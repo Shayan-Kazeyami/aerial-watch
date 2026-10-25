@@ -1,0 +1,2913 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-25T19:14:37.698Z",
+  "title": "Aerial Quality 01 · R05 candidate evidence inventory",
+  "revision": "R05 integration candidate",
+  "status": "Editable visual design proposal; candidate inventory only",
+  "pathBase": "Watch project root; all file paths are relative",
+  "hashAlgorithm": "SHA-256",
+  "files": [
+    {
+      "path": "OM10-Showcase/dist/assembly-capture-provenance.js",
+      "role": "viewer",
+      "bytes": 5085,
+      "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-clock.js",
+      "role": "viewer",
+      "bytes": 2474,
+      "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-crown.js",
+      "role": "viewer",
+      "bytes": 3883,
+      "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-depth.js",
+      "role": "viewer",
+      "bytes": 2815,
+      "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-design.js",
+      "role": "viewer",
+      "bytes": 4906,
+      "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-dial.js",
+      "role": "viewer",
+      "bytes": 6811,
+      "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-form-details.js",
+      "role": "viewer",
+      "bytes": 3991,
+      "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-front-architecture.js",
+      "role": "viewer",
+      "bytes": 2355,
+      "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-glass-ao.js",
+      "role": "viewer",
+      "bytes": 6085,
+      "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-leather-details.js",
+      "role": "viewer",
+      "bytes": 3986,
+      "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-lifecycle.js",
+      "role": "viewer",
+      "bytes": 636,
+      "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-lighting.js",
+      "role": "viewer",
+      "bytes": 5196,
+      "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-loading.js",
+      "role": "viewer",
+      "bytes": 2738,
+      "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-materials.js",
+      "role": "viewer",
+      "bytes": 12182,
+      "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-motion.js",
+      "role": "viewer",
+      "bytes": 19611,
+      "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-open-front.js",
+      "role": "viewer",
+      "bytes": 3789,
+      "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-performance.js",
+      "role": "viewer",
+      "bytes": 1715,
+      "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-quality.css",
+      "role": "viewer",
+      "bytes": 21469,
+      "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-recording.js",
+      "role": "viewer",
+      "bytes": 4187,
+      "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-refraction.js",
+      "role": "viewer",
+      "bytes": 3005,
+      "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-resolution.js",
+      "role": "viewer",
+      "bytes": 2664,
+      "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-review.css",
+      "role": "viewer",
+      "bytes": 16873,
+      "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-review.html",
+      "role": "viewer",
+      "bytes": 20805,
+      "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-review.js",
+      "role": "viewer",
+      "bytes": 61140,
+      "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-seconds-details.js",
+      "role": "viewer",
+      "bytes": 4152,
+      "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-state.js",
+      "role": "viewer",
+      "bytes": 3047,
+      "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+    },
+    {
+      "path": "OM10-Showcase/dist/assembly-story.js",
+      "role": "viewer",
+      "bytes": 3394,
+      "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+    },
+    {
+      "path": "OM10-Showcase/dist/material-review-model.js",
+      "role": "viewer",
+      "bytes": 2615,
+      "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+    },
+    {
+      "path": "OM10-Showcase/dist/material-review.css",
+      "role": "viewer",
+      "bytes": 2977,
+      "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+    },
+    {
+      "path": "OM10-Showcase/dist/material-review.html",
+      "role": "viewer",
+      "bytes": 3251,
+      "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+    },
+    {
+      "path": "OM10-Showcase/dist/material-review.js",
+      "role": "viewer",
+      "bytes": 8343,
+      "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+    },
+    {
+      "path": "OM10-Showcase/dist/index.html",
+      "role": "viewer",
+      "bytes": 20805,
+      "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+    },
+    {
+      "path": "OM10-Showcase/dist/rebuild/assembly.glb",
+      "role": "preserved-original",
+      "bytes": 26126492,
+      "sha256": "40aadf5b8e6ed73fa0553b46873f68438d023674035b0bffb04afba569f31e99"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/open-front-plates.glb",
+      "role": "derived-asset",
+      "bytes": 2194400,
+      "sha256": "844568617545e79b484169fff68b8ab70f7ad3cf4dc54d7e268a5c28961d01b9"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/leather-detail.glb",
+      "role": "derived-asset",
+      "bytes": 1499648,
+      "sha256": "8c99c0086178e08af47e01b72afc0241193661d54b78ca3a030d2b346592e901"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/form-legibility-r01.glb",
+      "role": "derived-form-detail",
+      "bytes": 2570568,
+      "sha256": "151d5afec150fcf4ab996b521a8ff5eaa4a1e87e9c40cd827406476ac906fea8"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/front-architecture-r05.glb",
+      "role": "r05-front-candidate-only",
+      "bytes": 2588000,
+      "sha256": "95bc50666436b974d6a64dc6e29efb093dfa001bbd8d6e650316ba9e316211ab"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/front-architecture-r05.glb.br",
+      "role": "r05-front-lossless-sidecar",
+      "bytes": 536249,
+      "sha256": "58e527661d15e8c74b526e6b3aebc2e569c74a8eb500cf3f00e0a9ac2001b55d"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/leather-craft-r05.glb",
+      "role": "r05-leather-candidate-only",
+      "bytes": 1662940,
+      "sha256": "e1f986df1f021edc73822b605e28586769a9e21edc66740fe15f6ec31784e5c3"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/leather-craft-r05.glb.br",
+      "role": "r05-leather-lossless-sidecar",
+      "bytes": 630124,
+      "sha256": "556d471d4f4dcc93daf14e86cec250a4821b0f7df7d805d9c88220fb587a6cea"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/front-architecture-r05.glb",
+      "role": "r05-native-front-candidate",
+      "bytes": 2588000,
+      "sha256": "95bc50666436b974d6a64dc6e29efb093dfa001bbd8d6e650316ba9e316211ab"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/Aerial-Front-Architecture-R05.blend",
+      "role": "r05-native-front-candidate",
+      "bytes": 137732387,
+      "sha256": "4296ef6a11a80ae1c70847dd20f2ef071ce183144fefe67385b9f3264c9712fc"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/README.md",
+      "role": "r05-front-candidate-notes",
+      "bytes": 5020,
+      "sha256": "bd3fbb69c6379689a5fb3ec890936ddc0420862e1be81ac083499023f2183449"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/front-native-r05.png",
+      "role": "r05-front-candidate-preview",
+      "bytes": 1668162,
+      "sha256": "07355f3ec68dea016320b73aedd770e4369d840cfaba5ef47f704027814dfc53"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/before-native-matched.png",
+      "role": "historical-front-comparison",
+      "bytes": 1721519,
+      "sha256": "5fd828bde63e93edab52b10b2b635be4a06440d6aa59435eade86c1d1b95d65b"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/verification.json",
+      "role": "r05-front-candidate-validation",
+      "bytes": 64591,
+      "sha256": "120710418c339315d33b4848038e3645047ff0651e5d234d7be510b500be5e64"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/independent-validation.json",
+      "role": "r05-front-independent-validation",
+      "bytes": 1140,
+      "sha256": "a0507e1e43d810bfe1a0006c8eb53328b1da0544107a24c52c317d4fd4eb15f9"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/added-stock-clearance.json",
+      "role": "r05-front-sampled-clearance",
+      "bytes": 443,
+      "sha256": "4032ce0bb19d07e36c704dd174e99f41a19ba91ac7b243b59f2ae10562605d20"
+    },
+    {
+      "path": "Aerial-Quality-Study/front-architecture-r05/served-asset-verification.json",
+      "role": "r05-front-served-asset-validation",
+      "bytes": 322,
+      "sha256": "7c5ee9b37377e1a918053804eabee0218fb3b7d8b9e6f5999d381c5218c242de"
+    },
+    {
+      "path": "Aerial-Quality-Study/leather-craft-r05/leather-craft-r05.blend",
+      "role": "r05-native-leather-candidate",
+      "bytes": 136089398,
+      "sha256": "8c6c05776a64594293f90353e4529c17f5fbad9bd9c215e1ed43a1e96ad23442"
+    },
+    {
+      "path": "Aerial-Quality-Study/leather-craft-r05/leather-craft-r05.glb",
+      "role": "r05-native-leather-candidate",
+      "bytes": 1662940,
+      "sha256": "e1f986df1f021edc73822b605e28586769a9e21edc66740fe15f6ec31784e5c3"
+    },
+    {
+      "path": "Aerial-Quality-Study/leather-craft-r05/README.md",
+      "role": "r05-leather-candidate-notes",
+      "bytes": 2914,
+      "sha256": "122de65fdbb38dd7a8f5552b1a3bed7bae8da06519df7cd756f46de2d26d91d1"
+    },
+    {
+      "path": "Aerial-Quality-Study/leather-craft-r05/before-leather.png",
+      "role": "r05-leather-native-comparison",
+      "bytes": 953486,
+      "sha256": "a8e35ce063cec578fd4620f26d2a14da63a48fde873a96aebeaaaf3befb7cd1b"
+    },
+    {
+      "path": "Aerial-Quality-Study/leather-craft-r05/after-leather.png",
+      "role": "r05-leather-native-comparison",
+      "bytes": 971570,
+      "sha256": "cd9a254202369b9f80930dd03bc9053e437d9e915c8e156e609faa3fd29b6286"
+    },
+    {
+      "path": "Aerial-Quality-Study/leather-craft-r05/verification.json",
+      "role": "r05-leather-candidate-validation",
+      "bytes": 1429,
+      "sha256": "584122dabe858830046d74539d27717e67af27262a22671ab8c0eef653e01927"
+    },
+    {
+      "path": "Aerial-Quality-Study/leather-craft-r05/saved-validation.json",
+      "role": "r05-leather-saved-file-validation",
+      "bytes": 896,
+      "sha256": "69f2938e204aeef4ab1f6616405c1b48001bb5bfff00cfbfbf709f92f6a0424d"
+    },
+    {
+      "path": "OM10-Showcase/inspection/panel-r05-contract.json",
+      "role": "r05-panel-contract-pending-browser-review",
+      "bytes": 2029,
+      "sha256": "cdf4e7c72197314c065ed44329dbf03a00a4631141750c480ccffd7356a057c9"
+    },
+    {
+      "path": "OM10-Showcase/inspection/leather-craft-r05-material-roles.json",
+      "role": "r05-leather-material-role-validation",
+      "bytes": 1830,
+      "sha256": "0610a46278a83a5f06076f88200b610a05ce559ce43650e3ca6ddb1af30de0c7"
+    },
+    {
+      "path": "OM10-Showcase/tests/assembly-front-architecture.test.mjs",
+      "role": "r05-front-regression-test-source",
+      "bytes": 2447,
+      "sha256": "6a703b8ace1fe3b3c4e076aa11356833210d1ab2222fe3e8b90e4dfc0555c743"
+    },
+    {
+      "path": "OM10-Showcase/tests/assembly-seconds-details.test.mjs",
+      "role": "r05-seconds-regression-test-source",
+      "bytes": 1767,
+      "sha256": "9c57d2761372774e4fe9964a866791fb1730074e5c6d43edefd0ce9cadfe53f6"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/form-legibility-r01.glb.br",
+      "role": "lossless-transfer",
+      "bytes": 783685,
+      "sha256": "ddce4b1bc4b2a9c93005ead05223fd41cb3b31b37b2ac8bfaad9f9d530ed2779"
+    },
+    {
+      "path": "Aerial-Quality-Study/form-legibility-r01/Aerial-Form-Legibility-R01.blend",
+      "role": "native-form-candidate",
+      "bytes": 139526193,
+      "sha256": "040a641fb12cb6aff6415551fdaab06638874ca9c57be21e340b7c69a3bae34e"
+    },
+    {
+      "path": "Aerial-Quality-Study/form-legibility-r01/verification.json",
+      "role": "native-form-validation",
+      "bytes": 216165,
+      "sha256": "e5596bdb6f18df8f9d96b26e830d0a4a2ea84f4068f8effa610c45172d11dc73"
+    },
+    {
+      "path": "Aerial-Quality-Study/form-legibility-r01/independent-validation.json",
+      "role": "native-form-validation",
+      "bytes": 2836,
+      "sha256": "d1ba573bb89e3deab54d00f012ec0ab37919d2fcd68c793b1ad124a43359eff4"
+    },
+    {
+      "path": "Aerial-Quality-Study/browser-design.json",
+      "role": "shared-native-browser-design",
+      "bytes": 6113630,
+      "sha256": "2216b4d30c45658c47885d6dbb7474c37e7822f85ad11aa6dcfba7845ab27c82"
+    },
+    {
+      "path": "Aerial-Quality-Study/Aerial-Quality-01.blend",
+      "role": "native-proposal",
+      "bytes": 133026009,
+      "sha256": "087d937955a3146764b8dd755d6e3d39950f48c3a75c1c8870840930b78ffad7"
+    },
+    {
+      "path": "Aerial-Quality-Study/saved-file-validation.json",
+      "role": "native-validation",
+      "bytes": 5571,
+      "sha256": "ddcdbf1fbf9142fc960eb00762110934f1a88a570cc61b351bf8c142eeeadde3"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/native-verification.json",
+      "role": "native-validation",
+      "bytes": 34349,
+      "sha256": "6b37604f055e053dd7267f1254ca8645b43bacbc7e928823cd0c7e2af55e2bea"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/01-front.png",
+      "role": "live-capture",
+      "bytes": 1787640,
+      "sha256": "bc2a635d5d33ec72270053b253bd96be303f021de0eaf90d57ac70eed25e2419"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/01-front.json",
+      "role": "live-capture",
+      "bytes": 50289,
+      "sha256": "5ad98ddf4db4350a10f1bc80f773cd9c4d236cc917d5ff0fadb7ea97242467be"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/02-three-quarter.png",
+      "role": "live-capture",
+      "bytes": 1685689,
+      "sha256": "86489f6fdf5c323b8e66012d9ef4738aa8d11823b99458d8aee669387d70e7d8"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/02-three-quarter.json",
+      "role": "live-capture",
+      "bytes": 56261,
+      "sha256": "58a7c994e8aeb9b290cdf3a81cb134f33d9689e4935672a426c521251998fbf9"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/03-interior.png",
+      "role": "live-capture",
+      "bytes": 1649173,
+      "sha256": "2d5cb1f49a1f70d7c907406d02ba9b27d8fe4111a4a96efeda6d453061d57ff0"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/03-interior.json",
+      "role": "live-capture",
+      "bytes": 62150,
+      "sha256": "30c0e105a4f6dff49acf8e0b8f8301cca77a05968f76d578e2cd71d2ef75114e"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/04-balance.png",
+      "role": "live-capture",
+      "bytes": 2694854,
+      "sha256": "527e9a77bbc91a662923bf2ba3e14904eaeaf75d61a096acb15f0823d6d4a102"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/04-balance.json",
+      "role": "live-capture",
+      "bytes": 68038,
+      "sha256": "cb024e87252c40416db1c9cc5233fa53632c72bf910695c07842e1d1c7bb52fb"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/05-train.png",
+      "role": "live-capture",
+      "bytes": 2365045,
+      "sha256": "385a21f56791f077ae1e853fe941bc6c9ac070fec14d0cd1a9571b31496f1eae"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/05-train.json",
+      "role": "live-capture",
+      "bytes": 73843,
+      "sha256": "99f267e358e860b219705915f00678823fecc4115b84eee65e0bae6e1f10bbe4"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/06-leather.png",
+      "role": "live-capture",
+      "bytes": 1839256,
+      "sha256": "4c88e67250ba934c3565209723c0a22c63a5d49140198fbd068d0a332e5e8e05"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/06-leather.json",
+      "role": "live-capture",
+      "bytes": 79153,
+      "sha256": "f8491b8b46e712336b90fd996aba67810bba59312167d5ec730b35eb083a1ca2"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/mobile-front.png",
+      "role": "poster-or-gallery",
+      "bytes": 940307,
+      "sha256": "3005a96249b6b20f38a79a7b27185a50dd4bf70182e41872a18c4b2152741e77"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/mobile-front.json",
+      "role": "poster-or-gallery",
+      "bytes": 49822,
+      "sha256": "3f62a5bbb58c1542582049794cbdc993441d817d3686d866607237e511d8acdc"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/studio-poster.svg",
+      "role": "poster-or-gallery",
+      "bytes": 1087,
+      "sha256": "6022cf8b1a40542f2a3592e25b9f408ae7f48c75f11972cf5753bd75d4ad819f"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/native-front.png",
+      "role": "poster-or-gallery",
+      "bytes": 1171305,
+      "sha256": "636d2e2d91ff156b84e931b70741ff764f8bc372ecb1c056320b020a092ceecd"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/native-studio.png",
+      "role": "poster-or-gallery",
+      "bytes": 976872,
+      "sha256": "2333c712c7f9cccb23eb6238950c2ca38ae00f95b42a056deb1b95630ff35f60"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/viewer-revision.json",
+      "role": "capture-source-identity",
+      "bytes": 5381,
+      "sha256": "bccb645039819f6857e539b9269c620b0e0d2fe11c7a91893dd6fbd1182f2d88"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/viewer-revision.js",
+      "role": "capture-source-identity",
+      "bytes": 4360,
+      "sha256": "92ff561df9019379c7bfe60107e7ce68126da5d38de9fc109047c62ab2d84fbe"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/01-front.webp",
+      "role": "display-preview",
+      "bytes": 71842,
+      "sha256": "ec231f5564d0c25f906b144906f54dbb9c313c004a060498acce0621391bda2b"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/02-three-quarter.webp",
+      "role": "display-preview",
+      "bytes": 53338,
+      "sha256": "ea31268e2d52e26681e66a2bb0357e659b4bd2927ee92c50fbf3a1eac58dfda2"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/03-interior.webp",
+      "role": "display-preview",
+      "bytes": 68336,
+      "sha256": "72d918c6f8c0775cfa46501c31ff52e1b0b67e42e61e6933edb7a7f73820d988"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/04-balance.webp",
+      "role": "display-preview",
+      "bytes": 105838,
+      "sha256": "8bf3f630238a8b3bd84a22f97d30a796908c9d3ffa826472d03fcb69c1a7056a"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/05-train.webp",
+      "role": "display-preview",
+      "bytes": 112896,
+      "sha256": "5e3afddd8f6743c2b9075e9d339f57306a057552d979b140cfab37361c26c6d4"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/06-leather.webp",
+      "role": "display-preview",
+      "bytes": 46122,
+      "sha256": "ce338c11ea06eead920c1d72a2feb9214373c27cf6343065daccebed973ed9a3"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/native-front.webp",
+      "role": "display-preview",
+      "bytes": 86412,
+      "sha256": "e3c264840bba52e4fa23c80340c8cb0dfe0809139613b0cbe7c93f454fce770b"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/native-studio.webp",
+      "role": "display-preview",
+      "bytes": 50794,
+      "sha256": "44f0b68a7fae88c599da25d5e1550dfc662a08ca7d39f73eec8ba14f7573aba7"
+    },
+    {
+      "path": "OM10-Showcase/dist/quality-study/mobile-front.webp",
+      "role": "display-preview",
+      "bytes": 93570,
+      "sha256": "0828f5746bc20f6454e4d61fb6982163c552ff3c440417129d86a70ff1e563aa"
+    }
+  ],
+  "validation": {
+    "nativeSavedStatus": "passed",
+    "nativeBlendHashMatches": true,
+    "sharedPayloadHashMatches": true,
+    "leatherExportHashMatches": true,
+    "originalAssemblyHashMatches": true,
+    "formCandidateHashesMatch": true,
+    "independentFormValidationMatches": true,
+    "r05FrontCandidateMatches": {
+      "candidateHashesMatch": true,
+      "baselinePreservationChecksMatch": true,
+      "seatAndTopologyChecksMatch": true,
+      "addedStockSamplesHaveNoReportedOverlap": true,
+      "servedAssetAndSidecarMatch": true
+    },
+    "r05LeatherCandidateMatches": {
+      "candidateHashesMatch": true,
+      "baselineAndSavedMeshChecksMatch": true,
+      "strapTopologyAndThreadSamplesMatch": true,
+      "servedAssetAndSidecarMatch": true
+    },
+    "r05PanelContractMatches": {
+      "retainedControlContractMatches": true,
+      "browserAcceptancePending": true
+    },
+    "checksAre": "File identity and previously saved validation consistency. Candidate checks do not establish browser integration, aesthetic/user acceptance, or physical/engineering acceptance."
+  },
+  "candidateEvidence": {
+    "frontArchitecture": {
+      "status": "separate native/browser candidate; not an accepted design",
+      "aestheticAcceptance": "unresolved; user complaint U28 remains open",
+      "geometryEvidence": {
+        "candidateHashesMatch": true,
+        "baselinePreservationChecksMatch": true,
+        "seatAndTopologyChecksMatch": true,
+        "addedStockSamplesHaveNoReportedOverlap": true,
+        "servedAssetAndSidecarMatch": true
+      },
+      "limits": "Sampled seat/topology/added-stock checks only; stiffness, calendar function, tolerance, full motion sweep and physical fit are unvalidated."
+    },
+    "leatherCraft": {
+      "status": "separate native/browser candidate; not integrated or visually accepted",
+      "savedFileEvidence": {
+        "candidateHashesMatch": true,
+        "baselineAndSavedMeshChecksMatch": true,
+        "strapTopologyAndThreadSamplesMatch": true,
+        "servedAssetAndSidecarMatch": true
+      },
+      "limits": "Saved geometry and sampled thread seating checks only; browser appearance, leather bend/fatigue, manufacturing and user acceptance remain open."
+    },
+    "smallSeconds": {
+      "status": "runtime helper and focused test source inventoried; main integration and browser/performance acceptance pending"
+    },
+    "controls": {
+      "status": "R05 panel contract inventoried; browser acceptance pending"
+    }
+  },
+  "mapping": {
+    "preservedSourceCount": 166,
+    "preservedSourceIds": [
+      {
+        "sourceIndex": 0,
+        "partNumber": "OM10-00214",
+        "name": "OM10-00214 · 000"
+      },
+      {
+        "sourceIndex": 1,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 001"
+      },
+      {
+        "sourceIndex": 2,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 002"
+      },
+      {
+        "sourceIndex": 3,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 003"
+      },
+      {
+        "sourceIndex": 4,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 004"
+      },
+      {
+        "sourceIndex": 5,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 005"
+      },
+      {
+        "sourceIndex": 6,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 006"
+      },
+      {
+        "sourceIndex": 7,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 007"
+      },
+      {
+        "sourceIndex": 8,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 008"
+      },
+      {
+        "sourceIndex": 9,
+        "partNumber": "OM00-00118",
+        "name": "OM00-00118 · 009"
+      },
+      {
+        "sourceIndex": 10,
+        "partNumber": "OM00-00116",
+        "name": "OM00-00116 · 010"
+      },
+      {
+        "sourceIndex": 11,
+        "partNumber": "OM00-00115",
+        "name": "OM00-00115 · 011"
+      },
+      {
+        "sourceIndex": 12,
+        "partNumber": "OM00-00114",
+        "name": "OM00-00114 · 012"
+      },
+      {
+        "sourceIndex": 13,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 013"
+      },
+      {
+        "sourceIndex": 14,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 014"
+      },
+      {
+        "sourceIndex": 15,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111 · 015"
+      },
+      {
+        "sourceIndex": 16,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111 · 016"
+      },
+      {
+        "sourceIndex": 17,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111 · 017"
+      },
+      {
+        "sourceIndex": 18,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111 · 018"
+      },
+      {
+        "sourceIndex": 19,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 019"
+      },
+      {
+        "sourceIndex": 20,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 020"
+      },
+      {
+        "sourceIndex": 21,
+        "partNumber": "OM00-00120",
+        "name": "OM00-00120 · 021"
+      },
+      {
+        "sourceIndex": 22,
+        "partNumber": "OM00-00140",
+        "name": "OM00-00140 · 022"
+      },
+      {
+        "sourceIndex": 23,
+        "partNumber": "OM00-00122",
+        "name": "OM00-00122 · 023"
+      },
+      {
+        "sourceIndex": 24,
+        "partNumber": "OM00-00122",
+        "name": "OM00-00122 · 024"
+      },
+      {
+        "sourceIndex": 25,
+        "partNumber": "OM00-00123",
+        "name": "OM00-00123 · 025"
+      },
+      {
+        "sourceIndex": 26,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124 · 026"
+      },
+      {
+        "sourceIndex": 27,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124 · 027"
+      },
+      {
+        "sourceIndex": 28,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112 · 028"
+      },
+      {
+        "sourceIndex": 29,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 029"
+      },
+      {
+        "sourceIndex": 30,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 030"
+      },
+      {
+        "sourceIndex": 31,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 031"
+      },
+      {
+        "sourceIndex": 32,
+        "partNumber": "OM00-00113",
+        "name": "OM00-00113 · 032"
+      },
+      {
+        "sourceIndex": 33,
+        "partNumber": "OM00-00113",
+        "name": "OM00-00113 · 033"
+      },
+      {
+        "sourceIndex": 34,
+        "partNumber": "OM00-00110",
+        "name": "OM00-00110 · 034"
+      },
+      {
+        "sourceIndex": 35,
+        "partNumber": "OM00-00139",
+        "name": "OM00-00139 · 035"
+      },
+      {
+        "sourceIndex": 36,
+        "partNumber": "OM00-00139",
+        "name": "OM00-00139 · 036"
+      },
+      {
+        "sourceIndex": 37,
+        "partNumber": "OM00-00110",
+        "name": "OM00-00110 · 037"
+      },
+      {
+        "sourceIndex": 38,
+        "partNumber": "OM00-00138",
+        "name": "OM00-00138 · 038"
+      },
+      {
+        "sourceIndex": 39,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 039"
+      },
+      {
+        "sourceIndex": 40,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 040"
+      },
+      {
+        "sourceIndex": 41,
+        "partNumber": "OM10-00245",
+        "name": "OM10-00245 · 041"
+      },
+      {
+        "sourceIndex": 42,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108 · 042"
+      },
+      {
+        "sourceIndex": 43,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108 · 043"
+      },
+      {
+        "sourceIndex": 44,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108 · 044"
+      },
+      {
+        "sourceIndex": 45,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108 · 045"
+      },
+      {
+        "sourceIndex": 46,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108 · 046"
+      },
+      {
+        "sourceIndex": 47,
+        "partNumber": "OM00-00109",
+        "name": "OM00-00109 · 047"
+      },
+      {
+        "sourceIndex": 48,
+        "partNumber": "OM00-00109",
+        "name": "OM00-00109 · 048"
+      },
+      {
+        "sourceIndex": 49,
+        "partNumber": "OM10-00240",
+        "name": "OM10-00240 · 049"
+      },
+      {
+        "sourceIndex": 50,
+        "partNumber": "OM10-00194",
+        "name": "OM10-00194 · 050"
+      },
+      {
+        "sourceIndex": 51,
+        "partNumber": "OM10-00242",
+        "name": "OM10-00242 · 051"
+      },
+      {
+        "sourceIndex": 52,
+        "partNumber": "OM10-00225",
+        "name": "OM10-00225 · 052"
+      },
+      {
+        "sourceIndex": 53,
+        "partNumber": "OM10-00304",
+        "name": "OM10-00304 · 053"
+      },
+      {
+        "sourceIndex": 54,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141 · 054"
+      },
+      {
+        "sourceIndex": 55,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141 · 055"
+      },
+      {
+        "sourceIndex": 56,
+        "partNumber": "OM10-00232",
+        "name": "OM10-00232 · 056"
+      },
+      {
+        "sourceIndex": 57,
+        "partNumber": "OM10-00222",
+        "name": "OM10-00222 · 057"
+      },
+      {
+        "sourceIndex": 58,
+        "partNumber": "OM10-00238",
+        "name": "OM10-00238 · 058"
+      },
+      {
+        "sourceIndex": 59,
+        "partNumber": "OM10-00234",
+        "name": "OM10-00234 · 059"
+      },
+      {
+        "sourceIndex": 60,
+        "partNumber": "OM10-00236",
+        "name": "OM10-00236 · 060"
+      },
+      {
+        "sourceIndex": 61,
+        "partNumber": "OM10-00237",
+        "name": "OM10-00237 · 061"
+      },
+      {
+        "sourceIndex": 62,
+        "partNumber": "OM10-00231",
+        "name": "OM10-00231 · 062"
+      },
+      {
+        "sourceIndex": 63,
+        "partNumber": "OM10-00229",
+        "name": "OM10-00229 · 063"
+      },
+      {
+        "sourceIndex": 64,
+        "partNumber": "OM10-00233",
+        "name": "OM10-00233 · 064"
+      },
+      {
+        "sourceIndex": 65,
+        "partNumber": "OM10-00230",
+        "name": "OM10-00230 · 065"
+      },
+      {
+        "sourceIndex": 66,
+        "partNumber": "OM10-00235",
+        "name": "OM10-00235 · 066"
+      },
+      {
+        "sourceIndex": 67,
+        "partNumber": "OM10-00228",
+        "name": "OM10-00228 · 067"
+      },
+      {
+        "sourceIndex": 68,
+        "partNumber": "OM10-00241",
+        "name": "OM10-00241 · 068"
+      },
+      {
+        "sourceIndex": 69,
+        "partNumber": "OM10-00241",
+        "name": "OM10-00241 · 069"
+      },
+      {
+        "sourceIndex": 70,
+        "partNumber": "OM10-00307",
+        "name": "OM10-00307 · 070"
+      },
+      {
+        "sourceIndex": 71,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141 · 071"
+      },
+      {
+        "sourceIndex": 72,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141 · 072"
+      },
+      {
+        "sourceIndex": 73,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141 · 073"
+      },
+      {
+        "sourceIndex": 74,
+        "partNumber": "OM10-00220",
+        "name": "OM10-00220 · 074"
+      },
+      {
+        "sourceIndex": 75,
+        "partNumber": "OM10-00195",
+        "name": "OM10-00195 · 075"
+      },
+      {
+        "sourceIndex": 76,
+        "partNumber": "OM10-00308",
+        "name": "OM10-00308 · 076"
+      },
+      {
+        "sourceIndex": 77,
+        "partNumber": "OM10-00306",
+        "name": "OM10-00306 · 077"
+      },
+      {
+        "sourceIndex": 78,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 078"
+      },
+      {
+        "sourceIndex": 79,
+        "partNumber": "OM10-00211",
+        "name": "OM10-00211 · 079"
+      },
+      {
+        "sourceIndex": 80,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107 · 080"
+      },
+      {
+        "sourceIndex": 81,
+        "partNumber": "OM10-00121",
+        "name": "OM10-00121 · 081"
+      },
+      {
+        "sourceIndex": 82,
+        "partNumber": "OM10-00119",
+        "name": "OM10-00119 · 082"
+      },
+      {
+        "sourceIndex": 83,
+        "partNumber": "OM10-00118",
+        "name": "OM10-00118 · 083"
+      },
+      {
+        "sourceIndex": 84,
+        "partNumber": "OM10-00120",
+        "name": "OM10-00120 · 084"
+      },
+      {
+        "sourceIndex": 85,
+        "partNumber": "OM10-00197",
+        "name": "OM10-00197 · 085"
+      },
+      {
+        "sourceIndex": 86,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107 · 086"
+      },
+      {
+        "sourceIndex": 87,
+        "partNumber": "OM10-00144",
+        "name": "OM10-00144 · 087"
+      },
+      {
+        "sourceIndex": 88,
+        "partNumber": "OM10-00200",
+        "name": "OM10-00200 · 088"
+      },
+      {
+        "sourceIndex": 89,
+        "partNumber": "OM00-00100",
+        "name": "OM00-00100 · 089"
+      },
+      {
+        "sourceIndex": 90,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 090"
+      },
+      {
+        "sourceIndex": 91,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 091"
+      },
+      {
+        "sourceIndex": 92,
+        "partNumber": "OM10-00149",
+        "name": "OM10-00149 · 092"
+      },
+      {
+        "sourceIndex": 93,
+        "partNumber": "OM10-00150",
+        "name": "OM10-00150 · 093"
+      },
+      {
+        "sourceIndex": 94,
+        "partNumber": "OM10-00161",
+        "name": "OM10-00161 · 094"
+      },
+      {
+        "sourceIndex": 95,
+        "partNumber": "OM10-00162",
+        "name": "OM10-00162 · 095"
+      },
+      {
+        "sourceIndex": 96,
+        "partNumber": "OM10-00164",
+        "name": "OM10-00164 · 096"
+      },
+      {
+        "sourceIndex": 97,
+        "partNumber": "OM10-00165",
+        "name": "OM10-00165 · 097"
+      },
+      {
+        "sourceIndex": 98,
+        "partNumber": "OM10-00146",
+        "name": "OM10-00146 · 098"
+      },
+      {
+        "sourceIndex": 99,
+        "partNumber": "OM00-00101",
+        "name": "OM00-00101 · 099"
+      },
+      {
+        "sourceIndex": 100,
+        "partNumber": "OM10-00184",
+        "name": "OM10-00184 · 100"
+      },
+      {
+        "sourceIndex": 101,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124 · 101"
+      },
+      {
+        "sourceIndex": 102,
+        "partNumber": "OM00-00145",
+        "name": "OM00-00145 · 102"
+      },
+      {
+        "sourceIndex": 103,
+        "partNumber": "OM00-00145",
+        "name": "OM00-00145 · 103"
+      },
+      {
+        "sourceIndex": 104,
+        "partNumber": "OM00-00140",
+        "name": "OM00-00140 · 104"
+      },
+      {
+        "sourceIndex": 105,
+        "partNumber": "OM00-00122",
+        "name": "OM00-00122 · 105"
+      },
+      {
+        "sourceIndex": 106,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 106"
+      },
+      {
+        "sourceIndex": 107,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 107"
+      },
+      {
+        "sourceIndex": 108,
+        "partNumber": "OM10-00152",
+        "name": "OM10-00152 · 108"
+      },
+      {
+        "sourceIndex": 109,
+        "partNumber": "OM10-00156",
+        "name": "OM10-00156 · 109"
+      },
+      {
+        "sourceIndex": 110,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107 · 110"
+      },
+      {
+        "sourceIndex": 111,
+        "partNumber": "OM10-00104",
+        "name": "OM10-00104 · 111"
+      },
+      {
+        "sourceIndex": 112,
+        "partNumber": "OM10-00105",
+        "name": "OM10-00105 · 112"
+      },
+      {
+        "sourceIndex": 113,
+        "partNumber": "OM10-00107",
+        "name": "OM10-00107 · 113"
+      },
+      {
+        "sourceIndex": 114,
+        "partNumber": "OM10-00106",
+        "name": "OM10-00106 · 114"
+      },
+      {
+        "sourceIndex": 115,
+        "partNumber": "OM10-00106",
+        "name": "OM10-00106 · 115"
+      },
+      {
+        "sourceIndex": 116,
+        "partNumber": "OM10-00102",
+        "name": "OM10-00102 · 116"
+      },
+      {
+        "sourceIndex": 117,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124 · 117"
+      },
+      {
+        "sourceIndex": 118,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107 · 118"
+      },
+      {
+        "sourceIndex": 119,
+        "partNumber": "OM10-00196",
+        "name": "OM10-00196 · 119"
+      },
+      {
+        "sourceIndex": 120,
+        "partNumber": "OM00-00137",
+        "name": "OM00-00137 · 120"
+      },
+      {
+        "sourceIndex": 121,
+        "partNumber": "OM00-00135",
+        "name": "OM00-00135 · 121"
+      },
+      {
+        "sourceIndex": 122,
+        "partNumber": "OM00-00134",
+        "name": "OM00-00134 · 122"
+      },
+      {
+        "sourceIndex": 123,
+        "partNumber": "OM00-00133",
+        "name": "OM00-00133 · 123"
+      },
+      {
+        "sourceIndex": 124,
+        "partNumber": "OM00-00132",
+        "name": "OM00-00132 · 124"
+      },
+      {
+        "sourceIndex": 125,
+        "partNumber": "OM00-00126",
+        "name": "OM00-00126 · 125"
+      },
+      {
+        "sourceIndex": 126,
+        "partNumber": "OM00-00127",
+        "name": "OM00-00127 · 126"
+      },
+      {
+        "sourceIndex": 127,
+        "partNumber": "OM00-00129",
+        "name": "OM00-00129 · 127"
+      },
+      {
+        "sourceIndex": 128,
+        "partNumber": "OM00-00130",
+        "name": "OM00-00130 · 128"
+      },
+      {
+        "sourceIndex": 129,
+        "partNumber": "OM00-00125",
+        "name": "OM00-00125 · 129"
+      },
+      {
+        "sourceIndex": 130,
+        "partNumber": "OM10-00136",
+        "name": "OM10-00136 · 130"
+      },
+      {
+        "sourceIndex": 131,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 131"
+      },
+      {
+        "sourceIndex": 132,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 132"
+      },
+      {
+        "sourceIndex": 133,
+        "partNumber": "OM10-00112",
+        "name": "OM10-00112 · 133"
+      },
+      {
+        "sourceIndex": 134,
+        "partNumber": "OM10-00113",
+        "name": "OM10-00113 · 134"
+      },
+      {
+        "sourceIndex": 135,
+        "partNumber": "OM10-00110",
+        "name": "OM10-00110 · 135"
+      },
+      {
+        "sourceIndex": 136,
+        "partNumber": "OM10-00111",
+        "name": "OM10-00111 · 136"
+      },
+      {
+        "sourceIndex": 137,
+        "partNumber": "OM10-00116",
+        "name": "OM10-00116 · 137"
+      },
+      {
+        "sourceIndex": 138,
+        "partNumber": "OM10-00115",
+        "name": "OM10-00115 · 138"
+      },
+      {
+        "sourceIndex": 139,
+        "partNumber": "OM10-00127",
+        "name": "OM10-00127 · 139"
+      },
+      {
+        "sourceIndex": 140,
+        "partNumber": "OM10-00128",
+        "name": "OM10-00128 · 140"
+      },
+      {
+        "sourceIndex": 141,
+        "partNumber": "OM10-00199",
+        "name": "OM10-00199 · 141"
+      },
+      {
+        "sourceIndex": 142,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121 · 142"
+      },
+      {
+        "sourceIndex": 143,
+        "partNumber": "OM00-00120",
+        "name": "OM00-00120 · 143"
+      },
+      {
+        "sourceIndex": 144,
+        "partNumber": "OM10-00158",
+        "name": "OM10-00158 · 144"
+      },
+      {
+        "sourceIndex": 145,
+        "partNumber": "OM10-00159",
+        "name": "OM10-00159 · 145"
+      },
+      {
+        "sourceIndex": 146,
+        "partNumber": "OM10-00206",
+        "name": "OM10-00206 · 146"
+      },
+      {
+        "sourceIndex": 147,
+        "partNumber": "OM10-00142",
+        "name": "OM10-00142 · 147"
+      },
+      {
+        "sourceIndex": 148,
+        "partNumber": "OM10-00210",
+        "name": "OM10-00210 · 148"
+      },
+      {
+        "sourceIndex": 149,
+        "partNumber": "OM10-00138",
+        "name": "OM10-00138 · 149"
+      },
+      {
+        "sourceIndex": 150,
+        "partNumber": "OM10-00215",
+        "name": "OM10-00215 · 150"
+      },
+      {
+        "sourceIndex": 151,
+        "partNumber": "OM10-00213",
+        "name": "OM10-00213 · 151"
+      },
+      {
+        "sourceIndex": 152,
+        "partNumber": "OM10-00212",
+        "name": "OM10-00212 · 152"
+      },
+      {
+        "sourceIndex": 153,
+        "partNumber": "OM10-00207",
+        "name": "OM10-00207 · 153"
+      },
+      {
+        "sourceIndex": 154,
+        "partNumber": "OM00-00100",
+        "name": "OM00-00100 · 154"
+      },
+      {
+        "sourceIndex": 155,
+        "partNumber": "OM10-00217",
+        "name": "OM10-00217 · 155"
+      },
+      {
+        "sourceIndex": 156,
+        "partNumber": "OM10-00204",
+        "name": "OM10-00204 · 156"
+      },
+      {
+        "sourceIndex": 157,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107 · 157"
+      },
+      {
+        "sourceIndex": 158,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107 · 158"
+      },
+      {
+        "sourceIndex": 159,
+        "partNumber": "OM10-00209",
+        "name": "OM10-00209 · 159"
+      },
+      {
+        "sourceIndex": 160,
+        "partNumber": "OM00-00142",
+        "name": "OM00-00142 · 160"
+      },
+      {
+        "sourceIndex": 161,
+        "partNumber": "OM00-00142",
+        "name": "OM00-00142 · 161"
+      },
+      {
+        "sourceIndex": 162,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 162"
+      },
+      {
+        "sourceIndex": 163,
+        "partNumber": "OM00-00142",
+        "name": "OM00-00142 · 163"
+      },
+      {
+        "sourceIndex": 164,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 164"
+      },
+      {
+        "sourceIndex": 165,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106 · 165"
+      }
+    ],
+    "activeUnchangedNativeSources": 164,
+    "derivedPlates": [
+      {
+        "name": "OPEN-MAINPLATE / original seat-preserving proposal",
+        "replacesSourceIndex": 0,
+        "derived": true
+      },
+      {
+        "name": "OPEN-CALENDAR-COVER / original seat-preserving proposal",
+        "replacesSourceIndex": 155,
+        "derived": true
+      }
+    ],
+    "sharedGeometry": {
+      "path": "Aerial-Quality-Study/browser-design.json",
+      "partCount": 14,
+      "parts": [
+        {
+          "name": "Graphite chapter / integrated twelve signature",
+          "designPart": "QUALITY-FRAME",
+          "derived": true
+        },
+        {
+          "name": "Seconds / independent graphite chapter",
+          "designPart": "QUALITY-FRAME",
+          "derived": true
+        },
+        {
+          "name": "Seconds / axial mounting foot 350",
+          "designPart": "QUALITY-FRAME",
+          "derived": true
+        },
+        {
+          "name": "Seconds / axial mounting foot 110",
+          "designPart": "QUALITY-FRAME",
+          "derived": true
+        },
+        {
+          "name": "Seconds / axial mounting foot 250",
+          "designPart": "QUALITY-FRAME",
+          "derived": true
+        },
+        {
+          "name": "HOUR / faceted blue blade",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "HOUR / bored integral hub",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "HOUR / polished arbor collar",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "MINUTE / faceted blue blade",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "MINUTE / bored integral hub",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "MINUTE / polished arbor collar",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "SECONDS / faceted blue blade",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "SECONDS / bored integral hub",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        },
+        {
+          "name": "Seconds sleeve / coherent R02 low stack",
+          "designPart": "QUALITY-HAND",
+          "derived": true
+        }
+      ]
+    },
+    "displaySubstitutions": [
+      {
+        "originalAssemblyIds": [
+          "DIAL",
+          "CHAPTER"
+        ],
+        "proposal": "Open frame and coordinated printing; baseline originals retained"
+      },
+      {
+        "originalAssemblyIds": [
+          "HOUR",
+          "MINUTE",
+          "SECONDS",
+          "SECONDS-STAFF"
+        ],
+        "proposal": "Faceted R02 hands and shortened upper sleeve; baseline originals retained"
+      },
+      {
+        "originalAssemblyIds": [
+          "STRAP-UPPER",
+          "STRAP-LOWER"
+        ],
+        "proposal": "Lined straps and saddle stitches; baseline originals retained"
+      },
+      {
+        "originalAssemblyIds": [
+          "CASE"
+        ],
+        "originalSourceIndices": [
+          149
+        ],
+        "proposal": "Private case bevel geometry and grouped raised-date lettering; exact originals restore in baseline. Native form-legibility-r01 candidate is separately inventoried."
+      }
+    ],
+    "coordinates": {
+      "units": "mm",
+      "native": "watch XY with axial Z",
+      "CADToGLTF": "[-z,y,x]",
+      "sceneMount": "rotationX(+pi/2)"
+    }
+  },
+  "captureEvidence": [
+    {
+      "image": "OM10-Showcase/dist/quality-study/01-front.png",
+      "configuration": "OM10-Showcase/dist/quality-study/01-front.json",
+      "capturedAt": "2026-10-25T19:12:09.319Z",
+      "view": "face",
+      "renderProfile": "detail",
+      "drawingBuffer": {
+        "width": 2346,
+        "height": 1220,
+        "msaaSamples": 4
+      },
+      "sourceAtCapture": {
+        "status": "verified",
+        "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+        "algorithm": "SHA-256",
+        "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+        "metadataURL": "quality-study/viewer-revision.json",
+        "files": [
+          {
+            "path": "assembly-capture-provenance.js",
+            "bytes": 5085,
+            "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+          },
+          {
+            "path": "assembly-clock.js",
+            "bytes": 2474,
+            "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+          },
+          {
+            "path": "assembly-crown.js",
+            "bytes": 3883,
+            "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+          },
+          {
+            "path": "assembly-depth.js",
+            "bytes": 2815,
+            "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+          },
+          {
+            "path": "assembly-design.js",
+            "bytes": 4906,
+            "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+          },
+          {
+            "path": "assembly-dial.js",
+            "bytes": 6811,
+            "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+          },
+          {
+            "path": "assembly-form-details.js",
+            "bytes": 3991,
+            "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+          },
+          {
+            "path": "assembly-front-architecture.js",
+            "bytes": 2355,
+            "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+          },
+          {
+            "path": "assembly-glass-ao.js",
+            "bytes": 6085,
+            "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+          },
+          {
+            "path": "assembly-leather-details.js",
+            "bytes": 3986,
+            "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+          },
+          {
+            "path": "assembly-lifecycle.js",
+            "bytes": 636,
+            "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+          },
+          {
+            "path": "assembly-lighting.js",
+            "bytes": 5196,
+            "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+          },
+          {
+            "path": "assembly-loading.js",
+            "bytes": 2738,
+            "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+          },
+          {
+            "path": "assembly-materials.js",
+            "bytes": 12182,
+            "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+          },
+          {
+            "path": "assembly-motion.js",
+            "bytes": 19611,
+            "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+          },
+          {
+            "path": "assembly-open-front.js",
+            "bytes": 3789,
+            "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+          },
+          {
+            "path": "assembly-performance.js",
+            "bytes": 1715,
+            "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+          },
+          {
+            "path": "assembly-quality.css",
+            "bytes": 21469,
+            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+          },
+          {
+            "path": "assembly-recording.js",
+            "bytes": 4187,
+            "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+          },
+          {
+            "path": "assembly-refraction.js",
+            "bytes": 3005,
+            "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+          },
+          {
+            "path": "assembly-resolution.js",
+            "bytes": 2664,
+            "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+          },
+          {
+            "path": "assembly-review.css",
+            "bytes": 16873,
+            "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+          },
+          {
+            "path": "assembly-review.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "assembly-review.js",
+            "bytes": 61140,
+            "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+          },
+          {
+            "path": "assembly-seconds-details.js",
+            "bytes": 4152,
+            "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+          },
+          {
+            "path": "assembly-state.js",
+            "bytes": 3047,
+            "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+          },
+          {
+            "path": "assembly-story.js",
+            "bytes": 3394,
+            "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+          },
+          {
+            "path": "index.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "material-review-model.js",
+            "bytes": 2615,
+            "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+          },
+          {
+            "path": "material-review.css",
+            "bytes": 2977,
+            "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+          },
+          {
+            "path": "material-review.html",
+            "bytes": 3251,
+            "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+          },
+          {
+            "path": "material-review.js",
+            "bytes": 8343,
+            "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+          }
+        ],
+        "verifiedAt": "2026-10-25T19:12:09.310Z",
+        "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+      },
+      "currentViewerHashAtCapture": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+      "captureMatchesCurrentViewer": true
+    },
+    {
+      "image": "OM10-Showcase/dist/quality-study/02-three-quarter.png",
+      "configuration": "OM10-Showcase/dist/quality-study/02-three-quarter.json",
+      "capturedAt": "2026-10-25T19:12:39.447Z",
+      "view": "showcase",
+      "renderProfile": "detail",
+      "drawingBuffer": {
+        "width": 2346,
+        "height": 1220,
+        "msaaSamples": 4
+      },
+      "sourceAtCapture": {
+        "status": "verified",
+        "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+        "algorithm": "SHA-256",
+        "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+        "metadataURL": "quality-study/viewer-revision.json",
+        "files": [
+          {
+            "path": "assembly-capture-provenance.js",
+            "bytes": 5085,
+            "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+          },
+          {
+            "path": "assembly-clock.js",
+            "bytes": 2474,
+            "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+          },
+          {
+            "path": "assembly-crown.js",
+            "bytes": 3883,
+            "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+          },
+          {
+            "path": "assembly-depth.js",
+            "bytes": 2815,
+            "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+          },
+          {
+            "path": "assembly-design.js",
+            "bytes": 4906,
+            "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+          },
+          {
+            "path": "assembly-dial.js",
+            "bytes": 6811,
+            "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+          },
+          {
+            "path": "assembly-form-details.js",
+            "bytes": 3991,
+            "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+          },
+          {
+            "path": "assembly-front-architecture.js",
+            "bytes": 2355,
+            "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+          },
+          {
+            "path": "assembly-glass-ao.js",
+            "bytes": 6085,
+            "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+          },
+          {
+            "path": "assembly-leather-details.js",
+            "bytes": 3986,
+            "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+          },
+          {
+            "path": "assembly-lifecycle.js",
+            "bytes": 636,
+            "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+          },
+          {
+            "path": "assembly-lighting.js",
+            "bytes": 5196,
+            "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+          },
+          {
+            "path": "assembly-loading.js",
+            "bytes": 2738,
+            "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+          },
+          {
+            "path": "assembly-materials.js",
+            "bytes": 12182,
+            "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+          },
+          {
+            "path": "assembly-motion.js",
+            "bytes": 19611,
+            "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+          },
+          {
+            "path": "assembly-open-front.js",
+            "bytes": 3789,
+            "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+          },
+          {
+            "path": "assembly-performance.js",
+            "bytes": 1715,
+            "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+          },
+          {
+            "path": "assembly-quality.css",
+            "bytes": 21469,
+            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+          },
+          {
+            "path": "assembly-recording.js",
+            "bytes": 4187,
+            "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+          },
+          {
+            "path": "assembly-refraction.js",
+            "bytes": 3005,
+            "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+          },
+          {
+            "path": "assembly-resolution.js",
+            "bytes": 2664,
+            "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+          },
+          {
+            "path": "assembly-review.css",
+            "bytes": 16873,
+            "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+          },
+          {
+            "path": "assembly-review.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "assembly-review.js",
+            "bytes": 61140,
+            "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+          },
+          {
+            "path": "assembly-seconds-details.js",
+            "bytes": 4152,
+            "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+          },
+          {
+            "path": "assembly-state.js",
+            "bytes": 3047,
+            "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+          },
+          {
+            "path": "assembly-story.js",
+            "bytes": 3394,
+            "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+          },
+          {
+            "path": "index.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "material-review-model.js",
+            "bytes": 2615,
+            "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+          },
+          {
+            "path": "material-review.css",
+            "bytes": 2977,
+            "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+          },
+          {
+            "path": "material-review.html",
+            "bytes": 3251,
+            "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+          },
+          {
+            "path": "material-review.js",
+            "bytes": 8343,
+            "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+          }
+        ],
+        "verifiedAt": "2026-10-25T19:12:39.438Z",
+        "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+      },
+      "currentViewerHashAtCapture": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+      "captureMatchesCurrentViewer": true
+    },
+    {
+      "image": "OM10-Showcase/dist/quality-study/03-interior.png",
+      "configuration": "OM10-Showcase/dist/quality-study/03-interior.json",
+      "capturedAt": "2026-10-25T19:12:46.967Z",
+      "view": "interior",
+      "renderProfile": "detail",
+      "drawingBuffer": {
+        "width": 2346,
+        "height": 1220,
+        "msaaSamples": 4
+      },
+      "sourceAtCapture": {
+        "status": "verified",
+        "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+        "algorithm": "SHA-256",
+        "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+        "metadataURL": "quality-study/viewer-revision.json",
+        "files": [
+          {
+            "path": "assembly-capture-provenance.js",
+            "bytes": 5085,
+            "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+          },
+          {
+            "path": "assembly-clock.js",
+            "bytes": 2474,
+            "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+          },
+          {
+            "path": "assembly-crown.js",
+            "bytes": 3883,
+            "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+          },
+          {
+            "path": "assembly-depth.js",
+            "bytes": 2815,
+            "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+          },
+          {
+            "path": "assembly-design.js",
+            "bytes": 4906,
+            "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+          },
+          {
+            "path": "assembly-dial.js",
+            "bytes": 6811,
+            "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+          },
+          {
+            "path": "assembly-form-details.js",
+            "bytes": 3991,
+            "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+          },
+          {
+            "path": "assembly-front-architecture.js",
+            "bytes": 2355,
+            "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+          },
+          {
+            "path": "assembly-glass-ao.js",
+            "bytes": 6085,
+            "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+          },
+          {
+            "path": "assembly-leather-details.js",
+            "bytes": 3986,
+            "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+          },
+          {
+            "path": "assembly-lifecycle.js",
+            "bytes": 636,
+            "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+          },
+          {
+            "path": "assembly-lighting.js",
+            "bytes": 5196,
+            "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+          },
+          {
+            "path": "assembly-loading.js",
+            "bytes": 2738,
+            "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+          },
+          {
+            "path": "assembly-materials.js",
+            "bytes": 12182,
+            "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+          },
+          {
+            "path": "assembly-motion.js",
+            "bytes": 19611,
+            "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+          },
+          {
+            "path": "assembly-open-front.js",
+            "bytes": 3789,
+            "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+          },
+          {
+            "path": "assembly-performance.js",
+            "bytes": 1715,
+            "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+          },
+          {
+            "path": "assembly-quality.css",
+            "bytes": 21469,
+            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+          },
+          {
+            "path": "assembly-recording.js",
+            "bytes": 4187,
+            "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+          },
+          {
+            "path": "assembly-refraction.js",
+            "bytes": 3005,
+            "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+          },
+          {
+            "path": "assembly-resolution.js",
+            "bytes": 2664,
+            "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+          },
+          {
+            "path": "assembly-review.css",
+            "bytes": 16873,
+            "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+          },
+          {
+            "path": "assembly-review.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "assembly-review.js",
+            "bytes": 61140,
+            "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+          },
+          {
+            "path": "assembly-seconds-details.js",
+            "bytes": 4152,
+            "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+          },
+          {
+            "path": "assembly-state.js",
+            "bytes": 3047,
+            "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+          },
+          {
+            "path": "assembly-story.js",
+            "bytes": 3394,
+            "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+          },
+          {
+            "path": "index.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "material-review-model.js",
+            "bytes": 2615,
+            "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+          },
+          {
+            "path": "material-review.css",
+            "bytes": 2977,
+            "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+          },
+          {
+            "path": "material-review.html",
+            "bytes": 3251,
+            "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+          },
+          {
+            "path": "material-review.js",
+            "bytes": 8343,
+            "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+          }
+        ],
+        "verifiedAt": "2026-10-25T19:12:46.959Z",
+        "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+      },
+      "currentViewerHashAtCapture": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+      "captureMatchesCurrentViewer": true
+    },
+    {
+      "image": "OM10-Showcase/dist/quality-study/04-balance.png",
+      "configuration": "OM10-Showcase/dist/quality-study/04-balance.json",
+      "capturedAt": "2026-10-25T19:12:47.856Z",
+      "view": "balance",
+      "renderProfile": "detail",
+      "drawingBuffer": {
+        "width": 2346,
+        "height": 1220,
+        "msaaSamples": 4
+      },
+      "sourceAtCapture": {
+        "status": "verified",
+        "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+        "algorithm": "SHA-256",
+        "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+        "metadataURL": "quality-study/viewer-revision.json",
+        "files": [
+          {
+            "path": "assembly-capture-provenance.js",
+            "bytes": 5085,
+            "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+          },
+          {
+            "path": "assembly-clock.js",
+            "bytes": 2474,
+            "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+          },
+          {
+            "path": "assembly-crown.js",
+            "bytes": 3883,
+            "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+          },
+          {
+            "path": "assembly-depth.js",
+            "bytes": 2815,
+            "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+          },
+          {
+            "path": "assembly-design.js",
+            "bytes": 4906,
+            "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+          },
+          {
+            "path": "assembly-dial.js",
+            "bytes": 6811,
+            "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+          },
+          {
+            "path": "assembly-form-details.js",
+            "bytes": 3991,
+            "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+          },
+          {
+            "path": "assembly-front-architecture.js",
+            "bytes": 2355,
+            "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+          },
+          {
+            "path": "assembly-glass-ao.js",
+            "bytes": 6085,
+            "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+          },
+          {
+            "path": "assembly-leather-details.js",
+            "bytes": 3986,
+            "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+          },
+          {
+            "path": "assembly-lifecycle.js",
+            "bytes": 636,
+            "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+          },
+          {
+            "path": "assembly-lighting.js",
+            "bytes": 5196,
+            "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+          },
+          {
+            "path": "assembly-loading.js",
+            "bytes": 2738,
+            "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+          },
+          {
+            "path": "assembly-materials.js",
+            "bytes": 12182,
+            "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+          },
+          {
+            "path": "assembly-motion.js",
+            "bytes": 19611,
+            "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+          },
+          {
+            "path": "assembly-open-front.js",
+            "bytes": 3789,
+            "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+          },
+          {
+            "path": "assembly-performance.js",
+            "bytes": 1715,
+            "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+          },
+          {
+            "path": "assembly-quality.css",
+            "bytes": 21469,
+            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+          },
+          {
+            "path": "assembly-recording.js",
+            "bytes": 4187,
+            "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+          },
+          {
+            "path": "assembly-refraction.js",
+            "bytes": 3005,
+            "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+          },
+          {
+            "path": "assembly-resolution.js",
+            "bytes": 2664,
+            "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+          },
+          {
+            "path": "assembly-review.css",
+            "bytes": 16873,
+            "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+          },
+          {
+            "path": "assembly-review.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "assembly-review.js",
+            "bytes": 61140,
+            "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+          },
+          {
+            "path": "assembly-seconds-details.js",
+            "bytes": 4152,
+            "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+          },
+          {
+            "path": "assembly-state.js",
+            "bytes": 3047,
+            "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+          },
+          {
+            "path": "assembly-story.js",
+            "bytes": 3394,
+            "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+          },
+          {
+            "path": "index.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "material-review-model.js",
+            "bytes": 2615,
+            "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+          },
+          {
+            "path": "material-review.css",
+            "bytes": 2977,
+            "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+          },
+          {
+            "path": "material-review.html",
+            "bytes": 3251,
+            "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+          },
+          {
+            "path": "material-review.js",
+            "bytes": 8343,
+            "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+          }
+        ],
+        "verifiedAt": "2026-10-25T19:12:47.850Z",
+        "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+      },
+      "currentViewerHashAtCapture": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+      "captureMatchesCurrentViewer": true
+    },
+    {
+      "image": "OM10-Showcase/dist/quality-study/05-train.png",
+      "configuration": "OM10-Showcase/dist/quality-study/05-train.json",
+      "capturedAt": "2026-10-25T19:12:48.717Z",
+      "view": "train",
+      "renderProfile": "detail",
+      "drawingBuffer": {
+        "width": 2346,
+        "height": 1220,
+        "msaaSamples": 4
+      },
+      "sourceAtCapture": {
+        "status": "verified",
+        "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+        "algorithm": "SHA-256",
+        "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+        "metadataURL": "quality-study/viewer-revision.json",
+        "files": [
+          {
+            "path": "assembly-capture-provenance.js",
+            "bytes": 5085,
+            "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+          },
+          {
+            "path": "assembly-clock.js",
+            "bytes": 2474,
+            "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+          },
+          {
+            "path": "assembly-crown.js",
+            "bytes": 3883,
+            "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+          },
+          {
+            "path": "assembly-depth.js",
+            "bytes": 2815,
+            "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+          },
+          {
+            "path": "assembly-design.js",
+            "bytes": 4906,
+            "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+          },
+          {
+            "path": "assembly-dial.js",
+            "bytes": 6811,
+            "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+          },
+          {
+            "path": "assembly-form-details.js",
+            "bytes": 3991,
+            "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+          },
+          {
+            "path": "assembly-front-architecture.js",
+            "bytes": 2355,
+            "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+          },
+          {
+            "path": "assembly-glass-ao.js",
+            "bytes": 6085,
+            "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+          },
+          {
+            "path": "assembly-leather-details.js",
+            "bytes": 3986,
+            "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+          },
+          {
+            "path": "assembly-lifecycle.js",
+            "bytes": 636,
+            "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+          },
+          {
+            "path": "assembly-lighting.js",
+            "bytes": 5196,
+            "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+          },
+          {
+            "path": "assembly-loading.js",
+            "bytes": 2738,
+            "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+          },
+          {
+            "path": "assembly-materials.js",
+            "bytes": 12182,
+            "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+          },
+          {
+            "path": "assembly-motion.js",
+            "bytes": 19611,
+            "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+          },
+          {
+            "path": "assembly-open-front.js",
+            "bytes": 3789,
+            "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+          },
+          {
+            "path": "assembly-performance.js",
+            "bytes": 1715,
+            "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+          },
+          {
+            "path": "assembly-quality.css",
+            "bytes": 21469,
+            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+          },
+          {
+            "path": "assembly-recording.js",
+            "bytes": 4187,
+            "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+          },
+          {
+            "path": "assembly-refraction.js",
+            "bytes": 3005,
+            "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+          },
+          {
+            "path": "assembly-resolution.js",
+            "bytes": 2664,
+            "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+          },
+          {
+            "path": "assembly-review.css",
+            "bytes": 16873,
+            "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+          },
+          {
+            "path": "assembly-review.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "assembly-review.js",
+            "bytes": 61140,
+            "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+          },
+          {
+            "path": "assembly-seconds-details.js",
+            "bytes": 4152,
+            "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+          },
+          {
+            "path": "assembly-state.js",
+            "bytes": 3047,
+            "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+          },
+          {
+            "path": "assembly-story.js",
+            "bytes": 3394,
+            "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+          },
+          {
+            "path": "index.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "material-review-model.js",
+            "bytes": 2615,
+            "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+          },
+          {
+            "path": "material-review.css",
+            "bytes": 2977,
+            "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+          },
+          {
+            "path": "material-review.html",
+            "bytes": 3251,
+            "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+          },
+          {
+            "path": "material-review.js",
+            "bytes": 8343,
+            "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+          }
+        ],
+        "verifiedAt": "2026-10-25T19:12:48.711Z",
+        "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+      },
+      "currentViewerHashAtCapture": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+      "captureMatchesCurrentViewer": true
+    },
+    {
+      "image": "OM10-Showcase/dist/quality-study/06-leather.png",
+      "configuration": "OM10-Showcase/dist/quality-study/06-leather.json",
+      "capturedAt": "2026-10-25T19:12:49.558Z",
+      "view": "lug",
+      "renderProfile": "detail",
+      "drawingBuffer": {
+        "width": 2346,
+        "height": 1220,
+        "msaaSamples": 4
+      },
+      "sourceAtCapture": {
+        "status": "verified",
+        "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+        "algorithm": "SHA-256",
+        "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+        "metadataURL": "quality-study/viewer-revision.json",
+        "files": [
+          {
+            "path": "assembly-capture-provenance.js",
+            "bytes": 5085,
+            "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+          },
+          {
+            "path": "assembly-clock.js",
+            "bytes": 2474,
+            "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+          },
+          {
+            "path": "assembly-crown.js",
+            "bytes": 3883,
+            "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+          },
+          {
+            "path": "assembly-depth.js",
+            "bytes": 2815,
+            "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+          },
+          {
+            "path": "assembly-design.js",
+            "bytes": 4906,
+            "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+          },
+          {
+            "path": "assembly-dial.js",
+            "bytes": 6811,
+            "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+          },
+          {
+            "path": "assembly-form-details.js",
+            "bytes": 3991,
+            "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+          },
+          {
+            "path": "assembly-front-architecture.js",
+            "bytes": 2355,
+            "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+          },
+          {
+            "path": "assembly-glass-ao.js",
+            "bytes": 6085,
+            "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+          },
+          {
+            "path": "assembly-leather-details.js",
+            "bytes": 3986,
+            "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+          },
+          {
+            "path": "assembly-lifecycle.js",
+            "bytes": 636,
+            "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+          },
+          {
+            "path": "assembly-lighting.js",
+            "bytes": 5196,
+            "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+          },
+          {
+            "path": "assembly-loading.js",
+            "bytes": 2738,
+            "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+          },
+          {
+            "path": "assembly-materials.js",
+            "bytes": 12182,
+            "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+          },
+          {
+            "path": "assembly-motion.js",
+            "bytes": 19611,
+            "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+          },
+          {
+            "path": "assembly-open-front.js",
+            "bytes": 3789,
+            "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+          },
+          {
+            "path": "assembly-performance.js",
+            "bytes": 1715,
+            "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+          },
+          {
+            "path": "assembly-quality.css",
+            "bytes": 21469,
+            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+          },
+          {
+            "path": "assembly-recording.js",
+            "bytes": 4187,
+            "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+          },
+          {
+            "path": "assembly-refraction.js",
+            "bytes": 3005,
+            "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+          },
+          {
+            "path": "assembly-resolution.js",
+            "bytes": 2664,
+            "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+          },
+          {
+            "path": "assembly-review.css",
+            "bytes": 16873,
+            "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+          },
+          {
+            "path": "assembly-review.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "assembly-review.js",
+            "bytes": 61140,
+            "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+          },
+          {
+            "path": "assembly-seconds-details.js",
+            "bytes": 4152,
+            "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+          },
+          {
+            "path": "assembly-state.js",
+            "bytes": 3047,
+            "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+          },
+          {
+            "path": "assembly-story.js",
+            "bytes": 3394,
+            "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+          },
+          {
+            "path": "index.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "material-review-model.js",
+            "bytes": 2615,
+            "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+          },
+          {
+            "path": "material-review.css",
+            "bytes": 2977,
+            "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+          },
+          {
+            "path": "material-review.html",
+            "bytes": 3251,
+            "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+          },
+          {
+            "path": "material-review.js",
+            "bytes": 8343,
+            "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+          }
+        ],
+        "verifiedAt": "2026-10-25T19:12:49.551Z",
+        "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+      },
+      "currentViewerHashAtCapture": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+      "captureMatchesCurrentViewer": true
+    },
+    {
+      "image": "OM10-Showcase/dist/quality-study/mobile-front.png",
+      "configuration": "OM10-Showcase/dist/quality-study/mobile-front.json",
+      "capturedAt": "2026-10-25T19:14:28.362Z",
+      "view": "face",
+      "renderProfile": "detail",
+      "drawingBuffer": {
+        "width": 938,
+        "height": 1372,
+        "msaaSamples": 4
+      },
+      "sourceAtCapture": {
+        "status": "verified",
+        "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+        "algorithm": "SHA-256",
+        "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+        "metadataURL": "quality-study/viewer-revision.json",
+        "files": [
+          {
+            "path": "assembly-capture-provenance.js",
+            "bytes": 5085,
+            "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+          },
+          {
+            "path": "assembly-clock.js",
+            "bytes": 2474,
+            "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+          },
+          {
+            "path": "assembly-crown.js",
+            "bytes": 3883,
+            "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+          },
+          {
+            "path": "assembly-depth.js",
+            "bytes": 2815,
+            "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+          },
+          {
+            "path": "assembly-design.js",
+            "bytes": 4906,
+            "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+          },
+          {
+            "path": "assembly-dial.js",
+            "bytes": 6811,
+            "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+          },
+          {
+            "path": "assembly-form-details.js",
+            "bytes": 3991,
+            "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+          },
+          {
+            "path": "assembly-front-architecture.js",
+            "bytes": 2355,
+            "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+          },
+          {
+            "path": "assembly-glass-ao.js",
+            "bytes": 6085,
+            "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+          },
+          {
+            "path": "assembly-leather-details.js",
+            "bytes": 3986,
+            "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+          },
+          {
+            "path": "assembly-lifecycle.js",
+            "bytes": 636,
+            "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+          },
+          {
+            "path": "assembly-lighting.js",
+            "bytes": 5196,
+            "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+          },
+          {
+            "path": "assembly-loading.js",
+            "bytes": 2738,
+            "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+          },
+          {
+            "path": "assembly-materials.js",
+            "bytes": 12182,
+            "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+          },
+          {
+            "path": "assembly-motion.js",
+            "bytes": 19611,
+            "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+          },
+          {
+            "path": "assembly-open-front.js",
+            "bytes": 3789,
+            "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+          },
+          {
+            "path": "assembly-performance.js",
+            "bytes": 1715,
+            "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+          },
+          {
+            "path": "assembly-quality.css",
+            "bytes": 21469,
+            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+          },
+          {
+            "path": "assembly-recording.js",
+            "bytes": 4187,
+            "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+          },
+          {
+            "path": "assembly-refraction.js",
+            "bytes": 3005,
+            "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+          },
+          {
+            "path": "assembly-resolution.js",
+            "bytes": 2664,
+            "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+          },
+          {
+            "path": "assembly-review.css",
+            "bytes": 16873,
+            "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+          },
+          {
+            "path": "assembly-review.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "assembly-review.js",
+            "bytes": 61140,
+            "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+          },
+          {
+            "path": "assembly-seconds-details.js",
+            "bytes": 4152,
+            "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+          },
+          {
+            "path": "assembly-state.js",
+            "bytes": 3047,
+            "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+          },
+          {
+            "path": "assembly-story.js",
+            "bytes": 3394,
+            "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+          },
+          {
+            "path": "index.html",
+            "bytes": 20805,
+            "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+          },
+          {
+            "path": "material-review-model.js",
+            "bytes": 2615,
+            "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+          },
+          {
+            "path": "material-review.css",
+            "bytes": 2977,
+            "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+          },
+          {
+            "path": "material-review.html",
+            "bytes": 3251,
+            "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+          },
+          {
+            "path": "material-review.js",
+            "bytes": 8343,
+            "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+          }
+        ],
+        "verifiedAt": "2026-10-25T19:14:28.354Z",
+        "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+      },
+      "currentViewerHashAtCapture": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+      "captureMatchesCurrentViewer": true
+    }
+  ],
+  "limitations": [
+    "Not a production release or engineering approval. Structural strength, sealing, manufacturing tolerances and physical prototypes remain unvalidated.",
+    "Movement animation is a deterministic visual kinematic study, not a torque, force or wear simulation.",
+    "Native static gear poses and browser corrected animated phases are distinct presentations.",
+    "Saved validation checks identity, sampled seats, topology and shared coordinates; it does not certify complete mechanical clearances.",
+    "Capture source identity covers first-party viewer source only; native/model/vendor identities are inventoried separately. Refresh captures whose source digest differs from the current viewer revision. Source identity does not imply visual acceptance.",
+    "Performance evidence is device- and profile-specific. Physical-phone and controlled-network acceptance must be assessed separately."
+  ]
+}

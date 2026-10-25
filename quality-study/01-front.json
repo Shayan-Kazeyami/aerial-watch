@@ -1,0 +1,1987 @@
+{
+  "version": 1,
+  "date": "2026-10-25T19:12:09.319Z",
+  "design": "Aerial Quality 01",
+  "phase": "proposal-ready",
+  "view": "face",
+  "camera": {
+    "position": [
+      2.7388855527455673,
+      5.0865017408132545,
+      81.75387293558771
+    ],
+    "target": [
+      0,
+      0,
+      3.5
+    ],
+    "zoom": 1,
+    "fov": 32,
+    "near": 18.575290285257736,
+    "far": 800
+  },
+  "formDetails": {
+    "revision": "form-legibility-r01",
+    "ready": true,
+    "enabled": true,
+    "calendarDigitIslands": 53
+  },
+  "frontArchitecture": {
+    "revision": "front-architecture-r05",
+    "ready": true,
+    "enabled": true,
+    "audit": {
+      "replacementIndices": [
+        0,
+        155,
+        149
+      ],
+      "calendar": "Actual blank top machined at nativeZ2.099; original gear teeth retained",
+      "construction": "Five small wheel-concentric rounded slots and smooth source155 perimeter; native bearing reserves retained",
+      "raisedLip": {
+        "innerRadiusMM": 9.3,
+        "outerRadiusMM": 10.8,
+        "bottomNativeZMM": 2.18,
+        "topNativeZMM": 2.32,
+        "calendarNominalGapMM": 0.081,
+        "correctorNominalGapMM": 0.02
+      },
+      "clearance": {
+        "scope": "Static native-pose added-stock sampling only",
+        "addedStockSamples": 3024,
+        "sampledOverlapCount": 0,
+        "fullMotionValidated": false
+      },
+      "physicalValidation": false
+    }
+  },
+  "leatherCraft": {
+    "revision": "leather-craft-r05",
+    "ready": true,
+    "parts": 8
+  },
+  "compactCrown": true,
+  "clock": {
+    "mechanism": 0,
+    "hands": 0,
+    "speed": 1,
+    "hidden": false,
+    "running": {
+      "mechanism": false,
+      "hands": false
+    },
+    "backgroundPolicy": "pause while hidden",
+    "delta": 0.003099999997022678
+  },
+  "crown": {
+    "pulled": false,
+    "degrees": 0,
+    "mode": "winding"
+  },
+  "sourceAtCapture": {
+    "status": "verified",
+    "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+    "algorithm": "SHA-256",
+    "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
+    "metadataURL": "quality-study/viewer-revision.json",
+    "files": [
+      {
+        "path": "assembly-capture-provenance.js",
+        "bytes": 5085,
+        "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+      },
+      {
+        "path": "assembly-clock.js",
+        "bytes": 2474,
+        "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
+      },
+      {
+        "path": "assembly-crown.js",
+        "bytes": 3883,
+        "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+      },
+      {
+        "path": "assembly-depth.js",
+        "bytes": 2815,
+        "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+      },
+      {
+        "path": "assembly-design.js",
+        "bytes": 4906,
+        "sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+      },
+      {
+        "path": "assembly-dial.js",
+        "bytes": 6811,
+        "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+      },
+      {
+        "path": "assembly-form-details.js",
+        "bytes": 3991,
+        "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
+      },
+      {
+        "path": "assembly-front-architecture.js",
+        "bytes": 2355,
+        "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+      },
+      {
+        "path": "assembly-glass-ao.js",
+        "bytes": 6085,
+        "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
+      },
+      {
+        "path": "assembly-leather-details.js",
+        "bytes": 3986,
+        "sha256": "970e706b20d662928cb35f9f2ccc59357d864f0720786995e422967a53f0401c"
+      },
+      {
+        "path": "assembly-lifecycle.js",
+        "bytes": 636,
+        "sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+      },
+      {
+        "path": "assembly-lighting.js",
+        "bytes": 5196,
+        "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+      },
+      {
+        "path": "assembly-loading.js",
+        "bytes": 2738,
+        "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+      },
+      {
+        "path": "assembly-materials.js",
+        "bytes": 12182,
+        "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+      },
+      {
+        "path": "assembly-motion.js",
+        "bytes": 19611,
+        "sha256": "7b22ab3f9616cfb21322357f706ef0aa136be7204723eec3e696275861602584"
+      },
+      {
+        "path": "assembly-open-front.js",
+        "bytes": 3789,
+        "sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+      },
+      {
+        "path": "assembly-performance.js",
+        "bytes": 1715,
+        "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
+      },
+      {
+        "path": "assembly-quality.css",
+        "bytes": 21469,
+        "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+      },
+      {
+        "path": "assembly-recording.js",
+        "bytes": 4187,
+        "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+      },
+      {
+        "path": "assembly-refraction.js",
+        "bytes": 3005,
+        "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+      },
+      {
+        "path": "assembly-resolution.js",
+        "bytes": 2664,
+        "sha256": "b7327fabd5a38be7981d4b87c0345965df970fa792005be59489d076eb441553"
+      },
+      {
+        "path": "assembly-review.css",
+        "bytes": 16873,
+        "sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+      },
+      {
+        "path": "assembly-review.html",
+        "bytes": 20805,
+        "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+      },
+      {
+        "path": "assembly-review.js",
+        "bytes": 61140,
+        "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+      },
+      {
+        "path": "assembly-seconds-details.js",
+        "bytes": 4152,
+        "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+      },
+      {
+        "path": "assembly-state.js",
+        "bytes": 3047,
+        "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+      },
+      {
+        "path": "assembly-story.js",
+        "bytes": 3394,
+        "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+      },
+      {
+        "path": "index.html",
+        "bytes": 20805,
+        "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+      },
+      {
+        "path": "material-review-model.js",
+        "bytes": 2615,
+        "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+      },
+      {
+        "path": "material-review.css",
+        "bytes": 2977,
+        "sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+      },
+      {
+        "path": "material-review.html",
+        "bytes": 3251,
+        "sha256": "14aa4b638e61a94c7cdaa0cba02746df5f0f237ee841104ea011d8bd4f887299"
+      },
+      {
+        "path": "material-review.js",
+        "bytes": 8343,
+        "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+      }
+    ],
+    "verifiedAt": "2026-10-25T19:12:09.310Z",
+    "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
+  },
+  "options": {
+    "openWork": true,
+    "finishes": true,
+    "crystals": true,
+    "movementOnly": false,
+    "interior": false,
+    "powerPath": false,
+    "quality": "detail"
+  },
+  "viewport": {
+    "width": 939,
+    "height": 488,
+    "pixelRatio": 2.5,
+    "drawingBufferWidth": 2346,
+    "drawingBufferHeight": 1220,
+    "msaaSamples": 4,
+    "transmissionScale": 2
+  },
+  "sourceMeshes": 166,
+  "sourceVisible": 164,
+  "derivedParts": 24,
+  "lightRig": "face",
+  "performance": {
+    "loads": [
+      {
+        "url": "rebuild/assembly.glb",
+        "bodyBytes": 26126492,
+        "transferMs": 531.5999999940395,
+        "parseMs": 32.80000001192093,
+        "totalMs": 564.4000000059605
+      },
+      {
+        "url": "quality-study/open-front-plates.glb",
+        "bodyBytes": 2194400,
+        "transferMs": 406.29999999701977,
+        "parseMs": 2.2999999970197678,
+        "totalMs": 408.59999999403954
+      },
+      {
+        "url": "quality-study/leather-craft-r05.glb",
+        "bodyBytes": 1662940,
+        "transferMs": 1315.0999999940395,
+        "parseMs": 2.4000000059604645,
+        "totalMs": 1317.5
+      },
+      {
+        "url": "quality-study/form-legibility-r01.glb",
+        "bodyBytes": 2570568,
+        "transferMs": 1510.3999999910593,
+        "parseMs": 2,
+        "totalMs": 1512.3999999910593
+      },
+      {
+        "url": "quality-study/front-architecture-r05.glb",
+        "bodyBytes": 2588000,
+        "transferMs": 22.099999994039536,
+        "parseMs": 1.9000000059604645,
+        "totalMs": 24
+      }
+    ],
+    "firstInteractiveMs": 2088.7000000029802,
+    "totalFrames": 828,
+    "sampledFrames": 828,
+    "measurementDurationMs": 46496.5,
+    "cpuFrameMs": {
+      "median": 6.200000002980232,
+      "p95": 7.799999997019768,
+      "max": 1277.5999999940395
+    },
+    "renderedIntervalMs": {
+      "median": 15,
+      "p95": 20
+    },
+    "renderer": {
+      "drawCalls": 1057,
+      "triangles": 4985676,
+      "geometries": 222,
+      "textures": 13
+    },
+    "measurementNotes": "CPU includes motion/camera preparation and render submission; GPU time unavailable. Body bytes measure decoded HTTP response bytes, not cold/warm network transfer. Render intervals include on-demand idle gaps unless reset. Physical phone measurements are not inferred."
+  },
+  "resources": {
+    "disposed": false,
+    "active": [
+      "WebGL renderer",
+      "studio environment and finish library",
+      "post-processing composer",
+      "orbit controls",
+      "studio lighting and floor",
+      "stage resize observer",
+      "selection and power-path highlights",
+      "crown interaction",
+      "refraction-aligned ambient occlusion",
+      "canvas motion recorder",
+      "transparent baseline material",
+      "transparent baseline material",
+      "crown presentation transform",
+      "original assembly geometry",
+      "dial printing",
+      "open-work frame",
+      "quality hand design",
+      "optional proposed plates",
+      "craft comparison material",
+      "R05 leather craft geometry",
+      "calendar lettering and lug bevels",
+      "R05 front architecture"
+    ]
+  },
+  "warnings": [],
+  "navigationTiming": {
+    "moduleBootMs": 179.09999999403954,
+    "firstInteractiveMs": 2267.7999999970198,
+    "preview": {
+      "path": "/quality-study/01-front.webp",
+      "decoded": true,
+      "responseEndMs": 62
+    },
+    "note": "Times are relative to document navigation. Preview response completion/decoded state does not measure its first painted frame."
+  },
+  "pageTransfers": [
+    {
+      "path": "/assembly-review.css",
+      "startMs": 48.8999999910593,
+      "endMs": 60.29999999701977,
+      "transferBytes": 4737,
+      "encodedBodyBytes": 4437
+    },
+    {
+      "path": "/quality-study/01-front.webp",
+      "startMs": 49.20000000298023,
+      "endMs": 62,
+      "transferBytes": 78302,
+      "encodedBodyBytes": 78002
+    },
+    {
+      "path": "/assembly-quality.css",
+      "startMs": 49.20000000298023,
+      "endMs": 61.79999999701977,
+      "transferBytes": 5059,
+      "encodedBodyBytes": 4759
+    },
+    {
+      "path": "/assembly-review.js",
+      "startMs": 73.29999999701977,
+      "endMs": 78,
+      "transferBytes": 18034,
+      "encodedBodyBytes": 17734
+    },
+    {
+      "path": "/quality-study/native-studio.webp",
+      "startMs": 86.29999999701977,
+      "endMs": 97.5,
+      "transferBytes": 51094,
+      "encodedBodyBytes": 50794
+    },
+    {
+      "path": "/quality-study/native-front.webp",
+      "startMs": 86.29999999701977,
+      "endMs": 98,
+      "transferBytes": 86712,
+      "encodedBodyBytes": 86412
+    },
+    {
+      "path": "/quality-study/02-three-quarter.webp",
+      "startMs": 86.3999999910593,
+      "endMs": 105.59999999403954,
+      "transferBytes": 55822,
+      "encodedBodyBytes": 55522
+    },
+    {
+      "path": "/quality-study/03-interior.webp",
+      "startMs": 86.3999999910593,
+      "endMs": 107.29999999701977,
+      "transferBytes": 64896,
+      "encodedBodyBytes": 64596
+    },
+    {
+      "path": "/quality-study/04-balance.webp",
+      "startMs": 86.3999999910593,
+      "endMs": 108,
+      "transferBytes": 103280,
+      "encodedBodyBytes": 102980
+    },
+    {
+      "path": "/vendor/three.module.js",
+      "startMs": 91,
+      "endMs": 114.79999999701977,
+      "transferBytes": 118507,
+      "encodedBodyBytes": 118207
+    },
+    {
+      "path": "/vendor/controls/OrbitControls.js",
+      "startMs": 91.09999999403954,
+      "endMs": 107.5,
+      "transferBytes": 8471,
+      "encodedBodyBytes": 8171
+    },
+    {
+      "path": "/vendor/loaders/GLTFLoader.js",
+      "startMs": 91.09999999403954,
+      "endMs": 109.20000000298023,
+      "transferBytes": 25077,
+      "encodedBodyBytes": 24777
+    },
+    {
+      "path": "/vendor/postprocessing/EffectComposer.js",
+      "startMs": 91.09999999403954,
+      "endMs": 111.3999999910593,
+      "transferBytes": 2681,
+      "encodedBodyBytes": 2381
+    },
+    {
+      "path": "/vendor/postprocessing/RenderPass.js",
+      "startMs": 91.20000000298023,
+      "endMs": 112.70000000298023,
+      "transferBytes": 1572,
+      "encodedBodyBytes": 1272
+    },
+    {
+      "path": "/vendor/postprocessing/SSAOPass.js",
+      "startMs": 91.20000000298023,
+      "endMs": 114,
+      "transferBytes": 3580,
+      "encodedBodyBytes": 3280
+    },
+    {
+      "path": "/vendor/postprocessing/OutputPass.js",
+      "startMs": 91.20000000298023,
+      "endMs": 114.20000000298023,
+      "transferBytes": 1694,
+      "encodedBodyBytes": 1394
+    },
+    {
+      "path": "/assembly-materials.js",
+      "startMs": 91.20000000298023,
+      "endMs": 116,
+      "transferBytes": 5039,
+      "encodedBodyBytes": 4739
+    },
+    {
+      "path": "/assembly-motion.js",
+      "startMs": 91.20000000298023,
+      "endMs": 115.8999999910593,
+      "transferBytes": 6924,
+      "encodedBodyBytes": 6624
+    },
+    {
+      "path": "/assembly-lighting.js",
+      "startMs": 91.29999999701977,
+      "endMs": 117.3999999910593,
+      "transferBytes": 2282,
+      "encodedBodyBytes": 1982
+    },
+    {
+      "path": "/assembly-dial.js",
+      "startMs": 91.29999999701977,
+      "endMs": 119.5,
+      "transferBytes": 3097,
+      "encodedBodyBytes": 2797
+    },
+    {
+      "path": "/assembly-open-front.js",
+      "startMs": 91.29999999701977,
+      "endMs": 121.09999999403954,
+      "transferBytes": 2087,
+      "encodedBodyBytes": 1787
+    },
+    {
+      "path": "/assembly-design.js",
+      "startMs": 91.3999999910593,
+      "endMs": 121.8999999910593,
+      "transferBytes": 2405,
+      "encodedBodyBytes": 2105
+    },
+    {
+      "path": "/assembly-depth.js",
+      "startMs": 91.3999999910593,
+      "endMs": 123.09999999403954,
+      "transferBytes": 1486,
+      "encodedBodyBytes": 1186
+    },
+    {
+      "path": "/assembly-clock.js",
+      "startMs": 91.3999999910593,
+      "endMs": 123.5,
+      "transferBytes": 1180,
+      "encodedBodyBytes": 880
+    },
+    {
+      "path": "/assembly-glass-ao.js",
+      "startMs": 91.3999999910593,
+      "endMs": 123.20000000298023,
+      "transferBytes": 2530,
+      "encodedBodyBytes": 2230
+    },
+    {
+      "path": "/assembly-state.js",
+      "startMs": 91.5,
+      "endMs": 124.8999999910593,
+      "transferBytes": 1605,
+      "encodedBodyBytes": 1305
+    },
+    {
+      "path": "/assembly-loading.js",
+      "startMs": 91.5,
+      "endMs": 126.20000000298023,
+      "transferBytes": 1358,
+      "encodedBodyBytes": 1058
+    },
+    {
+      "path": "/assembly-performance.js",
+      "startMs": 91.5,
+      "endMs": 127.09999999403954,
+      "transferBytes": 1098,
+      "encodedBodyBytes": 798
+    },
+    {
+      "path": "/assembly-resolution.js",
+      "startMs": 91.5,
+      "endMs": 128.70000000298023,
+      "transferBytes": 1353,
+      "encodedBodyBytes": 1053
+    },
+    {
+      "path": "/assembly-crown.js",
+      "startMs": 91.59999999403954,
+      "endMs": 128.5,
+      "transferBytes": 1841,
+      "encodedBodyBytes": 1541
+    },
+    {
+      "path": "/assembly-capture-provenance.js",
+      "startMs": 91.59999999403954,
+      "endMs": 128.79999999701977,
+      "transferBytes": 2463,
+      "encodedBodyBytes": 2163
+    },
+    {
+      "path": "/assembly-recording.js",
+      "startMs": 91.59999999403954,
+      "endMs": 130.3999999910593,
+      "transferBytes": 1850,
+      "encodedBodyBytes": 1550
+    },
+    {
+      "path": "/assembly-story.js",
+      "startMs": 91.59999999403954,
+      "endMs": 130.70000000298023,
+      "transferBytes": 1883,
+      "encodedBodyBytes": 1583
+    },
+    {
+      "path": "/assembly-lifecycle.js",
+      "startMs": 91.59999999403954,
+      "endMs": 131.3999999910593,
+      "transferBytes": 936,
+      "encodedBodyBytes": 636
+    },
+    {
+      "path": "/assembly-form-details.js",
+      "startMs": 91.59999999403954,
+      "endMs": 132.3999999910593,
+      "transferBytes": 1986,
+      "encodedBodyBytes": 1686
+    },
+    {
+      "path": "/assembly-leather-details.js",
+      "startMs": 91.59999999403954,
+      "endMs": 133.5,
+      "transferBytes": 2002,
+      "encodedBodyBytes": 1702
+    },
+    {
+      "path": "/assembly-front-architecture.js",
+      "startMs": 91.70000000298023,
+      "endMs": 132.70000000298023,
+      "transferBytes": 1447,
+      "encodedBodyBytes": 1147
+    },
+    {
+      "path": "/vendor/utils/BufferGeometryUtils.js",
+      "startMs": 111.70000000298023,
+      "endMs": 136.29999999701977,
+      "transferBytes": 8323,
+      "encodedBodyBytes": 8023
+    },
+    {
+      "path": "/vendor/shaders/CopyShader.js",
+      "startMs": 115.20000000298023,
+      "endMs": 134.8999999910593,
+      "transferBytes": 1029,
+      "encodedBodyBytes": 729
+    },
+    {
+      "path": "/vendor/postprocessing/ShaderPass.js",
+      "startMs": 115.3999999910593,
+      "endMs": 137.79999999701977,
+      "transferBytes": 1565,
+      "encodedBodyBytes": 1265
+    },
+    {
+      "path": "/vendor/postprocessing/MaskPass.js",
+      "startMs": 115.3999999910593,
+      "endMs": 138,
+      "transferBytes": 1597,
+      "encodedBodyBytes": 1297
+    },
+    {
+      "path": "/vendor/postprocessing/Pass.js",
+      "startMs": 115.79999999701977,
+      "endMs": 138.20000000298023,
+      "transferBytes": 1795,
+      "encodedBodyBytes": 1495
+    },
+    {
+      "path": "/vendor/math/SimplexNoise.js",
+      "startMs": 116.20000000298023,
+      "endMs": 139.09999999403954,
+      "transferBytes": 4154,
+      "encodedBodyBytes": 3854
+    },
+    {
+      "path": "/vendor/shaders/SSAOShader.js",
+      "startMs": 116.29999999701977,
+      "endMs": 139.70000000298023,
+      "transferBytes": 2245,
+      "encodedBodyBytes": 1945
+    },
+    {
+      "path": "/vendor/shaders/OutputShader.js",
+      "startMs": 117,
+      "endMs": 141.20000000298023,
+      "transferBytes": 1016,
+      "encodedBodyBytes": 716
+    },
+    {
+      "path": "/vendor/three.core.js",
+      "startMs": 117,
+      "endMs": 169.29999999701977,
+      "transferBytes": 278598,
+      "encodedBodyBytes": 278298
+    },
+    {
+      "path": "/assembly-refraction.js",
+      "startMs": 118.3999999910593,
+      "endMs": 141.8999999910593,
+      "transferBytes": 1569,
+      "encodedBodyBytes": 1269
+    },
+    {
+      "path": "/assembly-seconds-details.js",
+      "startMs": 120.59999999403954,
+      "endMs": 142.20000000298023,
+      "transferBytes": 2208,
+      "encodedBodyBytes": 1908
+    },
+    {
+      "path": "/assets/manual-a-parts.json",
+      "startMs": 233.70000000298023,
+      "endMs": 267.29999999701977,
+      "transferBytes": 19866,
+      "encodedBodyBytes": 19566
+    },
+    {
+      "path": "/quality-study/viewer-revision.js",
+      "startMs": 241,
+      "endMs": 263.5,
+      "transferBytes": 2238,
+      "encodedBodyBytes": 1938
+    },
+    {
+      "path": "/quality-study/open-front-plates.glb",
+      "startMs": 241.29999999701977,
+      "endMs": 644.3999999910593,
+      "transferBytes": 468794,
+      "encodedBodyBytes": 468494
+    },
+    {
+      "path": "/rebuild/assembly.glb",
+      "startMs": 241.3999999910593,
+      "endMs": 766.3999999910593,
+      "transferBytes": 7241656,
+      "encodedBodyBytes": 7241356
+    },
+    {
+      "path": "/quality-study/form-legibility-r01.glb",
+      "startMs": 983.5999999940395,
+      "endMs": 2310.5999999940395,
+      "transferBytes": 783985,
+      "encodedBodyBytes": 783685
+    },
+    {
+      "path": "/quality-study/leather-craft-r05.glb",
+      "startMs": 983.7999999970198,
+      "endMs": 1009.7000000029802,
+      "transferBytes": 630424,
+      "encodedBodyBytes": 630124
+    },
+    {
+      "path": "/quality-study/front-architecture-r05.glb",
+      "startMs": 2542.7999999970198,
+      "endMs": 2563.2000000029802,
+      "transferBytes": 536549,
+      "encodedBodyBytes": 536249
+    },
+    {
+      "path": "/quality-study/viewer-revision.json",
+      "startMs": 46628.5,
+      "endMs": 46634.70000000298,
+      "transferBytes": 2219,
+      "encodedBodyBytes": 1919
+    },
+    {
+      "path": "/assembly-capture-provenance.js",
+      "startMs": 46636.59999999404,
+      "endMs": 46643.5,
+      "transferBytes": 2463,
+      "encodedBodyBytes": 2163
+    },
+    {
+      "path": "/assembly-clock.js",
+      "startMs": 46636.70000000298,
+      "endMs": 46644.29999999702,
+      "transferBytes": 1180,
+      "encodedBodyBytes": 880
+    },
+    {
+      "path": "/assembly-crown.js",
+      "startMs": 46636.70000000298,
+      "endMs": 46645.5,
+      "transferBytes": 1841,
+      "encodedBodyBytes": 1541
+    },
+    {
+      "path": "/assembly-depth.js",
+      "startMs": 46636.70000000298,
+      "endMs": 46646.89999999106,
+      "transferBytes": 1486,
+      "encodedBodyBytes": 1186
+    },
+    {
+      "path": "/assembly-design.js",
+      "startMs": 46636.70000000298,
+      "endMs": 46648,
+      "transferBytes": 2405,
+      "encodedBodyBytes": 2105
+    },
+    {
+      "path": "/assembly-dial.js",
+      "startMs": 46636.79999999702,
+      "endMs": 46648.5,
+      "transferBytes": 3097,
+      "encodedBodyBytes": 2797
+    },
+    {
+      "path": "/assembly-form-details.js",
+      "startMs": 46636.79999999702,
+      "endMs": 46648.79999999702,
+      "transferBytes": 1986,
+      "encodedBodyBytes": 1686
+    },
+    {
+      "path": "/assembly-front-architecture.js",
+      "startMs": 46636.79999999702,
+      "endMs": 46651,
+      "transferBytes": 1447,
+      "encodedBodyBytes": 1147
+    },
+    {
+      "path": "/assembly-glass-ao.js",
+      "startMs": 46636.89999999106,
+      "endMs": 46651.09999999404,
+      "transferBytes": 2530,
+      "encodedBodyBytes": 2230
+    },
+    {
+      "path": "/assembly-leather-details.js",
+      "startMs": 46637,
+      "endMs": 46651.20000000298,
+      "transferBytes": 2002,
+      "encodedBodyBytes": 1702
+    },
+    {
+      "path": "/assembly-lifecycle.js",
+      "startMs": 46637,
+      "endMs": 46651.59999999404,
+      "transferBytes": 936,
+      "encodedBodyBytes": 636
+    },
+    {
+      "path": "/assembly-lighting.js",
+      "startMs": 46637,
+      "endMs": 46652.39999999106,
+      "transferBytes": 2282,
+      "encodedBodyBytes": 1982
+    },
+    {
+      "path": "/assembly-loading.js",
+      "startMs": 46637.09999999404,
+      "endMs": 46652.79999999702,
+      "transferBytes": 1358,
+      "encodedBodyBytes": 1058
+    },
+    {
+      "path": "/assembly-materials.js",
+      "startMs": 46637.09999999404,
+      "endMs": 46654.70000000298,
+      "transferBytes": 5039,
+      "encodedBodyBytes": 4739
+    },
+    {
+      "path": "/assembly-motion.js",
+      "startMs": 46637.09999999404,
+      "endMs": 46655.09999999404,
+      "transferBytes": 6924,
+      "encodedBodyBytes": 6624
+    },
+    {
+      "path": "/assembly-open-front.js",
+      "startMs": 46637.20000000298,
+      "endMs": 46654.29999999702,
+      "transferBytes": 2087,
+      "encodedBodyBytes": 1787
+    },
+    {
+      "path": "/assembly-performance.js",
+      "startMs": 46637.29999999702,
+      "endMs": 46656,
+      "transferBytes": 1098,
+      "encodedBodyBytes": 798
+    },
+    {
+      "path": "/assembly-recording.js",
+      "startMs": 46637.29999999702,
+      "endMs": 46657.20000000298,
+      "transferBytes": 1850,
+      "encodedBodyBytes": 1550
+    },
+    {
+      "path": "/assembly-quality.css",
+      "startMs": 46637.29999999702,
+      "endMs": 46657.79999999702,
+      "transferBytes": 5059,
+      "encodedBodyBytes": 4759
+    },
+    {
+      "path": "/assembly-refraction.js",
+      "startMs": 46637.39999999106,
+      "endMs": 46658.20000000298,
+      "transferBytes": 1569,
+      "encodedBodyBytes": 1269
+    },
+    {
+      "path": "/assembly-resolution.js",
+      "startMs": 46637.39999999106,
+      "endMs": 46658.20000000298,
+      "transferBytes": 1353,
+      "encodedBodyBytes": 1053
+    },
+    {
+      "path": "/assembly-review.css",
+      "startMs": 46637.39999999106,
+      "endMs": 46659,
+      "transferBytes": 4737,
+      "encodedBodyBytes": 4437
+    },
+    {
+      "path": "/assembly-review.html",
+      "startMs": 46637.39999999106,
+      "endMs": 46659.79999999702,
+      "transferBytes": 6450,
+      "encodedBodyBytes": 6150
+    },
+    {
+      "path": "/assembly-review.js",
+      "startMs": 46637.39999999106,
+      "endMs": 46662.09999999404,
+      "transferBytes": 18034,
+      "encodedBodyBytes": 17734
+    },
+    {
+      "path": "/assembly-seconds-details.js",
+      "startMs": 46637.5,
+      "endMs": 46662.29999999702,
+      "transferBytes": 2208,
+      "encodedBodyBytes": 1908
+    },
+    {
+      "path": "/assembly-state.js",
+      "startMs": 46637.5,
+      "endMs": 46663,
+      "transferBytes": 1605,
+      "encodedBodyBytes": 1305
+    },
+    {
+      "path": "/assembly-story.js",
+      "startMs": 46637.5,
+      "endMs": 46663.29999999702,
+      "transferBytes": 1883,
+      "encodedBodyBytes": 1583
+    },
+    {
+      "path": "/index.html",
+      "startMs": 46637.5,
+      "endMs": 46664.39999999106,
+      "transferBytes": 6450,
+      "encodedBodyBytes": 6150
+    },
+    {
+      "path": "/material-review-model.js",
+      "startMs": 46637.70000000298,
+      "endMs": 46664.39999999106,
+      "transferBytes": 1417,
+      "encodedBodyBytes": 1117
+    },
+    {
+      "path": "/material-review.html",
+      "startMs": 46637.70000000298,
+      "endMs": 46665.5,
+      "transferBytes": 1885,
+      "encodedBodyBytes": 1585
+    },
+    {
+      "path": "/material-review.css",
+      "startMs": 46637.70000000298,
+      "endMs": 46665.89999999106,
+      "transferBytes": 1519,
+      "encodedBodyBytes": 1219
+    },
+    {
+      "path": "/material-review.js",
+      "startMs": 46637.70000000298,
+      "endMs": 46666.09999999404,
+      "transferBytes": 3389,
+      "encodedBodyBytes": 3089
+    }
+  ],
+  "GPU": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Ti (0x00002D04) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "manifest": {
+    "units": "mm",
+    "CADToGLTF": "[-z,y,x]",
+    "sceneMount": "rotationX(+pi/2)",
+    "baseline": "rebuild/assembly.glb",
+    "originalSources": [
+      {
+        "id": 0,
+        "partNumber": "OM10-00214",
+        "name": "OM10-00214_·_000"
+      },
+      {
+        "id": 1,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_001"
+      },
+      {
+        "id": 2,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_002"
+      },
+      {
+        "id": 3,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_003"
+      },
+      {
+        "id": 4,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_004"
+      },
+      {
+        "id": 5,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_005"
+      },
+      {
+        "id": 6,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_006"
+      },
+      {
+        "id": 7,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_007"
+      },
+      {
+        "id": 8,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_008"
+      },
+      {
+        "id": 9,
+        "partNumber": "OM00-00118",
+        "name": "OM00-00118_·_009"
+      },
+      {
+        "id": 10,
+        "partNumber": "OM00-00116",
+        "name": "OM00-00116_·_010"
+      },
+      {
+        "id": 11,
+        "partNumber": "OM00-00115",
+        "name": "OM00-00115_·_011"
+      },
+      {
+        "id": 12,
+        "partNumber": "OM00-00114",
+        "name": "OM00-00114_·_012"
+      },
+      {
+        "id": 13,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_013"
+      },
+      {
+        "id": 14,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_014"
+      },
+      {
+        "id": 15,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111_·_015"
+      },
+      {
+        "id": 16,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111_·_016"
+      },
+      {
+        "id": 17,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111_·_017"
+      },
+      {
+        "id": 18,
+        "partNumber": "OM00-00111",
+        "name": "OM00-00111_·_018"
+      },
+      {
+        "id": 19,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_019"
+      },
+      {
+        "id": 20,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_020"
+      },
+      {
+        "id": 21,
+        "partNumber": "OM00-00120",
+        "name": "OM00-00120_·_021"
+      },
+      {
+        "id": 22,
+        "partNumber": "OM00-00140",
+        "name": "OM00-00140_·_022"
+      },
+      {
+        "id": 23,
+        "partNumber": "OM00-00122",
+        "name": "OM00-00122_·_023"
+      },
+      {
+        "id": 24,
+        "partNumber": "OM00-00122",
+        "name": "OM00-00122_·_024"
+      },
+      {
+        "id": 25,
+        "partNumber": "OM00-00123",
+        "name": "OM00-00123_·_025"
+      },
+      {
+        "id": 26,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124_·_026"
+      },
+      {
+        "id": 27,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124_·_027"
+      },
+      {
+        "id": 28,
+        "partNumber": "OM00-00112",
+        "name": "OM00-00112_·_028"
+      },
+      {
+        "id": 29,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_029"
+      },
+      {
+        "id": 30,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_030"
+      },
+      {
+        "id": 31,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_031"
+      },
+      {
+        "id": 32,
+        "partNumber": "OM00-00113",
+        "name": "OM00-00113_·_032"
+      },
+      {
+        "id": 33,
+        "partNumber": "OM00-00113",
+        "name": "OM00-00113_·_033"
+      },
+      {
+        "id": 34,
+        "partNumber": "OM00-00110",
+        "name": "OM00-00110_·_034"
+      },
+      {
+        "id": 35,
+        "partNumber": "OM00-00139",
+        "name": "OM00-00139_·_035"
+      },
+      {
+        "id": 36,
+        "partNumber": "OM00-00139",
+        "name": "OM00-00139_·_036"
+      },
+      {
+        "id": 37,
+        "partNumber": "OM00-00110",
+        "name": "OM00-00110_·_037"
+      },
+      {
+        "id": 38,
+        "partNumber": "OM00-00138",
+        "name": "OM00-00138_·_038"
+      },
+      {
+        "id": 39,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_039"
+      },
+      {
+        "id": 40,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_040"
+      },
+      {
+        "id": 41,
+        "partNumber": "OM10-00245",
+        "name": "OM10-00245_·_041"
+      },
+      {
+        "id": 42,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108_·_042"
+      },
+      {
+        "id": 43,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108_·_043"
+      },
+      {
+        "id": 44,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108_·_044"
+      },
+      {
+        "id": 45,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108_·_045"
+      },
+      {
+        "id": 46,
+        "partNumber": "OM00-00108",
+        "name": "OM00-00108_·_046"
+      },
+      {
+        "id": 47,
+        "partNumber": "OM00-00109",
+        "name": "OM00-00109_·_047"
+      },
+      {
+        "id": 48,
+        "partNumber": "OM00-00109",
+        "name": "OM00-00109_·_048"
+      },
+      {
+        "id": 49,
+        "partNumber": "OM10-00240",
+        "name": "OM10-00240_·_049"
+      },
+      {
+        "id": 50,
+        "partNumber": "OM10-00194",
+        "name": "OM10-00194_·_050"
+      },
+      {
+        "id": 51,
+        "partNumber": "OM10-00242",
+        "name": "OM10-00242_·_051"
+      },
+      {
+        "id": 52,
+        "partNumber": "OM10-00225",
+        "name": "OM10-00225_·_052"
+      },
+      {
+        "id": 53,
+        "partNumber": "OM10-00304",
+        "name": "OM10-00304_·_053"
+      },
+      {
+        "id": 54,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141_·_054"
+      },
+      {
+        "id": 55,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141_·_055"
+      },
+      {
+        "id": 56,
+        "partNumber": "OM10-00232",
+        "name": "OM10-00232_·_056"
+      },
+      {
+        "id": 57,
+        "partNumber": "OM10-00222",
+        "name": "OM10-00222_·_057"
+      },
+      {
+        "id": 58,
+        "partNumber": "OM10-00238",
+        "name": "OM10-00238_·_058"
+      },
+      {
+        "id": 59,
+        "partNumber": "OM10-00234",
+        "name": "OM10-00234_·_059"
+      },
+      {
+        "id": 60,
+        "partNumber": "OM10-00236",
+        "name": "OM10-00236_·_060"
+      },
+      {
+        "id": 61,
+        "partNumber": "OM10-00237",
+        "name": "OM10-00237_·_061"
+      },
+      {
+        "id": 62,
+        "partNumber": "OM10-00231",
+        "name": "OM10-00231_·_062"
+      },
+      {
+        "id": 63,
+        "partNumber": "OM10-00229",
+        "name": "OM10-00229_·_063"
+      },
+      {
+        "id": 64,
+        "partNumber": "OM10-00233",
+        "name": "OM10-00233_·_064"
+      },
+      {
+        "id": 65,
+        "partNumber": "OM10-00230",
+        "name": "OM10-00230_·_065"
+      },
+      {
+        "id": 66,
+        "partNumber": "OM10-00235",
+        "name": "OM10-00235_·_066"
+      },
+      {
+        "id": 67,
+        "partNumber": "OM10-00228",
+        "name": "OM10-00228_·_067"
+      },
+      {
+        "id": 68,
+        "partNumber": "OM10-00241",
+        "name": "OM10-00241_·_068"
+      },
+      {
+        "id": 69,
+        "partNumber": "OM10-00241",
+        "name": "OM10-00241_·_069"
+      },
+      {
+        "id": 70,
+        "partNumber": "OM10-00307",
+        "name": "OM10-00307_·_070"
+      },
+      {
+        "id": 71,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141_·_071"
+      },
+      {
+        "id": 72,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141_·_072"
+      },
+      {
+        "id": 73,
+        "partNumber": "OM00-00141",
+        "name": "OM00-00141_·_073"
+      },
+      {
+        "id": 74,
+        "partNumber": "OM10-00220",
+        "name": "OM10-00220_·_074"
+      },
+      {
+        "id": 75,
+        "partNumber": "OM10-00195",
+        "name": "OM10-00195_·_075"
+      },
+      {
+        "id": 76,
+        "partNumber": "OM10-00308",
+        "name": "OM10-00308_·_076"
+      },
+      {
+        "id": 77,
+        "partNumber": "OM10-00306",
+        "name": "OM10-00306_·_077"
+      },
+      {
+        "id": 78,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_078"
+      },
+      {
+        "id": 79,
+        "partNumber": "OM10-00211",
+        "name": "OM10-00211_·_079"
+      },
+      {
+        "id": 80,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107_·_080"
+      },
+      {
+        "id": 81,
+        "partNumber": "OM10-00121",
+        "name": "OM10-00121_·_081"
+      },
+      {
+        "id": 82,
+        "partNumber": "OM10-00119",
+        "name": "OM10-00119_·_082"
+      },
+      {
+        "id": 83,
+        "partNumber": "OM10-00118",
+        "name": "OM10-00118_·_083"
+      },
+      {
+        "id": 84,
+        "partNumber": "OM10-00120",
+        "name": "OM10-00120_·_084"
+      },
+      {
+        "id": 85,
+        "partNumber": "OM10-00197",
+        "name": "OM10-00197_·_085"
+      },
+      {
+        "id": 86,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107_·_086"
+      },
+      {
+        "id": 87,
+        "partNumber": "OM10-00144",
+        "name": "OM10-00144_·_087"
+      },
+      {
+        "id": 88,
+        "partNumber": "OM10-00200",
+        "name": "OM10-00200_·_088"
+      },
+      {
+        "id": 89,
+        "partNumber": "OM00-00100",
+        "name": "OM00-00100_·_089"
+      },
+      {
+        "id": 90,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_090"
+      },
+      {
+        "id": 91,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_091"
+      },
+      {
+        "id": 92,
+        "partNumber": "OM10-00149",
+        "name": "OM10-00149_·_092"
+      },
+      {
+        "id": 93,
+        "partNumber": "OM10-00150",
+        "name": "OM10-00150_·_093"
+      },
+      {
+        "id": 94,
+        "partNumber": "OM10-00161",
+        "name": "OM10-00161_·_094"
+      },
+      {
+        "id": 95,
+        "partNumber": "OM10-00162",
+        "name": "OM10-00162_·_095"
+      },
+      {
+        "id": 96,
+        "partNumber": "OM10-00164",
+        "name": "OM10-00164_·_096"
+      },
+      {
+        "id": 97,
+        "partNumber": "OM10-00165",
+        "name": "OM10-00165_·_097"
+      },
+      {
+        "id": 98,
+        "partNumber": "OM10-00146",
+        "name": "OM10-00146_·_098"
+      },
+      {
+        "id": 99,
+        "partNumber": "OM00-00101",
+        "name": "OM00-00101_·_099"
+      },
+      {
+        "id": 100,
+        "partNumber": "OM10-00184",
+        "name": "OM10-00184_·_100"
+      },
+      {
+        "id": 101,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124_·_101"
+      },
+      {
+        "id": 102,
+        "partNumber": "OM00-00145",
+        "name": "OM00-00145_·_102"
+      },
+      {
+        "id": 103,
+        "partNumber": "OM00-00145",
+        "name": "OM00-00145_·_103"
+      },
+      {
+        "id": 104,
+        "partNumber": "OM00-00140",
+        "name": "OM00-00140_·_104"
+      },
+      {
+        "id": 105,
+        "partNumber": "OM00-00122",
+        "name": "OM00-00122_·_105"
+      },
+      {
+        "id": 106,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_106"
+      },
+      {
+        "id": 107,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_107"
+      },
+      {
+        "id": 108,
+        "partNumber": "OM10-00152",
+        "name": "OM10-00152_·_108"
+      },
+      {
+        "id": 109,
+        "partNumber": "OM10-00156",
+        "name": "OM10-00156_·_109"
+      },
+      {
+        "id": 110,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107_·_110"
+      },
+      {
+        "id": 111,
+        "partNumber": "OM10-00104",
+        "name": "OM10-00104_·_111"
+      },
+      {
+        "id": 112,
+        "partNumber": "OM10-00105",
+        "name": "OM10-00105_·_112"
+      },
+      {
+        "id": 113,
+        "partNumber": "OM10-00107",
+        "name": "OM10-00107_·_113"
+      },
+      {
+        "id": 114,
+        "partNumber": "OM10-00106",
+        "name": "OM10-00106_·_114"
+      },
+      {
+        "id": 115,
+        "partNumber": "OM10-00106",
+        "name": "OM10-00106_·_115"
+      },
+      {
+        "id": 116,
+        "partNumber": "OM10-00102",
+        "name": "OM10-00102_·_116"
+      },
+      {
+        "id": 117,
+        "partNumber": "OM00-00124",
+        "name": "OM00-00124_·_117"
+      },
+      {
+        "id": 118,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107_·_118"
+      },
+      {
+        "id": 119,
+        "partNumber": "OM10-00196",
+        "name": "OM10-00196_·_119"
+      },
+      {
+        "id": 120,
+        "partNumber": "OM00-00137",
+        "name": "OM00-00137_·_120"
+      },
+      {
+        "id": 121,
+        "partNumber": "OM00-00135",
+        "name": "OM00-00135_·_121"
+      },
+      {
+        "id": 122,
+        "partNumber": "OM00-00134",
+        "name": "OM00-00134_·_122"
+      },
+      {
+        "id": 123,
+        "partNumber": "OM00-00133",
+        "name": "OM00-00133_·_123"
+      },
+      {
+        "id": 124,
+        "partNumber": "OM00-00132",
+        "name": "OM00-00132_·_124"
+      },
+      {
+        "id": 125,
+        "partNumber": "OM00-00126",
+        "name": "OM00-00126_·_125"
+      },
+      {
+        "id": 126,
+        "partNumber": "OM00-00127",
+        "name": "OM00-00127_·_126"
+      },
+      {
+        "id": 127,
+        "partNumber": "OM00-00129",
+        "name": "OM00-00129_·_127"
+      },
+      {
+        "id": 128,
+        "partNumber": "OM00-00130",
+        "name": "OM00-00130_·_128"
+      },
+      {
+        "id": 129,
+        "partNumber": "OM00-00125",
+        "name": "OM00-00125_·_129"
+      },
+      {
+        "id": 130,
+        "partNumber": "OM10-00136",
+        "name": "OM10-00136_·_130"
+      },
+      {
+        "id": 131,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_131"
+      },
+      {
+        "id": 132,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_132"
+      },
+      {
+        "id": 133,
+        "partNumber": "OM10-00112",
+        "name": "OM10-00112_·_133"
+      },
+      {
+        "id": 134,
+        "partNumber": "OM10-00113",
+        "name": "OM10-00113_·_134"
+      },
+      {
+        "id": 135,
+        "partNumber": "OM10-00110",
+        "name": "OM10-00110_·_135"
+      },
+      {
+        "id": 136,
+        "partNumber": "OM10-00111",
+        "name": "OM10-00111_·_136"
+      },
+      {
+        "id": 137,
+        "partNumber": "OM10-00116",
+        "name": "OM10-00116_·_137"
+      },
+      {
+        "id": 138,
+        "partNumber": "OM10-00115",
+        "name": "OM10-00115_·_138"
+      },
+      {
+        "id": 139,
+        "partNumber": "OM10-00127",
+        "name": "OM10-00127_·_139"
+      },
+      {
+        "id": 140,
+        "partNumber": "OM10-00128",
+        "name": "OM10-00128_·_140"
+      },
+      {
+        "id": 141,
+        "partNumber": "OM10-00199",
+        "name": "OM10-00199_·_141"
+      },
+      {
+        "id": 142,
+        "partNumber": "OM00-00121",
+        "name": "OM00-00121_·_142"
+      },
+      {
+        "id": 143,
+        "partNumber": "OM00-00120",
+        "name": "OM00-00120_·_143"
+      },
+      {
+        "id": 144,
+        "partNumber": "OM10-00158",
+        "name": "OM10-00158_·_144"
+      },
+      {
+        "id": 145,
+        "partNumber": "OM10-00159",
+        "name": "OM10-00159_·_145"
+      },
+      {
+        "id": 146,
+        "partNumber": "OM10-00206",
+        "name": "OM10-00206_·_146"
+      },
+      {
+        "id": 147,
+        "partNumber": "OM10-00142",
+        "name": "OM10-00142_·_147"
+      },
+      {
+        "id": 148,
+        "partNumber": "OM10-00210",
+        "name": "OM10-00210_·_148"
+      },
+      {
+        "id": 149,
+        "partNumber": "OM10-00138",
+        "name": "OM10-00138_·_149"
+      },
+      {
+        "id": 150,
+        "partNumber": "OM10-00215",
+        "name": "OM10-00215_·_150"
+      },
+      {
+        "id": 151,
+        "partNumber": "OM10-00213",
+        "name": "OM10-00213_·_151"
+      },
+      {
+        "id": 152,
+        "partNumber": "OM10-00212",
+        "name": "OM10-00212_·_152"
+      },
+      {
+        "id": 153,
+        "partNumber": "OM10-00207",
+        "name": "OM10-00207_·_153"
+      },
+      {
+        "id": 154,
+        "partNumber": "OM00-00100",
+        "name": "OM00-00100_·_154"
+      },
+      {
+        "id": 155,
+        "partNumber": "OM10-00217",
+        "name": "OM10-00217_·_155"
+      },
+      {
+        "id": 156,
+        "partNumber": "OM10-00204",
+        "name": "OM10-00204_·_156"
+      },
+      {
+        "id": 157,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107_·_157"
+      },
+      {
+        "id": 158,
+        "partNumber": "OM00-00107",
+        "name": "OM00-00107_·_158"
+      },
+      {
+        "id": 159,
+        "partNumber": "OM10-00209",
+        "name": "OM10-00209_·_159"
+      },
+      {
+        "id": 160,
+        "partNumber": "OM00-00142",
+        "name": "OM00-00142_·_160"
+      },
+      {
+        "id": 161,
+        "partNumber": "OM00-00142",
+        "name": "OM00-00142_·_161"
+      },
+      {
+        "id": 162,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_162"
+      },
+      {
+        "id": 163,
+        "partNumber": "OM00-00142",
+        "name": "OM00-00142_·_163"
+      },
+      {
+        "id": 164,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_164"
+      },
+      {
+        "id": 165,
+        "partNumber": "OM00-00106",
+        "name": "OM00-00106_·_165"
+      }
+    ],
+    "derived": [
+      {
+        "id": "OPEN-MAINPLATE__original_seat-preserving_proposal",
+        "name": "OPEN-MAINPLATE__original_seat-preserving_proposal",
+        "replacesSource": 0
+      },
+      {
+        "id": "OPEN-CALENDAR-COVER__original_seat-preserving_proposal",
+        "name": "OPEN-CALENDAR-COVER__original_seat-preserving_proposal",
+        "replacesSource": 155
+      },
+      {
+        "id": "Graphite chapter / integrated twelve signature",
+        "name": "Graphite chapter / integrated twelve signature",
+        "replacesSource": null
+      },
+      {
+        "id": "Seconds / independent graphite chapter",
+        "name": "Seconds / independent graphite chapter",
+        "replacesSource": null
+      },
+      {
+        "id": "Seconds / axial mounting foot 350",
+        "name": "Seconds / axial mounting foot 350",
+        "replacesSource": null
+      },
+      {
+        "id": "Seconds / axial mounting foot 110",
+        "name": "Seconds / axial mounting foot 110",
+        "replacesSource": null
+      },
+      {
+        "id": "Seconds / axial mounting foot 250",
+        "name": "Seconds / axial mounting foot 250",
+        "replacesSource": null
+      },
+      {
+        "id": "HOUR / faceted blue blade",
+        "name": "HOUR / faceted blue blade",
+        "replacesSource": null
+      },
+      {
+        "id": "HOUR / bored integral hub",
+        "name": "HOUR / bored integral hub",
+        "replacesSource": null
+      },
+      {
+        "id": "HOUR / polished arbor collar",
+        "name": "HOUR / polished arbor collar",
+        "replacesSource": null
+      },
+      {
+        "id": "MINUTE / faceted blue blade",
+        "name": "MINUTE / faceted blue blade",
+        "replacesSource": null
+      },
+      {
+        "id": "MINUTE / bored integral hub",
+        "name": "MINUTE / bored integral hub",
+        "replacesSource": null
+      },
+      {
+        "id": "MINUTE / polished arbor collar",
+        "name": "MINUTE / polished arbor collar",
+        "replacesSource": null
+      },
+      {
+        "id": "SECONDS / faceted blue blade",
+        "name": "SECONDS / faceted blue blade",
+        "replacesSource": null
+      },
+      {
+        "id": "SECONDS / bored integral hub",
+        "name": "SECONDS / bored integral hub",
+        "replacesSource": null
+      },
+      {
+        "id": "Seconds sleeve / coherent R02 low stack",
+        "name": "Seconds sleeve / coherent R02 low stack",
+        "replacesSource": null
+      },
+      {
+        "id": "Upper_strap_·_solid_padded_band_and_rolled_end001",
+        "name": "Upper_strap_·_solid_padded_band_and_rolled_end001",
+        "replacesSource": null
+      },
+      {
+        "id": "Upper_strap_·_solid_padded_band_and_rolled_end001_1",
+        "name": "Upper_strap_·_solid_padded_band_and_rolled_end001_1",
+        "replacesSource": null
+      },
+      {
+        "id": "Upper_strap_·_solid_padded_band_and_rolled_end001_2",
+        "name": "Upper_strap_·_solid_padded_band_and_rolled_end001_2",
+        "replacesSource": null
+      },
+      {
+        "id": "R05__STRAP-UPPER_seated_stitches",
+        "name": "R05__STRAP-UPPER_seated_stitches",
+        "replacesSource": null
+      },
+      {
+        "id": "Lower_strap_·_solid_padded_band_and_rolled_end001",
+        "name": "Lower_strap_·_solid_padded_band_and_rolled_end001",
+        "replacesSource": null
+      },
+      {
+        "id": "Lower_strap_·_solid_padded_band_and_rolled_end001_1",
+        "name": "Lower_strap_·_solid_padded_band_and_rolled_end001_1",
+        "replacesSource": null
+      },
+      {
+        "id": "Lower_strap_·_solid_padded_band_and_rolled_end001_2",
+        "name": "Lower_strap_·_solid_padded_band_and_rolled_end001_2",
+        "replacesSource": null
+      },
+      {
+        "id": "R05__STRAP-LOWER_seated_stitches",
+        "name": "R05__STRAP-LOWER_seated_stitches",
+        "replacesSource": null
+      }
+    ]
+  },
+  "transport": [
+    {
+      "name": "/quality-study/open-front-plates.glb",
+      "transferSize": 468794,
+      "encodedBodySize": 468494,
+      "decodedBodySize": 2194400,
+      "duration": 403.09999999403954
+    },
+    {
+      "name": "/rebuild/assembly.glb",
+      "transferSize": 7241656,
+      "encodedBodySize": 7241356,
+      "decodedBodySize": 26126492,
+      "duration": 525
+    },
+    {
+      "name": "/quality-study/form-legibility-r01.glb",
+      "transferSize": 783985,
+      "encodedBodySize": 783685,
+      "decodedBodySize": 2570568,
+      "duration": 1327
+    },
+    {
+      "name": "/quality-study/leather-craft-r05.glb",
+      "transferSize": 630424,
+      "encodedBodySize": 630124,
+      "decodedBodySize": 1662940,
+      "duration": 25.900000005960464
+    },
+    {
+      "name": "/quality-study/front-architecture-r05.glb",
+      "transferSize": 536549,
+      "encodedBodySize": 536249,
+      "decodedBodySize": 2588000,
+      "duration": 20.400000005960464
+    }
+  ]
+}

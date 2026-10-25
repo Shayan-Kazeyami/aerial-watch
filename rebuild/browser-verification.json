@@ -1,0 +1,68 @@
+{
+  "driver": "Bundled Playwright Chromium; offline CLI package unavailable",
+  "checks": [
+    {
+      "name": "Root opens the native rebuild with all original meshes retained",
+      "pass": true
+    },
+    {
+      "name": "Default omits exactly the two optical crystals",
+      "pass": true
+    },
+    {
+      "name": "Inspection view front retains all structural source parts",
+      "pass": true
+    },
+    {
+      "name": "Inspection view side retains all structural source parts",
+      "pass": true
+    },
+    {
+      "name": "Inspection view back retains all structural source parts",
+      "pass": true
+    },
+    {
+      "name": "Inspection view lug retains all structural source parts",
+      "pass": true
+    },
+    {
+      "name": "Inspection view buckle retains all structural source parts",
+      "pass": true
+    },
+    {
+      "name": "Movement-only inspection restores no artificial cutaway",
+      "pass": true
+    },
+    {
+      "name": "Both crystal solids can be shown",
+      "pass": true
+    },
+    {
+      "name": "Click selects real mesh with attachment information",
+      "pass": true
+    },
+    {
+      "name": "Escape clears selection",
+      "pass": true
+    },
+    {
+      "name": "Browser download is byte-identical to the native export",
+      "pass": true
+    },
+    {
+      "name": "All five native clay previews load",
+      "pass": true
+    },
+    {
+      "name": "390px viewport has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "No runtime or missing-asset browser errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "physicalPhoneVerified": false
+}

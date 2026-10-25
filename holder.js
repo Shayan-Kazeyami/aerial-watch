@@ -1,0 +1,15 @@
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const $=id=>document.getElementById(id),stage=$('stage');
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(37,1,.1,500);
+const renderer=new THREE.WebGLRenderer({canvas:$('holder-scene'),alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
+const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;room.dispose();pmrem.dispose();scene.environmentIntensity=.5;
+scene.add(new THREE.HemisphereLight(0xffffff,0x43503c,1.3));const light=new THREE.DirectionalLight(0xfff5e4,2);light.position.set(15,60,40);scene.add(light);
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.minDistance=30;controls.maxDistance=180;const models={};let dirty=true;
+function reset(){camera.position.set(52,40,58);camera.up.set(0,1,0);controls.target.set(0,-4,0);controls.update();dirty=true;}reset();controls.addEventListener('change',()=>dirty=true);
+function resize(){camera.aspect=stage.clientWidth/stage.clientHeight;camera.updateProjectionMatrix();renderer.setSize(stage.clientWidth,stage.clientHeight,false);dirty=true;}new ResizeObserver(resize).observe(stage);resize();
+async function load(id){const r=await fetch('holder-assets/'+id+'.json');if(!r.ok)throw Error('Source CAD mesh could not load');const data=await r.json();if(!data.success)throw Error('Invalid source CAD data');const group=new THREE.Group();for(const source of data.meshes){const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(source.attributes.position.array,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(source.attributes.normal.array,3));geometry.setIndex(source.index.array);const color=id==='holder'?0xd9dcd5:0x777e75;const material=new THREE.MeshStandardMaterial({color,metalness:.12,roughness:.52,side:THREE.DoubleSide});const mesh=new THREE.Mesh(geometry,material);mesh.name=source.name;group.add(mesh);}scene.add(group);models[id]=group;dirty=true;}
+Promise.all([load('holder'),load('holder-clamp')]).then(()=>{$('status').hidden=true;}).catch(e=>{$('status').textContent='Could not load holder. Check the local server and reload.';console.error(e);});
+for(const [button,id]of [['holder','holder'],['clamp','holder-clamp']])$(button).onclick=()=>{if(!models[id])return;models[id].visible=!models[id].visible;$(button).setAttribute('aria-pressed',String(models[id].visible));dirty=true;};$('reset').onclick=()=>{for(const [button,id]of [['holder','holder'],['clamp','holder-clamp']]){if(models[id])models[id].visible=true;$(button).setAttribute('aria-pressed','true');}reset();};
+function frame(){requestAnimationFrame(frame);controls.update();if(dirty){renderer.render(scene,camera);dirty=false;}}frame();

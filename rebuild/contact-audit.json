@@ -1,0 +1,51 @@
+{
+  "sourceSurfaceContacts": [],
+  "exteriorSurfaceContacts": [
+    {
+      "a": "STRAP-UPPER",
+      "b": "STRAP-LOWER",
+      "trianglePairs": 0
+    },
+    {
+      "a": "STRAP-UPPER",
+      "b": "CASE",
+      "trianglePairs": 0
+    },
+    {
+      "a": "STRAP-LOWER",
+      "b": "CASE",
+      "trianglePairs": 0
+    },
+    {
+      "a": "RETAINER",
+      "b": "CASE",
+      "trianglePairs": 465
+    },
+    {
+      "a": "DIAL-CARRIER",
+      "b": "CASE",
+      "trianglePairs": 667
+    },
+    {
+      "a": "DIAL",
+      "b": "DIAL-CARRIER",
+      "trianglePairs": 523
+    },
+    {
+      "a": "CHAPTER",
+      "b": "DIAL",
+      "trianglePairs": 0
+    },
+    {
+      "a": "BUCKLE",
+      "b": "STRAP-UPPER",
+      "trianglePairs": 0
+    },
+    {
+      "a": "BUCKLE-TANG",
+      "b": "STRAP-UPPER",
+      "trianglePairs": 0
+    }
+  ],
+  "interpretation": "Surface overlaps are diagnostic, including intended fits/seats. Not a complete solid interference or manufacturing analysis."
+}

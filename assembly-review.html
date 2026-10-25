@@ -1,0 +1,265 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta name="theme-color" content="#171a19">
+
+  <meta name="description" content="Aerial — an interactive watch study. Explore metal, leather and the rhythm of an original OM10 movement.">
+
+  <title>AERIAL · The art of mechanical time</title>
+
+  <link rel="icon" href="data:,">
+
+  <link rel="stylesheet" href="assembly-review.css">
+
+  <link rel="stylesheet" href="assembly-quality.css">
+
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+
+</head>
+
+<body class="quality-upgrade">
+
+<a class="skip-link" href="#inspection-controls">Skip to watch controls</a>
+
+<header>
+
+  <a class="brand" href="assembly-review.html" aria-label="Aerial home">AERIAL<span>MECHANICAL OBJECTS</span></a>
+
+  <span class="header-note">INDEPENDENT BY DESIGN <i></i> AERIAL</span>
+
+  <a class="header-link" href="#details">Explore the details <span aria-hidden="true">↘</span></a>
+
+</header>
+
+<main>
+
+  <section class="viewer" aria-label="Interactive watch studio">
+
+    <div class="studio-heading"><span>AERIAL / OPEN WORK</span><span><i class="live-dot" aria-hidden="true"></i> MECHANICAL OBJECTS</span></div>
+
+    <div id="stage">
+
+      <canvas id="assembly-canvas" aria-label="Interactive Aerial watch. Drag to rotate; scroll or use plus and minus to zoom. Arrow keys pan. Home resets the camera. Use the component explorer for keyboard selection." aria-describedby="canvas-help" aria-busy="true" tabindex="0"></canvas>
+
+      <div id="interior-pins" hidden aria-label="Interior focus points">
+
+        <button type="button" data-pin="balance" aria-label="01 Balance — inspect the oscillating balance">01</button>
+
+        <button type="button" data-pin="train" aria-label="02 Gear train — inspect the connected wheels">02</button>
+
+        <button type="button" data-pin="winding" aria-label="03 Barrel and winding — inspect the power source">03</button>
+
+      </div>
+
+      <picture id="studio-poster" class="studio-poster" aria-hidden="true"><source media="(max-width:700px)" srcset="quality-study/mobile-front.webp"><img src="quality-study/01-front.webp" alt="" fetchpriority="high"></picture>
+
+      <div id="loading" role="status"><span class="loading-mark" aria-hidden="true">A</span><p id="load-message">Preparing the watch studio…</p><button id="retry" type="button" hidden>Reload viewer</button></div>
+
+    </div>
+
+    <div class="overlay"><span id="mode-label">COMPLETE ASSEMBLY / INTACT OM10</span><span id="canvas-help">Drag to rotate <span aria-hidden="true">·</span> Scroll to get closer</span></div>
+
+    <fieldset id="view-controls" class="views" disabled aria-label="Camera views">
+
+      <div class="view-main">
+
+        <button type="button" data-view="face" aria-pressed="true" class="active">Watch face</button>
+
+        <button type="button" data-view="interior" aria-pressed="false">Interior</button>
+
+        <button type="button" data-view="showcase" aria-pressed="false">Studio</button>
+
+        </div>
+
+      <div class="view-detail"><span class="detail-label">A CLOSER LOOK</span><button type="button" data-view="balance" aria-pressed="false">Balance</button><button type="button" data-view="train" aria-pressed="false">Gear train</button>
+
+      </div>
+
+      <div class="view-secondary">
+
+        <details class="camera-more"><summary>More views <span aria-hidden="true">+</span></summary><div><button type="button" data-view="three-quarter" aria-pressed="false">Portrait</button><button type="button" data-view="back" aria-pressed="false">Reverse</button><button type="button" data-view="front" aria-pressed="false">Front</button><button type="button" data-view="side" aria-pressed="false">Profile</button><button type="button" data-view="lug" aria-pressed="false">Lug joint</button><button type="button" data-view="buckle" aria-pressed="false">Buckle joint</button><button type="button" data-view="winding" aria-pressed="false">Winding gears</button></div></details>
+
+        <button type="button" id="tour" aria-pressed="false"><span class="play-icon" aria-hidden="true">▷</span> Studio tour</button>
+
+      </div>
+
+    </fieldset>
+
+    <span class="studio-index" aria-hidden="true">DESIGNED TO REVEAL</span>
+
+  </section>
+
+  <aside aria-label="Watch controls">
+    <div class="panel-heading"><span class="eyebrow">AERIAL / OPEN WORK</span><h1>The watch studio</h1><p>Rotate the watch. Explore its movement.</p></div>
+    <fieldset id="inspection-controls" disabled>
+      <legend class="sr-only">Watch controls</legend>
+      <section class="everyday-controls" aria-labelledby="everyday-title">
+        <h2 id="everyday-title">Motion</h2>
+        <button id="play-motion" class="primary-button" type="button" aria-pressed="true">Pause motion</button>
+        <div class="motion-summary"><p id="primary-motion-status" class="small" role="status">Preparing the watch…</p><label class="check"><input id="slow-motion" type="checkbox"> Slow motion</label></div>
+        <div class="everyday-actions"><button id="inspect-motion" type="button">Look inside</button><button id="crown-focus" type="button" aria-controls="crown-controls">View crown</button></div>
+      </section>
+      <section class="appearance-panel" aria-labelledby="appearance-title">
+        <h2 id="appearance-title">Appearance</h2>
+        <label class="check"><input id="crystals" type="checkbox" checked> Show glass</label>
+        <label class="check"><input id="open-work" type="checkbox" checked aria-describedby="open-work-note"> Open-work front</label>
+        <p id="open-work-note" class="small">Switch off to compare the original solid front.</p>
+        <label class="check"><input id="finish" type="checkbox" checked aria-describedby="finish-note"> Studio finishes</label>
+        <p id="finish-note" class="small">Switch off to see the original materials.</p>
+        <label class="field" for="render-quality">Image quality<select id="render-quality" aria-describedby="quality-note"><option value="balanced">Balanced</option><option value="detail" selected>High definition</option><option value="studio">Maximum detail</option><option value="efficient">Smoother motion</option></select></label>
+        <p id="quality-note" class="small">Choose Smoother motion for lighter playback.</p>
+      </section>
+      <details id="crown-controls" class="crown-controls"><summary>Set the time <span aria-hidden="true">+</span></summary>
+        <div class="crown-body"><p id="crown-state" role="status" aria-live="polite">Seated · turn to wind</p>
+          <button id="crown-pull" type="button" aria-pressed="false" aria-describedby="crown-state crown-help">Pull out to set time</button>
+          <div class="crown-turns" role="group" aria-label="Turn crown"><button id="crown-left" type="button" aria-label="Turn crown counterclockwise" aria-describedby="crown-state crown-help">↶ Turn left</button><button id="crown-right" type="button" aria-label="Turn crown clockwise" aria-describedby="crown-state crown-help">Turn right ↷</button></div>
+          <p id="crown-help" class="small">Pull out the crown, turn to move the hands, then push it back in.</p>
+          <button id="crown-reset" class="text-button" type="button">Reset crown position</button>
+        </div>
+      </details>
+      <section id="interior-guide" hidden aria-labelledby="interior-title">
+
+        <span class="eyebrow">BENEATH THE CASEBACK</span><h2 id="interior-title">Inside the case.</h2>
+
+        <p id="interior-description">The rear cover is removed to reveal the original movement, held inside its case.</p>
+
+        <div class="interior-focus">
+
+          <button type="button" data-focus="balance" aria-pressed="false"><span>01</span><span><b>Balance</b><small>The oscillation that sets the rhythm.</small></span></button>
+
+          <button type="button" data-focus="train" aria-pressed="false"><span>02</span><span><b>Gear train</b><small>Matched wheels carry each release.</small></span></button>
+
+          <button type="button" data-focus="winding" aria-pressed="false"><span>03</span><span><b>Barrel &amp; winding</b><small>The drum turns; the winding ratchet stays held.</small></span></button>
+
+        </div>
+
+        <div class="power-path-control"><label class="check"><input type="checkbox" id="power-path"> Follow the power</label><p id="power-path-description" class="small" role="status">Explore how the barrel, train and balance work together.</p></div><button id="interior-overview" type="button" class="text-button">Back to interior overview ↗</button>
+
+      </section>
+
+
+      <details class="save-controls"><summary>Save &amp; restore <span aria-hidden="true">+</span></summary><div class="save-body">
+        <p class="small">Download the current view or return to it later.</p>
+        <div class="capture-actions"><button id="capture-scene" type="button">Save image · PNG</button><button id="record-scene" type="button">Save 8-second video</button><button id="export-config" type="button">Save view settings</button><label class="file-action">Load view settings<input type="file" id="import-config" accept="application/json"></label></div>
+      </div></details>
+      <details class="inspection-details" id="inspection-details"><summary>Advanced inspection <span aria-hidden="true">+</span></summary><div class="advanced-body">
+      <section class="motion-panel" aria-labelledby="motion-title">
+
+        <div class="section-label"><h2 id="motion-title">Playback controls</h2><span class="live-dot" aria-hidden="true"></span></div>
+
+        <p id="motion-status" class="motion-status" role="status">Preparing movement animation…</p>
+
+        <div class="motion-switches"><label class="check"><input id="animate-movement" type="checkbox" aria-describedby="motion-note"> Mechanism</label><label class="check"><input id="animate" type="checkbox" aria-describedby="motion-note"> Hands</label></div>
+
+        <label class="field speed-field" for="speed">Time scale<select id="speed"><option value="1">1× · real time</option><option value="0.25">0.25× · slow motion</option></select></label>
+
+        <div class="inspection-actions"><button id="reset-hands" class="text-button" type="button">Reset pose</button></div>
+
+        <div class="time-inspector"><label for="scrub-time">Inspect a moment <output id="scrub-value">0.00 s</output></label><input id="scrub-time" type="range" min="0" max="60" step="0.01" value="0" aria-label="Inspect a moment"></div>
+
+        <details class="motion-explanation"><summary>About the motion</summary><p class="small" id="motion-note">A 3.5 Hz balance governs seven releases per second. Twelve gear contacts use measured tooth counts and aligned starting phases. The barrel drum drives the train and hands; its arbor, ratchet and winding wheels stay locked while the watch runs. The measured 20-tooth escape wheel advances in phased impulses; the pallet rocks between banks and the hairspring deforms around its fixed outer terminal. Slow motion scales the whole mechanism. Balance amplitude, spring shape and pallet travel are illustrative estimates; contact forces, calendar indexing and energy transfer are not solved.</p></details>
+
+      </section>
+
+
+      <section class="advanced-inspection"><div class="details-body">
+        <h2>Explore components</h2>
+        <label class="check"><input id="movement-only" type="checkbox"> Original movement only</label>
+        <div class="inspection-actions"><button id="show-all" type="button" disabled>Show complete watch</button><button id="reset" type="button">Reset studio</button></div>
+        <p id="visible-count" class="small">Loading components…</p>
+          <section class="explorer" aria-labelledby="explorer-title">
+
+            <h2 id="explorer-title">Component explorer</h2>
+
+            <label class="field" for="component-search">Find a component<input id="component-search" type="search" placeholder="Crown, springbar, OM10…" autocomplete="off"></label>
+
+            <label class="field" for="component-scope">Component group<select id="component-scope"><option value="all">All components</option><option value="exterior">Added exterior</option><option value="movement">Original OM10 movement</option></select></label>
+
+            <p id="search-count" class="small" role="status">Loading components…</p>
+
+            <ul id="component-list" aria-label="Select a component"></ul>
+
+          </section>
+
+
+        <details class="tour-controls"><summary>Tour navigation</summary><div class="tour-navigation" aria-label="Studio sequence"><button type="button" id="tour-previous">Previous shot</button><output id="tour-step" aria-live="polite">Explore the studio</output><button type="button" id="tour-next">Next shot</button></div></details>
+        <details class="render-information"><summary>Rendering information</summary><p id="render-status" class="small" aria-live="off">Preparing rendering…</p><a href="material-review.html" target="_blank" rel="noreferrer">Compare material finishes ↗</a></details>
+<details class="quality-diagnostics"><summary>Studio diagnostics</summary><button type="button" id="start-measurement">Start new measurement</button><button type="button" id="refresh-diagnostics">Refresh diagnostics</button><pre id="diagnostics-report">Measurements appear here after refresh.</pre></details>
+      </div></section></div></details>
+      <div id="selection" hidden>
+
+        <span class="eyebrow">SELECTED COMPONENT</span><h2 id="part-name"></h2><p id="part-role"></p><small id="part-support"></small>
+
+        <div class="inspection-actions"><button id="isolate" type="button" disabled>Isolate selection</button><button id="clear" type="button">Clear selection</button></div><p class="small"><a href="#assembly-canvas">Return to the watch ↑</a></p>
+
+      </div>
+
+
+    </fieldset>
+    <p id="viewer-status" class="viewer-status" role="status" aria-live="polite" aria-atomic="true">The studio is loading. Static renders are available below.</p>
+    <noscript><p>Enable JavaScript for the interactive studio. Static renders and downloads remain available.</p></noscript>
+    <a class="discovery-link" href="#details">Design details &amp; downloads <span aria-hidden="true">↓</span></a>
+  </aside>
+
+</main>
+
+<section class="renders" id="details" aria-labelledby="details-title">
+
+  <div class="renders-heading"><div><span class="eyebrow">02 / FORM &amp; FINISH</span><h2 id="details-title">Every detail,<br><em>in the open.</em></h2></div><p>Satin silver meets polished edges. Warm brass turns beneath a slender graphite chapter. Explore the character of each surface and the movement that gives it life.</p></div>
+
+  <div class="craft-notes"><article><span>01 / ARCHITECTURE</span><h3>Space with a purpose.</h3><p>A slender chapter frames the movement. An independent seconds ring leaves the centre open.</p></article><article><span>02 / MATERIAL</span><h3>Light finds the edge.</h3><p>Directional satin, polished steel, warm brass and deep blue hands give each part its own character.</p></article><article><span>03 / RHYTHM</span><h3>Seven releases. One second.</h3><p>The measured gear train carries each impulse. Slow the movement down, or pause at any moment to look closer.</p></article></div>
+
+  <div class="render-grid finish-grid" aria-label="Earlier native design studies">
+    <figure><a href="quality-study/native-studio.png" target="_blank" rel="noreferrer"><img src="quality-study/native-studio.webp" alt="Earlier Quality 01 native study before the R05 front and strap refinements" loading="lazy" width="900" height="900"></a><figcaption><span>QUALITY 01</span> Earlier native study · complete watch</figcaption></figure>
+    <figure><a href="quality-study/native-front.png" target="_blank" rel="noreferrer"><img src="quality-study/native-front.webp" alt="Earlier Quality 01 native open front" loading="lazy" width="900" height="900"></a><figcaption><span>QUALITY 01</span> Earlier native study · open-work front</figcaption></figure>
+  </div>
+  <details class="source-details"><summary>Geometry, source &amp; downloads <span aria-hidden="true">+</span></summary><div class="source-body"><p>The open-work front is a separate design proposal. The R05 front uses five small rounded gear openings, a raised plate rim and a blank calendar surface. Original calendar teeth and measured bearing seats are retained. The original 166-mesh OM10 and solid-dial assembly remain available with Open-work front switched off.</p><p>Materials and animation are visual studies. Structural loads, tolerances, sealing and manufacture still require validation.</p><div class="downloads"><a href="rebuild/assembly.glb" download>Original assembly GLB ↗</a><a href="quality-study/front-architecture-r05.glb" download>R05 front proposal ↗</a><a href="rebuild/assembly-report.json" target="_blank" rel="noreferrer">Baseline inspection ↗</a><a href="aerial-assets/aerial-concept.png" target="_blank" rel="noreferrer">Chosen concept ↗</a></div></div></details>
+
+  <div class="render-grid quality-live-grid" aria-label="Current high-definition WebGL captures">
+    <figure><a href="quality-study/01-front.png" target="_blank" rel="noreferrer"><img src="quality-study/01-front.webp" alt="The graphite chapter, blue hands and original exposed gears" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 01</span> Open-work front · Quality 01</figcaption></figure>
+    <figure><a href="quality-study/02-three-quarter.png" target="_blank" rel="noreferrer"><img src="quality-study/02-three-quarter.webp" alt="The current Quality 01 watch and stitched leather in the live studio" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 02</span> Complete watch · Quality 01</figcaption></figure>
+    <figure><a href="quality-study/03-interior.png" target="_blank" rel="noreferrer"><img src="quality-study/03-interior.webp" alt="The actual rear movement with its caseback and straps omitted" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 03</span> Inside the case · Quality 01</figcaption></figure>
+    <figure><a href="quality-study/04-balance.png" target="_blank" rel="noreferrer"><img src="quality-study/04-balance.webp" alt="The original oscillating balance, anchored spring and ruby bearings" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 04</span> Balance and hairspring · Quality 01</figcaption></figure>
+    <figure><a href="quality-study/05-train.png" target="_blank" rel="noreferrer"><img src="quality-study/05-train.webp" alt="The aligned original train with steel pinions and brass wheels" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 05</span> Connected gear train · Quality 01</figcaption></figure>
+    <figure><a href="quality-study/06-leather.png" target="_blank" rel="noreferrer"><img src="quality-study/06-leather.webp" alt="Charcoal leather, matched saddle stitching and polished integrated lugs" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 06</span> Leather and lug craft · Quality 01</figcaption></figure>
+  </div>
+  <p class="small">The native renders preserve the earlier design study. The live captures show the current R05 front, finer seconds markings and revised leather at a repeatable rest pose.</p>
+</section>
+
+<footer><a class="footer-brand" href="assembly-review.html">AERIAL</a><p>AN INTERACTIVE WATCH STUDY · QUALITY 01</p><p>Original OM10: <a href="https://openmovement.org/" target="_blank" rel="noreferrer">openmovement</a> · CC BY-SA 3.0. <a href="aerial.html">Earlier prototype ↗</a></p></footer>
+
+<script type="module">
+
+  // Import failures and unavailable WebGL must leave a useful, accessible fallback.
+
+  import('./assembly-review.js').catch(error => {
+
+    console.error(error);
+
+    document.getElementById('loading').hidden = false;
+
+    const message = 'The interactive viewer could not start. Check that the local preview server is running and WebGL is available. Static inspection renders and downloads remain available below.';
+
+    document.getElementById('load-message').textContent = message;
+
+    document.getElementById('viewer-status').textContent = message;
+
+    document.getElementById('assembly-canvas').setAttribute('aria-busy','false');
+
+    const retry = document.getElementById('retry'); retry.hidden = false; retry.onclick = () => location.reload();
+
+  });
+
+</script>
+
+</body>
+
+</html>
+
