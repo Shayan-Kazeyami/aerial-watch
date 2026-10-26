@@ -3,7 +3,7 @@
   "algorithm": "SHA-256",
   "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "UTF-8 JSON.stringify(files), sorted by relative path; entry keys path, bytes, sha256",
-  "digest": "c97660b52b69029b6c26149f2027fcd3666456875aad0cf8945b6c3a6d3bd16b",
+  "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
   "files": [
     {
       "path": "assembly-calendar-data.js",
@@ -19,6 +19,11 @@
       "path": "assembly-capture-provenance.js",
       "bytes": 5085,
       "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+    },
+    {
+      "path": "assembly-caseback-finish.js",
+      "bytes": 1935,
+      "sha256": "c31adc1ad1323f8dee5d0ca464b794619df8f1824f667b2dcd4a000ff51c29f8"
     },
     {
       "path": "assembly-clock.js",
@@ -152,8 +157,8 @@
     },
     {
       "path": "assembly-review.js",
-      "bytes": 65854,
-      "sha256": "952537ea99a711695cc2d94372b9c017e88736eaaec7a0c7d1e58c3d2e09d06d"
+      "bytes": 66556,
+      "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
     },
     {
       "path": "assembly-seconds-details.js",

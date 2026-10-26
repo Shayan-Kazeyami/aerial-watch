@@ -31,6 +31,7 @@ import {createAssemblyCalendar} from './assembly-calendar.js';
 import {createAssemblyWinding} from './assembly-winding.js';
 import {createAssemblySetting} from './assembly-setting.js';
 import {createAssemblySettingEngagement} from './assembly-setting-engagement.js';
+import {createCasebackFinish} from './assembly-caseback-finish.js';
 
 const $ = id => document.getElementById(id), scene = new THREE.Scene();
 const bootTime=performance.now(),clock=createPresentationClock(),resources=createResourceScope(),performanceMonitor=createPerformanceMonitor();
@@ -76,7 +77,7 @@ let loadPhase='poster',proposalReady=false,proposalLoading=false,loadWarnings=[]
 let source = [], exterior = [], selected = [], groups = [], isolated = null, model;
 let depthBounds=[];
 let interiorView=false,dialDetails,dialFace;
-let openWork=true,openDialDetails,openFrontFrame,openPlates=[],craftParts=[],formDetails,leatherDetails,frontArchitecture,frontArchitectureLoading=false;
+let openWork=true,openDialDetails,openFrontFrame,openPlates=[],craftParts=[],formDetails,leatherDetails,frontArchitecture,frontArchitectureLoading=false,casebackFinish;
 const replacedSources=new Set([0,155]);
 const openFrontActive=()=>proposalReady&&openWork&&!$('movement-only').checked&&!isolated;
 function syncFrontDetails() {
@@ -312,6 +313,7 @@ if($('power-path'))$('power-path').onchange=()=>{powerPath=$('power-path').check
   announce(powerPath?'Original movement power path highlighted. Open Interior or Gear train to follow it.':'Power path highlights hidden.');};
 function updateMaterials() {
   syncFrontDetails();
+  casebackFinish?.setEnabled($('finish').checked);
   scene.environment = $('finish').checked ? finishes.environment : null;
   for (const material of highlights) material.dispose(); highlights.length = 0;
   for (const mesh of [...meshes(),...openPlates,...craftParts]) {
@@ -608,6 +610,8 @@ function initializeBaseline(result,metadata){
     baseMaterials.set(mesh,mesh.material);finishMaterials.set(mesh,finishes.apply(mesh));mesh.castShadow=!mesh.userData.inspectionTransparent;mesh.receiveShadow=true;
     if(mesh.userData.sourceIndex===undefined){const period={HOUR:43200,MINUTE:3600,SECONDS:60}[mesh.userData.assemblyId];if(period)hands.push({mesh,period,original:mesh.quaternion.clone()});}
   });
+  const casebackMesh=exterior.find(mesh=>mesh.userData.assemblyId==='CASEBACK');
+  if(casebackMesh){casebackFinish=createCasebackFinish({mesh:casebackMesh});resources.own('caseback cap finish geometry',()=>casebackFinish.dispose());}
   for(const mesh of source){mesh.updateMatrix();sourceRestMatrices.set(mesh.userData.sourceIndex,mesh.matrix.clone());}
   variantManifest=createVariantManifest(source);mechanism=createAssemblyMotion(source,metadata);
   try{calendar=createAssemblyCalendar(source);}catch(error){loadWarnings.push(`Calendar reconstruction unavailable: ${error.message}`);}
@@ -677,6 +681,7 @@ function captureConfiguration({clockStamp}={}){
     calendar:{revision:'r09-indexed-calendar',ready:!!calendar,state:calendarState},
     winding:{revision:'r09-crown-coupling',ready:!!winding,state:winding?.snapshot()??null},
     setting:{revision:'r09-friction-setting',ready:!!setting},
+    casebackFinish:{revision:'r10-cap-corner-normals',enabled:!!casebackFinish?.enabled,audit:casebackFinish?.audit??null},
     settingEngagement:{revision:'r09-keyless-endpoints',ready:!!settingEngagement,state:engagementState,limits:settingEngagement?.limits??null},
     leatherCraft:{revision:'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
     compactCrown:!!crownVisual&&openFrontActive(),
@@ -769,7 +774,9 @@ function frame(time) {
     const movingHands=$('animate').checked&&(hands.some(hand=>hand.mesh.visible)||openFrontActive());
     if(moving||movingHands){applyClockPose(stamp);dirty=visibleMotion=true;}
   }
-  if (dirty) {
+  // Canvas capture needs drawn frames even when the watch and camera are paused.
+  // Keep its timeline advancing without changing either presentation clock.
+  if (dirty || recorder.recording) {
     try {
       const depth=updateInspectionDepth(camera,controls.target,depthBounds,ao);
       controls.minDistance=depth.minimumDistance;
@@ -780,7 +787,7 @@ function frame(time) {
     catch (error) { fail('The graphics renderer could not display this assembly. Retry the viewer or inspect the static renders below.',error); }
   }
   if(!loading && time-frameWindow>=1500) {
-    const running=visibleMotion || tour || cameraTween;
+    const running=visibleMotion || tour || cameraTween || recorder.recording;
     const rate=Math.round(renderedFrames*1000/(time-frameWindow));
     $('render-status').textContent=`${qualityProfiles[quality].label} · ${running ? `${rate} fps` : 'still view, renders on change'}`;
     renderedFrames=0; frameWindow=time;
