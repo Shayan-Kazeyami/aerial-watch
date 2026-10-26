@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "date": "2026-10-25T19:12:48.717Z",
+  "date": "2026-10-26T02:12:10.032Z",
   "design": "Aerial Quality 01",
   "phase": "proposal-ready",
   "view": "train",
@@ -27,17 +27,18 @@
     "calendarDigitIslands": 53
   },
   "frontArchitecture": {
-    "revision": "front-architecture-r05",
+    "revision": "front-architecture-r07",
     "ready": true,
     "enabled": true,
     "audit": {
+      "revision": "r07",
       "replacementIndices": [
         0,
         155,
         149
       ],
       "calendar": "Actual blank top machined at nativeZ2.099; original gear teeth retained",
-      "construction": "Five small wheel-concentric rounded slots and smooth source155 perimeter; native bearing reserves retained",
+      "construction": "Five rounded rim-following windows with extended wheel99 arc and smooth source155 perimeter; original bearing/support reserves retained",
       "raisedLip": {
         "innerRadiusMM": 9.3,
         "outerRadiusMM": 10.8,
@@ -48,12 +49,17 @@
       },
       "clearance": {
         "scope": "Static native-pose added-stock sampling only",
-        "addedStockSamples": 3024,
+        "addedStockSamples": 2775,
         "sampledOverlapCount": 0,
         "fullMotionValidated": false
       },
       "physicalValidation": false
     }
+  },
+  "escapement": {
+    "revision": "r07-visual-reconstruction",
+    "ready": true,
+    "limits": "Visual kinematic finite-section separation only. Mid-slot impulse-pin/fork gap remains .031-.040mm; no loaded impulse contact, force, energy, physical banking, tolerance or continuous3D collision certification."
   },
   "leatherCraft": {
     "revision": "leather-craft-r05",
@@ -71,7 +77,7 @@
       "hands": false
     },
     "backgroundPolicy": "pause while hidden",
-    "delta": 0.0022999999970197676
+    "delta": 0.0013000000000029104
   },
   "crown": {
     "pulled": false,
@@ -80,7 +86,7 @@
   },
   "sourceAtCapture": {
     "status": "verified",
-    "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+    "digest": "bf04696bcf304a7277abf7f5f471d2d0bfd4d20c8388256efa709d8daf700bdf",
     "algorithm": "SHA-256",
     "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
     "metadataURL": "quality-study/viewer-revision.json",
@@ -116,14 +122,24 @@
         "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
       },
       {
+        "path": "assembly-escapement-data.js",
+        "bytes": 12484,
+        "sha256": "031ce8a4f0b16a47b4ef49bb346ec3a8bd32095e78bbafce42392ab893c16960"
+      },
+      {
+        "path": "assembly-escapement.js",
+        "bytes": 6932,
+        "sha256": "437c16663baae30418533ec878dcd02cb93d48465b0358b511d4ccd53dbd0f96"
+      },
+      {
         "path": "assembly-form-details.js",
         "bytes": 3991,
         "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
       },
       {
         "path": "assembly-front-architecture.js",
-        "bytes": 2355,
-        "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+        "bytes": 3377,
+        "sha256": "0a6b4131555593e2078338cb19f9a1ac10707ab299b32777472fde10482ba219"
       },
       {
         "path": "assembly-glass-ao.js",
@@ -197,13 +213,13 @@
       },
       {
         "path": "assembly-review.html",
-        "bytes": 20805,
-        "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+        "bytes": 20875,
+        "sha256": "55ab98f17d070d5aaecd48e862fc55b4aec711747df1cf157fe744dd21c61dae"
       },
       {
         "path": "assembly-review.js",
-        "bytes": 61140,
-        "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+        "bytes": 62109,
+        "sha256": "4c654f807ab86b6f3f6392c7739eb62a22efc03bb5ff043225784cd7bffe4fb7"
       },
       {
         "path": "assembly-seconds-details.js",
@@ -222,8 +238,8 @@
       },
       {
         "path": "index.html",
-        "bytes": 20805,
-        "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+        "bytes": 20875,
+        "sha256": "55ab98f17d070d5aaecd48e862fc55b4aec711747df1cf157fe744dd21c61dae"
       },
       {
         "path": "material-review-model.js",
@@ -246,7 +262,7 @@
         "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
       }
     ],
-    "verifiedAt": "2026-10-25T19:12:48.711Z",
+    "verifiedAt": "2026-10-26T02:12:10.025Z",
     "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
   },
   "options": {
@@ -276,47 +292,47 @@
       {
         "url": "rebuild/assembly.glb",
         "bodyBytes": 26126492,
-        "transferMs": 531.5999999940395,
-        "parseMs": 32.80000001192093,
-        "totalMs": 564.4000000059605
+        "transferMs": 215.90000000596046,
+        "parseMs": 28.700000002980232,
+        "totalMs": 244.6000000089407
       },
       {
         "url": "quality-study/open-front-plates.glb",
         "bodyBytes": 2194400,
-        "transferMs": 406.29999999701977,
-        "parseMs": 2.2999999970197678,
-        "totalMs": 408.59999999403954
+        "transferMs": 101.20000000298023,
+        "parseMs": 4.200000002980232,
+        "totalMs": 105.40000000596046
       },
       {
         "url": "quality-study/leather-craft-r05.glb",
         "bodyBytes": 1662940,
-        "transferMs": 1315.0999999940395,
-        "parseMs": 2.4000000059604645,
-        "totalMs": 1317.5
+        "transferMs": 669.2999999970198,
+        "parseMs": 1.800000011920929,
+        "totalMs": 671.1000000089407
       },
       {
         "url": "quality-study/form-legibility-r01.glb",
         "bodyBytes": 2570568,
-        "transferMs": 1510.3999999910593,
-        "parseMs": 2,
-        "totalMs": 1512.3999999910593
+        "transferMs": 676.9000000059605,
+        "parseMs": 1.3999999910593033,
+        "totalMs": 678.2999999970198
       },
       {
-        "url": "quality-study/front-architecture-r05.glb",
-        "bodyBytes": 2588000,
-        "transferMs": 22.099999994039536,
-        "parseMs": 1.9000000059604645,
-        "totalMs": 24
+        "url": "quality-study/front-architecture-r07.glb",
+        "bodyBytes": 2677180,
+        "transferMs": 152.70000000298023,
+        "parseMs": 1.199999988079071,
+        "totalMs": 153.8999999910593
       }
     ],
-    "firstInteractiveMs": 2088.7000000029802,
-    "totalFrames": 832,
-    "sampledFrames": 832,
-    "measurementDurationMs": 85895.5,
+    "firstInteractiveMs": 1062.2999999970198,
+    "totalFrames": 1712,
+    "sampledFrames": 1712,
+    "measurementDurationMs": 83476,
     "cpuFrameMs": {
-      "median": 6.200000002980232,
-      "p95": 7.799999997019768,
-      "max": 1277.5999999940395
+      "median": 4,
+      "p95": 5.9000000059604645,
+      "max": 637.6000000089407
     },
     "renderedIntervalMs": {
       "median": 15,
@@ -324,9 +340,9 @@
     },
     "renderer": {
       "drawCalls": 896,
-      "triangles": 4196250,
-      "geometries": 222,
-      "textures": 13
+      "triangles": 4207420,
+      "geometries": 352,
+      "textures": 14
     },
     "measurementNotes": "CPU includes motion/camera preparation and render submission; GPU time unavailable. Body bytes measure decoded HTTP response bytes, not cold/warm network transfer. Render intervals include on-demand idle gaps unless reset. Physical phone measurements are not inferred."
   },
@@ -347,6 +363,7 @@
       "transparent baseline material",
       "crown presentation transform",
       "original assembly geometry",
+      "escapement and private spring display",
       "dial printing",
       "open-work frame",
       "quality hand design",
@@ -354,1560 +371,1770 @@
       "craft comparison material",
       "R05 leather craft geometry",
       "calendar lettering and lug bevels",
-      "R05 front architecture"
+      "R07 front architecture"
     ]
   },
   "warnings": [],
   "navigationTiming": {
-    "moduleBootMs": 179.09999999403954,
-    "firstInteractiveMs": 2267.7999999970198,
+    "moduleBootMs": 160.6000000089407,
+    "firstInteractiveMs": 1222.9000000059605,
     "preview": {
       "path": "/quality-study/01-front.webp",
       "decoded": true,
-      "responseEndMs": 62
+      "responseEndMs": 27
     },
     "note": "Times are relative to document navigation. Preview response completion/decoded state does not measure its first painted frame."
   },
   "pageTransfers": [
     {
       "path": "/assembly-review.css",
-      "startMs": 48.8999999910593,
-      "endMs": 60.29999999701977,
+      "startMs": 13,
+      "endMs": 25.400000005960464,
       "transferBytes": 4737,
       "encodedBodyBytes": 4437
     },
     {
-      "path": "/quality-study/01-front.webp",
-      "startMs": 49.20000000298023,
-      "endMs": 62,
-      "transferBytes": 78302,
-      "encodedBodyBytes": 78002
-    },
-    {
       "path": "/assembly-quality.css",
-      "startMs": 49.20000000298023,
-      "endMs": 61.79999999701977,
+      "startMs": 13.299999997019768,
+      "endMs": 26.5,
       "transferBytes": 5059,
       "encodedBodyBytes": 4759
     },
     {
+      "path": "/quality-study/01-front.webp",
+      "startMs": 13.299999997019768,
+      "endMs": 27,
+      "transferBytes": 72142,
+      "encodedBodyBytes": 71842
+    },
+    {
       "path": "/assembly-review.js",
-      "startMs": 73.29999999701977,
-      "endMs": 78,
-      "transferBytes": 18034,
-      "encodedBodyBytes": 17734
+      "startMs": 36,
+      "endMs": 39.6000000089407,
+      "transferBytes": 18274,
+      "encodedBodyBytes": 17974
     },
     {
       "path": "/quality-study/native-studio.webp",
-      "startMs": 86.29999999701977,
-      "endMs": 97.5,
+      "startMs": 90.70000000298023,
+      "endMs": 97.40000000596046,
       "transferBytes": 51094,
       "encodedBodyBytes": 50794
     },
     {
       "path": "/quality-study/native-front.webp",
-      "startMs": 86.29999999701977,
-      "endMs": 98,
+      "startMs": 90.90000000596046,
+      "endMs": 98.70000000298023,
       "transferBytes": 86712,
       "encodedBodyBytes": 86412
     },
     {
-      "path": "/quality-study/02-three-quarter.webp",
-      "startMs": 86.3999999910593,
-      "endMs": 105.59999999403954,
-      "transferBytes": 55822,
-      "encodedBodyBytes": 55522
-    },
-    {
-      "path": "/quality-study/03-interior.webp",
-      "startMs": 86.3999999910593,
-      "endMs": 107.29999999701977,
-      "transferBytes": 64896,
-      "encodedBodyBytes": 64596
-    },
-    {
-      "path": "/quality-study/04-balance.webp",
-      "startMs": 86.3999999910593,
-      "endMs": 108,
-      "transferBytes": 103280,
-      "encodedBodyBytes": 102980
-    },
-    {
-      "path": "/vendor/three.module.js",
-      "startMs": 91,
-      "endMs": 114.79999999701977,
-      "transferBytes": 118507,
-      "encodedBodyBytes": 118207
-    },
-    {
       "path": "/vendor/controls/OrbitControls.js",
-      "startMs": 91.09999999403954,
-      "endMs": 107.5,
+      "startMs": 93.1000000089407,
+      "endMs": 105.40000000596046,
       "transferBytes": 8471,
       "encodedBodyBytes": 8171
     },
     {
-      "path": "/vendor/loaders/GLTFLoader.js",
-      "startMs": 91.09999999403954,
-      "endMs": 109.20000000298023,
-      "transferBytes": 25077,
-      "encodedBodyBytes": 24777
+      "path": "/vendor/three.module.js",
+      "startMs": 93.1000000089407,
+      "endMs": 113.90000000596046,
+      "transferBytes": 118507,
+      "encodedBodyBytes": 118207
     },
     {
       "path": "/vendor/postprocessing/EffectComposer.js",
-      "startMs": 91.09999999403954,
-      "endMs": 111.3999999910593,
+      "startMs": 93.20000000298023,
+      "endMs": 105.70000000298023,
       "transferBytes": 2681,
       "encodedBodyBytes": 2381
     },
     {
       "path": "/vendor/postprocessing/RenderPass.js",
-      "startMs": 91.20000000298023,
-      "endMs": 112.70000000298023,
+      "startMs": 93.20000000298023,
+      "endMs": 107.5,
       "transferBytes": 1572,
       "encodedBodyBytes": 1272
     },
     {
+      "path": "/vendor/loaders/GLTFLoader.js",
+      "startMs": 93.20000000298023,
+      "endMs": 107.70000000298023,
+      "transferBytes": 25077,
+      "encodedBodyBytes": 24777
+    },
+    {
       "path": "/vendor/postprocessing/SSAOPass.js",
-      "startMs": 91.20000000298023,
-      "endMs": 114,
+      "startMs": 93.20000000298023,
+      "endMs": 109.1000000089407,
       "transferBytes": 3580,
       "encodedBodyBytes": 3280
     },
     {
       "path": "/vendor/postprocessing/OutputPass.js",
-      "startMs": 91.20000000298023,
-      "endMs": 114.20000000298023,
+      "startMs": 93.20000000298023,
+      "endMs": 112.90000000596046,
       "transferBytes": 1694,
       "encodedBodyBytes": 1394
     },
     {
-      "path": "/assembly-materials.js",
-      "startMs": 91.20000000298023,
-      "endMs": 116,
-      "transferBytes": 5039,
-      "encodedBodyBytes": 4739
-    },
-    {
       "path": "/assembly-motion.js",
-      "startMs": 91.20000000298023,
-      "endMs": 115.8999999910593,
+      "startMs": 93.20000000298023,
+      "endMs": 113.6000000089407,
       "transferBytes": 6924,
       "encodedBodyBytes": 6624
     },
     {
+      "path": "/assembly-materials.js",
+      "startMs": 93.29999999701977,
+      "endMs": 115.1000000089407,
+      "transferBytes": 5039,
+      "encodedBodyBytes": 4739
+    },
+    {
       "path": "/assembly-lighting.js",
-      "startMs": 91.29999999701977,
-      "endMs": 117.3999999910593,
+      "startMs": 93.29999999701977,
+      "endMs": 115.20000000298023,
       "transferBytes": 2282,
       "encodedBodyBytes": 1982
     },
     {
       "path": "/assembly-dial.js",
-      "startMs": 91.29999999701977,
-      "endMs": 119.5,
+      "startMs": 93.40000000596046,
+      "endMs": 115,
       "transferBytes": 3097,
       "encodedBodyBytes": 2797
     },
     {
       "path": "/assembly-open-front.js",
-      "startMs": 91.29999999701977,
-      "endMs": 121.09999999403954,
+      "startMs": 93.40000000596046,
+      "endMs": 116.70000000298023,
       "transferBytes": 2087,
       "encodedBodyBytes": 1787
     },
     {
       "path": "/assembly-design.js",
-      "startMs": 91.3999999910593,
-      "endMs": 121.8999999910593,
+      "startMs": 93.40000000596046,
+      "endMs": 116.79999999701977,
       "transferBytes": 2405,
       "encodedBodyBytes": 2105
     },
     {
       "path": "/assembly-depth.js",
-      "startMs": 91.3999999910593,
-      "endMs": 123.09999999403954,
+      "startMs": 93.40000000596046,
+      "endMs": 117.6000000089407,
       "transferBytes": 1486,
       "encodedBodyBytes": 1186
     },
     {
-      "path": "/assembly-clock.js",
-      "startMs": 91.3999999910593,
-      "endMs": 123.5,
-      "transferBytes": 1180,
-      "encodedBodyBytes": 880
-    },
-    {
       "path": "/assembly-glass-ao.js",
-      "startMs": 91.3999999910593,
-      "endMs": 123.20000000298023,
+      "startMs": 93.40000000596046,
+      "endMs": 118.90000000596046,
       "transferBytes": 2530,
       "encodedBodyBytes": 2230
     },
     {
       "path": "/assembly-state.js",
-      "startMs": 91.5,
-      "endMs": 124.8999999910593,
+      "startMs": 93.40000000596046,
+      "endMs": 119.1000000089407,
       "transferBytes": 1605,
       "encodedBodyBytes": 1305
     },
     {
+      "path": "/assembly-clock.js",
+      "startMs": 93.40000000596046,
+      "endMs": 119.1000000089407,
+      "transferBytes": 1180,
+      "encodedBodyBytes": 880
+    },
+    {
       "path": "/assembly-loading.js",
-      "startMs": 91.5,
-      "endMs": 126.20000000298023,
+      "startMs": 93.40000000596046,
+      "endMs": 121.20000000298023,
       "transferBytes": 1358,
       "encodedBodyBytes": 1058
     },
     {
       "path": "/assembly-performance.js",
-      "startMs": 91.5,
-      "endMs": 127.09999999403954,
+      "startMs": 93.40000000596046,
+      "endMs": 121.79999999701977,
       "transferBytes": 1098,
       "encodedBodyBytes": 798
     },
     {
       "path": "/assembly-resolution.js",
-      "startMs": 91.5,
-      "endMs": 128.70000000298023,
+      "startMs": 93.40000000596046,
+      "endMs": 122.5,
       "transferBytes": 1353,
       "encodedBodyBytes": 1053
     },
     {
       "path": "/assembly-crown.js",
-      "startMs": 91.59999999403954,
-      "endMs": 128.5,
+      "startMs": 93.5,
+      "endMs": 123.5,
       "transferBytes": 1841,
       "encodedBodyBytes": 1541
     },
     {
       "path": "/assembly-capture-provenance.js",
-      "startMs": 91.59999999403954,
-      "endMs": 128.79999999701977,
+      "startMs": 93.5,
+      "endMs": 123.5,
       "transferBytes": 2463,
       "encodedBodyBytes": 2163
     },
     {
       "path": "/assembly-recording.js",
-      "startMs": 91.59999999403954,
-      "endMs": 130.3999999910593,
+      "startMs": 93.6000000089407,
+      "endMs": 123.5,
       "transferBytes": 1850,
       "encodedBodyBytes": 1550
     },
     {
-      "path": "/assembly-story.js",
-      "startMs": 91.59999999403954,
-      "endMs": 130.70000000298023,
-      "transferBytes": 1883,
-      "encodedBodyBytes": 1583
-    },
-    {
       "path": "/assembly-lifecycle.js",
-      "startMs": 91.59999999403954,
-      "endMs": 131.3999999910593,
+      "startMs": 93.6000000089407,
+      "endMs": 124.70000000298023,
       "transferBytes": 936,
       "encodedBodyBytes": 636
     },
     {
+      "path": "/assembly-story.js",
+      "startMs": 93.6000000089407,
+      "endMs": 125.40000000596046,
+      "transferBytes": 1883,
+      "encodedBodyBytes": 1583
+    },
+    {
       "path": "/assembly-form-details.js",
-      "startMs": 91.59999999403954,
-      "endMs": 132.3999999910593,
+      "startMs": 93.6000000089407,
+      "endMs": 125.90000000596046,
       "transferBytes": 1986,
       "encodedBodyBytes": 1686
     },
     {
+      "path": "/assembly-front-architecture.js",
+      "startMs": 93.6000000089407,
+      "endMs": 127.20000000298023,
+      "transferBytes": 1818,
+      "encodedBodyBytes": 1518
+    },
+    {
+      "path": "/assembly-escapement.js",
+      "startMs": 93.6000000089407,
+      "endMs": 127.5,
+      "transferBytes": 3117,
+      "encodedBodyBytes": 2817
+    },
+    {
       "path": "/assembly-leather-details.js",
-      "startMs": 91.59999999403954,
-      "endMs": 133.5,
+      "startMs": 93.6000000089407,
+      "endMs": 128.29999999701977,
       "transferBytes": 2002,
       "encodedBodyBytes": 1702
     },
     {
-      "path": "/assembly-front-architecture.js",
-      "startMs": 91.70000000298023,
-      "endMs": 132.70000000298023,
-      "transferBytes": 1447,
-      "encodedBodyBytes": 1147
-    },
-    {
-      "path": "/vendor/utils/BufferGeometryUtils.js",
-      "startMs": 111.70000000298023,
-      "endMs": 136.29999999701977,
-      "transferBytes": 8323,
-      "encodedBodyBytes": 8023
-    },
-    {
       "path": "/vendor/shaders/CopyShader.js",
-      "startMs": 115.20000000298023,
-      "endMs": 134.8999999910593,
+      "startMs": 107.90000000596046,
+      "endMs": 127.40000000596046,
       "transferBytes": 1029,
       "encodedBodyBytes": 729
     },
     {
       "path": "/vendor/postprocessing/ShaderPass.js",
-      "startMs": 115.3999999910593,
-      "endMs": 137.79999999701977,
+      "startMs": 108,
+      "endMs": 129.1000000089407,
       "transferBytes": 1565,
       "encodedBodyBytes": 1265
     },
     {
       "path": "/vendor/postprocessing/MaskPass.js",
-      "startMs": 115.3999999910593,
-      "endMs": 138,
+      "startMs": 108.1000000089407,
+      "endMs": 129.1000000089407,
       "transferBytes": 1597,
       "encodedBodyBytes": 1297
     },
     {
       "path": "/vendor/postprocessing/Pass.js",
-      "startMs": 115.79999999701977,
-      "endMs": 138.20000000298023,
+      "startMs": 108.79999999701977,
+      "endMs": 130.20000000298023,
       "transferBytes": 1795,
       "encodedBodyBytes": 1495
     },
     {
+      "path": "/vendor/utils/BufferGeometryUtils.js",
+      "startMs": 110,
+      "endMs": 131.1000000089407,
+      "transferBytes": 8323,
+      "encodedBodyBytes": 8023
+    },
+    {
       "path": "/vendor/math/SimplexNoise.js",
-      "startMs": 116.20000000298023,
-      "endMs": 139.09999999403954,
+      "startMs": 113.6000000089407,
+      "endMs": 130.40000000596046,
       "transferBytes": 4154,
       "encodedBodyBytes": 3854
     },
     {
       "path": "/vendor/shaders/SSAOShader.js",
-      "startMs": 116.29999999701977,
-      "endMs": 139.70000000298023,
+      "startMs": 113.6000000089407,
+      "endMs": 131.6000000089407,
       "transferBytes": 2245,
       "encodedBodyBytes": 1945
     },
     {
-      "path": "/vendor/shaders/OutputShader.js",
-      "startMs": 117,
-      "endMs": 141.20000000298023,
-      "transferBytes": 1016,
-      "encodedBodyBytes": 716
-    },
-    {
       "path": "/vendor/three.core.js",
-      "startMs": 117,
-      "endMs": 169.29999999701977,
+      "startMs": 117.20000000298023,
+      "endMs": 153.40000000596046,
       "transferBytes": 278598,
       "encodedBodyBytes": 278298
     },
     {
+      "path": "/vendor/shaders/OutputShader.js",
+      "startMs": 117.29999999701977,
+      "endMs": 132.20000000298023,
+      "transferBytes": 1016,
+      "encodedBodyBytes": 716
+    },
+    {
       "path": "/assembly-refraction.js",
-      "startMs": 118.3999999910593,
-      "endMs": 141.8999999910593,
+      "startMs": 117.6000000089407,
+      "endMs": 133,
       "transferBytes": 1569,
       "encodedBodyBytes": 1269
     },
     {
       "path": "/assembly-seconds-details.js",
-      "startMs": 120.59999999403954,
-      "endMs": 142.20000000298023,
+      "startMs": 117.6000000089407,
+      "endMs": 133.29999999701977,
       "transferBytes": 2208,
       "encodedBodyBytes": 1908
     },
     {
+      "path": "/assembly-escapement-data.js",
+      "startMs": 128.70000000298023,
+      "endMs": 133.79999999701977,
+      "transferBytes": 4820,
+      "encodedBodyBytes": 4520
+    },
+    {
       "path": "/assets/manual-a-parts.json",
-      "startMs": 233.70000000298023,
-      "endMs": 267.29999999701977,
+      "startMs": 210.1000000089407,
+      "endMs": 214.79999999701977,
       "transferBytes": 19866,
       "encodedBodyBytes": 19566
     },
     {
       "path": "/quality-study/viewer-revision.js",
-      "startMs": 241,
-      "endMs": 263.5,
-      "transferBytes": 2238,
-      "encodedBodyBytes": 1938
+      "startMs": 216,
+      "endMs": 219,
+      "transferBytes": 2343,
+      "encodedBodyBytes": 2043
     },
     {
       "path": "/quality-study/open-front-plates.glb",
-      "startMs": 241.29999999701977,
-      "endMs": 644.3999999910593,
+      "startMs": 216.70000000298023,
+      "endMs": 307.29999999701977,
       "transferBytes": 468794,
       "encodedBodyBytes": 468494
     },
     {
       "path": "/rebuild/assembly.glb",
-      "startMs": 241.3999999910593,
-      "endMs": 766.3999999910593,
+      "startMs": 216.90000000596046,
+      "endMs": 427.70000000298023,
       "transferBytes": 7241656,
       "encodedBodyBytes": 7241356
     },
     {
-      "path": "/quality-study/form-legibility-r01.glb",
-      "startMs": 983.5999999940395,
-      "endMs": 2310.5999999940395,
-      "transferBytes": 783985,
-      "encodedBodyBytes": 783685
-    },
-    {
       "path": "/quality-study/leather-craft-r05.glb",
-      "startMs": 983.7999999970198,
-      "endMs": 1009.7000000029802,
+      "startMs": 572.5,
+      "endMs": 597.2999999970198,
       "transferBytes": 630424,
       "encodedBodyBytes": 630124
     },
     {
-      "path": "/quality-study/front-architecture-r05.glb",
-      "startMs": 2542.7999999970198,
-      "endMs": 2563.2000000029802,
-      "transferBytes": 536549,
-      "encodedBodyBytes": 536249
+      "path": "/quality-study/form-legibility-r01.glb",
+      "startMs": 572.5,
+      "endMs": 1227.6000000089407,
+      "transferBytes": 783985,
+      "encodedBodyBytes": 783685
+    },
+    {
+      "path": "/quality-study/front-architecture-r07.glb",
+      "startMs": 1276.7000000029802,
+      "endMs": 1427.9000000059605,
+      "transferBytes": 563270,
+      "encodedBodyBytes": 562970
+    },
+    {
+      "path": "/quality-study/02-three-quarter.webp",
+      "startMs": 12687.40000000596,
+      "endMs": 12692.40000000596,
+      "transferBytes": 53638,
+      "encodedBodyBytes": 53338
     },
     {
       "path": "/quality-study/viewer-revision.json",
-      "startMs": 46628.5,
-      "endMs": 46634.70000000298,
-      "transferBytes": 2219,
-      "encodedBodyBytes": 1919
+      "startMs": 13325.5,
+      "endMs": 13329.20000000298,
+      "transferBytes": 2323,
+      "encodedBodyBytes": 2023
     },
     {
       "path": "/assembly-capture-provenance.js",
-      "startMs": 46636.59999999404,
-      "endMs": 46643.5,
+      "startMs": 13330,
+      "endMs": 13336,
       "transferBytes": 2463,
       "encodedBodyBytes": 2163
     },
     {
       "path": "/assembly-clock.js",
-      "startMs": 46636.70000000298,
-      "endMs": 46644.29999999702,
+      "startMs": 13330,
+      "endMs": 13337.40000000596,
       "transferBytes": 1180,
       "encodedBodyBytes": 880
     },
     {
       "path": "/assembly-crown.js",
-      "startMs": 46636.70000000298,
-      "endMs": 46645.5,
+      "startMs": 13330.10000000894,
+      "endMs": 13338.60000000894,
       "transferBytes": 1841,
       "encodedBodyBytes": 1541
     },
     {
       "path": "/assembly-depth.js",
-      "startMs": 46636.70000000298,
-      "endMs": 46646.89999999106,
+      "startMs": 13330.10000000894,
+      "endMs": 13339,
       "transferBytes": 1486,
       "encodedBodyBytes": 1186
     },
     {
       "path": "/assembly-design.js",
-      "startMs": 46636.70000000298,
-      "endMs": 46648,
+      "startMs": 13330.20000000298,
+      "endMs": 13339.29999999702,
       "transferBytes": 2405,
       "encodedBodyBytes": 2105
     },
     {
       "path": "/assembly-dial.js",
-      "startMs": 46636.79999999702,
-      "endMs": 46648.5,
+      "startMs": 13330.20000000298,
+      "endMs": 13339.40000000596,
       "transferBytes": 3097,
       "encodedBodyBytes": 2797
     },
     {
+      "path": "/assembly-escapement-data.js",
+      "startMs": 13330.29999999702,
+      "endMs": 13339.90000000596,
+      "transferBytes": 4820,
+      "encodedBodyBytes": 4520
+    },
+    {
+      "path": "/assembly-escapement.js",
+      "startMs": 13330.29999999702,
+      "endMs": 13340.40000000596,
+      "transferBytes": 3117,
+      "encodedBodyBytes": 2817
+    },
+    {
       "path": "/assembly-form-details.js",
-      "startMs": 46636.79999999702,
-      "endMs": 46648.79999999702,
+      "startMs": 13330.29999999702,
+      "endMs": 13340.90000000596,
       "transferBytes": 1986,
       "encodedBodyBytes": 1686
     },
     {
       "path": "/assembly-front-architecture.js",
-      "startMs": 46636.79999999702,
-      "endMs": 46651,
-      "transferBytes": 1447,
-      "encodedBodyBytes": 1147
+      "startMs": 13330.29999999702,
+      "endMs": 13341.29999999702,
+      "transferBytes": 1818,
+      "encodedBodyBytes": 1518
     },
     {
       "path": "/assembly-glass-ao.js",
-      "startMs": 46636.89999999106,
-      "endMs": 46651.09999999404,
+      "startMs": 13330.29999999702,
+      "endMs": 13342.29999999702,
       "transferBytes": 2530,
       "encodedBodyBytes": 2230
     },
     {
       "path": "/assembly-leather-details.js",
-      "startMs": 46637,
-      "endMs": 46651.20000000298,
+      "startMs": 13330.29999999702,
+      "endMs": 13342.40000000596,
       "transferBytes": 2002,
       "encodedBodyBytes": 1702
     },
     {
       "path": "/assembly-lifecycle.js",
-      "startMs": 46637,
-      "endMs": 46651.59999999404,
+      "startMs": 13330.40000000596,
+      "endMs": 13342.20000000298,
       "transferBytes": 936,
       "encodedBodyBytes": 636
     },
     {
       "path": "/assembly-lighting.js",
-      "startMs": 46637,
-      "endMs": 46652.39999999106,
+      "startMs": 13330.40000000596,
+      "endMs": 13342.90000000596,
       "transferBytes": 2282,
       "encodedBodyBytes": 1982
     },
     {
       "path": "/assembly-loading.js",
-      "startMs": 46637.09999999404,
-      "endMs": 46652.79999999702,
+      "startMs": 13330.40000000596,
+      "endMs": 13343.20000000298,
       "transferBytes": 1358,
       "encodedBodyBytes": 1058
     },
     {
       "path": "/assembly-materials.js",
-      "startMs": 46637.09999999404,
-      "endMs": 46654.70000000298,
+      "startMs": 13330.5,
+      "endMs": 13344.10000000894,
       "transferBytes": 5039,
       "encodedBodyBytes": 4739
     },
     {
       "path": "/assembly-motion.js",
-      "startMs": 46637.09999999404,
-      "endMs": 46655.09999999404,
+      "startMs": 13330.5,
+      "endMs": 13345.20000000298,
       "transferBytes": 6924,
       "encodedBodyBytes": 6624
     },
     {
       "path": "/assembly-open-front.js",
-      "startMs": 46637.20000000298,
-      "endMs": 46654.29999999702,
+      "startMs": 13330.60000000894,
+      "endMs": 13345,
       "transferBytes": 2087,
       "encodedBodyBytes": 1787
     },
     {
       "path": "/assembly-performance.js",
-      "startMs": 46637.29999999702,
-      "endMs": 46656,
+      "startMs": 13330.60000000894,
+      "endMs": 13345.10000000894,
       "transferBytes": 1098,
       "encodedBodyBytes": 798
     },
     {
       "path": "/assembly-recording.js",
-      "startMs": 46637.29999999702,
-      "endMs": 46657.20000000298,
+      "startMs": 13330.60000000894,
+      "endMs": 13345.70000000298,
       "transferBytes": 1850,
       "encodedBodyBytes": 1550
     },
     {
       "path": "/assembly-quality.css",
-      "startMs": 46637.29999999702,
-      "endMs": 46657.79999999702,
+      "startMs": 13330.60000000894,
+      "endMs": 13346.10000000894,
       "transferBytes": 5059,
       "encodedBodyBytes": 4759
     },
     {
       "path": "/assembly-refraction.js",
-      "startMs": 46637.39999999106,
-      "endMs": 46658.20000000298,
+      "startMs": 13330.60000000894,
+      "endMs": 13346.60000000894,
       "transferBytes": 1569,
       "encodedBodyBytes": 1269
     },
     {
       "path": "/assembly-resolution.js",
-      "startMs": 46637.39999999106,
-      "endMs": 46658.20000000298,
+      "startMs": 13330.60000000894,
+      "endMs": 13347.70000000298,
       "transferBytes": 1353,
       "encodedBodyBytes": 1053
     },
     {
       "path": "/assembly-review.css",
-      "startMs": 46637.39999999106,
-      "endMs": 46659,
+      "startMs": 13330.60000000894,
+      "endMs": 13348.40000000596,
       "transferBytes": 4737,
       "encodedBodyBytes": 4437
     },
     {
       "path": "/assembly-review.html",
-      "startMs": 46637.39999999106,
-      "endMs": 46659.79999999702,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
-    },
-    {
-      "path": "/assembly-review.js",
-      "startMs": 46637.39999999106,
-      "endMs": 46662.09999999404,
-      "transferBytes": 18034,
-      "encodedBodyBytes": 17734
+      "startMs": 13330.70000000298,
+      "endMs": 13348.5,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
     },
     {
       "path": "/assembly-seconds-details.js",
-      "startMs": 46637.5,
-      "endMs": 46662.29999999702,
+      "startMs": 13330.70000000298,
+      "endMs": 13349,
       "transferBytes": 2208,
       "encodedBodyBytes": 1908
     },
     {
+      "path": "/assembly-review.js",
+      "startMs": 13330.70000000298,
+      "endMs": 13349.29999999702,
+      "transferBytes": 18274,
+      "encodedBodyBytes": 17974
+    },
+    {
       "path": "/assembly-state.js",
-      "startMs": 46637.5,
-      "endMs": 46663,
+      "startMs": 13330.70000000298,
+      "endMs": 13349.79999999702,
       "transferBytes": 1605,
       "encodedBodyBytes": 1305
     },
     {
       "path": "/assembly-story.js",
-      "startMs": 46637.5,
-      "endMs": 46663.29999999702,
+      "startMs": 13330.70000000298,
+      "endMs": 13350.29999999702,
       "transferBytes": 1883,
       "encodedBodyBytes": 1583
     },
     {
       "path": "/index.html",
-      "startMs": 46637.5,
-      "endMs": 46664.39999999106,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
+      "startMs": 13330.79999999702,
+      "endMs": 13352.70000000298,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
     },
     {
       "path": "/material-review-model.js",
-      "startMs": 46637.70000000298,
-      "endMs": 46664.39999999106,
+      "startMs": 13330.90000000596,
+      "endMs": 13351.79999999702,
       "transferBytes": 1417,
       "encodedBodyBytes": 1117
     },
     {
-      "path": "/material-review.html",
-      "startMs": 46637.70000000298,
-      "endMs": 46665.5,
-      "transferBytes": 1885,
-      "encodedBodyBytes": 1585
-    },
-    {
       "path": "/material-review.css",
-      "startMs": 46637.70000000298,
-      "endMs": 46665.89999999106,
+      "startMs": 13330.90000000596,
+      "endMs": 13353.40000000596,
       "transferBytes": 1519,
       "encodedBodyBytes": 1219
     },
     {
+      "path": "/material-review.html",
+      "startMs": 13331,
+      "endMs": 13353.5,
+      "transferBytes": 1885,
+      "encodedBodyBytes": 1585
+    },
+    {
       "path": "/material-review.js",
-      "startMs": 46637.70000000298,
-      "endMs": 46666.09999999404,
+      "startMs": 13331,
+      "endMs": 13354,
       "transferBytes": 3389,
       "encodedBodyBytes": 3089
     },
     {
       "path": "/quality-study/viewer-revision.json",
-      "startMs": 76759.70000000298,
-      "endMs": 76764.79999999702,
-      "transferBytes": 2219,
-      "encodedBodyBytes": 1919
+      "startMs": 45173.79999999702,
+      "endMs": 45180,
+      "transferBytes": 2323,
+      "encodedBodyBytes": 2023
     },
     {
       "path": "/assembly-capture-provenance.js",
-      "startMs": 76766.5,
-      "endMs": 76774.70000000298,
+      "startMs": 45181.20000000298,
+      "endMs": 45186.70000000298,
       "transferBytes": 2463,
       "encodedBodyBytes": 2163
     },
     {
       "path": "/assembly-clock.js",
-      "startMs": 76766.70000000298,
-      "endMs": 76775.5,
+      "startMs": 45181.29999999702,
+      "endMs": 45187.79999999702,
       "transferBytes": 1180,
       "encodedBodyBytes": 880
     },
     {
       "path": "/assembly-crown.js",
-      "startMs": 76766.70000000298,
-      "endMs": 76777,
+      "startMs": 45181.29999999702,
+      "endMs": 45189.70000000298,
       "transferBytes": 1841,
       "encodedBodyBytes": 1541
     },
     {
       "path": "/assembly-depth.js",
-      "startMs": 76766.79999999702,
-      "endMs": 76777.70000000298,
+      "startMs": 45181.40000000596,
+      "endMs": 45190,
       "transferBytes": 1486,
       "encodedBodyBytes": 1186
     },
     {
       "path": "/assembly-design.js",
-      "startMs": 76766.89999999106,
-      "endMs": 76778.29999999702,
+      "startMs": 45181.40000000596,
+      "endMs": 45190.40000000596,
       "transferBytes": 2405,
       "encodedBodyBytes": 2105
     },
     {
       "path": "/assembly-dial.js",
-      "startMs": 76766.89999999106,
-      "endMs": 76779.70000000298,
+      "startMs": 45181.40000000596,
+      "endMs": 45190.90000000596,
       "transferBytes": 3097,
       "encodedBodyBytes": 2797
     },
     {
+      "path": "/assembly-escapement-data.js",
+      "startMs": 45181.40000000596,
+      "endMs": 45191.10000000894,
+      "transferBytes": 4820,
+      "encodedBodyBytes": 4520
+    },
+    {
+      "path": "/assembly-escapement.js",
+      "startMs": 45181.5,
+      "endMs": 45191.40000000596,
+      "transferBytes": 3117,
+      "encodedBodyBytes": 2817
+    },
+    {
       "path": "/assembly-form-details.js",
-      "startMs": 76767.09999999404,
-      "endMs": 76779.79999999702,
+      "startMs": 45181.5,
+      "endMs": 45192.29999999702,
       "transferBytes": 1986,
       "encodedBodyBytes": 1686
     },
     {
       "path": "/assembly-front-architecture.js",
-      "startMs": 76767.09999999404,
-      "endMs": 76780.39999999106,
-      "transferBytes": 1447,
-      "encodedBodyBytes": 1147
+      "startMs": 45181.5,
+      "endMs": 45192.90000000596,
+      "transferBytes": 1818,
+      "encodedBodyBytes": 1518
     },
     {
       "path": "/assembly-glass-ao.js",
-      "startMs": 76767.09999999404,
-      "endMs": 76780.5,
+      "startMs": 45181.60000000894,
+      "endMs": 45193.60000000894,
       "transferBytes": 2530,
       "encodedBodyBytes": 2230
     },
     {
       "path": "/assembly-leather-details.js",
-      "startMs": 76767.09999999404,
-      "endMs": 76781.5,
+      "startMs": 45181.60000000894,
+      "endMs": 45194.5,
       "transferBytes": 2002,
       "encodedBodyBytes": 1702
     },
     {
       "path": "/assembly-lifecycle.js",
-      "startMs": 76767.09999999404,
-      "endMs": 76782,
+      "startMs": 45181.70000000298,
+      "endMs": 45193.60000000894,
       "transferBytes": 936,
       "encodedBodyBytes": 636
     },
     {
       "path": "/assembly-lighting.js",
-      "startMs": 76767.09999999404,
-      "endMs": 76782.79999999702,
+      "startMs": 45181.70000000298,
+      "endMs": 45194.90000000596,
       "transferBytes": 2282,
       "encodedBodyBytes": 1982
     },
     {
       "path": "/assembly-loading.js",
-      "startMs": 76767.20000000298,
-      "endMs": 76782.89999999106,
+      "startMs": 45181.79999999702,
+      "endMs": 45195.5,
       "transferBytes": 1358,
       "encodedBodyBytes": 1058
     },
     {
       "path": "/assembly-materials.js",
-      "startMs": 76767.20000000298,
-      "endMs": 76784.09999999404,
+      "startMs": 45181.79999999702,
+      "endMs": 45196.79999999702,
       "transferBytes": 5039,
       "encodedBodyBytes": 4739
     },
     {
       "path": "/assembly-motion.js",
-      "startMs": 76767.20000000298,
-      "endMs": 76784.70000000298,
+      "startMs": 45181.79999999702,
+      "endMs": 45197.70000000298,
       "transferBytes": 6924,
       "encodedBodyBytes": 6624
     },
     {
       "path": "/assembly-open-front.js",
-      "startMs": 76767.20000000298,
-      "endMs": 76785.59999999404,
+      "startMs": 45181.90000000596,
+      "endMs": 45197.29999999702,
       "transferBytes": 2087,
       "encodedBodyBytes": 1787
     },
     {
       "path": "/assembly-performance.js",
-      "startMs": 76767.20000000298,
-      "endMs": 76785.70000000298,
-      "transferBytes": 1098,
-      "encodedBodyBytes": 798
-    },
-    {
-      "path": "/assembly-quality.css",
-      "startMs": 76767.20000000298,
-      "endMs": 76787.09999999404,
-      "transferBytes": 5059,
-      "encodedBodyBytes": 4759
-    },
-    {
-      "path": "/assembly-recording.js",
-      "startMs": 76767.29999999702,
-      "endMs": 76786.70000000298,
-      "transferBytes": 1850,
-      "encodedBodyBytes": 1550
-    },
-    {
-      "path": "/assembly-refraction.js",
-      "startMs": 76767.29999999702,
-      "endMs": 76787.89999999106,
-      "transferBytes": 1569,
-      "encodedBodyBytes": 1269
-    },
-    {
-      "path": "/assembly-resolution.js",
-      "startMs": 76767.29999999702,
-      "endMs": 76788.5,
-      "transferBytes": 1353,
-      "encodedBodyBytes": 1053
-    },
-    {
-      "path": "/assembly-review.css",
-      "startMs": 76767.29999999702,
-      "endMs": 76789.39999999106,
-      "transferBytes": 4737,
-      "encodedBodyBytes": 4437
-    },
-    {
-      "path": "/assembly-review.html",
-      "startMs": 76767.29999999702,
-      "endMs": 76790.39999999106,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
-    },
-    {
-      "path": "/assembly-seconds-details.js",
-      "startMs": 76767.39999999106,
-      "endMs": 76790.20000000298,
-      "transferBytes": 2208,
-      "encodedBodyBytes": 1908
-    },
-    {
-      "path": "/assembly-review.js",
-      "startMs": 76767.39999999106,
-      "endMs": 76791.20000000298,
-      "transferBytes": 18034,
-      "encodedBodyBytes": 17734
-    },
-    {
-      "path": "/assembly-state.js",
-      "startMs": 76767.5,
-      "endMs": 76791.5,
-      "transferBytes": 1605,
-      "encodedBodyBytes": 1305
-    },
-    {
-      "path": "/assembly-story.js",
-      "startMs": 76767.5,
-      "endMs": 76792.09999999404,
-      "transferBytes": 1883,
-      "encodedBodyBytes": 1583
-    },
-    {
-      "path": "/index.html",
-      "startMs": 76767.5,
-      "endMs": 76792.70000000298,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
-    },
-    {
-      "path": "/material-review-model.js",
-      "startMs": 76767.5,
-      "endMs": 76792.89999999106,
-      "transferBytes": 1417,
-      "encodedBodyBytes": 1117
-    },
-    {
-      "path": "/material-review.css",
-      "startMs": 76767.59999999404,
-      "endMs": 76793.29999999702,
-      "transferBytes": 1519,
-      "encodedBodyBytes": 1219
-    },
-    {
-      "path": "/material-review.js",
-      "startMs": 76767.59999999404,
-      "endMs": 76793.79999999702,
-      "transferBytes": 3389,
-      "encodedBodyBytes": 3089
-    },
-    {
-      "path": "/material-review.html",
-      "startMs": 76767.59999999404,
-      "endMs": 76794.70000000298,
-      "transferBytes": 1885,
-      "encodedBodyBytes": 1585
-    },
-    {
-      "path": "/quality-study/viewer-revision.json",
-      "startMs": 84279.59999999404,
-      "endMs": 84284.09999999404,
-      "transferBytes": 2219,
-      "encodedBodyBytes": 1919
-    },
-    {
-      "path": "/assembly-capture-provenance.js",
-      "startMs": 84285.09999999404,
-      "endMs": 84294,
-      "transferBytes": 2463,
-      "encodedBodyBytes": 2163
-    },
-    {
-      "path": "/assembly-clock.js",
-      "startMs": 84285.09999999404,
-      "endMs": 84294.89999999106,
-      "transferBytes": 1180,
-      "encodedBodyBytes": 880
-    },
-    {
-      "path": "/assembly-crown.js",
-      "startMs": 84285.20000000298,
-      "endMs": 84295.70000000298,
-      "transferBytes": 1841,
-      "encodedBodyBytes": 1541
-    },
-    {
-      "path": "/assembly-depth.js",
-      "startMs": 84285.20000000298,
-      "endMs": 84296.09999999404,
-      "transferBytes": 1486,
-      "encodedBodyBytes": 1186
-    },
-    {
-      "path": "/assembly-design.js",
-      "startMs": 84285.20000000298,
-      "endMs": 84297.09999999404,
-      "transferBytes": 2405,
-      "encodedBodyBytes": 2105
-    },
-    {
-      "path": "/assembly-form-details.js",
-      "startMs": 84285.20000000298,
-      "endMs": 84297.79999999702,
-      "transferBytes": 1986,
-      "encodedBodyBytes": 1686
-    },
-    {
-      "path": "/assembly-dial.js",
-      "startMs": 84285.20000000298,
-      "endMs": 84298.09999999404,
-      "transferBytes": 3097,
-      "encodedBodyBytes": 2797
-    },
-    {
-      "path": "/assembly-front-architecture.js",
-      "startMs": 84285.29999999702,
-      "endMs": 84298.70000000298,
-      "transferBytes": 1447,
-      "encodedBodyBytes": 1147
-    },
-    {
-      "path": "/assembly-glass-ao.js",
-      "startMs": 84285.29999999702,
-      "endMs": 84299,
-      "transferBytes": 2530,
-      "encodedBodyBytes": 2230
-    },
-    {
-      "path": "/assembly-leather-details.js",
-      "startMs": 84285.29999999702,
-      "endMs": 84299.89999999106,
-      "transferBytes": 2002,
-      "encodedBodyBytes": 1702
-    },
-    {
-      "path": "/assembly-lifecycle.js",
-      "startMs": 84285.29999999702,
-      "endMs": 84300.39999999106,
-      "transferBytes": 936,
-      "encodedBodyBytes": 636
-    },
-    {
-      "path": "/assembly-lighting.js",
-      "startMs": 84285.39999999106,
-      "endMs": 84301.39999999106,
-      "transferBytes": 2282,
-      "encodedBodyBytes": 1982
-    },
-    {
-      "path": "/assembly-loading.js",
-      "startMs": 84285.39999999106,
-      "endMs": 84302.20000000298,
-      "transferBytes": 1358,
-      "encodedBodyBytes": 1058
-    },
-    {
-      "path": "/assembly-materials.js",
-      "startMs": 84285.39999999106,
-      "endMs": 84302.39999999106,
-      "transferBytes": 5039,
-      "encodedBodyBytes": 4739
-    },
-    {
-      "path": "/assembly-motion.js",
-      "startMs": 84285.39999999106,
-      "endMs": 84303,
-      "transferBytes": 6924,
-      "encodedBodyBytes": 6624
-    },
-    {
-      "path": "/assembly-open-front.js",
-      "startMs": 84285.39999999106,
-      "endMs": 84303.39999999106,
-      "transferBytes": 2087,
-      "encodedBodyBytes": 1787
-    },
-    {
-      "path": "/assembly-performance.js",
-      "startMs": 84285.5,
-      "endMs": 84304.09999999404,
+      "startMs": 45181.90000000596,
+      "endMs": 45198.20000000298,
       "transferBytes": 1098,
       "encodedBodyBytes": 798
     },
     {
       "path": "/assembly-recording.js",
-      "startMs": 84285.5,
-      "endMs": 84305.70000000298,
+      "startMs": 45182,
+      "endMs": 45199.40000000596,
       "transferBytes": 1850,
       "encodedBodyBytes": 1550
     },
     {
       "path": "/assembly-quality.css",
-      "startMs": 84285.5,
-      "endMs": 84306.89999999106,
+      "startMs": 45182,
+      "endMs": 45199.5,
       "transferBytes": 5059,
       "encodedBodyBytes": 4759
     },
     {
       "path": "/assembly-refraction.js",
-      "startMs": 84285.59999999404,
-      "endMs": 84306.39999999106,
+      "startMs": 45182,
+      "endMs": 45200,
       "transferBytes": 1569,
       "encodedBodyBytes": 1269
     },
     {
       "path": "/assembly-resolution.js",
-      "startMs": 84285.59999999404,
-      "endMs": 84307.79999999702,
+      "startMs": 45182.10000000894,
+      "endMs": 45200.60000000894,
       "transferBytes": 1353,
       "encodedBodyBytes": 1053
     },
     {
       "path": "/assembly-review.css",
-      "startMs": 84285.59999999404,
-      "endMs": 84308.5,
+      "startMs": 45182.10000000894,
+      "endMs": 45201.90000000596,
       "transferBytes": 4737,
       "encodedBodyBytes": 4437
     },
     {
       "path": "/assembly-review.html",
-      "startMs": 84285.70000000298,
-      "endMs": 84309.59999999404,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
-    },
-    {
-      "path": "/assembly-state.js",
-      "startMs": 84285.70000000298,
-      "endMs": 84310.89999999106,
-      "transferBytes": 1605,
-      "encodedBodyBytes": 1305
+      "startMs": 45182.10000000894,
+      "endMs": 45202.10000000894,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
     },
     {
       "path": "/assembly-seconds-details.js",
-      "startMs": 84285.70000000298,
-      "endMs": 84311.29999999702,
+      "startMs": 45182.10000000894,
+      "endMs": 45203.20000000298,
       "transferBytes": 2208,
       "encodedBodyBytes": 1908
     },
     {
+      "path": "/assembly-state.js",
+      "startMs": 45182.10000000894,
+      "endMs": 45203.90000000596,
+      "transferBytes": 1605,
+      "encodedBodyBytes": 1305
+    },
+    {
       "path": "/assembly-review.js",
-      "startMs": 84285.70000000298,
-      "endMs": 84311.89999999106,
-      "transferBytes": 18034,
-      "encodedBodyBytes": 17734
+      "startMs": 45182.10000000894,
+      "endMs": 45204.60000000894,
+      "transferBytes": 18274,
+      "encodedBodyBytes": 17974
     },
     {
       "path": "/assembly-story.js",
-      "startMs": 84285.70000000298,
-      "endMs": 84312.5,
+      "startMs": 45182.10000000894,
+      "endMs": 45205,
       "transferBytes": 1883,
       "encodedBodyBytes": 1583
     },
     {
       "path": "/index.html",
-      "startMs": 84285.70000000298,
-      "endMs": 84313,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
+      "startMs": 45182.10000000894,
+      "endMs": 45206.70000000298,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
     },
     {
       "path": "/material-review-model.js",
-      "startMs": 84285.79999999702,
-      "endMs": 84313.59999999404,
+      "startMs": 45182.20000000298,
+      "endMs": 45206.5,
       "transferBytes": 1417,
       "encodedBodyBytes": 1117
     },
     {
       "path": "/material-review.css",
-      "startMs": 84285.79999999702,
-      "endMs": 84314.20000000298,
+      "startMs": 45182.20000000298,
+      "endMs": 45207.20000000298,
       "transferBytes": 1519,
       "encodedBodyBytes": 1219
     },
     {
       "path": "/material-review.html",
-      "startMs": 84285.79999999702,
-      "endMs": 84314.29999999702,
+      "startMs": 45182.20000000298,
+      "endMs": 45207.60000000894,
       "transferBytes": 1885,
       "encodedBodyBytes": 1585
     },
     {
       "path": "/material-review.js",
-      "startMs": 84285.79999999702,
-      "endMs": 84314.5,
+      "startMs": 45182.20000000298,
+      "endMs": 45208,
       "transferBytes": 3389,
       "encodedBodyBytes": 3089
     },
     {
       "path": "/quality-study/viewer-revision.json",
-      "startMs": 85174,
-      "endMs": 85177.5,
-      "transferBytes": 2219,
-      "encodedBodyBytes": 1919
+      "startMs": 62722.10000000894,
+      "endMs": 62726.29999999702,
+      "transferBytes": 2323,
+      "encodedBodyBytes": 2023
     },
     {
       "path": "/assembly-capture-provenance.js",
-      "startMs": 85178.79999999702,
-      "endMs": 85184.5,
+      "startMs": 62727.10000000894,
+      "endMs": 62732.5,
       "transferBytes": 2463,
       "encodedBodyBytes": 2163
     },
     {
-      "path": "/assembly-crown.js",
-      "startMs": 85178.79999999702,
-      "endMs": 85185.39999999106,
-      "transferBytes": 1841,
-      "encodedBodyBytes": 1541
-    },
-    {
       "path": "/assembly-clock.js",
-      "startMs": 85178.79999999702,
-      "endMs": 85186,
+      "startMs": 62727.10000000894,
+      "endMs": 62734.60000000894,
       "transferBytes": 1180,
       "encodedBodyBytes": 880
     },
     {
+      "path": "/assembly-crown.js",
+      "startMs": 62727.20000000298,
+      "endMs": 62735.70000000298,
+      "transferBytes": 1841,
+      "encodedBodyBytes": 1541
+    },
+    {
       "path": "/assembly-depth.js",
-      "startMs": 85178.89999999106,
-      "endMs": 85187.09999999404,
+      "startMs": 62727.20000000298,
+      "endMs": 62736.20000000298,
       "transferBytes": 1486,
       "encodedBodyBytes": 1186
     },
     {
       "path": "/assembly-design.js",
-      "startMs": 85178.89999999106,
-      "endMs": 85187.09999999404,
+      "startMs": 62727.20000000298,
+      "endMs": 62736.29999999702,
       "transferBytes": 2405,
       "encodedBodyBytes": 2105
     },
     {
       "path": "/assembly-dial.js",
-      "startMs": 85178.89999999106,
-      "endMs": 85187.79999999702,
+      "startMs": 62727.20000000298,
+      "endMs": 62736.40000000596,
       "transferBytes": 3097,
       "encodedBodyBytes": 2797
     },
     {
+      "path": "/assembly-escapement-data.js",
+      "startMs": 62727.20000000298,
+      "endMs": 62736.60000000894,
+      "transferBytes": 4820,
+      "encodedBodyBytes": 4520
+    },
+    {
+      "path": "/assembly-escapement.js",
+      "startMs": 62727.29999999702,
+      "endMs": 62737.79999999702,
+      "transferBytes": 3117,
+      "encodedBodyBytes": 2817
+    },
+    {
       "path": "/assembly-form-details.js",
-      "startMs": 85178.89999999106,
-      "endMs": 85188.39999999106,
+      "startMs": 62727.29999999702,
+      "endMs": 62738.40000000596,
       "transferBytes": 1986,
       "encodedBodyBytes": 1686
     },
     {
       "path": "/assembly-front-architecture.js",
-      "startMs": 85178.89999999106,
-      "endMs": 85189,
-      "transferBytes": 1447,
-      "encodedBodyBytes": 1147
+      "startMs": 62727.29999999702,
+      "endMs": 62739.60000000894,
+      "transferBytes": 1818,
+      "encodedBodyBytes": 1518
     },
     {
       "path": "/assembly-glass-ao.js",
-      "startMs": 85179.09999999404,
-      "endMs": 85189.29999999702,
+      "startMs": 62727.40000000596,
+      "endMs": 62739.10000000894,
       "transferBytes": 2530,
       "encodedBodyBytes": 2230
     },
     {
-      "path": "/assembly-lifecycle.js",
-      "startMs": 85179.09999999404,
-      "endMs": 85189.79999999702,
-      "transferBytes": 936,
-      "encodedBodyBytes": 636
-    },
-    {
       "path": "/assembly-leather-details.js",
-      "startMs": 85179.09999999404,
-      "endMs": 85190.29999999702,
+      "startMs": 62727.40000000596,
+      "endMs": 62739.60000000894,
       "transferBytes": 2002,
       "encodedBodyBytes": 1702
     },
     {
-      "path": "/assembly-lighting.js",
-      "startMs": 85179.20000000298,
-      "endMs": 85190.79999999702,
-      "transferBytes": 2282,
-      "encodedBodyBytes": 1982
+      "path": "/assembly-lifecycle.js",
+      "startMs": 62727.40000000596,
+      "endMs": 62739.70000000298,
+      "transferBytes": 936,
+      "encodedBodyBytes": 636
     },
     {
       "path": "/assembly-loading.js",
-      "startMs": 85179.29999999702,
-      "endMs": 85191.39999999106,
+      "startMs": 62727.40000000596,
+      "endMs": 62740.90000000596,
       "transferBytes": 1358,
       "encodedBodyBytes": 1058
     },
     {
+      "path": "/assembly-lighting.js",
+      "startMs": 62727.40000000596,
+      "endMs": 62741.20000000298,
+      "transferBytes": 2282,
+      "encodedBodyBytes": 1982
+    },
+    {
       "path": "/assembly-materials.js",
-      "startMs": 85179.29999999702,
-      "endMs": 85191.70000000298,
+      "startMs": 62727.40000000596,
+      "endMs": 62741.40000000596,
       "transferBytes": 5039,
       "encodedBodyBytes": 4739
     },
     {
       "path": "/assembly-motion.js",
-      "startMs": 85179.29999999702,
-      "endMs": 85192.5,
+      "startMs": 62727.40000000596,
+      "endMs": 62743.20000000298,
       "transferBytes": 6924,
       "encodedBodyBytes": 6624
     },
     {
       "path": "/assembly-open-front.js",
-      "startMs": 85179.29999999702,
-      "endMs": 85192.89999999106,
+      "startMs": 62727.5,
+      "endMs": 62743.29999999702,
       "transferBytes": 2087,
       "encodedBodyBytes": 1787
     },
     {
       "path": "/assembly-performance.js",
-      "startMs": 85179.39999999106,
-      "endMs": 85193.59999999404,
+      "startMs": 62727.5,
+      "endMs": 62743.5,
       "transferBytes": 1098,
       "encodedBodyBytes": 798
     },
     {
-      "path": "/assembly-quality.css",
-      "startMs": 85179.39999999106,
-      "endMs": 85196,
-      "transferBytes": 5059,
-      "encodedBodyBytes": 4759
-    },
-    {
-      "path": "/assembly-recording.js",
-      "startMs": 85179.39999999106,
-      "endMs": 85196.29999999702,
-      "transferBytes": 1850,
-      "encodedBodyBytes": 1550
-    },
-    {
       "path": "/assembly-refraction.js",
-      "startMs": 85179.39999999106,
-      "endMs": 85196.89999999106,
+      "startMs": 62727.60000000894,
+      "endMs": 62744.20000000298,
       "transferBytes": 1569,
       "encodedBodyBytes": 1269
     },
     {
+      "path": "/assembly-recording.js",
+      "startMs": 62727.60000000894,
+      "endMs": 62744.40000000596,
+      "transferBytes": 1850,
+      "encodedBodyBytes": 1550
+    },
+    {
+      "path": "/assembly-quality.css",
+      "startMs": 62727.60000000894,
+      "endMs": 62745.5,
+      "transferBytes": 5059,
+      "encodedBodyBytes": 4759
+    },
+    {
       "path": "/assembly-resolution.js",
-      "startMs": 85179.39999999106,
-      "endMs": 85197.20000000298,
+      "startMs": 62727.60000000894,
+      "endMs": 62746.70000000298,
       "transferBytes": 1353,
       "encodedBodyBytes": 1053
     },
     {
       "path": "/assembly-review.css",
-      "startMs": 85179.39999999106,
-      "endMs": 85198.5,
+      "startMs": 62727.60000000894,
+      "endMs": 62747.90000000596,
       "transferBytes": 4737,
       "encodedBodyBytes": 4437
     },
     {
       "path": "/assembly-review.html",
-      "startMs": 85179.5,
-      "endMs": 85199.39999999106,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
+      "startMs": 62727.60000000894,
+      "endMs": 62748.20000000298,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
     },
     {
       "path": "/assembly-seconds-details.js",
-      "startMs": 85179.5,
-      "endMs": 85200,
+      "startMs": 62727.70000000298,
+      "endMs": 62747.60000000894,
       "transferBytes": 2208,
       "encodedBodyBytes": 1908
     },
     {
+      "path": "/assembly-review.js",
+      "startMs": 62727.70000000298,
+      "endMs": 62748.70000000298,
+      "transferBytes": 18274,
+      "encodedBodyBytes": 17974
+    },
+    {
       "path": "/assembly-state.js",
-      "startMs": 85179.5,
-      "endMs": 85201.20000000298,
+      "startMs": 62727.70000000298,
+      "endMs": 62749.29999999702,
       "transferBytes": 1605,
       "encodedBodyBytes": 1305
     },
     {
-      "path": "/assembly-review.js",
-      "startMs": 85179.5,
-      "endMs": 85201.39999999106,
-      "transferBytes": 18034,
-      "encodedBodyBytes": 17734
-    },
-    {
       "path": "/assembly-story.js",
-      "startMs": 85179.59999999404,
-      "endMs": 85201.89999999106,
+      "startMs": 62727.70000000298,
+      "endMs": 62750.10000000894,
       "transferBytes": 1883,
       "encodedBodyBytes": 1583
     },
     {
+      "path": "/index.html",
+      "startMs": 62727.70000000298,
+      "endMs": 62751.20000000298,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
+    },
+    {
       "path": "/material-review-model.js",
-      "startMs": 85179.59999999404,
-      "endMs": 85203.79999999702,
+      "startMs": 62727.79999999702,
+      "endMs": 62750.5,
       "transferBytes": 1417,
       "encodedBodyBytes": 1117
     },
     {
-      "path": "/index.html",
-      "startMs": 85179.59999999404,
-      "endMs": 85204.20000000298,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
-    },
-    {
       "path": "/material-review.css",
-      "startMs": 85179.59999999404,
-      "endMs": 85204.70000000298,
+      "startMs": 62727.90000000596,
+      "endMs": 62751.5,
       "transferBytes": 1519,
       "encodedBodyBytes": 1219
     },
     {
       "path": "/material-review.html",
-      "startMs": 85179.59999999404,
-      "endMs": 85205.39999999106,
+      "startMs": 62727.90000000596,
+      "endMs": 62751.90000000596,
       "transferBytes": 1885,
       "encodedBodyBytes": 1585
     },
     {
       "path": "/material-review.js",
-      "startMs": 85179.70000000298,
-      "endMs": 85205.29999999702,
+      "startMs": 62727.90000000596,
+      "endMs": 62752.20000000298,
       "transferBytes": 3389,
       "encodedBodyBytes": 3089
     },
     {
       "path": "/quality-study/viewer-revision.json",
-      "startMs": 86032.89999999106,
-      "endMs": 86037.5,
-      "transferBytes": 2219,
-      "encodedBodyBytes": 1919
+      "startMs": 80829.40000000596,
+      "endMs": 80835.70000000298,
+      "transferBytes": 2323,
+      "encodedBodyBytes": 2023
     },
     {
       "path": "/assembly-capture-provenance.js",
-      "startMs": 86038.39999999106,
-      "endMs": 86044.59999999404,
+      "startMs": 80836.60000000894,
+      "endMs": 80843.40000000596,
       "transferBytes": 2463,
       "encodedBodyBytes": 2163
     },
     {
       "path": "/assembly-clock.js",
-      "startMs": 86038.5,
-      "endMs": 86046.5,
+      "startMs": 80836.60000000894,
+      "endMs": 80844.10000000894,
       "transferBytes": 1180,
       "encodedBodyBytes": 880
     },
     {
       "path": "/assembly-crown.js",
-      "startMs": 86038.5,
-      "endMs": 86046.59999999404,
+      "startMs": 80836.60000000894,
+      "endMs": 80844.60000000894,
       "transferBytes": 1841,
       "encodedBodyBytes": 1541
     },
     {
-      "path": "/assembly-design.js",
-      "startMs": 86038.5,
-      "endMs": 86046.59999999404,
-      "transferBytes": 2405,
-      "encodedBodyBytes": 2105
-    },
-    {
       "path": "/assembly-depth.js",
-      "startMs": 86038.5,
-      "endMs": 86046.70000000298,
+      "startMs": 80836.60000000894,
+      "endMs": 80845,
       "transferBytes": 1486,
       "encodedBodyBytes": 1186
     },
     {
+      "path": "/assembly-design.js",
+      "startMs": 80836.60000000894,
+      "endMs": 80845.29999999702,
+      "transferBytes": 2405,
+      "encodedBodyBytes": 2105
+    },
+    {
       "path": "/assembly-dial.js",
-      "startMs": 86038.5,
-      "endMs": 86048,
+      "startMs": 80836.60000000894,
+      "endMs": 80846.10000000894,
       "transferBytes": 3097,
       "encodedBodyBytes": 2797
     },
     {
+      "path": "/assembly-escapement-data.js",
+      "startMs": 80836.70000000298,
+      "endMs": 80846.90000000596,
+      "transferBytes": 4820,
+      "encodedBodyBytes": 4520
+    },
+    {
+      "path": "/assembly-escapement.js",
+      "startMs": 80836.70000000298,
+      "endMs": 80847.40000000596,
+      "transferBytes": 3117,
+      "encodedBodyBytes": 2817
+    },
+    {
       "path": "/assembly-form-details.js",
-      "startMs": 86038.5,
-      "endMs": 86048.5,
+      "startMs": 80836.70000000298,
+      "endMs": 80847.79999999702,
       "transferBytes": 1986,
       "encodedBodyBytes": 1686
     },
     {
-      "path": "/assembly-lifecycle.js",
-      "startMs": 86038.59999999404,
-      "endMs": 86049.20000000298,
-      "transferBytes": 936,
-      "encodedBodyBytes": 636
-    },
-    {
       "path": "/assembly-front-architecture.js",
-      "startMs": 86038.59999999404,
-      "endMs": 86049.5,
-      "transferBytes": 1447,
-      "encodedBodyBytes": 1147
+      "startMs": 80836.70000000298,
+      "endMs": 80847.79999999702,
+      "transferBytes": 1818,
+      "encodedBodyBytes": 1518
     },
     {
       "path": "/assembly-glass-ao.js",
-      "startMs": 86038.59999999404,
-      "endMs": 86049.79999999702,
+      "startMs": 80836.79999999702,
+      "endMs": 80848.70000000298,
       "transferBytes": 2530,
       "encodedBodyBytes": 2230
     },
     {
       "path": "/assembly-leather-details.js",
-      "startMs": 86038.59999999404,
-      "endMs": 86050.5,
+      "startMs": 80836.79999999702,
+      "endMs": 80849.20000000298,
       "transferBytes": 2002,
       "encodedBodyBytes": 1702
     },
     {
+      "path": "/assembly-lifecycle.js",
+      "startMs": 80836.79999999702,
+      "endMs": 80849.20000000298,
+      "transferBytes": 936,
+      "encodedBodyBytes": 636
+    },
+    {
       "path": "/assembly-lighting.js",
-      "startMs": 86038.59999999404,
-      "endMs": 86051.29999999702,
+      "startMs": 80836.90000000596,
+      "endMs": 80849.79999999702,
       "transferBytes": 2282,
       "encodedBodyBytes": 1982
     },
     {
       "path": "/assembly-loading.js",
-      "startMs": 86038.59999999404,
-      "endMs": 86052,
+      "startMs": 80836.90000000596,
+      "endMs": 80850.79999999702,
       "transferBytes": 1358,
       "encodedBodyBytes": 1058
     },
     {
       "path": "/assembly-materials.js",
-      "startMs": 86038.70000000298,
-      "endMs": 86052.5,
+      "startMs": 80836.90000000596,
+      "endMs": 80851,
       "transferBytes": 5039,
       "encodedBodyBytes": 4739
     },
     {
       "path": "/assembly-motion.js",
-      "startMs": 86038.70000000298,
-      "endMs": 86053.70000000298,
+      "startMs": 80836.90000000596,
+      "endMs": 80852.10000000894,
       "transferBytes": 6924,
       "encodedBodyBytes": 6624
     },
     {
       "path": "/assembly-open-front.js",
-      "startMs": 86038.70000000298,
-      "endMs": 86054.29999999702,
+      "startMs": 80837,
+      "endMs": 80852.40000000596,
       "transferBytes": 2087,
       "encodedBodyBytes": 1787
     },
     {
       "path": "/assembly-performance.js",
-      "startMs": 86038.79999999702,
-      "endMs": 86054.39999999106,
+      "startMs": 80837,
+      "endMs": 80852.70000000298,
       "transferBytes": 1098,
       "encodedBodyBytes": 798
     },
     {
-      "path": "/assembly-quality.css",
-      "startMs": 86038.79999999702,
-      "endMs": 86056,
-      "transferBytes": 5059,
-      "encodedBodyBytes": 4759
-    },
-    {
       "path": "/assembly-recording.js",
-      "startMs": 86038.79999999702,
-      "endMs": 86056.59999999404,
+      "startMs": 80837,
+      "endMs": 80853.70000000298,
       "transferBytes": 1850,
       "encodedBodyBytes": 1550
     },
     {
+      "path": "/assembly-quality.css",
+      "startMs": 80837,
+      "endMs": 80854,
+      "transferBytes": 5059,
+      "encodedBodyBytes": 4759
+    },
+    {
       "path": "/assembly-refraction.js",
-      "startMs": 86038.79999999702,
-      "endMs": 86057.39999999106,
+      "startMs": 80837,
+      "endMs": 80854.60000000894,
       "transferBytes": 1569,
       "encodedBodyBytes": 1269
     },
     {
       "path": "/assembly-resolution.js",
-      "startMs": 86038.89999999106,
-      "endMs": 86060.79999999702,
+      "startMs": 80837,
+      "endMs": 80855.29999999702,
       "transferBytes": 1353,
       "encodedBodyBytes": 1053
     },
     {
       "path": "/assembly-review.css",
-      "startMs": 86039,
-      "endMs": 86061.89999999106,
+      "startMs": 80837,
+      "endMs": 80856.20000000298,
       "transferBytes": 4737,
       "encodedBodyBytes": 4437
     },
     {
       "path": "/assembly-review.html",
-      "startMs": 86039,
-      "endMs": 86062.09999999404,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
+      "startMs": 80837.10000000894,
+      "endMs": 80856.60000000894,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
+    },
+    {
+      "path": "/assembly-review.js",
+      "startMs": 80837.10000000894,
+      "endMs": 80857.90000000596,
+      "transferBytes": 18274,
+      "encodedBodyBytes": 17974
     },
     {
       "path": "/assembly-seconds-details.js",
-      "startMs": 86039,
-      "endMs": 86063.09999999404,
+      "startMs": 80837.20000000298,
+      "endMs": 80857.60000000894,
       "transferBytes": 2208,
       "encodedBodyBytes": 1908
     },
     {
-      "path": "/assembly-review.js",
-      "startMs": 86039,
-      "endMs": 86063.09999999404,
-      "transferBytes": 18034,
-      "encodedBodyBytes": 17734
-    },
-    {
       "path": "/assembly-state.js",
-      "startMs": 86039,
-      "endMs": 86063.59999999404,
+      "startMs": 80837.20000000298,
+      "endMs": 80858,
       "transferBytes": 1605,
       "encodedBodyBytes": 1305
     },
     {
       "path": "/assembly-story.js",
-      "startMs": 86039,
-      "endMs": 86064.39999999106,
+      "startMs": 80837.20000000298,
+      "endMs": 80858.90000000596,
       "transferBytes": 1883,
       "encodedBodyBytes": 1583
     },
     {
-      "path": "/index.html",
-      "startMs": 86039,
-      "endMs": 86065.39999999106,
-      "transferBytes": 6450,
-      "encodedBodyBytes": 6150
-    },
-    {
       "path": "/material-review-model.js",
-      "startMs": 86039.09999999404,
-      "endMs": 86065.20000000298,
+      "startMs": 80837.20000000298,
+      "endMs": 80859.79999999702,
       "transferBytes": 1417,
       "encodedBodyBytes": 1117
     },
     {
-      "path": "/material-review.js",
-      "startMs": 86039.09999999404,
-      "endMs": 86066.29999999702,
-      "transferBytes": 3389,
-      "encodedBodyBytes": 3089
+      "path": "/index.html",
+      "startMs": 80837.20000000298,
+      "endMs": 80860,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
     },
     {
       "path": "/material-review.css",
-      "startMs": 86039.09999999404,
-      "endMs": 86066.59999999404,
+      "startMs": 80837.29999999702,
+      "endMs": 80860.5,
       "transferBytes": 1519,
       "encodedBodyBytes": 1219
     },
     {
       "path": "/material-review.html",
-      "startMs": 86039.09999999404,
-      "endMs": 86066.70000000298,
+      "startMs": 80837.29999999702,
+      "endMs": 80860.70000000298,
       "transferBytes": 1885,
       "encodedBodyBytes": 1585
+    },
+    {
+      "path": "/material-review.js",
+      "startMs": 80837.29999999702,
+      "endMs": 80860.90000000596,
+      "transferBytes": 3389,
+      "encodedBodyBytes": 3089
+    },
+    {
+      "path": "/quality-study/viewer-revision.json",
+      "startMs": 81530.5,
+      "endMs": 81535.20000000298,
+      "transferBytes": 2323,
+      "encodedBodyBytes": 2023
+    },
+    {
+      "path": "/assembly-capture-provenance.js",
+      "startMs": 81536.20000000298,
+      "endMs": 81541.60000000894,
+      "transferBytes": 2463,
+      "encodedBodyBytes": 2163
+    },
+    {
+      "path": "/assembly-clock.js",
+      "startMs": 81536.20000000298,
+      "endMs": 81544.5,
+      "transferBytes": 1180,
+      "encodedBodyBytes": 880
+    },
+    {
+      "path": "/assembly-crown.js",
+      "startMs": 81536.20000000298,
+      "endMs": 81545.60000000894,
+      "transferBytes": 1841,
+      "encodedBodyBytes": 1541
+    },
+    {
+      "path": "/assembly-depth.js",
+      "startMs": 81536.20000000298,
+      "endMs": 81545.79999999702,
+      "transferBytes": 1486,
+      "encodedBodyBytes": 1186
+    },
+    {
+      "path": "/assembly-design.js",
+      "startMs": 81536.29999999702,
+      "endMs": 81545.79999999702,
+      "transferBytes": 2405,
+      "encodedBodyBytes": 2105
+    },
+    {
+      "path": "/assembly-dial.js",
+      "startMs": 81536.29999999702,
+      "endMs": 81545.79999999702,
+      "transferBytes": 3097,
+      "encodedBodyBytes": 2797
+    },
+    {
+      "path": "/assembly-escapement-data.js",
+      "startMs": 81536.29999999702,
+      "endMs": 81545.79999999702,
+      "transferBytes": 4820,
+      "encodedBodyBytes": 4520
+    },
+    {
+      "path": "/assembly-escapement.js",
+      "startMs": 81536.29999999702,
+      "endMs": 81548.40000000596,
+      "transferBytes": 3117,
+      "encodedBodyBytes": 2817
+    },
+    {
+      "path": "/assembly-form-details.js",
+      "startMs": 81536.40000000596,
+      "endMs": 81548.70000000298,
+      "transferBytes": 1986,
+      "encodedBodyBytes": 1686
+    },
+    {
+      "path": "/assembly-front-architecture.js",
+      "startMs": 81536.40000000596,
+      "endMs": 81548.79999999702,
+      "transferBytes": 1818,
+      "encodedBodyBytes": 1518
+    },
+    {
+      "path": "/assembly-glass-ao.js",
+      "startMs": 81536.40000000596,
+      "endMs": 81549.90000000596,
+      "transferBytes": 2530,
+      "encodedBodyBytes": 2230
+    },
+    {
+      "path": "/assembly-lifecycle.js",
+      "startMs": 81536.5,
+      "endMs": 81550.29999999702,
+      "transferBytes": 936,
+      "encodedBodyBytes": 636
+    },
+    {
+      "path": "/assembly-leather-details.js",
+      "startMs": 81536.5,
+      "endMs": 81550.40000000596,
+      "transferBytes": 2002,
+      "encodedBodyBytes": 1702
+    },
+    {
+      "path": "/assembly-lighting.js",
+      "startMs": 81536.5,
+      "endMs": 81551.29999999702,
+      "transferBytes": 2282,
+      "encodedBodyBytes": 1982
+    },
+    {
+      "path": "/assembly-loading.js",
+      "startMs": 81536.5,
+      "endMs": 81551.40000000596,
+      "transferBytes": 1358,
+      "encodedBodyBytes": 1058
+    },
+    {
+      "path": "/assembly-materials.js",
+      "startMs": 81536.5,
+      "endMs": 81551.90000000596,
+      "transferBytes": 5039,
+      "encodedBodyBytes": 4739
+    },
+    {
+      "path": "/assembly-motion.js",
+      "startMs": 81536.5,
+      "endMs": 81554.90000000596,
+      "transferBytes": 6924,
+      "encodedBodyBytes": 6624
+    },
+    {
+      "path": "/assembly-open-front.js",
+      "startMs": 81536.60000000894,
+      "endMs": 81555.40000000596,
+      "transferBytes": 2087,
+      "encodedBodyBytes": 1787
+    },
+    {
+      "path": "/assembly-performance.js",
+      "startMs": 81536.60000000894,
+      "endMs": 81555.40000000596,
+      "transferBytes": 1098,
+      "encodedBodyBytes": 798
+    },
+    {
+      "path": "/assembly-recording.js",
+      "startMs": 81536.60000000894,
+      "endMs": 81557.29999999702,
+      "transferBytes": 1850,
+      "encodedBodyBytes": 1550
+    },
+    {
+      "path": "/assembly-refraction.js",
+      "startMs": 81536.60000000894,
+      "endMs": 81557.79999999702,
+      "transferBytes": 1569,
+      "encodedBodyBytes": 1269
+    },
+    {
+      "path": "/assembly-quality.css",
+      "startMs": 81536.60000000894,
+      "endMs": 81557.79999999702,
+      "transferBytes": 5059,
+      "encodedBodyBytes": 4759
+    },
+    {
+      "path": "/assembly-resolution.js",
+      "startMs": 81536.70000000298,
+      "endMs": 81558.29999999702,
+      "transferBytes": 1353,
+      "encodedBodyBytes": 1053
+    },
+    {
+      "path": "/assembly-review.html",
+      "startMs": 81536.70000000298,
+      "endMs": 81559.70000000298,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
+    },
+    {
+      "path": "/assembly-review.css",
+      "startMs": 81536.70000000298,
+      "endMs": 81560.29999999702,
+      "transferBytes": 4737,
+      "encodedBodyBytes": 4437
+    },
+    {
+      "path": "/assembly-review.js",
+      "startMs": 81536.79999999702,
+      "endMs": 81561.40000000596,
+      "transferBytes": 18274,
+      "encodedBodyBytes": 17974
+    },
+    {
+      "path": "/assembly-state.js",
+      "startMs": 81536.79999999702,
+      "endMs": 81561.79999999702,
+      "transferBytes": 1605,
+      "encodedBodyBytes": 1305
+    },
+    {
+      "path": "/assembly-seconds-details.js",
+      "startMs": 81536.79999999702,
+      "endMs": 81562,
+      "transferBytes": 2208,
+      "encodedBodyBytes": 1908
+    },
+    {
+      "path": "/assembly-story.js",
+      "startMs": 81536.79999999702,
+      "endMs": 81562.20000000298,
+      "transferBytes": 1883,
+      "encodedBodyBytes": 1583
+    },
+    {
+      "path": "/material-review-model.js",
+      "startMs": 81536.90000000596,
+      "endMs": 81562.79999999702,
+      "transferBytes": 1417,
+      "encodedBodyBytes": 1117
+    },
+    {
+      "path": "/index.html",
+      "startMs": 81536.90000000596,
+      "endMs": 81564,
+      "transferBytes": 6471,
+      "encodedBodyBytes": 6171
+    },
+    {
+      "path": "/material-review.css",
+      "startMs": 81536.90000000596,
+      "endMs": 81565.70000000298,
+      "transferBytes": 1519,
+      "encodedBodyBytes": 1219
+    },
+    {
+      "path": "/material-review.html",
+      "startMs": 81536.90000000596,
+      "endMs": 81565.79999999702,
+      "transferBytes": 1885,
+      "encodedBodyBytes": 1585
+    },
+    {
+      "path": "/material-review.js",
+      "startMs": 81536.90000000596,
+      "endMs": 81565.79999999702,
+      "transferBytes": 3389,
+      "encodedBodyBytes": 3089
+    },
+    {
+      "path": "/quality-study/viewer-revision.json",
+      "startMs": 82217.70000000298,
+      "endMs": 82220.90000000596,
+      "transferBytes": 2323,
+      "encodedBodyBytes": 2023
+    },
+    {
+      "path": "/assembly-capture-provenance.js",
+      "startMs": 82221.70000000298,
+      "endMs": 82225.5,
+      "transferBytes": 2463,
+      "encodedBodyBytes": 2163
+    },
+    {
+      "path": "/assembly-clock.js",
+      "startMs": 82221.70000000298,
+      "endMs": 82228.10000000894,
+      "transferBytes": 1180,
+      "encodedBodyBytes": 880
+    },
+    {
+      "path": "/assembly-crown.js",
+      "startMs": 82221.70000000298,
+      "endMs": 82228.20000000298,
+      "transferBytes": 1841,
+      "encodedBodyBytes": 1541
+    },
+    {
+      "path": "/assembly-depth.js",
+      "startMs": 82221.79999999702,
+      "endMs": 82229.10000000894,
+      "transferBytes": 1486,
+      "encodedBodyBytes": 1186
+    },
+    {
+      "path": "/assembly-design.js",
+      "startMs": 82221.79999999702,
+      "endMs": 82230.29999999702,
+      "transferBytes": 2405,
+      "encodedBodyBytes": 2105
+    },
+    {
+      "path": "/assembly-dial.js",
+      "startMs": 82221.79999999702,
+      "endMs": 82231,
+      "transferBytes": 3097,
+      "encodedBodyBytes": 2797
+    },
+    {
+      "path": "/assembly-escapement-data.js",
+      "startMs": 82221.79999999702,
+      "endMs": 82231.40000000596,
+      "transferBytes": 4820,
+      "encodedBodyBytes": 4520
+    },
+    {
+      "path": "/assembly-escapement.js",
+      "startMs": 82221.79999999702,
+      "endMs": 82231.79999999702,
+      "transferBytes": 3117,
+      "encodedBodyBytes": 2817
+    },
+    {
+      "path": "/assembly-form-details.js",
+      "startMs": 82221.79999999702,
+      "endMs": 82231.90000000596,
+      "transferBytes": 1986,
+      "encodedBodyBytes": 1686
+    },
+    {
+      "path": "/assembly-front-architecture.js",
+      "startMs": 82221.90000000596,
+      "endMs": 82232.5,
+      "transferBytes": 1818,
+      "encodedBodyBytes": 1518
+    },
+    {
+      "path": "/assembly-glass-ao.js",
+      "startMs": 82221.90000000596,
+      "endMs": 82233.20000000298,
+      "transferBytes": 2530,
+      "encodedBodyBytes": 2230
+    },
+    {
+      "path": "/assembly-leather-details.js",
+      "startMs": 82221.90000000596,
+      "endMs": 82233.5,
+      "transferBytes": 2002,
+      "encodedBodyBytes": 1702
+    },
+    {
+      "path": "/assembly-lifecycle.js",
+      "startMs": 82221.90000000596,
+      "endMs": 82233.70000000298,
+      "transferBytes": 936,
+      "encodedBodyBytes": 636
+    },
+    {
+      "path": "/assembly-lighting.js",
+      "startMs": 82221.90000000596,
+      "endMs": 82234.70000000298,
+      "transferBytes": 2282,
+      "encodedBodyBytes": 1982
+    },
+    {
+      "path": "/assembly-loading.js",
+      "startMs": 82221.90000000596,
+      "endMs": 82234.70000000298,
+      "transferBytes": 1358,
+      "encodedBodyBytes": 1058
+    },
+    {
+      "path": "/assembly-materials.js",
+      "startMs": 82222.10000000894,
+      "endMs": 82236,
+      "transferBytes": 5039,
+      "encodedBodyBytes": 4739
+    },
+    {
+      "path": "/assembly-motion.js",
+      "startMs": 82222.10000000894,
+      "endMs": 82236.60000000894,
+      "transferBytes": 6924,
+      "encodedBodyBytes": 6624
+    },
+    {
+      "path": "/assembly-open-front.js",
+      "startMs": 82222.10000000894,
+      "endMs": 82237.29999999702,
+      "transferBytes": 2087,
+      "encodedBodyBytes": 1787
+    },
+    {
+      "path": "/assembly-performance.js",
+      "startMs": 82222.10000000894,
+      "endMs": 82237.5,
+      "transferBytes": 1098,
+      "encodedBodyBytes": 798
     }
   ],
   "GPU": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Ti (0x00002D04) Direct3D11 vs_5_0 ps_5_0, D3D11)",
@@ -2877,35 +3104,35 @@
       "transferSize": 468794,
       "encodedBodySize": 468494,
       "decodedBodySize": 2194400,
-      "duration": 403.09999999403954
+      "duration": 90.59999999403954
     },
     {
       "name": "/rebuild/assembly.glb",
       "transferSize": 7241656,
       "encodedBodySize": 7241356,
       "decodedBodySize": 26126492,
-      "duration": 525
-    },
-    {
-      "name": "/quality-study/form-legibility-r01.glb",
-      "transferSize": 783985,
-      "encodedBodySize": 783685,
-      "decodedBodySize": 2570568,
-      "duration": 1327
+      "duration": 210.79999999701977
     },
     {
       "name": "/quality-study/leather-craft-r05.glb",
       "transferSize": 630424,
       "encodedBodySize": 630124,
       "decodedBodySize": 1662940,
-      "duration": 25.900000005960464
+      "duration": 24.799999997019768
     },
     {
-      "name": "/quality-study/front-architecture-r05.glb",
-      "transferSize": 536549,
-      "encodedBodySize": 536249,
-      "decodedBodySize": 2588000,
-      "duration": 20.400000005960464
+      "name": "/quality-study/form-legibility-r01.glb",
+      "transferSize": 783985,
+      "encodedBodySize": 783685,
+      "decodedBodySize": 2570568,
+      "duration": 655.1000000089407
+    },
+    {
+      "name": "/quality-study/front-architecture-r07.glb",
+      "transferSize": 563270,
+      "encodedBodySize": 562970,
+      "decodedBodySize": 2677180,
+      "duration": 151.20000000298023
     }
   ]
 }

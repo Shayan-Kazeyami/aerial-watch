@@ -3,7 +3,7 @@
   "algorithm": "SHA-256",
   "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "UTF-8 JSON.stringify(files), sorted by relative path; entry keys path, bytes, sha256",
-  "digest": "c6644b04bae10e0fa0072f1d7f4a9a0a154ad1e9ea29a93573a281f9fc9027d0",
+  "digest": "bf04696bcf304a7277abf7f5f471d2d0bfd4d20c8388256efa709d8daf700bdf",
   "files": [
     {
       "path": "assembly-capture-provenance.js",
@@ -36,14 +36,24 @@
       "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
     },
     {
+      "path": "assembly-escapement-data.js",
+      "bytes": 12484,
+      "sha256": "031ce8a4f0b16a47b4ef49bb346ec3a8bd32095e78bbafce42392ab893c16960"
+    },
+    {
+      "path": "assembly-escapement.js",
+      "bytes": 6932,
+      "sha256": "437c16663baae30418533ec878dcd02cb93d48465b0358b511d4ccd53dbd0f96"
+    },
+    {
       "path": "assembly-form-details.js",
       "bytes": 3991,
       "sha256": "195d579154704e64fda4850800ae73cf3431b82d0b8474249f612bebccb4c630"
     },
     {
       "path": "assembly-front-architecture.js",
-      "bytes": 2355,
-      "sha256": "d66b575b1045554b8ed4cb1f7a7410e9145464195c876c89528c3ae5f1aa6e77"
+      "bytes": 3377,
+      "sha256": "0a6b4131555593e2078338cb19f9a1ac10707ab299b32777472fde10482ba219"
     },
     {
       "path": "assembly-glass-ao.js",
@@ -117,13 +127,13 @@
     },
     {
       "path": "assembly-review.html",
-      "bytes": 20805,
-      "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+      "bytes": 20875,
+      "sha256": "55ab98f17d070d5aaecd48e862fc55b4aec711747df1cf157fe744dd21c61dae"
     },
     {
       "path": "assembly-review.js",
-      "bytes": 61140,
-      "sha256": "0531090e15f413465ad215c83cb5669ff4e1cf0980b9fd301520dfbbc62d7b69"
+      "bytes": 62109,
+      "sha256": "4c654f807ab86b6f3f6392c7739eb62a22efc03bb5ff043225784cd7bffe4fb7"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -142,8 +152,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 20805,
-      "sha256": "6ab088351a3cde36a9b7bac6f09191fdf0d8f319f932e13f6761e88c01a98b42"
+      "bytes": 20875,
+      "sha256": "55ab98f17d070d5aaecd48e862fc55b4aec711747df1cf157fe744dd21c61dae"
     },
     {
       "path": "material-review-model.js",

@@ -26,6 +26,7 @@ import {createViewerLifecycle} from './assembly-lifecycle.js';
 import {createFormDetails} from './assembly-form-details.js';
 import {createLeatherDetails} from './assembly-leather-details.js';
 import {createFrontArchitecture} from './assembly-front-architecture.js';
+import {createAssemblyEscapement} from './assembly-escapement.js';
 
 const $ = id => document.getElementById(id), scene = new THREE.Scene();
 const bootTime=performance.now(),clock=createPresentationClock(),resources=createResourceScope(),performanceMonitor=createPerformanceMonitor();
@@ -100,7 +101,7 @@ function syncFrontDetails() {
   if(active&&!interiorView&&craftParts.length)for(const part of exterior)if(['STRAP-UPPER','STRAP-LOWER'].includes(part.userData.assemblyId))part.visible=false;
 }
 let scale = 78, currentView = 'three-quarter', elapsed = 0;
-let mechanism, mechanismElapsed = 0, balanceElapsed = 0,crownVisual;
+let mechanism,escapement,handClockOrigin=0, mechanismElapsed = 0, balanceElapsed = 0,crownVisual;
 let cameraTween = null, tour = false, animationFrame=0;
 const tourSequence=createTourSequence();let powerPath=false;
 const lifecycle=createViewerLifecycle({pause:()=>{clock.setHidden(true);performanceMonitor.breakCadence();},
@@ -430,7 +431,7 @@ function syncSimpleControls(){
 const crownInteraction=createCrownInteraction({
   onPull:pulled=>{if(pulled){stopTour();$('animate-movement').checked=false;$('animate').checked=false;setClockPlayback();}},
   onSetTime:delta=>{const stamp=clock.snapshot(),seconds=((stamp.hands+delta)%43200+43200)%43200;applyClockPose(clock.seek(seconds,{track:'hands'}));dirty=true;},
-  onChange:state=>{crownVisual?.apply(state);if($('crown-state'))$('crown-state').textContent=state.pulled?'Pulled · turn to set time':'Seated · turn to wind';
+  onChange:state=>{crownVisual?.apply(state);if($('crown-state'))$('crown-state').textContent=state.pulled?'Pulled · turn to set time':'Seated · turn crown';
     if($('crown-pull')){$('crown-pull').textContent=state.pulled?'Push in to finish':'Pull out to set time';$('crown-pull').setAttribute('aria-pressed',String(state.pulled));}
     if($('crown-help'))$('crown-help').textContent=state.pulled?'Turn left or right to move the hands. Push in when you are done.':'Turning moves the crown as a winding gesture. Watch time stays unchanged.';
     syncSimpleControls();if(model&&!loading)visibility();dirty=true;},
@@ -448,8 +449,9 @@ function motionStatus() {
 }
 function applyClockPose(stamp) {
   mechanismElapsed=balanceElapsed=stamp.mechanism;elapsed=stamp.hands;
-  mechanism?.apply(mechanismElapsed,balanceElapsed);
-  for(const hand of hands)hand.mesh.quaternion.copy(hand.original).multiply(turn.setFromAxisAngle(axis,-2*Math.PI*sampleMechanicalTime(elapsed)/hand.period));
+  if(escapement)escapement.apply(mechanismElapsed);else mechanism?.apply(mechanismElapsed,balanceElapsed);
+  const handTime=escapement?escapement.sample(elapsed).trainTime-handClockOrigin:sampleMechanicalTime(elapsed);
+  for(const hand of hands)hand.mesh.quaternion.copy(hand.original).multiply(turn.setFromAxisAngle(axis,-2*Math.PI*handTime/hand.period));
   qualityDesign?.syncMotion();
   if($('scrub-value'))$('scrub-value').textContent=`${(mechanismElapsed%60).toFixed(2)} s`;
   if($('scrub-time')&&document.activeElement!==$('scrub-time'))$('scrub-time').value=String(mechanismElapsed%60);
@@ -471,7 +473,7 @@ $('animate').onchange = () => {
 };
 function resetMotion() {
   $('animate-movement').checked = false; $('animate').checked = false;
-  clock.reset();mechanismElapsed = balanceElapsed = 0; mechanism?.reset(); mechanism?.apply(0,0); resetHands(); motionStatus();
+  const stamp=clock.reset();mechanismElapsed = balanceElapsed = 0;mechanism?.reset();resetHands();applyClockPose(stamp);motionStatus();
   if($('scrub-time'))$('scrub-time').value='0';if($('scrub-value'))$('scrub-value').textContent='0.00 s';
 }
 $('speed').onchange=()=>{applyClockPose(clock.setSpeed(Number($('speed').value)));syncSimpleControls();dirty=true;};
@@ -560,14 +562,14 @@ function installProposal(result){
 function loadFrontArchitecture(){
   if(!proposalReady||!formDetails||frontArchitecture||frontArchitectureLoading||lifecycle.disposed)return;
   frontArchitectureLoading=true;
-  loadGLTFAsset('quality-study/front-architecture-r05.glb',assetOptions()).then(result=>{
+  loadGLTFAsset('quality-study/front-architecture-r07.glb',assetOptions()).then(result=>{
     if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
     try{
       formDetails.setEnabled(false);
       const targets=new Map(openPlates.map(mesh=>[mesh.userData.replacementForSourceIndex,mesh]));
       targets.set(149,source.find(mesh=>mesh.userData.sourceIndex===149));
-      frontArchitecture=createFrontArchitecture({targets,candidateScene:result.gltf.scene});
-      resources.own('R05 front architecture',()=>frontArchitecture.dispose());
+      frontArchitecture=createFrontArchitecture({targets,candidateScene:result.gltf.scene,revision:'r07'});
+      resources.own('R07 front architecture',()=>frontArchitecture.dispose());
       performanceMonitor.load(result.metrics);updateMaterials();visibility();
     }finally{disposeObjectTree(result.gltf.scene);}
   }).catch(error=>{if(!lifecycle.disposed){loadWarnings.push(`Front architecture: ${error.message}`);updateMaterials();visibility();}}).finally(()=>{frontArchitectureLoading=false;});
@@ -584,7 +586,11 @@ function initializeBaseline(result,metadata){
     baseMaterials.set(mesh,mesh.material);finishMaterials.set(mesh,finishes.apply(mesh));mesh.castShadow=!mesh.userData.inspectionTransparent;mesh.receiveShadow=true;
     if(mesh.userData.sourceIndex===undefined){const period={HOUR:43200,MINUTE:3600,SECONDS:60}[mesh.userData.assemblyId];if(period)hands.push({mesh,period,original:mesh.quaternion.clone()});}
   });
-  variantManifest=createVariantManifest(source);mechanism=createAssemblyMotion(source,metadata);mechanism.apply(0,0);
+  variantManifest=createVariantManifest(source);mechanism=createAssemblyMotion(source,metadata);
+  const springMesh=mechanism.entries.find(entry=>entry.kind==='spring').mesh,originalSpringGeometry=springMesh.geometry;
+  try{escapement=createAssemblyEscapement(mechanism);handClockOrigin=escapement.sample(0).trainTime;escapement.apply(0);}
+  catch(error){loadWarnings.push(`Escapement reconstruction unavailable: ${error.message}`);mechanism.apply(0,0);}
+  const displaySpringGeometry=springMesh.geometry;
   const crownMesh=exterior.find(mesh=>mesh.userData.assemblyId==='CROWN');
   if(crownMesh){crownVisual=createCrownVisual(crownMesh,{compact:true,stem:source.find(mesh=>mesh.userData.sourceIndex===52),tube:exterior.find(mesh=>mesh.userData.assemblyId==='CROWN-TUBE')});resources.own('crown presentation transform',()=>crownVisual.dispose());}
   dialFace=exterior.find(mesh=>mesh.userData.assemblyId==='DIAL'&&!/mark/i.test(mesh.name));
@@ -593,6 +599,7 @@ function initializeBaseline(result,metadata){
   openFrontFrame=createOpenFrontFrame();gltf.scene.add(openFrontFrame.group);
   qualityDesign=createQualityDesign(source,exterior);gltf.scene.add(qualityDesign.group);
   resources.own('original assembly geometry',disposeBaseline);
+  resources.own('escapement and private spring display',()=>{if(escapement)escapement.dispose();else mechanism.reset();if(displaySpringGeometry!==originalSpringGeometry)displaySpringGeometry.dispose();});
   resources.own('dial printing',()=>{dialDetails.dispose();openDialDetails.dispose();});resources.own('open-work frame',()=>openFrontFrame.dispose());resources.own('quality hand design',()=>qualityDesign.dispose());
   loading=false;$('load-message').textContent='Lighting the watch studio…';$('assembly-canvas').setAttribute('aria-busy','false');
   $('inspection-controls').disabled=false;$('view-controls').disabled=false;$('animate').disabled=hands.length!==3;
@@ -635,7 +642,8 @@ function captureConfiguration({clockStamp}={}){
   return {version:1,date:new Date().toISOString(),design:'Aerial Quality 01',phase:loadPhase,view:currentView,
     camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},
     formDetails:{revision:'form-legibility-r01',ready:!!formDetails,enabled:!!formDetails?.enabled,calendarDigitIslands:formDetails?.audit.components??null},
-    frontArchitecture:{revision:'front-architecture-r05',ready:!!frontArchitecture,enabled:!!frontArchitecture?.enabled,audit:frontArchitecture?.audit??null},
+    frontArchitecture:{revision:'front-architecture-r07',ready:!!frontArchitecture,enabled:!!frontArchitecture?.enabled,audit:frontArchitecture?.audit??null},
+    escapement:{revision:'r07-visual-reconstruction',ready:!!escapement,limits:escapement?.limits??null},
     leatherCraft:{revision:'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
     compactCrown:!!crownVisual&&openFrontActive(),
     clock:clockStamp||clock.snapshot(),crown:crownInteraction.snapshot(),sourceAtCapture:captureProvenance.snapshot(),options:{openWork:$('open-work').checked,finishes:$('finish').checked,crystals:$('crystals').checked,movementOnly:$('movement-only').checked,interior:interiorView,powerPath,quality},
