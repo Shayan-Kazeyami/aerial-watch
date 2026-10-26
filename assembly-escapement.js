@@ -1,5 +1,6 @@
 import {Quaternion,Vector3} from './vendor/three.module.js';
 import {escapementData} from './assembly-escapement-data.js';
+import {contactR09Data} from './assembly-contact-r09-data.js';
 
 const TAU=2*Math.PI,DEG=Math.PI/180,AXIS=new Vector3(0,1,0);
 const SOURCE_SHA='40aadf5b8e6ed73fa0553b46873f68438d023674035b0bffb04afba569f31e99';
@@ -18,7 +19,7 @@ function rational(value){
 
 // Reversible visual reconstruction, not a loaded-contact or force solver.
 // Construction only validates/copies data. The caller retains motion ownership.
-export function createAssemblyEscapement(motion,{data=escapementData,sourceSha256}={}){
+export function createAssemblyEscapement(motion,{data=escapementData,contactData=contactR09Data,sourceSha256}={}){
   if(!motion||typeof motion.apply!=='function'||typeof motion.reset!=='function'||!Array.isArray(motion.entries))fail('motion API required');
   if(sourceSha256!==undefined&&sourceSha256!==SOURCE_SHA)fail('source hash mismatch');
   if(!data||data.version!==1||data.sourceSha256!==SOURCE_SHA||data.balanceHz!==3.5||data.amplitudeDegrees!==210||data.periodWheelDegrees!==18||data.insetDegrees!==.02||!Array.isArray(data.banks)||data.banks.length!==2||data.banks[0]!==-6.5||data.banks[1]!==6)fail('unsupported path calibration');
@@ -42,12 +43,17 @@ export function createAssemblyEscapement(motion,{data=escapementData,sourceSha25
   const turnIndex=points.findIndex(p=>p.alpha===6),closureCorrectionDegrees=points[0].theta+18-points.at(-1).theta;
   if(turnIndex<=0||turnIndex>=points.length-1||points[0].alpha!==-6.5||points.at(-1).alpha!==-6.5||Math.abs(closureCorrectionDegrees)>1e-5)fail('invalid cycle endpoints');
   points.at(-1).theta+=closureCorrectionDegrees;
-  const tracks=[points.slice(0,turnIndex+1),points.slice(turnIndex)].map((path,half)=>{
+  if(!contactData||JSON.stringify(contactData)!==JSON.stringify(contactR09Data))fail('unreviewed contact corridor');
+  const tracks=contactData.tracks.map((track,half)=>{
     const direction=half===0?-1:1;
-    const track=path.map((p,i)=>({alpha:p.alpha,theta:p.theta,beta:-3.5*p.alpha+(i&&path[i-1].alpha===p.alpha?direction*.1:0)-(i+1<path.length&&path[i+1].alpha===p.alpha?direction*.1:0)}));
-    for(let i=1;i<track.length;i++)if((track[i].beta-track[i-1].beta)*direction<=0)fail('nonmonotonic balance corridor');
-    return track;
+    return track.map((p,i)=>{
+      if(!Array.isArray(p)||p.length!==3||!p.every(Number.isFinite)||p[0]<-6.5||p[0]>6||Math.abs(p[2])>210)fail('malformed contact node');
+      if(i&&(p[2]-track[i-1][2])*direction<=0)fail('nonmonotonic balance corridor');
+      return {alpha:p[0],theta:p[1],beta:p[2]};
+    });
   });
+  if(tracks[0][0].theta!==points[0].theta||tracks[0][0].alpha!==-6.5||tracks[0].at(-1).alpha!==6||tracks[1][0].alpha!==6||tracks[1].at(-1).alpha!==-6.5)fail('contact endpoint mismatch');
+  tracks[1].at(-1).theta+=closureCorrectionDegrees;
   // Capture the original implementations before callers wire their own API.
   const baselineApply=motion.apply.bind(motion),baselineReset=motion.reset.bind(motion),rotation=new Quaternion();
   let disposed=false;
@@ -90,5 +96,5 @@ export function createAssemblyEscapement(motion,{data=escapementData,sourceSha25
   }
   function reset(){assertLive();baselineReset();}
   function dispose(){if(disposed)return;baselineReset();disposed=true;}
-  return {apply,reset,sample,angleFor,dispose,sourceSha256:SOURCE_SHA,closureCorrectionDegrees,limits:escapementData.limits};
+  return {apply,reset,sample,angleFor,dispose,sourceSha256:SOURCE_SHA,closureCorrectionDegrees,limits:contactR09Data.limits};
 }

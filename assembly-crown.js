@@ -1,8 +1,8 @@
 import {Quaternion,Vector3} from './vendor/three.module.js';
 
-// UI state only. Seated turns are a visual winding gesture; no stored-energy,
-// force or torque model is implied. Pulling/pushing never changes watch time.
-export function createCrownInteraction({onChange=()=>{},onSetTime=()=>{},onPull=()=>{}}={}){
+// Input state; mechanism owners receive signed strokes separately from restores.
+export function createCrownInteraction({onChange=()=>{},onSetTime=()=>{},onPull=()=>{},onTurn=()=>{},secondsPerDegree=10}={}){
+  if(!Number.isFinite(secondsPerDegree)||secondsPerDegree<=0)throw new TypeError('Invalid crown setting ratio.');
   let pulled=false,degrees=0,disposed=false;
   const snapshot=()=>({pulled,degrees,mode:pulled?'setting':'winding'});
   const publish=()=>{const state=snapshot();onChange(state);return state;};
@@ -11,7 +11,7 @@ export function createCrownInteraction({onChange=()=>{},onSetTime=()=>{},onPull=
       const changed=pulled!==state.pulled;pulled=state.pulled;degrees=state.degrees;if(changed)onPull(pulled);return publish();},
     setPulled(value){if(disposed)return snapshot();const next=!!value;if(next!==pulled){pulled=next;onPull(pulled);}return publish();},
     turn(delta){if(disposed)return snapshot();if(!Number.isFinite(delta))throw new TypeError('Crown turn must be finite.');
-      degrees+=delta;if(pulled)onSetTime(delta*10);return publish();},
+      degrees+=delta;onTurn(delta,snapshot());if(pulled)onSetTime(delta*secondsPerDegree);return publish();},
     reset(){if(disposed)return snapshot();if(pulled){pulled=false;onPull(false);}degrees=0;return publish();},
     dispose(){disposed=true;},
   };

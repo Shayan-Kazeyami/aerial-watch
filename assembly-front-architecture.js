@@ -3,8 +3,10 @@ import * as THREE from './vendor/three.module.js';
 /** Authored R05/R07 Boolean replacements; all swaps are private and reversible.
  * targets: Map<number,Mesh> for current displayed plates0/155 and real calendar149.
  * Both scenes must use the same glTF assembly-space mount (not world matrices).
+ * restMatrices optionally maps source indices to imported local Matrix4 snapshots;
+ * supply these for targets that may already be posed when candidates finish loading.
  */
-export function createFrontArchitecture({targets,candidateScene,revision}) {
+export function createFrontArchitecture({targets,candidateScene,revision,restMatrices}) {
   const candidates=new Map(),revisions=new Set();
   if(revision!==undefined&&!['r05','r07'].includes(revision))throw new Error('Unsupported front architecture revision.');
   candidateScene.traverse(mesh=>{
@@ -28,7 +30,7 @@ export function createFrontArchitecture({targets,candidateScene,revision}) {
       const target=targets.get(index),candidate=candidates.get(index);
       if(!target?.isMesh)throw new Error(`Missing front architecture target${index}`);
       target.updateMatrix();candidate.updateMatrix();
-      const geometry=candidate.geometry.clone().applyMatrix4(new THREE.Matrix4().copy(target.matrix).invert().multiply(candidate.matrix));
+      const geometry=candidate.geometry.clone().applyMatrix4(new THREE.Matrix4().copy(restMatrices?.get(index)??target.matrix).invert().multiply(candidate.matrix));
       geometry.clearGroups();geometry.computeBoundingBox();geometry.computeBoundingSphere();
       rows.push({index,target,geometry,original:target.geometry});
     }

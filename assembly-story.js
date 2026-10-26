@@ -36,6 +36,9 @@ export function validateViewConfiguration(config,{qualities=['balanced','detail'
   const {mechanism=0,hands=0,speed=1}=config.clock||{};
   if(![mechanism,hands].every(v=>Number.isFinite(v)&&v>=0)||!Number.isFinite(speed)||speed<=0||speed>1000)throw new Error('Invalid saved clock.');
   const crown=config.crown??{pulled:false,degrees:0};
+  const settingSeconds=config.settingSeconds??0;if(!Number.isFinite(settingSeconds)||Math.abs(settingSeconds)>1e12)throw new Error('Invalid saved setting offset.');
   if(typeof crown.pulled!=='boolean'||!Number.isFinite(crown.degrees)||Math.abs(crown.degrees)>3600000)throw new Error('Invalid saved crown state.');
-  return {view,camera:{position:[...position],target:[...target],zoom,fov},options:{...config.options,quality},clock:{mechanism,hands,speed},crown:{pulled:crown.pulled,degrees:crown.degrees}};
+  const winding=config.winding?.state??{crownDegrees:crown.degrees,driveDegrees:0,ratchetRadians:0,pulled:crown.pulled,reverseFreewheel:false};
+  if(!winding||![winding.crownDegrees,winding.driveDegrees,winding.ratchetRadians].every(Number.isFinite)||Math.abs(winding.crownDegrees)>1e12||Math.abs(winding.driveDegrees)>1e12||Math.abs(winding.crownDegrees-crown.degrees)>1e-8||winding.driveDegrees>0||typeof winding.pulled!=='boolean'||typeof winding.reverseFreewheel!=='boolean'||winding.pulled!==crown.pulled||(winding.pulled&&winding.reverseFreewheel)||Math.abs(winding.ratchetRadians+winding.driveDegrees*Math.PI/180*16/63)>1e-8)throw new Error('Invalid saved winding state.');
+  return {view,camera:{position:[...position],target:[...target],zoom,fov},options:{...config.options,quality},clock:{mechanism,hands,speed},crown:{pulled:crown.pulled,degrees:crown.degrees},winding:{...winding},settingSeconds};
 }

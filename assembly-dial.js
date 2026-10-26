@@ -1,5 +1,6 @@
 import * as THREE from './vendor/three.module.js';
 import {createSecondsDetails} from './assembly-seconds-details.js';
+import {createCompositionIndices} from './assembly-composition.js';
 
 // Display-only printing above the supplied dial. Coordinates are millimetres in
 // the native dial plane; no source part or source geometry is modified.
@@ -120,10 +121,12 @@ export function createDialDetails({renderer, openWork=false, canvasFactory = () 
   group.name = 'Aerial dial surface details'; group.add(print);
   const secondsDetails = openWork ? createSecondsDetails({canvasFactory, renderer, height:DIAL_LAYOUT.height}) : null;
   if(secondsDetails) group.add(secondsDetails.group);
+  const hourIndices = openWork ? createCompositionIndices() : null;
+  if(hourIndices) group.add(hourIndices.group);
   let disposed = false;
   return {group, texture, dispose() {
     if (disposed) return;
-    disposed = true; secondsDetails?.dispose(); geometry.dispose(); material.dispose(); texture.dispose();
+    disposed = true; secondsDetails?.dispose(); hourIndices?.dispose(); geometry.dispose(); material.dispose(); texture.dispose();
     group.removeFromParent();
   }};
 }

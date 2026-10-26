@@ -116,11 +116,12 @@
         <label class="field" for="render-quality">Image quality<select id="render-quality" aria-describedby="quality-note"><option value="balanced">Balanced</option><option value="detail" selected>High definition</option><option value="studio">Maximum detail</option><option value="efficient">Smoother motion</option></select></label>
         <p id="quality-note" class="small">Choose Smoother motion for lighter playback.</p>
       </section>
-      <details id="crown-controls" class="crown-controls"><summary>Set the time <span aria-hidden="true">+</span></summary>
+      <details id="crown-controls" class="crown-controls"><summary>Wind &amp; set time <span aria-hidden="true">+</span></summary>
         <div class="crown-body"><p id="crown-state" role="status" aria-live="polite">Seated · turn crown</p>
           <button id="crown-pull" type="button" aria-pressed="false" aria-describedby="crown-state crown-help">Pull out to set time</button>
           <div class="crown-turns" role="group" aria-label="Turn crown"><button id="crown-left" type="button" aria-label="Turn crown counterclockwise" aria-describedby="crown-state crown-help">↶ Turn left</button><button id="crown-right" type="button" aria-label="Turn crown clockwise" aria-describedby="crown-state crown-help">Turn right ↷</button></div>
           <p id="crown-help" class="small">Pull out the crown, turn to move the hands, then push it back in.</p>
+          <button type="button" data-view="winding" aria-pressed="false">See winding gears</button>
           <button id="crown-reset" class="text-button" type="button">Reset crown position</button>
         </div>
       </details>
@@ -164,7 +165,7 @@
 
         <div class="time-inspector"><label for="scrub-time">Inspect a moment <output id="scrub-value">0.00 s</output></label><input id="scrub-time" type="range" min="0" max="60" step="0.01" value="0" aria-label="Inspect a moment"></div>
 
-        <details class="motion-explanation"><summary>About the motion</summary><p class="small" id="motion-note">A 3.5 Hz balance governs seven releases per second. Twelve gear contacts use measured tooth counts and aligned starting phases. The barrel drum drives the train and hands; its arbor, ratchet and winding wheels stay locked while the watch runs. The measured 20-tooth escape wheel advances in phased impulses; the pallet follows a sampled-clearance path linked to the balance and gear train, and the hairspring deforms around its fixed outer terminal. Slow motion scales the whole mechanism. This remains a visual motion study: the impulse pin has clearance within the fork, and contact forces, winding coupling, calendar indexing and energy transfer are not solved.</p></details>
+        <details class="motion-explanation"><summary>About the motion</summary><p class="small" id="motion-note">A 3.5 Hz balance governs seven releases per second. The train uses measured tooth counts and aligned starting phases. The barrel drives the train and hands; winding wheels and ratchet stay held during normal running. Turn the seated crown left to drive the winding gears and click; a right turn lets the clutch return. The calendar advances one step each day. Slow motion scales running movement. This is a visual motion study with sampled clearances; spring stress, contact forces and energy transfer are not simulated.</p></details>
 
       </section>
 
@@ -230,7 +231,7 @@
     <figure><a href="quality-study/05-train.png" target="_blank" rel="noreferrer"><img src="quality-study/05-train.webp" alt="The aligned original train with steel pinions and brass wheels" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 05</span> Connected gear train · Quality 01</figcaption></figure>
     <figure><a href="quality-study/06-leather.png" target="_blank" rel="noreferrer"><img src="quality-study/06-leather.webp" alt="Charcoal leather, matched saddle stitching and polished integrated lugs" loading="lazy" width="1929" height="924"></a><figcaption><span>LIVE / 06</span> Leather and lug craft · Quality 01</figcaption></figure>
   </div>
-  <p class="small">The native renders preserve the earlier design study. The live captures show the current R07 front, finer seconds markings and revised leather at a repeatable rest pose.</p>
+  <p class="small">The native renders preserve the earlier design study. The live captures show the current open-work front, hour and seconds markings, and revised leather at a repeatable rest pose.</p>
 </section>
 
 <footer><a class="footer-brand" href="assembly-review.html">AERIAL</a><p>AN INTERACTIVE WATCH STUDY · QUALITY 01</p><p>Original OM10: <a href="https://openmovement.org/" target="_blank" rel="noreferrer">openmovement</a> · CC BY-SA 3.0. <a href="aerial.html">Earlier prototype ↗</a></p></footer>

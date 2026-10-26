@@ -3,8 +3,18 @@
   "algorithm": "SHA-256",
   "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "UTF-8 JSON.stringify(files), sorted by relative path; entry keys path, bytes, sha256",
-  "digest": "bf04696bcf304a7277abf7f5f471d2d0bfd4d20c8388256efa709d8daf700bdf",
+  "digest": "c97660b52b69029b6c26149f2027fcd3666456875aad0cf8945b6c3a6d3bd16b",
   "files": [
+    {
+      "path": "assembly-calendar-data.js",
+      "bytes": 163369,
+      "sha256": "712bb6e31d46e42fe5d358f07e61134065b01339b969f119daac0bbf00c0a15d"
+    },
+    {
+      "path": "assembly-calendar.js",
+      "bytes": 3062,
+      "sha256": "1852cad11bd93380c16a031522a89780f8f742cefda1183ac82aa27b64fe5b45"
+    },
     {
       "path": "assembly-capture-provenance.js",
       "bytes": 5085,
@@ -16,9 +26,19 @@
       "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
     },
     {
+      "path": "assembly-composition.js",
+      "bytes": 1563,
+      "sha256": "7d84dd49632f98e82b87b0a451db22ea015c7a47cf2d58a95c31df129b2f7b89"
+    },
+    {
+      "path": "assembly-contact-r09-data.js",
+      "bytes": 57435,
+      "sha256": "9787373c4b15a29c29ae745d53150a0f0e59c79cfc7e5127c08827ce2f0b081b"
+    },
+    {
       "path": "assembly-crown.js",
-      "bytes": 3883,
-      "sha256": "30ec18405974ed10eddc4efaa88054635ef3c4f94ab2cd3b2a39bfe31ba17230"
+      "bytes": 3994,
+      "sha256": "71558fead740350e52bc455a95bb301643cd75c2bec8fedb419b50e9d98f168a"
     },
     {
       "path": "assembly-depth.js",
@@ -32,8 +52,8 @@
     },
     {
       "path": "assembly-dial.js",
-      "bytes": 6811,
-      "sha256": "004ab74ca67d9449f6a82994e039c7fb851f462e0eb665e65790cb298eb0162b"
+      "bytes": 7022,
+      "sha256": "ab937535a37b229dfee6273e17560caf5b74c109527dcbd1e5a411e5930720d5"
     },
     {
       "path": "assembly-escapement-data.js",
@@ -42,8 +62,8 @@
     },
     {
       "path": "assembly-escapement.js",
-      "bytes": 6932,
-      "sha256": "437c16663baae30418533ec878dcd02cb93d48465b0358b511d4ccd53dbd0f96"
+      "bytes": 7324,
+      "sha256": "1a14264d953673ca83bb5c3a0307a5a1a1bbf5bf928fba2370867ca1e6209946"
     },
     {
       "path": "assembly-form-details.js",
@@ -52,8 +72,8 @@
     },
     {
       "path": "assembly-front-architecture.js",
-      "bytes": 3377,
-      "sha256": "0a6b4131555593e2078338cb19f9a1ac10707ab299b32777472fde10482ba219"
+      "bytes": 3588,
+      "sha256": "fb0e99488e7bbdf62e4bb67965501148342cebbe66f1a74a67f00f055885db6b"
     },
     {
       "path": "assembly-glass-ao.js",
@@ -127,18 +147,38 @@
     },
     {
       "path": "assembly-review.html",
-      "bytes": 20875,
-      "sha256": "55ab98f17d070d5aaecd48e862fc55b4aec711747df1cf157fe744dd21c61dae"
+      "bytes": 20849,
+      "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
     },
     {
       "path": "assembly-review.js",
-      "bytes": 62109,
-      "sha256": "4c654f807ab86b6f3f6392c7739eb62a22efc03bb5ff043225784cd7bffe4fb7"
+      "bytes": 65854,
+      "sha256": "952537ea99a711695cc2d94372b9c017e88736eaaec7a0c7d1e58c3d2e09d06d"
     },
     {
       "path": "assembly-seconds-details.js",
       "bytes": 4152,
       "sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+    },
+    {
+      "path": "assembly-setting-carrier-r09-data.js",
+      "bytes": 188034,
+      "sha256": "773fcb36b08d4c557f6fb4ed33749f3a04d736af8f19f360823bc7752dcd94a8"
+    },
+    {
+      "path": "assembly-setting-engagement-data.js",
+      "bytes": 3448,
+      "sha256": "3802ce73cd545e9a872847b3f2dedd14a334b484b36b7049e34bb2cd9f8261e2"
+    },
+    {
+      "path": "assembly-setting-engagement.js",
+      "bytes": 7803,
+      "sha256": "9bf3abb9c89b1f827f151f7916a8215738e115a56b3090933e440e567d4ae14d"
+    },
+    {
+      "path": "assembly-setting.js",
+      "bytes": 2003,
+      "sha256": "954a7622e2843a1122d66de999039de0c55eb3fe8ea3d1f5eb0c7b6768f93fdf"
     },
     {
       "path": "assembly-state.js",
@@ -147,13 +187,23 @@
     },
     {
       "path": "assembly-story.js",
-      "bytes": 3394,
-      "sha256": "2129c156bd3f0d9373a50649b2b203f3d9d4ffddefb896e7f5cb525c2f168336"
+      "bytes": 4276,
+      "sha256": "be9cdc78a7c166d009953cf075a04b54a61303b733eb06b2169269dbc0a3d807"
+    },
+    {
+      "path": "assembly-winding-calibration.js",
+      "bytes": 19170,
+      "sha256": "f010afda424b7cbb58da7fa5c0a6e4a23dd5e15e99e4b1ff9969245f8331cc06"
+    },
+    {
+      "path": "assembly-winding.js",
+      "bytes": 7192,
+      "sha256": "64229191508478fe868f8a5387f0d8414ddf6e87e14096d285646c6eb323683c"
     },
     {
       "path": "index.html",
-      "bytes": 20875,
-      "sha256": "55ab98f17d070d5aaecd48e862fc55b4aec711747df1cf157fe744dd21c61dae"
+      "bytes": 20849,
+      "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
     },
     {
       "path": "material-review-model.js",

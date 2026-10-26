@@ -27,6 +27,10 @@ import {createFormDetails} from './assembly-form-details.js';
 import {createLeatherDetails} from './assembly-leather-details.js';
 import {createFrontArchitecture} from './assembly-front-architecture.js';
 import {createAssemblyEscapement} from './assembly-escapement.js';
+import {createAssemblyCalendar} from './assembly-calendar.js';
+import {createAssemblyWinding} from './assembly-winding.js';
+import {createAssemblySetting} from './assembly-setting.js';
+import {createAssemblySettingEngagement} from './assembly-setting-engagement.js';
 
 const $ = id => document.getElementById(id), scene = new THREE.Scene();
 const bootTime=performance.now(),clock=createPresentationClock(),resources=createResourceScope(),performanceMonitor=createPerformanceMonitor();
@@ -101,7 +105,9 @@ function syncFrontDetails() {
   if(active&&!interiorView&&craftParts.length)for(const part of exterior)if(['STRAP-UPPER','STRAP-LOWER'].includes(part.userData.assemblyId))part.visible=false;
 }
 let scale = 78, currentView = 'three-quarter', elapsed = 0;
-let mechanism,escapement,handClockOrigin=0, mechanismElapsed = 0, balanceElapsed = 0,crownVisual;
+let mechanism,escapement,calendar,winding,setting,settingEngagement,handClockOrigin=0, mechanismElapsed = 0, balanceElapsed = 0,crownVisual;
+let settingSeconds=0,calendarState=null,engagementState=null;
+const sourceRestMatrices=new Map();
 let cameraTween = null, tour = false, animationFrame=0;
 const tourSequence=createTourSequence();let powerPath=false;
 const lifecycle=createViewerLifecycle({pause:()=>{clock.setHidden(true);performanceMonitor.breakCadence();},
@@ -429,18 +435,28 @@ function syncSimpleControls(){
   if($('primary-motion-status'))$('primary-motion-status').textContent=pulled?'Time setting · turn the crown':running?'Movement running':'Motion paused';
 }
 const crownInteraction=createCrownInteraction({
-  onPull:pulled=>{if(pulled){stopTour();$('animate-movement').checked=false;$('animate').checked=false;setClockPlayback();}},
-  onSetTime:delta=>{const stamp=clock.snapshot(),seconds=((stamp.hands+delta)%43200+43200)%43200;applyClockPose(clock.seek(seconds,{track:'hands'}));dirty=true;},
-  onChange:state=>{crownVisual?.apply(state);if($('crown-state'))$('crown-state').textContent=state.pulled?'Pulled · turn to set time':'Seated · turn crown';
+  secondsPerDegree:20/3,
+  onTurn:(degrees,state)=>{winding?.turn(degrees,{pulled:state.pulled});dirty=true;},
+  onPull:pulled=>{winding?.setPulled(pulled);if(pulled){stopTour();$('animate-movement').checked=false;$('animate').checked=false;setClockPlayback();}else if(winding){winding.apply();dirty=true;}},
+  onSetTime:delta=>{settingSeconds-=delta;const stamp=clock.snapshot(),seconds=((stamp.hands-delta)%43200+43200)%43200;applyClockPose(clock.seek(seconds,{track:'hands'}));dirty=true;},
+  onChange:state=>{crownVisual?.apply({...state,degrees:state.degrees+(engagementState?.leadInStemDegrees||0)});if($('crown-state'))$('crown-state').textContent=state.pulled?'Pulled · turn to set time':'Seated · turn crown';
     if($('crown-pull')){$('crown-pull').textContent=state.pulled?'Push in to finish':'Pull out to set time';$('crown-pull').setAttribute('aria-pressed',String(state.pulled));}
-    if($('crown-help'))$('crown-help').textContent=state.pulled?'Turn left or right to move the hands. Push in when you are done.':'Turning moves the crown as a winding gesture. Watch time stays unchanged.';
+    if($('crown-help'))$('crown-help').textContent=state.pulled?'Turn left or right to move the hands. Push in when you are done.':'Turn left to wind the gears; turning right lets the clutch return. Watch time stays unchanged.';
     syncSimpleControls();if(model&&!loading)visibility();dirty=true;},
 });resources.own('crown interaction',()=>crownInteraction.dispose());
 function focusCrown(){if(loading||failed)return;stopTour();clearSelection();isolated=null;interiorView=false;$('movement-only').checked=false;visibility();if($('crown-controls'))$('crown-controls').open=true;view('crown');$('crown-pull')?.focus({preventScroll:true});announce('Crown controls opened. Turn while seated, or pull out to set the hands.');}
 if($('crown-focus'))$('crown-focus').onclick=focusCrown;
-if($('crown-pull'))$('crown-pull').onclick=()=>crownInteraction.setPulled(!crownInteraction.snapshot().pulled);
+if($('crown-pull'))$('crown-pull').onclick=()=>{
+  const pulled=!crownInteraction.snapshot().pulled;crownInteraction.setPulled(pulled);
+  // Retain the free input's tooth take-up when reseated; this is not a stroke
+  // and never seeks the hands or changes the held winding drive.
+  if(pulled&&engagementState?.ready&&winding){
+    const state=crownInteraction.snapshot(),degrees=state.degrees+engagementState.leadInStemDegrees;
+    winding.restore({...winding.snapshot(),crownDegrees:degrees});crownInteraction.restore({...state,degrees});applyClockPose(clock.snapshot());
+  }
+};
 for(const [id,degrees]of [['crown-left',-15],['crown-right',15]])if($(id))$(id).onclick=()=>{stopTour();crownInteraction.turn(degrees);};
-if($('crown-reset'))$('crown-reset').onclick=()=>{crownInteraction.reset();announce('Crown reseated and aligned. The current hand time is retained.');};
+if($('crown-reset'))$('crown-reset').onclick=()=>{crownInteraction.reset();if(winding)winding.restore({...winding.snapshot(),crownDegrees:0,pulled:false,reverseFreewheel:false});announce('Crown reseated and aligned. The current hand time is retained.');};
 if($('play-motion'))$('play-motion').onclick=()=>{if(crownInteraction.snapshot().pulled)return;stopTour();const play=!($('animate-movement').checked||$('animate').checked);$('animate-movement').checked=play;$('animate').checked=play;setClockPlayback();};
 if($('slow-motion'))$('slow-motion').onchange=()=>{$('speed').value=$('slow-motion').checked?'0.25':'1';applyClockPose(clock.setSpeed(Number($('speed').value)));syncSimpleControls();dirty=true;};
 function motionStatus() {
@@ -450,6 +466,11 @@ function motionStatus() {
 function applyClockPose(stamp) {
   mechanismElapsed=balanceElapsed=stamp.mechanism;elapsed=stamp.hands;
   if(escapement)escapement.apply(mechanismElapsed);else mechanism?.apply(mechanismElapsed,balanceElapsed);
+  winding?.apply();
+  setting?.apply(settingSeconds,escapement?escapement.sample(mechanismElapsed).trainTime:sampleMechanicalTime(mechanismElapsed));
+  if(settingEngagement)engagementState=settingEngagement.apply({pulled:crownInteraction.snapshot().pulled,settingSeconds,commonTrainTime:escapement?escapement.sample(mechanismElapsed).trainTime:sampleMechanicalTime(mechanismElapsed),inputDegrees:crownInteraction.snapshot().degrees});
+  crownVisual?.apply({...crownInteraction.snapshot(),degrees:crownInteraction.snapshot().degrees+(engagementState?.leadInStemDegrees||0)});
+  if(calendar)calendarState=calendar.apply((escapement?escapement.sample(mechanismElapsed).trainTime:sampleMechanicalTime(mechanismElapsed))+settingSeconds);
   const handTime=escapement?escapement.sample(elapsed).trainTime-handClockOrigin:sampleMechanicalTime(elapsed);
   for(const hand of hands)hand.mesh.quaternion.copy(hand.original).multiply(turn.setFromAxisAngle(axis,-2*Math.PI*handTime/hand.period));
   qualityDesign?.syncMotion();
@@ -473,12 +494,12 @@ $('animate').onchange = () => {
 };
 function resetMotion() {
   $('animate-movement').checked = false; $('animate').checked = false;
-  const stamp=clock.reset();mechanismElapsed = balanceElapsed = 0;mechanism?.reset();resetHands();applyClockPose(stamp);motionStatus();
+  const stamp=clock.reset();settingSeconds=0;winding?.reset();crownInteraction.reset();mechanismElapsed = balanceElapsed = 0;mechanism?.reset();resetHands();applyClockPose(stamp);motionStatus();
   if($('scrub-time'))$('scrub-time').value='0';if($('scrub-value'))$('scrub-value').textContent='0.00 s';
 }
 $('speed').onchange=()=>{applyClockPose(clock.setSpeed(Number($('speed').value)));syncSimpleControls();dirty=true;};
 if($('scrub-time'))$('scrub-time').oninput=()=>{
-  stopTour();const timestamp=performance.now();$('animate-movement').checked=false;$('animate').checked=false;
+  stopTour();if(crownInteraction.snapshot().pulled)crownInteraction.setPulled(false);const timestamp=performance.now();$('animate-movement').checked=false;$('animate').checked=false;
   clock.setRunning('mechanism',false,timestamp);clock.setRunning('hands',false,timestamp);
   applyClockPose(clock.seek(Number($('scrub-time').value),{timestamp}));motionStatus();dirty=true;
 };
@@ -568,7 +589,7 @@ function loadFrontArchitecture(){
       formDetails.setEnabled(false);
       const targets=new Map(openPlates.map(mesh=>[mesh.userData.replacementForSourceIndex,mesh]));
       targets.set(149,source.find(mesh=>mesh.userData.sourceIndex===149));
-      frontArchitecture=createFrontArchitecture({targets,candidateScene:result.gltf.scene,revision:'r07'});
+      frontArchitecture=createFrontArchitecture({targets,candidateScene:result.gltf.scene,revision:'r07',restMatrices:sourceRestMatrices});
       resources.own('R07 front architecture',()=>frontArchitecture.dispose());
       performanceMonitor.load(result.metrics);updateMaterials();visibility();
     }finally{disposeObjectTree(result.gltf.scene);}
@@ -578,6 +599,7 @@ function initializeBaseline(result,metadata){
   if(lifecycle.disposed){disposeObjectTree((result.gltf||result).scene);return;}
   const gltf=result.gltf||result;performanceMonitor.load(result.metrics||{});
   const disposeBaseline=createObjectTreeDisposer(gltf.scene);
+  resources.own('original assembly geometry',disposeBaseline);
   model=new THREE.Group();model.rotation.x=Math.PI/2;model.add(gltf.scene);scene.add(model);
   gltf.scene.traverse(mesh=>{
     if(!mesh.isMesh)return;
@@ -586,11 +608,16 @@ function initializeBaseline(result,metadata){
     baseMaterials.set(mesh,mesh.material);finishMaterials.set(mesh,finishes.apply(mesh));mesh.castShadow=!mesh.userData.inspectionTransparent;mesh.receiveShadow=true;
     if(mesh.userData.sourceIndex===undefined){const period={HOUR:43200,MINUTE:3600,SECONDS:60}[mesh.userData.assemblyId];if(period)hands.push({mesh,period,original:mesh.quaternion.clone()});}
   });
+  for(const mesh of source){mesh.updateMatrix();sourceRestMatrices.set(mesh.userData.sourceIndex,mesh.matrix.clone());}
   variantManifest=createVariantManifest(source);mechanism=createAssemblyMotion(source,metadata);
+  try{calendar=createAssemblyCalendar(source);}catch(error){loadWarnings.push(`Calendar reconstruction unavailable: ${error.message}`);}
   const springMesh=mechanism.entries.find(entry=>entry.kind==='spring').mesh,originalSpringGeometry=springMesh.geometry;
   try{escapement=createAssemblyEscapement(mechanism);handClockOrigin=escapement.sample(0).trainTime;escapement.apply(0);}
   catch(error){loadWarnings.push(`Escapement reconstruction unavailable: ${error.message}`);mechanism.apply(0,0);}
   const displaySpringGeometry=springMesh.geometry;
+  try{winding=createAssemblyWinding(source,mechanism);}catch(error){loadWarnings.push(`Winding reconstruction unavailable: ${error.message}`);}
+  try{setting=createAssemblySetting(mechanism);}catch(error){loadWarnings.push(`Setting reconstruction unavailable: ${error.message}`);}
+  try{if(winding&&setting)settingEngagement=createAssemblySettingEngagement(source,mechanism,winding);}catch(error){loadWarnings.push(`Setting engagement unavailable: ${error.message}`);}
   const crownMesh=exterior.find(mesh=>mesh.userData.assemblyId==='CROWN');
   if(crownMesh){crownVisual=createCrownVisual(crownMesh,{compact:true,stem:source.find(mesh=>mesh.userData.sourceIndex===52),tube:exterior.find(mesh=>mesh.userData.assemblyId==='CROWN-TUBE')});resources.own('crown presentation transform',()=>crownVisual.dispose());}
   dialFace=exterior.find(mesh=>mesh.userData.assemblyId==='DIAL'&&!/mark/i.test(mesh.name));
@@ -598,8 +625,11 @@ function initializeBaseline(result,metadata){
   openDialDetails=createDialDetails({renderer,openWork:true});gltf.scene.add(openDialDetails.group);
   openFrontFrame=createOpenFrontFrame();gltf.scene.add(openFrontFrame.group);
   qualityDesign=createQualityDesign(source,exterior);gltf.scene.add(qualityDesign.group);
-  resources.own('original assembly geometry',disposeBaseline);
   resources.own('escapement and private spring display',()=>{if(escapement)escapement.dispose();else mechanism.reset();if(displaySpringGeometry!==originalSpringGeometry)displaySpringGeometry.dispose();});
+  resources.own('winding train and private clutch spring',()=>winding?.dispose());
+  resources.own('manual setting train',()=>setting?.dispose());
+  resources.own('setting engagement and private clearance geometry',()=>settingEngagement?.dispose());
+  resources.own('indexed calendar and private spring display',()=>calendar?.dispose());
   resources.own('dial printing',()=>{dialDetails.dispose();openDialDetails.dispose();});resources.own('open-work frame',()=>openFrontFrame.dispose());resources.own('quality hand design',()=>qualityDesign.dispose());
   loading=false;$('load-message').textContent='Lighting the watch studio…';$('assembly-canvas').setAttribute('aria-busy','false');
   $('inspection-controls').disabled=false;$('view-controls').disabled=false;$('animate').disabled=hands.length!==3;
@@ -643,10 +673,14 @@ function captureConfiguration({clockStamp}={}){
     camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},
     formDetails:{revision:'form-legibility-r01',ready:!!formDetails,enabled:!!formDetails?.enabled,calendarDigitIslands:formDetails?.audit.components??null},
     frontArchitecture:{revision:'front-architecture-r07',ready:!!frontArchitecture,enabled:!!frontArchitecture?.enabled,audit:frontArchitecture?.audit??null},
-    escapement:{revision:'r07-visual-reconstruction',ready:!!escapement,limits:escapement?.limits??null},
+    escapement:{revision:'r09-contact-reconstruction',ready:!!escapement,limits:escapement?.limits??null},
+    calendar:{revision:'r09-indexed-calendar',ready:!!calendar,state:calendarState},
+    winding:{revision:'r09-crown-coupling',ready:!!winding,state:winding?.snapshot()??null},
+    setting:{revision:'r09-friction-setting',ready:!!setting},
+    settingEngagement:{revision:'r09-keyless-endpoints',ready:!!settingEngagement,state:engagementState,limits:settingEngagement?.limits??null},
     leatherCraft:{revision:'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
     compactCrown:!!crownVisual&&openFrontActive(),
-    clock:clockStamp||clock.snapshot(),crown:crownInteraction.snapshot(),sourceAtCapture:captureProvenance.snapshot(),options:{openWork:$('open-work').checked,finishes:$('finish').checked,crystals:$('crystals').checked,movementOnly:$('movement-only').checked,interior:interiorView,powerPath,quality},
+    settingSeconds,clock:clockStamp||clock.snapshot(),crown:crownInteraction.snapshot(),sourceAtCapture:captureProvenance.snapshot(),options:{openWork:$('open-work').checked,finishes:$('finish').checked,crystals:$('crystals').checked,movementOnly:$('movement-only').checked,interior:interiorView,powerPath,quality},
     viewport:{width:renderer.domElement.clientWidth,height:renderer.domElement.clientHeight,pixelRatio:renderer.getPixelRatio(),drawingBufferWidth:renderer.domElement.width,drawingBufferHeight:renderer.domElement.height,msaaSamples:composer.renderTarget1.samples,transmissionScale:renderer.transmissionResolutionScale},
     sourceMeshes:source.length,sourceVisible:source.filter(m=>m.visible).length,derivedParts:openPlates.length+(openFrontFrame?.count||0)+(qualityDesign?.count||0)+craftParts.length,lightRig:lighting.shot,
     performance:measuredPerformance,resources:resources.snapshot(),warnings:[...loadWarnings],
@@ -700,7 +734,8 @@ if($('import-config'))$('import-config').onchange=async event=>{
     resetMotion();clock.setSpeed(config.clock.speed);
     if(![...$('speed').options].some(option=>Number(option.value)===config.clock.speed)){$('speed').querySelector('[data-saved-speed]')?.remove();const option=new Option(`${config.clock.speed}× · saved time scale`,String(config.clock.speed));option.dataset.savedSpeed='true';$('speed').add(option);}
     $('speed').value=String(config.clock.speed);
-    clock.seek(config.clock.mechanism,{track:'mechanism'});applyClockPose(clock.seek(config.clock.hands,{track:'hands'}));crownInteraction.restore(config.crown);if(config.view==='crown'&&$('crown-controls'))$('crown-controls').open=true;motionStatus();dirty=true;announce('Saved camera, crown, options, time scale and pose restored. Motion is paused.');
+    settingSeconds=config.settingSeconds;winding?.restore(config.winding);crownInteraction.restore(config.crown);
+    clock.seek(config.clock.mechanism,{track:'mechanism'});applyClockPose(clock.seek(config.clock.hands,{track:'hands'}));if(config.view==='crown'&&$('crown-controls'))$('crown-controls').open=true;motionStatus();dirty=true;announce('Saved camera, crown, options, time scale and pose restored. Motion is paused.');
   }catch(e){if(!lifecycle.disposed&&request===configurationRequest)announce(`Could not restore view: ${e.message}`);}finally{if(request===configurationRequest)input.value='';}
 };
 let last = 0;
