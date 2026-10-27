@@ -48,25 +48,28 @@
 
       <canvas id="assembly-canvas" aria-label="Interactive Aerial watch. Drag to rotate; scroll or use plus and minus to zoom. Arrow keys pan. Home resets the camera. Use the component explorer for keyboard selection." aria-describedby="canvas-help" aria-busy="true" tabindex="0"></canvas>
 
-      <div id="interior-pins" hidden aria-label="Interior focus points">
 
-        <button type="button" data-pin="balance" aria-label="01 Balance — inspect the oscillating balance">01</button>
-
-        <button type="button" data-pin="train" aria-label="02 Gear train — inspect the connected wheels">02</button>
-
-        <button type="button" data-pin="winding" aria-label="03 Barrel and winding — inspect the power source">03</button>
-
-      </div>
 
       <picture id="studio-poster" class="studio-poster" aria-hidden="true"><source media="(max-width:700px)" srcset="quality-study/mobile-front.webp"><img src="quality-study/01-front.webp" alt="" fetchpriority="high"></picture>
 
-      <div id="loading" role="status"><span class="loading-mark" aria-hidden="true">A</span><p id="load-message">Preparing the watch studio…</p><button id="retry" type="button" hidden>Reload viewer</button></div>
+      <div id="loading" role="status"><span class="loading-mark" aria-hidden="true">A</span><p id="load-message">Preparing the watch studio…</p></div>
 
     </div>
 
     <div class="overlay"><span id="mode-label">COMPLETE ASSEMBLY / INTACT OM10</span><span id="canvas-help">Drag to rotate <span aria-hidden="true">·</span> Scroll to get closer</span></div>
 
+
+
+    <span class="studio-index" aria-hidden="true">DESIGNED TO REVEAL</span>
+
+  </section>
+
+  <aside id="showcase-controls" aria-label="Watch controls">
+    <div class="panel-heading"><span class="eyebrow">AERIAL / OPEN WORK</span><h1>Explore the watch</h1><p>Views, motion and details in one place.</p></div>
+    <fieldset id="inspection-controls" disabled>
+      <legend class="sr-only">Watch controls</legend>
     <fieldset id="view-controls" class="views" disabled aria-label="Camera views">
+      <h2>Views</h2>
 
       <div class="view-main">
 
@@ -91,15 +94,6 @@
       </div>
 
     </fieldset>
-
-    <span class="studio-index" aria-hidden="true">DESIGNED TO REVEAL</span>
-
-  </section>
-
-  <aside aria-label="Watch controls">
-    <div class="panel-heading"><span class="eyebrow">AERIAL / OPEN WORK</span><h1>The watch studio</h1><p>Rotate the watch. Explore its movement.</p></div>
-    <fieldset id="inspection-controls" disabled>
-      <legend class="sr-only">Watch controls</legend>
       <section class="everyday-controls" aria-labelledby="everyday-title">
         <h2 id="everyday-title">Motion</h2>
         <button id="play-motion" class="primary-button" type="button" aria-pressed="true">Pause motion</button>
@@ -131,15 +125,15 @@
 
         <p id="interior-description">The rear cover is removed to reveal the original movement, held inside its case.</p>
 
-        <div class="interior-focus">
+      <div id="interior-pins" class="interior-focus" data-controls-inline="true" hidden aria-label="Interior focus points">
 
-          <button type="button" data-focus="balance" aria-pressed="false"><span>01</span><span><b>Balance</b><small>The oscillation that sets the rhythm.</small></span></button>
+        <button type="button" data-pin="balance" data-focus="balance" aria-pressed="false" aria-label="01 Balance — inspect the oscillating balance">Balance</button>
 
-          <button type="button" data-focus="train" aria-pressed="false"><span>02</span><span><b>Gear train</b><small>Matched wheels carry each release.</small></span></button>
+        <button type="button" data-pin="train" data-focus="train" aria-pressed="false" aria-label="02 Gear train — inspect the connected wheels">Gear train</button>
 
-          <button type="button" data-focus="winding" aria-pressed="false"><span>03</span><span><b>Barrel &amp; winding</b><small>The drum turns; the winding ratchet stays held.</small></span></button>
+        <button type="button" data-pin="winding" data-focus="winding" aria-pressed="false" aria-label="03 Barrel and winding — inspect the power source">Winding</button>
 
-        </div>
+      </div>
 
         <div class="power-path-control"><label class="check"><input type="checkbox" id="power-path"> Follow the power</label><p id="power-path-description" class="small" role="status">Explore how the barrel, train and balance work together.</p></div><button id="interior-overview" type="button" class="text-button">Back to interior overview ↗</button>
 
@@ -204,6 +198,7 @@
 
 
     </fieldset>
+    <button id="retry" type="button" hidden>Reload viewer</button>
     <p id="viewer-status" class="viewer-status" role="status" aria-live="polite" aria-atomic="true">The studio is loading. Static renders are available below.</p>
     <noscript><p>Enable JavaScript for the interactive studio. Static renders and downloads remain available.</p></noscript>
     <a class="discovery-link" href="#details">Design details &amp; downloads <span aria-hidden="true">↓</span></a>

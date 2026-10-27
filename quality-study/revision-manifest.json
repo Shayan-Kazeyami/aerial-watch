@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T18:39:15.249Z",
-  "title": "Aerial Quality 01 · R09 priority mechanisms and composition",
-  "revision": "R10 surface and recording refinement",
+  "generatedAt": "2026-10-27T04:27:01.988Z",
+  "title": "Aerial Quality 01 / R11 single control section",
+  "revision": "R11 single control section",
   "status": "Editable visual design proposal; browser review and physical/aesthetic acceptance remain open",
   "pathBase": "Watch project root; all file paths are relative",
   "hashAlgorithm": "SHA-256",
@@ -154,8 +154,8 @@
     {
       "path": "OM10-Showcase/dist/assembly-quality.css",
       "role": "viewer",
-      "bytes": 21469,
-      "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+      "bytes": 24590,
+      "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
     },
     {
       "path": "OM10-Showcase/dist/assembly-recording.js",
@@ -184,14 +184,14 @@
     {
       "path": "OM10-Showcase/dist/assembly-review.html",
       "role": "viewer",
-      "bytes": 20849,
-      "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+      "bytes": 20478,
+      "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
     },
     {
       "path": "OM10-Showcase/dist/assembly-review.js",
       "role": "viewer",
-      "bytes": 66556,
-      "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+      "bytes": 66744,
+      "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
     },
     {
       "path": "OM10-Showcase/dist/assembly-seconds-details.js",
@@ -274,8 +274,8 @@
     {
       "path": "OM10-Showcase/dist/index.html",
       "role": "viewer",
-      "bytes": 20849,
-      "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+      "bytes": 20478,
+      "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
     },
     {
       "path": "OM10-Showcase/dist/rebuild/assembly.glb",
@@ -640,86 +640,86 @@
     {
       "path": "OM10-Showcase/dist/quality-study/01-front.png",
       "role": "live-capture",
-      "bytes": 1813863,
-      "sha256": "29657109e4952e10c4682bd74b5264dd71883ac7c471cb2094c3f547fb26878f"
+      "bytes": 2458381,
+      "sha256": "056d35e60c7034df13d20a2364e2aad32e12ace76f19efd620e0101975fdfbb3"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/01-front.json",
       "role": "live-capture",
-      "bytes": 61109,
-      "sha256": "5537ee989681724f04e95edadd7d229ce568d72473cc1f9958035cc139744ce7"
+      "bytes": 87071,
+      "sha256": "fc03b8ce6d9249cb5c112858ad6b9c29e64756e8e6f8a77e353308bfb6eac168"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/02-three-quarter.png",
       "role": "live-capture",
-      "bytes": 1712259,
-      "sha256": "5d3679b2144e65d19e177b70b7b7b05a6b08de2de21d7395cc7644d1d71c5b56"
+      "bytes": 2159271,
+      "sha256": "fe360153516101535edb92b1e05348032842585f626b6c33966a4d98820ccaf7"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/02-three-quarter.json",
       "role": "live-capture",
-      "bytes": 69803,
-      "sha256": "33c9b80cb7b99193d53047b99205ec99463124e73a23eb1d6a30e9db01bdb391"
+      "bytes": 87123,
+      "sha256": "88a05a15597f8a59856f674e31324cff5f04b755eb0ddbc3a3c047361558b975"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/03-interior.png",
       "role": "live-capture",
-      "bytes": 1585426,
-      "sha256": "8c9fcdc5e47bb7c9c5887626d73754f8c23f229e2901260238b45c35a7de8c50"
+      "bytes": 2111080,
+      "sha256": "117a9e54df620b7a42bbd8a4e998dfb24417995019fb7505767987bb725ee0b0"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/03-interior.json",
       "role": "live-capture",
-      "bytes": 78424,
-      "sha256": "18855b886541811d4f39fcf9b6a6af0173a0b02aea3798e9ceda5705795d7803"
+      "bytes": 87089,
+      "sha256": "3623a3491d62b3fa4df0f834999cb69efb2d240038a85e46ec54effc379649d5"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/04-balance.png",
       "role": "live-capture",
-      "bytes": 2685429,
-      "sha256": "cde957198f7189c8647b6bb808760af0eaae75a479f1867f8442a575cd4a8806"
+      "bytes": 3220789,
+      "sha256": "75f8efaadace3574fa78f40d6c4e2a15b4fd72c5476b8b5d4e8d768c3a1aa561"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/04-balance.json",
       "role": "live-capture",
-      "bytes": 87163,
-      "sha256": "726aa038d1a417ff007409f282b36b2904c0243a9883db60a517551485b2a9ed"
+      "bytes": 87071,
+      "sha256": "dbcc5db62340d81fb90fca014e1fab8d278c430b693fc3ca52506357372cea12"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/05-train.png",
       "role": "live-capture",
-      "bytes": 2321501,
-      "sha256": "33f26d025de9f0cbee0ae802610374aac0731cd5e59672024cf7687af292ee93"
+      "bytes": 2903169,
+      "sha256": "a1836ca79c75e14c2522cb3fd26c1dbddcdc5022316601ab5bb4164a56dfaa4c"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/05-train.json",
       "role": "live-capture",
-      "bytes": 87175,
-      "sha256": "c877c73d79795e564feb27f2f796b19c9370348e8bf858a437c9aafe250fa41b"
+      "bytes": 87095,
+      "sha256": "46017d76a600460f9e57756363b5d8dbe08d62b3a83b752fb2e94724743ca9c3"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/06-leather.png",
       "role": "live-capture",
-      "bytes": 1911642,
-      "sha256": "6c135dfe7b3242c42d5800090847724a63194ccdc23086ce3aff24377fbfd2ce"
+      "bytes": 2383676,
+      "sha256": "2ddf8ffdcafc825460b21f366e80073315e6b5f6efdcb0f611de9c8b34a0c493"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/06-leather.json",
       "role": "live-capture",
-      "bytes": 87126,
-      "sha256": "2c7daa2bea7ae410f3e347dd90a0b56432ae34cbbabc4779b5fc26da42d96079"
+      "bytes": 87059,
+      "sha256": "8fe603f13a1b69040ba9473bcb8d411f7931b823f1e347ad7388fca8f3a2a5bc"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/mobile-front.png",
       "role": "poster-or-gallery",
-      "bytes": 975499,
-      "sha256": "3a82389fd97a09e37666623a9b43bb3d4b4ef62dd12fc73e4ea6a3b1408e323f"
+      "bytes": 852377,
+      "sha256": "23734baf7650eee0df291ee9ddeb96359cf0bea70827ed4f4bd71eeabb71fd33"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/mobile-front.json",
       "role": "poster-or-gallery",
-      "bytes": 87128,
-      "sha256": "f80c24c3774140e998f966d91b9f289b46607458817885fdea2793579914bf72"
+      "bytes": 87038,
+      "sha256": "642e9cad86afad48b0032eb21d5c61c6664db34c2407b651b55f0a330c8584dd"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/studio-poster.svg",
@@ -743,49 +743,49 @@
       "path": "OM10-Showcase/dist/quality-study/viewer-revision.json",
       "role": "capture-source-identity",
       "bytes": 7485,
-      "sha256": "ba1ee50ecaeb7cbdf061da984e13f13e685e9531678db940949ddc12173880ed"
+      "sha256": "fd821a80eb16f4d5b79c76baa58d2f3ed42b79c10e1e212c082480f1ddfb7c65"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/viewer-revision.js",
       "role": "capture-source-identity",
       "bytes": 6022,
-      "sha256": "45c7e35aecb4f9bf13bb9cb4c31e4d5c879fb883e245c8e1032b637dad1e06c8"
+      "sha256": "c49a52ae67a74a5697bde552a43e586fd1ea5c0d7447fe3ac0232bebe6e1bb87"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/01-front.webp",
       "role": "display-preview",
-      "bytes": 75040,
-      "sha256": "56e16552e385bbdc7d799b24e328324f7538f8b56e06ced60162d78a16c2688a"
+      "bytes": 99296,
+      "sha256": "608a94124b8f2428ced68c6d4445ab4f24eeeb7ada4c9cad7061d08ed0286b72"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/02-three-quarter.webp",
       "role": "display-preview",
-      "bytes": 55300,
-      "sha256": "4665c673d0903ddc2d6384f3c9107b9c8ee39f9480702b4f9f4f746121e9121c"
+      "bytes": 74598,
+      "sha256": "2a2222bf44bf705b37a93c48ca01af740ab01d8a9b400abf69aad6afa6811b1e"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/03-interior.webp",
       "role": "display-preview",
-      "bytes": 68664,
-      "sha256": "f28e4a7b14b2bd94007a2ce1ed14efb74ec2b40be0987fa012c39e9fd600688b"
+      "bytes": 92794,
+      "sha256": "64d72493c4f48e1f54b6453b5393c69a56143c74342f69f2261eba22a37b9dbd"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/04-balance.webp",
       "role": "display-preview",
-      "bytes": 107010,
-      "sha256": "5c83539d727560a68fd0520de1f89bccb19350de3aa9ba1031c2c8392f203da4"
+      "bytes": 124218,
+      "sha256": "1ccae42dfd814a056ee8f55fa3d99f2162a6ce2753d91480a40995a0f41ace04"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/05-train.webp",
       "role": "display-preview",
-      "bytes": 112708,
-      "sha256": "41d926e708164d4a098baf412543f7131b0d0b521ef904728eab00088f3f844e"
+      "bytes": 138978,
+      "sha256": "370f60cd6b014fce67aadcc5c3c7109ac66fa5bfe02057bd4dc6d0fc26e3ffcd"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/06-leather.webp",
       "role": "display-preview",
-      "bytes": 47452,
-      "sha256": "7010e39c4a06e9ccf779f0cd765fd7c1f99f4fdf5f1ea84d3c2c30be50b2f576"
+      "bytes": 64378,
+      "sha256": "a49e4daefff19451d6f63217de8cdb0bad8bfa09ac3eaa47672578d069b880f1"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/native-front.webp",
@@ -802,8 +802,8 @@
     {
       "path": "OM10-Showcase/dist/quality-study/mobile-front.webp",
       "role": "display-preview",
-      "bytes": 97060,
-      "sha256": "b7ab6b98e16ff9bdf7d55e8aed4102a3c331645706e8e1ab6f7717cda9def3cb"
+      "bytes": 84420,
+      "sha256": "b83113adbf98e3ffad92261572ff57832e6bd6344e0b6354c6c6b916651f4065"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/front-architecture-r07.glb",
@@ -987,117 +987,297 @@
     },
     {
       "path": "OM10-Showcase/inspection/r10-final-browser-proof.json",
-      "role": "r10-scoped-final-local-evidence",
+      "role": "historical-r10-F3-scoped-local-evidence",
       "bytes": 3639,
       "sha256": "9ee2c031f5475485da76b3cc0fccb653cb0aee3a250c9949c1712fb2e793e68a"
     },
     {
       "path": "OM10-Showcase/inspection/r10-final-calendar-check.json",
-      "role": "r10-scoped-final-local-evidence",
+      "role": "historical-r10-F3-scoped-local-evidence",
       "bytes": 1365,
       "sha256": "bb7e90faeaecd5a0da1983b5431160251c8e3261051e66b6b21a064ca2cc645c"
     },
     {
       "path": "OM10-Showcase/inspection/r10-final-scrub.json",
-      "role": "r10-scoped-final-local-evidence",
+      "role": "historical-r10-F3-scoped-local-evidence",
       "bytes": 84120,
       "sha256": "832bfc4d594757d3f3c44a56aa831d88462b4769b22f58e8bd1f94f90af80bb5"
     },
     {
       "path": "OM10-Showcase/inspection/r10-final-calendar-22000.json",
-      "role": "r10-scoped-final-local-evidence",
+      "role": "historical-r10-F3-scoped-local-evidence",
       "bytes": 84077,
       "sha256": "4b8ad570c02c3da2abd5579abc4037a77e4312f25826381050123018b900974d"
     },
     {
       "path": "OM10-Showcase/inspection/r10-final-calendar-31000.json",
-      "role": "r10-scoped-final-local-evidence",
+      "role": "historical-r10-F3-scoped-local-evidence",
       "bytes": 84144,
       "sha256": "46ce62f20fcb588a8d218e8fa1dcab89063fb663b420e419e99fc6c5f4f9a2d3"
     },
     {
       "path": "OM10-Showcase/inspection/r10-final-calendar-41000.json",
-      "role": "r10-scoped-final-local-evidence",
+      "role": "historical-r10-F3-scoped-local-evidence",
       "bytes": 84094,
       "sha256": "558f80c4b40179b3e6bd3208850cbb0d1148ee89af7b4064b1c8101f1325c009"
     },
     {
       "path": "OM10-Showcase/inspection/r10-final-calendar-108400.json",
-      "role": "r10-scoped-final-local-evidence",
+      "role": "historical-r10-F3-scoped-local-evidence",
       "bytes": 84110,
       "sha256": "ec75e6769b270adf6d557f463843d1ad8afe068914c32798ad34d1d1e847ccd9"
     },
     {
       "path": "OM10-Showcase/inspection/surface-r10/production-corrected.json",
-      "role": "r10-final-caseback-evidence",
+      "role": "historical-r10-F3-caseback-evidence",
       "bytes": 67841,
       "sha256": "8fab82ccede1fbb14a9a9db92f63a1d9745fd8ce5948741d12a2a21b07d9cf9f"
     },
     {
       "path": "OM10-Showcase/inspection/surface-r10/production-corrected.png",
-      "role": "r10-final-caseback-evidence",
+      "role": "historical-r10-F3-caseback-evidence",
       "bytes": 1713339,
       "sha256": "eb758fd0de92b35e75ff41913034feb69a462b27fba94b22ab5442efd4081b02"
     },
     {
       "path": "OM10-Showcase/inspection/surface-r10/production-baseline-restored.json",
-      "role": "r10-final-caseback-evidence",
+      "role": "historical-r10-F3-caseback-evidence",
       "bytes": 76174,
       "sha256": "f9bd4abcc8d5a4bf1620d7d6d491a63b1fafe2f59829eeeb125ee5a4a2dcec5e"
     },
     {
       "path": "OM10-Showcase/inspection/surface-r10/production-corrected-restored.png",
-      "role": "r10-final-caseback-evidence",
+      "role": "historical-r10-F3-caseback-evidence",
       "bytes": 1731075,
       "sha256": "492168aa829441fd5ba1cb826745b693df30fda1c755cefe23c11fee1c65c382"
     },
     {
       "path": "OM10-Showcase/inspection/surface-r10/production-restore-check.json",
-      "role": "r10-final-caseback-evidence",
+      "role": "historical-r10-F3-caseback-evidence",
       "bytes": 532,
       "sha256": "6c60f15d8eb1304cd48e9632a75b2b456617a1b90cae5a0caaa54062ecc2c811"
     },
     {
       "path": "OM10-Showcase/inspection/reliability-r10/final-recorder-verification.json",
-      "role": "r10-final-recorder-evidence",
+      "role": "historical-r10-F3-recorder-evidence",
       "bytes": 2409,
       "sha256": "3e5d1ae1cf514ad37ab4420e3a7371ab5f9e7d55becd77a445b2019b1fd70d99"
     },
     {
       "path": "OM10-Showcase/inspection/reliability-r10/final-recorder-report.md",
-      "role": "r10-final-recorder-evidence",
+      "role": "historical-r10-F3-recorder-evidence",
       "bytes": 1037,
       "sha256": "ba83448de5d150014bd0bbc947dac13ecf70d470671a4ad3e55ab34bc2ea0015"
     },
     {
       "path": "OM10-Showcase/inspection/reliability-r10/final-paused.webm",
-      "role": "r10-final-recorder-evidence",
+      "role": "historical-r10-F3-recorder-evidence",
       "bytes": 2883677,
       "sha256": "4f946b19d6aa9cd25f216fd8a27133c7c5fa1039b7717b0c610c28ab802f292e"
     },
     {
       "path": "OM10-Showcase/inspection/reliability-r10/final-recorder-start.json",
-      "role": "r10-final-recorder-evidence",
+      "role": "historical-r10-F3-recorder-evidence",
       "bytes": 84111,
       "sha256": "93dbf095177fb1c98a56eed84e58d8027745b2bd0325443a7be0c018cf0ac244"
     },
     {
       "path": "OM10-Showcase/inspection/reliability-r10/final-recorder-end.json",
-      "role": "r10-final-recorder-evidence",
+      "role": "historical-r10-F3-recorder-evidence",
       "bytes": 84126,
       "sha256": "93888b5fd103485c23cdf343cd512be895288d5bcbfd5d065356361054d1204f"
     },
     {
       "path": "OM10-Showcase/inspection/reliability-r10/final-recorder-start.png",
-      "role": "r10-final-recorder-evidence",
+      "role": "historical-r10-F3-recorder-evidence",
       "bytes": 2111494,
       "sha256": "ed6c3bfbc5f67fc70a345e24df250e365cb0a84356f409d91eb32d5d9abe80f9"
     },
     {
       "path": "OM10-Showcase/inspection/reliability-r10/final-recorder-end.png",
-      "role": "r10-final-recorder-evidence",
+      "role": "historical-r10-F3-recorder-evidence",
       "bytes": 2111693,
       "sha256": "afdab16364dc93e83ad954121f29cc9c45d643dff13a865f95c40f5e1ffe9eaf"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/final-browser-proof.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 8991,
+      "sha256": "32e32d304f0d89c9005211dc0a44662d471c9f1fe2757553936b396d9ea773bb"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/restore-check.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 4611,
+      "sha256": "9330c8542042b4273ffb96c634377e53cc701b2569db1b1c3f0d2d493ee7a7a0"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/restore-a.png",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 2466792,
+      "sha256": "99798588dc5cdce717a0a06547cfd4987e8825385b727ea6187f207b00833542"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/restore-b.png",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 2466856,
+      "sha256": "f4297235ab421a70aec94ce0f035631c30bbc54443832481ec14640859b83ac9"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/mode-turn.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 84026,
+      "sha256": "e0a4a729faf9c531eda792235f3d5f36d004e275bf46208542c5ea484b5b0474"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/restored.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 84026,
+      "sha256": "bf6e90bd683b83cff9339d1cf341a24f5142aa6778600ef00b3fe6b185137201"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/resource-cycle-0.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83866,
+      "sha256": "9e6bed0d82f90362ebe9d24b5b27dac696506ee53ea412c86636eb865af1a776"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/final-calendar-check.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 1365,
+      "sha256": "bb7e90faeaecd5a0da1983b5431160251c8e3261051e66b6b21a064ca2cc645c"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/final-scrub.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83836,
+      "sha256": "97ae23d5087a95e408fa1e24b4197ceb530573fb59f8299dd91d3a06d173b4ec"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/final-calendar-22000.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83794,
+      "sha256": "341db9f8a2d9c5105546b6bbc86ad9efe48f196a8de4c180695e8907ba22db80"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/final-calendar-31000.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83846,
+      "sha256": "4c659e7a35a599196488c1d556799aab395dccdd04b7bc7e053f2992dee27914"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/final-calendar-41000.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83811,
+      "sha256": "068b8ce0fc6cedbc09d31a0b128f8307296b5046c1bbc2e3eefdd3a69919e7eb"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/final-calendar-108400.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83813,
+      "sha256": "c4ee0467de99e652703cbf9abe468dfdc7425be3dc2733bcfdd7976974767802"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/caseback-corrected.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83812,
+      "sha256": "b22d3f4cfc51801e0a15302a2c41e30afe16ee931531140bf8b18e7816365464"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/caseback-baseline.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83831,
+      "sha256": "a90297eb78125624cc2cf1982659339affbf67c8437d5231936318ce82ed3ec6"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/caseback-restore.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 6921,
+      "sha256": "2ea09d942ac912dfc9d6a1ec1f857db4afb25fea8acd3a4c4eab3e42325e4669"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/caseback-a.png",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 3339484,
+      "sha256": "083d71363828a97fab3e04e44105df125ec3d984b150b821f9ccdaa5a010405f"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/caseback-b.png",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 3339374,
+      "sha256": "78545532fb85397552a7fbc8251707fe901623df2c65583b7c8efab297ce8702"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/recorder-verification.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 3652,
+      "sha256": "d7e7b67c3c6df506edb88d608d3f2a588bea0c8b6c922298d789f4cb4cc408fd"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/paused.webm",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 3564590,
+      "sha256": "33316b3bd0b8b6953960e5c565c152d7035a20a20a9902f852f7f16e4a3449fc"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/recorder-start.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83790,
+      "sha256": "462b84fdfe70f038ea0fbc3c813febcc54873c2b61995e481df3a318e0e483c5"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/recorder-end.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 83775,
+      "sha256": "c2ddb29bc8f9db730ddfb688cc92c4be2fdbba5f773c79357fd64597518d08ae"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/recorder-start.png",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 2458932,
+      "sha256": "6f244cac700269ad98fc7c5a438c34f3e2006ebb0328411df0420d6e1ed108f2"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/recorder-end.png",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 2458377,
+      "sha256": "a4175d6c6104bc7129cd2ca1ba800470f999b8fa0c807b892fe91a3de67cfb81"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/layout-check.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 2091,
+      "sha256": "8074173a4e229bedfe6a853e9ffdc3f08ad7c9c3a472a213894aa8c198eb6b7e"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/keyboard-check.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 345,
+      "sha256": "9063b8b31c7f48ab1895a99782035bb6864a9e85aa5c3c7ca497626fa2a94a87"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/control-contract.json",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 5510,
+      "sha256": "ba8caf269d159a016528c0b32e3c93d1d5542775398003c4f50e77df3dac0075"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/control-contract.md",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 8404,
+      "sha256": "47b5a13f008863eaf2f65aed82cedfc4d4f8501c3fd427cf5c51c015c549ba0c"
+    },
+    {
+      "path": "OM10-Showcase/inspection/showcase-r11/UI-REVIEW.md",
+      "role": "r11-single-section-current-evidence",
+      "bytes": 6807,
+      "sha256": "24f83bfc89db215d351730f7cf46e4f57af9774e6928cbcd01c18cdb22c367ee"
+    },
+    {
+      "path": "OM10-Showcase/tests/showcase-controls.test.mjs",
+      "role": "r11-unified-controls-regression-test-source",
+      "bytes": 7919,
+      "sha256": "70ae8d02a3fc4019cedc6bd65392bd8611464c1d9c82c47bf4d3288418c0c043"
     },
     {
       "path": "OM10-Showcase/tests/assembly-caseback-finish.test.mjs",
@@ -1197,6 +1377,40 @@
     "checksAre": "File identity and previously saved validation consistency. Candidate checks do not establish browser integration, aesthetic/user acceptance, or physical/engineering acceptance."
   },
   "candidateEvidence": {
+    "showcaseControls": {
+      "status": "R11 views, motion, crown, appearance and optional tools integrated in one controls section",
+      "evidence": {
+        "source": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
+        "oneControlSection": true,
+        "canvasControls": 0,
+        "verifiedLayouts": [
+          {
+            "width": 1280,
+            "height": 800
+          },
+          {
+            "width": 320,
+            "height": 780
+          },
+          {
+            "width": 390,
+            "height": 844
+          },
+          {
+            "width": 430,
+            "height": 932
+          },
+          {
+            "width": 844,
+            "height": 390
+          }
+        ],
+        "noHorizontalOverflow": true,
+        "boundedKeyboardPaths": true,
+        "fullAccessibilityAcceptance": false
+      },
+      "scope": "Scoped desktop/narrow/landscape layout and current-source restoration evidence; full assistive-technology/device acceptance remains open."
+    },
     "nativeFinish": {
       "status": "Preferred separate native R10 finish variant; accepted baseline unchanged",
       "evidence": {
@@ -1216,26 +1430,39 @@
     "caseback": {
       "status": "R10 private CASEBACK axial cap corner normals integrated; exact original geometry recoverable",
       "evidence": {
-        "source": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "source": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "capTriangles": 2160,
         "studioFinishOffRestoresSource": true,
-        "restoredCorrectedPixelsIdentical": true,
-        "limits": "Scoped reconstructed-camera and appearance restore check; exact historical complaint pose, general aesthetics and physical acceptance remain separate."
+        "boundedRestore": {
+          "stateMatchesWithinNumericTolerance": true,
+          "numericStateTolerance": 1e-9,
+          "maximumNumericStateError": 0,
+          "pixelIdentical": false,
+          "renderWithinTolerance": true,
+          "metrics": {
+            "maxChannelDelta": 1,
+            "changedPixels": 154,
+            "totalPixels": 3589380,
+            "changedFraction": 0.00004290434559728978
+          }
+        },
+        "limits": "Scoped reconstructed-camera and appearance restore check with measured image tolerance; exact historical pose, general aesthetics and physical acceptance remain separate."
       },
       "limits": "Private indexed corners expanded; only cap normals changed. Final scoped browser evidence is separate from broad hardware aesthetics."
     },
     "recording": {
       "status": "R10 paused-canvas draw condition integrated; current-source encoded run verified with stationary clock snapshots",
       "evidence": {
-        "source": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
-        "actualDurationSeconds": 7.925554,
+        "source": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
+        "actualDurationSeconds": 7.974165,
         "dimensions": [
-          1385,
-          1478
+          2346,
+          1530
         ],
         "stationaryClockSnapshots": true,
         "pngExactPixelIdentity": false,
         "pngMaximumChannelDelta": 1,
+        "pngChangedPixels": 61,
         "limits": "One actual encoded run; requested8seconds is not encoded duration, stationary clocks do not imply exact pixel identity or physical acceptance."
       },
       "limits": "Requested duration is not actual encoded duration. Historical939 paused clip actual7.944584seconds remains separate; final run reports measured duration and near-identical rather than exact PNGs."
@@ -1276,17 +1503,17 @@
     },
     "calendar": {
       "status": "R09 indexed calendar helper and calibration data integrated into shared train-time kinematics",
-      "statusDetail": "R10 current-source local browser verified hold22000s, partial31000s, full41000s and next-day hold108400s; earlier source-specific captures remain historical; physical calendar acceptance remains open",
+      "statusDetail": "R11 current-source local browser verified hold22000s, partial31000s, full41000s and next-day hold108400s; earlier source-specific captures remain historical; physical calendar acceptance remains open",
       "limits": "Sampled calibration and kinematic tests do not establish full physical calendar operation or acceptance."
     },
     "winding": {
       "status": "R09 crown-coupled winding helper and calibration integrated into shared mechanism",
-      "statusDetail": "R10 current-source local browser verified seated winding, held reverse return, pulled held drive, retained push angle and exact restore; bounded discrete endpoints only",
+      "statusDetail": "R11 current-source local browser verified seated winding, held reverse return, pulled held drive, retained push angle and exact restore; bounded discrete endpoints only",
       "limits": "Sampled winding, clutch, and spring behavior; physical torque, wear, tolerance, and acceptance remain unresolved."
     },
     "setting": {
       "status": "R09 manual setting/friction helper and native engagement endpoints integrated with crown setting interaction",
-      "statusDetail": "R10 current-source local browser verified pull without hand seek, negative15degree stroke advances100seconds with mechanism held, retained push angle and pixel-identical1385x1478 restore",
+      "statusDetail": "R11 current-source local browser verified pull without hand seek, negative15degree stroke advances100seconds with mechanism held, retained push angle and semantic2346x1530 restore with measured one-code-value image tolerance",
       "limits": "Kinematic candidate only; physical friction, force, durability, tolerance, and acceptance remain unresolved."
     },
     "leatherCraft": {
@@ -1303,11 +1530,11 @@
       "status": "Integrated solid rails and60ticks; scoped R08 desktop/mobile and warmed resource checks verified; broader styling, native parity and real-phone acceptance remain open"
     },
     "controls": {
-      "status": "Historical R05 panel contract retained; scoped R08 desktop/narrow interactions, restore, context recovery and reduced-motion checks verified; full keyboard, screen-reader, touch and real-device acceptance remain open"
+      "status": "R11 unified showcase section integrated; historical R05 contract and scoped R08 checks retained; full keyboard, screen-reader, touch and real-device acceptance remain open"
     }
   },
   "localBrowserEvidence": {
-    "source": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+    "source": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
     "settingAndRestore": {
       "pullNoHandSeek": true,
       "pullHeldDrive": true,
@@ -1315,11 +1542,40 @@
       "heldMechanism": true,
       "pushRetainedAngle": true,
       "reverseReturnHeldRatchet": true,
-      "restorePixelsIdentical": true
+      "restorePixelsIdentical": false,
+      "restoreStateIdentical": true,
+      "restoreImageWithinTolerance": true
+    },
+    "boundedRestore": {
+      "stateMatchesWithinNumericTolerance": true,
+      "numericStateTolerance": 1e-9,
+      "maximumNumericStateError": 0,
+      "pixelIdentical": false,
+      "renderWithinTolerance": true,
+      "metrics": {
+        "maxChannelDelta": 1,
+        "changedPixels": 56,
+        "totalPixels": 3589380,
+        "changedFraction": 0.000015601580217196285
+      }
+    },
+    "warmup": {
+      "path": "resource-cycle-0.json",
+      "cycle": 0,
+      "renderer": {
+        "drawCalls": 1059,
+        "triangles": 4997278,
+        "geometries": 356,
+        "textures": 14
+      },
+      "owners": 28,
+      "warnings": [],
+      "source": "verified",
+      "note": "Initial original/private geometry GPU upload; subsequent thirteen cycles are measured plateau."
     },
     "restoredSize": [
-      1385,
-      1478
+      2346,
+      1530
     ],
     "warmedCycles": 13,
     "stableResources": {
@@ -1334,7 +1590,7 @@
       108400
     ],
     "scrub": "Current-source pulled-mode scrub reseats before seek",
-    "limits": "Current desktop browser discrete endpoints, exact restored PNGs and finite resource cycles; physical dynamics, continuous pull, quick-date and real phones remain open."
+    "limits": "Unified control-section UI with bounded actual desktop/responsive browser mode and restore checks. Restored state matches; image differences max1 code value, not exact pixel identity. Physical devices, full accessibility, dynamics and broad aesthetics remain open."
   },
   "historicalOpticsEvidence": {
     "source": "c97660b52b69029b6c26149f2027fcd3666456875aad0cf8945b6c3a6d3bd16b",
@@ -2310,17 +2566,17 @@
     {
       "image": "OM10-Showcase/dist/quality-study/01-front.png",
       "configuration": "OM10-Showcase/dist/quality-study/01-front.json",
-      "capturedAt": "2026-10-26T18:37:50.944Z",
+      "capturedAt": "2026-10-27T04:20:52.750Z",
       "view": "face",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1220,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "digest": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -2447,8 +2703,8 @@
           },
           {
             "path": "assembly-quality.css",
-            "bytes": 21469,
-            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+            "bytes": 24590,
+            "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
           },
           {
             "path": "assembly-recording.js",
@@ -2472,13 +2728,13 @@
           },
           {
             "path": "assembly-review.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "assembly-review.js",
-            "bytes": 66556,
-            "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+            "bytes": 66744,
+            "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -2527,8 +2783,8 @@
           },
           {
             "path": "index.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "material-review-model.js",
@@ -2551,26 +2807,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-26T18:37:50.937Z",
+        "verifiedAt": "2026-10-27T04:20:52.744Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+      "currentViewerHashAtCapture": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/02-three-quarter.png",
       "configuration": "OM10-Showcase/dist/quality-study/02-three-quarter.json",
-      "capturedAt": "2026-10-26T18:37:51.566Z",
+      "capturedAt": "2026-10-27T04:20:53.031Z",
       "view": "showcase",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1220,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "digest": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -2697,8 +2953,8 @@
           },
           {
             "path": "assembly-quality.css",
-            "bytes": 21469,
-            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+            "bytes": 24590,
+            "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
           },
           {
             "path": "assembly-recording.js",
@@ -2722,13 +2978,13 @@
           },
           {
             "path": "assembly-review.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "assembly-review.js",
-            "bytes": 66556,
-            "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+            "bytes": 66744,
+            "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -2777,8 +3033,8 @@
           },
           {
             "path": "index.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "material-review-model.js",
@@ -2801,26 +3057,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-26T18:37:51.559Z",
+        "verifiedAt": "2026-10-27T04:20:53.026Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+      "currentViewerHashAtCapture": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/03-interior.png",
       "configuration": "OM10-Showcase/dist/quality-study/03-interior.json",
-      "capturedAt": "2026-10-26T18:37:52.255Z",
+      "capturedAt": "2026-10-27T04:20:53.296Z",
       "view": "interior",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1220,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "digest": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -2947,8 +3203,8 @@
           },
           {
             "path": "assembly-quality.css",
-            "bytes": 21469,
-            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+            "bytes": 24590,
+            "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
           },
           {
             "path": "assembly-recording.js",
@@ -2972,13 +3228,13 @@
           },
           {
             "path": "assembly-review.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "assembly-review.js",
-            "bytes": 66556,
-            "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+            "bytes": 66744,
+            "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3027,8 +3283,8 @@
           },
           {
             "path": "index.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "material-review-model.js",
@@ -3051,26 +3307,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-26T18:37:52.249Z",
+        "verifiedAt": "2026-10-27T04:20:53.289Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+      "currentViewerHashAtCapture": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/04-balance.png",
       "configuration": "OM10-Showcase/dist/quality-study/04-balance.json",
-      "capturedAt": "2026-10-26T18:37:52.863Z",
+      "capturedAt": "2026-10-27T04:20:53.589Z",
       "view": "balance",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1220,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "digest": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3197,8 +3453,8 @@
           },
           {
             "path": "assembly-quality.css",
-            "bytes": 21469,
-            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+            "bytes": 24590,
+            "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
           },
           {
             "path": "assembly-recording.js",
@@ -3222,13 +3478,13 @@
           },
           {
             "path": "assembly-review.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "assembly-review.js",
-            "bytes": 66556,
-            "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+            "bytes": 66744,
+            "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3277,8 +3533,8 @@
           },
           {
             "path": "index.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "material-review-model.js",
@@ -3301,26 +3557,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-26T18:37:52.857Z",
+        "verifiedAt": "2026-10-27T04:20:53.584Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+      "currentViewerHashAtCapture": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/05-train.png",
       "configuration": "OM10-Showcase/dist/quality-study/05-train.json",
-      "capturedAt": "2026-10-26T18:37:53.472Z",
+      "capturedAt": "2026-10-27T04:20:53.901Z",
       "view": "train",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1220,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "digest": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3447,8 +3703,8 @@
           },
           {
             "path": "assembly-quality.css",
-            "bytes": 21469,
-            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+            "bytes": 24590,
+            "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
           },
           {
             "path": "assembly-recording.js",
@@ -3472,13 +3728,13 @@
           },
           {
             "path": "assembly-review.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "assembly-review.js",
-            "bytes": 66556,
-            "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+            "bytes": 66744,
+            "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3527,8 +3783,8 @@
           },
           {
             "path": "index.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "material-review-model.js",
@@ -3551,26 +3807,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-26T18:37:53.467Z",
+        "verifiedAt": "2026-10-27T04:20:53.896Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+      "currentViewerHashAtCapture": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/06-leather.png",
       "configuration": "OM10-Showcase/dist/quality-study/06-leather.json",
-      "capturedAt": "2026-10-26T18:37:54.092Z",
+      "capturedAt": "2026-10-27T04:20:54.205Z",
       "view": "lug",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1220,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "digest": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3697,8 +3953,8 @@
           },
           {
             "path": "assembly-quality.css",
-            "bytes": 21469,
-            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+            "bytes": 24590,
+            "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
           },
           {
             "path": "assembly-recording.js",
@@ -3722,13 +3978,13 @@
           },
           {
             "path": "assembly-review.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "assembly-review.js",
-            "bytes": 66556,
-            "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+            "bytes": 66744,
+            "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3777,8 +4033,8 @@
           },
           {
             "path": "index.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "material-review-model.js",
@@ -3801,26 +4057,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-26T18:37:54.087Z",
+        "verifiedAt": "2026-10-27T04:20:54.199Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+      "currentViewerHashAtCapture": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/mobile-front.png",
       "configuration": "OM10-Showcase/dist/quality-study/mobile-front.json",
-      "capturedAt": "2026-10-26T18:37:54.703Z",
+      "capturedAt": "2026-10-27T04:20:54.536Z",
       "view": "face",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 938,
-        "height": 1372,
+        "height": 1247,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+        "digest": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3947,8 +4203,8 @@
           },
           {
             "path": "assembly-quality.css",
-            "bytes": 21469,
-            "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+            "bytes": 24590,
+            "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
           },
           {
             "path": "assembly-recording.js",
@@ -3972,13 +4228,13 @@
           },
           {
             "path": "assembly-review.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "assembly-review.js",
-            "bytes": 66556,
-            "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+            "bytes": 66744,
+            "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -4027,8 +4283,8 @@
           },
           {
             "path": "index.html",
-            "bytes": 20849,
-            "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+            "bytes": 20478,
+            "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
           },
           {
             "path": "material-review-model.js",
@@ -4051,10 +4307,10 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-26T18:37:54.696Z",
+        "verifiedAt": "2026-10-27T04:20:54.530Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "f3f7688f4722f5b7d0ec10a25462b9dd4fe1f4ac9cb3177e3a6c1af14b1ab096",
+      "currentViewerHashAtCapture": "34f0000f81e3bd7266a643a05f05177f60b4803b90fcd4affc3013e9f105c642",
       "captureMatchesCurrentViewer": true
     }
   ],

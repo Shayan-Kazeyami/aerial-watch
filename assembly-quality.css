@@ -104,3 +104,36 @@ aside .everyday-controls .small,aside .crown-controls .small,aside .advanced-bod
 @media(min-width:1500px){.quality-upgrade main{grid-template-columns:minmax(0,1fr) 346px}.quality-upgrade aside{padding:30px 29px}.quality-upgrade .viewer{min-height:700px}}
 @media(max-width:1050px) and (min-width:701px){.quality-upgrade main{grid-template-columns:minmax(0,1fr) 294px}.quality-upgrade aside{padding:24px 20px}.quality-upgrade .viewer{min-height:650px}}
 @media(max-width:700px){.quality-upgrade main{display:flex;flex-direction:column}.quality-upgrade .viewer{position:relative;top:auto;height:calc(100svh - 74px);min-height:560px;max-height:900px}.quality-upgrade aside{width:100%;padding:26px 7% 30px}.quality-upgrade .panel-heading h1{font-size:27px;letter-spacing:-.5px;margin-top:10px}.panel-heading p{font-size:12px}.quality-upgrade aside h2{font-size:13px}.quality-upgrade aside .small{font-size:11px}.quality-upgrade aside .check{font-size:13px;min-height:44px}.quality-upgrade .motion-summary .check{font-size:12px}.quality-upgrade .everyday-controls #primary-motion-status{font-size:11px}.quality-upgrade aside button,.quality-upgrade .file-action{min-height:44px;font-size:12px}.quality-upgrade aside details>summary{min-height:55px;font-size:13px}.quality-upgrade aside .field{font-size:12px}.quality-upgrade aside .field select,.quality-upgrade aside .field input{font-size:12px}.quality-upgrade .appearance-panel .small{max-width:none;font-size:11px}.quality-upgrade .capture-actions button,.quality-upgrade .file-action{font-size:11px}}
+
+/* Main-site showcase: one control section, with an unobstructed watch canvas. */
+.quality-upgrade .viewer #stage{top:56px;bottom:48px}
+.quality-upgrade .viewer .overlay{bottom:19px}
+.quality-upgrade .viewer .studio-index{display:none}
+#showcase-controls .views{position:static;inset:auto;transform:none;width:auto;display:block;margin:0;padding:18px 0;border:0;border-bottom:1px solid var(--line);text-align:left;color:var(--ink)}
+#showcase-controls .view-main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+#showcase-controls .views button{min-width:0;min-height:44px;padding:9px 6px;border:1px solid #aeb9b0;background:#f9f8f2;color:#243831;font-size:11px;line-height:1.4;letter-spacing:0;text-transform:none}
+#showcase-controls .views button.active,#showcase-controls .views button[aria-pressed=true]{background:#dce5df;border-color:#758c80;color:#213d34;text-decoration:none}
+#showcase-controls .view-detail{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+#showcase-controls .view-detail button{flex:1}
+#showcase-controls .detail-label{display:none}
+#showcase-controls .view-secondary{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;align-items:start}
+#showcase-controls .camera-more{position:static;min-width:0;text-align:left}
+#showcase-controls .camera-more>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:9px 6px;border:1px solid #aeb9b0;border-radius:3px;background:#f9f8f2;color:#243831;font-size:11px;letter-spacing:0;text-transform:none}
+#showcase-controls .camera-more[open]{grid-column:1/-1}
+#showcase-controls .camera-more[open]+#tour{grid-column:1/-1}
+#showcase-controls .camera-more>div{position:static;inset:auto;transform:none;width:auto;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:6px 0 0;padding:0;background:transparent;border:0;box-shadow:none}
+#showcase-controls .camera-more:not([open])>div{display:none}
+#showcase-controls #interior-pins{position:static;inset:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;pointer-events:auto}
+#showcase-controls #interior-pins[hidden]{display:none}
+#showcase-controls #interior-pins button{position:static;transform:none;width:auto;height:auto;min-height:44px;padding:9px 5px;border-radius:3px;border:1px solid #aeb9b0;background:#f9f8f2;color:#243831;box-shadow:none;text-align:center;font-size:11px}
+#showcase-controls #interior-pins button:hover{background:#e8ede5;border-color:#758c80}
+#showcase-controls #interior-pins button[aria-pressed=true]{background:#dce5df;border-color:#758c80;color:#213d34}
+#showcase-controls #retry{width:100%;min-height:44px;margin-top:14px;background:#263e41;color:#fff}
+@media(max-width:700px){
+  .quality-upgrade .viewer{height:min(68svh,620px);min-height:420px;max-height:none}
+  .quality-upgrade .viewer #stage{top:47px;bottom:28px}
+  .quality-upgrade .viewer .overlay{display:none}
+  #showcase-controls{padding-top:20px}
+  #showcase-controls .views{padding-top:16px}
+  #showcase-controls .views button,#showcase-controls .camera-more>summary{font-size:12px}
+}

@@ -200,8 +200,8 @@
     },
     {
       "path": "assembly-quality.css",
-      "sizeBytes": 21469,
-      "sha256": "bd4eb59334cfa78314314f10ea2c097985aadda10c4223d52e34029163551f26"
+      "sizeBytes": 24590,
+      "sha256": "dcb7a89812cb4a5525d1f920ee7a79bc6a006e56390283473134e084746f08db"
     },
     {
       "path": "assembly-recording.js",
@@ -225,13 +225,13 @@
     },
     {
       "path": "assembly-review.html",
-      "sizeBytes": 20849,
-      "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+      "sizeBytes": 20478,
+      "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 66556,
-      "sha256": "cbd16aaccb99e134e3595858788a7c6deb0b04f244e0d4c60759106b44045e5c"
+      "sizeBytes": 66744,
+      "sha256": "b6858a89852eb1d2f370b03ccc60938395275b78682bb11f521f729c2e5da4ce"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -365,8 +365,8 @@
     },
     {
       "path": "index.html",
-      "sizeBytes": 20849,
-      "sha256": "8d453eed8786c30ac1f755ab0be66e6d1d93ff3e23e31be6bfacd41c5a12e694"
+      "sizeBytes": 20478,
+      "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
     },
     {
       "path": "material-review-model.js",
@@ -415,93 +415,93 @@
     },
     {
       "path": "quality-study/01-front.json",
-      "sizeBytes": 61109,
-      "sha256": "5537ee989681724f04e95edadd7d229ce568d72473cc1f9958035cc139744ce7"
+      "sizeBytes": 87071,
+      "sha256": "fc03b8ce6d9249cb5c112858ad6b9c29e64756e8e6f8a77e353308bfb6eac168"
     },
     {
       "path": "quality-study/01-front.png",
-      "sizeBytes": 1813863,
-      "sha256": "29657109e4952e10c4682bd74b5264dd71883ac7c471cb2094c3f547fb26878f"
+      "sizeBytes": 2458381,
+      "sha256": "056d35e60c7034df13d20a2364e2aad32e12ace76f19efd620e0101975fdfbb3"
     },
     {
       "path": "quality-study/01-front.webp",
-      "sizeBytes": 75040,
-      "sha256": "56e16552e385bbdc7d799b24e328324f7538f8b56e06ced60162d78a16c2688a"
+      "sizeBytes": 99296,
+      "sha256": "608a94124b8f2428ced68c6d4445ab4f24eeeb7ada4c9cad7061d08ed0286b72"
     },
     {
       "path": "quality-study/02-three-quarter.json",
-      "sizeBytes": 69803,
-      "sha256": "33c9b80cb7b99193d53047b99205ec99463124e73a23eb1d6a30e9db01bdb391"
+      "sizeBytes": 87123,
+      "sha256": "88a05a15597f8a59856f674e31324cff5f04b755eb0ddbc3a3c047361558b975"
     },
     {
       "path": "quality-study/02-three-quarter.png",
-      "sizeBytes": 1712259,
-      "sha256": "5d3679b2144e65d19e177b70b7b7b05a6b08de2de21d7395cc7644d1d71c5b56"
+      "sizeBytes": 2159271,
+      "sha256": "fe360153516101535edb92b1e05348032842585f626b6c33966a4d98820ccaf7"
     },
     {
       "path": "quality-study/02-three-quarter.webp",
-      "sizeBytes": 55300,
-      "sha256": "4665c673d0903ddc2d6384f3c9107b9c8ee39f9480702b4f9f4f746121e9121c"
+      "sizeBytes": 74598,
+      "sha256": "2a2222bf44bf705b37a93c48ca01af740ab01d8a9b400abf69aad6afa6811b1e"
     },
     {
       "path": "quality-study/03-interior.json",
-      "sizeBytes": 78424,
-      "sha256": "18855b886541811d4f39fcf9b6a6af0173a0b02aea3798e9ceda5705795d7803"
+      "sizeBytes": 87089,
+      "sha256": "3623a3491d62b3fa4df0f834999cb69efb2d240038a85e46ec54effc379649d5"
     },
     {
       "path": "quality-study/03-interior.png",
-      "sizeBytes": 1585426,
-      "sha256": "8c9fcdc5e47bb7c9c5887626d73754f8c23f229e2901260238b45c35a7de8c50"
+      "sizeBytes": 2111080,
+      "sha256": "117a9e54df620b7a42bbd8a4e998dfb24417995019fb7505767987bb725ee0b0"
     },
     {
       "path": "quality-study/03-interior.webp",
-      "sizeBytes": 68664,
-      "sha256": "f28e4a7b14b2bd94007a2ce1ed14efb74ec2b40be0987fa012c39e9fd600688b"
+      "sizeBytes": 92794,
+      "sha256": "64d72493c4f48e1f54b6453b5393c69a56143c74342f69f2261eba22a37b9dbd"
     },
     {
       "path": "quality-study/04-balance.json",
-      "sizeBytes": 87163,
-      "sha256": "726aa038d1a417ff007409f282b36b2904c0243a9883db60a517551485b2a9ed"
+      "sizeBytes": 87071,
+      "sha256": "dbcc5db62340d81fb90fca014e1fab8d278c430b693fc3ca52506357372cea12"
     },
     {
       "path": "quality-study/04-balance.png",
-      "sizeBytes": 2685429,
-      "sha256": "cde957198f7189c8647b6bb808760af0eaae75a479f1867f8442a575cd4a8806"
+      "sizeBytes": 3220789,
+      "sha256": "75f8efaadace3574fa78f40d6c4e2a15b4fd72c5476b8b5d4e8d768c3a1aa561"
     },
     {
       "path": "quality-study/04-balance.webp",
-      "sizeBytes": 107010,
-      "sha256": "5c83539d727560a68fd0520de1f89bccb19350de3aa9ba1031c2c8392f203da4"
+      "sizeBytes": 124218,
+      "sha256": "1ccae42dfd814a056ee8f55fa3d99f2162a6ce2753d91480a40995a0f41ace04"
     },
     {
       "path": "quality-study/05-train.json",
-      "sizeBytes": 87175,
-      "sha256": "c877c73d79795e564feb27f2f796b19c9370348e8bf858a437c9aafe250fa41b"
+      "sizeBytes": 87095,
+      "sha256": "46017d76a600460f9e57756363b5d8dbe08d62b3a83b752fb2e94724743ca9c3"
     },
     {
       "path": "quality-study/05-train.png",
-      "sizeBytes": 2321501,
-      "sha256": "33f26d025de9f0cbee0ae802610374aac0731cd5e59672024cf7687af292ee93"
+      "sizeBytes": 2903169,
+      "sha256": "a1836ca79c75e14c2522cb3fd26c1dbddcdc5022316601ab5bb4164a56dfaa4c"
     },
     {
       "path": "quality-study/05-train.webp",
-      "sizeBytes": 112708,
-      "sha256": "41d926e708164d4a098baf412543f7131b0d0b521ef904728eab00088f3f844e"
+      "sizeBytes": 138978,
+      "sha256": "370f60cd6b014fce67aadcc5c3c7109ac66fa5bfe02057bd4dc6d0fc26e3ffcd"
     },
     {
       "path": "quality-study/06-leather.json",
-      "sizeBytes": 87126,
-      "sha256": "2c7daa2bea7ae410f3e347dd90a0b56432ae34cbbabc4779b5fc26da42d96079"
+      "sizeBytes": 87059,
+      "sha256": "8fe603f13a1b69040ba9473bcb8d411f7931b823f1e347ad7388fca8f3a2a5bc"
     },
     {
       "path": "quality-study/06-leather.png",
-      "sizeBytes": 1911642,
-      "sha256": "6c135dfe7b3242c42d5800090847724a63194ccdc23086ce3aff24377fbfd2ce"
+      "sizeBytes": 2383676,
+      "sha256": "2ddf8ffdcafc825460b21f366e80073315e6b5f6efdcb0f611de9c8b34a0c493"
     },
     {
       "path": "quality-study/06-leather.webp",
-      "sizeBytes": 47452,
-      "sha256": "7010e39c4a06e9ccf779f0cd765fd7c1f99f4fdf5f1ea84d3c2c30be50b2f576"
+      "sizeBytes": 64378,
+      "sha256": "a49e4daefff19451d6f63217de8cdb0bad8bfa09ac3eaa47672578d069b880f1"
     },
     {
       "path": "quality-study/form-legibility-r01.glb",
@@ -555,18 +555,18 @@
     },
     {
       "path": "quality-study/mobile-front.json",
-      "sizeBytes": 87128,
-      "sha256": "f80c24c3774140e998f966d91b9f289b46607458817885fdea2793579914bf72"
+      "sizeBytes": 87038,
+      "sha256": "642e9cad86afad48b0032eb21d5c61c6664db34c2407b651b55f0a330c8584dd"
     },
     {
       "path": "quality-study/mobile-front.png",
-      "sizeBytes": 975499,
-      "sha256": "3a82389fd97a09e37666623a9b43bb3d4b4ef62dd12fc73e4ea6a3b1408e323f"
+      "sizeBytes": 852377,
+      "sha256": "23734baf7650eee0df291ee9ddeb96359cf0bea70827ed4f4bd71eeabb71fd33"
     },
     {
       "path": "quality-study/mobile-front.webp",
-      "sizeBytes": 97060,
-      "sha256": "b7ab6b98e16ff9bdf7d55e8aed4102a3c331645706e8e1ab6f7717cda9def3cb"
+      "sizeBytes": 84420,
+      "sha256": "b83113adbf98e3ffad92261572ff57832e6bd6344e0b6354c6c6b916651f4065"
     },
     {
       "path": "quality-study/native-front.png",
@@ -605,8 +605,8 @@
     },
     {
       "path": "quality-study/revision-manifest.json",
-      "sizeBytes": 144468,
-      "sha256": "7e2db1515665a38656a36f9c9485f70481ba58c060d122cd03ba723109140168"
+      "sizeBytes": 154400,
+      "sha256": "c1b7325ab9002368a92ac464f0f32338359c887bb785d779fc0bde009adfd3e8"
     },
     {
       "path": "quality-study/studio-poster.svg",
@@ -616,12 +616,12 @@
     {
       "path": "quality-study/viewer-revision.js",
       "sizeBytes": 6022,
-      "sha256": "45c7e35aecb4f9bf13bb9cb4c31e4d5c879fb883e245c8e1032b637dad1e06c8"
+      "sha256": "c49a52ae67a74a5697bde552a43e586fd1ea5c0d7447fe3ac0232bebe6e1bb87"
     },
     {
       "path": "quality-study/viewer-revision.json",
       "sizeBytes": 7485,
-      "sha256": "ba1ee50ecaeb7cbdf061da984e13f13e685e9531678db940949ddc12173880ed"
+      "sha256": "fd821a80eb16f4d5b79c76baa58d2f3ed42b79c10e1e212c082480f1ddfb7c65"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",

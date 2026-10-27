@@ -124,6 +124,8 @@ const movementViews = ['balance','train','winding'];
 const interiorOmissions=/^(CASEBACK|BACK-SCREW|REAR-CRYSTAL|STRAP|SPRINGBAR|KEEPER|BUCKLE)/;
 const pinPositions={balance:new THREE.Vector3(-3.514,8.063,-2.23),train:new THREE.Vector3(-8,0,-2.3),winding:new THREE.Vector3(6.5,-3.5,-2.4)};
 function updatePins() {
+  // Showcase focus choices live with the other controls, away from the canvas.
+  if($('interior-pins').dataset.controlsInline==='true'){$('interior-pins').hidden=!interiorView;return;}
   const rearFacing=camera.position.clone().sub(controls.target).normalize().z<-.35;
   const show=interiorView&&!isolated&&currentView==='interior'&&!cameraTween&&rearFacing; $('interior-pins').hidden=!show;
   if(!show) return;
