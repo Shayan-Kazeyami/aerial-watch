@@ -3,7 +3,7 @@
   "algorithm": "SHA-256",
   "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "UTF-8 JSON.stringify(files), sorted by relative path; entry keys path, bytes, sha256",
-  "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+  "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
   "files": [
     {
       "path": "assembly-calendar-data.js",
@@ -162,8 +162,8 @@
     },
     {
       "path": "assembly-review.js",
-      "bytes": 67341,
-      "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+      "bytes": 67456,
+      "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
     },
     {
       "path": "assembly-seconds-details.js",

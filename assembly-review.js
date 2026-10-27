@@ -142,7 +142,11 @@ const hands = [], axis = new THREE.Vector3(0,1,0), turn = new THREE.Quaternion()
 const meshes = () => [...source,...exterior];
 const eachMaterial = (material,fn) => Array.isArray(material) ? material.map(fn) : fn(material);
 const announce = message => { $('viewer-status').textContent = message; };
-function stopTour() { tour = false;tourSequence.stop(); cameraTween = null; $('tour').setAttribute('aria-pressed','false'); $('tour').textContent = 'Studio tour'; }
+function stopTour() {
+  const wasRunning=tour;
+  tour = false;tourSequence.stop(); cameraTween = null; $('tour').setAttribute('aria-pressed','false'); $('tour').textContent = 'Studio tour';
+  if(wasRunning)announce('Studio tour paused. Choose a view or restart the tour.');
+}
 controls.addEventListener('start', () => { stopTour(); cameraTween = null; });
 function fail(message,error) {
   failed = true; loadPhase='error'; $('loading').hidden = false; $('load-message').textContent = message; $('retry').hidden = false;

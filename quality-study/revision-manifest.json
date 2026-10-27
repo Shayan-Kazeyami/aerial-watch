@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 2,
-  "generatedAt": "2026-10-27T12:12:25.830Z",
-  "title": "Aerial Quality 01 / R12 bounded accessibility and lining",
-  "revision": "R12 bounded accessibility and lining",
+  "schemaVersion": 3,
+  "generatedAt": "2026-10-27T13:07:43.803Z",
+  "title": "Aerial Quality 01 / R13 bounded tour and recovery",
+  "revision": "R13 bounded tour and recovery",
   "status": "Editable visual design proposal; browser review and physical/aesthetic acceptance remain open",
   "pathBase": "Watch project root; all file paths are relative",
   "hashAlgorithm": "SHA-256",
@@ -196,8 +196,8 @@
     {
       "path": "OM10-Showcase/dist/assembly-review.js",
       "role": "viewer",
-      "bytes": 67341,
-      "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+      "bytes": 67456,
+      "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
     },
     {
       "path": "OM10-Showcase/dist/assembly-seconds-details.js",
@@ -646,86 +646,86 @@
     {
       "path": "OM10-Showcase/dist/quality-study/01-front.png",
       "role": "live-capture",
-      "bytes": 2226200,
-      "sha256": "2e8affcbec33fc0975feef96f4134e8442df1396802e556af6d8913798f0d124"
+      "bytes": 2435236,
+      "sha256": "8ce1af5478a492715b6dc7b5116a374aa51a5430432d84ca3aeb1286c37af77e"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/01-front.json",
       "role": "live-capture",
-      "bytes": 80189,
-      "sha256": "83f64e230f5d00b26605d0248d833ff8407b4d5de42ec96bba879fd3df22f63d"
+      "bytes": 61660,
+      "sha256": "82e11364d0ddfd3522a576f349712eb2ac87720b678e44e635befdf636b65102"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/02-three-quarter.png",
       "role": "live-capture",
-      "bytes": 2051512,
-      "sha256": "8aceb9ae7dc9668327b559398ba9b382b29ca429efbc88776ddf88d7f630e6c3"
+      "bytes": 2114695,
+      "sha256": "f8b914aafc6ce8a3ecb756a3ee6b52d0eaf4f93993bea6e9d518587e43b56916"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/02-three-quarter.json",
       "role": "live-capture",
-      "bytes": 87577,
-      "sha256": "c91a5fc22a8c637fb9a84c68c887c811ef771f864189642a00483f2ae5f3ea29"
+      "bytes": 70740,
+      "sha256": "b3f844f9358dbd90c0eba69cd861b89ea3fb1c6de624dee7cd0d674219fe1d5c"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/03-interior.png",
       "role": "live-capture",
-      "bytes": 1985445,
-      "sha256": "7872ae0673f277c57a9d8ffdfe7fe618d9fc58edc3d9d6c2104824c39152e836"
+      "bytes": 2086432,
+      "sha256": "7820d298721832551b64f4cfcf740c9bc9b7e308927af409954437017fafae87"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/03-interior.json",
       "role": "live-capture",
-      "bytes": 87540,
-      "sha256": "9aacd1a90a16da0139a1a8c48ee467426238170de947db1667c6290a8af79dcb"
+      "bytes": 79450,
+      "sha256": "5ceea41c6e62dd5f1f5dfbc0c648702f1faea0d142c7d15ee1b8d9da5cdee278"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/04-balance.png",
       "role": "live-capture",
-      "bytes": 2943590,
-      "sha256": "7a48b6a5d067a667d6d123251601dfe8519d378c0a7934cfce2f483a98b8b6e8"
+      "bytes": 3271138,
+      "sha256": "eb0f16937ffa4200c5912a39759fea27b34aaf921ef2d2793011f9000644225d"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/04-balance.json",
       "role": "live-capture",
-      "bytes": 87560,
-      "sha256": "8f9dc19e7e769d85ef91ef4dbf6dba5ce601e423ba70485714eeb018fcd9c468"
+      "bytes": 87259,
+      "sha256": "7fa968a9cf8a80e613ccb684621cf2f0c2b8bc8717fc4f40d9dd1a672a4f6e29"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/05-train.png",
       "role": "live-capture",
-      "bytes": 2601275,
-      "sha256": "131d8c8639f385298ad31b42740b6d29fd47cff414ec56fb74e57780565ae0fe"
+      "bytes": 2945811,
+      "sha256": "09d39ec75cdd72ba20e00bac3558a66731084fdcb453f2d33f073e05e639106d"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/05-train.json",
       "role": "live-capture",
-      "bytes": 87573,
-      "sha256": "222c11c52e5a1951d5c5582bd347f2b59ac61cbc67de3eab61d3da5b37fa9195"
+      "bytes": 87263,
+      "sha256": "857d8196a09fdbd97c64de33b3dc533ee9f39b98c118c7333861090898007847"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/06-leather.png",
       "role": "live-capture",
-      "bytes": 2237780,
-      "sha256": "e489e96a2750ff05b5567f578680086fed60a80d3241fccce08cd79b06b71ca1"
+      "bytes": 2390725,
+      "sha256": "d99a7c5ba348eccce6ff59974e425065c04f6fd99cf5bba2e89874d1adab0fb5"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/06-leather.json",
       "role": "live-capture",
-      "bytes": 87536,
-      "sha256": "86f44d6b1e5142db4967fe797657dd307c4dd059eaa7a5de9d9200845987925c"
+      "bytes": 87237,
+      "sha256": "dff34dba6adc04ee42204fe033b83dd891e1b3fd5874c8e28af480d2768b6e13"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/mobile-front.png",
       "role": "poster-or-gallery",
-      "bytes": 910643,
-      "sha256": "c043cd6d728a4e1683716d1d3008afd86e75d8267ad451f7692dc9fa828fef61"
+      "bytes": 845407,
+      "sha256": "7667c6c84d032d0b3e0549792d9f2d4de2aa7b04faa2c9c65afc65183003e175"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/mobile-front.json",
       "role": "poster-or-gallery",
-      "bytes": 87509,
-      "sha256": "3e9393fa7c707aaf85c876bf5f3322d58308278dc17f4289f723aadd05a8c08c"
+      "bytes": 87190,
+      "sha256": "8795b7ab56cc27f3b9b2b5ff66d2188cae0232bdf078133378b3c4b2ef1feecb"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/studio-poster.svg",
@@ -749,49 +749,49 @@
       "path": "OM10-Showcase/dist/quality-study/viewer-revision.json",
       "role": "capture-source-identity",
       "bytes": 7645,
-      "sha256": "1bb561fc0702670ff29af80a868433fc19fbcfaecf99ff60c688298329ad3725"
+      "sha256": "f221e1531c80ba12ad09ada5bd67bd96c088d080b8ee961d996e82288e7ed5de"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/viewer-revision.js",
       "role": "capture-source-identity",
       "bytes": 6148,
-      "sha256": "131be3ade9855b0f501932c32d2967d0a08bdfb39a36f3eb8c2b614ac6e090f3"
+      "sha256": "db495faee27da7f7775f2422dbde5f837b41c6e65efc7eccd4f6f439e78e8764"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/01-front.webp",
       "role": "display-preview",
-      "bytes": 85106,
-      "sha256": "edee99c138556f74dcf3f2b9bcf9700228f587ab7fe8d8a2daee0f57414180d4"
+      "bytes": 99404,
+      "sha256": "1bfdb5cae5effc89eae4d43a742631c9074e443acd91bf8362c0480db2258a30"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/02-three-quarter.webp",
       "role": "display-preview",
-      "bytes": 61922,
-      "sha256": "3c4588ab8a774c62e96ff6e49680305093dafdd64613905469af17e90267c9c8"
+      "bytes": 73648,
+      "sha256": "ece8c11f32185da5f776c1297bda34559e64e5e36f27c097a8cebe6efd8c5b94"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/03-interior.webp",
       "role": "display-preview",
-      "bytes": 77962,
-      "sha256": "526878cc557aaed514f96b9c1a4fb57f098fd2f204b0611153728602c8bf9090"
+      "bytes": 93110,
+      "sha256": "b932cf76b5831225716e6f5d3cb42950d4a0943c653b2174eeabd8567ec166b0"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/04-balance.webp",
       "role": "display-preview",
-      "bytes": 114512,
-      "sha256": "0e11617cfbc8048b40d0013d963aa88204e3df684e221b690bc954f0b87e84cd"
+      "bytes": 124894,
+      "sha256": "25417b35ddb8c6f40ccd7b53584aac8d3d337112f9b3cea56b1ecdca40ace659"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/05-train.webp",
       "role": "display-preview",
-      "bytes": 122744,
-      "sha256": "881683f5d1e469cea6b9793b420de304dade8306777c0cd717e9f0a60dc65f92"
+      "bytes": 139236,
+      "sha256": "185575715dd3642e2cb2f746733d74f14ffa1d9bfd74d2e8696bb60a06dd2af0"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/06-leather.webp",
       "role": "display-preview",
-      "bytes": 52542,
-      "sha256": "28e30b1379c032149ac362c62de76e410ddec63d5170dafb1d9b4f8e50f857d9"
+      "bytes": 62306,
+      "sha256": "104b0f5f7b16ad282de71351ff1bf3969f9e979d01785c5764fa1a696f6dbc55"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/native-front.webp",
@@ -808,8 +808,8 @@
     {
       "path": "OM10-Showcase/dist/quality-study/mobile-front.webp",
       "role": "display-preview",
-      "bytes": 84508,
-      "sha256": "8d9d9abee15264c80c8670ee5a357e6dff63585ea72bdf16ff1e621d2eb8cba7"
+      "bytes": 84374,
+      "sha256": "f1899439eb2a44c91a758ffe375d8b9de16bd3086ec75708b73425a7c8019882"
     },
     {
       "path": "OM10-Showcase/dist/quality-study/front-architecture-r07.glb",
@@ -1292,38 +1292,140 @@
       "sha256": "c39a9905bd5810b8a8816dd0d927bfe3edda5896646aa6076c1c13ce996a7988"
     },
     {
+      "path": "OM10-Showcase/inspection/reliability-r13/integration-check.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 1629,
+      "sha256": "01d26b7cb45913361d08a1d0e190a30a7771807d558a0cac76abc19bbb8d544c"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/tour-full-cycle.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 2539,
+      "sha256": "e3c69902aae75ba3b868a5a7e00d31766e4eb410662e8bea979dbd5ca00d58f5"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/tour-interruptions.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 800,
+      "sha256": "d3db23ed640ca6e85d575b678c3a671c8e193b5e956ac97e28de08df93d59f6c"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/resize-check.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 1298,
+      "sha256": "eccc07308d5ed5348f6216d139d43683732b488a9bed339cce9dcfc4a8d09c2e"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/context-check.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 2601,
+      "sha256": "d240a02a0ad7f951ef8ea04f28f2744142f1c09ff23c8c0b02f351292aa54623"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/reduced-check.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 2345,
+      "sha256": "52a92e359d3798e2d5e2f3ec38cf570bd0c4e752658259ca07caba87f64314d0"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/status-check.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 592,
+      "sha256": "df0f4afbfae12f5648d4795582f179906ac7720362007fb7ec6b1b20dc8de0c5"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/current-source.json",
+      "role": "r13-current-reliability-evidence",
+      "bytes": 59819,
+      "sha256": "04e53919fcffdf428137d6d013bba9b85dab6693a500c0bb6dc8bd017d160aa8"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/fixture-manifest.json",
+      "role": "r13-supporting-fixture-identity-evidence",
+      "bytes": 866,
+      "sha256": "7480bf3e140e83d14b45c6f43fbe26b67b37dbbbc935db2ac9eceb16fe59ba8d"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/http-source-check.json",
+      "role": "r13-supporting-fixture-identity-evidence",
+      "bytes": 2506,
+      "sha256": "43b2fed7ff59277c6771f6bcd6507710e755f3b4360fcdf4e81e0343e854fc09"
+    },
+    {
+      "path": "OM10-Showcase/inspection/reliability-r13/load-failure-check.json",
+      "role": "r13-supporting-fixture-identity-evidence",
+      "bytes": 1173,
+      "sha256": "edaacfb6af00431434ddbe808e5d33700f708437273f2414d888da48b205d5e1"
+    },
+    {
+      "path": "OM10-Showcase/inspection/animation-r13/REPORT.md",
+      "role": "r13-bounded-animation-audit-evidence",
+      "bytes": 5865,
+      "sha256": "655a08f6ee200a3b1ded6fe2719b1c25d448791d401a9812e214cd5ddcda51cb"
+    },
+    {
+      "path": "OM10-Showcase/inspection/animation-r13/mode-map.json",
+      "role": "r13-bounded-animation-audit-evidence",
+      "bytes": 81902,
+      "sha256": "811325f96178ebd4f3f759305a93978833190d43cf3c43485f14cf646316f327"
+    },
+    {
+      "path": "OM10-Showcase/inspection/animation-r13/CLICK-SPRING.md",
+      "role": "r13-bounded-animation-audit-evidence",
+      "bytes": 3100,
+      "sha256": "f0933844620b54b5d4aec2d0da59dc86c166b700fa10bb205153e1fdd8d3fc3b"
+    },
+    {
+      "path": "OM10-Showcase/inspection/animation-r13/click-spring.json",
+      "role": "r13-bounded-animation-audit-evidence",
+      "bytes": 28780,
+      "sha256": "4a1da94a6d2f91c4ad863cef014569e660c647819ac6e0cae113687c92ee6d44"
+    },
+    {
+      "path": "OM10-Showcase/tools/animation-r13-audit.mjs",
+      "role": "r13-animation-audit-source",
+      "bytes": 5989,
+      "sha256": "b5d0618facae9ae563d40800d326338d7f690e080bec344a081291ee0ec3387b"
+    },
+    {
+      "path": "OM10-Showcase/tools/animation-r13-click-spring.mjs",
+      "role": "r13-animation-audit-source",
+      "bytes": 3467,
+      "sha256": "19a6d166adb858fd05723ee8ec5c2b1fbfaeac8d074c8ab0061056596b93f3c8"
+    },
+    {
       "path": "OM10-Showcase/inspection/showcase-r12/integration-check.json",
-      "role": "r12-current-integration-evidence",
+      "role": "historical-r12-07-integration-evidence",
       "bytes": 1211,
       "sha256": "2de17250ace99d082aae031533281ebe81a13a446f6e157e2e7be9eed5e9e4d0"
     },
     {
       "path": "OM10-Showcase/inspection/showcase-r12/keyboard-after.json",
-      "role": "r12-current-integration-evidence",
+      "role": "historical-r12-07-integration-evidence",
       "bytes": 822,
       "sha256": "4225011122214a738e198c53c56b39e5d55d508942996229303776b2338ebd2b"
     },
     {
       "path": "OM10-Showcase/inspection/showcase-r12/control-dom-after.json",
-      "role": "r12-current-integration-evidence",
+      "role": "historical-r12-07-integration-evidence",
       "bytes": 2590188,
       "sha256": "da795fd93b3ab202bf07e929720edb82b2e4f474da5ef95e1fd13442eac05b06"
     },
     {
       "path": "OM10-Showcase/inspection/showcase-r12/target-contrast-report.json",
-      "role": "r12-current-integration-evidence",
+      "role": "historical-r12-07-integration-evidence",
       "bytes": 39302,
       "sha256": "40d4a1f2d923f2eae336f4254d6b5671a5d486bccf8fa8dedcdb57dc0b8d06a5"
     },
     {
       "path": "OM10-Showcase/inspection/showcase-r12/integrated-lining.json",
-      "role": "r12-current-integration-evidence",
+      "role": "historical-r12-07-integration-evidence",
       "bytes": 60138,
       "sha256": "9f6652b1b44e0ef9be2f9cc444656e3f111a2c9422a1f285ff528965e5ec330f"
     },
     {
       "path": "OM10-Showcase/inspection/showcase-r12/layout-check.json",
-      "role": "r12-current-integration-evidence",
+      "role": "historical-r12-07-integration-evidence",
       "bytes": 1785,
       "sha256": "ced813e906e4eadcaf3f5d919a8ae4f0c56272eef2279b3ab5c8b731f30510c1"
     },
@@ -1426,7 +1528,7 @@
   },
   "candidateEvidence": {
     "showcaseControls": {
-      "status": "R12 bounded focus, target, layout and lining integration verified",
+      "status": "R12 bounded focus, target, layout and lining integration retained",
       "evidence": {
         "source": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
         "scope": "R12 current-load, bounded focus, targets, layout and lining integration only",
@@ -1454,9 +1556,10 @@
             "file": "control-dom-after.json",
             "sha256": "da795fd93b3ab202bf07e929720edb82b2e4f474da5ef95e1fd13442eac05b06"
           }
-        ]
+        ],
+        "historical": true
       },
-      "scope": "Current integration only; R11 restoration and five-layout evidence remain historical; full assistive-technology/device acceptance remains open."
+      "scope": "Historical R12 source07 integration only; R11 restoration remains historical; full assistive-technology/device acceptance remains open."
     },
     "nativeFinish": {
       "status": "Preferred separate native R10 finish variant; accepted baseline unchanged",
@@ -1566,7 +1669,7 @@
       "limits": "Kinematic candidate only; physical friction, force, durability, tolerance, and acceptance remain unresolved."
     },
     "leatherCraft": {
-      "status": "R12 integrated lining role with current-source gallery; historical R05 sampled native stitch-seat/export checks retained; fine craft and user acceptance remain open",
+      "status": "R12 integrated lining role retained with refreshed gallery; historical R05 sampled native stitch-seat/export checks retained; fine craft and user acceptance remain open",
       "savedFileEvidence": {
         "candidateHashesMatch": true,
         "baselineAndSavedMeshChecksMatch": true,
@@ -1579,10 +1682,52 @@
       "status": "Integrated solid rails and60ticks; scoped R08 desktop/mobile and warmed resource checks verified; broader styling, native parity and real-phone acceptance remain open"
     },
     "controls": {
-      "status": "R12 bounded focus and target fixes integrated; historical R11 layout and earlier checks retained; full keyboard, screen-reader, touch and real-device acceptance remain open"
+      "status": "R13 tour status recovery integrated; historical R12 bounded focus/target and R11 layout checks retained; full keyboard, screen-reader, touch and real-device acceptance remain open"
     }
   },
   "localBrowserEvidence": {
+    "source": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
+    "scope": "R13 bounded tour/status/resize integration and diagnostic recovery fixtures only",
+    "tourVerified": true,
+    "statusRecoveryVerified": true,
+    "resizeVerified": true,
+    "contextRecoveryVerified": true,
+    "reducedHandlerVerified": true,
+    "contextScope": "Actual WebGL_lose_context diagnostic fixture; not OS/device recovery",
+    "reducedScope": "EventTarget diagnostic handler fixture; not OS reduced-motion preference acceptance",
+    "fullDeviceAcceptance": false,
+    "evidence": [
+      {
+        "file": "tour-full-cycle.json",
+        "sha256": "e3c69902aae75ba3b868a5a7e00d31766e4eb410662e8bea979dbd5ca00d58f5"
+      },
+      {
+        "file": "tour-interruptions.json",
+        "sha256": "d3db23ed640ca6e85d575b678c3a671c8e193b5e956ac97e28de08df93d59f6c"
+      },
+      {
+        "file": "resize-check.json",
+        "sha256": "eccc07308d5ed5348f6216d139d43683732b488a9bed339cce9dcfc4a8d09c2e"
+      },
+      {
+        "file": "context-check.json",
+        "sha256": "d240a02a0ad7f951ef8ea04f28f2744142f1c09ff23c8c0b02f351292aa54623"
+      },
+      {
+        "file": "reduced-check.json",
+        "sha256": "52a92e359d3798e2d5e2f3ec38cf570bd0c4e752658259ca07caba87f64314d0"
+      },
+      {
+        "file": "status-check.json",
+        "sha256": "df0f4afbfae12f5648d4795582f179906ac7720362007fb7ec6b1b20dc8de0c5"
+      },
+      {
+        "file": "current-source.json",
+        "sha256": "04e53919fcffdf428137d6d013bba9b85dab6693a500c0bb6dc8bd017d160aa8"
+      }
+    ]
+  },
+  "historicalR12BrowserEvidence": {
     "source": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
     "scope": "R12 current-load, bounded focus, targets, layout and lining integration only",
     "oneControlSection": true,
@@ -1609,7 +1754,8 @@
         "file": "control-dom-after.json",
         "sha256": "da795fd93b3ab202bf07e929720edb82b2e4f474da5ef95e1fd13442eac05b06"
       }
-    ]
+    ],
+    "historical": true
   },
   "historicalR11BrowserEvidence": {
     "historical": true,
@@ -2675,17 +2821,17 @@
     {
       "image": "OM10-Showcase/dist/quality-study/01-front.png",
       "configuration": "OM10-Showcase/dist/quality-study/01-front.json",
-      "capturedAt": "2026-10-27T12:10:24.765Z",
+      "capturedAt": "2026-10-27T13:04:38.036Z",
       "view": "face",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1340,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+        "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -2847,8 +2993,8 @@
           },
           {
             "path": "assembly-review.js",
-            "bytes": 67341,
-            "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+            "bytes": 67456,
+            "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -2921,26 +3067,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-27T12:10:24.755Z",
+        "verifiedAt": "2026-10-27T13:04:38.029Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+      "currentViewerHashAtCapture": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/02-three-quarter.png",
       "configuration": "OM10-Showcase/dist/quality-study/02-three-quarter.json",
-      "capturedAt": "2026-10-27T12:10:25.216Z",
+      "capturedAt": "2026-10-27T13:04:38.942Z",
       "view": "showcase",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1340,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+        "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3102,8 +3248,8 @@
           },
           {
             "path": "assembly-review.js",
-            "bytes": 67341,
-            "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+            "bytes": 67456,
+            "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3176,26 +3322,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-27T12:10:25.209Z",
+        "verifiedAt": "2026-10-27T13:04:38.935Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+      "currentViewerHashAtCapture": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/03-interior.png",
       "configuration": "OM10-Showcase/dist/quality-study/03-interior.json",
-      "capturedAt": "2026-10-27T12:10:25.640Z",
+      "capturedAt": "2026-10-27T13:04:39.667Z",
       "view": "interior",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1340,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+        "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3357,8 +3503,8 @@
           },
           {
             "path": "assembly-review.js",
-            "bytes": 67341,
-            "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+            "bytes": 67456,
+            "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3431,26 +3577,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-27T12:10:25.632Z",
+        "verifiedAt": "2026-10-27T13:04:39.662Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+      "currentViewerHashAtCapture": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/04-balance.png",
       "configuration": "OM10-Showcase/dist/quality-study/04-balance.json",
-      "capturedAt": "2026-10-27T12:10:26.067Z",
+      "capturedAt": "2026-10-27T13:04:40.422Z",
       "view": "balance",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1340,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+        "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3612,8 +3758,8 @@
           },
           {
             "path": "assembly-review.js",
-            "bytes": 67341,
-            "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+            "bytes": 67456,
+            "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3686,26 +3832,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-27T12:10:26.062Z",
+        "verifiedAt": "2026-10-27T13:04:40.417Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+      "currentViewerHashAtCapture": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/05-train.png",
       "configuration": "OM10-Showcase/dist/quality-study/05-train.json",
-      "capturedAt": "2026-10-27T12:10:26.504Z",
+      "capturedAt": "2026-10-27T13:04:41.199Z",
       "view": "train",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1340,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+        "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -3867,8 +4013,8 @@
           },
           {
             "path": "assembly-review.js",
-            "bytes": 67341,
-            "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+            "bytes": 67456,
+            "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -3941,26 +4087,26 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-27T12:10:26.497Z",
+        "verifiedAt": "2026-10-27T13:04:41.194Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+      "currentViewerHashAtCapture": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/06-leather.png",
       "configuration": "OM10-Showcase/dist/quality-study/06-leather.json",
-      "capturedAt": "2026-10-27T12:10:26.912Z",
+      "capturedAt": "2026-10-27T13:04:41.962Z",
       "view": "lug",
       "renderProfile": "detail",
       "drawingBuffer": {
         "width": 2346,
-        "height": 1340,
+        "height": 1530,
         "msaaSamples": 4
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+        "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -4122,8 +4268,8 @@
           },
           {
             "path": "assembly-review.js",
-            "bytes": 67341,
-            "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+            "bytes": 67456,
+            "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -4196,16 +4342,16 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-27T12:10:26.906Z",
+        "verifiedAt": "2026-10-27T13:04:41.957Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+      "currentViewerHashAtCapture": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
       "captureMatchesCurrentViewer": true
     },
     {
       "image": "OM10-Showcase/dist/quality-study/mobile-front.png",
       "configuration": "OM10-Showcase/dist/quality-study/mobile-front.json",
-      "capturedAt": "2026-10-27T12:10:27.361Z",
+      "capturedAt": "2026-10-27T13:04:42.821Z",
       "view": "face",
       "renderProfile": "detail",
       "drawingBuffer": {
@@ -4215,7 +4361,7 @@
       },
       "sourceAtCapture": {
         "status": "verified",
-        "digest": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+        "digest": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
         "algorithm": "SHA-256",
         "scope": "First-party assembly/material-review JS, CSS and HTML plus index.html; excludes vendor dependencies, models and rendered images.",
         "metadataURL": "quality-study/viewer-revision.json",
@@ -4377,8 +4523,8 @@
           },
           {
             "path": "assembly-review.js",
-            "bytes": 67341,
-            "sha256": "8d2fc37bed70768e9665679af8dfd12ed3f86822937d622006b5b6cfaceaea18"
+            "bytes": 67456,
+            "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
           },
           {
             "path": "assembly-seconds-details.js",
@@ -4451,10 +4597,10 @@
             "sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
           }
         ],
-        "verifiedAt": "2026-10-27T12:10:27.354Z",
+        "verifiedAt": "2026-10-27T13:04:42.814Z",
         "limitation": "Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance."
       },
-      "currentViewerHashAtCapture": "07fd170634e1fb28fd5548351587d0756a674e6afe8ed2430288b34087cbb610",
+      "currentViewerHashAtCapture": "8d0690ae15db5503ce5b49c5d07ac76b2c50f70d4147719abc9cbb07da40b342",
       "captureMatchesCurrentViewer": true
     }
   ],
