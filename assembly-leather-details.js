@@ -10,7 +10,9 @@ export function createLeatherDetails({candidateScene,originalStraps=[]}){
  const get=role=>{
   if(materials.has(role))return materials.get(role);
   const m=role==='edgepaint'?new THREE.MeshPhysicalMaterial():finishes.apply({userData:{finishKind:role}}).clone();
-  if(role!=='edgepaint'){
+  // R05's saved native warm lining is plain. Keep its cloned finish settings,
+  // but do not transfer the generic lining preset's exterior leather grain.
+  if(role!=='edgepaint'&&role!=='lining'){
    const reference=finishes.apply({userData:{finishKind:role}});m.onBeforeCompile=reference.onBeforeCompile;m.customProgramCacheKey=reference.customProgramCacheKey;
    if(role==='leather'){
     const compile=m.onBeforeCompile;m.onBeforeCompile=shader=>{compile(shader);shader.fragmentShader=shader.fragmentShader.replace('p*4.8','p*7.').replace('p*28.','p*31.').replace('.65*pores+.35*fine','.78*pores+.22*fine').replace('-.025*finishGrad','-.014*finishGrad').replace('.08500','.12000');};m.customProgramCacheKey=()=> 'aerial-leather-r05-7-31-v1';

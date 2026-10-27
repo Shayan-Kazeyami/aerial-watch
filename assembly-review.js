@@ -32,6 +32,7 @@ import {createAssemblyWinding} from './assembly-winding.js';
 import {createAssemblySetting} from './assembly-setting.js';
 import {createAssemblySettingEngagement} from './assembly-setting-engagement.js';
 import {createCasebackFinish} from './assembly-caseback-finish.js';
+import {closeDisclosureWithFocus,isEditingControl,restoreExplorerFocus} from './assembly-control-focus.js';
 
 const $ = id => document.getElementById(id), scene = new THREE.Scene();
 const bootTime=performance.now(),clock=createPresentationClock(),resources=createResourceScope(),performanceMonitor=createPerformanceMonitor();
@@ -289,7 +290,7 @@ function view(name, transition = true) {
   } else cameraTween = null;
 }
 for (const button of document.querySelectorAll('[data-view]')) button.onclick = () => {
-  document.querySelector('.camera-more')?.removeAttribute('open');
+  closeDisclosureWithFocus(document.querySelector('.camera-more'),document.activeElement);
   stopTour();
   if (['showcase','three-quarter','back','lug','buckle'].includes(button.dataset.view)) {
     interiorView=false; isolated=null; $('movement-only').checked=false; visibility();
@@ -384,7 +385,11 @@ function showAll() {
   interiorView=false; isolated = null; $('movement-only').checked = false; visibility(); view('face');
   announce(openWork?'Complete watch restored with the open-work front proposal.':'Complete solid-dial baseline restored with all 166 original movement meshes.');
 }
-$('clear').onclick = () => { clearSelection(); announce('Selection cleared.'); };
+$('clear').onclick = () => {
+  const key=groups.find(group=>group.parts.some(mesh=>selected.includes(mesh)))?.key;
+  clearSelection(); restoreExplorerFocus($('component-list'),key,$('component-search'));
+  announce('Selection cleared.');
+};
 $('show-all').onclick = showAll;
 $('isolate').onclick = () => {
   stopTour();
@@ -523,8 +528,16 @@ $('reset').onclick = () => {
   $('component-search').value = ''; $('component-scope').value = 'all'; clearSelection(); renderExplorer(); showAll();
   announce('Open-work presentation restored and motion paused. Original movement geometry remains preserved in the baseline.');
 };
-document.addEventListener('keydown', event => { if (event.key === 'Escape' && !loading && !failed) { stopTour(); clearSelection();
-  if($('crown-controls')?.contains(document.activeElement)){$('crown-controls').open=false;$('crown-focus')?.focus({preventScroll:true});}
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && !loading && !failed) {
+  if($('crown-controls')?.contains(document.activeElement)){
+    stopTour();clearSelection();$('crown-controls').open=false;$('crown-focus')?.focus({preventScroll:true});return;
+  }
+  if(isEditingControl(event.target))return;
+  const cameraMenu=document.querySelector('.camera-more');
+  if(cameraMenu?.open&&cameraMenu.contains(document.activeElement)){
+    closeDisclosureWithFocus(cameraMenu,document.activeElement);return;
+  }
+  stopTour(); clearSelection();
 } });
 controls.listenToKeyEvents(renderer.domElement);
 renderer.domElement.addEventListener('keydown', event => {

@@ -129,6 +129,9 @@ aside .everyday-controls .small,aside .crown-controls .small,aside .advanced-bod
 #showcase-controls #interior-pins button:hover{background:#e8ede5;border-color:#758c80}
 #showcase-controls #interior-pins button[aria-pressed=true]{background:#dce5df;border-color:#758c80;color:#213d34}
 #showcase-controls #retry{width:100%;min-height:44px;margin-top:14px;background:#263e41;color:#fff}
+/* Keep compact showcase controls comfortable to target at every breakpoint. */
+#showcase-controls :is(button,select,summary,input:not([type=checkbox]):not([type=file]),.check,.file-action){min-height:44px}
+#showcase-controls :is(#primary-motion-status,#viewer-status,#motion-status,#reset-hands,#scrub-value){color:#4f6059}
 @media(max-width:700px){
   .quality-upgrade .viewer{height:min(68svh,620px);min-height:420px;max-height:none}
   .quality-upgrade .viewer #stage{top:47px;bottom:28px}
