@@ -30,3 +30,4 @@ Historical study pages are separate entry points and have not received the same
 loading-deadline regression coverage as the main studio.
 
 Run the dependency-free checks with `node --test tests/*.test.mjs`.
+Verify JavaScript syntax and deployment file identities with `node scripts/validate.mjs`.
