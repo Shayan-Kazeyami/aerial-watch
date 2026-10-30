@@ -36,9 +36,11 @@ async function loadGLTFAssetUnbounded(url,{loader,fetcher=fetch,onProgress=()=>{
   if(!response.ok)throw new Error(`Asset ${url} could not load (${response.status}).`);
   const total=Number(response.headers?.get('content-length'))||0;let buffer,loaded=0;
   if(response.body?.getReader) {
-    const reader=response.body.getReader(),chunks=[];
-    try{for(;;){signal?.throwIfAborted();const {done,value}=await reader.read();if(done)break;chunks.push(value);loaded+=value.byteLength;onProgress({loaded,total,lengthComputable:total>0});}}
-    finally{reader.releaseLock();}
+    const reader=response.body.getReader(),chunks=[];let completed=false;
+    const cancel=()=>{reader.cancel(signal?.reason).catch(()=>{});};
+    signal?.addEventListener('abort',cancel,{once:true});
+    try{for(;;){signal?.throwIfAborted();const {done,value}=await reader.read();if(done){completed=true;break;}chunks.push(value);loaded+=value.byteLength;onProgress({loaded,total,lengthComputable:total>0});}}
+    finally{signal?.removeEventListener('abort',cancel);if(!completed)cancel();reader.releaseLock();}
     const bytes=new Uint8Array(loaded);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}buffer=bytes.buffer;
   } else {buffer=await response.arrayBuffer();loaded=buffer.byteLength;onProgress({loaded,total,lengthComputable:total>0});}
   signal?.throwIfAborted();

@@ -180,8 +180,8 @@
     },
     {
       "path": "assembly-loading.js",
-      "sizeBytes": 4145,
-      "sha256": "29d6e686048bb34635abc6fd110bb588d3d856206698af828bf13feb3de71172"
+      "sizeBytes": 4376,
+      "sha256": "0dc12fbf6a9bd009fb70bc48a796dbcd36d66aaacbce9699b010a5b98a17c11c"
     },
     {
       "path": "assembly-materials.js",
@@ -235,8 +235,8 @@
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 67732,
-      "sha256": "ae38c9637fd5ec76a650bebb5e00be295f1fc5df62c397634423300f3ee4acdc"
+      "sizeBytes": 68213,
+      "sha256": "089998850f97f6fb300d88b9b225a0c1de7209f1917fc87a03eece300616ee71"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -265,8 +265,8 @@
     },
     {
       "path": "assembly-state.js",
-      "sizeBytes": 3047,
-      "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+      "sizeBytes": 3240,
+      "sha256": "de831ede1c4d40b727ef31b7611774d7c429014c839fb973b5c449959b6782f1"
     },
     {
       "path": "assembly-story.js",

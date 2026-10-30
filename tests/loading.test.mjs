@@ -16,3 +16,19 @@ test('metadata HTTP and malformed JSON failures propagate',async()=>{await asser
 test('metadata stalled response body times out',async()=>{let signal;await assert.rejects(loadJSONAsset('parts.json',{timeoutMs:20,fetcher:async(_url,options)=>{signal=options.signal;return {ok:true,json:()=>new Promise(()=>{})};}}),{name:'TimeoutError'});assert.ok(signal.aborted);});
 test('metadata honors pre-existing cancellation without fetching',async()=>{const controller=new AbortController();controller.abort();await assert.rejects(loadJSONAsset('parts.json',{signal:controller.signal,fetcher:()=>assert.fail('must not fetch')}),{name:'AbortError'});});
 test('metadata timeout disposes a completed baseline and optional proposal',async()=>{const disposed=[];await assert.rejects(loadProgressiveAssembly({loadBaseline:async()=>({id:'baseline'}),loadMetadata:()=>loadJSONAsset('parts.json',{timeoutMs:20,fetcher:()=>new Promise(()=>{})}),loadProposal:async()=>({id:'proposal'}),onBaseline:()=>assert.fail('must not initialize without metadata'),disposeUnused:value=>disposed.push(value.id)}),{name:'TimeoutError'});await new Promise(resolve=>setImmediate(resolve));assert.deepEqual(disposed.sort(),['baseline','proposal']);});
+
+test('timeout cancels a stalled response stream and releases its reader',async()=>{
+  let cancelled=0;
+  const body=new ReadableStream({cancel(){cancelled++;}});
+  await assert.rejects(loadGLTFAsset('watch.glb',{...options,timeoutMs:20,fetcher:async()=>new Response(body)}),{name:'TimeoutError'});
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(cancelled,1);
+  assert.equal(body.locked,false);
+});
+test('progress callback failure cancels the unfinished response stream',async()=>{
+  let cancelled=0;
+  const body=new ReadableStream({start(controller){controller.enqueue(new Uint8Array([1]));},cancel(){cancelled++;}});
+  await assert.rejects(loadGLTFAsset('watch.glb',{...options,fetcher:async()=>new Response(body),onProgress:()=>{throw new Error('progress failed');}}),/progress failed/);
+  assert.equal(cancelled,1);
+  assert.equal(body.locked,false);
+});
