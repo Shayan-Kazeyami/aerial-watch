@@ -15,7 +15,7 @@ import {updateInspectionDepth} from './assembly-depth.js';
 import {createRefractionAwareAO} from './assembly-glass-ao.js';
 import {createPresentationClock} from './assembly-clock.js';
 import {partVisible,createVariantManifest,createResourceScope,createObjectTreeDisposer,disposeObjectTree} from './assembly-state.js';
-import {loadGLTFAsset,loadProgressiveAssembly} from './assembly-loading.js';
+import {loadGLTFAsset,loadJSONAsset,loadProgressiveAssembly} from './assembly-loading.js';
 import {createPerformanceMonitor} from './assembly-performance.js';
 import {RENDER_PROFILES,resolveRenderResolution} from './assembly-resolution.js';
 import {createCrownInteraction,createCrownVisual} from './assembly-crown.js';
@@ -152,6 +152,8 @@ function fail(message,error) {
   failed = true; loadPhase='error'; $('loading').hidden = false; $('load-message').textContent = message; $('retry').hidden = false;
   $('inspection-controls').disabled = true; $('view-controls').disabled = true;
   $('assembly-canvas').setAttribute('aria-busy','false'); announce(message);
+  for (const id of ['primary-motion-status','motion-status']) $(id).textContent='Interactive motion unavailable. Reload the viewer to retry.';
+  $('render-status').textContent='3D rendering unavailable.';
   if (error) console.error(error);
 }
 $('retry').onclick = () => location.reload();
@@ -683,10 +685,10 @@ function initializeBaseline(result,metadata){
 loadProgressiveAssembly({
   signal:lifecycle.signal,disposeUnused:result=>disposeObjectTree((result.gltf||result).scene),
   loadBaseline:()=>loadGLTFAsset('rebuild/assembly.glb',{...assetOptions(),onProgress:p=>{if(!lifecycle.disposed&&!failed)$('load-message').textContent=`Preparing the watch · ${(p.loaded/1048576).toFixed(1)} MB`;}}),
-  loadMetadata:()=>fetch('assets/manual-a-parts.json',{signal:lifecycle.signal}).then(r=>{if(!r.ok)throw new Error('Movement metadata could not load.');return r.json();}),
+  loadMetadata:()=>loadJSONAsset('assets/manual-a-parts.json',{signal:lifecycle.signal}),
   loadProposal:()=>{proposalLoading=true;return loadGLTFAsset('quality-study/open-front-plates.glb',assetOptions());},
   onBaseline:initializeBaseline,onProposal:installProposal,onWarning:proposalWarning,onPhase:phase=>{loadPhase=phase;},
-}).catch(error=>{if(!lifecycle.disposed)fail('The assembly could not load. Reload the viewer to retry. Static renders remain available below.',error);});
+}).catch(error=>{if(!lifecycle.disposed)fail(error.name==='TimeoutError'?'Loading took too long. Check your connection and reload the viewer. Static renders remain available below.':'The assembly could not load. Reload the viewer to retry. Static renders remain available below.',error);});
 
 function captureConfiguration({clockStamp}={}){
   const gl=renderer.getContext(),extension=gl.getExtension('WEBGL_debug_renderer_info');
