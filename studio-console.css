@@ -191,3 +191,14 @@
  .integrated-studio .details-body #selection{position:absolute!important;left:0!important;top:94px!important;width:140px!important}
 }
 @media(min-width:1050px){.integrated-studio .details-body #selection{grid-area:auto!important}}
+
+/* Keep the short right-hand groups in one independent column. Shared grid
+   rows otherwise grow to match the explorer and push diagnostics off screen. */
+.integrated-studio .studio-meta{grid-column:3;grid-row:1/5;display:flex;flex-direction:column;gap:7px;min-width:0}
+.integrated-studio #showcase-controls .studio-meta .quality-diagnostics{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.integrated-studio #showcase-controls .studio-meta #diagnostics-report{grid-column:1/-1;max-height:24px;margin:0;white-space:pre-wrap}
+@media(max-width:1049px){.integrated-studio .studio-meta{width:100%}}
+.integrated-studio #showcase-controls .studio-meta .tour-navigation{padding:0;margin:0}
+.integrated-studio #showcase-controls .studio-meta .render-information a{margin:0}
+.integrated-studio #showcase-controls .studio-meta .quality-diagnostics button{margin:0}
+.integrated-studio #showcase-controls .studio-meta #diagnostics-report{padding:3px;background:#152428;color:#c5d2cc;max-height:28px;font-size:9px}

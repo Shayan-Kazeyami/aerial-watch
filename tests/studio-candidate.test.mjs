@@ -24,3 +24,11 @@ test('power-path control remains outside the duplicate interior guide',async()=>
  assert.equal((html.match(/id="power-path"/g)||[]).length,1);
  assert(html.indexOf('id="power-path"')<html.indexOf('id="interior-guide"'));
 });
+test('premium poster has a lightweight WebP source and original PNG fallback',async()=>{
+ const html=await read('integrated-preview.html');
+ assert.match(html,/<source type="image\/webp" srcset="premium-face\/face-b-render.webp"\/>/);
+ assert.match(html,/<img[^>]+src="premium-face\/face-b-render.png"/);
+ const bytes=await readFile(new URL('../premium-face/face-b-render.webp',import.meta.url));
+ assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');
+ assert(bytes.length<150000);
+});

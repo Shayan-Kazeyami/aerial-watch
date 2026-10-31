@@ -11,7 +11,7 @@
 <link href="assembly-review.css" rel="stylesheet"/>
 <link href="assembly-quality.css" rel="stylesheet"/>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
-<link href="studio-console.css?v=b07" rel="stylesheet"/></head>
+<link href="studio-console.css?v=b08" rel="stylesheet"/></head>
 <body class="quality-upgrade integrated-studio" data-premium-face="b">
 <a class="skip-link" href="#inspection-controls">Skip to watch controls</a>
 <header>
@@ -24,7 +24,7 @@
 <div class="studio-heading"><span>AERIAL / LEFT CRESCENT</span><span><i aria-hidden="true" class="live-dot"></i> MECHANICAL OBJECTS</span></div>
 <div id="stage">
 <canvas aria-busy="true" aria-describedby="canvas-help" aria-label="Interactive Aerial watch. Drag to rotate; scroll or use plus and minus to zoom. Arrow keys pan. Home resets the camera. Use the component explorer for keyboard selection." id="assembly-canvas" tabindex="0"></canvas>
-<picture aria-hidden="true" class="studio-poster" id="studio-poster"><source media="(max-width:700px)" srcset="premium-face/face-b-render.png"/><img alt="" fetchpriority="high" src="premium-face/face-b-render.png"/></picture>
+<picture aria-hidden="true" class="studio-poster" id="studio-poster"><source type="image/webp" srcset="premium-face/face-b-render.webp"/><img alt="" fetchpriority="high" src="premium-face/face-b-render.png"/></picture>
 <div id="loading" role="status"><span aria-hidden="true" class="loading-mark">A</span><p id="load-message">Preparing the watch studio…</p></div>
 </div>
 <div class="overlay"><span id="mode-label">COMPLETE ASSEMBLY / INTACT OM10</span><span id="canvas-help">Drag to rotate <span aria-hidden="true">·</span> Scroll to get closer</span></div>
@@ -86,9 +86,9 @@
 <p class="small" id="search-count" role="status">Loading components…</p>
 <ul aria-label="Select a component" id="component-list"></ul>
 </section>
-<section class="tour-controls exposed-group"><h2>Tour navigation</h2><div aria-label="Studio sequence" class="tour-navigation"><button id="tour-previous" type="button">Previous shot</button><output aria-live="polite" id="tour-step">Explore the studio</output><button id="tour-next" type="button">Next shot</button></div></section>
+<div class="studio-meta"><section class="tour-controls exposed-group"><h2>Tour navigation</h2><div aria-label="Studio sequence" class="tour-navigation"><button id="tour-previous" type="button">Previous shot</button><output aria-live="polite" id="tour-step">Explore the studio</output><button id="tour-next" type="button">Next shot</button></div></section>
 <section class="render-information exposed-group"><h2>Rendering information</h2><p aria-live="off" class="small" id="render-status">Preparing rendering…</p><a href="material-review.html" rel="noreferrer" target="_blank">Compare material finishes ↗</a></section>
-<section class="quality-diagnostics exposed-group"><h2>Studio diagnostics</h2><button id="start-measurement" type="button">Start new measurement</button><button id="refresh-diagnostics" type="button">Refresh diagnostics</button><pre id="diagnostics-report">Measurements appear here after refresh.</pre></section>
+<section class="quality-diagnostics exposed-group"><h2>Studio diagnostics</h2><button id="start-measurement" type="button">Start new measurement</button><button id="refresh-diagnostics" type="button">Refresh diagnostics</button><pre id="diagnostics-report">Measurements appear here after refresh.</pre></section></div>
 </div></section></div></section><div hidden="" id="selection">
 <span class="eyebrow">SELECTED COMPONENT</span><h2 id="part-name"></h2><p id="part-role"></p><small id="part-support"></small>
 <div class="inspection-actions"><button disabled="" id="isolate" type="button">Isolate selection</button><button id="clear" type="button">Clear selection</button></div><p class="small"><a href="#assembly-canvas">Return to the watch ↑</a></p>

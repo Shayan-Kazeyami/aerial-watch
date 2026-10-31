@@ -621,12 +621,12 @@
     {
       "path": "quality-study/viewer-revision.js",
       "sizeBytes": 6991,
-      "sha256": "2216ffeae5be9bbcd97b00ecd1bcc41dc0cc83c74845dba63b3736cc45c9223b"
+      "sha256": "de22587442cad12093655021f767d8f5c76db6161f3fd2791f695e3a3e050d79"
     },
     {
       "path": "quality-study/viewer-revision.json",
       "sizeBytes": 8726,
-      "sha256": "8f71878c1d3af15a342614d7ba0a20ba24d030a4b7bffed4826fc165ded7b8b7"
+      "sha256": "b2d22c067d762abb78fba2844ac3db58d331bb8913239b2d79f952d2172a631a"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",
@@ -815,8 +815,8 @@
     },
     {
       "path": "integrated-preview.html",
-      "sizeBytes": 19462,
-      "sha256": "8e23e1ea2a7fa75b58782a383a0edd9ba43535ba58ac654ee323e7b2a7bca165"
+      "sizeBytes": 19486,
+      "sha256": "af0c39abe036b7d6037bbf3e475984d1391f8464efd0c47878a3334a71f7700e"
     },
     {
       "path": "premium-face/face-b-render.png",
@@ -830,8 +830,8 @@
     },
     {
       "path": "studio-console.css",
-      "sizeBytes": 19021,
-      "sha256": "f18d3d34ed013c04f78fef0f5845f7cb14f10ebf7a2afb7bfce4a73a81dfab57"
+      "sizeBytes": 20029,
+      "sha256": "2539e50b7c9024e3f074ec4e74f2dd02e02da48d1b075ea5bfa9f796ee86955c"
     },
     {
       "path": "studio-console.js",
@@ -852,6 +852,11 @@
       "path": "assembly-download.js",
       "sizeBytes": 1003,
       "sha256": "f5ccbc0632b7a683b02746bdc8f7ba2af268df6f89ed31339426758b7e032971"
+    },
+    {
+      "path": "premium-face/face-b-render.webp",
+      "sizeBytes": 104422,
+      "sha256": "47e1c73c063a9fd9a3e7c9332aee683f249b160f2c19227dad145159f047e757"
     }
   ]
 }
