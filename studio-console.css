@@ -1,0 +1,125 @@
+/* Candidate studio shell: no global styles escape the explicit body class. */
+.integrated-studio header{height:62px;padding:0 26px;background:#eeeae1}
+.integrated-studio main{display:block;max-width:none}
+.integrated-studio .viewer{position:relative;top:auto;width:100%;height:calc(100svh - 62px);min-height:820px;max-height:none;background:#101b1f}
+.integrated-studio .viewer #stage{left:238px;right:238px;top:58px;bottom:264px}
+.integrated-studio .studio-heading{left:24px;right:24px;top:21px}
+.integrated-studio .viewer .overlay{left:250px;right:250px;bottom:245px;font-size:9px}
+.integrated-studio #showcase-controls{position:absolute;inset:52px 18px 12px;padding:0;width:auto;pointer-events:none;color:#e6e4dc}
+.integrated-studio #inspection-controls{display:contents}
+.integrated-studio .console-rail,.integrated-studio .console-bottom{pointer-events:auto;background:#1b292ce8;border:1px solid #92a6a32c;border-radius:8px;padding:14px}
+.integrated-studio .console-rail{position:absolute;top:0;width:208px;bottom:255px}
+.integrated-studio .console-left{left:0}.integrated-studio .console-right{right:0}
+.integrated-studio .console-bottom{position:absolute;left:0;right:0;bottom:42px;height:198px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.integrated-studio #showcase-controls h2{font:600 10px/1.4 Arial,sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:#c7b68c;margin:0 0 8px}
+.integrated-studio #showcase-controls button,.integrated-studio #showcase-controls .file-action{min-height:30px;padding:6px 5px;font-size:10px;line-height:1.35;color:#e4e7df;background:#27393d;border:1px solid #8ca09a38;border-radius:3px}
+.integrated-studio #showcase-controls button[aria-pressed=true],.integrated-studio #showcase-controls button.active{background:#d3c298;color:#182325;border-color:#d3c298}
+.integrated-studio #showcase-controls button:hover{background:#405454}
+.integrated-studio #showcase-controls .small{font-size:10px;color:#a8b7b4;line-height:1.4;margin:5px 0}
+.integrated-studio #showcase-controls .check{font-size:11px;min-height:27px;margin:0;gap:8px;color:#d9dfd9}
+.integrated-studio #showcase-controls .field{font-size:10px;margin:7px 0;color:#b7c6c2}
+.integrated-studio #showcase-controls input:not([type=checkbox]):not([type=file]){min-height:28px;font-size:11px;color:#e4e7df;background:#152428;border-color:#66827a77;width:100%}
+.integrated-studio #showcase-controls #view-controls{padding:0 0 12px;margin:0 0 12px;border-color:#8ca09a38}
+.integrated-studio #showcase-controls .view-main,.integrated-studio #showcase-controls .view-detail,.integrated-studio #showcase-controls .camera-more>div{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.integrated-studio #showcase-controls .view-main{grid-template-columns:repeat(3,1fr)}
+.integrated-studio #showcase-controls .view-secondary{display:block}
+.integrated-studio #showcase-controls .camera-more>div{position:static;width:auto;min-width:0;margin:5px 0;padding:0;background:none;box-shadow:none;border:0;transform:none}
+.integrated-studio #showcase-controls .camera-more:not([open])>div{display:grid}
+.integrated-studio #showcase-controls .camera-more>h2{display:none}
+.integrated-studio #showcase-controls .view-secondary>#tour{width:100%;margin-top:3px}
+.integrated-studio #showcase-controls .appearance-panel,.integrated-studio #showcase-controls .everyday-controls,.integrated-studio #showcase-controls .crown-controls{padding:0 0 12px;margin:0 0 12px;border-color:#8ca09a38}
+.integrated-studio #showcase-controls .crown-body,.integrated-studio #showcase-controls .save-body{padding:0}
+.integrated-studio #showcase-controls .primary-button{width:100%;min-height:34px}
+.integrated-studio .visible-choices{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.integrated-studio .visible-choices button{flex:1 1 40%}
+.integrated-studio #showcase-controls select[hidden]{display:none!important}
+.integrated-studio #showcase-controls .capture-actions{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.integrated-studio #showcase-controls .motion-explanation,.integrated-studio #showcase-controls .speed-field>label,.integrated-studio #showcase-controls .discovery-link{display:none}
+.integrated-studio #inspection-details{grid-column:1/-1;border:0;margin:0;padding:0}
+.integrated-studio #inspection-details>h2{display:none}
+.integrated-studio .advanced-body{display:grid;grid-template-columns:210px 1fr;gap:16px;padding:0}
+.integrated-studio .advanced-body .motion-panel{padding:0;border:0}
+.integrated-studio .advanced-body .section-label{display:block}
+.integrated-studio .advanced-body .motion-panel #motion-status{display:none}
+.integrated-studio .advanced-body .motion-switches{display:flex;gap:12px;margin:0}
+.integrated-studio .advanced-body .details-body{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:6px 16px;padding:0}
+.integrated-studio .advanced-body .details-body>h2,.integrated-studio #visible-count{display:none}
+.integrated-studio .advanced-body .details-body>.check,.integrated-studio .advanced-body .details-body>.inspection-actions{grid-column:1}
+.integrated-studio .explorer{grid-column:2;grid-row:1/5;padding:0}
+.integrated-studio .tour-controls,.integrated-studio .render-information,.integrated-studio .quality-diagnostics{grid-column:3;border:0;margin:0;padding:0}
+.integrated-studio .tour-navigation{display:flex;gap:4px;align-items:center}
+.integrated-studio #tour-step{font-size:9px}
+.integrated-studio #component-list{max-height:42px;overflow:auto}
+.integrated-studio #diagnostics-report{max-height:36px;overflow:auto;font-size:9px;color:#becbc7}
+.integrated-studio #showcase-controls #viewer-status{position:absolute;bottom:0;left:0;right:0;margin:0;font-size:10px;color:#c6d2cb;text-align:center;pointer-events:auto}
+.integrated-studio #retry{position:absolute;left:calc(50% - 80px);top:75%;width:160px!important;pointer-events:auto}
+.integrated-studio #selection{position:absolute;left:240px;right:240px;bottom:250px;background:#19292de8;padding:10px;border:1px solid #c7b68c55;pointer-events:auto}
+@media(max-width:950px){.integrated-studio .viewer{height:auto;min-height:1350px}.integrated-studio .viewer #stage{left:0;right:0;top:50px;bottom:auto;height:450px}.integrated-studio #showcase-controls{top:520px}.integrated-studio .console-rail{width:calc(50% - 6px);bottom:235px}.integrated-studio .console-bottom{height:210px}.integrated-studio .advanced-body{grid-template-columns:160px 1fr}.integrated-studio .advanced-body .details-body{grid-template-columns:1fr 1fr}.integrated-studio .explorer{grid-column:2}.integrated-studio .tour-controls,.integrated-studio .render-information,.integrated-studio .quality-diagnostics{grid-column:1}.integrated-studio .viewer .overlay{display:none}}
+.integrated-studio .viewer #showcase-controls{background:transparent;border:0}
+.integrated-studio #showcase-controls :is(button,select,summary,input:not([type=checkbox]):not([type=file]),.check,.file-action){min-height:30px}
+.integrated-studio #showcase-controls .motion-summary{margin:5px 0;padding:0}
+.integrated-studio #showcase-controls .everyday-actions{margin:7px 0}
+.integrated-studio #showcase-controls .crown-turns{margin:6px 0}
+.integrated-studio #showcase-controls .appearance-panel .small{margin:3px 0;font-size:9px}
+.integrated-studio #showcase-controls .crown-controls #crown-state{padding:7px;margin:4px 0;background:#24393e;color:#cad6cf}
+.integrated-studio #showcase-controls .motion-summary #primary-motion-status{min-height:0}
+.integrated-studio #showcase-controls .console-bottom .inspection-actions{margin:4px 0}
+.integrated-studio #showcase-controls .console-bottom .time-inspector{margin:7px 0;padding:0}
+.integrated-studio #showcase-controls .console-bottom .motion-switches{margin:4px 0}
+/* Keep the desktop control deck within the viewport without shrinking labels. */
+@media(min-width:951px){
+ .integrated-studio .viewer{min-height:700px}
+ .integrated-studio .viewer #stage{bottom:220px}
+ .integrated-studio #showcase-controls .console-rail{bottom:205px}
+ .integrated-studio #showcase-controls .console-bottom{height:158px}
+ .integrated-studio .viewer .overlay{bottom:201px}
+ .integrated-studio #showcase-controls .camera-more>div{grid-template-columns:repeat(3,1fr)}
+ .integrated-studio #showcase-controls .appearance-panel .small,.integrated-studio #showcase-controls .crown-body>#crown-help,.integrated-studio #showcase-controls .save-body>.small{display:none}
+ .integrated-studio #showcase-controls .everyday-controls #primary-motion-status{font-size:9px;line-height:1.3}
+ .integrated-studio #showcase-controls .console-bottom .field{margin:3px 0}
+ .integrated-studio #showcase-controls .console-bottom .visible-choices{flex-wrap:nowrap}
+ .integrated-studio #showcase-controls .console-bottom .visible-choices button{font-size:9px;min-height:26px}
+ .integrated-studio #showcase-controls .console-bottom h2{margin-bottom:4px}
+ .integrated-studio #showcase-controls .console-bottom .tour-navigation{display:grid;grid-template-columns:1fr 1fr}
+ .integrated-studio #tour-step{grid-row:2;grid-column:1/-1}
+ .integrated-studio #showcase-controls .console-bottom .quality-diagnostics>h2,.integrated-studio #showcase-controls .console-bottom .render-information>h2{display:none}
+ .integrated-studio #showcase-controls .console-bottom .quality-diagnostics button{font-size:9px;min-height:26px;padding:4px}
+ .integrated-studio #showcase-controls .console-bottom #diagnostics-report{max-height:24px;margin:0}
+}
+.integrated-studio #showcase-controls button,.integrated-studio #showcase-controls .file-action{min-height:30px!important;padding:5px!important;line-height:1.3!important;font-size:10px!important}
+.integrated-studio #showcase-controls .motion-summary{display:block!important}
+.integrated-studio #showcase-controls .motion-summary .check{margin-top:4px;min-height:24px!important}
+.integrated-studio #showcase-controls #crown-pull{width:100%;margin:3px 0}
+.integrated-studio #showcase-controls #crown-state{min-height:0;padding:4px!important;font-size:10px;line-height:1.3}
+.integrated-studio #showcase-controls .crown-turns{display:flex;gap:4px}
+.integrated-studio #showcase-controls .crown-turns button{flex:1}
+.integrated-studio #showcase-controls .crown-body>.text-button{display:inline-block;margin:3px 0}
+.integrated-studio #showcase-controls .appearance-panel .field{margin:3px 0}
+.integrated-studio #showcase-controls .appearance-panel .check{min-height:24px!important;line-height:1.3;padding:0}
+.integrated-studio #showcase-controls .advanced-inspection{padding:0;margin:0;border:0}
+.integrated-studio #showcase-controls .advanced-body .explorer .field{display:block;min-height:0;padding:0;margin:3px 0}
+.integrated-studio #showcase-controls .advanced-body .inspection-actions{display:flex;gap:4px}
+.integrated-studio #showcase-controls .advanced-body .speed-field{display:block;margin:0}
+.integrated-studio #showcase-controls .advanced-body .motion-panel{margin:0}
+.integrated-studio #showcase-controls .advanced-body .time-inspector{display:block}
+.integrated-studio #showcase-controls .advanced-body .section-label .live-dot{display:none}
+.integrated-studio #showcase-controls .all-camera-views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.integrated-studio #showcase-controls .all-camera-views #tour{grid-column:1/-1}
+.integrated-studio #showcase-controls #primary-motion-status{display:none}
+.integrated-studio #showcase-controls .crown-body{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.integrated-studio #showcase-controls .crown-body #crown-state,.integrated-studio #showcase-controls .crown-body #crown-pull,.integrated-studio #showcase-controls .crown-body .crown-turns{grid-column:1/-1;margin:0!important}
+.integrated-studio #showcase-controls .crown-body .text-button{margin:0!important}
+.integrated-studio #showcase-controls .advanced-body,.integrated-studio #showcase-controls .details-body{align-items:start;align-content:start;grid-auto-rows:min-content}
+.integrated-studio #showcase-controls .console-bottom .inspection-actions{align-items:start;align-self:start}
+.integrated-studio #showcase-controls .console-bottom .inspection-actions button{flex:1}
+.integrated-studio #showcase-controls .console-bottom .explorer{margin:0;padding:0}
+.integrated-studio #showcase-controls .console-bottom #search-count{font-size:9px;margin:2px 0}
+.integrated-studio #showcase-controls .console-bottom #scrub-time{height:12px;min-height:12px!important}
+.integrated-studio #showcase-controls .console-bottom .details-body>.inspection-actions{display:grid;grid-template-columns:1fr;gap:4px}
+@media(min-width:951px){
+ .integrated-studio .viewer{min-height:780px}
+ .integrated-studio #showcase-controls .console-rail{bottom:247px}
+ .integrated-studio #showcase-controls .console-bottom{height:200px}
+ .integrated-studio .viewer #stage{bottom:262px}
+ .integrated-studio .viewer .overlay{bottom:243px}
+}
