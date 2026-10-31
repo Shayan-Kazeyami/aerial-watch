@@ -246,6 +246,10 @@
     document.getElementById('load-message').textContent = message;
 
     document.getElementById('viewer-status').textContent = message;
+    for (const id of ['primary-motion-status', 'motion-status']) {
+      document.getElementById(id).textContent = 'Interactive motion unavailable. Reload the viewer to retry.';
+    }
+    document.getElementById('render-status').textContent = '3D rendering unavailable.';
 
     document.getElementById('assembly-canvas').setAttribute('aria-busy','false');
 

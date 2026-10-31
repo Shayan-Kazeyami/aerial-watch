@@ -14,8 +14,8 @@ import {createQualityDesign} from './assembly-design.js';
 import {updateInspectionDepth} from './assembly-depth.js';
 import {createRefractionAwareAO} from './assembly-glass-ao.js';
 import {createPresentationClock} from './assembly-clock.js';
-import {partVisible,createVariantManifest,createResourceScope,createObjectTreeDisposer,disposeObjectTree} from './assembly-state.js';
-import {loadGLTFAsset,loadProgressiveAssembly} from './assembly-loading.js';
+import {partVisible,createVariantManifest,createResourceScope,createObjectTreeDisposer} from './assembly-state.js';
+import {loadGLTFAsset,loadJSONAsset,loadProgressiveAssembly} from './assembly-loading.js';
 import {createPerformanceMonitor} from './assembly-performance.js';
 import {RENDER_PROFILES,resolveRenderResolution} from './assembly-resolution.js';
 import {createCrownInteraction,createCrownVisual} from './assembly-crown.js';
@@ -36,6 +36,13 @@ import {closeDisclosureWithFocus,isEditingControl,restoreExplorerFocus} from './
 
 const $ = id => document.getElementById(id), scene = new THREE.Scene();
 const bootTime=performance.now(),clock=createPresentationClock(),resources=createResourceScope(),performanceMonitor=createPerformanceMonitor();
+// Share one disposal boundary across load rejection and registered ownership.
+const objectDisposers=new WeakMap();
+function ownedObjectTreeDisposer(root){
+  if(!objectDisposers.has(root))objectDisposers.set(root,createObjectTreeDisposer(root));
+  return objectDisposers.get(root);
+}
+function disposeObjectTree(root){ownedObjectTreeDisposer(root)();}
 scene.background = new THREE.Color('#171a19');
 scene.fog = new THREE.Fog('#171a19',350,900);
 const renderer = new THREE.WebGLRenderer({canvas: $('assembly-canvas'), antialias: true, powerPreference:'high-performance'});
@@ -152,6 +159,8 @@ function fail(message,error) {
   failed = true; loadPhase='error'; $('loading').hidden = false; $('load-message').textContent = message; $('retry').hidden = false;
   $('inspection-controls').disabled = true; $('view-controls').disabled = true;
   $('assembly-canvas').setAttribute('aria-busy','false'); announce(message);
+  for (const id of ['primary-motion-status','motion-status']) $(id).textContent='Interactive motion unavailable. Reload the viewer to retry.';
+  $('render-status').textContent='3D rendering unavailable.';
   if (error) console.error(error);
 }
 $('retry').onclick = () => location.reload();
@@ -583,14 +592,14 @@ function proposalWarning(error){
   proposalLoading=false;proposalReady=false;loadWarnings.push(error.message);visibility();
   announce('Original assembly ready. The optional open-work design could not load; use Retry design to try again.');
   let retry=$('retry-proposal');if(!retry){retry=document.createElement('button');retry.id='retry-proposal';retry.type='button';retry.textContent='Retry design';$('open-work-note').after(retry);}
-  retry.onclick=async()=>{retry.disabled=true;proposalLoading=true;try{const result=await loadGLTFAsset('quality-study/open-front-plates.glb',assetOptions());installProposal(result);retry.remove();}catch(e){proposalWarning(e);}finally{if(!lifecycle.disposed)retry.disabled=false;}};
+  retry.onclick=async()=>{retry.disabled=true;proposalLoading=true;let result;try{result=await loadGLTFAsset('quality-study/open-front-plates.glb',assetOptions());installProposal(result);retry.remove();}catch(e){if(result)try{disposeObjectTree((result.gltf||result).scene);}catch(cleanupError){console.error('Proposal cleanup failed.',cleanupError);}proposalWarning(e);}finally{if(!lifecycle.disposed)retry.disabled=false;}};
 }
 function installProposal(result){
   if(lifecycle.disposed){disposeObjectTree((result.gltf||result).scene);return;}
   const proposal=result.gltf||result;performanceMonitor.load(result.metrics||{});
   const candidates=[];proposal.scene.traverse(mesh=>{if(mesh.isMesh)candidates.push(mesh);});
   if(candidates.length!==2||new Set(candidates.map(mesh=>mesh.userData.replacementForSourceIndex)).size!==2||candidates.some(mesh=>!replacedSources.has(mesh.userData.replacementForSourceIndex)))throw new Error('Expected two distinct open-work plates.');
-  const disposeProposal=createObjectTreeDisposer(proposal.scene);
+  const disposeProposal=ownedObjectTreeDisposer(proposal.scene);
   for(const mesh of candidates){
     const original=source.find(part=>part.userData.sourceIndex===mesh.userData.replacementForSourceIndex);
     openPlates.push(mesh);baseMaterials.set(mesh,mesh.material);
@@ -619,7 +628,7 @@ function loadFrontArchitecture(){
 function initializeBaseline(result,metadata){
   if(lifecycle.disposed){disposeObjectTree((result.gltf||result).scene);return;}
   const gltf=result.gltf||result;performanceMonitor.load(result.metrics||{});
-  const disposeBaseline=createObjectTreeDisposer(gltf.scene);
+  const disposeBaseline=ownedObjectTreeDisposer(gltf.scene);
   resources.own('original assembly geometry',disposeBaseline);
   model=new THREE.Group();model.rotation.x=Math.PI/2;model.add(gltf.scene);scene.add(model);
   gltf.scene.traverse(mesh=>{
@@ -683,10 +692,10 @@ function initializeBaseline(result,metadata){
 loadProgressiveAssembly({
   signal:lifecycle.signal,disposeUnused:result=>disposeObjectTree((result.gltf||result).scene),
   loadBaseline:()=>loadGLTFAsset('rebuild/assembly.glb',{...assetOptions(),onProgress:p=>{if(!lifecycle.disposed&&!failed)$('load-message').textContent=`Preparing the watch · ${(p.loaded/1048576).toFixed(1)} MB`;}}),
-  loadMetadata:()=>fetch('assets/manual-a-parts.json',{signal:lifecycle.signal}).then(r=>{if(!r.ok)throw new Error('Movement metadata could not load.');return r.json();}),
+  loadMetadata:()=>loadJSONAsset('assets/manual-a-parts.json',{signal:lifecycle.signal}),
   loadProposal:()=>{proposalLoading=true;return loadGLTFAsset('quality-study/open-front-plates.glb',assetOptions());},
   onBaseline:initializeBaseline,onProposal:installProposal,onWarning:proposalWarning,onPhase:phase=>{loadPhase=phase;},
-}).catch(error=>{if(!lifecycle.disposed)fail('The assembly could not load. Reload the viewer to retry. Static renders remain available below.',error);});
+}).catch(error=>{if(!lifecycle.disposed)fail(error.name==='TimeoutError'?'Loading took too long. Check your connection and reload the viewer. Static renders remain available below.':'The assembly could not load. Reload the viewer to retry. Static renders remain available below.',error);});
 
 function captureConfiguration({clockStamp}={}){
   const gl=renderer.getContext(),extension=gl.getExtension('WEBGL_debug_renderer_info');

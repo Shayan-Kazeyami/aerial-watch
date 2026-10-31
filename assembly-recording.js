@@ -45,7 +45,7 @@ export function createCanvasRecorder({canvas,onStatus=()=>{},onComplete=()=>{},
           const blob=new Blob(recording.chunks,{type:recording.recorder.mimeType||mimeType});cleanup(recording);
           if(!blob.size){const error=new Error('The browser produced an empty clip. Start the watch motion and try recording again.');status(error.message,'error',error);reject(error);return;}
           const result={blob,mimeType:blob.type,durationMs,frameRate};
-          try{onComplete(result);status('Motion clip ready.','complete');resolve(result);}catch(error){reject(error);}
+          try{onComplete(result);status('Motion clip ready.','complete');resolve(result);}catch(error){status(error.message,'error',error);reject(error);}
         };
         recording.recorder.start();recording.timer=schedule(stop,durationMs);
         status(`Recording ${durationMs/1000}-second motion clip…`,'recording');

@@ -90,8 +90,8 @@
     },
     {
       "path": "assembly-capture-provenance.js",
-      "sizeBytes": 5085,
-      "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+      "sizeBytes": 6116,
+      "sha256": "b47a59a43d21b575a561e3b2b0c561c88669cc9c303ef843530f31025b8f67ff"
     },
     {
       "path": "assembly-caseback-finish.js",
@@ -180,8 +180,8 @@
     },
     {
       "path": "assembly-loading.js",
-      "sizeBytes": 2738,
-      "sha256": "7a94609b13cac85c6d94e18293b78dd42b15a334ab1325b0b75799e7a19cc843"
+      "sizeBytes": 4376,
+      "sha256": "0dc12fbf6a9bd009fb70bc48a796dbcd36d66aaacbce9699b010a5b98a17c11c"
     },
     {
       "path": "assembly-materials.js",
@@ -210,8 +210,8 @@
     },
     {
       "path": "assembly-recording.js",
-      "sizeBytes": 4187,
-      "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+      "sizeBytes": 4223,
+      "sha256": "f1954a057584469fc7b72843f6e079523e73eded5f52fcab9c65e9786c06b61b"
     },
     {
       "path": "assembly-refraction.js",
@@ -230,13 +230,13 @@
     },
     {
       "path": "assembly-review.html",
-      "sizeBytes": 20478,
-      "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
+      "sizeBytes": 20754,
+      "sha256": "f756666958a2aae33164d89fb800aadd8c3b10c184dfb8a8021ced0f3810748e"
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 67456,
-      "sha256": "578db60adecaccfc62d0c5aefb7a173fc1eb3dd429a6515e82601628211152a0"
+      "sizeBytes": 68213,
+      "sha256": "089998850f97f6fb300d88b9b225a0c1de7209f1917fc87a03eece300616ee71"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -265,8 +265,8 @@
     },
     {
       "path": "assembly-state.js",
-      "sizeBytes": 3047,
-      "sha256": "c9d38ac7a679da24ceb1c3354f81ba8bf6919c2b34b1ad9f3b2c9c2b7868db90"
+      "sizeBytes": 3240,
+      "sha256": "de831ede1c4d40b727ef31b7611774d7c429014c839fb973b5c449959b6782f1"
     },
     {
       "path": "assembly-story.js",
@@ -370,8 +370,8 @@
     },
     {
       "path": "index.html",
-      "sizeBytes": 20478,
-      "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
+      "sizeBytes": 20754,
+      "sha256": "f756666958a2aae33164d89fb800aadd8c3b10c184dfb8a8021ced0f3810748e"
     },
     {
       "path": "material-review-model.js",
@@ -795,8 +795,8 @@
     },
     {
       "path": "README.md",
-      "sizeBytes": 1681,
-      "sha256": "c06f8b5d461c570ed3b018c3d6abb9e376853eb03709f81b61e2cf9001dfddcb"
+      "sizeBytes": 3110,
+      "sha256": "866902ed6af45acafda7aef4cff58c56a2d0723d1ccd02d7dfb11e1e6e27be20"
     },
     {
       "path": ".nojekyll",

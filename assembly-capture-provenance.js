@@ -9,24 +9,40 @@ async function validateRevision(revision){
 
 // Optional boot metadata is imported in parallel. Nothing here gates the
 // original assembly, first interactive frame or ordinary watch controls.
-export function createCaptureProvenance({fetcher=fetch,signal,loadBootRevision=()=>import('./quality-study/viewer-revision.js').then(module=>module.default),metadataURL='quality-study/viewer-revision.json'}={}){
+export function createCaptureProvenance({fetcher=fetch,signal,loadBootRevision=()=>import('./quality-study/viewer-revision.js').then(module=>module.default),metadataURL='quality-study/viewer-revision.json',timeoutMs=15000}={}){
+  if(!Number.isFinite(timeoutMs)||timeoutMs<=0)throw new RangeError('timeoutMs must be positive.');
   let state={status:'not-yet-verified',scope:'First-party viewer source only',digest:null},pending;
   const boot=Promise.resolve().then(loadBootRevision).then(validateRevision).then(value=>({value}),error=>({error}));
   const snapshot=()=>structuredClone(state);
   return {snapshot,
     resolve(){if(pending)return pending;
-      pending=(async()=>{try{
-        const pinned=await boot;if(pinned.error)throw pinned.error;
-        const response=await fetcher(metadataURL,{cache:'no-store',signal});if(!response.ok)throw new Error('Capture revision metadata is unavailable.');
+      pending=(async()=>{
+       const controller=new AbortController();let timer,onAbort;
+       const interrupted=new Promise((_,reject)=>{
+        onAbort=()=>{controller.abort(signal.reason);reject(signal.reason);};
+        signal?.addEventListener('abort',onAbort,{once:true});
+        timer=setTimeout(()=>{const error=new Error('Source verification timed out. Exported files are not revision-verified; retry to verify the source.');error.name='TimeoutError';controller.abort(error);reject(error);},timeoutMs);
+       });
+       const verify=async()=>{
+        signal?.throwIfAborted();
+        const pinned=await boot;controller.signal.throwIfAborted();if(pinned.error)throw pinned.error;
+        const response=await fetcher(metadataURL,{cache:'no-store',signal:controller.signal});if(!response.ok)throw new Error('Capture revision metadata is unavailable.');
         const current=await validateRevision(await response.json());
-        if(pinned.value.digest!==current.digest){state={status:'viewer-reload-required',digest:pinned.value.digest,currentServedDigest:current.digest,scope:current.scope,reason:'Served source revision changed after this viewer opened. Reload before making revision-verified evidence.'};return snapshot();}
+        controller.signal.throwIfAborted();
+        if(pinned.value.digest!==current.digest){return {status:'viewer-reload-required',digest:pinned.value.digest,currentServedDigest:current.digest,scope:current.scope,reason:'Served source revision changed after this viewer opened. Reload before making revision-verified evidence.'};}
         const mismatches=[];await Promise.all(current.files.map(async file=>{
-          const asset=await fetcher(file.path,{cache:'no-store',signal});if(!asset.ok){mismatches.push(file.path);return;}
+          const asset=await fetcher(file.path,{cache:'no-store',signal:controller.signal});if(!asset.ok){mismatches.push(file.path);return;}
           const bytes=await asset.arrayBuffer();if(bytes.byteLength!==file.bytes||await sha256(bytes)!==file.sha256)mismatches.push(file.path);
         }));
-        state=mismatches.length?{status:'served-source-mismatch',digest:current.digest,scope:current.scope,mismatches:mismatches.sort(),reason:'Source files changed without regenerated capture metadata.'}:
+        controller.signal.throwIfAborted();
+        return mismatches.length?{status:'served-source-mismatch',digest:current.digest,scope:current.scope,mismatches:mismatches.sort(),reason:'Source files changed without regenerated capture metadata.'}:
           {status:'verified',digest:current.digest,algorithm:'SHA-256',scope:current.scope,metadataURL,files:current.files,verifiedAt:new Date().toISOString(),limitation:'Identifies the pinned viewer source revision and verifies current served bytes; excludes vendor/model identities, physical behavior and visual acceptance.'};
-      }catch(error){state={status:'unavailable',digest:null,scope:'First-party viewer source only',reason:error.message};}return snapshot();})().finally(()=>{pending=null;});return pending;
+       };
+       try{state=await Promise.race([verify(),interrupted]);}
+       catch(error){controller.abort(error);state={status:'unavailable',digest:null,scope:'First-party viewer source only',reason:error?.message||String(error)};}
+       finally{clearTimeout(timer);signal?.removeEventListener('abort',onAbort);}
+       return snapshot();
+      })().finally(()=>{pending=null;});return pending;
     },
   };
 }

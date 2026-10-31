@@ -36,6 +36,12 @@ export function createObjectTreeDisposer(root) {
   root.traverse(object=>{if(!object.isMesh)return;geometries.add(object.geometry);
     for(const material of Array.isArray(object.material)?object.material:[object.material])if(material){materials.add(material);for(const value of Object.values(material))if(value?.isTexture)textures.add(value);}});
   let disposed=false;
-  return ()=>{if(disposed)return;disposed=true;geometries.forEach(value=>value.dispose());materials.forEach(value=>value.dispose());textures.forEach(value=>value.dispose());root.removeFromParent();};
+  return ()=>{
+    if(disposed)return;disposed=true;
+    const failures=[],attempt=dispose=>{try{dispose();}catch(error){failures.push(error);}};
+    for(const value of [...geometries,...materials,...textures])attempt(()=>value.dispose());
+    attempt(()=>root.removeFromParent());
+    if(failures.length)throw new AggregateError(failures,'Some object resources could not be disposed.');
+  };
 }
 export function disposeObjectTree(root) {createObjectTreeDisposer(root)();}
