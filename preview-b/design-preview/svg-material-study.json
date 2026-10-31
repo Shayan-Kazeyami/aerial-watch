@@ -1,0 +1,10 @@
+{
+  "revision": "B-SVG-02-material-study",
+  "changes": [
+    "Darker non-metallic charcoal and clearer micrograin",
+    "Separate polished bezel material, retaining satin movement plates",
+    "Slightly brighter champagne markers and trim"
+  ],
+  "camera_and_geometry": "unchanged from svg-face-r01",
+  "status": "Visual candidate; not published runtime materials."
+}

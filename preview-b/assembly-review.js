@@ -10,7 +10,7 @@ import {createAssemblyMaterials,cloneAssemblyMaterial} from './assembly-material
 import {createAssemblyLighting} from './assembly-lighting.js';
 import {createDialDetails} from './assembly-dial.js';
 import {createOpenFrontFrame} from './assembly-open-front.js';
-import {preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES,premiumMovementFinishKind} from './assembly-premium-face.js?v=b03';
+import {premiumFaceAsset,preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES,premiumMovementFinishKind} from './assembly-premium-face.js?v=svg02';
 import {createQualityDesign} from './assembly-design.js';
 import {updateInspectionDepth} from './assembly-depth.js?v=b03';
 import {createRefractionAwareAO} from './assembly-glass-ao.js';
@@ -21,7 +21,7 @@ import {createPerformanceMonitor} from './assembly-performance.js';
 import {RENDER_PROFILES,resolveRenderResolution} from './assembly-resolution.js';
 import {createCrownInteraction,createCrownVisual} from './assembly-crown.js';
 import {createCaptureProvenance,embedPNGConfiguration} from './assembly-capture-provenance.js';
-import {componentLabel,componentSearchText,normalizeComponentText} from './assembly-component-labels.js';
+import {componentLabel,componentSearchText,normalizeComponentText} from './assembly-component-labels.js?v=b04';
 import {createDownloadManager} from './assembly-download.js';
 import {captureCanvasPNG} from './assembly-image-export.js?v=b03';
 import {createCanvasRecorder} from './assembly-recording.js';
@@ -137,7 +137,7 @@ const lifecycle=createViewerLifecycle({pause:()=>{clock.setHidden(true);performa
   resume:()=>{clock.setHidden(document.hidden);last=frameWindow=performance.now();dirty=true;},
   dispose:()=>{cancelAnimationFrame(animationFrame);try{resources.dispose();}catch(error){console.error('Viewer resource cleanup failed.',error);}}});
 const assetOptions=()=>({loader:new GLTFLoader(),signal:lifecycle.signal,disposeUnused:gltf=>disposeObjectTree(gltf.scene)});
-const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=b03').then(module=>module.default)}),pendingCaptures=new Set();
+const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=svg02').then(module=>module.default)}),pendingCaptures=new Set();
 const requestedQuality=new URLSearchParams(location.search).get('quality');
 const startPaused=new URLSearchParams(location.search).get('paused')==='1';
 let quality=Object.hasOwn(RENDER_PROFILES,requestedQuality)?requestedQuality:(premiumRequested?'balanced':'detail'), renderedFrames=0, frameWindow=performance.now();
@@ -683,7 +683,7 @@ function initializeBaseline(result,metadata){
   resources.own('indexed calendar and private spring display',()=>calendar?.dispose());
   resources.own('dial printing',()=>{dialDetails.dispose();openDialDetails.dispose();});resources.own('open-work frame',()=>openFrontFrame.dispose());resources.own('quality hand design',()=>qualityDesign.dispose());
   if(premiumRequested){
-    loadGLTFAsset('premium-face/face-b.glb',assetOptions()).then(result=>{
+    loadGLTFAsset(premiumFaceAsset(new URLSearchParams(location.search).get('face')),assetOptions()).then(result=>{
       if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
       try{
         premiumFace=preparePremiumFace(result.gltf.scene);model.add(premiumFace.root);

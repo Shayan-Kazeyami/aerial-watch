@@ -11,7 +11,7 @@
 <link href="assembly-review.css" rel="stylesheet"/>
 <link href="assembly-quality.css" rel="stylesheet"/>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
-<link href="studio-console.css?v=b09" rel="stylesheet"/></head>
+<link href="studio-console.css?v=b11" rel="stylesheet"/></head>
 <body class="quality-upgrade integrated-studio" data-premium-face="b">
 <a class="skip-link" href="#inspection-controls">Skip to watch controls</a>
 <header>
@@ -122,7 +122,13 @@
 
   // Import failures and unavailable WebGL must leave a useful, accessible fallback.
 
-  import('./assembly-review.js?v=b03').catch(error => {
+  if(new URLSearchParams(location.search).get('face')==='svg'){
+    const poster=document.getElementById('studio-poster');
+    poster.querySelector('source').srcset='premium-face/face-svg-render.webp?v=svg02';
+    poster.querySelector('img').src='premium-face/face-svg-render.png?v=svg02';
+    document.querySelector('.studio-heading span').textContent='AERIAL / SVG-DERIVED LEFT CRESCENT';
+  }
+  import('./assembly-review.js?v=svg02').catch(error => {
 
     console.error(error);
 
