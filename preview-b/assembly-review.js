@@ -29,6 +29,7 @@ import {POWER_PATH,createTourSequence,restoresExterior,sourceNeedsBaseline,valid
 import {createViewerLifecycle} from './assembly-lifecycle.js';
 import {createFormDetails} from './assembly-form-details.js';
 import {createLeatherDetails} from './assembly-leather-details.js';
+import {createPhotoLeatherDetails} from './assembly-photo-leather.js';
 import {createFrontArchitecture} from './assembly-front-architecture.js';
 import {createAssemblyEscapement} from './assembly-escapement.js';
 import {createAssemblyCalendar} from './assembly-calendar.js';
@@ -137,7 +138,7 @@ const lifecycle=createViewerLifecycle({pause:()=>{clock.setHidden(true);performa
   resume:()=>{clock.setHidden(document.hidden);last=frameWindow=performance.now();dirty=true;},
   dispose:()=>{cancelAnimationFrame(animationFrame);try{resources.dispose();}catch(error){console.error('Viewer resource cleanup failed.',error);}}});
 const assetOptions=()=>({loader:new GLTFLoader(),signal:lifecycle.signal,disposeUnused:gltf=>disposeObjectTree(gltf.scene)});
-const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=svg02').then(module=>module.default)}),pendingCaptures=new Set();
+const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=svg03-photo09').then(module=>module.default)}),pendingCaptures=new Set();
 const requestedQuality=new URLSearchParams(location.search).get('quality');
 const startPaused=new URLSearchParams(location.search).get('paused')==='1';
 let quality=Object.hasOwn(RENDER_PROFILES,requestedQuality)?requestedQuality:(premiumRequested?'balanced':'detail'), renderedFrames=0, frameWindow=performance.now();
@@ -683,7 +684,7 @@ function initializeBaseline(result,metadata){
   resources.own('indexed calendar and private spring display',()=>calendar?.dispose());
   resources.own('dial printing',()=>{dialDetails.dispose();openDialDetails.dispose();});resources.own('open-work frame',()=>openFrontFrame.dispose());resources.own('quality hand design',()=>qualityDesign.dispose());
   if(premiumRequested){
-    loadGLTFAsset(premiumFaceAsset(new URLSearchParams(location.search).get('face')),assetOptions()).then(result=>{
+    loadGLTFAsset(new URLSearchParams(location.search).get('face')==='svg03'?'quality-study/face-svg03-rim-candidate.glb':premiumFaceAsset(new URLSearchParams(location.search).get('face')),assetOptions()).then(result=>{
       if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
       try{
         premiumFace=preparePremiumFace(result.gltf.scene);model.add(premiumFace.root);
@@ -708,11 +709,11 @@ function initializeBaseline(result,metadata){
       loadFrontArchitecture();
     }finally{disposeObjectTree(result.gltf.scene);}
   }).catch(error=>{if(lifecycle.disposed)return;loadWarnings.push(`Form detail: ${error.message}`);announce('The watch is ready. Additional calendar and edge details are unavailable.');});
-  loadGLTFAsset('quality-study/leather-craft-r05.glb',assetOptions()).then(result=>{
+  loadGLTFAsset(new URLSearchParams(location.search).get('leather')==='photo'?'quality-study/leather-craft-r09.glb':'quality-study/leather-craft-r05.glb',assetOptions()).then(result=>{
     if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
     try{
     performanceMonitor.load(result.metrics);const clay=new THREE.MeshStandardMaterial({color:0x93989b,roughness:.7});resources.own('craft comparison material',()=>clay.dispose());
-    leatherDetails=createLeatherDetails({candidateScene:result.gltf.scene});
+    leatherDetails=(new URLSearchParams(location.search).get('leather')==='photo'?createPhotoLeatherDetails:createLeatherDetails)({candidateScene:result.gltf.scene});
     for(const mesh of leatherDetails.meshes){craftParts.push(mesh);baseMaterials.set(mesh,clay);finishMaterials.set(mesh,leatherDetails.materialFor(mesh));}
     model.add(leatherDetails.group);resources.own('R05 leather craft geometry',()=>leatherDetails.dispose());updateMaterials();visibility();
     variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);
@@ -741,7 +742,7 @@ function captureConfiguration({clockStamp}={}){
     setting:{revision:'r09-friction-setting',ready:!!setting},
     casebackFinish:{revision:'r10-cap-corner-normals',enabled:!!casebackFinish?.enabled,audit:casebackFinish?.audit??null},
     settingEngagement:{revision:'r09-keyless-endpoints',ready:!!settingEngagement,state:engagementState,limits:settingEngagement?.limits??null},
-    leatherCraft:{revision:'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
+    leatherCraft:{revision:new URLSearchParams(location.search).get('leather')==='photo'?'leather-craft-r09':'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
     compactCrown:!!crownVisual&&openFrontActive(),
     settingSeconds,clock:clockStamp||clock.snapshot(),crown:crownInteraction.snapshot(),sourceAtCapture:captureProvenance.snapshot(),options:{openWork:$('open-work').checked,finishes:$('finish').checked,crystals:$('crystals').checked,movementOnly:$('movement-only').checked,interior:interiorView,powerPath,quality},
     viewport:{width:renderer.domElement.clientWidth,height:renderer.domElement.clientHeight,pixelRatio:renderer.getPixelRatio(),drawingBufferWidth:renderer.domElement.width,drawingBufferHeight:renderer.domElement.height,msaaSamples:composer.renderTarget1.samples,transmissionScale:renderer.transmissionResolutionScale},

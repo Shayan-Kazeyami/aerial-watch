@@ -1,9 +1,10 @@
-import bpy,json,math
+import bpy,json,math,sys,argparse
 from pathlib import Path
 from mathutils import Matrix
 from mathutils.bvhtree import BVHTree
 ROOT=Path(__file__).resolve().parent
-bpy.ops.wm.open_mainfile(filepath=str(ROOT/'svg-face-r02.blend'));deps=bpy.context.evaluated_depsgraph_get()
+parser=argparse.ArgumentParser();parser.add_argument('--scene',default='svg-face-r02.blend');parser.add_argument('--output',default='svg-hand-sweep.json');args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+bpy.ops.wm.open_mainfile(filepath=str(ROOT/args.scene));deps=bpy.context.evaluated_depsgraph_get()
 verts=[];faces=[]
 for obj in bpy.context.scene.objects:
  if not obj.get('premiumFacePart'):continue
@@ -21,4 +22,4 @@ for obj in bpy.context.scene.objects:
   if pairs:hits.append({'degrees':angle,'triangle_pairs':len(pairs)})
  checks.append({'hand':obj.get('assemblyId'),'local_axis':'Z (glTF Y-up equivalent)','samples':72,'colliding_samples':hits})
 result={'step_degrees':5,'checks':checks,'scope':'Sampled triangle-surface overlap between each original hand and new authored face parts. Not continuous-time, tolerance, force or complete movement certification.'}
-(ROOT/'svg-hand-sweep.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+(ROOT/args.output).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
