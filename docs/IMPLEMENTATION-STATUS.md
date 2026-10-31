@@ -1,29 +1,24 @@
 # Aerial implementation checkpoint
 
-31 October 2026
+31 October 2026, 15:48 UTC
 
 ## Verified work
+- Owner selected Left Crescent B with an open small-seconds ring. The follow-up sapphire-blue accents were rejected; neutral bearings are retained.
+- New native Blender face has the broad crescent, warm-metal rim, charcoal grain, applied hour markers and 60-tick seconds ring. Editable compressed Blender scene and render prepared.
+- Exact vertex hashes and world transforms match for all 169 original movement/hand meshes against the cutaway baseline. Three original front plates are hidden for presentation, not engineered away.
+- Ring-to-seconds-hand static vertical separation is 0.280000095 mm. Full component interference and mounting are not validated.
+- Exported authored-only face GLB: 76 meshes, about 1.3 MB. A new optional runtime overlay loads it on integrated-preview.html, with original model geometry retained and baseline/inspection modes reversible.
+- Existing control IDs and camera choices remain. All visible control buttons/inputs fit within the observed 1180 x 757 desktop viewport in fallback mode. This is DOM-layout evidence, not interaction acceptance.
+- Async status announcements now synchronize visible option buttons after imported state changes.
+- 46 Node tests pass; 76 JavaScript syntax checks and 167 deployment manifest identities pass.
+- Original source GLBs and production index.html unchanged. Historical captures are labelled as older design evidence.
 
-- Masterplan written and saved for the Kazeyami portfolio-showcase goal.
-- Recording finalization recovery remains in draft PR 2; 41 tests and its GitHub CI passed at commit 2532192fde35807ca8e5e13346b1aeb744904002.
-- Actual-model premium-dial composition study rendered in Blender with two selective apertures. Source GLBs unchanged. Render delivered for review; not an accepted final design.
-- Separate `integrated-preview.html` candidate consolidates controls inside the studio frame and exposes previously collapsed control sections. Native select fields are represented with visible choice buttons.
-- Candidate structural tests confirm baseline control IDs and camera choices are retained and the production entry point is unchanged.
-- Current local suite: 43 tests pass. 74 JavaScript syntax checks and 161 existing production manifest identities pass. Candidate files are not yet in the production deployment manifest.
+## Remaining acceptance gates
+- Live WebGL cannot initialize in the provided cloud browser: GL_VENDOR and GL_RENDERER are Disabled. No successful live render, playback, crown, camera, export or runtime overlay proof is claimed.
+- Browser security policy also blocks chrome://gpu diagnostics. Do not route around that restriction or disable browser security to manufacture a pass.
+- UI fit is checked only in fallback state; loaded component lists and real interactions still need validation. Mobile uses a readable stacked layout, not an impossible all-controls-on-one-small-screen claim.
+- Real device/mobile performance, accessibility behavior, interrupted/repeated exports and recording playback remain open.
+- The source gear geometry differs from idealized AI surfaces. Visual finish can improve further; no final client-launch acceptance is claimed.
 
-## Not finished
-
-- The two round dial openings are an initial experiment, not the final premium composition. Refine aperture architecture, internal finishing and dial depth before acceptance.
-- The integrated console remains visually dense. Smaller desktop layouts overflow; the no-scroll target is not yet accepted. Do not promote it as a finished client interface.
-- Choice-state synchronization following asynchronous view imports still needs a runtime integration check.
-- Real interactive rendering is unavailable in this cloud Chromium: WebGL context creation reports Disabled. The browser can inspect HTML/CSS and the static fallback, not live watch interaction.
-- Responsive and accessibility tests, native recording playback, mobile performance and final integration remain open.
-
-## Next work
-
-1. Refine the dial proposal against the owner's premium/non-cheap-skeleton requirement.
-2. Consolidate redundant UI commands and reduce visual density without hiding essential options.
-3. Validate actual viewer behavior in a WebGL-capable environment when available. Do not disable browser security to obtain a pass.
-4. Keep all design changes separate from main until visual and runtime acceptance.
-
-No production deployment, main merge, source licence alteration or external account setup was performed.
+## Next required environment capability
+A WebGL-capable permitted browser is needed to test the integrated candidate end-to-end. Static/unit/native render work does not replace this gate. Keep the candidate out of main until this is verified.

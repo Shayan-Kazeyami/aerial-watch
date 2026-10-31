@@ -1,0 +1,36 @@
+{
+  "seconds_pivot_xy_mm": [
+    -7.998827934265137,
+    -0.016291368752717972
+  ],
+  "hand_min_z_mm": 3.9000000953674316,
+  "chapter_max_z_mm": 3.62,
+  "vertical_gap_mm": 0.28000009536743153,
+  "hand_max_radius_mm": 3.0454687317648994,
+  "source_transforms_unchanged": true,
+  "scope": "Static full-hand minimum height over ring; not complete rotating assembly/structural validation.",
+  "bearing_material_parts": [
+    "OM00-00115 \u00b7 011",
+    "OM00-00120 \u00b7 021",
+    "OM00-00140 \u00b7 022",
+    "OM00-00122 \u00b7 023",
+    "OM00-00122 \u00b7 024",
+    "OM00-00123 \u00b7 025",
+    "OM00-00124 \u00b7 026",
+    "OM00-00124 \u00b7 027",
+    "OM00-00124 \u00b7 101",
+    "OM00-00145 \u00b7 102",
+    "OM00-00145 \u00b7 103",
+    "OM00-00140 \u00b7 104",
+    "OM00-00122 \u00b7 105",
+    "OM00-00124 \u00b7 117",
+    "OM00-00134 \u00b7 122",
+    "OM00-00120 \u00b7 143"
+  ],
+  "presentation_hidden_plates": [
+    0,
+    149,
+    155
+  ],
+  "caution": "Cutaway presentation: three existing front plates hidden. Not a structural or manufacturing design."
+}

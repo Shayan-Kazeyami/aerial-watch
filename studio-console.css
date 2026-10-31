@@ -123,3 +123,50 @@
  .integrated-studio .viewer #stage{bottom:262px}
  .integrated-studio .viewer .overlay{bottom:243px}
 }
+/* Final single-screen desktop layout. Technical content below is not a control drawer. */
+@media(min-width:1050px){
+ .integrated-studio header{height:48px;padding:0 22px}
+ .integrated-studio .viewer{height:calc(100svh - 48px);min-height:0}
+ .integrated-studio .studio-heading{top:14px;font-size:9px}
+ .integrated-studio #showcase-controls{inset:38px 16px 8px}
+ .integrated-studio #showcase-controls .console-rail{width:194px;bottom:222px;padding:11px}
+ .integrated-studio .viewer #stage{left:220px;right:220px;top:38px;bottom:238px}
+ .integrated-studio .viewer .overlay{left:224px;right:224px;bottom:218px}
+ .integrated-studio #showcase-controls .console-bottom{bottom:30px;height:180px;padding:10px;gap:10px}
+ .integrated-studio #showcase-controls button,.integrated-studio #showcase-controls .file-action{font-size:10px!important;min-height:27px!important;padding:4px!important}
+ .integrated-studio #showcase-controls #view-controls{padding-bottom:8px;margin-bottom:8px}
+ .integrated-studio #showcase-controls h2{font-size:10px;margin-bottom:6px}
+ .integrated-studio #showcase-controls .appearance-panel,.integrated-studio #showcase-controls .everyday-controls,.integrated-studio #showcase-controls .crown-controls{padding-bottom:8px;margin-bottom:8px}
+ .integrated-studio #showcase-controls .all-camera-views{gap:4px}
+ .integrated-studio #showcase-controls .advanced-body{grid-template-columns:180px 1fr;gap:12px}
+ .integrated-studio #showcase-controls .details-body{grid-template-columns:140px minmax(190px,1fr) 190px;gap:4px 12px}
+ .integrated-studio #showcase-controls .details-body>.inspection-actions{display:flex;flex-direction:column}
+ .integrated-studio #showcase-controls .visible-choices button{font-size:9px!important}
+ .integrated-studio #showcase-controls #component-list{max-height:34px}
+ .integrated-studio #showcase-controls #diagnostics-report{max-height:20px;line-height:1.2}
+ .integrated-studio #showcase-controls .tour-navigation{grid-template-columns:1fr 1fr}
+ .integrated-studio #showcase-controls #viewer-status{font-size:10px;line-height:1.25}
+ .integrated-studio #showcase-controls #retry{top:45%;left:calc(50% - 80px)}
+ .integrated-studio #stage #studio-poster img{width:100%;height:100%;object-fit:contain}
+}
+@media(max-width:1049px){
+ .integrated-studio .viewer{min-height:0;height:auto;display:flex;flex-direction:column;padding-top:40px}
+ .integrated-studio .viewer #stage{position:relative;inset:auto;width:100%;height:58svh;min-height:300px}
+ .integrated-studio #showcase-controls{position:relative;inset:auto;padding:12px;display:block}
+ .integrated-studio #showcase-controls .console-rail,.integrated-studio #showcase-controls .console-bottom{position:relative;inset:auto;width:auto;height:auto;margin:10px 0}
+ .integrated-studio #showcase-controls .console-bottom{display:block}
+ .integrated-studio #showcase-controls .advanced-body,.integrated-studio #showcase-controls .details-body{display:flex;flex-direction:column;gap:12px}
+ .integrated-studio #showcase-controls #viewer-status{position:relative;margin:10px 0}
+ .integrated-studio .viewer .overlay{position:relative;inset:auto;padding:8px 12px}
+ .integrated-studio #showcase-controls #retry{position:relative;inset:auto;width:100%!important}
+}
+@media(min-width:1050px){
+ .integrated-studio #showcase-controls .console-bottom{height:210px}
+ .integrated-studio #showcase-controls .console-rail{bottom:252px}
+ .integrated-studio .viewer #stage{bottom:268px}
+ .integrated-studio .viewer .overlay{bottom:248px}
+ .integrated-studio #showcase-controls .tour-controls{grid-row:1}
+ .integrated-studio #showcase-controls .render-information{grid-row:2}
+ .integrated-studio #showcase-controls .quality-diagnostics{grid-row:3}
+ .integrated-studio #showcase-controls .explorer{grid-row:1/4}
+}

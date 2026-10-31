@@ -10,6 +10,7 @@ import {createAssemblyMaterials,cloneAssemblyMaterial} from './assembly-material
 import {createAssemblyLighting} from './assembly-lighting.js';
 import {createDialDetails} from './assembly-dial.js';
 import {createOpenFrontFrame} from './assembly-open-front.js';
+import {preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES} from './assembly-premium-face.js';
 import {createQualityDesign} from './assembly-design.js';
 import {updateInspectionDepth} from './assembly-depth.js';
 import {createRefractionAwareAO} from './assembly-glass-ao.js';
@@ -86,10 +87,15 @@ let source = [], exterior = [], selected = [], groups = [], isolated = null, mod
 let depthBounds=[];
 let interiorView=false,dialDetails,dialFace;
 let openWork=true,openDialDetails,openFrontFrame,openPlates=[],craftParts=[],formDetails,leatherDetails,frontArchitecture,frontArchitectureLoading=false,casebackFinish;
+const premiumRequested=document.body.dataset.premiumFace==='b';
+let premiumFace=null;
+const premiumActive=()=>premiumFaceVisible({enabled:!!premiumFace,openWork:openFrontActive(),movementOnly:$('movement-only').checked,isolated:!!isolated,interior:interiorView});
 const replacedSources=new Set([0,155]);
 const openFrontActive=()=>proposalReady&&openWork&&!$('movement-only').checked&&!isolated;
 function syncFrontDetails() {
-  const active=openFrontActive(),finished=$('finish').checked;
+  const premium=premiumActive();
+  const active=openFrontActive()&&!premium,finished=$('finish').checked;
+  if(premiumFace)premiumFace.root.visible=premium;
   // Restore the calendar before the older form layer restores its own source.
   if(!active)frontArchitecture?.setEnabled(false);
   formDetails?.setEnabled(active);
@@ -110,8 +116,13 @@ function syncFrontDetails() {
       mesh.material=finishes.apply(mesh);
     }
   }
-  for(const part of craftParts)part.visible=active&&!interiorView;
-  if(active&&!interiorView&&craftParts.length)for(const part of exterior)if(['STRAP-UPPER','STRAP-LOWER'].includes(part.userData.assemblyId))part.visible=false;
+  if(premium){
+    for(const mesh of source)if(PREMIUM_HIDDEN_SOURCES.includes(mesh.userData.sourceIndex))mesh.visible=false;
+    for(const mesh of exterior)if(['DIAL','CHAPTER'].includes(mesh.userData.assemblyId))mesh.visible=false;
+    for(const mesh of openPlates)mesh.visible=false;
+  }
+  for(const part of craftParts)part.visible=(active||premium)&&!interiorView;
+  if((active||premium)&&!interiorView&&craftParts.length)for(const part of exterior)if(['STRAP-UPPER','STRAP-LOWER'].includes(part.userData.assemblyId))part.visible=false;
 }
 let scale = 78, currentView = 'three-quarter', elapsed = 0;
 let mechanism,escapement,calendar,winding,setting,settingEngagement,handClockOrigin=0, mechanismElapsed = 0, balanceElapsed = 0,crownVisual;
@@ -148,7 +159,7 @@ const baseMaterials = new WeakMap(), finishMaterials = new WeakMap(), highlights
 const hands = [], axis = new THREE.Vector3(0,1,0), turn = new THREE.Quaternion();
 const meshes = () => [...source,...exterior];
 const eachMaterial = (material,fn) => Array.isArray(material) ? material.map(fn) : fn(material);
-const announce = message => { $('viewer-status').textContent = message; };
+const announce = message => { $('viewer-status').textContent = message; document.dispatchEvent(new Event('studio-state-change')); };
 function stopTour() {
   const wasRunning=tour;
   tour = false;tourSequence.stop(); cameraTween = null; $('tour').setAttribute('aria-pressed','false'); $('tour').textContent = 'Studio tour';
@@ -355,7 +366,7 @@ function visibility() {
   syncFrontDetails();
   updateMaterials();
   scene.updateMatrixWorld(true);
-  const proposed=open?[...openPlates,...(openFrontFrame?.group.children||[]),...(qualityDesign?.meshes||[]),...craftParts.filter(m=>m.visible)]:[];
+  const proposed=open?(premiumActive()?[...premiumFace.meshes,...craftParts.filter(m=>m.visible)]:[...openPlates.filter(m=>m.visible),...(openFrontFrame?.group.visible?openFrontFrame.group.children:[]),...(qualityDesign?.group.visible?qualityDesign.meshes:[]),...craftParts.filter(m=>m.visible)]):[];
   depthBounds=[...meshes().filter(mesh=>mesh.visible),...proposed].map(mesh=>new THREE.Box3().setFromObject(mesh).expandByScalar(.5));
   controls.minDistance=9;
   $('interior-guide').hidden=!interiorView;
@@ -570,7 +581,7 @@ renderer.domElement.addEventListener('pointerup', event => {
   if (loading || failed || !start || Math.hypot(event.clientX-start[0],event.clientY-start[1]) > 5) return;
   const r = renderer.domElement.getBoundingClientRect(), ray = new THREE.Raycaster();
   ray.setFromCamera(new THREE.Vector2((event.clientX-r.left)/r.width*2-1,-(event.clientY-r.top)/r.height*2+1),camera);
-  const proposed=openFrontActive()?[...openPlates,...(openFrontFrame?.group.children||[]),...(qualityDesign?.meshes||[]),...craftParts]:[];
+  const proposed=openFrontActive()?(premiumActive()?[...premiumFace.meshes,...craftParts.filter(m=>m.visible)]:[...openPlates.filter(m=>m.visible),...(openFrontFrame?.group.visible?openFrontFrame.group.children:[]),...(qualityDesign?.group.visible?qualityDesign.meshes:[]),...craftParts.filter(m=>m.visible)]):[];
   const hit = ray.intersectObjects([...meshes(),...proposed].filter(mesh => mesh.visible && !mesh.userData.inspectionTransparent),false)[0];
   if(hit && proposed.includes(hit.object)) {
     clearSelection();announce(`${hit.object.name}. Open-work design proposal; inspect its source counterpart in the component explorer.`);
@@ -606,7 +617,7 @@ function installProposal(result){
     finishMaterials.set(mesh,finishes.apply({name:original.name,userData:original.userData,material:mesh.material}));mesh.castShadow=true;mesh.receiveShadow=true;
   }
   model.add(proposal.scene);resources.own('optional proposed plates',disposeProposal);
-  proposalReady=true;proposalLoading=false;variantManifest=createVariantManifest(source,[...openPlates,...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);updateMaterials();visibility();
+  proposalReady=true;proposalLoading=false;variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);updateMaterials();visibility();
   announce('Open-work design ready. Explore the original movement and blued hands.');
   loadFrontArchitecture();
 }
@@ -663,6 +674,17 @@ function initializeBaseline(result,metadata){
   resources.own('setting engagement and private clearance geometry',()=>settingEngagement?.dispose());
   resources.own('indexed calendar and private spring display',()=>calendar?.dispose());
   resources.own('dial printing',()=>{dialDetails.dispose();openDialDetails.dispose();});resources.own('open-work frame',()=>openFrontFrame.dispose());resources.own('quality hand design',()=>qualityDesign.dispose());
+  if(premiumRequested){
+    loadGLTFAsset('premium-face/face-b.glb',assetOptions()).then(result=>{
+      if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
+      try{
+        premiumFace=preparePremiumFace(result.gltf.scene);model.add(premiumFace.root);
+        resources.own('B premium dial',ownedObjectTreeDisposer(premiumFace.root));
+        performanceMonitor.load(result.metrics||{});variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...(openFrontFrame?.group.children||[]),...(qualityDesign?.meshes||[]),...craftParts]);visibility();
+        announce('Left Crescent dial ready. Original gear layout preserved.');
+      }catch(error){disposeObjectTree(result.gltf.scene);throw error;}
+    }).catch(error=>{if(!lifecycle.disposed){loadWarnings.push(`Premium face: ${error.message}`);announce('The premium dial could not load. Original watch remains available; reload to retry.');}});
+  }
   loading=false;$('load-message').textContent='Lighting the watch studio…';$('assembly-canvas').setAttribute('aria-busy','false');
   $('inspection-controls').disabled=false;$('view-controls').disabled=false;$('animate').disabled=hands.length!==3;
   $('animate-movement').checked=!reducedMotion.matches;$('animate').checked=!reducedMotion.matches&&hands.length===3;
@@ -685,7 +707,7 @@ function initializeBaseline(result,metadata){
     leatherDetails=createLeatherDetails({candidateScene:result.gltf.scene});
     for(const mesh of leatherDetails.meshes){craftParts.push(mesh);baseMaterials.set(mesh,clay);finishMaterials.set(mesh,leatherDetails.materialFor(mesh));}
     model.add(leatherDetails.group);resources.own('R05 leather craft geometry',()=>leatherDetails.dispose());updateMaterials();visibility();
-    variantManifest=createVariantManifest(source,[...openPlates,...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);
+    variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);
     }finally{disposeObjectTree(result.gltf.scene);}
   }).catch(error=>{if(lifecycle.disposed)return;loadWarnings.push(`Leather detail: ${error.message}`);announce('The watch is ready. Additional leather detail is unavailable.');});
 }
@@ -701,7 +723,7 @@ function captureConfiguration({clockStamp}={}){
   const gl=renderer.getContext(),extension=gl.getExtension('WEBGL_debug_renderer_info');
   const measuredPerformance=performanceMonitor.snapshot(),preview=$('studio-poster')?.querySelector('img');
   const previewEntry=preview?performance.getEntriesByName(preview.currentSrc).at(-1):null;
-  return {version:1,date:new Date().toISOString(),design:'Aerial Quality 01',phase:loadPhase,view:currentView,
+  return {version:1,date:new Date().toISOString(),premiumFace:{requested:premiumRequested,ready:!!premiumFace,active:premiumActive(),revision:premiumFace?.revision??null},design:premiumRequested?'Aerial Left Crescent B':'Aerial Quality 01',phase:loadPhase,view:currentView,
     camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},
     formDetails:{revision:'form-legibility-r01',ready:!!formDetails,enabled:!!formDetails?.enabled,calendarDigitIslands:formDetails?.audit.components??null},
     frontArchitecture:{revision:'front-architecture-r07',ready:!!frontArchitecture,enabled:!!frontArchitecture?.enabled,audit:frontArchitecture?.audit??null},
@@ -715,7 +737,7 @@ function captureConfiguration({clockStamp}={}){
     compactCrown:!!crownVisual&&openFrontActive(),
     settingSeconds,clock:clockStamp||clock.snapshot(),crown:crownInteraction.snapshot(),sourceAtCapture:captureProvenance.snapshot(),options:{openWork:$('open-work').checked,finishes:$('finish').checked,crystals:$('crystals').checked,movementOnly:$('movement-only').checked,interior:interiorView,powerPath,quality},
     viewport:{width:renderer.domElement.clientWidth,height:renderer.domElement.clientHeight,pixelRatio:renderer.getPixelRatio(),drawingBufferWidth:renderer.domElement.width,drawingBufferHeight:renderer.domElement.height,msaaSamples:composer.renderTarget1.samples,transmissionScale:renderer.transmissionResolutionScale},
-    sourceMeshes:source.length,sourceVisible:source.filter(m=>m.visible).length,derivedParts:openPlates.length+(openFrontFrame?.count||0)+(qualityDesign?.count||0)+craftParts.length,lightRig:lighting.shot,
+    sourceMeshes:source.length,sourceVisible:source.filter(m=>m.visible).length,derivedParts:(premiumFace?.meshes.length||0)+openPlates.length+(openFrontFrame?.count||0)+(qualityDesign?.count||0)+craftParts.length,lightRig:lighting.shot,
     performance:measuredPerformance,resources:resources.snapshot(),warnings:[...loadWarnings],
     navigationTiming:{moduleBootMs:bootTime,firstInteractiveMs:measuredPerformance.firstInteractiveMs===null?null:bootTime+measuredPerformance.firstInteractiveMs,
       preview:preview?{path:new URL(preview.currentSrc).pathname,decoded:preview.complete&&preview.naturalWidth>0,responseEndMs:previewEntry?.responseEnd??null}:null,
