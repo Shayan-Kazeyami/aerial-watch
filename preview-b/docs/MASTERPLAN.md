@@ -127,7 +127,7 @@ The watch and viewer meet the accepted visual direction; essential interactions 
 
 The selected B face exists as an editable Blender scene and a 76-mesh authored overlay. Exact vertex hashes and world transforms were preserved across all 169 source movement/hand meshes. Original front plates are hidden for cutaway presentation, not structurally validated replacement plates.
 
-Published preview: https://shayan-kazeyami.github.io/aerial-watch/preview-b/integrated-preview.html . It is isolated from the existing homepage. Latest published design checkpoint is 8c17b786; more local live-QA fixes are in progress. No final launch acceptance.
+Published preview: https://shayan-kazeyami.github.io/aerial-watch/preview-b/integrated-preview.html . It is isolated from the existing homepage. Published design checkpoint 4d67c2bd includes the compact footer and WebP poster; more local responsive QA refinements are in progress. No final launch acceptance.
 
 Live WebGL now works in the explicitly approved isolated software-rendering test profile. Limited interactions have been visually checked; export delivery and broader runtime/device tests remain open. See LIVE-QA-2026-10-31.md and IMPLEMENTATION-STATUS.md for evidence boundaries.
 
