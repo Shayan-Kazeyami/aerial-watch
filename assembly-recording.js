@@ -2,11 +2,12 @@
 // remain owned by the viewer. No audio, network upload or hidden rendering.
 export function createCanvasRecorder({canvas,onStatus=()=>{},onComplete=()=>{},
   MediaRecorderClass=globalThis.MediaRecorder,durationMs=8000,frameRate=30,
-  videoBitsPerSecond=12000000,schedule=setTimeout,cancel=clearTimeout}={}){
+  videoBitsPerSecond=12000000,finalizeTimeoutMs=5000,schedule=setTimeout,cancel=clearTimeout}={}){
   let active=null,disposed=false;
   const status=(message,state,error)=>onStatus(message,{state,error});
   function cleanup(recording){
     if(recording.timer!==undefined){cancel(recording.timer);recording.timer=undefined;}
+    if(recording.finalizeTimer!==undefined){cancel(recording.finalizeTimer);recording.finalizeTimer=undefined;}
     recording.stream?.getTracks().forEach(track=>track.stop());
     if(recording.recorder){recording.recorder.ondataavailable=null;recording.recorder.onerror=null;recording.recorder.onstop=null;}
     if(active===recording)active=null;
@@ -20,7 +21,12 @@ export function createCanvasRecorder({canvas,onStatus=()=>{},onComplete=()=>{},
   }
   function stop(){if(!active)return false;const recording=active;
     if(recording.stopRequested)return false;recording.stopRequested=true;
-    try{recording.recorder.stop();}catch(error){fail(recording,error);}return true;
+    try{
+      // A browser can stop encoding without dispatching its final data/stop event.
+      // Bound that wait so the caller can recover rather than stay disabled.
+      recording.finalizeTimer=schedule(()=>fail(recording,new Error('Finishing the motion clip timed out. Please try recording again.')),finalizeTimeoutMs);
+      recording.recorder.stop();
+    }catch(error){fail(recording,error);}return true;
   }
   return {
     get recording(){return !!active;},
@@ -33,6 +39,7 @@ export function createCanvasRecorder({canvas,onStatus=()=>{},onComplete=()=>{},
       const mimeType=candidates.find(type=>typeof MediaRecorderClass.isTypeSupported!=='function'||MediaRecorderClass.isTypeSupported(type));
       if(!mimeType)throw new Error('WebM video recording is unavailable in this browser. You can still save a still image.');
       if(!Number.isFinite(durationMs)||durationMs<=0||!Number.isFinite(frameRate)||frameRate<=0)throw new Error('A positive recording duration and frame rate are required.');
+      if(!Number.isFinite(finalizeTimeoutMs)||finalizeTimeoutMs<=0)throw new Error('A positive recording finalization timeout is required.');
       let resolve,reject;const completion=new Promise((yes,no)=>{resolve=yes;reject=no;});
       const recording={resolve,reject,chunks:[],settled:false,stopRequested:false};active=recording;
       try{
