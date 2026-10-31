@@ -1,0 +1,28 @@
+{
+  "straps": [
+    {
+      "name": "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+      "physical_uv_islands": 253,
+      "scan_tile_mm": 100,
+      "puncture_count": 176,
+      "thread_ply_count": 3,
+      "thread_envelope_diameter_mm": 0.122,
+      "channel_depth_mm": 0.045,
+      "boolean_applied": true,
+      "vertices": 27687
+    },
+    {
+      "name": "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+      "physical_uv_islands": 365,
+      "scan_tile_mm": 100,
+      "puncture_count": 88,
+      "thread_ply_count": 3,
+      "thread_envelope_diameter_mm": 0.122,
+      "channel_depth_mm": 0.045,
+      "boolean_applied": true,
+      "vertices": 17543
+    }
+  ],
+  "source_meshes_unchanged": 169,
+  "limits": "Decorative static sewn anatomy. No manufacturing or dynamic clearance certification."
+}

@@ -1,0 +1,35 @@
+{
+  "revision": "R10",
+  "objects": [
+    "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+    "Seam study / upper waxed three-ply stitches",
+    "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+    "Seam study / lower waxed three-ply stitches"
+  ],
+  "authored_mesh_objects": 4,
+  "glb_bytes": 41847856,
+  "maps": {
+    "color": "2048 full material tile, shader baked sRGB",
+    "roughness": "2048 full material tile, shader baked non-color",
+    "normal": "original unchanged 4096 OpenGL scan, strength 0.25"
+  },
+  "physical_uv_scale_mm": 100,
+  "normal_source": "Poly Haven Leather White CC0",
+  "append_from_native_r05": [
+    "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+    "Seam study / upper waxed three-ply stitches",
+    "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+    "Seam study / lower waxed three-ply stitches"
+  ],
+  "triangulated_after_bevel_for_tangents": true,
+  "final_bevel_uv_repair": [
+    {
+      "name": "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+      "reprojected_final_bevel_triangles": 404
+    },
+    {
+      "name": "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+      "reprojected_final_bevel_triangles": 1170
+    }
+  ]
+}

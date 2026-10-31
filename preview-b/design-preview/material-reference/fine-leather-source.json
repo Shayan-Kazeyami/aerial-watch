@@ -1,0 +1,28 @@
+{
+  "asset": "leather_white",
+  "source": "https://polyhaven.com/a/leather_white",
+  "license": "CC0",
+  "files": [
+    {
+      "kind": "Diffuse",
+      "path": "design-preview/material-reference/leather_white_diff_4k.jpg",
+      "size": 14972596,
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/leather_white/leather_white_diff_4k.jpg",
+      "md5": "26a2ffa8618206fbf99b63ab3bcbfd92"
+    },
+    {
+      "kind": "nor_gl",
+      "path": "design-preview/material-reference/leather_white_nor_gl_4k.png",
+      "size": 26791907,
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/leather_white/leather_white_nor_gl_4k.png",
+      "md5": "0fe4ccefc6e7958fc18297fa1ec1cd32"
+    },
+    {
+      "kind": "Rough",
+      "path": "design-preview/material-reference/leather_white_rough_4k.jpg",
+      "size": 13101657,
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/leather_white/leather_white_rough_4k.jpg",
+      "md5": "dee436c3a3dfb153d99abfb1b2d07352"
+    }
+  ]
+}

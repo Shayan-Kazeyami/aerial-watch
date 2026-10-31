@@ -1,0 +1,24 @@
+{
+  "step_degrees": 5,
+  "checks": [
+    {
+      "hand": "HOUR",
+      "local_axis": "Z (glTF Y-up equivalent)",
+      "samples": 72,
+      "colliding_samples": []
+    },
+    {
+      "hand": "MINUTE",
+      "local_axis": "Z (glTF Y-up equivalent)",
+      "samples": 72,
+      "colliding_samples": []
+    },
+    {
+      "hand": "SECONDS",
+      "local_axis": "Z (glTF Y-up equivalent)",
+      "samples": 72,
+      "colliding_samples": []
+    }
+  ],
+  "scope": "Sampled triangle-surface overlap between each original hand and new authored face parts. Not continuous-time, tolerance, force or complete movement certification."
+}

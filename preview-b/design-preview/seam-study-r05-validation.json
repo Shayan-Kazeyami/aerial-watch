@@ -1,0 +1,32 @@
+{
+  "bands": [
+    {
+      "name": "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+      "triangles": 45372,
+      "collapsed_uv_triangles_including_boolean_cuts": 0,
+      "nonmanifold_edges": 0,
+      "lug_region_vertex_count": 2444,
+      "max_lug_region_distance_to_original_mm": 0.0
+    },
+    {
+      "name": "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+      "triangles": 29828,
+      "collapsed_uv_triangles_including_boolean_cuts": 0,
+      "nonmanifold_edges": 0,
+      "lug_region_vertex_count": 2683,
+      "max_lug_region_distance_to_original_mm": 0.0
+    }
+  ],
+  "new_thread_source_collisions": [
+    {
+      "name": "Seam study / upper waxed three-ply stitches",
+      "source_surface_triangle_intersections": 0
+    },
+    {
+      "name": "Seam study / lower waxed three-ply stitches",
+      "source_surface_triangle_intersections": 0
+    }
+  ],
+  "sampled_thread_to_source_minimum_mm": 1.1919190883636475,
+  "limits": "Static mesh checks. New replacement bands are closed after welding split vertices. No dynamic, strength or manufacturing certification."
+}

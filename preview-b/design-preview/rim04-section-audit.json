@@ -1,0 +1,39 @@
+{
+  "rim_nonadjacent_triangle_self_intersection_pairs": 0,
+  "right_main_section_count": 640,
+  "right_width_range_mm": [
+    0.22499936265924564,
+    0.22500058753968702
+  ],
+  "right_drop_range_mm": [
+    0.5,
+    0.5
+  ],
+  "right_angle_range_degrees": [
+    65.77219869280749,
+    65.77231541710239
+  ],
+  "upper_outline_exact_svg_cubics_retained_except_tip_trim": true,
+  "mesh_profile_sampling": "160 samples per cubic; identical parameters on main right wall; localized endpoint blends only",
+  "seconds_attachment": "Original SVG03 support/ring dimensions unchanged",
+  "limits": "Triangle intersection test excludes vertex-adjacent triangles; sampled representation, not certified CAD tolerance.",
+  "left_main_width_range_mm": [
+    0.7999990441661768,
+    0.8000010580289024
+  ],
+  "left_all_depth_cone_max_radial_error_mm": 7.044194045846552e-07,
+  "left_all_depth_face_inclination_range_degrees": [
+    32.00407973633376,
+    32.00641232397189
+  ],
+  "right_all_depth_face_inclination_range_degrees": [
+    65.76305426023573,
+    65.78041401723407
+  ],
+  "depth_layers": 33,
+  "endpoint_geometry": "Depth-sliced intersection of constant-angle left cone and normal-offset right wall. Only the 0.20 mm meeting fillet blends them; no end ramp.",
+  "connected_components": {
+    "SVG broad sloped champagne wall": 1,
+    "SVG unified dial and seconds support": 1
+  }
+}

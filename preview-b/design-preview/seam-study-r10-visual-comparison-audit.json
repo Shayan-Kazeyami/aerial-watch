@@ -1,0 +1,14 @@
+{
+  "comparison": "Same 800px camera, 96 samples; read-only image metrics, not image edits",
+  "surface_roi_xywh": [
+    380,
+    50,
+    320,
+    300
+  ],
+  "native_to_compatible_surface_rgb_mae": 0.007063602941176471,
+  "compatible_to_runtime_surface_rgb_mae": 0.0036551062091503272,
+  "compatible_surface_mean_rgb": 0.32680936819172113,
+  "runtime_surface_mean_rgb": 0.3261480528322439,
+  "visual_review": "PASS candidate runtime equivalence. Grain slightly softer at extreme crop; no brightness shift, blocking or torn puncture shading. Not acceptance of overall leather finish."
+}

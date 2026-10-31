@@ -37,6 +37,8 @@ vec4 getAssemblyTransmissionSample(vec2 uv,float roughness,float ior,vec2 entryU
 export function addRefractionEdgeFallback(material){
   material.onBeforeCompile=shader=>{
     let chunk=ShaderChunk.transmission_pars_fragment;
+    const required=['\tvec3 volumeAttenuation(','\t\tvec4 transmittedLight;','getTransmissionSample( refractionCoords, roughness, iors[ i ] )','getTransmissionSample( refractionCoords, roughness, ior )'];
+    if(required.some(token=>!chunk.includes(token)))throw new Error('Unsupported transmission shader layout; review the refraction patch before upgrading Three.js.');
     chunk=chunk.replace('\tvec3 volumeAttenuation(',sampleFunction+'\n\tvec3 volumeAttenuation(')
       .replace('\t\tvec4 transmittedLight;','\t\tvec4 assemblyEntryClip=projMatrix*viewMatrix*vec4(position,1.);\n\t\tvec2 assemblyEntryUV=assemblyEntryClip.xy/assemblyEntryClip.w*.5+.5;\n\t\tvec4 transmittedLight;')
       .replace('getTransmissionSample( refractionCoords, roughness, iors[ i ] )','getAssemblyTransmissionSample( refractionCoords, roughness, iors[ i ], assemblyEntryUV, ndcPos.w )')
