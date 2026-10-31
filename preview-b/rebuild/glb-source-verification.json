@@ -1,0 +1,1005 @@
+{
+  "sourceMeshes": 166,
+  "sourceTriangles": 759744,
+  "allTriangleGeometryMatches": true,
+  "maximumSourceVertexErrorMM": 9.5367431640625e-07,
+  "comparisonToleranceMM": 1e-05,
+  "partResults": [
+    {
+      "sourceIndex": 0,
+      "triangles": 33068,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.805480102731963e-07
+    },
+    {
+      "sourceIndex": 1,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 2,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 3,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 4,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 5,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 6.664001972467304e-08
+    },
+    {
+      "sourceIndex": 6,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 7,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 8,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 9,
+      "triangles": 3060,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 10,
+      "triangles": 1620,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 11,
+      "triangles": 1252,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 12,
+      "triangles": 7501,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 13,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 14,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 15,
+      "triangles": 1236,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 16,
+      "triangles": 1236,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 17,
+      "triangles": 1236,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 18,
+      "triangles": 1236,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 19,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 20,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 21,
+      "triangles": 2300,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 22,
+      "triangles": 2404,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 23,
+      "triangles": 1778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 24,
+      "triangles": 1778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.0972712132352805e-14
+    },
+    {
+      "sourceIndex": 25,
+      "triangles": 2912,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 26,
+      "triangles": 3906,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 27,
+      "triangles": 3906,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 28,
+      "triangles": 2380,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 29,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 30,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 31,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 32,
+      "triangles": 1370,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 33,
+      "triangles": 1370,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 34,
+      "triangles": 872,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 35,
+      "triangles": 696,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 36,
+      "triangles": 696,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 37,
+      "triangles": 872,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 38,
+      "triangles": 556,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.842877388000488e-08
+    },
+    {
+      "sourceIndex": 39,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 40,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 41,
+      "triangles": 8640,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.76837158203125e-07
+    },
+    {
+      "sourceIndex": 42,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 43,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 44,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 45,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 46,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 47,
+      "triangles": 556,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 48,
+      "triangles": 556,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 49,
+      "triangles": 900,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 50,
+      "triangles": 5330,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 51,
+      "triangles": 6908,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 52,
+      "triangles": 4378,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.76837158203125e-07
+    },
+    {
+      "sourceIndex": 53,
+      "triangles": 2078,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.384185791015625e-07
+    },
+    {
+      "sourceIndex": 54,
+      "triangles": 4778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1175870895385742e-08
+    },
+    {
+      "sourceIndex": 55,
+      "triangles": 4778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1175870895385742e-08
+    },
+    {
+      "sourceIndex": 56,
+      "triangles": 2288,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 57,
+      "triangles": 1558,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.4027400513659813e-07
+    },
+    {
+      "sourceIndex": 58,
+      "triangles": 1080,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 59,
+      "triangles": 880,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 60,
+      "triangles": 916,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 61,
+      "triangles": 1128,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 62,
+      "triangles": 1266,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 63,
+      "triangles": 10082,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 64,
+      "triangles": 2388,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 65,
+      "triangles": 5894,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 66,
+      "triangles": 1400,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 67,
+      "triangles": 4330,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 68,
+      "triangles": 1120,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 69,
+      "triangles": 1120,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 70,
+      "triangles": 3476,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.384185791015625e-07
+    },
+    {
+      "sourceIndex": 71,
+      "triangles": 4778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 72,
+      "triangles": 4778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 73,
+      "triangles": 4778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 74,
+      "triangles": 4094,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 75,
+      "triangles": 8762,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 76,
+      "triangles": 4064,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 77,
+      "triangles": 2698,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 9.5367431640625e-07
+    },
+    {
+      "sourceIndex": 78,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 79,
+      "triangles": 632,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.2351741790771484e-07
+    },
+    {
+      "sourceIndex": 80,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 81,
+      "triangles": 27898,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 3.3717478231665154e-07
+    },
+    {
+      "sourceIndex": 82,
+      "triangles": 1688,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.76837158203125e-07
+    },
+    {
+      "sourceIndex": 83,
+      "triangles": 3906,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 84,
+      "triangles": 7492,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.980232238769531e-07
+    },
+    {
+      "sourceIndex": 85,
+      "triangles": 15010,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 3.1680303891334916e-07
+    },
+    {
+      "sourceIndex": 86,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 87,
+      "triangles": 1120,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 88,
+      "triangles": 1376,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 89,
+      "triangles": 556,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 90,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 91,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 92,
+      "triangles": 6466,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 93,
+      "triangles": 19840,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.384185791015625e-07
+    },
+    {
+      "sourceIndex": 94,
+      "triangles": 4898,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 95,
+      "triangles": 19132,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.384185791015625e-07
+    },
+    {
+      "sourceIndex": 96,
+      "triangles": 9974,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.3844768293201923e-07
+    },
+    {
+      "sourceIndex": 97,
+      "triangles": 21944,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 98,
+      "triangles": 4780,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 99,
+      "triangles": 6336,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 100,
+      "triangles": 7116,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.76837158203125e-07
+    },
+    {
+      "sourceIndex": 101,
+      "triangles": 3906,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 102,
+      "triangles": 1622,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 103,
+      "triangles": 1622,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.9736640165073094e-14
+    },
+    {
+      "sourceIndex": 104,
+      "triangles": 2404,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 105,
+      "triangles": 1778,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 106,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 107,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 108,
+      "triangles": 9826,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 109,
+      "triangles": 10872,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 110,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.214684778958144e-08
+    },
+    {
+      "sourceIndex": 111,
+      "triangles": 2048,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 112,
+      "triangles": 718,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 113,
+      "triangles": 1592,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 114,
+      "triangles": 48,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 115,
+      "triangles": 48,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 116,
+      "triangles": 2724,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1944189282075968e-07
+    },
+    {
+      "sourceIndex": 117,
+      "triangles": 3906,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 118,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 119,
+      "triangles": 2438,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 4.76837158203125e-07
+    },
+    {
+      "sourceIndex": 120,
+      "triangles": 2876,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 121,
+      "triangles": 2450,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 122,
+      "triangles": 3450,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 123,
+      "triangles": 578,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 124,
+      "triangles": 1820,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 125,
+      "triangles": 1704,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 126,
+      "triangles": 1642,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 127,
+      "triangles": 1536,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 128,
+      "triangles": 1890,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 129,
+      "triangles": 2784,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 130,
+      "triangles": 26222,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 131,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 132,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 133,
+      "triangles": 11708,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 134,
+      "triangles": 1922,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.6656007889869215e-07
+    },
+    {
+      "sourceIndex": 135,
+      "triangles": 1638,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 136,
+      "triangles": 172,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 137,
+      "triangles": 978,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 138,
+      "triangles": 9488,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 139,
+      "triangles": 7533,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 140,
+      "triangles": 14680,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 141,
+      "triangles": 5392,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 9.5367431640625e-07
+    },
+    {
+      "sourceIndex": 142,
+      "triangles": 2100,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 143,
+      "triangles": 2300,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 144,
+      "triangles": 4184,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 145,
+      "triangles": 11224,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.6858739115832577e-07
+    },
+    {
+      "sourceIndex": 146,
+      "triangles": 13572,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 147,
+      "triangles": 1268,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 148,
+      "triangles": 872,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 149,
+      "triangles": 53528,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 150,
+      "triangles": 3440,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 151,
+      "triangles": 6128,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 5.960464477539063e-08
+    },
+    {
+      "sourceIndex": 152,
+      "triangles": 7016,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 153,
+      "triangles": 12610,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 154,
+      "triangles": 556,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.4901161193847656e-08
+    },
+    {
+      "sourceIndex": 155,
+      "triangles": 10458,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 9.5367431640625e-07
+    },
+    {
+      "sourceIndex": 156,
+      "triangles": 804,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 157,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 158,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 0
+    },
+    {
+      "sourceIndex": 159,
+      "triangles": 872,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 1.1920928955078125e-07
+    },
+    {
+      "sourceIndex": 160,
+      "triangles": 432,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 7.450580596923828e-09
+    },
+    {
+      "sourceIndex": 161,
+      "triangles": 432,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 7.450580596923828e-09
+    },
+    {
+      "sourceIndex": 162,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 163,
+      "triangles": 432,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 7.450580596923828e-09
+    },
+    {
+      "sourceIndex": 164,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    },
+    {
+      "sourceIndex": 165,
+      "triangles": 4782,
+      "geometryMatches": true,
+      "maxVertexErrorMM": 2.9802322387695312e-08
+    }
+  ]
+}
