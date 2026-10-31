@@ -1,0 +1,27 @@
+{
+  "source_blend": "seam-study-r05.blend",
+  "append_only": [
+    "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+    "Seam study / upper waxed three-ply stitches",
+    "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+    "Seam study / lower waxed three-ply stitches"
+  ],
+  "exclude": "All hidden originals, QUALITY-STRAP/QUALITY-STITCH old replacements, recess cutter objects, original source meshes and movement.",
+  "native_master": "seam-study-r05.blend",
+  "runtime_glb": "seam-study-leather-r10-runtime.glb",
+  "native_export_compatible": "seam-study-r10-export-compatible.blend",
+  "runtime_roundtrip_scene": "seam-study-r10-runtime-roundtrip.blend",
+  "loader_revision_required": "R10",
+  "runtime_object_roles": [
+    "QUALITY-STRAP",
+    "QUALITY-STITCH"
+  ],
+  "replacement_ids": [
+    "STRAP-UPPER",
+    "STRAP-LOWER"
+  ],
+  "runtime_bytes": 9487248,
+  "runtime_sha256": "ba6be0bffb7fc66dccbbc3adc26d3e5b076c67a8a23503d491d44c2bb7f7e566",
+  "final_roundtrip_proof": "seam-study-r10-runtime-roundtrip-final-detail.png",
+  "comparison_page": "seam-study-r10-comparison.html"
+}

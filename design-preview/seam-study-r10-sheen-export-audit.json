@@ -1,0 +1,70 @@
+[
+  {
+    "file": "seam-study-leather-r10.glb",
+    "bytes": 41847864,
+    "binary_payload_unchanged": true,
+    "fixed": [
+      {
+        "material": "leather / fine charcoal calf / photo R10",
+        "authored_weight": 0.1,
+        "exported_sheenColorFactor": [
+          0.1,
+          0.1,
+          0.1
+        ]
+      },
+      {
+        "material": "lining / warm leather R10",
+        "authored_weight": 0.04,
+        "exported_sheenColorFactor": [
+          0.04,
+          0.04,
+          0.04
+        ]
+      },
+      {
+        "material": "thread / waxed graphite three ply R10",
+        "authored_weight": 0.25,
+        "exported_sheenColorFactor": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      }
+    ]
+  },
+  {
+    "file": "seam-study-leather-r10-runtime.glb",
+    "bytes": 9487248,
+    "binary_payload_unchanged": true,
+    "fixed": [
+      {
+        "material": "leather / fine charcoal calf / photo R10 runtime",
+        "authored_weight": 0.1,
+        "exported_sheenColorFactor": [
+          0.1,
+          0.1,
+          0.1
+        ]
+      },
+      {
+        "material": "lining / warm leather R10",
+        "authored_weight": 0.04,
+        "exported_sheenColorFactor": [
+          0.04,
+          0.04,
+          0.04
+        ]
+      },
+      {
+        "material": "thread / waxed graphite three ply R10",
+        "authored_weight": 0.25,
+        "exported_sheenColorFactor": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      }
+    ]
+  }
+]

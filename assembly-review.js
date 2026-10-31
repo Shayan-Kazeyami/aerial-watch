@@ -5,12 +5,13 @@ import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {SSAOPass} from 'three/addons/postprocessing/SSAOPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {createAssemblyMotion, sampleMechanicalTime} from './assembly-motion.js';
 import {createAssemblyMaterials,cloneAssemblyMaterial} from './assembly-materials.js';
 import {createAssemblyLighting} from './assembly-lighting.js';
 import {createDialDetails} from './assembly-dial.js';
 import {createOpenFrontFrame} from './assembly-open-front.js';
-import {premiumFaceAsset,preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES,premiumMovementFinishKind} from './assembly-premium-face.js?v=svg02';
+import {premiumFaceAsset,preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES,premiumMovementFinishKind} from './assembly-premium-face.js?v=svg04';
 import {createQualityDesign} from './assembly-design.js';
 import {updateInspectionDepth} from './assembly-depth.js?v=b03';
 import {createRefractionAwareAO} from './assembly-glass-ao.js';
@@ -30,6 +31,7 @@ import {createViewerLifecycle} from './assembly-lifecycle.js';
 import {createFormDetails} from './assembly-form-details.js';
 import {createLeatherDetails} from './assembly-leather-details.js';
 import {createPhotoLeatherDetails} from './assembly-photo-leather.js';
+import {createAssemblyExplosion} from './assembly-explode.js';
 import {createFrontArchitecture} from './assembly-front-architecture.js';
 import {createAssemblyEscapement} from './assembly-escapement.js';
 import {createAssemblyCalendar} from './assembly-calendar.js';
@@ -48,28 +50,35 @@ function ownedObjectTreeDisposer(root){
   return objectDisposers.get(root);
 }
 function disposeObjectTree(root){ownedObjectTreeDisposer(root)();}
+const atelierVisuals=document.body.classList.contains('atelier-live')||new URLSearchParams(location.search).get('visual')==='atelier';
 scene.background = new THREE.Color('#171a19');
 scene.fog = new THREE.Fog('#171a19',350,900);
-const renderer = new THREE.WebGLRenderer({canvas: $('assembly-canvas'), antialias: true, powerPreference:'high-performance'});
+if(atelierVisuals){
+ const backdrop=document.createElement('canvas');backdrop.width=backdrop.height=512;const context=backdrop.getContext('2d');
+ const gradient=context.createRadialGradient(270,215,20,256,256,330);gradient.addColorStop(0,'#3d413e');gradient.addColorStop(.65,'#2b302c');gradient.addColorStop(1,'#272c28');context.fillStyle=gradient;context.fillRect(0,0,512,512);
+ const texture=new THREE.CanvasTexture(backdrop);texture.colorSpace=THREE.SRGBColorSpace;scene.background=texture;scene.fog=null;resources.own('atelier studio backdrop',()=>texture.dispose());
+}
+const renderer = new THREE.WebGLRenderer({canvas: $('assembly-canvas'), antialias: true, alpha:false, powerPreference:'high-performance'});
+if(atelierVisuals)renderer.setClearColor(0x191b1a,1);
 // Count the entire composed frame, including transmission, shadows and AO.
 renderer.info.autoReset=false;
 renderer.setPixelRatio(2);
 renderer.transmissionResolutionScale=2;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.08;
-renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-const finishes = createAssemblyMaterials(renderer);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = Number(THREE.REVISION)>=187?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
+const finishes = createAssemblyMaterials(renderer,{atelier:atelierVisuals});
 scene.environment = finishes.environment; scene.environmentIntensity = .85;
 const camera = new THREE.PerspectiveCamera(32,1,.1,800);
-const lighting=createAssemblyLighting(scene,{renderer}),{key,floor}=lighting;
+const lighting=createAssemblyLighting(scene,{renderer,atelier:atelierVisuals}),{key,floor}=lighting;
 const composer = new EffectComposer(renderer);
 composer.renderTarget1.samples = composer.renderTarget2.samples = Math.min(4,renderer.capabilities.maxSamples);
 composer.addPass(new RenderPass(scene,camera));
 const ao = new SSAOPass(scene,camera,1,1,24);
 ao.kernelRadius = 1.2; ao.minDistance = .000025; ao.maxDistance = .006;
-composer.addPass(ao); composer.addPass(new OutputPass());
+composer.addPass(ao);const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),.07,.25,1.8);bloom.enabled=false;composer.addPass(bloom);composer.addPass(new OutputPass());
 const controls = new OrbitControls(camera,renderer.domElement);
-renderer.domElement.style.touchAction='pan-y';
+renderer.domElement.style.touchAction=atelierVisuals?'none':'pan-y';
 resources.own('WebGL renderer',()=>renderer.dispose());
 resources.own('studio environment and finish library',()=>finishes.dispose());
 resources.own('post-processing composer',()=>{ao.dispose();composer.passes.forEach(pass=>pass!==ao&&pass.dispose?.());composer.dispose();});
@@ -80,14 +89,14 @@ controls.enableDamping = !reducedMotion.matches; controls.dampingFactor = .09; c
 controls.minDistance = 9; controls.maxDistance = 480;
 reducedMotion.addEventListener('change', event => {
   controls.enableDamping = !event.matches;
-  if (event.matches) { $('animate-movement').checked = false; $('animate').checked = false; stopTour(); cameraTween = null; setClockPlayback(); }
+  if (event.matches) { $('animate-movement').checked = false; $('animate').checked = false; stopTour(); cameraTween = null; crownVisual?.finish(); setClockPlayback(); }
   dirty = true;
 });
 controls.addEventListener('change', () => { dirty = true; });
 
 let loading = true, failed = false, contextLost = false, dirty = true, firstRender = true;
 let loadPhase='poster',proposalReady=false,proposalLoading=false,loadWarnings=[],variantManifest=null,qualityDesign;
-let source = [], exterior = [], selected = [], groups = [], isolated = null, model;
+let source = [], exterior = [], selected = [], groups = [], isolated = null, model, explosion;
 let depthBounds=[];
 let interiorView=false,dialDetails,dialFace;
 let openWork=true,openDialDetails,openFrontFrame,openPlates=[],craftParts=[],formDetails,leatherDetails,frontArchitecture,frontArchitectureLoading=false,casebackFinish;
@@ -136,7 +145,7 @@ let cameraTween = null, tour = false, animationFrame=0;
 const tourSequence=createTourSequence();let powerPath=false;
 const lifecycle=createViewerLifecycle({pause:()=>{clock.setHidden(true);performanceMonitor.breakCadence();},
   resume:()=>{clock.setHidden(document.hidden);last=frameWindow=performance.now();dirty=true;},
-  dispose:()=>{cancelAnimationFrame(animationFrame);try{resources.dispose();}catch(error){console.error('Viewer resource cleanup failed.',error);}}});
+  dispose:()=>{cancelAnimationFrame(animationFrame);explosion?.dispose();try{resources.dispose();}catch(error){console.error('Viewer resource cleanup failed.',error);}}});
 const assetOptions=()=>({loader:new GLTFLoader(),signal:lifecycle.signal,disposeUnused:gltf=>disposeObjectTree(gltf.scene)});
 const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=svg03-photo09').then(module=>module.default)}),pendingCaptures=new Set();
 const requestedQuality=new URLSearchParams(location.search).get('quality');
@@ -201,7 +210,7 @@ function resize() {
 function renderingQuality(name) {
   const profile=qualityProfiles[name]; if(!profile) return;
   quality=name; $('render-quality').value=name;
-  ao.enabled=profile.ao; renderer.shadowMap.enabled=profile.shadows; key.castShadow=profile.shadows;
+  ao.enabled=profile.ao;bloom.enabled=atelierVisuals&&name==='studio'; renderer.shadowMap.enabled=profile.shadows; key.castShadow=profile.shadows;
   const samples=Math.min(profile.samples,renderer.capabilities.maxSamples);
   for(const target of [composer.renderTarget1,composer.renderTarget2]) if(target.samples!==samples) { target.samples=samples; target.dispose(); }
   if(!profile.shadows && key.shadow.map) { key.shadow.map.dispose(); key.shadow.map=null; }
@@ -486,7 +495,19 @@ const crownInteraction=createCrownInteraction({
     if($('crown-help'))$('crown-help').textContent=state.pulled?'Turn left or right to move the hands. Push in when you are done.':'Turn left to wind the gears; turning right lets the clutch return. Watch time stays unchanged.';
     syncSimpleControls();if(model&&!loading)visibility();dirty=true;},
 });resources.own('crown interaction',()=>crownInteraction.dispose());
-function focusCrown(){if(loading||failed)return;stopTour();clearSelection();isolated=null;interiorView=false;$('movement-only').checked=false;visibility();if($('crown-controls'))$('crown-controls').open=true;view('crown');$('crown-pull')?.focus({preventScroll:true});announce('Crown controls opened. Turn while seated, or pull out to set the hands.');}
+
+function registerExplosionParts(){if(!model||!explosion)return;const parts=[];model.traverse(o=>{if(o.isMesh)parts.push(o);});explosion.register(parts);}
+function announceAtelierCapabilities(){document.dispatchEvent(new CustomEvent('atelier:capabilities',{detail:{explode:!!explosion&&!loading&&!failed,crownDrag:!!crownVisual&&!loading&&!failed}}));}
+function resetExplosion(instant=false){explosion?.reset({instant});document.dispatchEvent(new CustomEvent('atelier:explode-state',{detail:{amount:0}}));dirty=true;}
+document.addEventListener('atelier:request-capabilities',announceAtelierCapabilities);
+document.addEventListener('atelier:explode',event=>{
+ const amount=event.detail?.amount;if(!explosion||loading||failed||!Number.isFinite(amount))return;
+ stopTour();registerExplosionParts();
+ if(amount>0){$('animate-movement').checked=false;$('animate').checked=false;setClockPlayback();if(!explosion.active){clearSelection();isolated=null;$('movement-only').checked=false;visibility();view('showcase');}}
+ explosion.setAmount(amount);dirty=true;
+});
+
+function focusCrown(){resetExplosion(true);if(loading||failed)return;stopTour();clearSelection();isolated=null;interiorView=false;$('movement-only').checked=false;visibility();if($('crown-controls'))$('crown-controls').open=true;view('crown');$('crown-pull')?.focus({preventScroll:true});announce('Crown controls opened. Turn while seated, or pull out to set the hands.');}
 if($('crown-focus'))$('crown-focus').onclick=focusCrown;
 if($('crown-pull'))$('crown-pull').onclick=()=>{
   const pulled=!crownInteraction.snapshot().pulled;crownInteraction.setPulled(pulled);
@@ -499,7 +520,7 @@ if($('crown-pull'))$('crown-pull').onclick=()=>{
 };
 for(const [id,degrees]of [['crown-left',-15],['crown-right',15]])if($(id))$(id).onclick=()=>{stopTour();crownInteraction.turn(degrees);};
 if($('crown-reset'))$('crown-reset').onclick=()=>{crownInteraction.reset();if(winding)winding.restore({...winding.snapshot(),crownDegrees:0,pulled:false,reverseFreewheel:false});announce('Crown reseated and aligned. The current hand time is retained.');};
-if($('play-motion'))$('play-motion').onclick=()=>{if(crownInteraction.snapshot().pulled)return;stopTour();const play=!($('animate-movement').checked||$('animate').checked);$('animate-movement').checked=play;$('animate').checked=play;setClockPlayback();};
+if($('play-motion'))$('play-motion').onclick=()=>{if(crownInteraction.snapshot().pulled)return;if(explosion?.active){announce('Reassemble the watch before playing the mechanism.');return;}stopTour();const play=!($('animate-movement').checked||$('animate').checked);$('animate-movement').checked=play;$('animate').checked=play;setClockPlayback();};
 if($('slow-motion'))$('slow-motion').onchange=()=>{$('speed').value=$('slow-motion').checked?'0.25':'1';applyClockPose(clock.setSpeed(Number($('speed').value)));syncSimpleControls();dirty=true;};
 function motionStatus() {
   $('motion-status').textContent = `Mechanism ${$('animate-movement').checked ? 'running' : 'paused'} · Hands ${$('animate').checked ? 'running' : 'paused'}`;
@@ -552,7 +573,7 @@ $('inspect-motion').onclick = () => {
   announce(`Interior view opened. ${openFrontActive()?'The proposed open-work plates are active; original parts remain in the baseline.':'All 166 original movement parts are visible inside the case.'} Choose a numbered focus point for a closer look.`);
   $('assembly-canvas').focus({preventScroll:true}); $('assembly-canvas').scrollIntoView({block:'start',behavior:'auto'});
 };
-$('reset').onclick = () => {
+$('reset').onclick = () => {resetExplosion(true);
   crownInteraction.reset();
   stopTour(); resetMotion(); $('speed').value = '1'; $('finish').checked = true; $('crystals').checked = true;
   clock.setSpeed(1);
@@ -597,6 +618,22 @@ renderer.domElement.addEventListener('pointerup', event => {
   } else if(hit?.object.userData.assemblyId==='CROWN')focusCrown();
   else if (hit) select(hit.object); else clearSelection();
 });
+
+let crownDrag=null;
+function hitCrown(event){if(loading||failed||explosion?.active)return false;const mesh=exterior.find(m=>m.userData.assemblyId==='CROWN');if(!mesh?.visible)return false;const r=renderer.domElement.getBoundingClientRect(),ray=new THREE.Raycaster();ray.setFromCamera(new THREE.Vector2((event.clientX-r.left)/r.width*2-1,-(event.clientY-r.top)/r.height*2+1),camera);return ray.intersectObject(mesh,false).length>0;}
+renderer.domElement.addEventListener('pointerdown',event=>{
+ if(event.button!==0||!hitCrown(event))return;stopTour();crownDrag={id:event.pointerId,lastY:event.clientY,startX:event.clientX,startY:event.clientY,moved:false};controls.enabled=false;down=null;renderer.domElement.setPointerCapture(event.pointerId);event.preventDefault();event.stopImmediatePropagation();document.dispatchEvent(new CustomEvent('atelier:mode',{detail:{mode:'time'}}));
+},true);
+renderer.domElement.addEventListener('pointermove',event=>{
+ if(!crownDrag||event.pointerId!==crownDrag.id)return;const dy=crownDrag.lastY-event.clientY;crownDrag.lastY=event.clientY;if(Math.hypot(event.clientX-crownDrag.startX,event.clientY-crownDrag.startY)>3)crownDrag.moved=true;if(crownDrag.moved&&dy)crownInteraction.turn(Math.max(-20,Math.min(20,dy*.65)));event.preventDefault();event.stopImmediatePropagation();
+},true);
+function endCrownDrag(event){if(!crownDrag||event.pointerId!==crownDrag.id)return;const moved=crownDrag.moved;crownDrag=null;controls.enabled=true;if(renderer.domElement.hasPointerCapture(event.pointerId))renderer.domElement.releasePointerCapture(event.pointerId);down=null;event.stopImmediatePropagation();if(!moved)document.dispatchEvent(new CustomEvent('atelier:mode',{detail:{mode:'time'}}));dirty=true;}
+renderer.domElement.addEventListener('pointerup',endCrownDrag,true);
+renderer.domElement.addEventListener('pointercancel',endCrownDrag,true);
+function cancelCrownGesture(){if(!crownDrag)return;const id=crownDrag.id;crownDrag=null;controls.enabled=true;down=null;if(renderer.domElement.hasPointerCapture(id))renderer.domElement.releasePointerCapture(id);dirty=true;}
+renderer.domElement.addEventListener('lostpointercapture',cancelCrownGesture);window.addEventListener('blur',cancelCrownGesture);document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelCrownGesture();});
+renderer.domElement.addEventListener('dblclick',event=>{if(!hitCrown(event))return;event.preventDefault();event.stopImmediatePropagation();crownInteraction.setPulled(!crownInteraction.snapshot().pulled);document.dispatchEvent(new CustomEvent('atelier:mode',{detail:{mode:'time'}}));},true);
+
 const originalVisibility = ao._overrideVisibility.bind(ao);
 ao._overrideVisibility = () => {
   originalVisibility();
@@ -650,7 +687,7 @@ function initializeBaseline(result,metadata){
   const gltf=result.gltf||result;performanceMonitor.load(result.metrics||{});
   const disposeBaseline=ownedObjectTreeDisposer(gltf.scene);
   resources.own('original assembly geometry',disposeBaseline);
-  model=new THREE.Group();model.rotation.x=Math.PI/2;model.add(gltf.scene);scene.add(model);
+  model=new THREE.Group();model.rotation.x=Math.PI/2;model.add(gltf.scene);scene.add(model);explosion=createAssemblyExplosion({root:model,duration:reducedMotion.matches?0:.55});
   gltf.scene.traverse(mesh=>{
     if(!mesh.isMesh)return;
     if(mesh.userData.sourceIndex!==undefined)source.push(mesh);else exterior.push(mesh);
@@ -671,7 +708,7 @@ function initializeBaseline(result,metadata){
   try{setting=createAssemblySetting(mechanism);}catch(error){loadWarnings.push(`Setting reconstruction unavailable: ${error.message}`);}
   try{if(winding&&setting)settingEngagement=createAssemblySettingEngagement(source,mechanism,winding);}catch(error){loadWarnings.push(`Setting engagement unavailable: ${error.message}`);}
   const crownMesh=exterior.find(mesh=>mesh.userData.assemblyId==='CROWN');
-  if(crownMesh){crownVisual=createCrownVisual(crownMesh,{compact:true,stem:source.find(mesh=>mesh.userData.sourceIndex===52),tube:exterior.find(mesh=>mesh.userData.assemblyId==='CROWN-TUBE')});resources.own('crown presentation transform',()=>crownVisual.dispose());}
+  if(crownMesh){crownVisual=createCrownVisual(crownMesh,{duration:reducedMotion.matches?0:.24,compact:true,stem:source.find(mesh=>mesh.userData.sourceIndex===52),tube:exterior.find(mesh=>mesh.userData.assemblyId==='CROWN-TUBE')});resources.own('crown presentation transform',()=>crownVisual.dispose());}
   dialFace=exterior.find(mesh=>mesh.userData.assemblyId==='DIAL'&&!/mark/i.test(mesh.name));
   dialDetails=createDialDetails({renderer});gltf.scene.add(dialDetails.group);
   openDialDetails=createDialDetails({renderer,openWork:true});gltf.scene.add(openDialDetails.group);
@@ -684,7 +721,7 @@ function initializeBaseline(result,metadata){
   resources.own('indexed calendar and private spring display',()=>calendar?.dispose());
   resources.own('dial printing',()=>{dialDetails.dispose();openDialDetails.dispose();});resources.own('open-work frame',()=>openFrontFrame.dispose());resources.own('quality hand design',()=>qualityDesign.dispose());
   if(premiumRequested){
-    loadGLTFAsset(new URLSearchParams(location.search).get('face')==='svg03'?'quality-study/face-svg03-rim-candidate.glb':premiumFaceAsset(new URLSearchParams(location.search).get('face')),assetOptions()).then(result=>{
+    loadGLTFAsset(premiumFaceAsset(new URLSearchParams(location.search).get('face')),assetOptions()).then(result=>{
       if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
       try{
         premiumFace=preparePremiumFace(result.gltf.scene);model.add(premiumFace.root);
@@ -709,11 +746,11 @@ function initializeBaseline(result,metadata){
       loadFrontArchitecture();
     }finally{disposeObjectTree(result.gltf.scene);}
   }).catch(error=>{if(lifecycle.disposed)return;loadWarnings.push(`Form detail: ${error.message}`);announce('The watch is ready. Additional calendar and edge details are unavailable.');});
-  loadGLTFAsset(new URLSearchParams(location.search).get('leather')==='photo'?'quality-study/leather-craft-r09.glb':'quality-study/leather-craft-r05.glb',assetOptions()).then(result=>{
+  loadGLTFAsset(new URLSearchParams(location.search).get('leather')==='craft'?'quality-study/leather-craft-r10.glb':new URLSearchParams(location.search).get('leather')==='photo'?'quality-study/leather-craft-r09.glb':'quality-study/leather-craft-r05.glb',assetOptions()).then(result=>{
     if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
     try{
     performanceMonitor.load(result.metrics);const clay=new THREE.MeshStandardMaterial({color:0x93989b,roughness:.7});resources.own('craft comparison material',()=>clay.dispose());
-    leatherDetails=(new URLSearchParams(location.search).get('leather')==='photo'?createPhotoLeatherDetails:createLeatherDetails)({candidateScene:result.gltf.scene});
+    leatherDetails=(['photo','craft'].includes(new URLSearchParams(location.search).get('leather'))?createPhotoLeatherDetails:createLeatherDetails)({candidateScene:result.gltf.scene});
     for(const mesh of leatherDetails.meshes){craftParts.push(mesh);baseMaterials.set(mesh,clay);finishMaterials.set(mesh,leatherDetails.materialFor(mesh));}
     model.add(leatherDetails.group);resources.own('R05 leather craft geometry',()=>leatherDetails.dispose());updateMaterials();visibility();
     variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);
@@ -728,11 +765,20 @@ loadProgressiveAssembly({
   onBaseline:initializeBaseline,onProposal:installProposal,onWarning:proposalWarning,onPhase:phase=>{loadPhase=phase;},
 }).catch(error=>{if(!lifecycle.disposed)fail(error.name==='TimeoutError'?'Loading took too long. Check your connection and reload the viewer. Static renders remain available below.':'The assembly could not load. Reload the viewer to retry. Static renders remain available below.',error);});
 
+
+function inspectionReference(mesh){return mesh.userData.sourceIndex!==undefined?'source:'+mesh.userData.sourceIndex:'assembly:'+mesh.userData.assemblyId;}
+function resolveInspectionState(state){const resolve=refs=>refs.flatMap(ref=>{const found=meshes().filter(mesh=>inspectionReference(mesh)===ref);if(!found.length)throw new Error('Saved component is unavailable: '+ref);return found;});return {selected:resolve(state.selected),isolated:state.isolated===null?null:resolve(state.isolated)};}
+function restoreInspectionState(state){
+ clearSelection();selected=state.selected;isolated=state.isolated===null?null:new Set(state.isolated);
+ if(selected.length){const group=groups.find(g=>g.parts.includes(selected[0]));$('selection').hidden=false;$('part-name').textContent=group?.label||'Restored components';$('part-role').textContent=selected[0].userData.description||selected[0].userData.role||'Restored assembly selection';$('part-support').textContent=selected[0].userData.support?'Attachment: '+selected[0].userData.support:'Original placement retained';}
+ updateMaterials();visibility();renderExplorer();
+}
+
 function captureConfiguration({clockStamp}={}){
   const gl=renderer.getContext(),extension=gl.getExtension('WEBGL_debug_renderer_info');
   const measuredPerformance=performanceMonitor.snapshot(),preview=$('studio-poster')?.querySelector('img');
   const previewEntry=preview?performance.getEntriesByName(preview.currentSrc).at(-1):null;
-  return {version:1,date:new Date().toISOString(),premiumFace:{requested:premiumRequested,ready:!!premiumFace,active:premiumActive(),revision:premiumFace?.revision??null},design:premiumRequested?'Aerial Left Crescent B':'Aerial Quality 01',phase:loadPhase,view:currentView,
+  return {version:1,date:new Date().toISOString(),inspection:{selected:[...new Set(selected.map(inspectionReference))],isolated:isolated?[...new Set([...isolated].map(inspectionReference))]:null},renderer:{threeRevision:THREE.REVISION,backend:'WebGL',bloom:bloom.enabled,toneMapping:'ACES'},explosion:explosion?.amount??0,premiumFace:{requested:premiumRequested,ready:!!premiumFace,active:premiumActive(),revision:premiumFace?.revision??null},design:premiumRequested?'Aerial Left Crescent B':'Aerial Quality 01',phase:loadPhase,view:currentView,
     camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},
     formDetails:{revision:'form-legibility-r01',ready:!!formDetails,enabled:!!formDetails?.enabled,calendarDigitIslands:formDetails?.audit.components??null},
     frontArchitecture:{revision:'front-architecture-r07',ready:!!frontArchitecture,enabled:!!frontArchitecture?.enabled,audit:frontArchitecture?.audit??null},
@@ -742,7 +788,7 @@ function captureConfiguration({clockStamp}={}){
     setting:{revision:'r09-friction-setting',ready:!!setting},
     casebackFinish:{revision:'r10-cap-corner-normals',enabled:!!casebackFinish?.enabled,audit:casebackFinish?.audit??null},
     settingEngagement:{revision:'r09-keyless-endpoints',ready:!!settingEngagement,state:engagementState,limits:settingEngagement?.limits??null},
-    leatherCraft:{revision:new URLSearchParams(location.search).get('leather')==='photo'?'leather-craft-r09':'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
+    leatherCraft:{revision:leatherDetails?.revision?'leather-craft-'+leatherDetails.revision.toLowerCase():'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
     compactCrown:!!crownVisual&&openFrontActive(),
     settingSeconds,clock:clockStamp||clock.snapshot(),crown:crownInteraction.snapshot(),sourceAtCapture:captureProvenance.snapshot(),options:{openWork:$('open-work').checked,finishes:$('finish').checked,crystals:$('crystals').checked,movementOnly:$('movement-only').checked,interior:interiorView,powerPath,quality},
     viewport:{width:renderer.domElement.clientWidth,height:renderer.domElement.clientHeight,pixelRatio:renderer.getPixelRatio(),drawingBufferWidth:renderer.domElement.width,drawingBufferHeight:renderer.domElement.height,msaaSamples:composer.renderTarget1.samples,transmissionScale:renderer.transmissionResolutionScale},
@@ -789,6 +835,7 @@ if($('import-config'))$('import-config').onchange=async event=>{
   const request=++configurationRequest;
   try{if(loading||failed)throw new Error('Wait for the watch to finish loading.');if(file.size>1048576)throw new Error('View file is too large.');
     const config=validateViewConfiguration(JSON.parse(await file.text()),{qualities:Object.keys(qualityProfiles)});if(lifecycle.disposed||request!==configurationRequest)return;
+    const restoredInspection=resolveInspectionState(config.inspection);explosion?.reset({instant:true});
     stopTour();isolated=null;clearSelection();view(config.view,false);
     openWork=config.options.openWork;$('open-work').checked=openWork;$('finish').checked=config.options.finishes;$('crystals').checked=config.options.crystals;$('movement-only').checked=config.options.movementOnly;
     if(typeof config.options.interior==='boolean')interiorView=config.options.interior;
@@ -801,7 +848,7 @@ if($('import-config'))$('import-config').onchange=async event=>{
     if(![...$('speed').options].some(option=>Number(option.value)===config.clock.speed)){$('speed').querySelector('[data-saved-speed]')?.remove();const option=new Option(`${config.clock.speed}× · saved time scale`,String(config.clock.speed));option.dataset.savedSpeed='true';$('speed').add(option);}
     $('speed').value=String(config.clock.speed);
     settingSeconds=config.settingSeconds;winding?.restore(config.winding);crownInteraction.restore(config.crown);
-    clock.seek(config.clock.mechanism,{track:'mechanism'});applyClockPose(clock.seek(config.clock.hands,{track:'hands'}));if(config.view==='crown'&&$('crown-controls'))$('crown-controls').open=true;motionStatus();dirty=true;announce('Saved camera, crown, options, time scale and pose restored. Motion is paused.');
+    clock.seek(config.clock.mechanism,{track:'mechanism'});applyClockPose(clock.seek(config.clock.hands,{track:'hands'}));crownVisual?.finish();restoreInspectionState(restoredInspection);if(config.view==='crown'&&$('crown-controls'))$('crown-controls').open=true;registerExplosionParts();explosion?.setAmount(config.explosion,{instant:true});document.dispatchEvent(new CustomEvent('atelier:explode-state',{detail:{amount:config.explosion}}));motionStatus();dirty=true;announce('Saved camera, crown, options, time scale and pose restored. Motion is paused.');
   }catch(e){if(!lifecycle.disposed&&request===configurationRequest)announce(`Could not restore view: ${e.message}`);}finally{if(request===configurationRequest)input.value='';}
 };
 let last = 0;
@@ -825,18 +872,20 @@ function frame(time) {
     if (progress === 1) cameraTween = null;
   }
   controls.update();
-  for(const id of ['capture-scene','export-config'])if($(id))$(id).disabled=loading||failed||!!cameraTween||pendingCaptures.has(id);
+  for(const id of ['capture-scene','export-config'])if($(id))$(id).disabled=loading||failed||!!cameraTween||!!crownVisual?.active||!!explosion?.animating||pendingCaptures.has(id);
   const ready=String(!loading&&!failed&&!cameraTween&&!lightingChanged);if($('stage').dataset.cameraReady!==ready)$('stage').dataset.cameraReady=ready;
   if(dirty) updatePins();
   if (tour) {
     if(tourSequence.tick(delta))tourView();
   }
   let visibleMotion=false;
-  if(!loading){
+  if(!loading&&!explosion?.active){
     const moving=$('animate-movement').checked&&mechanism.entries.some(entry=>entry.mesh.visible&&(entry.kind!=='wheel'||entry.rate!==0));
     const movingHands=$('animate').checked&&(hands.some(hand=>hand.mesh.visible)||openFrontActive());
     if(moving||movingHands){applyClockPose(stamp);dirty=visibleMotion=true;}
   }
+  if(explosion?.active){registerExplosionParts();if(explosion.update(delta))dirty=visibleMotion=true;}
+  if(crownVisual?.update(delta)){dirty=true;visibleMotion=true;}
   // Canvas capture needs drawn frames even when the watch and camera are paused.
   // Keep its timeline advancing without changing either presentation clock.
   if (dirty || recorder.recording) {
@@ -845,7 +894,7 @@ function frame(time) {
       controls.minDistance=depth.minimumDistance;
       renderer.info.reset();composer.render();renderedFrames++;dirty=false;
       performanceMonitor.frame({timestamp:time,cpuMs:performance.now()-cpuStart,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures});
-      if(firstRender&&!loading){firstRender=false;$('loading').hidden=true;if($('studio-poster'))$('studio-poster').hidden=true;performanceMonitor.interactive(performance.now()-bootTime);}
+      if(firstRender&&!loading){firstRender=false;$('loading').hidden=true;if($('studio-poster'))$('studio-poster').hidden=true;performanceMonitor.interactive(performance.now()-bootTime);announceAtelierCapabilities();}
     }
     catch (error) { fail('The graphics renderer could not display this assembly. Retry the viewer or inspect the static renders below.',error); }
   }

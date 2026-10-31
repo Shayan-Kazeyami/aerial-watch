@@ -9,7 +9,7 @@ const {createObjectTreeDisposer}=await import('data:text/javascript;base64,'+Buf
 
 test('load rejection and registered ownership share one resource cleanup boundary',()=>{
  const calls=[],root={traverse:visit=>visit({isMesh:true,geometry:{dispose:()=>calls.push('geometry')},material:null}),removeFromParent:()=>calls.push('detach')};
- const helpers=source.slice(source.indexOf('const objectDisposers='),source.indexOf('scene.background ='));
+ const helpers=source.slice(source.indexOf('const objectDisposers='),source.indexOf('const atelierVisuals='));
  const context=vm.createContext({createObjectTreeDisposer,root});
  vm.runInContext(helpers+'\nconst registered=ownedObjectTreeDisposer(root);disposeObjectTree(root);registered();',context);
  assert.deepEqual(calls,['geometry','detach']);

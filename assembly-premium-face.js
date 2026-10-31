@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three.module.js';
 
-export const premiumFaceAsset=variant=>variant==='svg'?'premium-face/face-svg-b.glb?v=svg02':'premium-face/face-b.glb';
+export const premiumFaceAsset=variant=>variant==='svg04'?'premium-face/face-svg04.glb?v=constant04':variant==='svg03'?'quality-study/face-svg03-rim-candidate.glb':variant==='svg'?'premium-face/face-svg-b.glb?v=svg02':'premium-face/face-b.glb';
 export const PREMIUM_HIDDEN_SOURCES = Object.freeze([0, 149, 155]);
 export function premiumFaceVisible({enabled, openWork, movementOnly, isolated, interior}) {
   return !!enabled && !!openWork && !movementOnly && !isolated && !interior;
@@ -17,12 +17,13 @@ export function preparePremiumFace(root) {
   const revisions=new Set(meshes.map(mesh=>mesh.userData.designRevision).filter(Boolean));
   if(revisions.size>1)throw new Error('Invalid premium face asset: mixed design revisions.');
   const revision=[...revisions][0]||'B-02',svgDerived=revision.startsWith('B-SVG-');
+  const fineGrain=revision.startsWith('B-SVG-04');
   let texture;
   if(typeof document!=='undefined'){
-    const canvas=document.createElement('canvas');canvas.width=canvas.height=256;
+    const canvas=document.createElement('canvas');const size=fineGrain?1024:256;canvas.width=canvas.height=size;
     const context=canvas.getContext('2d');
     if(context){
-      const pixels=context.createImageData(256,256);let seed=29;
+      const pixels=context.createImageData(size,size);let seed=29;
       for(let i=0;i<pixels.data.length;i+=4){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const c=110+(seed>>>27);pixels.data.set([c,c,c,255],i);}
       context.putImageData(pixels,0,0);texture=new THREE.CanvasTexture(canvas);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(svgDerived?1:20,svgDerived?1:20);texture.name='Fine charcoal grain';
     }
@@ -32,7 +33,7 @@ export function preparePremiumFace(root) {
     if(/Graphite/i.test(material.name)){
       // SVG-derived material scalars come from the inspected Blender export.
       if(!svgDerived){material.color.setHex(0x19191b);material.metalness=.12;material.roughness=.48;}
-      if(texture){material.bumpMap=texture;material.bumpScale=svgDerived?.12:.025;}
+      if(texture){material.bumpMap=texture;material.bumpScale=fineGrain?.008:svgDerived?.12:.025;}
     }
     if(!svgDerived&&/champagne/i.test(material.name)){material.color.setHex(0xb89b70);material.metalness=.85;material.roughness=.26;}
   }

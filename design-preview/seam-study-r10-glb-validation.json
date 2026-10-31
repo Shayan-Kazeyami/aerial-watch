@@ -1,0 +1,95 @@
+{
+  "bytes": 41847856,
+  "mesh_nodes": 4,
+  "runtime_primitives": 8,
+  "triangle_count": 360872,
+  "vertex_count": 213601,
+  "node_names": [
+    "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+    "Seam study / upper waxed three-ply stitches",
+    "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+    "Seam study / lower waxed three-ply stitches"
+  ],
+  "materials": [
+    "leather / fine charcoal calf / photo R10",
+    "lining / warm leather R10",
+    "edge paint / satin burnished R10",
+    "thread / waxed graphite three ply R10"
+  ],
+  "images": 3,
+  "extensions_used": [
+    "KHR_materials_specular",
+    "KHR_materials_sheen"
+  ],
+  "sourceIndex_absent": true,
+  "attributes": [
+    "POSITION",
+    "NORMAL",
+    "TEXCOORD_0",
+    "TANGENT"
+  ],
+  "checks": [
+    {
+      "collapsed_uv_nondegenerate_triangles": 47,
+      "collapsed_uv_triangles": 71,
+      "vertices": 34937,
+      "triangles": 45155,
+      "normal_max_unit_length_error": 1.3438368218210428e-07
+    },
+    {
+      "collapsed_uv_nondegenerate_triangles": 10,
+      "collapsed_uv_triangles": 18,
+      "vertices": 7038,
+      "triangles": 10742,
+      "normal_max_unit_length_error": 1.3421731237528434e-07
+    },
+    {
+      "collapsed_uv_nondegenerate_triangles": 6,
+      "collapsed_uv_triangles": 15,
+      "vertices": 5199,
+      "triangles": 5891,
+      "normal_max_unit_length_error": 1.2680494876349258e-07
+    },
+    {
+      "collapsed_uv_nondegenerate_triangles": 0,
+      "collapsed_uv_triangles": 0,
+      "vertices": 86592,
+      "triangles": 172128,
+      "normal_max_unit_length_error": 1.387424746202015e-07
+    },
+    {
+      "collapsed_uv_nondegenerate_triangles": 33,
+      "collapsed_uv_triangles": 212,
+      "vertices": 22186,
+      "triangles": 26358,
+      "normal_max_unit_length_error": 1.2702593954472263e-07
+    },
+    {
+      "collapsed_uv_nondegenerate_triangles": 5,
+      "collapsed_uv_triangles": 19,
+      "vertices": 7305,
+      "triangles": 9073,
+      "normal_max_unit_length_error": 1.3204833737567867e-07
+    },
+    {
+      "collapsed_uv_nondegenerate_triangles": 1,
+      "collapsed_uv_triangles": 27,
+      "vertices": 7048,
+      "triangles": 5461,
+      "normal_max_unit_length_error": 1.335340942265617e-07
+    },
+    {
+      "collapsed_uv_nondegenerate_triangles": 0,
+      "collapsed_uv_triangles": 0,
+      "vertices": 43296,
+      "triangles": 86064,
+      "normal_max_unit_length_error": 1.389095685144781e-07
+    }
+  ],
+  "normal_texture": [
+    {
+      "index": 0,
+      "scale": 0.25
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "depth_layers": {
+    "main": 9,
+    "endpoints": 33
+  },
+  "xy_profile_samples": 1216,
+  "rim_triangles": 60864,
+  "rim_vertices": 30432,
+  "nonmanifold_edges": 0,
+  "self_intersection_pairs": 0,
+  "source_meshes_unchanged": 169,
+  "visible_source_intersections": [],
+  "left_all_depth_cone_radial_error_max_mm": 7.044194045846552e-07,
+  "left_inclination_range_degrees": [
+    32.00407973633376,
+    32.006090152402486
+  ],
+  "right_inclination_range_degrees": [
+    65.76305426023573,
+    65.78041401723407
+  ],
+  "full_master_front_vertex_to_runtime_surface_max_mm": 1.0925712103926344e-06,
+  "full_master_front_vertex_to_runtime_surface_mean_mm": 3.9466456903905066e-08,
+  "wire_crosssection_changes": [
+    {
+      "name": "SVG champagne aperture rim",
+      "old_bevel_resolution": 3,
+      "new_bevel_resolution": 2,
+      "radius_mm": 0.04500000178813934,
+      "max_crosssection_sagitta_mm": 0.0034254211731060994,
+      "evaluated_crosssection_sides": 8
+    },
+    {
+      "name": "SVG lower champagne rim lip",
+      "old_bevel_resolution": 3,
+      "new_bevel_resolution": 2,
+      "radius_mm": 0.017999999225139618,
+      "max_crosssection_sagitta_mm": 0.0013701683558141043,
+      "evaluated_crosssection_sides": 8
+    }
+  ],
+  "limits": "Master-vertex to runtime surface comparison, not bidirectional Hausdorff; no XY profile decimation; no full manufacturing certification.",
+  "runtime_curve_triangles": {
+    "SVG champagne aperture rim": 19456,
+    "SVG lower champagne rim lip": 19456
+  }
+}

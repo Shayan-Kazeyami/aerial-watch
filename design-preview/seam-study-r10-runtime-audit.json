@@ -1,0 +1,53 @@
+{
+  "revision": "R10",
+  "glb_bytes": 9487248,
+  "thread_reduction": [
+    {
+      "name": "Seam study / upper waxed three-ply stitches",
+      "old_vertices": 86592,
+      "runtime_vertices": 27720,
+      "strand_rings": 21,
+      "strand_sides": 5
+    },
+    {
+      "name": "Seam study / lower waxed three-ply stitches",
+      "old_vertices": 43296,
+      "runtime_vertices": 13860,
+      "strand_rings": 21,
+      "strand_sides": 5
+    }
+  ],
+  "preserved": "All 264 puncture seats, exact high-detail two-segment 0.012 mm band/bevel geometry, original silhouette and 132 three-ply stitches. Only thread tessellation reduced; no band decimation.",
+  "normal": "2K tangent tile with 0.25 source strength baked; shader strength 1.0",
+  "color": "2K JPEG95 baked tile",
+  "roughness": "2K JPEG95, Blender Raw encoding, JPEG embedded directly without re-expanding to PNG; see compression audit",
+  "tangents": "Runtime derivative TBN, no redundant tangent attribute",
+  "render_comparison": "Passed visual candidate equivalence against native-compatible reference after sheen export correction and restoring exact two-segment band/bevel geometry; slight softer 2K normal grain at extreme crop.",
+  "nonroughness_bufferViews_hash_identical": true,
+  "float32_uv_repair": [
+    {
+      "name": "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+      "float32_subpixel_sliver_uvs_repaired": 17
+    },
+    {
+      "name": "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+      "float32_subpixel_sliver_uvs_repaired": 14
+    }
+  ],
+  "sheen_export_fix": "Blender exporter discarded weights; corrected KHR_materials_sheen.sheenColorFactor to leather 0.10, lining 0.04, thread 0.25. See sheen audit.",
+  "bevel_restored": "Exact high-detail two-segment band geometry restored from compatible master; only thread tessellation reduced.",
+  "normal_png_lossless_reencode": {
+    "bytes": 4207264,
+    "max_decoded_pixel_difference": 0.0
+  },
+  "normal_attribute_encoding": "unchanged float32; no quantization needed after lossless PNG recompression",
+  "sha256": "ba6be0bffb7fc66dccbbc3adc26d3e5b076c67a8a23503d491d44c2bb7f7e566",
+  "final_evidence": [
+    "seam-study-r05-seam-detail.png",
+    "seam-study-r10-compatible-reference-detail.png",
+    "seam-study-r10-runtime-roundtrip-final-detail.png",
+    "seam-study-r10-comparison.html"
+  ],
+  "native_master": "seam-study-r05.blend",
+  "no_quantization_used": true
+}

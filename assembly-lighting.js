@@ -19,14 +19,14 @@ function shotName(view){
   return Object.hasOwn(ASSEMBLY_LIGHT_SHOTS,view)?view:'hero';
 }
 
-export function createAssemblyLighting(scene,{renderer,onChange}={}){
-  const hemisphere=new THREE.HemisphereLight(0xe7edf4,0x1b1d1c,.22);
+export function createAssemblyLighting(scene,{renderer,onChange,atelier=false}={}){
+  const hemisphere=new THREE.HemisphereLight(0xe7edf4,0x1b1d1c,atelier?.35:.22);
   const key=new THREE.DirectionalLight(0xfff4e3,1),rim=new THREE.DirectionalLight(0xd4e4ff,.45);
   const fill=new THREE.DirectionalLight(0xe5edf5,.28);
   key.castShadow=true;key.shadow.mapSize.set(2048,2048);
   key.shadow.bias=-.000025;key.shadow.normalBias=.006;key.shadow.radius=2;
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(2400,2400),new THREE.MeshStandardMaterial({color:0x151b20,roughness:.87,metalness:.06}));
-  floor.name='Photographic studio floor';floor.rotation.x=-Math.PI/2;floor.position.y=-35.2;floor.receiveShadow=true;
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(2400,2400),atelier?new THREE.ShadowMaterial({color:0x000000,opacity:.22}):new THREE.MeshStandardMaterial({color:0x151b20,roughness:.87,metalness:.06}));
+  floor.name='Photographic studio floor';floor.rotation.x=-Math.PI/2;floor.position.y=-35.2;floor.receiveShadow=true;if(atelier)floor.visible=false;
   scene.add(hemisphere,key,key.target,rim,rim.target,fill,fill.target,floor);
   let goal,changing=false,disposed=false,current='face';
 
@@ -41,7 +41,7 @@ export function createAssemblyLighting(scene,{renderer,onChange}={}){
     current=shotName(view);const profile=ASSEMBLY_LIGHT_SHOTS[current],focus=new THREE.Vector3(...profile.focus);
     goal={focus,key:focus.clone().add(new THREE.Vector3(...profile.key)),rim:focus.clone().add(new THREE.Vector3(...profile.rim)),
       fill:focus.clone().add(new THREE.Vector3(8,16,current==='rear'||['balance','train','winding'].includes(current)?-55:55)),
-      keyPower:profile.keyPower,rimPower:profile.rimPower,fillPower:profile.fillPower,environmentIntensity:profile.environmentIntensity,exposure:1.08};
+      keyPower:profile.keyPower,rimPower:profile.rimPower,fillPower:profile.fillPower,environmentIntensity:profile.environmentIntensity,exposure:atelier?1.03:1.08};
     setShadowFit(profile);changing=true;
     if(instant)update(10);
     const settings={name:current,key,floor,rim,exposure:goal.exposure,environmentIntensity:goal.environmentIntensity,

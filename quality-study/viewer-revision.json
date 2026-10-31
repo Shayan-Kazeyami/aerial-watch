@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "algorithm": "SHA-256",
-  "scope": "First-party assembly/material-review/studio JS, CSS and HTML; excludes vendor dependencies, models and rendered images.",
+  "scope": "First-party assembly/material-review/studio/atelier JS, CSS and HTML; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "SHA-256 of UTF-8 JSON.stringify(files), ordered lexicographically by path.",
-  "digest": "48c522211eb2350bdd263c0d58093950f50e18a1d55525ea065a67dae806e633",
+  "digest": "2b094f9ff0b7876efeb71948c6ffcc001046d8f26385a031cc40332eb1e7590c",
   "files": [
     {
       "path": "assembly-calendar-data.js",
@@ -52,8 +52,8 @@
     },
     {
       "path": "assembly-crown.js",
-      "bytes": 3994,
-      "sha256": "71558fead740350e52bc455a95bb301643cd75c2bec8fedb419b50e9d98f168a"
+      "bytes": 5688,
+      "sha256": "103946d6378b508b5f6c8fcc5d1d85dcb6ed84017ce651b0c079951deea3beed"
     },
     {
       "path": "assembly-depth.js",
@@ -84,6 +84,11 @@
       "path": "assembly-escapement.js",
       "bytes": 7324,
       "sha256": "1a14264d953673ca83bb5c3a0307a5a1a1bbf5bf928fba2370867ca1e6209946"
+    },
+    {
+      "path": "assembly-explode.js",
+      "bytes": 5893,
+      "sha256": "bc42a300ff74c7bc0c6c67241ce0f8b54cc3b97669d326cba33247be91fbf5ca"
     },
     {
       "path": "assembly-form-details.js",
@@ -117,8 +122,8 @@
     },
     {
       "path": "assembly-lighting.js",
-      "bytes": 5196,
-      "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+      "bytes": 5329,
+      "sha256": "f1ee63daa58137cc5d12a265388ffa51e1e8759061e76e61db561ddb372754af"
     },
     {
       "path": "assembly-loading.js",
@@ -127,8 +132,8 @@
     },
     {
       "path": "assembly-materials.js",
-      "bytes": 12182,
-      "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+      "bytes": 13249,
+      "sha256": "1b77d762b31315c7da9f44c5735d33301d77e8d96c1dcd2afee1b9968a86f0b8"
     },
     {
       "path": "assembly-motion.js",
@@ -147,13 +152,13 @@
     },
     {
       "path": "assembly-photo-leather.js",
-      "bytes": 2482,
-      "sha256": "febb85a4aac5fc7572a7c4fb466e7e7e6efce08e26accad6eaf527b924d49f42"
+      "bytes": 2674,
+      "sha256": "d07b74325a2b35f29857fdfcdebc2da7212912d335178e6f087715591a51b519"
     },
     {
       "path": "assembly-premium-face.js",
-      "bytes": 2962,
-      "sha256": "ad91c341531d3f27bec4731fdf3f0d2d61c9d7e0543fb7e16c9465bbfbd0ef47"
+      "bytes": 3185,
+      "sha256": "9b71684f25a782279000ce7ac349c86a5e90d4a29c199e30556fb6e0bb993d2d"
     },
     {
       "path": "assembly-quality.css",
@@ -167,8 +172,8 @@
     },
     {
       "path": "assembly-refraction.js",
-      "bytes": 3005,
-      "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+      "bytes": 3377,
+      "sha256": "214dcaa150e425b66754559eacfbf609049faed84e3cd4f0e3a2e09ef910820e"
     },
     {
       "path": "assembly-resolution.js",
@@ -187,8 +192,8 @@
     },
     {
       "path": "assembly-review.js",
-      "bytes": 72360,
-      "sha256": "a8d08201a78c60bd4b156addd9b4c577f041a27baa858babaac80d0238aab3a2"
+      "bytes": 79589,
+      "sha256": "b9ec1607b03646ed2dfb9da0f46a36b5ed9c96593f1bbb7857ffb64b15b8c253"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -222,8 +227,8 @@
     },
     {
       "path": "assembly-story.js",
-      "bytes": 4276,
-      "sha256": "be9cdc78a7c166d009953cf075a04b54a61303b733eb06b2169269dbc0a3d807"
+      "bytes": 5304,
+      "sha256": "455556adbd0306d9e8e1c8848e61b2f678583db1ed36742498ff859c83fee395"
     },
     {
       "path": "assembly-winding-calibration.js",
@@ -234,6 +239,31 @@
       "path": "assembly-winding.js",
       "bytes": 7192,
       "sha256": "64229191508478fe868f8a5387f0d8414ddf6e87e14096d285646c6eb323683c"
+    },
+    {
+      "path": "atelier-layout-study.css",
+      "bytes": 11384,
+      "sha256": "60181885f05ec3265d6ba338741297898ee2a6c88d619377a6512949cc1be9bd"
+    },
+    {
+      "path": "atelier-layout-study.html",
+      "bytes": 8523,
+      "sha256": "7b0a3262fa70b1c7ae90913a940fbcb7d7d75147e85d9dba9520113ba278b10c"
+    },
+    {
+      "path": "atelier-preview.css",
+      "bytes": 17483,
+      "sha256": "943982125aeab9b34916dee36563a82d02accd093ff3fc75e0567c9efb865245"
+    },
+    {
+      "path": "atelier-preview.html",
+      "bytes": 21937,
+      "sha256": "a00bfaf693c8e59e78f2677b9a6a5b69bff3d118ea4a7fb7c2aafc2b72bb246a"
+    },
+    {
+      "path": "atelier-preview.js",
+      "bytes": 17248,
+      "sha256": "98317ed825af2707abf85cd2d58b2ef999bccc22a3e96e67e7f4a6eb912e0731"
     },
     {
       "path": "index.html",

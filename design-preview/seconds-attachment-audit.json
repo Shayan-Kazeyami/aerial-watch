@@ -1,0 +1,27 @@
+{
+  "original_source_meshes_identical": 169,
+  "rim_mesh_identical": true,
+  "dial_nonmanifold_edges": 0,
+  "dial_connected_components": 1,
+  "dial_volume": 130.717526435576,
+  "static_visible_source_surface_intersections": [],
+  "ring_face_preserved": {
+    "center": [
+      -7.998827934265137,
+      -0.016291368752717972
+    ],
+    "inner_radius": 3.1,
+    "outer_radius": 4.1,
+    "top_z": 3.57
+  },
+  "new_annulus_bottom_z": 2.83,
+  "bridge_width_min_max_mm": [
+    0.52,
+    0.86
+  ],
+  "bridge_depth_mm": 0.605,
+  "limitations": [
+    "Not manufacturing validation. No full moving-gear sweep. Triangle overlap is surface-only.",
+    "Ring remains suspended above movement by twin integrated bridges; no claim it rests on gears."
+  ]
+}

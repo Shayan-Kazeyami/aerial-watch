@@ -27,3 +27,7 @@ The subsequent studio revision animates 34 source components, indexes twelve gea
 ## Photographed leather candidate (R09)
 
 The optional `leather=photo` candidate uses adapted, charcoal-tinted and baked maps from **Brown Leather**, by **Rob Tuytel**, [Poly Haven](https://polyhaven.com/a/brown_leather), CC0. Source metadata and checksums are in `design-preview/material-reference/brown-leather-source.json`. No external texture requests occur at runtime. The fitted strap geometry is separately authored; this material does not change the OM10 geometry attribution.
+
+## Fine leather and sewn strap candidate R10
+
+The optional `leather=craft` candidate uses **Leather White**, a separate CC0 texture asset from [Poly Haven](https://polyhaven.com/a/leather_white), recolored to charcoal through the material pipeline. The source maps are retained at 4K for the native study; the runtime embeds reviewed 2K material maps. Source URLs and checksums are in `design-preview/material-reference/fine-leather-source.json`. It does not reuse the Brown Leather asset as its current surface. The padded bands, punctures, seam treatment and three-ply thread geometry are authored presentation work. No claim about a measured leather species, physical manufacturing tolerances or durability is made.
