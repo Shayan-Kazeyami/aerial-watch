@@ -19,7 +19,7 @@ The live model was exercised in a dedicated software-WebGL browser. This proves 
 - Exploded assembly separated and reassembled.
 - An exploded amount of 0.55 was saved, reset, restored and saved again. Camera, crown, clock, options, explosion, inspection state and setting offset compared exactly equal.
 - PNG output decoded at 1180 × 503 with actual watch pixels; embedded source identity verified. Local capture adapter copied generated Blob bytes. Normal browser download delivery is a separate, unverified check.
-- Eight-second video request generated a 32,186-byte VP9 WebM with only two decoded frames and about 4.01 seconds between packets. This is **unusable**, not a video-export pass. Local recorder validation now rejects such obviously sparse output; it does not turn the slow render into a smooth video.
+- Eight-second video request generated a 32,186-byte VP9 WebM with only two decoded frames and about 4.01 seconds between packets. This is **unusable**, not a video-export pass. A later request yielded only three frames over 5.855 seconds and is also unusable. Local recorder validation now rejects capture packet cadence below 8 packets/second or timestamp coverage below 75% for captures lasting at least two seconds; it does not turn the slow render into a smooth video.
 
 ## Fixes following inspection
 

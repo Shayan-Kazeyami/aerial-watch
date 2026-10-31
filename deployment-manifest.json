@@ -255,8 +255,8 @@
     },
     {
       "path": "assembly-recording.js",
-      "sizeBytes": 10624,
-      "sha256": "cdc28c645106e839e18aa2d0dfa5a04cd054d62845fe0cbb9ccdd7e1a0154027"
+      "sizeBytes": 11003,
+      "sha256": "30bb8d3a54e3daaefe4835d5709af63b12da307b0c7e085d101a39ad7eb2a864"
     },
     {
       "path": "assembly-refraction.js",
@@ -756,12 +756,12 @@
     {
       "path": "quality-study/viewer-revision.js",
       "sizeBytes": 7861,
-      "sha256": "a3e460ef9bfada68524b33486b55d55f12999603354b9f6a519bd337f480f275"
+      "sha256": "e3d347d47f31ea04cb5ffdd010af3081cd2b3f031d5f07b2f47f74c015ec376f"
     },
     {
       "path": "quality-study/viewer-revision.json",
       "sizeBytes": 9834,
-      "sha256": "5c35eadb387de517f1ba0e066df278ee82f8dd7365c9041c57e6783eae996029"
+      "sha256": "60b428c98fc05f1c426bcc04907a2eebf5684dc6e3d4dc33095fbf73404bf992"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",

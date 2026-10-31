@@ -164,28 +164,28 @@ test('observed two-packet eight-second capture is rejected instead of downloaded
   assert.equal(completed,0);assertClean(h,instance);
 });
 
-test('healthy container exposes requested settings separately from measured timing',async()=>{
+test('30-packet-per-second container exposes requested settings separately from measured timing',async()=>{
   let time=100;const h=setup({now:()=>time});
   const pending=h.recorder.start(),instance=h.instances[0];
-  instance.data(await webm([0,2000,4000,6000,7900]).arrayBuffer());time=8100;h.recorder.stop();instance.finish();
+  instance.data(await webm(Array.from({length:240},(_,i)=>Math.round(i*1000/30))).arrayBuffer());time=8100;h.recorder.stop();instance.finish();
   const result=await pending;
   assert.equal(result.requestedDurationMs,8000);assert.equal(result.requestedFrameRate,30);
   assert.equal(result.elapsedMs,8000);assert.equal(result.durationMs,undefined);assert.equal(result.frameRate,undefined);
-  assert.equal(result.videoTiming.timestampSpanMs,7900);assert.equal(result.videoTiming.encodedPacketCount,5);
+  assert.equal(result.videoTiming.timestampSpanMs,7967);assert.equal(result.videoTiming.encodedPacketCount,240);
   assertClean(h,instance);
 });
 
 test('short timestamp coverage rejects even when there are many packets',async()=>{
   let time=0;const h=setup({now:()=>time});const pending=h.recorder.start(),instance=h.instances[0];
-  instance.data(await webm([0,100,200,300,400,500]).arrayBuffer());time=8000;instance.finish();
+  instance.data(await webm(Array.from({length:240},(_,i)=>i*24)).arrayBuffer());time=8000;instance.finish();
   await assert.rejects(pending,/too little motion/);assertClean(h,instance);
 });
 
 test('an intentional early stop is compared with elapsed capture, not the eight-second target',async()=>{
   let time=0;const h=setup({now:()=>time});const pending=h.recorder.start(),instance=h.instances[0];
-  instance.data(await webm([0,1000,2900]).arrayBuffer());time=3000;h.recorder.stop();
+  instance.data(await webm(Array.from({length:90},(_,i)=>Math.round(i*1000/30))).arrayBuffer());time=3000;h.recorder.stop();
   time=10000;instance.finish();const result=await pending;
-  assert.equal(result.elapsedMs,3000);assert.equal(result.videoTiming.timestampSpanMs,2900);assertClean(h,instance);
+  assert.equal(result.elapsedMs,3000);assert.equal(result.videoTiming.timestampSpanMs,2967);assertClean(h,instance);
 });
 
 test('uninspected output explicitly reports unknown timing rather than nominal FPS',async()=>{
@@ -225,4 +225,22 @@ test('completion callback disposal cannot announce a cancelled clip as ready',as
   const h=setup({onComplete:()=>h.recorder.dispose()});
   const pending=h.recorder.start(),instance=h.instances[0];instance.data();instance.finish();
   await assert.rejects(pending,{name:'AbortError'});assert.equal(h.statuses.at(-1).state,'disposed');assertClean(h,instance);
+});
+
+
+test('observed three-packet 5855 ms capture and sparse full-span captures are rejected',async()=>{
+  for(const times of [[0,2927,5855],[0,4000,7999],[0,2000,4000,6000,7900],Array.from({length:63},(_,i)=>Math.round(i*7999/62))]){
+    let time=0,completed=0;const h=setup({now:()=>time,onComplete:()=>completed++});
+    const pending=h.recorder.start(),instance=h.instances[0];
+    instance.data(await webm(times).arrayBuffer());time=8000;h.recorder.stop();instance.finish();
+    await assert.rejects(pending,error=>error.message.includes('too little motion')&&error.videoTiming.encodedPacketCount===times.length);
+    assert.equal(completed,0);assert.match(h.statuses.at(-1).message,/Start the watch motion if paused/);
+    assert.match(h.statuses.at(-1).message,/Smoother motion quality/);assertClean(h,instance);
+  }
+});
+
+test('paused static capture is rejected with actionable motion guidance',async()=>{
+  let time=0;const h=setup({now:()=>time});const pending=h.recorder.start(),instance=h.instances[0];
+  instance.data(await webm([0]).arrayBuffer());time=8000;instance.finish();
+  await assert.rejects(pending,/Start the watch motion if paused.*Smoother motion.*tab visible/);assertClean(h,instance);
 });

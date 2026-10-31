@@ -137,10 +137,14 @@ export function createCanvasRecorder({canvas,onStatus=()=>{},onComplete=()=>{},
             recording.finalizeTimer=schedule(()=>fail(recording,new Error('Checking the motion clip timed out. Please try recording again.')),finalizeTimeoutMs);
             const videoTiming=await inspect(blob);
             if(recording.settled)return;
+            // A few widely spaced packets are not a useful motion clip even
+            // when they cover most of the requested interval. This is only a
+            // structural cadence floor, NOT measured decoded FPS or a smoothness
+            // guarantee. Compare with elapsed capture time, including early stops.
             const sparse=videoTiming.verified&&(videoTiming.encodedPacketCount===0||(elapsedMs>=2000&&
-              (videoTiming.encodedPacketCount<3||videoTiming.timestampSpanMs<elapsedMs*0.5)));
+              (videoTiming.encodedPacketCount/(elapsedMs/1000)<8||videoTiming.timestampSpanMs<elapsedMs*0.75)));
             if(sparse){
-              const error=new Error('The browser captured too little motion for a usable clip. Try a lower detail level, keep this tab visible, and record again.');
+              const error=new Error('The browser captured too little motion for a usable clip. Start the watch motion if paused, choose Smoother motion quality, keep this tab visible, and record again.');
               error.videoTiming=videoTiming;error.elapsedMs=elapsedMs;fail(recording,error);return;
             }
             const result={blob,mimeType:blob.type,requestedDurationMs:durationMs,requestedFrameRate:frameRate,

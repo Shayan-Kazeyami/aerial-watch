@@ -3,7 +3,7 @@
   "algorithm": "SHA-256",
   "scope": "First-party assembly/material-review/studio/atelier JS, CSS and HTML; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "SHA-256 of UTF-8 JSON.stringify(files), ordered lexicographically by path.",
-  "digest": "f363cbfc3d55ffdb07ef3c10042bdbf9d0c7ca3da179918a0d8070e724069209",
+  "digest": "93b2512fb7e50df75b5e9aaade74802c20e2f5d3d9d66ae95bb588499ef87e66",
   "files": [
     {
       "path": "assembly-calendar-data.js",
@@ -167,8 +167,8 @@
     },
     {
       "path": "assembly-recording.js",
-      "bytes": 10624,
-      "sha256": "cdc28c645106e839e18aa2d0dfa5a04cd054d62845fe0cbb9ccdd7e1a0154027"
+      "bytes": 11003,
+      "sha256": "30bb8d3a54e3daaefe4835d5709af63b12da307b0c7e085d101a39ad7eb2a864"
     },
     {
       "path": "assembly-refraction.js",
