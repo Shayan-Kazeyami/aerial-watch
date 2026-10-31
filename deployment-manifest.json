@@ -90,8 +90,8 @@
     },
     {
       "path": "assembly-capture-provenance.js",
-      "sizeBytes": 5085,
-      "sha256": "1b02dd71fff005620e0febc3a41df25f08b589e5f9326b7591dfe908deb47654"
+      "sizeBytes": 6116,
+      "sha256": "b47a59a43d21b575a561e3b2b0c561c88669cc9c303ef843530f31025b8f67ff"
     },
     {
       "path": "assembly-caseback-finish.js",
@@ -210,8 +210,8 @@
     },
     {
       "path": "assembly-recording.js",
-      "sizeBytes": 4187,
-      "sha256": "e35b7e1df7569ef134a8d416614bbff9c59a5663664bf15ae227f2d2e8ff6ea3"
+      "sizeBytes": 4223,
+      "sha256": "f1954a057584469fc7b72843f6e079523e73eded5f52fcab9c65e9786c06b61b"
     },
     {
       "path": "assembly-refraction.js",
