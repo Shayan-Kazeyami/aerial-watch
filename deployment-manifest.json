@@ -125,8 +125,8 @@
     },
     {
       "path": "assembly-depth.js",
-      "sizeBytes": 2815,
-      "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+      "sizeBytes": 3053,
+      "sha256": "e1ab373bbdcfac516529af70fac6cf7941044b2eb1d83bbbd98c561b820b1b52"
     },
     {
       "path": "assembly-design.js",
@@ -235,8 +235,8 @@
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 71798,
-      "sha256": "a7451642e3e00c85780329316dfd4a680d2933c0ae8f080d457a1c5d08e4c2e5"
+      "sizeBytes": 71675,
+      "sha256": "588238ddb12a3359d8e3d34a2f1c17a5a3441721bb0e69b4fbbdadfd954d6193"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -620,13 +620,13 @@
     },
     {
       "path": "quality-study/viewer-revision.js",
-      "sizeBytes": 6870,
-      "sha256": "abfdb63ed237218ba6dd1db666c5cda6b541fdb6336ce7c93f0d8e64e17c1e02"
+      "sizeBytes": 6991,
+      "sha256": "2216ffeae5be9bbcd97b00ecd1bcc41dc0cc83c74845dba63b3736cc45c9223b"
     },
     {
       "path": "quality-study/viewer-revision.json",
-      "sizeBytes": 8571,
-      "sha256": "96ad04d5058e28cad0d680e4134e83a1577a718f2ea8db4a8a9a0edc58ea4105"
+      "sizeBytes": 8726,
+      "sha256": "8f71878c1d3af15a342614d7ba0a20ba24d030a4b7bffed4826fc165ded7b8b7"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",
@@ -815,8 +815,8 @@
     },
     {
       "path": "integrated-preview.html",
-      "sizeBytes": 19456,
-      "sha256": "e3f5ebd9bb21170ad75560c4054ce2fd63be5494a2fead46c5e55389cd9c671c"
+      "sizeBytes": 19462,
+      "sha256": "8e23e1ea2a7fa75b58782a383a0edd9ba43535ba58ac654ee323e7b2a7bca165"
     },
     {
       "path": "premium-face/face-b-render.png",
@@ -830,13 +830,13 @@
     },
     {
       "path": "studio-console.css",
-      "sizeBytes": 17534,
-      "sha256": "60e7a29c836b5e5aac55a81ce9239a7b04d507c7ba2c68b934677f00cd35a6ed"
+      "sizeBytes": 19021,
+      "sha256": "f18d3d34ed013c04f78fef0f5845f7cb14f10ebf7a2afb7bfce4a73a81dfab57"
     },
     {
       "path": "studio-console.js",
-      "sizeBytes": 2176,
-      "sha256": "e2952f6e8625e2a56f940479686d3a5986db6485b0df7466df151d36127637f8"
+      "sizeBytes": 2498,
+      "sha256": "a2fece20e5a2b34ff66955cde7bd2a6f92fea9925ef169009ed3fe16b9087011"
     },
     {
       "path": "assembly-image-export.js",
@@ -847,6 +847,11 @@
       "path": "assembly-component-labels.js",
       "sizeBytes": 2164,
       "sha256": "17a14c9fb0c2940954ce441e5171ff53d0e3adde8f53d4e955d8c69b814102a3"
+    },
+    {
+      "path": "assembly-download.js",
+      "sizeBytes": 1003,
+      "sha256": "f5ccbc0632b7a683b02746bdc8f7ba2af268df6f89ed31339426758b7e032971"
     }
   ]
 }

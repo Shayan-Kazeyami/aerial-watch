@@ -3,7 +3,7 @@
   "algorithm": "SHA-256",
   "scope": "First-party assembly/material-review/studio JS, CSS and HTML; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "SHA-256 of UTF-8 JSON.stringify(files), ordered lexicographically by path.",
-  "digest": "1d6a179e71ff4791587a34ce5f84b6a7f307a8db68ca58c35bb4d942b1b06c61",
+  "digest": "f76fd0e6990f7023dce081f147f30ff4ba6f76f9c681f2b251e431dc5f2bc056",
   "files": [
     {
       "path": "assembly-calendar-data.js",
@@ -57,8 +57,8 @@
     },
     {
       "path": "assembly-depth.js",
-      "bytes": 2815,
-      "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+      "bytes": 3053,
+      "sha256": "e1ab373bbdcfac516529af70fac6cf7941044b2eb1d83bbbd98c561b820b1b52"
     },
     {
       "path": "assembly-design.js",
@@ -69,6 +69,11 @@
       "path": "assembly-dial.js",
       "bytes": 7022,
       "sha256": "ab937535a37b229dfee6273e17560caf5b74c109527dcbd1e5a411e5930720d5"
+    },
+    {
+      "path": "assembly-download.js",
+      "bytes": 1003,
+      "sha256": "f5ccbc0632b7a683b02746bdc8f7ba2af268df6f89ed31339426758b7e032971"
     },
     {
       "path": "assembly-escapement-data.js",
@@ -177,8 +182,8 @@
     },
     {
       "path": "assembly-review.js",
-      "bytes": 71798,
-      "sha256": "a7451642e3e00c85780329316dfd4a680d2933c0ae8f080d457a1c5d08e4c2e5"
+      "bytes": 71675,
+      "sha256": "588238ddb12a3359d8e3d34a2f1c17a5a3441721bb0e69b4fbbdadfd954d6193"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -232,8 +237,8 @@
     },
     {
       "path": "integrated-preview.html",
-      "bytes": 19456,
-      "sha256": "e3f5ebd9bb21170ad75560c4054ce2fd63be5494a2fead46c5e55389cd9c671c"
+      "bytes": 19462,
+      "sha256": "8e23e1ea2a7fa75b58782a383a0edd9ba43535ba58ac654ee323e7b2a7bca165"
     },
     {
       "path": "material-review-model.js",
@@ -257,13 +262,13 @@
     },
     {
       "path": "studio-console.css",
-      "bytes": 17534,
-      "sha256": "60e7a29c836b5e5aac55a81ce9239a7b04d507c7ba2c68b934677f00cd35a6ed"
+      "bytes": 19021,
+      "sha256": "f18d3d34ed013c04f78fef0f5845f7cb14f10ebf7a2afb7bfce4a73a81dfab57"
     },
     {
       "path": "studio-console.js",
-      "bytes": 2176,
-      "sha256": "e2952f6e8625e2a56f940479686d3a5986db6485b0df7466df151d36127637f8"
+      "bytes": 2498,
+      "sha256": "a2fece20e5a2b34ff66955cde7bd2a6f92fea9925ef169009ed3fe16b9087011"
     }
   ]
 }

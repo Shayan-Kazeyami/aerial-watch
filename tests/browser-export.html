@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Aerial export test fixture</title>
+<h1>Export test fixture</h1><p>This is a 2D test of the shared production export helpers, not a watch render.</p>
+<canvas id="canvas" width="160" height="100"></canvas><button id="png">Export test PNG</button><button id="json">Export test JSON</button><button id="video">Export test video</button><p id="status" role="status">Ready</p>
+<script type="module">
+import {createCanvasRecorder} from '../assembly-recording.js';
+import {captureCanvasPNG} from '../assembly-image-export.js';
+import {createDownloadManager} from '../assembly-download.js';
+const c=document.getElementById('canvas'),ctx=c.getContext('2d'),downloads=createDownloadManager();
+ctx.fillStyle='#182325';ctx.fillRect(0,0,160,100);ctx.fillStyle='#cfbd94';ctx.fillRect(40,20,80,60);
+document.getElementById('png').onclick=async()=>{try{const b=await captureCanvasPNG(c);downloads.save(b,'aerial-export-test.png');document.getElementById('status').textContent='PNG requested';}catch(e){document.getElementById('status').textContent=e.message;}};
+document.getElementById('json').onclick=()=>{downloads.save(new Blob(['{"test":"aerial"}'],{type:'application/json'}),'aerial-export-test.json');document.getElementById('status').textContent='JSON requested';};
+const recorder=createCanvasRecorder({canvas:c,onStatus:message=>document.getElementById('status').textContent=message});
+let raf=0;
+document.getElementById('video').onclick=async()=>{
+ const button=document.getElementById('video');button.disabled=true;
+ const draw=t=>{ctx.fillStyle='#182325';ctx.fillRect(0,0,160,100);ctx.fillStyle='#cfbd94';ctx.fillRect((t/20)%120,20,40,60);raf=requestAnimationFrame(draw);};raf=requestAnimationFrame(draw);
+ try{const result=await recorder.start();downloads.save(result.blob,'aerial-export-test.webm');}catch(e){document.getElementById('status').textContent=e.message;}finally{cancelAnimationFrame(raf);button.disabled=false;}
+};
+addEventListener('pagehide',()=>{recorder.dispose();cancelAnimationFrame(raf);},{once:true});
+addEventListener('pagehide',()=>downloads.dispose(),{once:true});
+</script></html>

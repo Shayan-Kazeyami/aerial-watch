@@ -12,7 +12,7 @@ import {createDialDetails} from './assembly-dial.js';
 import {createOpenFrontFrame} from './assembly-open-front.js';
 import {preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES,premiumMovementFinishKind} from './assembly-premium-face.js?v=b03';
 import {createQualityDesign} from './assembly-design.js';
-import {updateInspectionDepth} from './assembly-depth.js';
+import {updateInspectionDepth} from './assembly-depth.js?v=b03';
 import {createRefractionAwareAO} from './assembly-glass-ao.js';
 import {createPresentationClock} from './assembly-clock.js';
 import {partVisible,createVariantManifest,createResourceScope,createObjectTreeDisposer} from './assembly-state.js';
@@ -22,6 +22,7 @@ import {RENDER_PROFILES,resolveRenderResolution} from './assembly-resolution.js'
 import {createCrownInteraction,createCrownVisual} from './assembly-crown.js';
 import {createCaptureProvenance,embedPNGConfiguration} from './assembly-capture-provenance.js';
 import {componentLabel,componentSearchText,normalizeComponentText} from './assembly-component-labels.js';
+import {createDownloadManager} from './assembly-download.js';
 import {captureCanvasPNG} from './assembly-image-export.js?v=b03';
 import {createCanvasRecorder} from './assembly-recording.js';
 import {POWER_PATH,createTourSequence,restoresExterior,sourceNeedsBaseline,validateViewConfiguration} from './assembly-story.js';
@@ -374,8 +375,8 @@ function visibility() {
   updateMaterials();
   scene.updateMatrixWorld(true);
   const proposed=open?(premiumActive()?[...premiumFace.meshes,...craftParts.filter(m=>m.visible)]:[...openPlates.filter(m=>m.visible),...(openFrontFrame?.group.visible?openFrontFrame.group.children:[]),...(qualityDesign?.group.visible?qualityDesign.meshes:[]),...craftParts.filter(m=>m.visible)]):[];
-  depthBounds=[...meshes().filter(mesh=>mesh.visible),...proposed].map(mesh=>new THREE.Box3().setFromObject(mesh).expandByScalar(.5));
-  controls.minDistance=9;
+  depthBounds=[...meshes().filter(mesh=>mesh.visible),...proposed].map(mesh=>new THREE.Box3().setFromObject(mesh).expandByScalar(isolated ? .05 : .5));
+  controls.minDistance=isolated ? .25 : 9;
   $('interior-guide').hidden=!interiorView;
   // Hidden mechanisms still advance their clock. Catch up before a component is
   // revealed, including when playback was paused while it was out of view.
@@ -402,7 +403,7 @@ function select(mesh) {
   const restoreWatch=mesh.userData.sourceIndex === undefined;
   if (restoreWatch) { $('movement-only').checked = false; interiorView=false; }
   if (mesh.userData.inspectionTransparent) $('crystals').checked = true;
-  $('selection').hidden = false; $('part-name').textContent = group.label;
+  $('selection').hidden = false; $('part-name').textContent = group.label; $('part-name').title=group.label;
   $('part-role').textContent = mesh.userData.description || mesh.userData.role || 'Part of the named assembly';
   $('part-support').textContent = mesh.userData.support ? 'Attachment: '+mesh.userData.support : 'Original OM10 component — original placement preserved';
   for (const button of $('component-list').querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.dataset.key === group.key));
@@ -754,13 +755,9 @@ function captureConfiguration({clockStamp}={}){
     transport:performance.getEntriesByType('resource').filter(e=>/\.glb/.test(e.name)).map(e=>({name:new URL(e.name).pathname,transferSize:e.transferSize,encodedBodySize:e.encodedBodySize,decodedBodySize:e.decodedBodySize,duration:e.duration})),
   };
 }
-const pendingDownloads=new Map();
-resources.own('download object URLs',()=>{for(const [url,timer] of pendingDownloads){clearTimeout(timer);URL.revokeObjectURL(url);}pendingDownloads.clear();});
-function downloadBlob(blob,name){
-  const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;link.hidden=true;
-  document.body.append(link);link.click();link.remove();
-  const timer=setTimeout(()=>{URL.revokeObjectURL(url);pendingDownloads.delete(url);},60000);pendingDownloads.set(url,timer);
-}
+const downloads=createDownloadManager();
+resources.own('download object URLs',()=>downloads.dispose());
+const downloadBlob=(blob,name)=>downloads.save(blob,name);
 const recorder=createCanvasRecorder({canvas:renderer.domElement,onStatus:announce});
 resources.own('canvas motion recorder',()=>recorder.dispose());
 if($('record-scene'))$('record-scene').onclick=async()=>{
@@ -779,7 +776,7 @@ if($('export-config'))$('export-config').onclick=async()=>{
 if($('capture-scene'))$('capture-scene').onclick=async()=>{
   if(pendingCaptures.has('capture-scene'))return;pendingCaptures.add('capture-scene');announce('Preparing PNG image…');
   try{await captureProvenance.resolve();if(lifecycle.disposed)return;
-    const stamp=clock.tick(performance.now());applyClockPose(stamp);updateInspectionDepth(camera,controls.target,depthBounds,ao);renderer.info.reset();composer.render();
+    const stamp=clock.tick(performance.now());applyClockPose(stamp);updateInspectionDepth(camera,controls.target,depthBounds,ao,isolated?{distanceFloor:.25,surfacePadding:.05}:undefined);renderer.info.reset();composer.render();
     const configuration=captureConfiguration({clockStamp:stamp}),blob=await captureCanvasPNG(renderer.domElement);
     if(!blob)throw new Error('The canvas could not create an image.');if(lifecycle.disposed)return;
     downloadBlob(await embedPNGConfiguration(blob,configuration),'aerial-studio.png');announce('PNG download requested. Check your browser downloads.');
@@ -841,7 +838,7 @@ function frame(time) {
   // Keep its timeline advancing without changing either presentation clock.
   if (dirty || recorder.recording) {
     try {
-      const depth=updateInspectionDepth(camera,controls.target,depthBounds,ao);
+      const depth=updateInspectionDepth(camera,controls.target,depthBounds,ao,isolated?{distanceFloor:.25,surfacePadding:.05}:undefined);
       controls.minDistance=depth.minimumDistance;
       renderer.info.reset();composer.render();renderedFrames++;dirty=false;
       performanceMonitor.frame({timestamp:time,cpuMs:performance.now()-cpuStart,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures});

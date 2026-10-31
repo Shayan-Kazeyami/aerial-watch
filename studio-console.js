@@ -1,6 +1,11 @@
 // Visible alternatives to selects. Keep native fields as the viewer state source.
 export function installVisibleChoices(root=document){
  const disposers=[];
+ const selection=root.querySelector('#selection'),selectionHost=root.querySelector('.details-body');
+ if(selection&&selectionHost){
+  const parent=selection.parentNode,next=selection.nextSibling;selectionHost.append(selection);
+  disposers.push(()=>parent?.insertBefore(selection,next?.parentNode===parent?next:null));
+ }
  for(const select of root.querySelectorAll('#showcase-controls select')){
   const group=document.createElement('div');group.className='visible-choices';group.setAttribute('role','group');
   const label=root.querySelector(`label[for="${select.id}"]`);
