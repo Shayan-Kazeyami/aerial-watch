@@ -809,7 +809,9 @@ function frame(time) {
   animationFrame=requestAnimationFrame(frame);
   if (document.hidden || failed || contextLost) { last = time; return; }
   if(time-last<15)return;const cpuStart=performance.now(),stamp=clock.tick(time);
-  const delta=Math.min(stamp.delta,.1);last=time;
+  // Camera, lighting and tour are presentation timelines, not physics steps.
+  // Clamping elapsed time made a short camera move take many seconds at low FPS.
+  const delta=Math.max(0,stamp.delta);last=time;
   const lightingChanged=lighting.update(delta);if(lightingChanged)dirty=true;
   if (cameraTween) {
     cameraTween.elapsed += delta;

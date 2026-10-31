@@ -11,3 +11,8 @@ test('malformed view files are rejected before applying any state',()=>{
   const v=valid();change(v);assert.throws(()=>validateViewConfiguration(v));
  }
 });
+test('tour timing follows elapsed seconds rather than rendered-frame count',async()=>{
+ const {createTourSequence}=await import('../assembly-story.js');const tour=createTourSequence();tour.start();
+ assert.equal(tour.tick(7.5).index,1);assert.equal(tour.tick(14).index,3);
+ tour.stop();assert.equal(tour.tick(100),null);
+});
