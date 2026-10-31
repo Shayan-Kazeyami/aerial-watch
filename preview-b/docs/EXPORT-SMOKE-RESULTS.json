@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-31",
+  "scope": "Real browser smoke test of shared production export helpers using a 160x100 animated 2D fixture; NOT the full WebGL watch.",
+  "artifacts": {
+    "png": {
+      "bytes": 819,
+      "sha256": "a7d1c27a9d33942cc35e6ea76c81ac3f14e73db3cb3a0c56841200395369ee4c"
+    },
+    "json": {
+      "bytes": 17,
+      "sha256": "7be0a60e79c0a6ed11eaff5da36e0e7804725b0c2f136b4274b43e7070f97555"
+    },
+    "webm": {
+      "bytes": 54141,
+      "sha256": "787f14a23be55b05da87113e98080dcc38c4d5b2ab92bd429a8ea968142df237"
+    }
+  },
+  "png": {
+    "signature_valid": true,
+    "dimensions": [
+      160,
+      100
+    ]
+  },
+  "json": {
+    "test": "aerial"
+  },
+  "webm": {
+    "codec": "vp9",
+    "dimensions": [
+      160,
+      100
+    ],
+    "decoded_frames": 240,
+    "distinct_decoded_frames": 240,
+    "decoder_exit": 0
+  },
+  "limits": [
+    "Full WebGL watch file delivery not verified in separate software-rendering profile.",
+    "Does not establish real-device rendering performance or all export/import journeys."
+  ],
+  "helper_hashes": {
+    "assembly-image-export.js": "149db3275720e4ce9b1d2a33ba811bfeabb71c49b58529197d3fc2cf7b93ac64",
+    "assembly-download.js": "f5ccbc0632b7a683b02746bdc8f7ba2af268df6f89ed31339426758b7e032971",
+    "assembly-recording.js": "027aa3914520005e8b6728af811d4d747fe119d1b5588fa6802849b82d6d2e54"
+  }
+}
