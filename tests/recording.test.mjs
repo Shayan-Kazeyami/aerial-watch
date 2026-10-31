@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 
 const source=await readFile(new URL('../assembly-recording.js',import.meta.url),'utf8');
-const {createCanvasRecorder}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const {createCanvasRecorder,inspectWebM}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 
 function setup(options={}){
   const instances=[],statuses=[],timers=new Map();let stoppedTracks=0,nextTimer=0;
@@ -119,4 +119,110 @@ test('invalid finalization timeouts fail before capturing a stream',()=>{
     assert.throws(()=>h.recorder.start(),/positive.*timeout/);
     assert.equal(h.instances.length,0);assert.equal(h.recorder.recording,false);
   }
+});
+
+// Minimal structural fixtures, deliberately not decodable video. Inspection
+// measures container packets/timestamps; it must never claim decoder success.
+function webm(times,{scale=1000000,unknownSegment=false,laced=false,blockGroup=false}={}){
+  const element=(id,data)=>Buffer.concat([Buffer.from(id,'hex'),Buffer.from([0x20|(data.length>>16),(data.length>>8)&255,data.length&255]),data]);
+  const uint=(id,n)=>element(id,Buffer.from([(n>>24)&255,(n>>16)&255,(n>>8)&255,n&255]));
+  const tracks=element('1654ae6b',element('ae',Buffer.concat([uint('d7',1),uint('83',1)])));
+  const info=element('1549a966',uint('2ad7b1',scale));
+  const blocks=times.map(time=>{
+    const data=Buffer.from([0x81,(time>>8)&255,time&255,laced?0x82:0x80,0x01]);
+    return blockGroup?element('a0',element('a1',data)):element('a3',data);
+  });
+  const cluster=element('1f43b675',Buffer.concat([uint('e7',0),...blocks]));
+  const contents=Buffer.concat([info,tracks,cluster]);
+  const segment=unknownSegment?Buffer.concat([Buffer.from('18538067ff','hex'),contents]):element('18538067',contents);
+  return new Blob([element('1a45dfa3',Buffer.alloc(0)),segment]);
+}
+
+test('WebM inspection measures packet timestamps, not requested or decoded FPS',async()=>{
+  for(const options of [{},{unknownSegment:true},{blockGroup:true}]){
+    assert.deepEqual(await inspectWebM(webm([0,4010],options)),{
+      verified:true,encodedPacketCount:2,timestampSpanMs:4010,
+    });
+  }
+  assert.equal((await inspectWebM(webm([-100,100],{scale:2000000}))).timestampSpanMs,400);
+  assert.equal((await inspectWebM(webm([]))).encodedPacketCount,0);
+});
+
+test('unsupported, malformed, truncated and excessive WebM inputs are unverified',async()=>{
+  const bytes=new Uint8Array(await webm([0,100]).arrayBuffer());
+  for(const blob of [new Blob(['not a video']),new Blob([bytes.subarray(0,bytes.length-1)]),webm([0],{laced:true})]){
+    assert.deepEqual(await inspectWebM(blob),{verified:false,encodedPacketCount:null,timestampSpanMs:null});
+  }
+  assert.equal((await inspectWebM({size:128*1024*1024+1,arrayBuffer(){throw Error('Must not allocate');}})).verified,false);
+});
+
+test('observed two-packet eight-second capture is rejected instead of downloaded',async()=>{
+  let time=0,completed=0;const h=setup({now:()=>time,onComplete:()=>completed++});
+  const pending=h.recorder.start(),instance=h.instances[0];
+  instance.data(await webm([0,4010]).arrayBuffer());time=8000;h.recorder.stop();instance.finish();
+  await assert.rejects(pending,error=>error.message.includes('too little motion')&&error.videoTiming.encodedPacketCount===2);
+  assert.equal(completed,0);assertClean(h,instance);
+});
+
+test('healthy container exposes requested settings separately from measured timing',async()=>{
+  let time=100;const h=setup({now:()=>time});
+  const pending=h.recorder.start(),instance=h.instances[0];
+  instance.data(await webm([0,2000,4000,6000,7900]).arrayBuffer());time=8100;h.recorder.stop();instance.finish();
+  const result=await pending;
+  assert.equal(result.requestedDurationMs,8000);assert.equal(result.requestedFrameRate,30);
+  assert.equal(result.elapsedMs,8000);assert.equal(result.durationMs,undefined);assert.equal(result.frameRate,undefined);
+  assert.equal(result.videoTiming.timestampSpanMs,7900);assert.equal(result.videoTiming.encodedPacketCount,5);
+  assertClean(h,instance);
+});
+
+test('short timestamp coverage rejects even when there are many packets',async()=>{
+  let time=0;const h=setup({now:()=>time});const pending=h.recorder.start(),instance=h.instances[0];
+  instance.data(await webm([0,100,200,300,400,500]).arrayBuffer());time=8000;instance.finish();
+  await assert.rejects(pending,/too little motion/);assertClean(h,instance);
+});
+
+test('an intentional early stop is compared with elapsed capture, not the eight-second target',async()=>{
+  let time=0;const h=setup({now:()=>time});const pending=h.recorder.start(),instance=h.instances[0];
+  instance.data(await webm([0,1000,2900]).arrayBuffer());time=3000;h.recorder.stop();
+  time=10000;instance.finish();const result=await pending;
+  assert.equal(result.elapsedMs,3000);assert.equal(result.videoTiming.timestampSpanMs,2900);assertClean(h,instance);
+});
+
+test('uninspected output explicitly reports unknown timing rather than nominal FPS',async()=>{
+  const h=setup(),pending=h.recorder.start(),instance=h.instances[0];instance.data();instance.finish();
+  const result=await pending;assert.equal(result.videoTiming.verified,false);
+  assert.equal(result.videoTiming.timestampSpanMs,null);assert.match(h.statuses.at(-1).message,/could not be verified/);
+});
+
+test('disposal during asynchronous inspection rejects and suppresses late download',async()=>{
+  let finish,completed=0;const h=setup({inspect:()=>new Promise(resolve=>{finish=resolve;}),onComplete:()=>completed++});
+  const pending=h.recorder.start(),instance=h.instances[0];instance.data();instance.finish();
+  assert.equal(h.recorder.recording,true);assert.equal(h.stoppedTracks,1);
+  assert.throws(()=>h.recorder.start(),/already recording/);
+  const rejected=assert.rejects(pending,{name:'AbortError'});h.recorder.dispose();
+  finish({verified:false});await rejected;await Promise.resolve();
+  assert.equal(completed,0);assert.equal(h.stoppedTracks,1);assertClean(h,instance);
+});
+
+test('inspection timeout permits retry and ignores a stale inspection result',async()=>{
+  let finish,completed=0,calls=0;
+  const h=setup({inspect:()=>++calls===1?new Promise(resolve=>{finish=resolve;}):Promise.resolve({verified:false}),onComplete:()=>completed++});
+  const pending=h.recorder.start(),first=h.instances[0];first.data();first.finish();
+  const rejected=assert.rejects(pending,/Checking.*timed out/);[...h.timers.values()][0]();await rejected;
+  const retry=h.recorder.start(),second=h.instances[1];second.data();second.finish();await retry;
+  finish({verified:true,encodedPacketCount:100,timestampSpanMs:8000});await Promise.resolve();
+  assert.equal(completed,1);assertClean(h,second);
+});
+
+
+test('known video container with no packets is rejected even after an early stop',async()=>{
+  const h=setup(),pending=h.recorder.start(),instance=h.instances[0];
+  instance.data(await webm([]).arrayBuffer());instance.finish();
+  await assert.rejects(pending,/too little motion/);assertClean(h,instance);
+});
+
+test('completion callback disposal cannot announce a cancelled clip as ready',async()=>{
+  const h=setup({onComplete:()=>h.recorder.dispose()});
+  const pending=h.recorder.start(),instance=h.instances[0];instance.data();instance.finish();
+  await assert.rejects(pending,{name:'AbortError'});assert.equal(h.statuses.at(-1).state,'disposed');assertClean(h,instance);
 });

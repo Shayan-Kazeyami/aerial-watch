@@ -133,7 +133,26 @@ normal=normalize(abs(finishDet)*normal-.025*finishGrad);
   material.customProgramCacheKey=()=>`om10-finish-v3-${type}-${strength}-${grainAxis}-${kind}-${capAxis}`;
 }
 
-export function createStudioEnvironment(renderer,{neutral=false,atelier=false}={}){
+// Optional lighting-only A/B. Fresh arrays keep callers from mutating the
+// default rig. Do not adopt the trial without matched real-render captures.
+export function atelierReflectionCards(light='atelier'){
+  const trial=light==='atelier2';
+  const cards=[
+    [[0,48,38],[30,15],0xfff9f2,.8],
+    [trial?[-38,24,45]:[-32,28,48],trial?[10,45]:[20,45],0xfff7ed,4.5],
+    [[32,2,25],[3.5,48],0xf1f5ff,6.0],
+    [[-24,10,-35],[5,30],0xe5edff,2.5],
+    [[5,45,10],[35,22],0xffffff,1.6],
+    [[12,0,40],[10,48],0x080909,.03],
+    [[-3,0,-45],[35,40],0xe5e9ed,.35],
+  ];
+  // Restrained near-camera neutral reflection for dark metallic hands, not
+  // an emissive hand material or a global exposure/fill-light increase.
+  if(trial)cards.push([[-6,6,58],[12,20],0xf4f5f6,.65]);
+  return cards;
+}
+
+export function createStudioEnvironment(renderer,{neutral=false,atelier=false,light='atelier'}={}){
   const studio=new THREE.Scene();studio.background=new THREE.Color(atelier?0x272a2d:neutral?0x636363:0x353b43);
   const geometry=new THREE.PlaneGeometry(1,1),cards=[];
   const card=(position,size,color,power)=>{
@@ -141,13 +160,7 @@ export function createStudioEnvironment(renderer,{neutral=false,atelier=false}={
     const mesh=new THREE.Mesh(geometry,material);mesh.position.set(...position);mesh.scale.set(...size,1);mesh.lookAt(0,0,0);studio.add(mesh);cards.push(material);
   };
   if(atelier){
-    card([0,48,38],[30,15],0xfff9f2,.8);
-    card([-32,28,48],[20,45],0xfff7ed,4.5);
-    card([32,2,25],[3.5,48],0xf1f5ff,6.0);
-    card([-24,10,-35],[5,30],0xe5edff,2.5);
-    card([5,45,10],[35,22],0xffffff,1.6);
-    card([12,0,40],[10,48],0x080909,.03);
-    card([-3,0,-45],[35,40],0xe5e9ed,.35);
+    for(const specification of atelierReflectionCards(light))card(...specification);
   }else if(neutral){
     card([-25,32,35],[22,58],0xffffff,2.4);
     card([30,9,26],[7,52],0xffffff,2.0);
@@ -166,8 +179,8 @@ export function createStudioEnvironment(renderer,{neutral=false,atelier=false}={
   geometry.dispose();cards.forEach(material=>material.dispose());generator.dispose();return target;
 }
 
-export function createAssemblyMaterials(renderer,{atelier=false}={}){
-  const target=renderer?createStudioEnvironment(renderer,{atelier}):null,materials=new Map();let disposed=false;
+export function createAssemblyMaterials(renderer,{atelier=false,light='atelier'}={}){
+  const target=renderer?createStudioEnvironment(renderer,{atelier,light}):null,materials=new Map();let disposed=false;
   function unitAxis(axis,fallback){
     const length=Array.isArray(axis)&&axis.length===3&&axis.every(Number.isFinite)?Math.hypot(...axis):0;
     return Number.isFinite(length)&&length>.001?axis.map(value=>value/length):fallback;

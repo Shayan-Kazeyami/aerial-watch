@@ -54,7 +54,33 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e.target.closest('
 function sendExplosion(amount){if(!ready||!explodeAvailable)return;explodeAmount=Math.max(0,Math.min(1,amount));document.dispatchEvent(new CustomEvent('atelier:explode',{detail:{amount:explodeAmount}}));if($('atelier-explosion'))$('atelier-explosion').value=String(explodeAmount*100);updateText('atelier-explosion-value',`${Math.round(explodeAmount*100)}%`);}
 document.addEventListener('atelier:mode',e=>{if(e.detail?.mode==='time')setMode('time',{activate:false});});
 document.addEventListener('atelier:capabilities',e=>{explodeAvailable=e.detail?.explode===true;crownDragAvailable=e.detail?.crownDrag===true;if(mode==='explode')setMode('explode',{activate:false});if(e.detail?.crownDrag)updateText('atelier-crown-direct','Drag the crown up or down to turn it. Double-click to pull or push; the buttons below work with touch and keyboard.');});
-document.addEventListener('atelier:explode-state',e=>{explodeAmount=Math.max(0,Math.min(1,Number(e.detail?.amount)||0));if($('atelier-explosion'))$('atelier-explosion').value=String(explodeAmount*100);updateText('atelier-explosion-value',`${Math.round(explodeAmount*100)}%`);});
+// BEGIN restore-state synchronization (also exercised by the focused Node tests).
+function resolveRestoredAtelierMode(detail){
+ if(Number(detail.amount)>0)return 'explode';
+ if(detail.crownPulled||detail.view==='crown')return 'time';
+ if(detail.selected)return 'selection';
+ if(detail.isolated)return 'components';
+ if(detail.interior)return 'inside';
+ return 'explore';
+}
+function handleAtelierExplosionState(event){
+ const detail=event.detail||{};
+ explodeAmount=Math.max(0,Math.min(1,Number(detail.amount)||0));
+ if($('atelier-explosion'))$('atelier-explosion').value=String(Math.round(explodeAmount*100));
+ updateText('atelier-explosion-value',`${Math.round(explodeAmount*100)}%`);
+ if(detail.reason!=='restore')return;
+ const restoreFocus=$('context').contains(document.activeElement)||document.activeElement===$('import-config')||document.activeElement===document.body;
+ // Adopt the already-restored selection before sync() observes it. Never select,
+ // reseat the crown, reset the explosion, or move the imported camera here.
+ selectedBefore=!$('selection').hidden;
+ const nextMode=resolveRestoredAtelierMode({...detail,amount:explodeAmount});
+ panelOpener=document.querySelector(`.task-dock [data-mode="${nextMode}"]`)||document.querySelector('.atelier-more');
+ setMode(nextMode,{activate:false});
+ if(restoreFocus)$(nextMode==='explore'?'assembly-canvas':'close').focus();
+}
+document.addEventListener('atelier:explode-state',handleAtelierExplosionState);
+// END restore-state synchronization.
+
 let scheduled=false;const schedule=()=>{if(!scheduled){scheduled=true;requestAnimationFrame(()=>{scheduled=false;sync();});}};
 new MutationObserver(schedule).observe(bridge,{subtree:true,childList:true,attributes:true,characterData:true});document.addEventListener('studio-state-change',schedule);bridge.addEventListener('change',schedule);sync();
 try{await import('./assembly-review.js?v=atelier-local-1');document.dispatchEvent(new CustomEvent('atelier:request-capabilities'));schedule();}catch(error){console.error(error);failed=true;$('loading').hidden=false;$('load-message').textContent='3D graphics could not start in this browser. This is a static preview, not the live model.';$('viewer-status').textContent='3D unavailable. Try a WebGL-capable browser.';$('assembly-canvas').setAttribute('aria-busy','false');$('studio-poster').hidden=false;sync();}

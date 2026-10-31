@@ -220,8 +220,8 @@
     },
     {
       "path": "assembly-materials.js",
-      "sizeBytes": 13249,
-      "sha256": "1b77d762b31315c7da9f44c5735d33301d77e8d96c1dcd2afee1b9968a86f0b8"
+      "sizeBytes": 13865,
+      "sha256": "97292cd7fe6f6d8db9c0e5b5a4c0fe69a5d8cabb677ac64124cebd366f1eab83"
     },
     {
       "path": "assembly-motion.js",
@@ -255,8 +255,8 @@
     },
     {
       "path": "assembly-recording.js",
-      "sizeBytes": 4831,
-      "sha256": "027aa3914520005e8b6728af811d4d747fe119d1b5588fa6802849b82d6d2e54"
+      "sizeBytes": 10624,
+      "sha256": "cdc28c645106e839e18aa2d0dfa5a04cd054d62845fe0cbb9ccdd7e1a0154027"
     },
     {
       "path": "assembly-refraction.js",
@@ -280,8 +280,8 @@
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 79589,
-      "sha256": "b9ec1607b03646ed2dfb9da0f46a36b5ed9c96593f1bbb7857ffb64b15b8c253"
+      "sizeBytes": 79836,
+      "sha256": "35ce7fc01bec0b6284c7693f5896c1d82b99ea98e33cfc8de083fd4f99f19c4b"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -375,8 +375,8 @@
     },
     {
       "path": "atelier-preview.css",
-      "sizeBytes": 17483,
-      "sha256": "943982125aeab9b34916dee36563a82d02accd093ff3fc75e0567c9efb865245"
+      "sizeBytes": 17628,
+      "sha256": "05e6a6f8b42ef4ac38d056dc008cd2c2971a7e148f80cff724496efffabfd008"
     },
     {
       "path": "atelier-preview.html",
@@ -385,8 +385,8 @@
     },
     {
       "path": "atelier-preview.js",
-      "sizeBytes": 17248,
-      "sha256": "98317ed825af2707abf85cd2d58b2ef999bccc22a3e96e67e7f4a6eb912e0731"
+      "sizeBytes": 18475,
+      "sha256": "efcce13cb8aff9fd62c0ba707b9f2ea5490807851686e9f3521963b62478971e"
     },
     {
       "path": "design-preview/Aerial-Left-Crescent-B-Angled-Rim-v3.svg",
@@ -755,13 +755,13 @@
     },
     {
       "path": "quality-study/viewer-revision.js",
-      "sizeBytes": 7860,
-      "sha256": "8f7c6124d3e8839b6194ab920d854b49993fb9893ad9535276a712ec60daa326"
+      "sizeBytes": 7861,
+      "sha256": "a3e460ef9bfada68524b33486b55d55f12999603354b9f6a519bd337f480f275"
     },
     {
       "path": "quality-study/viewer-revision.json",
-      "sizeBytes": 9833,
-      "sha256": "d9dae24621bcad40b4ce83a8ca364f4f4c62216b77162983860484a771a6e754"
+      "sizeBytes": 9834,
+      "sha256": "5c35eadb387de517f1ba0e066df278ee82f8dd7365c9041c57e6783eae996029"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",

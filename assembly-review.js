@@ -67,7 +67,7 @@ renderer.transmissionResolutionScale=2;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.08;
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = Number(THREE.REVISION)>=187?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
-const finishes = createAssemblyMaterials(renderer,{atelier:atelierVisuals});
+const finishes = createAssemblyMaterials(renderer,{atelier:atelierVisuals,light:new URLSearchParams(location.search).get('light')});
 scene.environment = finishes.environment; scene.environmentIntensity = .85;
 const camera = new THREE.PerspectiveCamera(32,1,.1,800);
 const lighting=createAssemblyLighting(scene,{renderer,atelier:atelierVisuals}),{key,floor}=lighting;
@@ -848,7 +848,7 @@ if($('import-config'))$('import-config').onchange=async event=>{
     if(![...$('speed').options].some(option=>Number(option.value)===config.clock.speed)){$('speed').querySelector('[data-saved-speed]')?.remove();const option=new Option(`${config.clock.speed}× · saved time scale`,String(config.clock.speed));option.dataset.savedSpeed='true';$('speed').add(option);}
     $('speed').value=String(config.clock.speed);
     settingSeconds=config.settingSeconds;winding?.restore(config.winding);crownInteraction.restore(config.crown);
-    clock.seek(config.clock.mechanism,{track:'mechanism'});applyClockPose(clock.seek(config.clock.hands,{track:'hands'}));crownVisual?.finish();restoreInspectionState(restoredInspection);if(config.view==='crown'&&$('crown-controls'))$('crown-controls').open=true;registerExplosionParts();explosion?.setAmount(config.explosion,{instant:true});document.dispatchEvent(new CustomEvent('atelier:explode-state',{detail:{amount:config.explosion}}));motionStatus();dirty=true;announce('Saved camera, crown, options, time scale and pose restored. Motion is paused.');
+    clock.seek(config.clock.mechanism,{track:'mechanism'});applyClockPose(clock.seek(config.clock.hands,{track:'hands'}));crownVisual?.finish();restoreInspectionState(restoredInspection);if(config.view==='crown'&&$('crown-controls'))$('crown-controls').open=true;registerExplosionParts();explosion?.setAmount(config.explosion,{instant:true});document.dispatchEvent(new CustomEvent('atelier:explode-state',{detail:{amount:config.explosion,reason:'restore',view:config.view,interior:interiorView,crownPulled:!!config.crown.pulled,selected:restoredInspection.selected.length>0,isolated:restoredInspection.isolated!==null}}));motionStatus();dirty=true;announce('Saved camera, crown, options, time scale, explosion and pose restored. Motion is paused.');
   }catch(e){if(!lifecycle.disposed&&request===configurationRequest)announce(`Could not restore view: ${e.message}`);}finally{if(request===configurationRequest)input.value='';}
 };
 let last = 0;

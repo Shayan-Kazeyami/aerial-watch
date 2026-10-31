@@ -26,3 +26,6 @@
 #atelier-panel-status{border-top:1px solid #ffffff20;margin:14px 0 0;padding-top:10px;line-height:1.5}.context-top{position:sticky;top:-22px;background:#272725;z-index:1;padding:10px 0}.study-label>span#atelier-state-label{width:auto;height:auto;background:none;border-radius:0}.atelier-more[aria-pressed=true]{color:#eeeae1;border-color:#d6c4a4}.quality[aria-expanded=true]{border-color:#d6c4a4}
 @media(max-width:1050px){.atelier-status{display:block!important;position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap}.context-top{top:-18px}}
 @media(max-width:680px){.atelier{min-height:min(580px,calc(100svh - 68px))}.context-card{max-height:min(42svh,calc(100% - 260px))}.context-top{top:-17px}#atelier-panel-status{font-size:11px!important}.study-label{max-width:calc(100% - 140px)}}
+
+/* Desktop already has the persistent live status; keep its mobile panel copy. */
+@media(min-width:1051px){#atelier-panel-status{display:none}}
