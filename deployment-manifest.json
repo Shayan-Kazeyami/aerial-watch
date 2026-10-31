@@ -235,8 +235,8 @@
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 71836,
-      "sha256": "e0c48f77215f03b7b45deb8a90b2293fb875fe8fa04ad21f2404285edc721c0a"
+      "sizeBytes": 71842,
+      "sha256": "2797463697ea8d03b81b7a87655091de9b54b799de40c6212a72cc7849146f7b"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -621,12 +621,12 @@
     {
       "path": "quality-study/viewer-revision.js",
       "sizeBytes": 6991,
-      "sha256": "c2cd490e0e4db0e0a859fb23ffa4ca48e3a4d6a0244c029b94112e81ee54f20c"
+      "sha256": "f9965dd8f71b141cb26bd597266f2b0bdb2d2f08517a9e5cb653be3225b7bbd9"
     },
     {
       "path": "quality-study/viewer-revision.json",
       "sizeBytes": 8726,
-      "sha256": "23f8968c914b5b08b4de5062708f0804703ffa8865977a360cd4ae5c902815fc"
+      "sha256": "efa4b6b6ae33498d09eae4cadcde758b4f1514ae63a2bb3e71fcbd43502799b8"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",
@@ -805,8 +805,8 @@
     },
     {
       "path": "ATTRIBUTION.md",
-      "sizeBytes": 3843,
-      "sha256": "bcae39b501ad2d53f9045cdd2a8067c3e6ddd134bbb48807cefd6f6974e02c03"
+      "sizeBytes": 4575,
+      "sha256": "4fe9c27e106c60e31da49fc42611fd1c1cecf5314c7f50443d68b545771ea767"
     },
     {
       "path": "assembly-premium-face.js",
@@ -816,7 +816,7 @@
     {
       "path": "integrated-preview.html",
       "sizeBytes": 19486,
-      "sha256": "e31bab5175f3d1a6df955e10a91be1c714b5ae221fe223fb208093786bd6940d"
+      "sha256": "9a60e724372b29c3843d34afecfc2aa66a4fba7125e5bc6a8e65f62beec2f15a"
     },
     {
       "path": "premium-face/face-b-render.png",
@@ -830,8 +830,8 @@
     },
     {
       "path": "studio-console.css",
-      "sizeBytes": 21244,
-      "sha256": "813eabf8f0335905021c41c3fef2fa1b7096b59a1505e256f5c57cb5f6b215ad"
+      "sizeBytes": 22959,
+      "sha256": "f1e5dc0cec15e1d73eddb0defc4a7a3db827844ca9309dbcac151b56f82ea64b"
     },
     {
       "path": "studio-console.js",
@@ -845,8 +845,8 @@
     },
     {
       "path": "assembly-component-labels.js",
-      "sizeBytes": 2164,
-      "sha256": "17a14c9fb0c2940954ce441e5171ff53d0e3adde8f53d4e955d8c69b814102a3"
+      "sizeBytes": 2348,
+      "sha256": "d8ab08f1ebe19f0336976669fb1b501676c0303e453a660ed25d028e0fe5cd4e"
     },
     {
       "path": "assembly-download.js",
@@ -857,6 +857,11 @@
       "path": "premium-face/face-b-render.webp",
       "sizeBytes": 104422,
       "sha256": "47e1c73c063a9fd9a3e7c9332aee683f249b160f2c19227dad145159f047e757"
+    },
+    {
+      "path": "tests/browser-embed.html",
+      "sizeBytes": 1229,
+      "sha256": "ff11133aabb41bf2a93de9e110616b64f70268f823935b62158c9d9cc76fd276"
     }
   ]
 }

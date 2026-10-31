@@ -12,3 +12,9 @@ test('component names remain human-readable while source identities remain searc
  assert(componentSearchText({sourceIndex:11,description:'Pierre bombée'}).includes('jewel bearing'));
  assert.equal(componentLabel({sourceIndex:50,description:'Pignon de remontoir'}),'Pinion · OM10 #50');
 });
+test('exterior parts have distinct everyday labels',()=>{
+ assert.equal(componentLabel({assemblyId:'BEZEL'}),'Bezel');
+ assert.equal(componentLabel({assemblyId:'BUCKLE'}),'Buckle frame');
+ assert.equal(componentLabel({assemblyId:'BUCKLE-TANG'}),'Buckle pin');
+ assert.equal(componentLabel({assemblyId:'DIAL-CARRIER'}),'Dial support');
+});

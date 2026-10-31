@@ -21,7 +21,7 @@ import {createPerformanceMonitor} from './assembly-performance.js';
 import {RENDER_PROFILES,resolveRenderResolution} from './assembly-resolution.js';
 import {createCrownInteraction,createCrownVisual} from './assembly-crown.js';
 import {createCaptureProvenance,embedPNGConfiguration} from './assembly-capture-provenance.js';
-import {componentLabel,componentSearchText,normalizeComponentText} from './assembly-component-labels.js';
+import {componentLabel,componentSearchText,normalizeComponentText} from './assembly-component-labels.js?v=b04';
 import {createDownloadManager} from './assembly-download.js';
 import {captureCanvasPNG} from './assembly-image-export.js?v=b03';
 import {createCanvasRecorder} from './assembly-recording.js';
@@ -137,7 +137,7 @@ const lifecycle=createViewerLifecycle({pause:()=>{clock.setHidden(true);performa
   resume:()=>{clock.setHidden(document.hidden);last=frameWindow=performance.now();dirty=true;},
   dispose:()=>{cancelAnimationFrame(animationFrame);try{resources.dispose();}catch(error){console.error('Viewer resource cleanup failed.',error);}}});
 const assetOptions=()=>({loader:new GLTFLoader(),signal:lifecycle.signal,disposeUnused:gltf=>disposeObjectTree(gltf.scene)});
-const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=b03').then(module=>module.default)}),pendingCaptures=new Set();
+const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=b04').then(module=>module.default)}),pendingCaptures=new Set();
 const requestedQuality=new URLSearchParams(location.search).get('quality');
 const startPaused=new URLSearchParams(location.search).get('paused')==='1';
 let quality=Object.hasOwn(RENDER_PROFILES,requestedQuality)?requestedQuality:(premiumRequested?'balanced':'detail'), renderedFrames=0, frameWindow=performance.now();

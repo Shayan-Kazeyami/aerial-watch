@@ -9,7 +9,7 @@ const categories=[
  [/tige|remontoir/,'Winding component'],[/tirette|bascule/,'Setting mechanism'],
  [/goupille|axe|arbre|tenon/,'Pin or staff'],
 ];
-const exterior={HOUR:'Hour hand',MINUTE:'Minute hand',SECONDS:'Small-seconds hand',CASE:'Case',CASEBACK:'Caseback',CROWN:'Crown',DIAL:'Original dial',CHAPTER:'Original chapter ring','FRONT-CRYSTAL':'Front glass','REAR-CRYSTAL':'Rear glass','STRAP-UPPER':'Upper strap','STRAP-LOWER':'Lower strap'};
+const exterior={BEZEL:'Bezel',BUCKLE:'Buckle frame','BUCKLE-TANG':'Buckle pin','DIAL-CARRIER':'Dial support','SECONDS-STAFF':'Seconds-hand sleeve',RETAINER:'Movement cradle','CROWN-TUBE':'Crown tube',HOUR:'Hour hand',MINUTE:'Minute hand',SECONDS:'Small-seconds hand',CASE:'Case',CASEBACK:'Caseback',CROWN:'Crown',DIAL:'Original dial',CHAPTER:'Original chapter ring','FRONT-CRYSTAL':'Front glass','REAR-CRYSTAL':'Rear glass','STRAP-UPPER':'Upper strap','STRAP-LOWER':'Lower strap'};
 export function componentLabel(data={},name=''){
  if(data.sourceIndex!==undefined){
   const raw=normalizeComponentText(`${data.description||''} ${name}`);

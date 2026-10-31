@@ -218,3 +218,26 @@
  .integrated-studio #showcase-controls .crown-body #crown-help{grid-column:1/-1}
  .integrated-studio #showcase-controls .appearance-panel .check{min-height:44px!important}
 }
+@media(max-width:1049px){
+ .integrated-studio #showcase-controls .advanced-body>*,.integrated-studio #showcase-controls .details-body>.explorer{width:100%;min-width:0}
+}
+/* Compact laptop heights retain the single-screen deck without overlapping rails. */
+@media(min-width:1050px) and (max-height:740px){
+ .integrated-studio header{height:40px}
+ .integrated-studio .viewer{height:calc(100svh - 40px)}
+ .integrated-studio .studio-heading{top:9px}
+ .integrated-studio #showcase-controls{inset:28px 16px 8px}
+ .integrated-studio #showcase-controls .console-bottom{height:200px;bottom:26px}
+ .integrated-studio #showcase-controls .console-rail{bottom:238px}
+ .integrated-studio .viewer #stage{top:28px;bottom:254px}
+ .integrated-studio .viewer .overlay{bottom:234px}
+ .integrated-studio #showcase-controls button,.integrated-studio #showcase-controls .file-action{min-height:24px!important;padding:3px!important}
+ .integrated-studio #showcase-controls h2{margin-bottom:4px}
+ .integrated-studio #showcase-controls #view-controls,.integrated-studio #showcase-controls .appearance-panel,.integrated-studio #showcase-controls .everyday-controls,.integrated-studio #showcase-controls .crown-controls{padding-bottom:6px;margin-bottom:6px}
+ .integrated-studio #showcase-controls .all-camera-views{gap:3px}
+ .integrated-studio .studio-meta{gap:4px}
+}
+@media(min-width:1050px) and (max-height:740px){
+ .integrated-studio #showcase-controls .console-rail{padding:8px}
+ .integrated-studio #showcase-controls #view-controls,.integrated-studio #showcase-controls .appearance-panel,.integrated-studio #showcase-controls .everyday-controls,.integrated-studio #showcase-controls .crown-controls{padding-bottom:4px;margin-bottom:4px}
+}

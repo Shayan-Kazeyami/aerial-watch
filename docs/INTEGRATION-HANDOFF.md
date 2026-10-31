@@ -29,4 +29,7 @@ For a full-page case study, link to the same entry directly. Below 1050 CSS pixe
 - Measure on representative phones, not only a desktop or software renderer.
 - Retain Openmovement OM10 CC BY-SA attribution and visual-study disclaimer.
 
-Current candidate is not launch-accepted: this cloud browser cannot create a WebGL context. Unit and layout checks pass but do not close this requirement.
+Current candidate is not launch-accepted. The normal cloud browser cannot create WebGL; an explicitly approved isolated software-rendering profile can, and actual B-face, crown, camera and component interactions have been observed there. It is not a representative device-performance test. Production export helpers have real browser PNG/JSON/WebM smoke evidence, while full-watch file delivery/import remains unresolved in the temporary profile. See `LIVE-QA-2026-10-31.md` for exact evidence and pending checks.
+
+## Repeatable embed smoke page
+Serve the repository and open `tests/browser-embed.html`. It embeds the real candidate using relative paths, and provides Remove/Restore controls for repeated mounting. This is a test wrapper, not the Kazeyami site. A wrapper load alone does not verify download policies or complete resource cleanup.
