@@ -210,8 +210,8 @@
     },
     {
       "path": "assembly-recording.js",
-      "sizeBytes": 4223,
-      "sha256": "f1954a057584469fc7b72843f6e079523e73eded5f52fcab9c65e9786c06b61b"
+      "sizeBytes": 4831,
+      "sha256": "027aa3914520005e8b6728af811d4d747fe119d1b5588fa6802849b82d6d2e54"
     },
     {
       "path": "assembly-refraction.js",
