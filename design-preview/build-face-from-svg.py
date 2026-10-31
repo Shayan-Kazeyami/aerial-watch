@@ -1,4 +1,4 @@
-"""Build a reversible B-SVG-01 candidate directly from the dimensioned SVG.
+"""Build a reversible B-SVG-02 candidate directly from the dimensioned SVG.
 Source movement objects are retained byte-for-byte in mesh coordinates and transforms.
 """
 import bpy,bmesh,math,json,re,hashlib,struct,sys
@@ -22,7 +22,7 @@ for o in list(bpy.context.scene.objects):
  if o.name not in baseline and o.type in {'MESH','CURVE','FONT'}:bpy.data.objects.remove(o,do_unlink=True)
 graphite=bpy.data.materials['Graphite dial'];gold=bpy.data.materials['Muted champagne'];steel=bpy.data.materials['Satin steel'];authored=[]
 def own(o,name,mat=graphite):
- o.name=name;o.data.materials.clear();o.data.materials.append(mat);o['premiumFacePart']=True;o['designRevision']='B-SVG-01';authored.append(o);return o
+ o.name=name;o.data.materials.clear();o.data.materials.append(mat);o['premiumFacePart']=True;o['designRevision']='B-SVG-02';authored.append(o);return o
 def cylinder(name,r,z,depth,xy=(0,0),mat=graphite):
  bpy.ops.mesh.primitive_cylinder_add(vertices=192,radius=r,depth=depth,location=(*xy,z));return own(bpy.context.object,name,mat)
 def boolean(base,operand,operation):
@@ -36,7 +36,7 @@ def prism(name,points,z,depth,mat=graphite):
  mesh=bpy.data.meshes.new(name);mesh.from_pydata(verts,[],faces);mesh.update();bm=bmesh.new();bm.from_mesh(mesh);bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces));bm.to_mesh(mesh);bm.free()
  o=bpy.data.objects.new(name,mesh);bpy.context.collection.objects.link(o);return own(o,name,mat)
 def cubic_path(d):
- tokens=re.findall(r'[MCZ]|[-+]?(?:\d*\.\d+|\d+)(?:[eE][-+]?\d+)?',d);i=0;out=[];current=None
+ tokens=re.findall(r'[MCAZ]|[-+]?(?:\d*\.\d+|\d+)(?:[eE][-+]?\d+)?',d);i=0;out=[];current=None
  while i<len(tokens):
   command=tokens[i];i+=1
   if command=='M':current=(float(tokens[i]),float(tokens[i+1]));i+=2;out.append(current)
@@ -45,6 +45,16 @@ def cubic_path(d):
    for k in range(1,81):
     t=k/80;out.append(tuple((1-t)**3*a[j]+3*(1-t)**2*t*b[j]+3*(1-t)*t*t*c[j]+t**3*e[j] for j in (0,1)))
    current=e
+  elif command=='A':
+   rx,ry,rotation,large,sweep,x2,y2=map(float,tokens[i:i+7]);i+=7
+   assert abs(rx-ry)<1e-8 and rotation==0,'Only circular SVG arcs are supported.'
+   x1,y1=current;xp=(x1-x2)/2;yp=(y1-y2)/2;den=xp*xp+yp*yp
+   factor=math.sqrt(max(0,(rx*rx-den)/den))*(-1 if large==sweep else 1)
+   center=((x1+x2)/2+factor*yp,(y1+y2)/2-factor*xp)
+   a=math.atan2(y1-center[1],x1-center[0]);b=math.atan2(y2-center[1],x2-center[0]);delta=(b-a)%(2*math.pi) if sweep else -((a-b)%(2*math.pi))
+   for k in range(1,161):
+    angle=a+delta*k/160;out.append((center[0]+rx*math.cos(angle),center[1]+rx*math.sin(angle)))
+   current=(x2,y2)
   elif command!='Z':raise ValueError('Unsupported SVG path command '+command)
  if math.dist(out[0],out[-1])<1e-6:out.pop()
  return out
@@ -107,10 +117,10 @@ for o in bpy.context.scene.objects:
  if o.type=='MESH' and o.get('assemblyId') in ['HOUR','MINUTE','SECONDS']:
   z=[(o.matrix_world@v.co).z for v in o.data.vertices];hand_bounds[o.get('assemblyId')]={'min_z_mm':min(z),'max_z_mm':max(z)}
 assert hand_bounds['SECONDS']['min_z_mm']>3.62
-report={'revision':'B-SVG-01','source_svg':'Aerial-Left-Crescent-B-dimensioned.svg','source_svg_sha256':svg_sha,'retained_source_meshes':len(source),'source_vertices_and_transforms_unchanged':True,'unified_dial_connected_components':components,'unified_dial_nonmanifold_edges':nonmanifold,'hand_bounds':hand_bounds,'seconds_tick_max_z_mm':3.62,'static_seconds_vertical_gap_mm':hand_bounds['SECONDS']['min_z_mm']-3.62,'scope':'Connected manifold authored dial/support solid and static hand-height checks. Not full dynamic collision or manufacturing certification.'}
+report={'revision':'B-SVG-02','source_svg':'Aerial-Left-Crescent-B-dimensioned.svg','source_svg_sha256':svg_sha,'retained_source_meshes':len(source),'source_vertices_and_transforms_unchanged':True,'unified_dial_connected_components':components,'unified_dial_nonmanifold_edges':nonmanifold,'hand_bounds':hand_bounds,'seconds_tick_max_z_mm':3.62,'static_seconds_vertical_gap_mm':hand_bounds['SECONDS']['min_z_mm']-3.62,'scope':'Connected manifold authored dial/support solid and static hand-height checks. Not full dynamic collision or manufacturing certification.'}
 (ROOT/'svg-face-3d-audit.json').write_text(json.dumps(report,indent=2)+'\n')
-scene=bpy.context.scene;scene.cycles.samples=96;scene.render.resolution_x=900;scene.render.resolution_y=900;scene.render.resolution_percentage=100;scene.render.filepath=str(ROOT/'svg-face-r01-preview.png')
+scene=bpy.context.scene;scene.cycles.samples=96;scene.render.resolution_x=900;scene.render.resolution_y=900;scene.render.resolution_percentage=100;scene.render.filepath=str(ROOT/'svg-face-r02-preview.png')
 bpy.ops.file.pack_all()
-bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'svg-face-r01.blend'),compress=True)
+bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'svg-face-r02.blend'),compress=True)
 print('SVG_3D_AUDIT',json.dumps(report),flush=True)
 if '--skip-render' not in sys.argv:bpy.ops.render.render(write_still=True)

@@ -1,9 +1,16 @@
 {
-  "revision": "B-SVG-01",
+  "revision": "B-SVG-02",
   "units": "mm",
   "aperture_samples": 480,
   "aperture_self_intersections": 0,
-  "minimum_outer_web_mm": 0.6836868191041692,
+  "minimum_outer_web_mm": 0.6999999999999975,
+  "outer_arc_radius_mm": 15.7,
+  "outer_arc_center_mm": [
+    0,
+    0
+  ],
+  "constant_outer_rim_mm": 0.6999999999999993,
+  "outer_arc_max_radial_error_mm": 1.7763568394002505e-15,
   "dial_radius_mm": 16.4,
   "small_seconds_pivot_blender_mm": [
     -7.998827934265137,

@@ -3,7 +3,7 @@ from pathlib import Path
 from mathutils import Matrix
 from mathutils.bvhtree import BVHTree
 ROOT=Path(__file__).resolve().parent
-bpy.ops.wm.open_mainfile(filepath=str(ROOT/'svg-face-r01.blend'));deps=bpy.context.evaluated_depsgraph_get()
+bpy.ops.wm.open_mainfile(filepath=str(ROOT/'svg-face-r02.blend'));deps=bpy.context.evaluated_depsgraph_get()
 verts=[];faces=[]
 for obj in bpy.context.scene.objects:
  if not obj.get('premiumFacePart'):continue

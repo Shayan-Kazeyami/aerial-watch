@@ -235,8 +235,8 @@
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 71842,
-      "sha256": "2797463697ea8d03b81b7a87655091de9b54b799de40c6212a72cc7849146f7b"
+      "sizeBytes": 71904,
+      "sha256": "7f72ee6a407a0c26ad39868185350a94a3ef68e5465845c925cc8c0abd79bd2b"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -621,12 +621,12 @@
     {
       "path": "quality-study/viewer-revision.js",
       "sizeBytes": 6991,
-      "sha256": "f9965dd8f71b141cb26bd597266f2b0bdb2d2f08517a9e5cb653be3225b7bbd9"
+      "sha256": "c1d4068c2a973a57c792fccc77effbf3f53ab8b27e2ffe856713b83c4aa20e13"
     },
     {
       "path": "quality-study/viewer-revision.json",
       "sizeBytes": 8726,
-      "sha256": "efa4b6b6ae33498d09eae4cadcde758b4f1514ae63a2bb3e71fcbd43502799b8"
+      "sha256": "b7dde4f02fcbda06863bd6f77cfbb68785aefaf2055f870fdf3c7963e5513cd4"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",
@@ -810,13 +810,13 @@
     },
     {
       "path": "assembly-premium-face.js",
-      "sizeBytes": 2430,
-      "sha256": "11730f0b2e4bfa92269e265f4f2bcf8fd8e88c9334de4a76b35ff0d810f1fd65"
+      "sizeBytes": 2962,
+      "sha256": "ad91c341531d3f27bec4731fdf3f0d2d61c9d7e0543fb7e16c9465bbfbd0ef47"
     },
     {
       "path": "integrated-preview.html",
-      "sizeBytes": 19486,
-      "sha256": "9a60e724372b29c3843d34afecfc2aa66a4fba7125e5bc6a8e65f62beec2f15a"
+      "sizeBytes": 19883,
+      "sha256": "4c7e80f954e5ab548755650c073787a0411d849e970bb167faac892944d3f8e5"
     },
     {
       "path": "premium-face/face-b-render.png",
@@ -862,6 +862,21 @@
       "path": "tests/browser-embed.html",
       "sizeBytes": 1229,
       "sha256": "ff11133aabb41bf2a93de9e110616b64f70268f823935b62158c9d9cc76fd276"
+    },
+    {
+      "path": "premium-face/face-svg-b.glb",
+      "sizeBytes": 2342368,
+      "sha256": "abbc5f488332890d5f45da2e81ff2b986ddf23be2d119db527504dc2596bf667"
+    },
+    {
+      "path": "premium-face/face-svg-render.png",
+      "sizeBytes": 2194697,
+      "sha256": "b2a1e3a0489e11a8bbf0e512b9fef5f9f9cf2631e6acfa01bde8ba8b8c4224f2"
+    },
+    {
+      "path": "premium-face/face-svg-render.webp",
+      "sizeBytes": 141058,
+      "sha256": "443129a6317247750830b4a0ac2de95fa0d102ef3f62eaf6bb9d20aced6341cf"
     }
   ]
 }
