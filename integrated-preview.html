@@ -102,8 +102,8 @@
 <section aria-labelledby="details-title" class="renders" id="details">
 <div class="renders-heading"><div><span class="eyebrow">02 / FORM &amp; FINISH</span><h2 id="details-title">Every detail,<br/><em>in the open.</em></h2></div><p>Satin silver meets polished edges. Warm brass turns beneath a slender graphite chapter. Explore the character of each surface and the movement that gives it life.</p></div>
 <div class="craft-notes"><article><span>01 / ARCHITECTURE</span><h3>Space with a purpose.</h3><p>A slender chapter frames the movement. An independent seconds ring leaves the centre open.</p></article><article><span>02 / MATERIAL</span><h3>Light finds the edge.</h3><p>Directional satin, polished steel, warm brass and deep blue hands give each part its own character.</p></article><article><span>03 / RHYTHM</span><h3>Seven releases. One second.</h3><p>The measured gear train carries each impulse. Slow the movement down, or pause at any moment to look closer.</p></article></div>
-<div aria-label="Earlier native design studies" class="render-grid finish-grid">
-<figure><a href="premium-face/face-b-render.png" rel="noreferrer" target="_blank"><img alt="Native Blender render of the Left Crescent face" height="900" loading="lazy" src="premium-face/face-b-render.png" width="900"/></a><figcaption><span>QUALITY 01</span> Left Crescent · native Blender render</figcaption></figure>
+<div aria-label="Current and earlier native design studies" class="render-grid finish-grid">
+<figure id="current-native-render"><a href="premium-face/face-b-render.png" rel="noreferrer" target="_blank"><img alt="Native Blender render of the Left Crescent face" height="900" loading="lazy" src="premium-face/face-b-render.png" width="900"/></a><figcaption><span>QUALITY 01</span> Left Crescent · native Blender render</figcaption></figure>
 <figure><a href="quality-study/native-front.png" rel="noreferrer" target="_blank"><img alt="Earlier Quality 01 native open front" height="900" loading="lazy" src="quality-study/native-front.webp" width="900"/></a><figcaption><span>QUALITY 01</span> Earlier native study · open-work front</figcaption></figure>
 </div>
 <details class="source-details"><summary>Geometry, source &amp; downloads <span aria-hidden="true">+</span></summary><div class="source-body"><p>The open-work front is a separate design proposal. The Left Crescent face is an authored overlay on the original movement. Three original front plates are hidden for this cutaway presentation; structural replacement plates and mounting remain unvalidated. The original 166-mesh OM10 and solid-dial assembly remain available with Open-work front switched off.</p><p>Materials and animation are visual studies. Structural loads, tolerances, sealing and manufacture still require validation.</p><div class="downloads"><a download="" href="rebuild/assembly.glb">Original assembly GLB ↗</a><a download="" href="premium-face/face-b.glb">Left Crescent face overlay ↗</a><a href="rebuild/assembly-report.json" rel="noreferrer" target="_blank">Baseline inspection ↗</a><a href="aerial-assets/aerial-concept.png" rel="noreferrer" target="_blank">Chosen concept ↗</a></div></div></details>
@@ -127,8 +127,22 @@
     poster.querySelector('source').srcset='premium-face/face-svg-render.webp?v=svg02';
     poster.querySelector('img').src='premium-face/face-svg-render.png?v=svg02';
     document.querySelector('.studio-heading span').textContent='AERIAL / SVG-DERIVED LEFT CRESCENT';
+    const native=document.getElementById('current-native-render');
+    native.querySelector('a').href='premium-face/face-svg-render.png?v=svg02';
+    native.querySelector('img').src='premium-face/face-svg-render.webp?v=svg02';
+    native.querySelector('img').alt='Actual Blender render of the concentric SVG-derived Left Crescent face';
+    native.querySelector('figcaption').textContent='SVG 02 · Concentric Left Crescent · native Blender render';
+    const svgLink=document.createElement('a');svgLink.href='design-preview/Aerial-Left-Crescent-B-dimensioned.svg';svgLink.download='Aerial-Left-Crescent-Concentric.svg';svgLink.textContent='Download the dimensioned SVG';svgLink.style.display='inline-block';svgLink.style.marginTop='12px';native.append(svgLink);
+
   }
-  import('./assembly-review.js?v=svg02').catch(error => {
+  if(new URLSearchParams(location.search).get('face')==='svg03'){
+    document.querySelector('.studio-heading span').textContent='AERIAL / CONTINUOUS ANGLED RIM · CANDIDATE';
+    const native=document.getElementById('current-native-render');
+    native.querySelector('a').href='quality-study/rim-svg03-native.png';native.querySelector('img').src='quality-study/rim-svg03-native.png';native.querySelector('img').alt='Actual native render of the continuous angled rim';native.querySelector('figcaption').textContent='SVG 03 · Continuous angled rim · native geometry checkpoint';
+    const poster=document.getElementById('studio-poster');poster.querySelector('source').removeAttribute('srcset');poster.querySelector('img').src='quality-study/rim-svg03-native.png';
+    const link=document.createElement('a');link.href='design-preview/Aerial-Left-Crescent-B-Angled-Rim-v3.svg';link.download='Aerial-Angled-Rim-v3.svg';link.textContent='Download the angled-rim SVG';native.append(link);
+  }
+  import('./assembly-review.js?v=svg03-photo09').catch(error => {
 
     console.error(error);
 

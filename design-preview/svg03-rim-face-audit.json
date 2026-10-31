@@ -1,0 +1,55 @@
+{
+  "revision": "B-SVG-03",
+  "units": "mm",
+  "aperture_samples": 480,
+  "aperture_self_intersections": 0,
+  "minimum_outer_web_mm": 0.6999999999999975,
+  "outer_arc_radius_mm": 15.7,
+  "outer_arc_center_mm": [
+    0,
+    0
+  ],
+  "constant_outer_rim_mm": 0.6999999999999993,
+  "sloped_wall_radial_width_mm": 0.7999999999999989,
+  "sloped_wall_drop_mm": 0.5,
+  "wall_end_taper_degrees": 18,
+  "wall_inner_trim_width_mm": 0.1,
+  "wall_is_continuous_closed_band": true,
+  "sloped_wall_angle_degrees": 32.00538320808353,
+  "outer_arc_max_radial_error_mm": 1.7763568394002505e-15,
+  "dial_radius_mm": 16.4,
+  "small_seconds_pivot_blender_mm": [
+    -7.998827934265137,
+    -0.016291368752717972
+  ],
+  "small_seconds_ring_radii_mm": [
+    3.1,
+    4.1
+  ],
+  "support_tabs": [
+    {
+      "x": -4.969212572410752,
+      "y": -2.643708631247282,
+      "width": 1.806187654208415,
+      "height": 0.32
+    },
+    {
+      "x": -4.969212572410752,
+      "y": 2.356291368752718,
+      "width": 2.020960710556859,
+      "height": 0.32
+    }
+  ],
+  "hour_marker_count": 7,
+  "hour_spacing_degrees": 30,
+  "seconds_tick_count": 60,
+  "seconds_spacing_degrees": 6,
+  "seconds_tick_top_z_mm": 3.62,
+  "source_seconds_hand_min_z_mm": 3.9000000953674316,
+  "static_seconds_vertical_gap_mm": 0.2800000953674316,
+  "limits": [
+    "2D construction validated; 3D conversion and full moving-clearance checks pending.",
+    "No gears moved or inferred from the image.",
+    "Support geometry is connected by design, not structurally certified."
+  ]
+}

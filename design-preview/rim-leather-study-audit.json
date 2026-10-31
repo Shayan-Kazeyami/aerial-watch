@@ -1,0 +1,59 @@
+{
+  "revision": "B-SVG-03",
+  "rim": {
+    "outer_radius_mm": 15.7,
+    "inner_radius_mm": 14.9,
+    "radial_width_mm": 0.7999999999999989,
+    "vertical_drop_mm": 0.5,
+    "slope_degrees": 32.00538320808353,
+    "end_taper_degrees": 18.0,
+    "inner_trim_width_mm": 0.1,
+    "continuous_closed_band": true,
+    "nonmanifold_edges": 0,
+    "visible_source_static_intersections": []
+  },
+  "source_meshes_unchanged": 169,
+  "leather_material_source": {
+    "asset": "Brown Leather",
+    "author": "Rob Tuytel",
+    "url": "https://polyhaven.com/a/brown_leather",
+    "license": "CC0",
+    "adaptation": "Charcoal material tint and 30 mm triplanar repeat; source image files unchanged"
+  },
+  "leather_geometry": "Existing fitted R05 stitch/lining/edge geometry reused; original straps retained hidden.",
+  "imported_leather_parts": [
+    {
+      "name": "R05 / Lower strap \u00b7 solid padded band and rolled end",
+      "dimensions_mm": [
+        19.999990463256836,
+        20.15662384033203,
+        45.22506332397461
+      ]
+    },
+    {
+      "name": "R05 / STRAP-LOWER seated stitches",
+      "dimensions_mm": [
+        17.34333610534668,
+        10.37965202331543,
+        33.65518569946289
+      ]
+    },
+    {
+      "name": "R05 / STRAP-UPPER seated stitches",
+      "dimensions_mm": [
+        17.444223403930664,
+        52.41027069091797,
+        41.776798248291016
+      ]
+    },
+    {
+      "name": "R05 / Upper strap \u00b7 solid padded band and rolled end",
+      "dimensions_mm": [
+        19.999977111816406,
+        60.195125579833984,
+        48.841156005859375
+      ]
+    }
+  ],
+  "limits": "Static rim/source surface-overlap test, not dynamic clearance certification or manufacturing tolerance/strength analysis."
+}
