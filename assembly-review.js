@@ -10,7 +10,7 @@ import {createAssemblyMaterials,cloneAssemblyMaterial} from './assembly-material
 import {createAssemblyLighting} from './assembly-lighting.js';
 import {createDialDetails} from './assembly-dial.js';
 import {createOpenFrontFrame} from './assembly-open-front.js';
-import {preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES} from './assembly-premium-face.js';
+import {preparePremiumFace,premiumFaceVisible,PREMIUM_HIDDEN_SOURCES,premiumMovementFinishKind} from './assembly-premium-face.js?v=b03';
 import {createQualityDesign} from './assembly-design.js';
 import {updateInspectionDepth} from './assembly-depth.js';
 import {createRefractionAwareAO} from './assembly-glass-ao.js';
@@ -21,6 +21,8 @@ import {createPerformanceMonitor} from './assembly-performance.js';
 import {RENDER_PROFILES,resolveRenderResolution} from './assembly-resolution.js';
 import {createCrownInteraction,createCrownVisual} from './assembly-crown.js';
 import {createCaptureProvenance,embedPNGConfiguration} from './assembly-capture-provenance.js';
+import {componentLabel,componentSearchText,normalizeComponentText} from './assembly-component-labels.js';
+import {captureCanvasPNG} from './assembly-image-export.js?v=b03';
 import {createCanvasRecorder} from './assembly-recording.js';
 import {POWER_PATH,createTourSequence,restoresExterior,sourceNeedsBaseline,validateViewConfiguration} from './assembly-story.js';
 import {createViewerLifecycle} from './assembly-lifecycle.js';
@@ -134,8 +136,10 @@ const lifecycle=createViewerLifecycle({pause:()=>{clock.setHidden(true);performa
   resume:()=>{clock.setHidden(document.hidden);last=frameWindow=performance.now();dirty=true;},
   dispose:()=>{cancelAnimationFrame(animationFrame);try{resources.dispose();}catch(error){console.error('Viewer resource cleanup failed.',error);}}});
 const assetOptions=()=>({loader:new GLTFLoader(),signal:lifecycle.signal,disposeUnused:gltf=>disposeObjectTree(gltf.scene)});
-const captureProvenance=createCaptureProvenance({signal:lifecycle.signal}),pendingCaptures=new Set();
-let quality='detail', renderedFrames=0, frameWindow=performance.now();
+const captureProvenance=createCaptureProvenance({signal:lifecycle.signal,loadBootRevision:()=>import('./quality-study/viewer-revision.js?v=b03').then(module=>module.default)}),pendingCaptures=new Set();
+const requestedQuality=new URLSearchParams(location.search).get('quality');
+const startPaused=new URLSearchParams(location.search).get('paused')==='1';
+let quality=Object.hasOwn(RENDER_PROFILES,requestedQuality)?requestedQuality:(premiumRequested?'balanced':'detail'), renderedFrames=0, frameWindow=performance.now();
 const qualityProfiles=RENDER_PROFILES;
 const detailSizes = {face:[45,45],interior:[45,45],crown:[18,20],lug:[34,30],buckle:[34,30],balance:[15,14],train:[24,23],winding:[17,18]};
 const detailViews = Object.keys(detailSizes);
@@ -204,6 +208,7 @@ function renderingQuality(name) {
   announce(`${profile.label} rendering enabled. Every movement and exterior component is retained.`);
 }
 $('render-quality').onchange=()=>renderingQuality($('render-quality').value);
+renderingQuality(quality);
 const stageObserver=new ResizeObserver(() => {
   resize();
   if (loading || !model) return;
@@ -276,7 +281,7 @@ function view(name, transition = true) {
   if (name === 'back') direction.set(-.1,.12,-1);
   if (name === 'face') {
     interiorView=false; $('movement-only').checked=false; isolated=null; visibility();
-    target.set(0,0,3.5); direction.set(.035,.065,1);
+    target.set(0,0,3.5); direction.set(...(premiumRequested?[0,0,1]:[.035,.065,1]));
   }
   if (name === 'interior') {
     interiorView=true; $('movement-only').checked=false; isolated=null; visibility();
@@ -347,6 +352,8 @@ function updateMaterials() {
     let base = $('finish').checked && finishMaterials.has(mesh) ? finishMaterials.get(mesh) : baseMaterials.get(mesh);
     if($('finish').checked&&openFrontActive()&&mesh.userData.sourceIndex===149)base=finishes.apply({name:mesh.name,material:baseMaterials.get(mesh),userData:{...mesh.userData,finishKind:'graphite',finishZone:'circular'}});
     if($('finish').checked&&mesh.userData.sourceIndex===149&&formDetails&&!frontArchitecture?.enabled)base=formDetails.calendarMaterial(base);
+    const premiumFinish=premiumActive()&&$('finish').checked?premiumMovementFinishKind(mesh.userData,mesh.name):null;
+    if(premiumFinish)base=finishes.apply({name:mesh.name,material:baseMaterials.get(mesh),userData:{...mesh.userData,finishKind:premiumFinish}});
     const pathStage=powerPath?POWER_PATH.findIndex(stage=>stage.ids.includes(mesh.userData.sourceIndex)):-1;
     mesh.material = selected.includes(mesh)||pathStage>=0 ? eachMaterial(base,material => {
       const highlighted = cloneAssemblyMaterial(material); highlighted.emissive.setHex(selected.includes(mesh)?0x6c8051:[0x927143,0x336e95,0x975b42,0x85599d][pathStage]); highlighted.emissiveIntensity = selected.includes(mesh)?.22:.42;
@@ -438,16 +445,16 @@ function buildExplorer() {
     const original = mesh.userData.sourceIndex !== undefined;
     const key = original ? 'source-'+mesh.userData.sourceIndex : 'assembly-'+(mesh.userData.assemblyId || mesh.uuid);
     if (!byKey.has(key)) byKey.set(key,{key,parts:[],original,
-      label:original ? `${mesh.userData.partNumber || mesh.name} · OM10 #${mesh.userData.sourceIndex}` : `${mesh.userData.assemblyId || 'Assembly'} · ${mesh.name}`});
+      label:componentLabel(mesh.userData,mesh.name)});
     byKey.get(key).parts.push(mesh);
   }
   groups = [...byKey.values()].sort((a,b) => Number(a.original)-Number(b.original) || a.label.localeCompare(b.label,undefined,{numeric:true}));
   renderExplorer();
 }
 function renderExplorer() {
-  const query = $('component-search').value.trim().toLocaleLowerCase(), scope = $('component-scope').value;
+  const query = normalizeComponentText($('component-search').value.trim()), scope = $('component-scope').value;
   const matches = groups.filter(group => (scope === 'all' || group.original === (scope === 'movement')) &&
-    [group.label,...group.parts.map(mesh => mesh.userData.description || mesh.userData.role || '')].join(' ').toLocaleLowerCase().includes(query));
+    [group.label,...group.parts.map(mesh => componentSearchText(mesh.userData,mesh.name))].join(' ').toLowerCase().includes(query));
   const fragment = document.createDocumentFragment();
   for (const group of matches) {
     const item = document.createElement('li'), button = document.createElement('button');
@@ -687,7 +694,7 @@ function initializeBaseline(result,metadata){
   }
   loading=false;$('load-message').textContent='Lighting the watch studio…';$('assembly-canvas').setAttribute('aria-busy','false');
   $('inspection-controls').disabled=false;$('view-controls').disabled=false;$('animate').disabled=hands.length!==3;
-  $('animate-movement').checked=!reducedMotion.matches;$('animate').checked=!reducedMotion.matches&&hands.length===3;
+  $('animate-movement').checked=!startPaused&&!reducedMotion.matches;$('animate').checked=!startPaused&&!reducedMotion.matches&&hands.length===3;
   $('finish').checked=true;$('crystals').checked=true;$('open-work').checked=true;updateMaterials();buildExplorer();visibility();
   view(new URLSearchParams(location.search).get('view')==='mechanism'?'interior':'face',false);setClockPlayback();
   announce('Original assembly ready. Preparing the optional open-work design.');
@@ -747,7 +754,13 @@ function captureConfiguration({clockStamp}={}){
     transport:performance.getEntriesByType('resource').filter(e=>/\.glb/.test(e.name)).map(e=>({name:new URL(e.name).pathname,transferSize:e.transferSize,encodedBodySize:e.encodedBodySize,decodedBodySize:e.decodedBodySize,duration:e.duration})),
   };
 }
-function downloadBlob(blob,name){const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+const pendingDownloads=new Map();
+resources.own('download object URLs',()=>{for(const [url,timer] of pendingDownloads){clearTimeout(timer);URL.revokeObjectURL(url);}pendingDownloads.clear();});
+function downloadBlob(blob,name){
+  const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;link.hidden=true;
+  document.body.append(link);link.click();link.remove();
+  const timer=setTimeout(()=>{URL.revokeObjectURL(url);pendingDownloads.delete(url);},60000);pendingDownloads.set(url,timer);
+}
 const recorder=createCanvasRecorder({canvas:renderer.domElement,onStatus:announce});
 resources.own('canvas motion recorder',()=>recorder.dispose());
 if($('record-scene'))$('record-scene').onclick=async()=>{
@@ -764,12 +777,12 @@ if($('export-config'))$('export-config').onclick=async()=>{
   catch(error){announce(`Could not save view: ${error.message}`);}finally{pendingCaptures.delete('export-config');}
 };
 if($('capture-scene'))$('capture-scene').onclick=async()=>{
-  if(pendingCaptures.has('capture-scene'))return;pendingCaptures.add('capture-scene');
+  if(pendingCaptures.has('capture-scene'))return;pendingCaptures.add('capture-scene');announce('Preparing PNG image…');
   try{await captureProvenance.resolve();if(lifecycle.disposed)return;
     const stamp=clock.tick(performance.now());applyClockPose(stamp);updateInspectionDepth(camera,controls.target,depthBounds,ao);renderer.info.reset();composer.render();
-    const configuration=captureConfiguration({clockStamp:stamp}),blob=await new Promise(resolve=>renderer.domElement.toBlob(resolve,'image/png'));
+    const configuration=captureConfiguration({clockStamp:stamp}),blob=await captureCanvasPNG(renderer.domElement);
     if(!blob)throw new Error('The canvas could not create an image.');if(lifecycle.disposed)return;
-    downloadBlob(await embedPNGConfiguration(blob,configuration),'aerial-studio.png');
+    downloadBlob(await embedPNGConfiguration(blob,configuration),'aerial-studio.png');announce('PNG download requested. Check your browser downloads.');
   }catch(error){announce(`Could not save image: ${error.message}`);}finally{pendingCaptures.delete('capture-scene');}
 };
 let configurationRequest=0;

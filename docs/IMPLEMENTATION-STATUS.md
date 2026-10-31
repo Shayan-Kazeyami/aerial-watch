@@ -22,3 +22,8 @@
 
 ## Next required environment capability
 A WebGL-capable permitted browser is needed to test the integrated candidate end-to-end. Static/unit/native render work does not replace this gate. Keep the candidate out of main until this is verified.
+
+## Live-QA update, 16:52 UTC
+The explicitly approved temporary software-WebGL profile now renders the actual watch. Original-face comparison, glass-off clarity, Sharp/Smooth selection, interior camera and crown pull were visually observed. The standard browser still cannot render WebGL; software throughput is not device performance evidence.
+
+Live QA found and corrected: an expanding interior guide displacing controls; low-contrast crown action; English balance searches failing against French descriptions; stale source-capture metadata; unbounded PNG encoding. B's movement palette now follows the neutral approved reference. Initial quality and paused URL options support repeatable tests. Current local suite: 54 tests, 82 syntax checks and 169 deployment identities. These changes are being checkpointed separately from final launch acceptance. PNG encoding reached download-requested state, but completed download delivery has not been verified. See LIVE-QA-2026-10-31.md.

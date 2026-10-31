@@ -11,7 +11,7 @@
 <link href="assembly-review.css" rel="stylesheet"/>
 <link href="assembly-quality.css" rel="stylesheet"/>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
-<link href="studio-console.css?v=b02" rel="stylesheet"/></head>
+<link href="studio-console.css?v=b04" rel="stylesheet"/></head>
 <body class="quality-upgrade integrated-studio" data-premium-face="b">
 <a class="skip-link" href="#inspection-controls">Skip to watch controls</a>
 <header>
@@ -38,7 +38,7 @@
 <label class="check"><input aria-describedby="finish-note" checked="" id="finish" type="checkbox"/> Studio finishes</label>
 <p class="small" id="finish-note">Switch off to see the original materials.</p>
 <label class="field" for="render-quality">Image quality<select aria-describedby="quality-note" id="render-quality"><option value="balanced">Balanced</option><option selected="" value="detail">Sharp</option><option value="studio">Studio</option><option value="efficient">Smooth</option></select></label>
-<p class="small" id="quality-note">Choose Smoother motion for lighter playback.</p>
+<p class="small" id="quality-note">Choose Smoother motion for lighter playback.</p><div class="power-path-control"><label class="check"><input id="power-path" type="checkbox"/> Follow the power</label><p class="sr-only" id="power-path-description" role="status">Explore how the barrel, train and balance work together.</p></div>
 </section></div><div class="console-rail console-right"><section aria-labelledby="everyday-title" class="everyday-controls">
 <h2 id="everyday-title">Motion</h2>
 <button aria-pressed="true" class="primary-button" id="play-motion" type="button">Pause motion</button>
@@ -63,7 +63,7 @@
 <button aria-label="02 Gear train — inspect the connected wheels" aria-pressed="false" data-focus="train" data-pin="train" type="button">Gears</button>
 <button aria-label="03 Barrel and winding — inspect the power source" aria-pressed="false" data-focus="winding" data-pin="winding" type="button">Winding</button>
 </div>
-<div class="power-path-control"><label class="check"><input id="power-path" type="checkbox"/> Follow the power</label><p class="small" id="power-path-description" role="status">Explore how the barrel, train and balance work together.</p></div><button class="text-button" id="interior-overview" type="button">Back to interior overview ↗</button>
+<button class="text-button" id="interior-overview" type="button">Back to interior overview ↗</button>
 </section><section class="inspection-details exposed-group" id="inspection-details"><h2>Advanced inspection </h2><div class="advanced-body">
 <section aria-labelledby="motion-title" class="motion-panel">
 <div class="section-label"><h2 id="motion-title">Playback controls</h2><span aria-hidden="true" class="live-dot"></span></div>
@@ -122,13 +122,14 @@
 
   // Import failures and unavailable WebGL must leave a useful, accessible fallback.
 
-  import('./assembly-review.js').catch(error => {
+  import('./assembly-review.js?v=b03').catch(error => {
 
     console.error(error);
 
     document.getElementById('loading').hidden = false;
 
-    const message = 'The interactive viewer could not start. Check that the local preview server is running and WebGL is available. Static inspection renders and downloads remain available below.';
+    const detail=String(error?.message||'Unknown startup error').slice(0,280);
+    const message = /WebGL|context/i.test(detail) ? '3D graphics could not start in this browser. Static renders remain available. Detail: '+detail : 'The viewer encountered a startup error. Reload to retry. Detail: '+detail;
 
     document.getElementById('load-message').textContent = message;
 

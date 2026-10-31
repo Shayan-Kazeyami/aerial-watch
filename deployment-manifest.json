@@ -235,8 +235,8 @@
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 70598,
-      "sha256": "8d85418a284e39fff2abdb62da073529b1fe4fca3b550ffb56ffe8467f98c313"
+      "sizeBytes": 71798,
+      "sha256": "a7451642e3e00c85780329316dfd4a680d2933c0ae8f080d457a1c5d08e4c2e5"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -620,13 +620,13 @@
     },
     {
       "path": "quality-study/viewer-revision.js",
-      "sizeBytes": 6148,
-      "sha256": "db495faee27da7f7775f2422dbde5f837b41c6e65efc7eccd4f6f439e78e8764"
+      "sizeBytes": 6870,
+      "sha256": "abfdb63ed237218ba6dd1db666c5cda6b541fdb6336ce7c93f0d8e64e17c1e02"
     },
     {
       "path": "quality-study/viewer-revision.json",
-      "sizeBytes": 7645,
-      "sha256": "f221e1531c80ba12ad09ada5bd67bd96c088d080b8ee961d996e82288e7ed5de"
+      "sizeBytes": 8571,
+      "sha256": "96ad04d5058e28cad0d680e4134e83a1577a718f2ea8db4a8a9a0edc58ea4105"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",
@@ -810,13 +810,13 @@
     },
     {
       "path": "assembly-premium-face.js",
-      "sizeBytes": 1957,
-      "sha256": "88bf632135c0953b594548ea8c8dcfdaa1f3d1772f4713be7b734f1c3b646f91"
+      "sizeBytes": 2430,
+      "sha256": "11730f0b2e4bfa92269e265f4f2bcf8fd8e88c9334de4a76b35ff0d810f1fd65"
     },
     {
       "path": "integrated-preview.html",
-      "sizeBytes": 19341,
-      "sha256": "5e4e88c4153cf9d5eed8bbcb9b027ce285d54664634a12130aef148a6036b36d"
+      "sizeBytes": 19456,
+      "sha256": "e3f5ebd9bb21170ad75560c4054ce2fd63be5494a2fead46c5e55389cd9c671c"
     },
     {
       "path": "premium-face/face-b-render.png",
@@ -830,13 +830,23 @@
     },
     {
       "path": "studio-console.css",
-      "sizeBytes": 16669,
-      "sha256": "35149750277f27105d78960e4b3e48f3dce6a813ee99a4ab35e9626df776c47e"
+      "sizeBytes": 17534,
+      "sha256": "60e7a29c836b5e5aac55a81ce9239a7b04d507c7ba2c68b934677f00cd35a6ed"
     },
     {
       "path": "studio-console.js",
       "sizeBytes": 2176,
       "sha256": "e2952f6e8625e2a56f940479686d3a5986db6485b0df7466df151d36127637f8"
+    },
+    {
+      "path": "assembly-image-export.js",
+      "sizeBytes": 719,
+      "sha256": "149db3275720e4ce9b1d2a33ba811bfeabb71c49b58529197d3fc2cf7b93ac64"
+    },
+    {
+      "path": "assembly-component-labels.js",
+      "sizeBytes": 2164,
+      "sha256": "17a14c9fb0c2940954ce441e5171ff53d0e3adde8f53d4e955d8c69b814102a3"
     }
   ]
 }

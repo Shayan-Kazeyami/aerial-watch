@@ -34,3 +34,12 @@ export function preparePremiumFace(root) {
   root.visible=false;
   return {root,meshes,texture,revision:'B-02'};
 }
+
+/** Restrained appearance of the approved B reference; original BOM is untouched. */
+export function premiumMovementFinishKind(data={}, name='') {
+  if(data.sourceIndex===undefined)return null;
+  const label=`${data.description||''} ${name}`.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  if(/\bpierre\b|contre pivot|cheville de plateau|^palette/.test(label))return 'steel';
+  if(/serge de balancier|planche/.test(label))return 'steel';
+  return null;
+}

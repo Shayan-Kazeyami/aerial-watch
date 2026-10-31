@@ -17,3 +17,10 @@ test('candidate exposes its camera actions and does not change the production en
  const views=html=>[...html.matchAll(/data-view=["']([^"']+)["']/g)].map(m=>m[1]).sort();
  assert.deepEqual(views(candidate),views(baseline));
 });
+test('power-path control remains outside the duplicate interior guide',async()=>{
+ const html=await read('integrated-preview.html');
+ const guide=html.slice(html.indexOf('id="interior-guide"'),html.indexOf('id="inspection-details"'));
+ assert(!guide.includes('id="power-path"'));
+ assert.equal((html.match(/id="power-path"/g)||[]).length,1);
+ assert(html.indexOf('id="power-path"')<html.indexOf('id="interior-guide"'));
+});

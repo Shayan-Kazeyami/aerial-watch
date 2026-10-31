@@ -26,3 +26,11 @@ test('exported face contains only authored geometry and required named parts',as
  assert(nodes.some(n=>n.name==='Champagne aperture rim'));
  assert.equal(nodes.filter(n=>n.name.startsWith('Seconds tick ')).length,60);
 });
+test('B reference palette keeps neutral bearings and silver wheel plates without recoloring barrels',async()=>{
+ const {premiumMovementFinishKind:kind}=await import('../assembly-premium-face.js');
+ assert.equal(kind({sourceIndex:11,description:'Pierre bombée'}),'steel');
+ assert.equal(kind({sourceIndex:99,description:'Planche de roue'}),'steel');
+ assert.equal(kind({sourceIndex:112,description:'Serge de balancier'}),'steel');
+ assert.equal(kind({sourceIndex:81,description:'Barillet'}),null);
+ assert.equal(kind({assemblyId:'HOUR'},'blue hand'),null);
+});

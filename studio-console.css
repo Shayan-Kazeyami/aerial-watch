@@ -170,3 +170,11 @@
  .integrated-studio #showcase-controls .quality-diagnostics{grid-row:3}
  .integrated-studio #showcase-controls .explorer{grid-row:1/4}
 }
+/* The view rail already exposes every interior focus action. Avoid a second,
+   expanding guide displacing the unified controls when Interior is selected. */
+.integrated-studio #interior-guide{display:none!important}
+.integrated-studio #showcase-controls #crown-pull{background:#cfbd94!important;color:#182325!important;border-color:#cfbd94!important}
+.integrated-studio #showcase-controls #crown-pull:disabled{opacity:.45}
+.integrated-studio #showcase-controls .sr-only{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap}
+.integrated-studio #showcase-controls .power-path-control{margin:2px 0 0!important;padding:0!important;border:0!important;min-height:0!important}
+.integrated-studio #showcase-controls .power-path-control .check{margin:0!important;min-height:22px!important}

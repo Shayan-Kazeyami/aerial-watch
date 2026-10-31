@@ -19,13 +19,13 @@ The client's first impression should be of a premium watch. Its technical depth 
 
 These requirements supersede the previous emphasis on a technical review interface. The mechanical source and licensing constraints remain in force.
 
-## Design proposal
+## Selected design direction
 
 ### Premium face
 
 Start with the dial composition, not decorative effects. Establish a continuous time-reading perimeter, strong hand contrast, disciplined typography and visible depth between dial, markers and hands. Reveal a small number of mechanically meaningful areas. Openings must follow a coherent design language rather than arbitrary cutouts or complete removal of the dial.
 
-Working palette: dark graphite, restrained warm metal accents, brushed and polished steel, deep-blue hands and charcoal leather. This is a proposed direction, not a user-mandated palette. Test it against the actual model before locking it.
+Selected reference: the approved B Left Crescent + Small Seconds image. Preserve its broad continuous crescent, thin warm-metal border, charcoal texture, steel, blue hands and dark strap. The user rejected the added sapphire-blue jewel treatment. Gear placement, size and axes are fixed. Keep the existing seconds pivot and hand length, with an open-center readable seconds ring. Do not repeat the earlier narrow-aperture design drift.
 
 Keep the balance and selected connected gear movement visible where the existing geometry permits. Do not invent nonfunctional gears, change tooth counts for decoration or imply a physical simulation. A separate interior view can expose much more without compromising the primary face.
 
@@ -123,15 +123,16 @@ Gate: the documented installation path is actually tested and the handoff identi
 
 The watch and viewer meet the accepted visual direction; essential interactions and exports work; representative desktop and mobile evidence exists; no critical known defects remain; documentation and licences are accurate; the integration package is reproducible. A green unit suite alone is not completion. A single impressive static render alone is not completion either.
 
-## Verified checkpoint
+## Current checkpoint
 
-- Existing readiness branch base inspected: b0f290d1ac84b8bf575e5da80ceb63777fe88814.
-- Direct recording-finalization recovery is in draft PR 2, final remote commit 2532192fde35807ca8e5e13346b1aeb744904002. It is stacked on the readiness branch, not main.
-- 41 Node regression tests, 72 JavaScript syntax checks and 161 manifest identities passed. GitHub CI for that commit passed.
-- The recording watchdog was regression-tested with a deliberately missing browser stop event. Real-device recording is not yet accepted.
-- Cloud browser preview now reaches the local site through a persistent desktop-hosted HTTP server. Chromium reports that its WebGL context is disabled. The observed watch image is a fallback poster, not successful live 3D rendering.
-- Premium dial redesign and unified controls are not implemented at this checkpoint.
+The selected B face exists as an editable Blender scene and a 76-mesh authored overlay. Exact vertex hashes and world transforms were preserved across all 169 source movement/hand meshes. Original front plates are hidden for cutaway presentation, not structurally validated replacement plates.
+
+Published preview: https://shayan-kazeyami.github.io/aerial-watch/preview-b/integrated-preview.html . It is isolated from the existing homepage. Latest published design checkpoint is 8c17b786; more local live-QA fixes are in progress. No final launch acceptance.
+
+Live WebGL now works in the explicitly approved isolated software-rendering test profile. Limited interactions have been visually checked; export delivery and broader runtime/device tests remain open. See LIVE-QA-2026-10-31.md and IMPLEMENTATION-STATUS.md for evidence boundaries.
+
+The complete plan was presented on 31 October 2026. The user instructed continuing each task step by step until the result looks good, without routine babysitting. Mobile stacking/scrolling and iframe-first integration are working implementation proposals, not separate verbatim user requirements.
 
 ## Working discipline
 
-One bounded visible deliverable at a time. Reuse checkpoints and test scripts; do not create extra coordination layers. Keep modifications reversible and on review branches. Update this checkpoint with evidence as work progresses. Do not claim final visual quality without inspecting actual model output, and do not trigger publication merely to obtain a preview.
+One bounded visible deliverable at a time. Reuse checkpoints and test scripts; do not create extra coordination layers. Keep modifications reversible and on review branches. Update this checkpoint with evidence as work progresses. Do not claim final visual quality without inspecting actual model output, and publish review previews only within the user-authorized preview scope. The main Kazeyami site integration remains the user’s step.
