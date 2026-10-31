@@ -3,7 +3,7 @@
   "algorithm": "SHA-256",
   "scope": "First-party assembly/material-review/studio JS, CSS and HTML; excludes vendor dependencies, models and rendered images.",
   "canonicalization": "SHA-256 of UTF-8 JSON.stringify(files), ordered lexicographically by path.",
-  "digest": "9b0c0a122d3b14179cb4221a45c616c15d7ec4604f863032447f07586bd42600",
+  "digest": "cf1aa5339a1f6d6020df3ea0c735e9b3a40b88ad919eafa037f24e5a388034d4",
   "files": [
     {
       "path": "assembly-calendar-data.js",
@@ -238,7 +238,7 @@
     {
       "path": "integrated-preview.html",
       "bytes": 19486,
-      "sha256": "af0c39abe036b7d6037bbf3e475984d1391f8464efd0c47878a3334a71f7700e"
+      "sha256": "e31bab5175f3d1a6df955e10a91be1c714b5ae221fe223fb208093786bd6940d"
     },
     {
       "path": "material-review-model.js",
@@ -262,8 +262,8 @@
     },
     {
       "path": "studio-console.css",
-      "bytes": 20029,
-      "sha256": "2539e50b7c9024e3f074ec4e74f2dd02e02da48d1b075ea5bfa9f796ee86955c"
+      "bytes": 21244,
+      "sha256": "813eabf8f0335905021c41c3fef2fa1b7096b59a1505e256f5c57cb5f6b215ad"
     },
     {
       "path": "studio-console.js",
