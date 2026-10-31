@@ -77,3 +77,46 @@ test('closing a pending recording cancels it once and suppresses late output',as
   assert.equal(h.statuses.at(-1).state,'disposed');assertClean(h,instance);
   assert.throws(()=>h.recorder.start(),/disposed/);
 });
+
+test('missing browser stop event times out, releases resources and permits retry',async()=>{
+  const h=setup({finalizeTimeoutMs:5000});
+  const pending=h.recorder.start(),first=h.instances[0];
+  first.data();h.recorder.stop();
+  // A broken encoder may become inactive without delivering its final event.
+  const watchdog=[...h.timers.values()].at(-1);
+  assert.ok(h.timers.size>=2,'stop must install a finalization watchdog');
+  const rejected=assert.rejects(pending,/finish.*timed out/i);
+  watchdog();await rejected;
+  assertClean(h,first);assert.equal(h.stoppedTracks,1);
+  const retry=h.recorder.start(),second=h.instances[1];second.data();second.finish();
+  await retry;assertClean(h,second);
+});
+
+test('late completion and watchdog cannot affect a new recording after timeout',async()=>{
+  let completions=0;const h=setup({onComplete:()=>completions++});
+  const pending=h.recorder.start(),first=h.instances[0],lateStop=first.onstop;
+  first.data();h.recorder.stop();const watchdog=[...h.timers.values()].at(-1);
+  const rejected=assert.rejects(pending,/timed out/);watchdog();await rejected;
+  const retry=h.recorder.start(),second=h.instances[1];
+  lateStop();watchdog();
+  assert.equal(h.recorder.recording,true);assert.equal(completions,0);
+  second.data();second.finish();await retry;
+  assert.equal(completions,1);assertClean(h,second);
+});
+
+test('closing during finalization clears the watchdog and cancels once',async()=>{
+  const h=setup(),pending=h.recorder.start(),instance=h.instances[0];
+  instance.data();h.recorder.stop();const watchdog=[...h.timers.values()].at(-1);
+  const rejected=assert.rejects(pending,{name:'AbortError'});
+  h.recorder.dispose();watchdog();await rejected;
+  assert.equal(h.statuses.filter(s=>s.state==='disposed').length,1);
+  assert.equal(h.stoppedTracks,1);assertClean(h,instance);
+});
+
+test('invalid finalization timeouts fail before capturing a stream',()=>{
+  for(const finalizeTimeoutMs of [0,-1,NaN,Infinity]){
+    const h=setup({finalizeTimeoutMs});
+    assert.throws(()=>h.recorder.start(),/positive.*timeout/);
+    assert.equal(h.instances.length,0);assert.equal(h.recorder.recording,false);
+  }
+});
