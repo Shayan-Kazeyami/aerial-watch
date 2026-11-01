@@ -1,0 +1,71 @@
+{
+  "source_meshes_unchanged": 169,
+  "source_identity_unchanged": true,
+  "rim": {
+    "nonmanifold_edges": 0,
+    "signed_volume_mm3": 3.0878721867807037
+  },
+  "dial": {
+    "nonmanifold_edges": 0,
+    "signed_volume_mm3": 120.06778811399938
+  },
+  "visible_source_intersections": [],
+  "right_wall_width_mm": 0.225,
+  "left_wall_width_mm": 0.8,
+  "shared_drop_mm": 0.5,
+  "join_radius_mm": 0.2,
+  "right_wall_angle_degrees": 65.77225468204583,
+  "left_wall_angle_degrees": 32.005383208083494,
+  "upper_geometry": {
+    "right_trim_parameters": [
+      0.010175212853959559,
+      3.9823359973562376
+    ],
+    "top_center": [
+      -3.8231372664760963,
+      -15.02110586613654
+    ],
+    "bottom_center": [
+      -5.490334325572023,
+      14.49504153127702
+    ],
+    "join_radius_mm": 0.2,
+    "outer_radius_mm": 15.7,
+    "right_offset_mm": 0
+  },
+  "lower_geometry": {
+    "right_trim_parameters": [
+      0.12933863582661637,
+      3.877452580744394
+    ],
+    "top_center": [
+      -3.202087839453885,
+      -14.347007822832659
+    ],
+    "bottom_center": [
+      -5.138985525593346,
+      13.772466292125825
+    ],
+    "join_radius_mm": 0.2,
+    "outer_radius_mm": 14.9,
+    "right_offset_mm": 0.225
+  },
+  "bounds_mm": [
+    [
+      -15.699979782104492,
+      -0.17362865805625916
+    ],
+    [
+      -14.695021629333496,
+      15.221104621887207
+    ],
+    [
+      2.890000104904175,
+      3.4700000286102295
+    ]
+  ],
+  "limitations": [
+    "Static surface-overlap only; no manufacturing certification.",
+    "Seconds attachment unchanged; separate design lane."
+  ]
+}

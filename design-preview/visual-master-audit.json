@@ -1,0 +1,12 @@
+{
+  "source_meshes_unchanged": 169,
+  "face": "constant-section SVG04 plus supported seconds ring",
+  "strap": "R05 new fine-grain native high-detail geometry",
+  "public_status": "Not published; runtime candidate separately verified",
+  "appended_objects": [
+    "Seam study / R05 / Upper strap \u00b7 solid padded band and rolled ",
+    "Seam study / R05 / Lower strap \u00b7 solid padded band and rolled ",
+    "Seam study / upper waxed three-ply stitches",
+    "Seam study / lower waxed three-ply stitches"
+  ]
+}

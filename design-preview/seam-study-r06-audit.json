@@ -1,0 +1,13 @@
+{
+  "geometry_identical_to": "seam-study-r05.blend",
+  "mesh_count": 397,
+  "roughness_range": [
+    0.36,
+    0.48
+  ],
+  "normal_strength": 0.32,
+  "specular_ior_level": 0.3,
+  "sheen_weight": 0.13,
+  "validation_inherited": "seam-study-r05-validation.json",
+  "purpose": "Material-only satin variant; no geometry changes."
+}

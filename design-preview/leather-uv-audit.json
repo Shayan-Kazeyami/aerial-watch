@@ -1,0 +1,26 @@
+[
+  {
+    "name": "R05 / Upper strap \u00b7 solid padded band and rolled end",
+    "before": {
+      "triangles": 27322,
+      "collapsed_uv_triangles": 20661
+    },
+    "after": {
+      "triangles": 27322,
+      "collapsed_uv_triangles": 0
+    },
+    "vertices_unchanged": true
+  },
+  {
+    "name": "R05 / Lower strap \u00b7 solid padded band and rolled end",
+    "before": {
+      "triangles": 20634,
+      "collapsed_uv_triangles": 15623
+    },
+    "after": {
+      "triangles": 20634,
+      "collapsed_uv_triangles": 0
+    },
+    "vertices_unchanged": true
+  }
+]

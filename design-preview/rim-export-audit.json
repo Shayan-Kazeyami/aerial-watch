@@ -1,0 +1,10 @@
+{
+  "file": "quality-study/face-svg03-rim-candidate.glb",
+  "sha256": "12ebd6f6b764934be12bb598b56708f18c561dea3f434f69311a2feda5416cf9",
+  "bytes": 3069312,
+  "mesh_nodes": 75,
+  "revision": "B-SVG-03",
+  "authored_only": true,
+  "contains_original_movement_meshes": false,
+  "status": "Local candidate only; published SVG02 unchanged."
+}

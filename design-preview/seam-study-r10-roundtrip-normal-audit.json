@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Seam study / R05 / Upper strap \u00b7 solid padded band and rol",
+    "matched_corner_samples": 26481,
+    "unmatched_position_samples": 0,
+    "maximum_matched_normal_angle_degrees": 15.70439611896915,
+    "over_1_degree_samples": 2,
+    "over_5_degree_samples": 2,
+    "p99_degrees": 0.0
+  },
+  {
+    "name": "Seam study / upper waxed three-ply stitches.001",
+    "matched_corner_samples": 23308,
+    "unmatched_position_samples": 0,
+    "maximum_matched_normal_angle_degrees": 0.03956468118525214,
+    "over_1_degree_samples": 0,
+    "over_5_degree_samples": 0,
+    "p99_degrees": 0.027976454840372228
+  },
+  {
+    "name": "Seam study / R05 / Lower strap \u00b7 solid padded band and rol",
+    "matched_corner_samples": 17526,
+    "unmatched_position_samples": 0,
+    "maximum_matched_normal_angle_degrees": 87.14395890303733,
+    "over_1_degree_samples": 9,
+    "over_5_degree_samples": 9,
+    "p99_degrees": 0.01978234059262607
+  },
+  {
+    "name": "Seam study / lower waxed three-ply stitches.001",
+    "matched_corner_samples": 11654,
+    "unmatched_position_samples": 0,
+    "maximum_matched_normal_angle_degrees": 0.03956468118525214,
+    "over_1_degree_samples": 0,
+    "over_5_degree_samples": 0,
+    "p99_degrees": 0.01978234059262607
+  }
+]

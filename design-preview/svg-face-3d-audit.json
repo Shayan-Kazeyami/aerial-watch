@@ -1,0 +1,26 @@
+{
+  "revision": "B-SVG-02",
+  "source_svg": "Aerial-Left-Crescent-B-dimensioned.svg",
+  "source_svg_sha256": "6660b3e1fa68984027decdc2a6892013dc778b7bd49d7d64229d157822f71e79",
+  "retained_source_meshes": 169,
+  "source_vertices_and_transforms_unchanged": true,
+  "unified_dial_connected_components": 1,
+  "unified_dial_nonmanifold_edges": 0,
+  "hand_bounds": {
+    "HOUR": {
+      "min_z_mm": 3.5199999809265137,
+      "max_z_mm": 4.079999923706055
+    },
+    "MINUTE": {
+      "min_z_mm": 4.019999980926514,
+      "max_z_mm": 4.62000036239624
+    },
+    "SECONDS": {
+      "min_z_mm": 3.9000000953674316,
+      "max_z_mm": 4.150000095367432
+    }
+  },
+  "seconds_tick_max_z_mm": 3.62,
+  "static_seconds_vertical_gap_mm": 0.28000009536743153,
+  "scope": "Connected manifold authored dial/support solid and static hand-height checks. Not full dynamic collision or manufacturing certification."
+}

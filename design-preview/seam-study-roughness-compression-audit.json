@@ -1,0 +1,14 @@
+{
+  "source_range": [
+    0.48235297203063965,
+    0.5607843399047852
+  ],
+  "jpeg_range": [
+    0.4901961088180542,
+    0.5568627715110779
+  ],
+  "mae": 0.0025177595671266317,
+  "max_error": 0.023529410362243652,
+  "jpeg_bytes": 503568,
+  "encoder": "Blender JPEG95, Raw view transform, Non-Color; original PNG unchanged"
+}

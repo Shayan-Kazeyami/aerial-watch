@@ -28,6 +28,16 @@ const finishes={
   crystal:{color:0xffffff,metalness:0,roughness:.006,transmission:1,thickness:.35,ior:1.76,specularIntensity:.28,clearcoat:0},
 };
 
+// Optional visual rebuild; units remain millimetres, no invented crystal depth.
+export const ATELIER_FINISH_OVERRIDES=Object.freeze({
+ crystal:Object.freeze({roughness:.008,specularIntensity:.45,attenuationColor:0xeaf5f3,attenuationDistance:30,dispersion:0}),
+ satin:Object.freeze({color:0xb9bec4,roughness:.32,strength:.045}),
+ steel:Object.freeze({color:0xc6cbd0,roughness:.20,strength:.018}),
+ polished:Object.freeze({color:0xd4d7db,roughness:.085,strength:.004}),
+ case:Object.freeze({color:0xb9bec4,roughness:.29,strength:.025}),
+ brass:Object.freeze({color:0xc5a56d,roughness:.25,strength:.025}),
+});
+
 // Measured axial extents of the two original solid crystal meshes, in mm.
 // Explicit part identity avoids making the rear window optically thicker than
 // its geometry; a generic authored crystal still uses the front default.
@@ -123,14 +133,35 @@ normal=normalize(abs(finishDet)*normal-.025*finishGrad);
   material.customProgramCacheKey=()=>`om10-finish-v3-${type}-${strength}-${grainAxis}-${kind}-${capAxis}`;
 }
 
-export function createStudioEnvironment(renderer,{neutral=false}={}){
-  const studio=new THREE.Scene();studio.background=new THREE.Color(neutral?0x636363:0x353b43);
+// Optional lighting-only A/B. Fresh arrays keep callers from mutating the
+// default rig. Do not adopt the trial without matched real-render captures.
+export function atelierReflectionCards(light='atelier'){
+  const trial=light==='atelier2';
+  const cards=[
+    [[0,48,38],[30,15],0xfff9f2,.8],
+    [trial?[-38,24,45]:[-32,28,48],trial?[10,45]:[20,45],0xfff7ed,4.5],
+    [[32,2,25],[3.5,48],0xf1f5ff,6.0],
+    [[-24,10,-35],[5,30],0xe5edff,2.5],
+    [[5,45,10],[35,22],0xffffff,1.6],
+    [[12,0,40],[10,48],0x080909,.03],
+    [[-3,0,-45],[35,40],0xe5e9ed,.35],
+  ];
+  // Restrained near-camera neutral reflection for dark metallic hands, not
+  // an emissive hand material or a global exposure/fill-light increase.
+  if(trial)cards.push([[-6,6,58],[12,20],0xf4f5f6,.65]);
+  return cards;
+}
+
+export function createStudioEnvironment(renderer,{neutral=false,atelier=false,light='atelier'}={}){
+  const studio=new THREE.Scene();studio.background=new THREE.Color(atelier?0x272a2d:neutral?0x636363:0x353b43);
   const geometry=new THREE.PlaneGeometry(1,1),cards=[];
   const card=(position,size,color,power)=>{
     const material=new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide});material.color.multiplyScalar(power);
     const mesh=new THREE.Mesh(geometry,material);mesh.position.set(...position);mesh.scale.set(...size,1);mesh.lookAt(0,0,0);studio.add(mesh);cards.push(material);
   };
-  if(neutral){
+  if(atelier){
+    for(const specification of atelierReflectionCards(light))card(...specification);
+  }else if(neutral){
     card([-25,32,35],[22,58],0xffffff,2.4);
     card([30,9,26],[7,52],0xffffff,2.0);
     card([0,50,-5],[48,38],0xffffff,1.5);
@@ -148,14 +179,19 @@ export function createStudioEnvironment(renderer,{neutral=false}={}){
   geometry.dispose();cards.forEach(material=>material.dispose());generator.dispose();return target;
 }
 
-export function createAssemblyMaterials(renderer){
-  const target=renderer?createStudioEnvironment(renderer):null,materials=new Map();let disposed=false;
+export function createAssemblyMaterials(renderer,{atelier=false,light='atelier',finish='baseline',clearTransmission=false}={}){
+  const target=renderer?createStudioEnvironment(renderer,{atelier,light}):null,materials=new Map();let disposed=false;
   function unitAxis(axis,fallback){
     const length=Array.isArray(axis)&&axis.length===3&&axis.every(Number.isFinite)?Math.hypot(...axis):0;
     return Number.isFinite(length)&&length>.001?axis.map(value=>value/length):fallback;
   }
   function get(kind,zone,axis,capAxis,opticalThickness){
-    const specification=finishes[kind]||finishes.steel;
+    const base=finishes[kind]||finishes.steel;
+    const specification={...base,...(atelier?(ATELIER_FINISH_OVERRIDES[kind]||{}):{})};
+    // Premium SVG04 keeps the exterior HOUR/MINUTE/SECONDS meshes. Their
+    // classified blued material, not the disabled quality-hand overlay, is
+    // the correct optional readability-trial target. Keep the lobe unchanged.
+    if(finish==='atelier2'&&kind==='blued')specification.color=0x346fa6;
     const texture=['linear','circular','cross'].includes(zone)?zone:specification.texture;
     const safeAxis=unitAxis(axis,[1,0,0]),faceAxis=unitAxis(capAxis,[0,1,0]);
     const thickness=kind==='crystal'?(opticalThickness??specification.thickness):specification.thickness;
@@ -166,7 +202,7 @@ export function createAssemblyMaterials(renderer){
     material.name=`OM10 / ${kind}`;material.userData.finish=kind;
     material.userData.grainAxis=[...safeAxis];material.userData.finishFaceAxis=[...faceAxis];material.userData.finishZone=texture||'plain';
     if(texture)addSurface(material,texture,strength,safeAxis,kind,faceAxis);
-    if(kind==='crystal')addRefractionEdgeFallback(material);
+    if(kind==='crystal')addRefractionEdgeFallback(material,{clearTransmission:atelier&&clearTransmission});
     materials.set(cacheKey,material);return material;
   }
   return {

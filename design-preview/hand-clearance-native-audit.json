@@ -1,0 +1,48 @@
+{
+  "source": "visual-master-r01.blend",
+  "derived": "visual-master-r02.blend",
+  "unchanged_raw_source_meshes": 170,
+  "original_vertices_transforms_datablocks_preserved": true,
+  "original_seconds_and_staff_retained_hidden": true,
+  "derived_display_comparisons": {
+    "SECONDS-STAFF": {
+      "source": "Seconds extension sleeve",
+      "derived": "Premium display clearance / Seconds extension sleeve",
+      "vertices": 3072,
+      "runtime_formula_max_vertex_error_mm": 0.0,
+      "world_z_bounds_mm": [
+        2.890000104904175,
+        3.680000066757202
+      ],
+      "original_datablock_retained": true,
+      "material_slots_identical": true
+    },
+    "SECONDS": {
+      "source": "Seconds hand \u00b7 integral hub",
+      "derived": "Premium display clearance / Seconds hand \u00b7 integral hub",
+      "vertices": 2332,
+      "runtime_formula_max_vertex_error_mm": 0.0,
+      "world_z_bounds_mm": [
+        3.580000162124634,
+        3.830000162124634
+      ],
+      "original_datablock_retained": true,
+      "material_slots_identical": true
+    }
+  },
+  "other_geometry_and_materials": "Unchanged; only two private mesh copies added. Raw source hand/staff hidden in render and viewport.",
+  "verification_reference": "hand-clearance-audit.json: actual runtime GLB coupled 12h, face sweeps and continuous depth bounds",
+  "limits": "Display interference correction, not manufacturing certification. Proof render uses temporary collision-example poses and isolated geometry only; saved native master retains initial poses.",
+  "actual_runtime_glb_comparison": {
+    "SECONDS-STAFF": {
+      "actual_runtime_glb_corrected_unique_positions": 2304,
+      "native_corrected_unique_positions": 2304,
+      "position_sets_identical_at_1e6_mm": true
+    },
+    "SECONDS": {
+      "actual_runtime_glb_corrected_unique_positions": 1848,
+      "native_corrected_unique_positions": 1848,
+      "position_sets_identical_at_1e6_mm": true
+    }
+  }
+}

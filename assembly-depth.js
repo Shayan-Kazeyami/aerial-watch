@@ -2,8 +2,9 @@ import {Vector3,Ray} from './vendor/three.module.js';
 
 // Millimetre-scale inspection needs much more precision than a fixed .1/800
 // frustum provides. Bounds are conservative world-space boxes, excluding floor.
-export function updateInspectionDepth(camera,target,bounds,ao) {
-  if(!bounds.length)return {minimumDistance:9,near:camera.near,far:camera.far};
+export function updateInspectionDepth(camera,target,bounds,ao,{distanceFloor=9,surfacePadding=.5}={}) {
+  if(!(distanceFloor>0&&Number.isFinite(distanceFloor)&&surfacePadding>=0&&Number.isFinite(surfacePadding)))throw new RangeError('Invalid inspection clearance.');
+  if(!bounds.length)return {minimumDistance:distanceFloor,near:camera.near,far:camera.far};
   const direction=camera.position.clone().sub(target).normalize();
   const point=new Vector3();let reach=1;
   for(const box of bounds) for(const x of [box.min.x,box.max.x])
@@ -15,7 +16,7 @@ export function updateInspectionDepth(camera,target,bounds,ao) {
   let surface=0;
   for(const box of bounds) if(ray.intersectBox(box,point))
     surface=Math.max(surface,point.sub(target).dot(direction));
-  const minimumDistance=Math.max(9,surface+.5);
+  const minimumDistance=Math.max(distanceFloor,surface+surfacePadding);
   if(camera.position.distanceTo(target)<minimumDistance)
     camera.position.copy(target).addScaledVector(direction,minimumDistance);
   camera.lookAt(target);camera.updateMatrixWorld(true);

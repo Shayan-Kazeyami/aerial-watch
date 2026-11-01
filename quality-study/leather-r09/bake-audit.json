@@ -1,0 +1,25 @@
+{
+  "revision": "R09",
+  "parts": [
+    {
+      "part": "strap-upper",
+      "maps": [
+        "color",
+        "roughness",
+        "normal"
+      ],
+      "resolution": 1024
+    },
+    {
+      "part": "strap-lower",
+      "maps": [
+        "color",
+        "roughness",
+        "normal"
+      ],
+      "resolution": 1024
+    }
+  ],
+  "source": "Poly Haven Brown Leather by Rob Tuytel, CC0",
+  "status": "Native PBR baked candidate; runtime not yet integrated or verified."
+}

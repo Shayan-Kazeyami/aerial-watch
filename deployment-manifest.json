@@ -4,6 +4,21 @@
   "projectPrefix": "/aerial-watch/",
   "files": [
     {
+      "path": ".nojekyll",
+      "sizeBytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ATTRIBUTION.md",
+      "sizeBytes": 5780,
+      "sha256": "40dfed9629fd9060c3a3a9d681a858f8344e2e77d93e3a77f5819d42742001db"
+    },
+    {
+      "path": "README.md",
+      "sizeBytes": 3110,
+      "sha256": "866902ed6af45acafda7aef4cff58c56a2d0723d1ccd02d7dfb11e1e6e27be20"
+    },
+    {
       "path": "aerial-assets/aerial-complete-manual-a.glb",
       "sizeBytes": 38811576,
       "sha256": "fcd80dd29bdffac13a5173c85c15f96cd655cc40480aca25095107f9accf4849"
@@ -104,6 +119,11 @@
       "sha256": "61ee0786ab6ffb6ca255c6065741acd0219268cb21067f5662f6b52414dc4b54"
     },
     {
+      "path": "assembly-component-labels.js",
+      "sizeBytes": 2348,
+      "sha256": "d8ab08f1ebe19f0336976669fb1b501676c0303e453a660ed25d028e0fe5cd4e"
+    },
+    {
       "path": "assembly-composition.js",
       "sizeBytes": 1563,
       "sha256": "7d84dd49632f98e82b87b0a451db22ea015c7a47cf2d58a95c31df129b2f7b89"
@@ -120,13 +140,13 @@
     },
     {
       "path": "assembly-crown.js",
-      "sizeBytes": 3994,
-      "sha256": "71558fead740350e52bc455a95bb301643cd75c2bec8fedb419b50e9d98f168a"
+      "sizeBytes": 5688,
+      "sha256": "103946d6378b508b5f6c8fcc5d1d85dcb6ed84017ce651b0c079951deea3beed"
     },
     {
       "path": "assembly-depth.js",
-      "sizeBytes": 2815,
-      "sha256": "3e5fbac15ae57d4dfb641323598bd7d9287101b4a287b1feaf946b3e7300ba36"
+      "sizeBytes": 3053,
+      "sha256": "e1ab373bbdcfac516529af70fac6cf7941044b2eb1d83bbbd98c561b820b1b52"
     },
     {
       "path": "assembly-design.js",
@@ -139,6 +159,11 @@
       "sha256": "ab937535a37b229dfee6273e17560caf5b74c109527dcbd1e5a411e5930720d5"
     },
     {
+      "path": "assembly-download.js",
+      "sizeBytes": 1003,
+      "sha256": "f5ccbc0632b7a683b02746bdc8f7ba2af268df6f89ed31339426758b7e032971"
+    },
+    {
       "path": "assembly-escapement-data.js",
       "sizeBytes": 12484,
       "sha256": "031ce8a4f0b16a47b4ef49bb346ec3a8bd32095e78bbafce42392ab893c16960"
@@ -147,6 +172,11 @@
       "path": "assembly-escapement.js",
       "sizeBytes": 7324,
       "sha256": "1a14264d953673ca83bb5c3a0307a5a1a1bbf5bf928fba2370867ca1e6209946"
+    },
+    {
+      "path": "assembly-explode.js",
+      "sizeBytes": 5893,
+      "sha256": "bc42a300ff74c7bc0c6c67241ce0f8b54cc3b97669d326cba33247be91fbf5ca"
     },
     {
       "path": "assembly-form-details.js",
@@ -164,6 +194,16 @@
       "sha256": "886025e117532540038341c7beff5a83554eefd16bf0d27dce3f91a30f348b7e"
     },
     {
+      "path": "assembly-hand-clearance.js",
+      "sizeBytes": 3127,
+      "sha256": "9b5b7504904b54631783a2898217c0dca7a031bb7a569c3c36bfc4ed5752b427"
+    },
+    {
+      "path": "assembly-image-export.js",
+      "sizeBytes": 719,
+      "sha256": "149db3275720e4ce9b1d2a33ba811bfeabb71c49b58529197d3fc2cf7b93ac64"
+    },
+    {
       "path": "assembly-leather-details.js",
       "sizeBytes": 4159,
       "sha256": "6a0f55777a3567acd22d8546a64e54729a26e20cdf8a42efae4a773ff1ac427b"
@@ -175,8 +215,8 @@
     },
     {
       "path": "assembly-lighting.js",
-      "sizeBytes": 5196,
-      "sha256": "75eb02f909aeb33a0cc290ca4f2962ad39ecb04b230273269d5f4d6711864d01"
+      "sizeBytes": 5329,
+      "sha256": "f1ee63daa58137cc5d12a265388ffa51e1e8759061e76e61db561ddb372754af"
     },
     {
       "path": "assembly-loading.js",
@@ -185,8 +225,8 @@
     },
     {
       "path": "assembly-materials.js",
-      "sizeBytes": 12182,
-      "sha256": "3780bce18c4d080b101536cd392d6ed3c0dbd8c8edc9233392a66e9fd800bd94"
+      "sizeBytes": 14256,
+      "sha256": "7ebd79e2667127d9e6a47af37696dfafe06da2ffe8d04dad2e3832cca31fe49d"
     },
     {
       "path": "assembly-motion.js",
@@ -204,19 +244,34 @@
       "sha256": "6264c2ed02bf510a80fc8623fe10a5132a3313f0fa873bfa1e447160784412a0"
     },
     {
+      "path": "assembly-photo-leather.js",
+      "sizeBytes": 2674,
+      "sha256": "d07b74325a2b35f29857fdfcdebc2da7212912d335178e6f087715591a51b519"
+    },
+    {
+      "path": "assembly-premium-face.js",
+      "sizeBytes": 3489,
+      "sha256": "0f8ca9a10efeab179c52d50daa8a584e4cc61620f94136d2f915ccc71e0bb1f6"
+    },
+    {
+      "path": "assembly-presentation-gate.js",
+      "sizeBytes": 1973,
+      "sha256": "1c4b297d62babcb4912ba0e1bd979a4a3a5c4317c3bdf3a65a781526706220bd"
+    },
+    {
       "path": "assembly-quality.css",
       "sizeBytes": 24915,
       "sha256": "cbc3f5a59a0bb46aa5c45fc2e907d58d3a5c54cb2925230380fa7fb1a788e602"
     },
     {
       "path": "assembly-recording.js",
-      "sizeBytes": 4831,
-      "sha256": "027aa3914520005e8b6728af811d4d747fe119d1b5588fa6802849b82d6d2e54"
+      "sizeBytes": 11003,
+      "sha256": "30bb8d3a54e3daaefe4835d5709af63b12da307b0c7e085d101a39ad7eb2a864"
     },
     {
       "path": "assembly-refraction.js",
-      "sizeBytes": 3005,
-      "sha256": "15d8257f7c468394b52dc2cba21a172c62e6ada813ef99b0ef8079a10f70b676"
+      "sizeBytes": 4544,
+      "sha256": "26631898c4d2d9779fdc458ef9e83103a38cd4663f373fc02d549b014ae1a579"
     },
     {
       "path": "assembly-resolution.js",
@@ -235,8 +290,8 @@
     },
     {
       "path": "assembly-review.js",
-      "sizeBytes": 68213,
-      "sha256": "089998850f97f6fb300d88b9b225a0c1de7209f1917fc87a03eece300616ee71"
+      "sizeBytes": 82248,
+      "sha256": "93a50dcc6a66fc339cc1dd1148bca5a5532b168ef42b0994bb0bd5e9315bd340"
     },
     {
       "path": "assembly-seconds-details.js",
@@ -270,8 +325,8 @@
     },
     {
       "path": "assembly-story.js",
-      "sizeBytes": 4276,
-      "sha256": "be9cdc78a7c166d009953cf075a04b54a61303b733eb06b2169269dbc0a3d807"
+      "sizeBytes": 5304,
+      "sha256": "455556adbd0306d9e8e1c8848e61b2f678583db1ed36742498ff859c83fee395"
     },
     {
       "path": "assembly-winding-calibration.js",
@@ -317,6 +372,36 @@
       "path": "assets/manual-b.glb",
       "sizeBytes": 34185520,
       "sha256": "5b263ce511cd03c36bace856f0dbe3083f8408d62b65d04f29ef8ff0f14ded94"
+    },
+    {
+      "path": "atelier-layout-study.css",
+      "sizeBytes": 11384,
+      "sha256": "60181885f05ec3265d6ba338741297898ee2a6c88d619377a6512949cc1be9bd"
+    },
+    {
+      "path": "atelier-layout-study.html",
+      "sizeBytes": 8523,
+      "sha256": "7b0a3262fa70b1c7ae90913a940fbcb7d7d75147e85d9dba9520113ba278b10c"
+    },
+    {
+      "path": "atelier-preview.css",
+      "sizeBytes": 21962,
+      "sha256": "e0683e49cc88510edffd4334a338ee936b73e87747996c1dd91b1da540900e8f"
+    },
+    {
+      "path": "atelier-preview.html",
+      "sizeBytes": 21937,
+      "sha256": "a00bfaf693c8e59e78f2677b9a6a5b69bff3d118ea4a7fb7c2aafc2b72bb246a"
+    },
+    {
+      "path": "atelier-preview.js",
+      "sizeBytes": 21179,
+      "sha256": "e7106d252a290ee58b9e30c25c18396d16488fed9685fec11cf4164b1dd46c8a"
+    },
+    {
+      "path": "design-preview/Aerial-Left-Crescent-B-Angled-Rim-v3.svg",
+      "sizeBytes": 48545,
+      "sha256": "dbfcd31b2cef6095334436d4de5959103920425b955a985ed7cb9fe63df11347"
     },
     {
       "path": "docs/OM10_Release_notes.pdf",
@@ -374,6 +459,11 @@
       "sha256": "f756666958a2aae33164d89fb800aadd8c3b10c184dfb8a8021ced0f3810748e"
     },
     {
+      "path": "integrated-preview.html",
+      "sizeBytes": 21684,
+      "sha256": "6b958fdc07dde73082811a69e54869b8bcfbcad795b4ef189c306eae45870e22"
+    },
+    {
       "path": "material-review-model.js",
       "sizeBytes": 2615,
       "sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
@@ -417,6 +507,41 @@
       "path": "open-front/shading-verification.json",
       "sizeBytes": 63526,
       "sha256": "be165f92cf6a30c6637c6068bc86db0698e3d46fd4f4d6fd9a156b2a517ee1f7"
+    },
+    {
+      "path": "premium-face/face-b-render.png",
+      "sizeBytes": 2098925,
+      "sha256": "df7b41495313716cddf99a5031235536f890419e37b784c9dd48441164a7b20f"
+    },
+    {
+      "path": "premium-face/face-b-render.webp",
+      "sizeBytes": 104422,
+      "sha256": "47e1c73c063a9fd9a3e7c9332aee683f249b160f2c19227dad145159f047e757"
+    },
+    {
+      "path": "premium-face/face-b.glb",
+      "sizeBytes": 1361720,
+      "sha256": "0b092d6c34ee99a2077a5529a0f79bb34f63ccf0ac6d084aefc646e49f5f2e6d"
+    },
+    {
+      "path": "premium-face/face-svg-b.glb",
+      "sizeBytes": 2342368,
+      "sha256": "abbc5f488332890d5f45da2e81ff2b986ddf23be2d119db527504dc2596bf667"
+    },
+    {
+      "path": "premium-face/face-svg-render.png",
+      "sizeBytes": 2194697,
+      "sha256": "b2a1e3a0489e11a8bbf0e512b9fef5f9f9cf2631e6acfa01bde8ba8b8c4224f2"
+    },
+    {
+      "path": "premium-face/face-svg-render.webp",
+      "sizeBytes": 141058,
+      "sha256": "443129a6317247750830b4a0ac2de95fa0d102ef3f62eaf6bb9d20aced6341cf"
+    },
+    {
+      "path": "premium-face/face-svg04.glb",
+      "sizeBytes": 5910464,
+      "sha256": "072f1adf44693ac45b7300686b2f78170ee0342dc87a885e2d2b394c1bb07c33"
     },
     {
       "path": "quality-study/01-front.json",
@@ -509,6 +634,11 @@
       "sha256": "104b0f5f7b16ad282de71351ff1bf3969f9e979d01785c5764fa1a696f6dbc55"
     },
     {
+      "path": "quality-study/face-svg03-rim-candidate.glb",
+      "sizeBytes": 3069312,
+      "sha256": "12ebd6f6b764934be12bb598b56708f18c561dea3f434f69311a2feda5416cf9"
+    },
+    {
       "path": "quality-study/form-legibility-r01.glb",
       "sizeBytes": 2570568,
       "sha256": "151d5afec150fcf4ab996b521a8ff5eaa4a1e87e9c40cd827406476ac906fea8"
@@ -547,6 +677,16 @@
       "path": "quality-study/leather-craft-r05.glb.br",
       "sizeBytes": 630124,
       "sha256": "556d471d4f4dcc93daf14e86cec250a4821b0f7df7d805d9c88220fb587a6cea"
+    },
+    {
+      "path": "quality-study/leather-craft-r09.glb",
+      "sizeBytes": 3648392,
+      "sha256": "4729dd168c80be314c22deaad09f8447b4ed5388a9d43016a1a3688203e2271f"
+    },
+    {
+      "path": "quality-study/leather-craft-r10.glb",
+      "sizeBytes": 9487248,
+      "sha256": "ba6be0bffb7fc66dccbbc3adc26d3e5b076c67a8a23503d491d44c2bb7f7e566"
     },
     {
       "path": "quality-study/leather-detail.glb",
@@ -614,19 +754,24 @@
       "sha256": "70c1c5411bc2142913276494502b048d44f0cb6925d4d5fd278e081285ce6e31"
     },
     {
+      "path": "quality-study/rim-svg03-native.png",
+      "sizeBytes": 1858346,
+      "sha256": "25bac0c69098800a031e0692e685dd1384fccc17c72990e38e5b7310ecd912be"
+    },
+    {
       "path": "quality-study/studio-poster.svg",
       "sizeBytes": 1087,
       "sha256": "6022cf8b1a40542f2a3592e25b9f408ae7f48c75f11972cf5753bd75d4ad819f"
     },
     {
       "path": "quality-study/viewer-revision.js",
-      "sizeBytes": 6148,
-      "sha256": "db495faee27da7f7775f2422dbde5f837b41c6e65efc7eccd4f6f439e78e8764"
+      "sizeBytes": 8118,
+      "sha256": "2dfa227bbba0dc7e6fe11f756fc2c146faab3ed6f0d2f14cf1ae09e2a031bb49"
     },
     {
       "path": "quality-study/viewer-revision.json",
-      "sizeBytes": 7645,
-      "sha256": "f221e1531c80ba12ad09ada5bd67bd96c088d080b8ee961d996e82288e7ed5de"
+      "sizeBytes": 10159,
+      "sha256": "6ea9b1bdc31fdaa71aeb700c04c42d06a4bf4b5f17043cb0b2ff6bc14b12570f"
     },
     {
       "path": "rebuild/01-three-quarter-clay.png",
@@ -694,9 +839,34 @@
       "sha256": "f93c8eac142144d43fb15e9b03582e26545dab9f1094d6c1450468c339661d10"
     },
     {
+      "path": "studio-console.css",
+      "sizeBytes": 22959,
+      "sha256": "f1e5dc0cec15e1d73eddb0defc4a7a3db827844ca9309dbcac151b56f82ea64b"
+    },
+    {
+      "path": "studio-console.js",
+      "sizeBytes": 2498,
+      "sha256": "a2fece20e5a2b34ff66955cde7bd2a6f92fea9925ef169009ed3fe16b9087011"
+    },
+    {
       "path": "style.css",
       "sizeBytes": 9955,
       "sha256": "8f0cff9a80b7ae67785b894162602fdfd2c987945ff6bf8982804425d67a0951"
+    },
+    {
+      "path": "tests/browser-embed.html",
+      "sizeBytes": 1229,
+      "sha256": "ff11133aabb41bf2a93de9e110616b64f70268f823935b62158c9d9cc76fd276"
+    },
+    {
+      "path": "vendor/GLTFExporter.js",
+      "sizeBytes": 86392,
+      "sha256": "e7c29444454eb321b39e4c8b3062944f4fd5299a0e7483e9cb8c0594cdec829f"
+    },
+    {
+      "path": "vendor/THREE-LICENSE.txt",
+      "sizeBytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
     },
     {
       "path": "vendor/controls/OrbitControls.js",
@@ -707,11 +877,6 @@
       "path": "vendor/environments/RoomEnvironment.js",
       "sizeBytes": 4899,
       "sha256": "c20f0b4677f6128a138d7152b85cbef9091f4f45cdfa05adca04d40c1697c7ae"
-    },
-    {
-      "path": "vendor/GLTFExporter.js",
-      "sizeBytes": 86392,
-      "sha256": "e7c29444454eb321b39e4c8b3062944f4fd5299a0e7483e9cb8c0594cdec829f"
     },
     {
       "path": "vendor/loaders/GLTFLoader.js",
@@ -749,19 +914,29 @@
       "sha256": "fd91229aacc5830e3984b0f2bdefcf566163ea028f4c1f1ab233fa6665a133ac"
     },
     {
-      "path": "vendor/postprocessing/ShaderPass.js",
-      "sizeBytes": 3228,
-      "sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
-    },
-    {
       "path": "vendor/postprocessing/SSAOPass.js",
       "sizeBytes": 13443,
       "sha256": "59944f833d10330f6bdd205260ad06a8ef2bd12a115e4101d81578b249627e3f"
     },
     {
+      "path": "vendor/postprocessing/ShaderPass.js",
+      "sizeBytes": 3228,
+      "sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
+    },
+    {
+      "path": "vendor/postprocessing/UnrealBloomPass.js",
+      "sizeBytes": 14388,
+      "sha256": "d92742959879b461f25348b2abddc7ca0d48527e7718340bcfa29fa771e2799a"
+    },
+    {
       "path": "vendor/shaders/CopyShader.js",
       "sizeBytes": 729,
       "sha256": "a33057d5ac91c43304c186ac0e8816e62bb2ed471d3a00ff3018dfd5c0389718"
+    },
+    {
+      "path": "vendor/shaders/LuminosityHighPassShader.js",
+      "sizeBytes": 1291,
+      "sha256": "5044f780b6e6cf863947f64c36fe1587132f7fbe395ada863cd1e5f0388dcf1e"
     },
     {
       "path": "vendor/shaders/OutputShader.js",
@@ -772,11 +947,6 @@
       "path": "vendor/shaders/SSAOShader.js",
       "sizeBytes": 6826,
       "sha256": "57ec7cc10ad3b6a8aafa97be21eca12972c5597ebc3023de1b37102a56c6b23b"
-    },
-    {
-      "path": "vendor/THREE-LICENSE.txt",
-      "sizeBytes": 1081,
-      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
     },
     {
       "path": "vendor/three.core.js",
@@ -792,21 +962,6 @@
       "path": "vendor/utils/BufferGeometryUtils.js",
       "sizeBytes": 35539,
       "sha256": "fda7e946b8e0b5ab39b779206589e7a1079a22eb24efb89d7223e03fdfb1f751"
-    },
-    {
-      "path": "README.md",
-      "sizeBytes": 3110,
-      "sha256": "866902ed6af45acafda7aef4cff58c56a2d0723d1ccd02d7dfb11e1e6e27be20"
-    },
-    {
-      "path": ".nojekyll",
-      "sizeBytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "path": "ATTRIBUTION.md",
-      "sizeBytes": 3843,
-      "sha256": "bcae39b501ad2d53f9045cdd2a8067c3e6ddd134bbb48807cefd6f6974e02c03"
     }
   ]
 }
