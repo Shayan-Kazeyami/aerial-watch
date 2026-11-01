@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ownerReleaseId": "fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72",
+  "sourceReleaseId": "7f1a5b9ecbf5864d49ec5886f7a6eda3c2a46fc092ed6d0c6bf12708520e5a7f",
+  "routes": {
+    "aerial-assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "docs": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "optimized-assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "premium-face": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "quality-study": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "rebuild": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "vendor": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/"
+  },
+  "reusedBytes": 150324200,
+  "transforms": [
+    "central GLTF/JSON asset URLs",
+    "KTX chunk directory base",
+    "Basis transcoder URL",
+    "HTML assets/srcset, dynamic poster and vendor import maps",
+    "first-party provenance"
+  ],
+  "limitation": "Browser QA and complete published inventory budget required before promotion."
+}
