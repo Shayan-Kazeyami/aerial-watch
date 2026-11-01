@@ -1,3 +1,4 @@
+import {createPresentationGate} from '../assembly-presentation-gate.js';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -14,6 +15,7 @@ test('runtime renderer failure clears motion status and disables inspection',asy
  const source=await readFile(new URL('../assembly-review.js',import.meta.url),'utf8');
  const body=source.match(/function fail\(message,error\) \{([\s\S]*?)\n\}/)[1];
  const nodes=new Map();const $=id=>{if(!nodes.has(id))nodes.set(id,{textContent:'Preparing',setAttribute(){}});return nodes.get(id);};
- vm.runInNewContext(body,{$,message:'Graphics lost',error:null,announce(){},console:{error(){}}});
- assert.match($('primary-motion-status').textContent,/unavailable/);assert.match($('motion-status').textContent,/unavailable/);assert.equal($('inspection-controls').disabled,true);
+ const presentationGate=createPresentationGate({enabled:true});
+ vm.runInNewContext(body,{presentationGate,$,message:'Graphics lost',error:null,announce(){},console:{error(){}}});
+ assert.match($('primary-motion-status').textContent,/unavailable/);assert.match($('motion-status').textContent,/unavailable/);assert.equal($('inspection-controls').disabled,true);assert.equal(presentationGate.snapshot().phase,'error');assert.equal(presentationGate.snapshot().interactive,false);
 });

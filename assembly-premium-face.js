@@ -6,7 +6,7 @@ export function premiumFaceVisible({enabled, openWork, movementOnly, isolated, i
   return !!enabled && !!openWork && !movementOnly && !isolated && !interior;
 }
 /** Authored dial overlay, not a replacement movement. Model mount matches baseline glTF. */
-export function preparePremiumFace(root) {
+export function preparePremiumFace(root,{finish='baseline'}={}) {
   const meshes=[];
   root.traverse(mesh=>{
     if(!mesh.isMesh)return;
@@ -18,6 +18,7 @@ export function preparePremiumFace(root) {
   if(revisions.size>1)throw new Error('Invalid premium face asset: mixed design revisions.');
   const revision=[...revisions][0]||'B-02',svgDerived=revision.startsWith('B-SVG-');
   const fineGrain=revision.startsWith('B-SVG-04');
+  const finishTrial=finish==='atelier2'&&fineGrain;
   let texture;
   if(typeof document!=='undefined'){
     const canvas=document.createElement('canvas');const size=fineGrain?1024:256;canvas.width=canvas.height=size;
@@ -33,7 +34,10 @@ export function preparePremiumFace(root) {
     if(/Graphite/i.test(material.name)){
       // SVG-derived material scalars come from the inspected Blender export.
       if(!svgDerived){material.color.setHex(0x19191b);material.metalness=.12;material.roughness=.48;}
-      if(texture){material.bumpMap=texture;material.bumpScale=fineGrain?.008:svgDerived?.12:.025;}
+      // A small linear-light lift retains the exported charcoal hue. The
+      // trial is restricted to SVG04; earlier assets keep their authored look.
+      if(finishTrial)material.color.multiplyScalar(1.18);
+      if(texture){material.bumpMap=texture;material.bumpScale=finishTrial?.003:fineGrain?.008:svgDerived?.12:.025;}
     }
     if(!svgDerived&&/champagne/i.test(material.name)){material.color.setHex(0xb89b70);material.metalness=.85;material.roughness=.26;}
   }

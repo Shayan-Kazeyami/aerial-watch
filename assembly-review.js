@@ -18,6 +18,7 @@ import {createRefractionAwareAO} from './assembly-glass-ao.js';
 import {createPresentationClock} from './assembly-clock.js';
 import {partVisible,createVariantManifest,createResourceScope,createObjectTreeDisposer} from './assembly-state.js';
 import {loadGLTFAsset,loadJSONAsset,loadProgressiveAssembly} from './assembly-loading.js';
+import {createPresentationGate} from './assembly-presentation-gate.js';
 import {createPerformanceMonitor} from './assembly-performance.js';
 import {RENDER_PROFILES,resolveRenderResolution} from './assembly-resolution.js';
 import {createCrownInteraction,createCrownVisual} from './assembly-crown.js';
@@ -32,6 +33,7 @@ import {createFormDetails} from './assembly-form-details.js';
 import {createLeatherDetails} from './assembly-leather-details.js';
 import {createPhotoLeatherDetails} from './assembly-photo-leather.js';
 import {createAssemblyExplosion} from './assembly-explode.js';
+import {createHandClearance,PREMIUM_HAND_CLEARANCE} from './assembly-hand-clearance.js';
 import {createFrontArchitecture} from './assembly-front-architecture.js';
 import {createAssemblyEscapement} from './assembly-escapement.js';
 import {createAssemblyCalendar} from './assembly-calendar.js';
@@ -67,7 +69,7 @@ renderer.transmissionResolutionScale=2;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.08;
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = Number(THREE.REVISION)>=187?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
-const finishes = createAssemblyMaterials(renderer,{atelier:atelierVisuals,light:new URLSearchParams(location.search).get('light')});
+const finishes = createAssemblyMaterials(renderer,{atelier:atelierVisuals,light:new URLSearchParams(location.search).get('light'),finish:new URLSearchParams(location.search).get('finish'),clearTransmission:new URLSearchParams(location.search).get('crystal')==='clear'});
 scene.environment = finishes.environment; scene.environmentIntensity = .85;
 const camera = new THREE.PerspectiveCamera(32,1,.1,800);
 const lighting=createAssemblyLighting(scene,{renderer,atelier:atelierVisuals}),{key,floor}=lighting;
@@ -101,12 +103,22 @@ let depthBounds=[];
 let interiorView=false,dialDetails,dialFace;
 let openWork=true,openDialDetails,openFrontFrame,openPlates=[],craftParts=[],formDetails,leatherDetails,frontArchitecture,frontArchitectureLoading=false,casebackFinish;
 const premiumRequested=document.body.dataset.premiumFace==='b';
+const presentationGate=createPresentationGate({enabled:document.body.classList.contains('atelier-live')&&premiumRequested,onChange:state=>{
+ dirty=true;$('assembly-canvas').setAttribute('aria-busy',String(!state.interactive));
+ if(!state.interactive)$('load-message').textContent=state.message;else if(['ready','degraded'].includes(state.phase))$('viewer-status').textContent=state.message;
+ document.dispatchEvent(new CustomEvent('atelier:presentation-state',{detail:state}));
+}});
+const publishPresentation=()=>presentationGate.publish();
+document.addEventListener('atelier:request-presentation-state',publishPresentation);
+resources.own('presentation readiness',()=>{presentationGate.dispose();document.removeEventListener('atelier:request-presentation-state',publishPresentation);});
+
 let premiumFace=null;
 const premiumActive=()=>premiumFaceVisible({enabled:!!premiumFace,openWork:openFrontActive(),movementOnly:$('movement-only').checked,isolated:!!isolated,interior:interiorView});
 const replacedSources=new Set([0,155]);
 const openFrontActive=()=>proposalReady&&openWork&&!$('movement-only').checked&&!isolated;
 function syncFrontDetails() {
   const premium=premiumActive();
+  handClearance?.setEnabled(premium);
   const active=openFrontActive()&&!premium,finished=$('finish').checked;
   if(premiumFace)premiumFace.root.visible=premium;
   // Restore the calendar before the older form layer restores its own source.
@@ -140,6 +152,7 @@ function syncFrontDetails() {
 let scale = 78, currentView = 'three-quarter', elapsed = 0;
 let mechanism,escapement,calendar,winding,setting,settingEngagement,handClockOrigin=0, mechanismElapsed = 0, balanceElapsed = 0,crownVisual;
 let settingSeconds=0,calendarState=null,engagementState=null;
+let handClearance;
 const sourceRestMatrices=new Map();
 let cameraTween = null, tour = false, animationFrame=0;
 const tourSequence=createTourSequence();let powerPath=false;
@@ -174,7 +187,7 @@ const baseMaterials = new WeakMap(), finishMaterials = new WeakMap(), highlights
 const hands = [], axis = new THREE.Vector3(0,1,0), turn = new THREE.Quaternion();
 const meshes = () => [...source,...exterior];
 const eachMaterial = (material,fn) => Array.isArray(material) ? material.map(fn) : fn(material);
-const announce = message => { $('viewer-status').textContent = message; document.dispatchEvent(new Event('studio-state-change')); };
+const announce = message => { const presentation=presentationGate.snapshot();$('viewer-status').textContent = presentation.enabled&&!['ready','degraded'].includes(presentation.phase)?presentation.message:message; document.dispatchEvent(new Event('studio-state-change')); };
 function stopTour() {
   const wasRunning=tour;
   tour = false;tourSequence.stop(); cameraTween = null; $('tour').setAttribute('aria-pressed','false'); $('tour').textContent = 'Studio tour';
@@ -182,7 +195,7 @@ function stopTour() {
 }
 controls.addEventListener('start', () => { stopTour(); cameraTween = null; });
 function fail(message,error) {
-  failed = true; loadPhase='error'; $('loading').hidden = false; $('load-message').textContent = message; $('retry').hidden = false;
+  failed = true; presentationGate.fail(message);loadPhase='error'; $('loading').hidden = false; $('load-message').textContent = message; $('retry').hidden = false;
   $('inspection-controls').disabled = true; $('view-controls').disabled = true;
   $('assembly-canvas').setAttribute('aria-busy','false'); announce(message);
   for (const id of ['primary-motion-status','motion-status']) $(id).textContent='Interactive motion unavailable. Reload the viewer to retry.';
@@ -646,7 +659,7 @@ const glassAO=createRefractionAwareAO({pass:ao,scene,camera,getCrystals:()=>exte
 resources.own('refraction-aligned ambient occlusion',()=>glassAO.dispose());
 function proposalWarning(error){
   if(lifecycle.disposed)return;
-  proposalLoading=false;proposalReady=false;loadWarnings.push(error.message);visibility();
+  proposalLoading=false;proposalReady=false;loadWarnings.push(error.message);visibility();presentationGate.settle('proposal',error);
   announce('Original assembly ready. The optional open-work design could not load; use Retry design to try again.');
   let retry=$('retry-proposal');if(!retry){retry=document.createElement('button');retry.id='retry-proposal';retry.type='button';retry.textContent='Retry design';$('open-work-note').after(retry);}
   retry.onclick=async()=>{retry.disabled=true;proposalLoading=true;let result;try{result=await loadGLTFAsset('quality-study/open-front-plates.glb',assetOptions());installProposal(result);retry.remove();}catch(e){if(result)try{disposeObjectTree((result.gltf||result).scene);}catch(cleanupError){console.error('Proposal cleanup failed.',cleanupError);}proposalWarning(e);}finally{if(!lifecycle.disposed)retry.disabled=false;}};
@@ -664,6 +677,7 @@ function installProposal(result){
   }
   model.add(proposal.scene);resources.own('optional proposed plates',disposeProposal);
   proposalReady=true;proposalLoading=false;variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);updateMaterials();visibility();
+  presentationGate.settle('proposal');
   announce('Open-work design ready. Explore the original movement and blued hands.');
   loadFrontArchitecture();
 }
@@ -695,6 +709,7 @@ function initializeBaseline(result,metadata){
     baseMaterials.set(mesh,mesh.material);finishMaterials.set(mesh,finishes.apply(mesh));mesh.castShadow=!mesh.userData.inspectionTransparent;mesh.receiveShadow=true;
     if(mesh.userData.sourceIndex===undefined){const period={HOUR:43200,MINUTE:3600,SECONDS:60}[mesh.userData.assemblyId];if(period)hands.push({mesh,period,original:mesh.quaternion.clone()});}
   });
+  if(premiumRequested){handClearance=createHandClearance(exterior);resources.own('premium seconds hand clearance',()=>handClearance.dispose());}
   const casebackMesh=exterior.find(mesh=>mesh.userData.assemblyId==='CASEBACK');
   if(casebackMesh){casebackFinish=createCasebackFinish({mesh:casebackMesh});resources.own('caseback cap finish geometry',()=>casebackFinish.dispose());}
   for(const mesh of source){mesh.updateMatrix();sourceRestMatrices.set(mesh.userData.sourceIndex,mesh.matrix.clone());}
@@ -724,18 +739,20 @@ function initializeBaseline(result,metadata){
     loadGLTFAsset(premiumFaceAsset(new URLSearchParams(location.search).get('face')),assetOptions()).then(result=>{
       if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
       try{
-        premiumFace=preparePremiumFace(result.gltf.scene);model.add(premiumFace.root);
+        premiumFace=preparePremiumFace(result.gltf.scene,{finish:new URLSearchParams(location.search).get('finish')});model.add(premiumFace.root);
         resources.own('B premium dial',ownedObjectTreeDisposer(premiumFace.root));
         performanceMonitor.load(result.metrics||{});variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...(openFrontFrame?.group.children||[]),...(qualityDesign?.meshes||[]),...craftParts]);visibility();
+        presentationGate.settle('premiumFace');
         announce('Left Crescent dial ready. Original gear layout preserved.');
       }catch(error){disposeObjectTree(result.gltf.scene);throw error;}
-    }).catch(error=>{if(!lifecycle.disposed){loadWarnings.push(`Premium face: ${error.message}`);announce('The premium dial could not load. Original watch remains available; reload to retry.');}});
+    }).catch(error=>{if(!lifecycle.disposed){loadWarnings.push(`Premium face: ${error.message}`);presentationGate.settle('premiumFace',error);announce('The premium dial could not load. Original watch remains available; reload to retry.');}});
   }
   loading=false;$('load-message').textContent='Lighting the watch studio…';$('assembly-canvas').setAttribute('aria-busy','false');
   $('inspection-controls').disabled=false;$('view-controls').disabled=false;$('animate').disabled=hands.length!==3;
   $('animate-movement').checked=!startPaused&&!reducedMotion.matches;$('animate').checked=!startPaused&&!reducedMotion.matches&&hands.length===3;
   $('finish').checked=true;$('crystals').checked=true;$('open-work').checked=true;updateMaterials();buildExplorer();visibility();
   view(new URLSearchParams(location.search).get('view')==='mechanism'?'interior':'face',false);setClockPlayback();
+  presentationGate.settle('baseline');
   announce('Original assembly ready. Preparing the optional open-work design.');
   loadGLTFAsset('quality-study/form-legibility-r01.glb',assetOptions()).then(result=>{
     if(lifecycle.disposed){disposeObjectTree(result.gltf.scene);return;}
@@ -754,8 +771,9 @@ function initializeBaseline(result,metadata){
     for(const mesh of leatherDetails.meshes){craftParts.push(mesh);baseMaterials.set(mesh,clay);finishMaterials.set(mesh,leatherDetails.materialFor(mesh));}
     model.add(leatherDetails.group);resources.own('R05 leather craft geometry',()=>leatherDetails.dispose());updateMaterials();visibility();
     variantManifest=createVariantManifest(source,[...openPlates,...(premiumFace?.meshes||[]),...openFrontFrame.group.children,...qualityDesign.meshes,...craftParts]);
+    presentationGate.settle('leather');
     }finally{disposeObjectTree(result.gltf.scene);}
-  }).catch(error=>{if(lifecycle.disposed)return;loadWarnings.push(`Leather detail: ${error.message}`);announce('The watch is ready. Additional leather detail is unavailable.');});
+  }).catch(error=>{if(lifecycle.disposed)return;loadWarnings.push(`Leather detail: ${error.message}`);presentationGate.settle('leather',error);announce('The watch is ready. Additional leather detail is unavailable.');});
 }
 loadProgressiveAssembly({
   signal:lifecycle.signal,disposeUnused:result=>disposeObjectTree((result.gltf||result).scene),
@@ -778,7 +796,7 @@ function captureConfiguration({clockStamp}={}){
   const gl=renderer.getContext(),extension=gl.getExtension('WEBGL_debug_renderer_info');
   const measuredPerformance=performanceMonitor.snapshot(),preview=$('studio-poster')?.querySelector('img');
   const previewEntry=preview?performance.getEntriesByName(preview.currentSrc).at(-1):null;
-  return {version:1,date:new Date().toISOString(),inspection:{selected:[...new Set(selected.map(inspectionReference))],isolated:isolated?[...new Set([...isolated].map(inspectionReference))]:null},renderer:{threeRevision:THREE.REVISION,backend:'WebGL',bloom:bloom.enabled,toneMapping:'ACES'},explosion:explosion?.amount??0,premiumFace:{requested:premiumRequested,ready:!!premiumFace,active:premiumActive(),revision:premiumFace?.revision??null},design:premiumRequested?'Aerial Left Crescent B':'Aerial Quality 01',phase:loadPhase,view:currentView,
+  return {version:1,date:new Date().toISOString(),inspection:{selected:[...new Set(selected.map(inspectionReference))],isolated:isolated?[...new Set([...isolated].map(inspectionReference))]:null},renderer:{threeRevision:THREE.REVISION,backend:'WebGL',bloom:bloom.enabled,toneMapping:'ACES',reflectionRig:atelierVisuals&&new URLSearchParams(location.search).get('light')==='atelier2'?'atelier2':atelierVisuals?'atelier':'legacy',finishTrial:new URLSearchParams(location.search).get('finish')==='atelier2'?'atelier2':'baseline',clearTransmission:atelierVisuals&&new URLSearchParams(location.search).get('crystal')==='clear'},explosion:explosion?.amount??0,handClearance:{enabled:!!handClearance?.enabled,...PREMIUM_HAND_CLEARANCE},premiumFace:{requested:premiumRequested,ready:!!premiumFace,active:premiumActive(),revision:premiumFace?.revision??null},design:premiumRequested?'Aerial Left Crescent B':'Aerial Quality 01',phase:loadPhase,view:currentView,
     camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},
     formDetails:{revision:'form-legibility-r01',ready:!!formDetails,enabled:!!formDetails?.enabled,calendarDigitIslands:formDetails?.audit.components??null},
     frontArchitecture:{revision:'front-architecture-r07',ready:!!frontArchitecture,enabled:!!frontArchitecture?.enabled,audit:frontArchitecture?.audit??null},
@@ -789,7 +807,7 @@ function captureConfiguration({clockStamp}={}){
     casebackFinish:{revision:'r10-cap-corner-normals',enabled:!!casebackFinish?.enabled,audit:casebackFinish?.audit??null},
     settingEngagement:{revision:'r09-keyless-endpoints',ready:!!settingEngagement,state:engagementState,limits:settingEngagement?.limits??null},
     leatherCraft:{revision:leatherDetails?.revision?'leather-craft-'+leatherDetails.revision.toLowerCase():'leather-craft-r05',ready:!!leatherDetails,parts:craftParts.length},
-    compactCrown:!!crownVisual&&openFrontActive(),
+    compactCrown:!!crownVisual&&openFrontActive()&&!premiumActive(),
     settingSeconds,clock:clockStamp||clock.snapshot(),crown:crownInteraction.snapshot(),sourceAtCapture:captureProvenance.snapshot(),options:{openWork:$('open-work').checked,finishes:$('finish').checked,crystals:$('crystals').checked,movementOnly:$('movement-only').checked,interior:interiorView,powerPath,quality},
     viewport:{width:renderer.domElement.clientWidth,height:renderer.domElement.clientHeight,pixelRatio:renderer.getPixelRatio(),drawingBufferWidth:renderer.domElement.width,drawingBufferHeight:renderer.domElement.height,msaaSamples:composer.renderTarget1.samples,transmissionScale:renderer.transmissionResolutionScale},
     sourceMeshes:source.length,sourceVisible:source.filter(m=>m.visible).length,derivedParts:(premiumFace?.meshes.length||0)+openPlates.length+(openFrontFrame?.count||0)+(qualityDesign?.count||0)+craftParts.length,lightRig:lighting.shot,
@@ -888,13 +906,13 @@ function frame(time) {
   if(crownVisual?.update(delta)){dirty=true;visibleMotion=true;}
   // Canvas capture needs drawn frames even when the watch and camera are paused.
   // Keep its timeline advancing without changing either presentation clock.
-  if (dirty || recorder.recording) {
+  if ((dirty || recorder.recording) && presentationGate.snapshot().canRender) {
     try {
       const depth=updateInspectionDepth(camera,controls.target,depthBounds,ao,isolated?{distanceFloor:.25,surfacePadding:.05}:undefined);
       controls.minDistance=depth.minimumDistance;
-      renderer.info.reset();composer.render();renderedFrames++;dirty=false;
+      renderer.info.reset();composer.render();renderedFrames++;dirty=false;presentationGate.rendered();
       performanceMonitor.frame({timestamp:time,cpuMs:performance.now()-cpuStart,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures});
-      if(firstRender&&!loading){firstRender=false;$('loading').hidden=true;if($('studio-poster'))$('studio-poster').hidden=true;performanceMonitor.interactive(performance.now()-bootTime);announceAtelierCapabilities();}
+      if(firstRender&&!loading&&presentationGate.snapshot().interactive){firstRender=false;$('loading').hidden=true;if($('studio-poster'))$('studio-poster').hidden=true;performanceMonitor.interactive(performance.now()-bootTime);announceAtelierCapabilities();}
     }
     catch (error) { fail('The graphics renderer could not display this assembly. Retry the viewer or inspect the static renders below.',error); }
   }
@@ -910,7 +928,7 @@ document.addEventListener('visibilitychange',()=>{const now=performance.now();cl
 window.addEventListener('pagehide',event=>lifecycle.hide(event));
 window.addEventListener('pageshow',()=>lifecycle.show());
 resize();
-window.assemblyInspect = () => ({loading,failed,sourceMeshes:source.length,sourceVisible:source.filter(mesh=>mesh.visible).length,
+window.assemblyInspect = () => ({loading,failed,presentation:presentationGate.snapshot(),sourceMeshes:source.length,sourceVisible:source.filter(mesh=>mesh.visible).length,
   interiorView,dialPrinting:!!dialDetails?.group.visible,renderQuality:quality,
   openWork:openFrontActive(),replacementPlates:openPlates.length,
   exteriorMeshes:exterior.length,exteriorVisible:exterior.filter(mesh=>mesh.visible).length,

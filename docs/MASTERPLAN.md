@@ -6,7 +6,7 @@ Updated 31 October 2026. Owner: Kazeyami. Status: active rebuild, not an accepte
 
 Rebuild Aerial into a premium interactive watch showcase that helps Kazeyami win design and development clients. The watch must look convincing before the interface or technical features ask for attention. This plan covers the model, materials, lighting, controls, animation, renderer evaluation, testing and final integration package.
 
-The current public preview is a working reference, not the quality target. Its materials, crescent rim and interface have been rejected. Preserve the useful engineering beneath it, then replace the weak presentation rather than polishing the same design indefinitely.
+The rebuild began because the earlier preview's materials, crescent rim and interface fell below the requested standard. The corrected rim has since received positive feedback and a direction to continue; the latest review is not a blanket rejection. Preserve the useful engineering while completing the remaining presentation and interaction work. The complete watch is not yet accepted.
 
 Visual quality comes first. Start with representative close-ups of the actual watch, solve the geometry and material problems there, then extend the result across the entire experience. Generated concepts can guide decisions; they cannot prove implementation.
 
@@ -21,9 +21,49 @@ Visual quality comes first. Start with representative close-ups of the actual wa
 - Continue routine design and implementation decisions without waiting for replies. Ask only when genuine access, scope or approval blocks progress.
 - Shayan owns integration into the main Kazeyami site. Deliver a tested package; do not silently deploy to that site.
 
-## Current checkpoint
+## Current progress and remaining acceptance
 
-These states describe the checkpoint before the new rebuild is validated. Local work must not inherit the earlier preview's test results.
+Progress recorded 31 October 2026 at 23:43 UTC. These results supersede the older planning statuses below only where explicit evidence is recorded. The original visual goals and roadmap order remain unchanged; the watch is not complete.
+
+### Published and local work
+
+- The live review remains at main checkpoint `b3ccff10`. The recorded source checkpoint `6944e0c` has passing CI and 110 tests. The latest local work passes 136 tests after hand-module integration, the loading gate and the compact mobile-capture fix; it is not published.
+- Publication of main update `8c325f`, covering restore-UI fixes and video safeguards, was denied. Explicit user confirmation has been pending since 23:18:58 UTC. Do not describe that update or later local work as live.
+- The constant-section crescent, seconds-ring support and R10 sewn leather are integrated in the actual model and exports. This is implementation evidence, not final material or lighting acceptance.
+- Actual-watch PNG capture passed, and JSON save, reset, restore and resave matched at an exploded amount of 0.55. Normal browser download and file-picker delivery remain separate acceptance checks.
+- The loading gate prevents the interim baseline-watch flash. Actual initial and final reveal states have been verified locally.
+
+### Rendering and video limits
+
+- The separate r187 trial rendered the actual model in Smooth and Sharp. Studio mode caused a SwiftShader GPU-process exit with code 512. The trial is not promoted; no usable WebGPU adapter is available here, and hardware performance remains unverified.
+- The optional clear-transmission experiment removes the BRDF minimum roughness floor only from transmission sampling while retaining the optical treatment. It is an unadopted experiment, not a replacement glass model or an accepted improvement.
+- Both eight-second video attempts failed useful motion export: one produced two decoded frames with about 4.01 seconds between packets; the next produced three frames over 5.855 seconds. The local guard now rejects sparse cadence. It does not create missing frames or prove a smooth hardware recording.
+
+### Critical runtime hand clearance
+
+Collisions between the actual baseline hour hand, seconds hand and staff were found at some coupled clock positions. The earlier native hand-versus-face audit passed 72 sampled positions but excluded hand pairs, so it did not establish hand-pair clearance.
+
+The private geometry correction is now implemented and enabled in the actual runtime. Exported JSON reports `handClearance.enabled=true`, a seconds-geometry offset of minus 0.32 mm on glTF Y and a staff top of 3.68 mm. The correction preserves source in-plane pivots and axes, hand shapes and lengths, raw source geometry and gears.
+
+- Native and runtime-module audits using the actual assets found zero intersections across 1,440 coupled poses over 12 hours and five hand or staff pairs. The 72-angle hand-versus-face check also passed.
+- Recorded continuous clearance bounds are at least 0.03 mm between hour and seconds hands, 0.02 mm between the seconds blade and ticks, and 0.13 mm to the crystal. These are geometric evidence, not manufacturing tolerance certification.
+- The latest raw-object audit retained all 170 checked original objects. The derived `visual-master-r02.blend` keeps the raw seconds and staff hidden alongside two display clones; native and runtime vertex sets match within 0.000001 mm.
+- A labeled side-view proof was delivered at 23:42:44 UTC. This supports the geometry result, not completion of every interaction test.
+
+**Remaining acceptance:** test the hands actually used and visible in the browser, not a disabled quality overlay. The former collision state at 37,230 seconds is being restored and checked now. Crown-setting, playback and broader restored-time regression remain pending. Geometry correction and runtime enablement are established; complete interactive acceptance is not.
+
+### Remaining release priorities
+
+1. Complete browser regression at the former collision state and through crown setting, playback and restored times; retain the verified geometry correction and actual-runtime enablement.
+2. Complete the existing visual and interaction gates, including materials, glass at grazing angles, lighting, mobile review, interrupted actions and integration behavior.
+3. Establish smooth, full-length actual-watch video and normal download delivery on a named hardware setup; retain the honest failure guard meanwhile.
+4. Resolve the pending publication confirmation, then verify any authorized deployment against its exact revision. Do not publish or label local experiments as accepted merely because their tests pass.
+
+Detailed actual-watch export and renderer evidence is recorded in [Atelier QA](ATELIER-QA-2026-10-31.md). The DOCX and Library copies are unchanged by this progress-only repository amendment.
+
+## Earlier planning checkpoint
+
+These historical states describe the plan at issue, before the later integration and tests above. They are retained for context, not as the latest implementation status. Local work must not inherit an earlier preview's test results.
 
 | Area | State | What this means |
 | --- | --- | --- |
@@ -239,6 +279,7 @@ The order below follows dependencies, not invented dates. Interface prototyping 
 
 ### Functional and accessible behavior
 
+- Verify clearance using the actual visible runtime hands at coupled clock positions, including hand pairs and staff intersections. A disabled overlay or hand-versus-face-only audit cannot pass this critical gate.
 - Test repeated and interrupted camera, tour, crown, appearance, isolation and explosion actions in mixed sequences.
 - Complete the keyboard route with visible focus, understandable labels, selected and disabled states, and readable status announcements.
 - Test touch targets, mobile orientation, zoom and reduced motion on the loaded experience.
@@ -260,15 +301,15 @@ Record browser version, device and GPU, active backend, viewport, pixel ratio, q
 
 Provide a versioned release candidate, editable native scene, source assets, exact dependency versions, license notices, integration guide and a tested rollback. An iframe is the initial integration proposal; a component integration needs explicit lifecycle and style isolation work. Test the chosen route rather than promising both.
 
-The latest recorded Drive backup, `1Q0MUqsdkqABtzMHSAxpzHlpZ1BWm48CL`, contains earlier r05 and r06 native work. It does not establish protection of these new edits. Create and verify an updated authorized backup before handoff.
+Verified private project backups now include the full visual-rebuild checkpoint and the later native R02 hand-clearance checkpoint. The latter contains the corrected native master, preservation audits, proof image and correction module. These are work checkpoints, not a finished release package.
 
-The experience is finished only when the visual defects above are resolved, required interactions and exports work, supported-device evidence is recorded, no critical known defects remain, and the source and integration package can reproduce the result. Report gaps as gaps. Do not label the current rejected preview accepted, and do not equate passing tests with a finished watch.
+The experience is finished only when the visual defects above are resolved, required interactions and exports work, supported-device evidence is recorded, no critical known defects remain, and the source and integration package can reproduce the result. Report gaps as gaps. Do not treat positive feedback on one correction as final acceptance of the complete experience, and do not equate passing tests with a finished watch.
 
 ## Working record
 
-- Published review route: [Aerial preview with SVG face and photographed leather](https://shayan-kazeyami.github.io/aerial-watch/preview-b/integrated-preview.html?face=svg03&leather=photo).
-- Recorded preview source: `4800e5c3664824531b9e331cdcbdd17156754617`.
-- Recorded main revision: `4004351e274bf6c788897f89f467d10a1fe225b0`.
+- Current published review route: [Aerial Atelier preview](https://shayan-kazeyami.github.io/aerial-watch/preview-b/atelier-preview.html?face=svg04&leather=craft). Later local fixes remain unpublished until authorized.
+- Original planning preview source: `4800e5c3664824531b9e331cdcbdd17156754617`; see the current progress section for the later checkpoint.
+- Original planning main revision: `4004351e274bf6c788897f89f467d10a1fe225b0`.
 - Detailed historical evidence: [implementation checkpoint](IMPLEMENTATION-STATUS.md), [live QA](LIVE-QA-2026-10-31.md), [integration handoff](INTEGRATION-HANDOFF.md), [source attribution](../ATTRIBUTION.md).
 
 Maintain one clear status for each requirement and tie completion to a revision and evidence. Share useful visible results as they become available. If blocked, state the exact reason, affected work and action needed, then continue independent authorized work. Routine aesthetic and engineering choices remain owned by the implementation work, not returned to Shayan as a stream of direction requests.

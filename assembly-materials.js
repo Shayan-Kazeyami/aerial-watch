@@ -179,7 +179,7 @@ export function createStudioEnvironment(renderer,{neutral=false,atelier=false,li
   geometry.dispose();cards.forEach(material=>material.dispose());generator.dispose();return target;
 }
 
-export function createAssemblyMaterials(renderer,{atelier=false,light='atelier'}={}){
+export function createAssemblyMaterials(renderer,{atelier=false,light='atelier',finish='baseline',clearTransmission=false}={}){
   const target=renderer?createStudioEnvironment(renderer,{atelier,light}):null,materials=new Map();let disposed=false;
   function unitAxis(axis,fallback){
     const length=Array.isArray(axis)&&axis.length===3&&axis.every(Number.isFinite)?Math.hypot(...axis):0;
@@ -187,7 +187,11 @@ export function createAssemblyMaterials(renderer,{atelier=false,light='atelier'}
   }
   function get(kind,zone,axis,capAxis,opticalThickness){
     const base=finishes[kind]||finishes.steel;
-    const specification=atelier?{...base,...(ATELIER_FINISH_OVERRIDES[kind]||{})}:base;
+    const specification={...base,...(atelier?(ATELIER_FINISH_OVERRIDES[kind]||{}):{})};
+    // Premium SVG04 keeps the exterior HOUR/MINUTE/SECONDS meshes. Their
+    // classified blued material, not the disabled quality-hand overlay, is
+    // the correct optional readability-trial target. Keep the lobe unchanged.
+    if(finish==='atelier2'&&kind==='blued')specification.color=0x346fa6;
     const texture=['linear','circular','cross'].includes(zone)?zone:specification.texture;
     const safeAxis=unitAxis(axis,[1,0,0]),faceAxis=unitAxis(capAxis,[0,1,0]);
     const thickness=kind==='crystal'?(opticalThickness??specification.thickness):specification.thickness;
@@ -198,7 +202,7 @@ export function createAssemblyMaterials(renderer,{atelier=false,light='atelier'}
     material.name=`OM10 / ${kind}`;material.userData.finish=kind;
     material.userData.grainAxis=[...safeAxis];material.userData.finishFaceAxis=[...faceAxis];material.userData.finishZone=texture||'plain';
     if(texture)addSurface(material,texture,strength,safeAxis,kind,faceAxis);
-    if(kind==='crystal')addRefractionEdgeFallback(material);
+    if(kind==='crystal')addRefractionEdgeFallback(material,{clearTransmission:atelier&&clearTransmission});
     materials.set(cacheKey,material);return material;
   }
   return {

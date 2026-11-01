@@ -29,3 +29,51 @@
 
 /* Desktop already has the persistent live status; keep its mobile panel copy. */
 @media(min-width:1051px){#atelier-panel-status{display:none}}
+
+/* Never leak intermediate WebGL assemblies through the static reference mask. */
+.atelier-live .object-stage .studio-poster{background:#191b1a}
+.atelier-live:not([data-ready=true]) #assembly-canvas{pointer-events:none}
+.atelier-live[data-ready=true][data-presentation=degraded] .study-label{display:flex}
+
+/* Pending Atelier already has the reference label and live status; avoid the motion dock. */
+.atelier-live[data-ready=false]:not([data-failed=true]) #loading{visibility:hidden}
+
+/* Narrow task panels: keep core actions above explanatory/status copy. */
+@media(max-width:680px){
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]){padding:10px 14px;max-height:calc(100% - 228px)}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) .context-top{top:-10px;height:44px;min-height:44px;margin:0 0 4px;padding:0;justify-content:flex-end}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) .context-top .eyebrow{display:none}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) .context-top button{margin:0;min-width:44px;min-height:44px}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) #context-title{position:absolute;top:22px;left:14px;right:62px;font-size:20px;line-height:1.1;margin:0;pointer-events:none;z-index:2}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) #atelier-panel-status{margin:8px 0 0;padding-top:8px;line-height:1.35}
+ .context-card[data-tool=capture] .capture-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:4px 0}
+ .context-card[data-tool=capture] .capture-actions button{min-width:0;min-height:44px;padding:8px 6px;font-size:12px;line-height:1.2}
+ .context-card[data-tool=capture] :is(.capture-intro,.capture-support){display:none}
+ .context-card[data-tool=time] #atelier-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .context-card[data-tool=time] #atelier-tools :is(.tool-stack,.tool-row){display:contents}
+ .context-card[data-tool=time] #atelier-tools button{order:1;min-height:44px;padding:8px 6px;min-width:0}
+ .context-card[data-tool=time] [data-proxy=crown-pull]{grid-column:1/-1}
+ .context-card[data-tool=time] #atelier-crown-state{grid-column:1/-1;order:0;margin:0;font-size:11px;line-height:1.3}
+ .context-card[data-tool=time] #atelier-crown-help{grid-column:1/-1;order:2;margin:0;font-size:11px;line-height:1.3}
+ .context-card[data-tool=time] #atelier-crown-direct{display:none}
+ .context-card[data-tool=explode] #atelier-tools>p:first-child{display:none}
+ .context-card[data-tool=explode] .slider-heading{margin-top:6px}
+ .context-card[data-tool=explode] input[type=range]{margin:4px 0;min-height:44px}
+ .context-card[data-tool=explode] .tool-row{margin:6px 0}
+ .context-card[data-tool=explode] #atelier-explosion-note[data-available=true]{display:none}
+}
+
+/* Narrow open tools reserve a real, unobscured canvas above the measured panel. */
+@media(max-width:680px){
+ .atelier-live[data-panel-open=true] .context-card{bottom:130px;max-height:calc(100% - 300px)}
+ .atelier-live[data-panel-open=true] .object-stage #stage{top:16px;bottom:calc(130px + var(--atelier-panel-height,240px) + 12px)}
+ .atelier-live[data-panel-open=true] :is(.title-block,.home,.interaction-hint){display:none}
+ .atelier-live[data-panel-open=true] .motion-tools{position:absolute;left:0;bottom:calc(100svh - 68px - 47px - 60px);width:max-content;padding:0 5px}
+ .atelier-live[data-panel-open=true] .motion-tools>:not(#motion){display:none}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #context-title{right:168px;font-size:18px}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] [data-proxy=crown-focus]{position:absolute;top:10px;right:58px;width:100px;height:44px;z-index:3}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-tools [data-proxy=crown-pull]{grid-column:auto;order:1}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-tools [data-proxy=crown-reset]{order:1}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-tools :is([data-proxy=crown-left],[data-proxy=crown-right]){order:2}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-crown-help{order:3}
+}

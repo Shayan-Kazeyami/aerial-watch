@@ -1,0 +1,90 @@
+{
+  "raw_asset_files_untouched": true,
+  "raw_baseline_mesh_count": 315,
+  "all_non_seconds_staff_geometry_and_transforms_unchanged": true,
+  "original_seconds_staff_buffers_unchanged": true,
+  "correction": {
+    "seconds_depth_translation_mm": -0.32,
+    "staff_lower_seat_fixed_to_mm": 2.94,
+    "staff_upper_height_mm": 3.68,
+    "seconds_shape_and_xy_unchanged": true
+  },
+  "actual_world_z_bounds_mm": {
+    "FRONT-CRYSTAL": {
+      "z": [
+        4.75,
+        5.100000381469727
+      ]
+    },
+    "HOUR": {
+      "z": [
+        3.5199999809265137,
+        4.079999923706055
+      ]
+    },
+    "MINUTE": {
+      "z": [
+        4.019999980926514,
+        4.62000036239624
+      ]
+    },
+    "SECONDS-STAFF": {
+      "z": [
+        2.890000104904175,
+        3.680000066757202
+      ]
+    },
+    "SECONDS": {
+      "z": [
+        3.580000162124634,
+        3.830000162124634
+      ]
+    }
+  },
+  "actual_face_max_z_mm": 3.619999885559082,
+  "hand_face_sweeps": {
+    "HOUR": {
+      "samples": 72,
+      "collision_angles_degrees": [],
+      "sampled_vertex_face_distance_min_mm": 0.05000019073486328
+    },
+    "MINUTE": {
+      "samples": 72,
+      "collision_angles_degrees": [],
+      "sampled_vertex_face_distance_min_mm": 0.5728024244308472
+    },
+    "SECONDS": {
+      "samples": 72,
+      "collision_angles_degrees": [],
+      "sampled_vertex_face_distance_min_mm": 0.06923436373472214
+    }
+  },
+  "coupled_12_hour_sweep": {
+    "step_seconds": 30,
+    "samples": 1440,
+    "pair_collisions": {
+      "HOUR/SECONDS": [],
+      "HOUR/SECONDS-STAFF": [],
+      "HOUR/MINUTE": [],
+      "MINUTE/SECONDS": [],
+      "MINUTE/SECONDS-STAFF": []
+    }
+  },
+  "continuous_separation_bounds_mm": {
+    "hour_blade_to_seconds_top": 0.029999732971191406,
+    "hour_blade_to_staff_top": 0.17999982833862305,
+    "minute_entire_hand_to_seconds_top": 0.18999981880187988,
+    "seconds_swept_envelope_min_radius_from_main_pivot": 4.9533757929571625,
+    "main_hub_excluded_radius": 1.5,
+    "seconds_blade_to_highest_face": 0.020000219345092773,
+    "hour_blade_to_highest_face": 0.24000000953674316,
+    "minute_blade_to_highest_face": 0.7699999809265137,
+    "highest_hand_to_crystal_underside": 0.12999963760375977
+  },
+  "limits": [
+    "Hand/face distance is sampled vertex-to-triangle, not full continuous distance certification.",
+    "Positive z separation plus radial exclusion proves hour/seconds and hour/staff separation over arbitrary angles; hour/minute pair has a sampled 12-hour test only.",
+    "Intentional coaxial sleeve/hub seating retained; no manufacturing tolerance or complete gear-train certification.",
+    "Actual viewer appearance and controls require parent browser QA."
+  ]
+}
