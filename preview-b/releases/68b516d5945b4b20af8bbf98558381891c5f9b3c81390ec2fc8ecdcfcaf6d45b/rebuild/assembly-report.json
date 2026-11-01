@@ -1,0 +1,1259 @@
+{
+  "stage": "MONOCHROME ASSEMBLY CHECKPOINT \u2014 NOT FINAL DESIGN APPROVAL",
+  "blender": "4.5.8 LTS",
+  "sourceMeshes": 166,
+  "sourceTriangles": 759744,
+  "hiddenSourceMeshes": [],
+  "maxSourceCoordinateErrorMM": 9.507506213424222e-07,
+  "originalDownloads": [
+    {
+      "path": "C:\\Users\\pc\\Desktop\\Kazeyami\\Projects\\Watch\\Downloads\\01-3-aut-beta-3d-step-file-va-22-05-2023.stp",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\pc\\Desktop\\Kazeyami\\Projects\\Watch\\Downloads\\om10-00001_20220701_va_01_3.stp",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\pc\\Desktop\\Kazeyami\\Projects\\Watch\\Downloads\\om10-00001_20220701_vb_01_3.stp",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\pc\\Desktop\\Kazeyami\\Projects\\Watch\\Downloads\\om10_movement_holder_v5.zip",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\pc\\Desktop\\Kazeyami\\Projects\\Watch\\Downloads\\OM10_Release_notes.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\pc\\Desktop\\Kazeyami\\Projects\\Watch\\Downloads\\OM10_Technical_Information_20210314.pdf",
+      "unchanged": true
+    }
+  ],
+  "newShells": [
+    {
+      "name": "Case \u00b7 continuous middle and integrated lugs",
+      "id": "CASE",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 2381.9984837803954,
+      "connectedComponents": 1,
+      "support": "ROOT"
+    },
+    {
+      "name": "Bezel \u00b7 softly rounded crown",
+      "id": "BEZEL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 323.42047508905176,
+      "connectedComponents": 1,
+      "support": "CASE"
+    },
+    {
+      "name": "Front crystal \u00b7 seated solid",
+      "id": "FRONT-CRYSTAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 385.00278569742835,
+      "connectedComponents": 1,
+      "support": "BEZEL"
+    },
+    {
+      "name": "Dial carrier \u00b7 stepped support seat",
+      "id": "DIAL-CARRIER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 162.24939703410942,
+      "connectedComponents": 1,
+      "support": "CASE"
+    },
+    {
+      "name": "Dial \u00b7 supported continuous face",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 211.21455365822126,
+      "connectedComponents": 1,
+      "support": "DIAL-CARRIER"
+    },
+    {
+      "name": "Chapter ring \u00b7 sloped inner flange",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 160.13327396404995,
+      "connectedComponents": 1,
+      "support": "DIAL-CARRIER"
+    },
+    {
+      "name": "Applied baton 00",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 01",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 02",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 03",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 04",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 05",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 06",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 07",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 08",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 09",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 10",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 11",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 12",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 13",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 14",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 15",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 16",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 17",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 18",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 19",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 20",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 21",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 22",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 23",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 24",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 25",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 26",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 27",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 28",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 29",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 30",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 31",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 32",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 33",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 34",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 35",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 36",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 37",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 38",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 39",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 40",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 41",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 42",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 43",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 44",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 45",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 46",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 47",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 48",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 49",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 50",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 51",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 52",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 53",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 54",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Applied baton 55",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.06328653981859943,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 56",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 57",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 58",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Recessed minute mark 59",
+      "id": "CHAPTER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.0007279999601244932,
+      "connectedComponents": 1,
+      "support": "CHAPTER"
+    },
+    {
+      "name": "Seconds dial mark 00",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 01",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 02",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 03",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 04",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 05",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 06",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 07",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 08",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 09",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 10",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 11",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 12",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 13",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 14",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 15",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 16",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 17",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 18",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 19",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 20",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 21",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 22",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 23",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 24",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 25",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 26",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 27",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 28",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 29",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 30",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 31",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 32",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 33",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 34",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 35",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 36",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 37",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 38",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 39",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 40",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 41",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 42",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 43",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 44",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 45",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 46",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 47",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 48",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 49",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 50",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 51",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 52",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 53",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 54",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 55",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.00023520000404715538,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 56",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 57",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 58",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Seconds dial mark 59",
+      "id": "DIAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 5.0399999526143056e-05,
+      "connectedComponents": 1,
+      "support": "DIAL"
+    },
+    {
+      "name": "Hour hand \u00b7 integral seated hub",
+      "id": "HOUR",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 2.560815054899475,
+      "connectedComponents": 1,
+      "support": "OM10:146"
+    },
+    {
+      "name": "Minute hand \u00b7 integral cannon hub",
+      "id": "MINUTE",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 1.41992241411253,
+      "connectedComponents": 1,
+      "support": "OM10:139"
+    },
+    {
+      "name": "Seconds extension sleeve",
+      "id": "SECONDS-STAFF",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.08338987563936587,
+      "connectedComponents": 1,
+      "support": "OM10:96"
+    },
+    {
+      "name": "Seconds hand \u00b7 integral hub",
+      "id": "SECONDS",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.12065836322595415,
+      "connectedComponents": 1,
+      "support": "SECONDS-STAFF"
+    },
+    {
+      "name": "Movement retaining cradle",
+      "id": "RETAINER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 158.87364403325537,
+      "connectedComponents": 1,
+      "support": "CASE"
+    },
+    {
+      "name": "Caseback \u00b7 seated exhibition ring",
+      "id": "CASEBACK",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 405.9686468869689,
+      "connectedComponents": 1,
+      "support": "CASE"
+    },
+    {
+      "name": "Caseback screw 0",
+      "id": "BACK-SCREW-0",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.653336236163559,
+      "connectedComponents": 1,
+      "support": "CASEBACK"
+    },
+    {
+      "name": "Caseback screw 1",
+      "id": "BACK-SCREW-1",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.653336236163559,
+      "connectedComponents": 1,
+      "support": "CASEBACK"
+    },
+    {
+      "name": "Caseback screw 2",
+      "id": "BACK-SCREW-2",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.653336236163559,
+      "connectedComponents": 1,
+      "support": "CASEBACK"
+    },
+    {
+      "name": "Caseback screw 3",
+      "id": "BACK-SCREW-3",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.653336236163559,
+      "connectedComponents": 1,
+      "support": "CASEBACK"
+    },
+    {
+      "name": "Caseback screw 4",
+      "id": "BACK-SCREW-4",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.653336236163559,
+      "connectedComponents": 1,
+      "support": "CASEBACK"
+    },
+    {
+      "name": "Caseback screw 5",
+      "id": "BACK-SCREW-5",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 0.653336236163559,
+      "connectedComponents": 1,
+      "support": "CASEBACK"
+    },
+    {
+      "name": "Rear crystal \u00b7 seated window",
+      "id": "REAR-CRYSTAL",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 232.68443667824613,
+      "connectedComponents": 1,
+      "support": "CASEBACK"
+    },
+    {
+      "name": "Crown tube",
+      "id": "CROWN-TUBE",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 3.9471778691505826,
+      "connectedComponents": 1,
+      "support": "CASE"
+    },
+    {
+      "name": "Crown \u00b7 bored fluted body",
+      "id": "CROWN",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 39.8747393465345,
+      "connectedComponents": 1,
+      "support": "OM10:52"
+    },
+    {
+      "name": "Upper strap \u00b7 solid padded band and rolled end",
+      "id": "STRAP-UPPER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 3829.4276609341255,
+      "connectedComponents": 1,
+      "support": "SPRINGBAR-UPPER"
+    },
+    {
+      "name": "Lower strap \u00b7 solid padded band and rolled end",
+      "id": "STRAP-LOWER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 2160.5057333154214,
+      "connectedComponents": 1,
+      "support": "SPRINGBAR-LOWER"
+    },
+    {
+      "name": "Springbar UPPER",
+      "id": "SPRINGBAR-UPPER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 36.6831347326136,
+      "connectedComponents": 1,
+      "support": "CASE"
+    },
+    {
+      "name": "Springbar LOWER",
+      "id": "SPRINGBAR-LOWER",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 36.6831347326136,
+      "connectedComponents": 1,
+      "support": "CASE"
+    },
+    {
+      "name": "Closed leather keeper 0",
+      "id": "KEEPER-0",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 92.82776274200033,
+      "connectedComponents": 1,
+      "support": "STRAP-LOWER"
+    },
+    {
+      "name": "Closed leather keeper 1",
+      "id": "KEEPER-1",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 92.8278558397447,
+      "connectedComponents": 1,
+      "support": "STRAP-LOWER"
+    },
+    {
+      "name": "Buckle frame \u00b7 continuous arched rails",
+      "id": "BUCKLE",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 61.49896655718347,
+      "connectedComponents": 1,
+      "support": "STRAP-LOWER"
+    },
+    {
+      "name": "Buckle tang \u00b7 pivot to actual adjustment hole",
+      "id": "BUCKLE-TANG",
+      "nonmanifoldEdges": 0,
+      "signedVolume": 2.306654276627656,
+      "connectedComponents": 1,
+      "support": "BUCKLE"
+    }
+  ],
+  "mainPlateSupportPadContacts": [
+    [
+      8.818930625915527,
+      11.013345718383789,
+      -0.30000001192092896
+    ],
+    [
+      -0.7318269610404968,
+      14.447235107421875,
+      -0.30000001192092896
+    ],
+    [
+      13.405009269714355,
+      -5.360511779785156,
+      -0.30000001192092896
+    ]
+  ],
+  "clearancesMM": {
+    "caseToSourceRadial": 0.67501926,
+    "retainerToSourceRadial": 0.19501926,
+    "springbarToStrapTunnelRadial": 0.01,
+    "springPinToLugBoreRadial": 0.025,
+    "minuteTopToFrontCrystal": 0.13
+  },
+  "limits": [
+    "Front uses a solid supported dial. Skeleton movement redesign has not been attempted.",
+    "Clay omits transparent front/rear crystals from renders only; both solids are present in the file.",
+    "Envelope dimensions and explicit intended interfaces are checked, not manufacturing tolerances or structural loads.",
+    "Original source assembly is preserved; source manufacturing features are not re-engineered.",
+    "New shells require visual inspection in addition to topology checks."
+  ]
+}

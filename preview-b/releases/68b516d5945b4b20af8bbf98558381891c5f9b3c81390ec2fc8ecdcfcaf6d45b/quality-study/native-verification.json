@@ -1,0 +1,1101 @@
+{
+  "status": "Unapproved editable open-front design proposal; engineering validation required",
+  "units": "mm",
+  "source": "Aerial-Finish-Study\\Aerial-Finish-Study.blend",
+  "sourceSHA256": "a2397295b86a6b75cb4cb0747f528441c7bc4cf0b891f94bbffaa38ac788724f",
+  "checkpointSHA256": "77f1a3df80ad515b0d3d0a832f8a044ada0a243adc1eb20fba671aaf62cd9beb",
+  "referenceMovementMeshes": 166,
+  "originalSourceFingerprints": {
+    "0": "bda3d85302e0f7198264ffda490c36de18120c0c87dd285bb7e9dd268c009c59",
+    "1": "4fa75bbd226a7a376d9ee97521ea2352a468e42b79df7e798606639ccf4f9445",
+    "2": "e39e1943858c5cb3ce28d9b029e8723cef6c0f62e9389648159d679ffd053fdd",
+    "3": "4e46ef365357c438ed424c3049dd54032b925c2d6b522f32ab7e53529848cf57",
+    "4": "d3ac33c1d3221f233068cfe5dfc6970c4e2c46e70c3cd17ac3c4a55fa3f2d292",
+    "5": "9d2eedf0ffb65bb9daeed3ec76258d3f477c6ea8b1de0277edc0e62df4b2a17e",
+    "6": "707b26614793357e3d4f41109802a33079a9332d8529d9c012373e7f6887febd",
+    "7": "7d39983197cdfb53f6b18e0d69f50d5bf311c06644a82119d38b66736e151729",
+    "8": "3b24a788ce9eba63c2eee293883adfeec89e2519daee065607130436f6a99d5a",
+    "9": "1021d27c115cb17a1cb624c0319cfa93e3bf998bb1efa99e3a0397da10753733",
+    "10": "26868268b2ef2274bf9125d055b6d00a7a39ab30fbe9fc8980ad5393f5541354",
+    "11": "3afc7805905cd208d2995bc61b2ff0bc1e023cf6064bc0bd0ad91d9ef33b53b9",
+    "12": "4dc078c4f4d74e6466c9e45f77949ed29efae1666f52affac0174a18dee90313",
+    "13": "089426402c8c7e3a89ca6c55ae1c2e1f59313d0f819e3fa25738428a52a63623",
+    "14": "fbbdf4fe9bbe9384491c4a608f3441bc78645780fdad4d7c189e6abfa9a7fc9c",
+    "15": "3334c60d2ab1f6242cc8b307800b3e2279c9ebba3ee608df436efbbcd8dba87e",
+    "16": "f31c620d9ce62514574f92e51273f7c50141c89546ce8429e02391941199cc0d",
+    "17": "a5e4558850e37285927e76811097c1da695550418ffb50036781d9fbeca570e3",
+    "18": "bf00cff3ba9e0eba4411c3b41163997dc4b1cd990be19ee27624c14d6245c416",
+    "19": "ac915877de40dc5cac2a7287fd5097b5286fb211119e2e8d9054b0a6603ec762",
+    "20": "875763656e36d8b2e55a90b033d5b809cc9dbbdcf75ba6ce08bf78d6f8ddc9f5",
+    "21": "49ce102a0179b7be46fb6c3e263c0af61eac70f1b28496353cabfa129dfeaeeb",
+    "22": "b66963e784819cd213ea62aab3b8815ba0a4c5614840ffe9f5d5e9125f82300e",
+    "23": "5c028c5fe396fa91539f3ecdd21ca976c8f2a8cf7de780f250484780b6cfda5c",
+    "24": "e4065d187863df0754ec69e9ba03397a2e9dcba5b994ab9042ad750a08ae8834",
+    "25": "75a9d5b9ff0ccca7f7c771f5ebb05e1a1e06537775ddada34ecbac0aa804c59f",
+    "26": "d4af60a4f6d7eadd2b15beeb04cfb5a3d83cf57bbf9212d8fd6fd70595f5e998",
+    "27": "793060ebb30a589f8ad21b3860dd458f56b774fa1029a4ddaa072aab360c25ca",
+    "28": "6c0814f7d001f4222e01592a3f08f1035ddd47bda18612c6ac5626fc7f7f494f",
+    "29": "3b43d1619f7f55a068d80e2f9de71f4bff5ee91ec749f7175806bb42d3775060",
+    "30": "c6d7974daa057bc31e44700fb4b5b173cf5d15d47a23dc741385215bb324db68",
+    "31": "f8c48a4a040809e1db26dd6c241db9ae473a8d99df18c4dcfa7cea2f00945f1f",
+    "32": "b6b5396c2e1aac6b85ecf38c2e329727887f4cdf01186b832f95c87312c83d56",
+    "33": "d1aafc4ce375948c822957ab0593e5384350efc4c758ed4e06a7015ed51b75d9",
+    "34": "cdcf507a1181cbf039c43fa92fd414a221c6abd78da9c0db3035c6075fec5000",
+    "35": "d163bd1621d9e73a48bf1a86be12e5eb1072199363ab0c010d0f5185d670d14f",
+    "36": "f6586f252af90da427530821a11a82f4084c6a3e98bb9102bbfd5e2798e8d9ad",
+    "37": "8e7dbfd03489cd6f6a6774e361171986c452521b4d52899d9ccac31c302cede4",
+    "38": "b059601d0024eb6f00dd2ca22edc5ff54c0738c92b13e040ab6768df192df31a",
+    "39": "83b9e47e9fb00a9829d2698b425e4ccfdb1f2a40b1f86c3e3c7f723adf80c93f",
+    "40": "eec60673ce2f295b3b0405ff98ce5eecb35290b2e8754bbd60a74024b360c62e",
+    "41": "38a13d297584c3e43bc5545e9e48df0d0bcba77e5c08bd26e19e5791e4db6d4e",
+    "42": "a4b736d4b71b4bc5bddf8938b86048a3b1d21b7e044806c52de54b27f83e24e3",
+    "43": "4363c4441e427237cef318d8a36b23c92e9f7207f3eab12c535fea696dd0523f",
+    "44": "10505bd8e0251c9a0c1858c4857d53cecf024d75283d83120549deec74ae0349",
+    "45": "2e77cddf7d691084551b09c81ff76709a2b50b2827e33817728483b97c8c78f5",
+    "46": "3b0debb8242cce06da53077c70becf51fb2be5d1d64f3387707e5bc528979ab9",
+    "47": "2fca563a6077159f66f905a0684a919737fca30e053413a570e2365bbaf6ffa2",
+    "48": "13ce6e4b5c32c72c0f7f26e651710c80e005e54c5d66d6e7a277f358abfb1196",
+    "49": "e9ed12700356019357429203fa07c9cb55e2fa51f126ec65b1d5c66bc6e6782a",
+    "50": "603cdaabe2e280e89714083c550c99cdcee0cd428cce8b35cb6144f28a4b322f",
+    "51": "6e58dd0a10a90abdf0c07e2587434fcfb879bfac76991193eeaf6b35cf4e50cd",
+    "52": "8f8cf1e7b20c4da052ade4509616b57d2999a923e2a0611a853421eb8d762c97",
+    "53": "5ff30df48da8dc41c869b2b7890d46b2dc18ad307b46b04303413481ba2a76d6",
+    "54": "89e5846df7038d4459b049613240b050b56038b5721448d66b5d7bf907bd0673",
+    "55": "9b538bff28b7f7bedc1b703308b354071609630b101d884fd5f2242bcb90adea",
+    "56": "b8f5b8e516d2e92230a748ade100cb3e137a03ac0c9d812c712b4378409c482f",
+    "57": "0ec7b8e88b5c930d6de098a509f54d38d82ace86581cdf14f8b6cfc00491d70e",
+    "58": "43ec6a3cab44a778bb2ec8a79eba2c1103d4f142be201bdd1ee7fa8d83b9aa6c",
+    "59": "9b690884d5be0dccd2b47dd48d2923d6fc24463a49063af286957d786ba0bd1e",
+    "60": "4574b1546105224eae62e0a8193ac08eb70fc846fc5c553315a50c4e5821ba9f",
+    "61": "3055906937f80b9e2b94bc37879a14a93b6071ac86427a71e11a4ddcdcafac55",
+    "62": "6fc9130857eb1a90ad1ff9d3032c1d93a4ab93b6fdbb2ccf835db65f3fe7dfd1",
+    "63": "1b182b46bef39887598fe6f4181962c52c787ddc122d53837cbd25ddf9450416",
+    "64": "da925f3088fb7546683e414bb7db7f964c511fb4376d3a52a94bb2a0f7a8bdc7",
+    "65": "c355a903e149874229b17a8f3c40aff5e0cbf58a14d0763724adbf27f5a6ba29",
+    "66": "33de274511e327da69d7e1fcdde1f4102cef2345210caf1b1cc428aaebe93821",
+    "67": "bf1374e64ece3c7b900030c741e79d7616c8cc459b23a612d58112aeb5ccfd3e",
+    "68": "a6f6cf20dc0208cb7736b831aa4eb93d5fc4c7a3a2de97f6fed8ac848dd9f3c1",
+    "69": "802a37deb16dc7c7407f0c122c598008235f38a7f6e95fd6b96aac2d5b11bee5",
+    "70": "dc17cbea9c9189efe99289f500266291ffa118bf29e9d60ff71f1343d77481db",
+    "71": "34946034d6511dc1715a55f48d5a382c7daf46776bdfe8f653440a91d9c99ac3",
+    "72": "92bd59a1599b3416cab08a05f870af203d7e741f4298c563946a93ba8ad59e2d",
+    "73": "1db83ab696a783d725fd2603bf7ce5b3586695bc349739ef19fc9a0b2f87dd8d",
+    "74": "7b8f1daa532f7a290bb3aab5b40f8e0a87b47309399d05a2b69c36c9250aa9e5",
+    "75": "c6dd1f2d3c25d4e89827c3a7b1d5a72612876650e047a2a03324f8867748851a",
+    "76": "84185cdb548049471cf841e871926ede74f0fb305f2cd1c14fcf1431b7f7e08b",
+    "77": "b2f78377ec477ace3d01389d864bbc45a743905883dfac00cd3fd0ae38df0e12",
+    "78": "a1193846182e2ee61fcf579807d4d56b48d30720be1688079e8524e379b135fd",
+    "79": "df609abdde8630f0e078cd202c85ceec35fe33d46ff0d57c277dc140790d0d91",
+    "80": "d8da3fb72bfd89c2e26d7e8512cabce1c5a4e0f6b98a2f519d25c6133400e218",
+    "81": "38a86886d63f1cfa83530722c75ea82d861ba4d1cf54fdbdf40ce3e929b1cc6a",
+    "82": "7a517cc28a26d6b7d9753e72fcd110b4f9deeb22ba9692eaefaddb6a5f1d0efc",
+    "83": "f6c3296cb87550b03f420d8f5231e3a001ed525cfbded7435202bb527cefbb3a",
+    "84": "2e2eee04ff45a0a8ff02bfe1eb578d1a0ffd291d8b1673583c7fd343997e7102",
+    "85": "428bcaf87235a3a5d900b17ef5fc45f3a46ad2d0fbe1386a91a979a7894be42e",
+    "86": "d952f84b38f393f3ee4fc2e5bac2b54395e9e043dfb7743962291cf87c1901b7",
+    "87": "19cd5cd3021caf04de1b61fc48202e7f805f14f390718b7ecf41a1ffb40e3fc7",
+    "88": "55603f552184c8cb128e89674673ba83b652dadbdd1e55914247bc816f4c36f5",
+    "89": "a88840d80b66e9f05475203c96fa3777a00255d34e6f147878be0f6b3c19c323",
+    "90": "1e98ebd44946a0cf2cc853d7e9e55f7033dbc7caedca4e28c7a13d83229b6961",
+    "91": "96a6a84474e0b132fdfa20a9123f4c9bb9ae5d4aa8fe5a1c34f211ca4ea1fcd3",
+    "92": "aee47558b2bcf7f91987034deded6386145fbec6869e8cc6c6db258cac2d81cf",
+    "93": "cd4a0e641cb736d6435e397c04450f0cb9a2601eddd8ab87860b1bc3c249369f",
+    "94": "5936202b0b3e94444a136db54d8752192ab76c1e36062fa80d5eb485f3d431ba",
+    "95": "4ec786317196a1fee958f7fb8f6b142d6b42db4b366549a49d3108c58b269b47",
+    "96": "5830d260eb426f3294f226aad8cac49dd076e1228a00a3e492ef879b32655f71",
+    "97": "d2203dc6bc874be66b15c09aabf798d42ce68925485773160f41ace36649c453",
+    "98": "b107febc3501105f356e592ba7127d8e95ce97f574e07806a41c67a96aba2c7f",
+    "99": "f1dc698272d5614872c37891d6303b883afe53472b8e8d35ca3beeb3bd5b1024",
+    "100": "3de447406f49298ba17ef4a7d39cad518f3ffcf054e6378f1b9e444c959c5bf1",
+    "101": "a6c999fe2c8c15d684c43be67f1ff8d4e87b6519c8e31f2011eeb155001aca12",
+    "102": "255fadc2865bcbe3d465a7501e7fbb7f794d1f39e2779981ba7fab0a31742021",
+    "103": "104e72ccec2bc4206200641c4e07ced701841dafdb3a51cb2d226ba8d7c1dc9f",
+    "104": "c7d044b6122ca015344d3645c9259735c36818af8a2d4e5e6338617fcf6bc443",
+    "105": "f1c802b196a587ba082dab95ad4edb194f7ee2f57de330d999e2e181f1644f73",
+    "106": "7e57b029c487e7feebf384fa3e6b2df0fabfe9711aae0d40254857c19b7b05e3",
+    "107": "c15f0da7196f04d08166491eed80229961d4f0aa4b5fe6c9ae9fcec67af85648",
+    "108": "15ab8ab3a0edb13e515bc8e5dbd53d1f7710485f3d1e42d8a85eaba51aaa05d7",
+    "109": "9bd7023526c01c44844232a733aa8529d776ef12f53fb72f7d9387a5add9585c",
+    "110": "a480ed7ece9497101b41989fea60397b25c2eeef9a64b760c02f4deee2c70835",
+    "111": "49beebac6c81c0afaea097a3cc5f49fd082153e97670dccdacbd2a0786591926",
+    "112": "5eba5d3a8866f4cb073b02d1ddf04a206d45b037782ce15e2145d342974e2a05",
+    "113": "f6ef0967819d276b427b49607b63b346ca269b494566343c9c2117b663de6e47",
+    "114": "27d5725104cf94f34fda2a34931770cace1343c77e4962bec91a64d2e18eae0e",
+    "115": "5e73c52aee916f16b79005b37b5ca0a908cf5f84f596c45b1d1e21469670f366",
+    "116": "c6e14e8a130b5d145fece54ca2f00dd29220150d4e5934127e0c8fd2399ba528",
+    "117": "4f19d06ef83f69e0b8f921f9b960552c529819aff13b4afeef396fd2b47c2a97",
+    "118": "24f4b80b7250382738dd518d6066e72f9249aa5562aa06caca4ea488e993ff02",
+    "119": "241ace33c87fb3f24095b0aec1800f6170e4f430117bd9838f5ab7f359318cb4",
+    "120": "56f77a9be3177febc37c2c2304c10d70f2f8438d4753bbf4ac9d3774c8b6dcde",
+    "121": "1f24c4c84c9f76ce7b0eac8d157d450bf2a68015a9ffa684d1da5c538f877ccc",
+    "122": "db58028f4572901e5b957f57d8f81027c519d72e2a7814405f2456ed38e08f88",
+    "123": "e62d6cd7da9c5819d9381da25f3dc3671ce93e24920b8aba7f8141119ca33628",
+    "124": "bfde97bbd23fb3bfc20f3c33e8d75c662ad7b6ea277ed31819a6d327f92bcd84",
+    "125": "9aa7b1991f9cd0d26efe7ef8737593f60ba57bec273b7397a6646a914489c793",
+    "126": "b6a1f9ab5720dec7072d81597054afd4ed45d9046082abd0703bf1e72ecd2b1e",
+    "127": "68507c8e5342f431ad6e48801b6c3ec3611ca2868c5182eedc3422c8faf49a61",
+    "128": "13690f90eaf2dd04fa0a4befe696b6d97533fd84f44b2661afdee36a7d3d3d6f",
+    "129": "a4730d6ea6414ca7b5c53af8b454fd32a76beef6843992515fa9a4ae1143ddaa",
+    "130": "46db4350a3d4d65810f487b7ab6b39524fda33fda1523e1eaf4bae2a735af6f3",
+    "131": "62be4b5efc8dbfc9818a8d08c12a7691b0b8710a4946c25d9aee70cd16658eeb",
+    "132": "9d63890f81c14441aa23869a58a11e8ee529221e4645ba5ed99d834a4ddee9a9",
+    "133": "b5a0756eb8d9d958b9cb53da3d81d9f5f25c71b1a64f7e0a60eda074831214e7",
+    "134": "1060f2384944485abe3a69250db0e97b928476bdc1eb5fd83a13d3fb9a669bcd",
+    "135": "a13c0a0efd604edf571b5a08483b7ba6f64b2c0fa3d2e07af26f08d6170ffb40",
+    "136": "5f38003bb36c1a85c34fea99dca3563b9580f0442fd0c606d1283959d3275060",
+    "137": "9fa222953f108287c8a6f90e484117ebcb94ec5569db18e100f95a619296bd49",
+    "138": "63eebe7d2c9edb59ed8f0704672e7388da11a656f0cf08a5bdc8ca62096729e5",
+    "139": "ba381cf377cf219ec8929a8abcc238b382714cff1f8f8295bd1e2fe57b41a8ba",
+    "140": "e8a6baeaa860150e490b14c5f4a4934d0d11c166aed13f3502d68d6eff98fe60",
+    "141": "8106df92a3d3502877ea9cc8304de68f3adfd6edacc1b1ee3b9fd0be06e22c86",
+    "142": "a074e176e39035fddad5e31b7f9f93049b472b0a0b853500b335e2affd73d112",
+    "143": "467df46860d3d5008ee17ee5c9eeed4cd5f480ca6ddfab25bd7721cc6a5346d8",
+    "144": "70ff8db78325d60ac85af60d39eca96caa048a58c8f69881c4e1574737f20168",
+    "145": "022b8092ca4dd55e64d02df8f23eadef0dae93102b5cc6870d056f12c3aae81f",
+    "146": "e23b2bc172d002c48adf593b33df2247357b24620ec0f79b4f0d7b6483a50e6d",
+    "147": "8a2f0f7d04f68d84cef7b9b39b3e96c8d8fa31b083dc275d31a02994a8298d8b",
+    "148": "20c83615ebfdc88492cf21fc4e1505a40343d6f3319249c7e7905ab5c41c4d8f",
+    "149": "56293077d856be6361a16e73ee9c92cc8f17216bc35f03ea96c805b0cc228a16",
+    "150": "cadf0f3bd9e20a16baf2f066327b56768b1b2dbb8561deac90b282d3ae3f7399",
+    "151": "d1fa17ab7ca8633a796910c63d6767c3d0e2ff12b13bcc3bd69eb82b57e81e3f",
+    "152": "52a6db352a3f71be5a736d6d7f2e5403665b2c6d4f9743172d3bd759ecdba4d6",
+    "153": "627f4ea7cb14484b025dd98aece151a5674651225e0b6e1fa6c418a53536e431",
+    "154": "3f866d0cb28ab33015f0b690b364c4a76fbd79a281b8d0cb1c40b5852d328121",
+    "155": "a962cca4ebbc8443b43a4960fb3b973e30a4788848df315713b72d85764259ed",
+    "156": "2e041e59450744c1ef797267439dd3db6cbac4ca3c5a9704a62fbbebc9f934f9",
+    "157": "7125255400ba404b700146195054387f5fd73f6f2ca8dbf59999d4f69227c32b",
+    "158": "e33a8b8a4d80d88e188ddcb4c6bc5482c24ee023cd7cbcd31f714ed610038863",
+    "159": "e7e72da34317b305dc0ff647f2db61a40263d26100b1d178a996d146265c356d",
+    "160": "bf8169c5956dd1efe6e59ae0d9a28fff0e9e0d261b06bcc887fbe53ca8fb4e77",
+    "161": "425410fec7f9a71e8cee1e92ef8a58a3ae5592cc5fc64503fb6c25d4f871d522",
+    "162": "e2344ee4769054c0bd3825c7debe4eb070f2e190dd6f54f2b3aff18bb2e2fb9a",
+    "163": "c6b3adab3e52e40e1b693356d576b9597afc40d9af1e7a947762e9e317c2fee7",
+    "164": "fd3e79c972614c8fc161841d23f6f58562389ade0bcf6d968de5d559304f18c9",
+    "165": "13176f2a126d1fb69d3290fb016a4db8e09676e2a903f6c5768959d01d27b807"
+  },
+  "activeUnchangedMovementMeshes": 164,
+  "derivedPlateMeshes": 2,
+  "unchangedActiveSourceFingerprints": true,
+  "retainedMeasuredPadGroups": 42,
+  "nominalWebWidthMM": 0.55,
+  "mainplateApertureLimitRadiusMM": 14.35,
+  "calendarCoverApertureLimitRadiusMM": 9.8,
+  "nominalCalendarCoverOuterRimWidthMM": 0.5,
+  "plateChecks": [
+    {
+      "replacementForSourceIndex": 0,
+      "topology": {
+        "vertices": 20414,
+        "faces": 31824,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "connectedComponents": 1,
+        "componentVertices": [
+          20414
+        ],
+        "triangles": 40988
+      },
+      "padCoverage": [
+        {
+          "sources": [
+            1,
+            78
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            2,
+            91
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            3,
+            110
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            4,
+            106
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            5,
+            131
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            6,
+            107
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            7,
+            90
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            8,
+            118
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            9,
+            10,
+            11,
+            12,
+            120,
+            121,
+            122,
+            123
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            13,
+            39
+          ],
+          "originalSampleHits": 45,
+          "retainedSampleHits": 45
+        },
+        {
+          "sources": [
+            14,
+            40
+          ],
+          "originalSampleHits": 42,
+          "retainedSampleHits": 42
+        },
+        {
+          "sources": [
+            15
+          ],
+          "originalSampleHits": 33,
+          "retainedSampleHits": 33
+        },
+        {
+          "sources": [
+            16
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            17
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            18
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            19,
+            157
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            20,
+            158
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            21,
+            86,
+            143
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            22,
+            104
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            23,
+            105
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            24,
+            103
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            25,
+            102
+          ],
+          "originalSampleHits": 35,
+          "retainedSampleHits": 35
+        },
+        {
+          "sources": [
+            26,
+            101
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            27,
+            117
+          ],
+          "originalSampleHits": 44,
+          "retainedSampleHits": 44
+        },
+        {
+          "sources": [
+            28,
+            132
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            29,
+            164
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            30,
+            165
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            31,
+            162
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            35
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            36
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            38,
+            null
+          ],
+          "originalSampleHits": 31,
+          "retainedSampleHits": 31
+        },
+        {
+          "sources": [
+            42,
+            72
+          ],
+          "originalSampleHits": 3,
+          "retainedSampleHits": 3
+        },
+        {
+          "sources": [
+            43,
+            71
+          ],
+          "originalSampleHits": 5,
+          "retainedSampleHits": 5
+        },
+        {
+          "sources": [
+            44,
+            73
+          ],
+          "originalSampleHits": 3,
+          "retainedSampleHits": 3
+        },
+        {
+          "sources": [
+            45,
+            55
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            46,
+            54
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            47
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            48
+          ],
+          "originalSampleHits": 2,
+          "retainedSampleHits": 2
+        },
+        {
+          "sources": [
+            66
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            80,
+            142
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            89
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            154
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        }
+      ]
+    },
+    {
+      "replacementForSourceIndex": 155,
+      "topology": {
+        "vertices": 7946,
+        "faces": 10923,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "connectedComponents": 1,
+        "componentVertices": [
+          7946
+        ],
+        "triangles": 15968
+      },
+      "padCoverage": [
+        {
+          "sources": [
+            1,
+            78
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            2,
+            91
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            3,
+            110
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            4,
+            106
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            5,
+            131
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            6,
+            107
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            7,
+            90
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            8,
+            118
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            9,
+            10,
+            11,
+            12,
+            120,
+            121,
+            122,
+            123
+          ],
+          "originalSampleHits": 44,
+          "retainedSampleHits": 44
+        },
+        {
+          "sources": [
+            13,
+            39
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            14,
+            40
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            15
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            16
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            17
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            18
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            19,
+            157
+          ],
+          "originalSampleHits": 45,
+          "retainedSampleHits": 45
+        },
+        {
+          "sources": [
+            20,
+            158
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            21,
+            86,
+            143
+          ],
+          "originalSampleHits": 46,
+          "retainedSampleHits": 46
+        },
+        {
+          "sources": [
+            22,
+            104
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            23,
+            105
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            24,
+            103
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            25,
+            102
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            26,
+            101
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            27,
+            117
+          ],
+          "originalSampleHits": 44,
+          "retainedSampleHits": 44
+        },
+        {
+          "sources": [
+            28,
+            132
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            29,
+            164
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            30,
+            165
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            31,
+            162
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            35
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            36
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            38,
+            null
+          ],
+          "originalSampleHits": 48,
+          "retainedSampleHits": 48
+        },
+        {
+          "sources": [
+            42,
+            72
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            43,
+            71
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            44,
+            73
+          ],
+          "originalSampleHits": 24,
+          "retainedSampleHits": 24
+        },
+        {
+          "sources": [
+            45,
+            55
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            46,
+            54
+          ],
+          "originalSampleHits": 17,
+          "retainedSampleHits": 17
+        },
+        {
+          "sources": [
+            47
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            48
+          ],
+          "originalSampleHits": 11,
+          "retainedSampleHits": 11
+        },
+        {
+          "sources": [
+            66
+          ],
+          "originalSampleHits": 24,
+          "retainedSampleHits": 24
+        },
+        {
+          "sources": [
+            80,
+            142
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            89
+          ],
+          "originalSampleHits": 0,
+          "retainedSampleHits": 0
+        },
+        {
+          "sources": [
+            154
+          ],
+          "originalSampleHits": 19,
+          "retainedSampleHits": 19
+        }
+      ]
+    }
+  ],
+  "qualityPartTopology": [
+    {
+      "name": "Graphite chapter / integrated twelve signature",
+      "vertices": 8192,
+      "faces": 16384,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "Seconds / independent graphite chapter",
+      "vertices": 4096,
+      "faces": 8192,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "Seconds / axial mounting foot 350",
+      "vertices": 98,
+      "faces": 192,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "Seconds / axial mounting foot 110",
+      "vertices": 98,
+      "faces": 192,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "Seconds / axial mounting foot 250",
+      "vertices": 98,
+      "faces": 192,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "HOUR / faceted blue blade",
+      "vertices": 15,
+      "faces": 26,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "HOUR / bored integral hub",
+      "vertices": 512,
+      "faces": 1024,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "HOUR / polished arbor collar",
+      "vertices": 512,
+      "faces": 1024,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "MINUTE / faceted blue blade",
+      "vertices": 15,
+      "faces": 26,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "MINUTE / bored integral hub",
+      "vertices": 512,
+      "faces": 1024,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "MINUTE / polished arbor collar",
+      "vertices": 512,
+      "faces": 1024,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "SECONDS / faceted blue blade",
+      "vertices": 15,
+      "faces": 26,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "SECONDS / bored integral hub",
+      "vertices": 512,
+      "faces": 1024,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    },
+    {
+      "name": "Seconds sleeve / coherent R02 low stack",
+      "vertices": 2304,
+      "faces": 4608,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0
+    }
+  ],
+  "browserDesignSHA256": "2216b4d30c45658c47885d6dbb7474c37e7822f85ad11aa6dcfba7845ab27c82",
+  "surfaceShading": [
+    {
+      "name": "OPEN-MAINPLATE / original seat-preserving proposal",
+      "angleDegrees": 30,
+      "planarCaps": "Flat polygon normals on native +/-Z faces",
+      "walls": "Smooth shading bounded by sharp creases",
+      "before": {
+        "customNormals": true,
+        "smoothFaces": 30679,
+        "faces": 31824
+      },
+      "after": {
+        "customNormals": false,
+        "flatFaces": 15942,
+        "smoothFaces": 15882,
+        "sharpEdges": 20711
+      }
+    },
+    {
+      "name": "OPEN-CALENDAR-COVER / original seat-preserving proposal",
+      "angleDegrees": 30,
+      "planarCaps": "Flat polygon normals on native +/-Z faces",
+      "walls": "Smooth shading bounded by sharp creases",
+      "before": {
+        "customNormals": true,
+        "smoothFaces": 10186,
+        "faces": 10923
+      },
+      "after": {
+        "customNormals": false,
+        "flatFaces": 5520,
+        "smoothFaces": 5403,
+        "sharpEdges": 8019
+      }
+    }
+  ],
+  "exportCoordinateMapping": "native/watch (x,y,z) -> glTF (x,z,-y); add under viewer +90 degree X mount",
+  "limits": [
+    "Geometry changes are a distinct proposal, never an original OM10 replacement release.",
+    "Pad surface sampling verifies retained original projected seats, not fatigue, stiffness or bearing fit.",
+    "Original bridges, date ring and all 164 other movement meshes remain intact and visible.",
+    "Original static native gear phase retained; browser supplies corrected kinematics."
+  ],
+  "handStack": {
+    "revision": "R02",
+    "secondsBlade": [
+      3.64,
+      3.8
+    ],
+    "secondsHub": [
+      3.59,
+      3.83
+    ],
+    "sleeveTop": 3.68,
+    "hourBlade": [
+      3.86,
+      4.02
+    ],
+    "hourHub": [
+      3.58,
+      4.08
+    ],
+    "minuteBlade": [
+      4.39,
+      4.55
+    ],
+    "minuteHub": [
+      4.22,
+      4.62
+    ],
+    "minuteCollarTop": 4.645,
+    "crystalBottom": 4.75,
+    "preservedSleeveAtOrBelow": 2.94,
+    "nominalGapsMM": {
+      "secondsBladeToHourBlade": 0.06,
+      "secondsHubToHourBlade": 0.03,
+      "sleeveToHourBlade": 0.18,
+      "hourHubToMinuteHub": 0.14,
+      "supportToHourHub": 0.058,
+      "minuteCollarToCrystal": 0.105
+    }
+  },
+  "blendSHA256": "087d937955a3146764b8dd755d6e3d39950f48c3a75c1c8870840930b78ffad7",
+  "seatCoverageTransform": "Stored matrix_basis used for all unparented movement objects, including hidden reference collection.",
+  "leatherExport": {
+    "stitchObjects": 2,
+    "linedStrapObjects": 2,
+    "bytes": 1499648,
+    "sha256": "8c99c0086178e08af47e01b72afc0241193661d54b78ca3a030d2b346592e901"
+  },
+  "defaultCamera": {
+    "position": [
+      -68,
+      40,
+      125
+    ],
+    "target": [
+      0,
+      0,
+      -15
+    ],
+    "orthoScale": 78,
+    "upAxis": "world +Y"
+  },
+  "calendarFinishProposal": {
+    "sourceIndex": 149,
+    "part": "OM10-00138 / retained calendar date disc",
+    "materialName": "QUALITY / graphite calendar date disc",
+    "linearColour": [
+      0.022174,
+      0.03434,
+      0.042311
+    ],
+    "metallic": 0.82,
+    "roughness": 0.39,
+    "scope": "Active Quality 01 proposal only; locked original reference unchanged",
+    "status": "Authored finish proposal; original geometry and transforms retained"
+  }
+}

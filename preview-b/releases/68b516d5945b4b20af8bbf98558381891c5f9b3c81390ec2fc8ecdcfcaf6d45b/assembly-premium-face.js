@@ -1,0 +1,60 @@
+import * as THREE from './vendor/three.module.js';
+
+export const premiumFaceAsset=variant=>variant==='svg04'?'premium-face/face-svg04.glb?v=constant04':variant==='svg03'?'quality-study/face-svg03-rim-candidate.glb':variant==='svg'?'premium-face/face-svg-b.glb?v=svg02':'premium-face/face-b.glb';
+export const PREMIUM_HIDDEN_SOURCES = Object.freeze([0, 149, 155]);
+export function premiumFaceVisible({enabled, openWork, movementOnly, isolated, interior}) {
+  return !!enabled && !!openWork && !movementOnly && !isolated && !interior;
+}
+/** Authored dial overlay, not a replacement movement. Model mount matches baseline glTF. */
+export function preparePremiumFace(root,{finish='baseline'}={}) {
+  const meshes=[];
+  root.traverse(mesh=>{
+    if(!mesh.isMesh)return;
+    if(mesh.userData.premiumFacePart!==true || mesh.userData.sourceIndex!==undefined)throw new Error('Invalid premium face asset: expected authored face parts only.');
+    meshes.push(mesh);mesh.castShadow=true;mesh.receiveShadow=true;
+  });
+  if(!meshes.length)throw new Error('Premium face asset contains no meshes.');
+  const revisions=new Set(meshes.map(mesh=>mesh.userData.designRevision).filter(Boolean));
+  if(revisions.size>1)throw new Error('Invalid premium face asset: mixed design revisions.');
+  const revision=[...revisions][0]||'B-02',svgDerived=revision.startsWith('B-SVG-');
+  const fineGrain=revision.startsWith('B-SVG-04');
+  const finishTrial=(finish==='atelier2'||finish==='atelier3')&&fineGrain;
+  let texture;
+  if(typeof document!=='undefined'){
+    const canvas=document.createElement('canvas');const size=fineGrain?1024:256;canvas.width=canvas.height=size;
+    const context=canvas.getContext('2d');
+    if(context){
+      const pixels=context.createImageData(size,size);let seed=29;
+      for(let i=0;i<pixels.data.length;i+=4){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const c=110+(seed>>>27);pixels.data.set([c,c,c,255],i);}
+      context.putImageData(pixels,0,0);texture=new THREE.CanvasTexture(canvas);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(svgDerived?1:20,svgDerived?1:20);texture.name='Fine charcoal grain';
+    }
+  }
+  const materials=new Set(meshes.flatMap(m=>Array.isArray(m.material)?m.material:[m.material]));
+  for(const material of materials){
+    if(/Graphite/i.test(material.name)){
+      // SVG-derived material scalars come from the inspected Blender export.
+      if(!svgDerived){material.color.setHex(0x19191b);material.metalness=.12;material.roughness=.48;}
+      // A small linear-light lift retains the exported charcoal hue. The
+      // trial is restricted to SVG04; earlier assets keep their authored look.
+      if(finishTrial){
+        // Optional art-directed charcoal readability study, not measured
+        // reflectance. Mutate the Color object using explicit linear values.
+        if(finish==='atelier3')material.color.setRGB(.045,.05,.058,THREE.LinearSRGBColorSpace);
+        else material.color.multiplyScalar(1.18);
+      }
+      if(texture){material.bumpMap=texture;material.bumpScale=finishTrial?.003:fineGrain?.008:svgDerived?.12:.025;}
+    }
+    if(!svgDerived&&/champagne/i.test(material.name)){material.color.setHex(0xb89b70);material.metalness=.85;material.roughness=.26;}
+  }
+  root.visible=false;
+  return {root,meshes,texture,revision};
+}
+
+/** Restrained appearance of the approved B reference; original BOM is untouched. */
+export function premiumMovementFinishKind(data={}, name='') {
+  if(data.sourceIndex===undefined)return null;
+  const label=`${data.description||''} ${name}`.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  if(/\bpierre\b|contre pivot|cheville de plateau|^palette/.test(label))return 'steel';
+  if(/serge de balancier|planche/.test(label))return 'steel';
+  return null;
+}

@@ -1,0 +1,14 @@
+{
+  "project": "https://github.com/zeux/meshoptimizer",
+  "release": "https://github.com/zeux/meshoptimizer/releases/tag/v1.0",
+  "tag": "v1.0",
+  "commit": "73583c335e541c139821d0de2bf5f12960a04941",
+  "license": "MIT (LICENSE.md)",
+  "verification": "Official tag downloads byte-compared with raw.githubusercontent.com immutable commit downloads before copying; no modifications.",
+  "files": {
+    "meshopt_encoder.js": "e79ba4a73a758f315ab153dc50c389c7b0bea2b5c1fdcfcaa62ad6d0c27cb25c",
+    "meshopt_decoder.mjs": "97901fb3d2d296eeea2a57348a734ef0a17e35f2d4aea5a65223635d3f0e1709",
+    "LICENSE.md": "e4a26033e3551fb2722888949fbb41e77aee628e8e8f04dcffeee301aa7e5634"
+  },
+  "runtime": "Only decoder is imported, lazily and opt-in. No workers, remote fetch, or CSP relaxation. Encoder is build-only."
+}
