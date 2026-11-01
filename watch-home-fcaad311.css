@@ -1,0 +1,7 @@
+:root{color-scheme:dark;background:#191b1a;color:#eeeae1;font-family:Arial,Helvetica,sans-serif}
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+#watch-viewer{display:block;width:100%;height:100vh;height:100dvh;border:0;background:#191b1a}
+noscript{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:#191b1a}
+noscript p{max-width:36rem;line-height:1.6}
+a{color:#d6c4a4}
+a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
