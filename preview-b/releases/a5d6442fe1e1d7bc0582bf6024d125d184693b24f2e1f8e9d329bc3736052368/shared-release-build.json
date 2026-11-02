@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "ownerReleaseId": "c23e2bbc8a64658f2c7f29431cb144cf584e96d0eeac9a1e22c73697acb7b3bc",
+  "ownerReleaseIds": [
+    "c23e2bbc8a64658f2c7f29431cb144cf584e96d0eeac9a1e22c73697acb7b3bc"
+  ],
+  "canonicalOwnerReleaseIds": [
+    "87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1",
+    "a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054",
+    "f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44",
+    "fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72"
+  ],
+  "sourceReleaseId": "3d24e93d78b12fa7d6388c1a85de7b6ef72dc91ecdb0f90b7827ebb55a4f7388",
+  "routes": {
+    "aerial-assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "case-assets": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "docs": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "leather-assets": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "leather-compat-r12": "../87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/",
+    "open-front": "../a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054/",
+    "optimized-assets": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "premium-face": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "quality-study": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "rebuild": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "vendor": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/"
+  },
+  "reusedBytes": 214417574,
+  "transforms": [
+    "central GLTF/JSON asset URLs",
+    "KTX chunk directory base",
+    "Basis transcoder URL",
+    "HTML assets/srcset, dynamic poster and vendor import maps",
+    "first-party provenance"
+  ],
+  "limitation": "Browser QA and complete published inventory budget required before promotion."
+}
