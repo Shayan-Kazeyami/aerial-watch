@@ -4,6 +4,21 @@
   "projectPrefix": "/aerial-watch/",
   "files": [
     {
+      "path": ".nojekyll",
+      "sizeBytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ATTRIBUTION.md",
+      "sizeBytes": 3843,
+      "sha256": "bcae39b501ad2d53f9045cdd2a8067c3e6ddd134bbb48807cefd6f6974e02c03"
+    },
+    {
+      "path": "README.md",
+      "sizeBytes": 1681,
+      "sha256": "c06f8b5d461c570ed3b018c3d6abb9e376853eb03709f81b61e2cf9001dfddcb"
+    },
+    {
       "path": "aerial-assets/aerial-complete-manual-a.glb",
       "sizeBytes": 38811576,
       "sha256": "fcd80dd29bdffac13a5173c85c15f96cd655cc40480aca25095107f9accf4849"
@@ -70,13 +85,13 @@
     },
     {
       "path": "aerial.js",
-      "sizeBytes": 18659,
-      "sha256": "ecc3c5ef8d9994d0bacb817af0be47ac4946fa19bd8b2dacb2784830c9a889e7"
+      "sizeBytes": 18743,
+      "sha256": "13f18bdd49822e679ec2a7cf717ffb77b52544b2a326694bcfa6a32bc010062f"
     },
     {
       "path": "app.js",
-      "sizeBytes": 12113,
-      "sha256": "c034f7bf97b1508f9ed9bf2db976044ccf4344df55888dc7a3ea5fecd2d9a94c"
+      "sizeBytes": 12197,
+      "sha256": "f320603bafe64a8df75dea08c08aeb07b98bf4f67fae8d892a6f0cccc741dcb4"
     },
     {
       "path": "assembly-calendar-data.js",
@@ -289,11 +304,6 @@
       "sha256": "0210c4b54476a8d58a2f34b77c1521f445f51ac23c4d8c6295f6190e67baa968"
     },
     {
-      "path": "assets/automatic.glb",
-      "sizeBytes": 42938844,
-      "sha256": "0bce6c11fde50ef969f9a21d962cd38077b2b41b21879e9bf7262cd90d7a48b6"
-    },
-    {
       "path": "assets/catalog.json",
       "sizeBytes": 1130,
       "sha256": "2fd980a4b31c0073ed226a4953d8b80e3fc46057e0e074b7026efb92934ab0e8"
@@ -304,19 +314,9 @@
       "sha256": "0b69ad7ad2d9a19760d75add06909ca221f36f7bdd0a0dbd457c1d38f4e26abf"
     },
     {
-      "path": "assets/manual-a.glb",
-      "sizeBytes": 34300528,
-      "sha256": "5f5edca3b0e7b43b8a86a26b2b196e881aeedb5fbba3efe3e2815b148ac440bd"
-    },
-    {
       "path": "assets/manual-b-parts.json",
       "sizeBytes": 74321,
       "sha256": "f2a6d389206211e7565f4a7b64af4c33e9d8bbee91e8eaf4c6ef7bdf9bb8a6ae"
-    },
-    {
-      "path": "assets/manual-b.glb",
-      "sizeBytes": 34185520,
-      "sha256": "5b263ce511cd03c36bace856f0dbe3083f8408d62b65d04f29ef8ff0f14ded94"
     },
     {
       "path": "docs/OM10_Release_notes.pdf",
@@ -417,6 +417,21 @@
       "path": "open-front/shading-verification.json",
       "sizeBytes": 63526,
       "sha256": "be165f92cf6a30c6637c6068bc86db0698e3d46fd4f4d6fd9a156b2a517ee1f7"
+    },
+    {
+      "path": "preview-b/releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/assets/automatic.glb",
+      "sizeBytes": 42938844,
+      "sha256": "0bce6c11fde50ef969f9a21d962cd38077b2b41b21879e9bf7262cd90d7a48b6"
+    },
+    {
+      "path": "preview-b/releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/assets/manual-a.glb",
+      "sizeBytes": 34300528,
+      "sha256": "5f5edca3b0e7b43b8a86a26b2b196e881aeedb5fbba3efe3e2815b148ac440bd"
+    },
+    {
+      "path": "preview-b/releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/assets/manual-b.glb",
+      "sizeBytes": 34185520,
+      "sha256": "5b263ce511cd03c36bace856f0dbe3083f8408d62b65d04f29ef8ff0f14ded94"
     },
     {
       "path": "quality-study/01-front.json",
@@ -699,6 +714,16 @@
       "sha256": "8f0cff9a80b7ae67785b894162602fdfd2c987945ff6bf8982804425d67a0951"
     },
     {
+      "path": "vendor/GLTFExporter.js",
+      "sizeBytes": 86392,
+      "sha256": "e7c29444454eb321b39e4c8b3062944f4fd5299a0e7483e9cb8c0594cdec829f"
+    },
+    {
+      "path": "vendor/THREE-LICENSE.txt",
+      "sizeBytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    {
       "path": "vendor/controls/OrbitControls.js",
       "sizeBytes": 38703,
       "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c"
@@ -707,11 +732,6 @@
       "path": "vendor/environments/RoomEnvironment.js",
       "sizeBytes": 4899,
       "sha256": "c20f0b4677f6128a138d7152b85cbef9091f4f45cdfa05adca04d40c1697c7ae"
-    },
-    {
-      "path": "vendor/GLTFExporter.js",
-      "sizeBytes": 86392,
-      "sha256": "e7c29444454eb321b39e4c8b3062944f4fd5299a0e7483e9cb8c0594cdec829f"
     },
     {
       "path": "vendor/loaders/GLTFLoader.js",
@@ -749,14 +769,14 @@
       "sha256": "fd91229aacc5830e3984b0f2bdefcf566163ea028f4c1f1ab233fa6665a133ac"
     },
     {
-      "path": "vendor/postprocessing/ShaderPass.js",
-      "sizeBytes": 3228,
-      "sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
-    },
-    {
       "path": "vendor/postprocessing/SSAOPass.js",
       "sizeBytes": 13443,
       "sha256": "59944f833d10330f6bdd205260ad06a8ef2bd12a115e4101d81578b249627e3f"
+    },
+    {
+      "path": "vendor/postprocessing/ShaderPass.js",
+      "sizeBytes": 3228,
+      "sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
     },
     {
       "path": "vendor/shaders/CopyShader.js",
@@ -774,11 +794,6 @@
       "sha256": "57ec7cc10ad3b6a8aafa97be21eca12972c5597ebc3023de1b37102a56c6b23b"
     },
     {
-      "path": "vendor/THREE-LICENSE.txt",
-      "sizeBytes": 1081,
-      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
-    },
-    {
       "path": "vendor/three.core.js",
       "sizeBytes": 1403455,
       "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20"
@@ -792,21 +807,6 @@
       "path": "vendor/utils/BufferGeometryUtils.js",
       "sizeBytes": 35539,
       "sha256": "fda7e946b8e0b5ab39b779206589e7a1079a22eb24efb89d7223e03fdfb1f751"
-    },
-    {
-      "path": "README.md",
-      "sizeBytes": 1681,
-      "sha256": "c06f8b5d461c570ed3b018c3d6abb9e376853eb03709f81b61e2cf9001dfddcb"
-    },
-    {
-      "path": ".nojekyll",
-      "sizeBytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "path": "ATTRIBUTION.md",
-      "sizeBytes": 3843,
-      "sha256": "bcae39b501ad2d53f9045cdd2a8067c3e6ddd134bbb48807cefd6f6974e02c03"
     }
   ]
 }

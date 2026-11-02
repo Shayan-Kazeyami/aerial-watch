@@ -60,7 +60,7 @@ async function loadVariant(id){
  const request=++loadId;loading=true;available(false);setPlaying(false);clearSelection();$('loading').hidden=false;$('loading').querySelector('b').textContent='Preparing the movement';$('load-detail').textContent='Loading original CAD geometry…';
  try{
   if(!cache.has(id)){
-   const [gltf,meta]=await Promise.all([loader.loadAsync(`assets/${id}.glb`,e=>{$('load-detail').textContent=`Loading geometry · ${(e.loaded/1048576).toFixed(1)} MB`; }),fetch(`assets/${id}-parts.json`).then(r=>{if(!r.ok)throw Error('Component metadata could not load');return r.json();})]);
+   const [gltf,meta]=await Promise.all([loader.loadAsync(`preview-b/releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/assets/${id}.glb`,e=>{$('load-detail').textContent=`Loading geometry · ${(e.loaded/1048576).toFixed(1)} MB`; }),fetch(`assets/${id}-parts.json`).then(r=>{if(!r.ok)throw Error('Component metadata could not load');return r.json();})]);
    cache.set(id,{gltf,meta});
   }
   if(request!==loadId)return;

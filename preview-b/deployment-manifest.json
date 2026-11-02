@@ -85,13 +85,13 @@
     },
     {
       "path": "aerial.js",
-      "sizeBytes": 18659,
-      "sha256": "ecc3c5ef8d9994d0bacb817af0be47ac4946fa19bd8b2dacb2784830c9a889e7"
+      "sizeBytes": 18733,
+      "sha256": "47357b972097d736757d8cbbf515298ab337f07eaef13d5a6a554baba1c81b2d"
     },
     {
       "path": "app.js",
-      "sizeBytes": 12113,
-      "sha256": "c034f7bf97b1508f9ed9bf2db976044ccf4344df55888dc7a3ea5fecd2d9a94c"
+      "sizeBytes": 12187,
+      "sha256": "f9f9d4b48d70b456a4853d4c0638deaa1dbebf5d01078c89c3d29541bea553c5"
     },
     {
       "path": "assembly-calendar-data.js",
@@ -334,11 +334,6 @@
       "sha256": "0210c4b54476a8d58a2f34b77c1521f445f51ac23c4d8c6295f6190e67baa968"
     },
     {
-      "path": "assets/automatic.glb",
-      "sizeBytes": 42938844,
-      "sha256": "0bce6c11fde50ef969f9a21d962cd38077b2b41b21879e9bf7262cd90d7a48b6"
-    },
-    {
       "path": "assets/catalog.json",
       "sizeBytes": 1130,
       "sha256": "2fd980a4b31c0073ed226a4953d8b80e3fc46057e0e074b7026efb92934ab0e8"
@@ -349,19 +344,9 @@
       "sha256": "0b69ad7ad2d9a19760d75add06909ca221f36f7bdd0a0dbd457c1d38f4e26abf"
     },
     {
-      "path": "assets/manual-a.glb",
-      "sizeBytes": 34300528,
-      "sha256": "5f5edca3b0e7b43b8a86a26b2b196e881aeedb5fbba3efe3e2815b148ac440bd"
-    },
-    {
       "path": "assets/manual-b-parts.json",
       "sizeBytes": 74321,
       "sha256": "f2a6d389206211e7565f4a7b64af4c33e9d8bbee91e8eaf4c6ef7bdf9bb8a6ae"
-    },
-    {
-      "path": "assets/manual-b.glb",
-      "sizeBytes": 34185520,
-      "sha256": "5b263ce511cd03c36bace856f0dbe3083f8408d62b65d04f29ef8ff0f14ded94"
     },
     {
       "path": "atelier-layout-study.css",
@@ -827,6 +812,21 @@
       "path": "rebuild/glb-source-verification.json",
       "sizeBytes": 23579,
       "sha256": "f93c8eac142144d43fb15e9b03582e26545dab9f1094d6c1450468c339661d10"
+    },
+    {
+      "path": "releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/assets/automatic.glb",
+      "sizeBytes": 42938844,
+      "sha256": "0bce6c11fde50ef969f9a21d962cd38077b2b41b21879e9bf7262cd90d7a48b6"
+    },
+    {
+      "path": "releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/assets/manual-a.glb",
+      "sizeBytes": 34300528,
+      "sha256": "5f5edca3b0e7b43b8a86a26b2b196e881aeedb5fbba3efe3e2815b148ac440bd"
+    },
+    {
+      "path": "releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/assets/manual-b.glb",
+      "sizeBytes": 34185520,
+      "sha256": "5b263ce511cd03c36bace856f0dbe3083f8408d62b65d04f29ef8ff0f14ded94"
     },
     {
       "path": "studio-console.css",
