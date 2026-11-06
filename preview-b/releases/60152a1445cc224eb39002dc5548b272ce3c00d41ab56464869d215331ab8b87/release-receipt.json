@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 2,
+  "releaseId": "60152a1445cc224eb39002dc5548b272ce3c00d41ab56464869d215331ab8b87",
+  "algorithm": "SHA-256",
+  "canonicalization": "SHA-256 of UTF-8 JSON.stringify({schemaVersion:2,localFiles,references}); each array sorted lexicographically by path; field order as shown in manifest",
+  "fileCount": 131,
+  "totalBytes": 1284379,
+  "referenceCount": 140,
+  "referencedBytes": 231334251
+}

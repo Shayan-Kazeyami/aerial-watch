@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "ownerReleaseId": "ca6cf8cd536204e18ba347d1853f33c6dbbef6a9a69492b79a02ef78984fd3fe",
+  "ownerReleaseIds": [
+    "3b37356cf003bfd57149ba6e480bbca9385033ca5c07084486c5a063b5285397",
+    "87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1",
+    "a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054",
+    "ca6cf8cd536204e18ba347d1853f33c6dbbef6a9a69492b79a02ef78984fd3fe",
+    "ccb31fdf75b1ce58aff97d09dbc2ef500b972bf01916cd368e7e8c6a0800afbe",
+    "f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44",
+    "fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72"
+  ],
+  "canonicalOwnerReleaseIds": [
+    "87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1",
+    "a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054",
+    "f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44",
+    "fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72"
+  ],
+  "sourceReleaseId": "651c22f2e7dc88e608cbb7cb023410b31f60d15e09e1d864f6ff812e430e168c",
+  "routes": {
+    "aerial-assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "case-assets": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "docs": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "leather-compat-r12": "../87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/",
+    "open-front": "../a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054/",
+    "optimized-assets": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "premium-face": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "quality-study": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "rebuild": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "vendor": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "leather-assets": "../5c32ed10f90818f697328e03331a1ef2e3c9d8f488a2af1873625d4580215347/"
+  },
+  "reusedBytes": 179317277,
+  "transforms": [
+    "central GLTF/JSON asset URLs",
+    "KTX chunk directory base",
+    "Basis transcoder URL",
+    "HTML assets/srcset, dynamic poster and vendor import maps",
+    "first-party provenance"
+  ],
+  "limitation": "Browser QA and complete published inventory budget required before promotion.",
+  "localAdjustment": "Compact inspection controls including active strap state; reuse byte-identical leather from prior published release."
+}
