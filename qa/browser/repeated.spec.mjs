@@ -20,7 +20,7 @@ test('three real PNG JSON restore cycles with owned URL cleanup',async({page},in
   const picture=await download('capture-scene',`actual-${i}.png`),p=png(picture.bytes);identity(p.view);
   const dimensions=await page.locator('#assembly-canvas').evaluate(c=>({width:c.width,height:c.height}));expect({width:p.width,height:p.height}).toEqual(dimensions);expect(p.width).toBe(1440-i*100);
   await page.locator('#home').click();await ready(page);await panel(page);const chooser=page.waitForEvent('filechooser');await page.locator('#atelier-import').click();await(await chooser).setFiles(saved.path);await expect(page.locator('#viewer-status')).toContainText('Saved camera, crown, options');await ready(page);
-  const resaved=await download('export-config',`restored-${i}.json`),r=JSON.parse(resaved.bytes);identity(r);for(const k of ['camera','options','crown','explosion'])expect(r[k]).toEqual(c[k]);
+  await panel(page);const resaved=await download('export-config',`restored-${i}.json`),r=JSON.parse(resaved.bytes);identity(r);for(const k of ['camera','options','crown','explosion'])expect(r[k]).toEqual(c[k]);
   evidence.cycles.push({cycle:i,dimensions,bytes:picture.bytes.length,pngSHA256:createHash('sha256').update(picture.bytes).digest('hex'),embeddedDigest:p.view.sourceAtCapture.digest,activeCap:p.view.capRefinement.active,roundtrip:true});
   await expect(page.locator('#atelier-tools [data-proxy="capture-scene"]')).toBeEnabled();await page.locator('#close').click();
  }
