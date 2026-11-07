@@ -1,0 +1,23 @@
+import {test,expect} from '@playwright/test';import {writeFile} from 'node:fs/promises';
+const target=process.env.WATCH_QA_URL||'http://127.0.0.1:8765/atelier-preview.html?quality=efficient';
+// One fresh Playwright context per test; use CI matrix camera per job if one GPU process stalls.
+const camera=process.env.MATERIAL_CAMERA||'three-quarter';
+if(!['face','three-quarter','back','side','lug','buckle','crown','interior','train','balance','winding'].includes(camera))throw Error('Unsupported real camera control');
+const bounded=async(p,ms,label)=>{let t;try{return await Promise.race([p,new Promise((_,reject)=>{t=setTimeout(()=>reject(Error(label+' timed out after '+ms+'ms')),ms);})]);}finally{clearTimeout(t);}};
+test(`independent Studio ${camera} capture, bounded scheduling diagnostic`,async({page},info)=>{
+ test.setTimeout(360000);page.setDefaultTimeout(30000);
+ const evidence={camera,scope:'Real Studio software-WebGL image; not aesthetic approval',samples:[],console:[],steps:[]};const mark=s=>evidence.steps.push({step:s,at:Date.now()});
+ page.on('console',m=>{if(['error','warning'].includes(m.type()))evidence.console.push({type:m.type(),text:m.text(),location:m.location()});});page.on('pageerror',e=>evidence.console.push({type:'pageerror',message:e.message}));
+ await page.addInitScript(()=>{window.__qaFrames={frames:0,last:0,timerTicks:0,lastTimer:0};const tick=at=>{window.__qaFrames.frames++;window.__qaFrames.last=at;requestAnimationFrame(tick);};requestAnimationFrame(tick);setInterval(()=>{window.__qaFrames.timerTicks++;window.__qaFrames.lastTimer=performance.now();},200);});
+ async function sample(label){const s=await bounded(page.evaluate(()=>{const s=window.assemblyInspect?.(),canvas=document.getElementById('assembly-canvas'),r=canvas?.getBoundingClientRect();return {now:performance.now(),frames:window.__qaFrames,hidden:document.hidden,cameraReady:document.getElementById('stage')?.dataset.cameraReady,view:s?.view,quality:s?.renderQuality,loading:s?.loading,failed:s?.failed,presentation:s?.presentation,animation:s?.animation,interiorAnimation:s?.interiorAnimation,camera:s?.camera,target:s?.target,canvas:r?{cssWidth:r.width,cssHeight:r.height,width:canvas.width,height:canvas.height}:null};}),5000,'read-only sample');evidence.samples.push({label,...s});return s;}
+ try{
+  mark('boot-efficient');await page.goto(target,{waitUntil:'domcontentloaded',timeout:30000});await page.waitForFunction(()=>window.assemblyInspect?.().presentation.phase==='ready',null,{timeout:240000});await page.locator('#home').click();
+  // Select target camera while still efficient, then raise quality; avoids full Studio camera tween.
+  mark('select-camera-efficient');if(camera==='face')await page.locator('[data-mode="explore"]:visible').first().click();else if(camera==='crown')await page.locator('[data-mode="time"]:visible').first().click();else if(['interior','train','balance','winding'].includes(camera)){await page.locator('[data-mode="inside"]:visible').first().click();if(camera!=='interior')await page.locator(`#atelier-tools [data-camera="${camera}"]`).click();}else{await page.locator('[data-mode="settings"]:visible').first().click();await page.locator(`#atelier-tools [data-camera="${camera}"]`).click();}
+  if(await page.locator('#context').isVisible())await page.locator('#close').click();await expect(page.locator('#stage')).toHaveAttribute('data-camera-ready','true',{timeout:30000});const beforeStudio=await sample('before-studio');
+  mark('studio');await page.locator('[data-mode="quality"]:visible').first().click();await page.locator('#atelier-tools [data-quality="studio"]').click();await page.locator('#close').click();
+  await expect(page.locator('#stage')).toHaveAttribute('data-camera-ready','true',{timeout:30000});let last=null,stable=0;
+  for(let i=0;i<12;i++){const s=await sample('studio-'+i);expect(s.quality).toBe('studio');expect(s.view).toBe(camera);expect(s.animation).toBe(false);expect(s.interiorAnimation).toBe(false);const sig=JSON.stringify([s.camera,s.target,s.canvas]);stable=sig===last?stable+1:0;last=sig;if(stable>=2&&s.frames.frames>=beforeStudio.frames.frames+3)break;await page.waitForTimeout(500);}expect(stable).toBeGreaterThanOrEqual(2);expect(evidence.samples.at(-1).frames.frames).toBeGreaterThanOrEqual(beforeStudio.frames.frames+3);
+  mark('screenshot');await bounded(page.locator('#assembly-canvas').screenshot({path:info.outputPath(camera+'-studio.png'),timeout:30000}),35000,'actual canvas screenshot');await sample('after-screenshot');mark('complete');
+ }catch(error){evidence.failure={message:error.message,stack:error.stack};throw error;}finally{await writeFile(info.outputPath('camera-diagnostic.json'),JSON.stringify(evidence,null,2));}
+});
