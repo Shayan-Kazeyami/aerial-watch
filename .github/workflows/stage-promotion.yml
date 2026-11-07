@@ -1,0 +1,40 @@
+name: Stage verified immutable package for guarded promotion
+on:
+  push:
+    branches: ['qa/publish-verified-949a4881']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: qa
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: c17bcb4246a8fcfab87143a029d4da342b0fac71
+          path: live
+          persist-credentials: true
+      - name: Verify unchanged production and retrieve exact approved artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api repos/$GITHUB_REPOSITORY/git/ref/heads/main --jq .object.sha)" = "c17bcb4246a8fcfab87143a029d4da342b0fac71"
+          gh api repos/$GITHUB_REPOSITORY/actions/artifacts/13595036784/zip > package.zip
+          echo '758328d799263294c25d62d0c7dd093b3197d808f9dec7bc9c608064a742fca3  package.zip' | sha256sum -c -
+          unzip -p package.zip shared-output/immutable-shared-release.tar.gz > release.tar.gz
+          python3 qa/promotion/stage-exact.py
+      - name: Commit only verified additive release and two entry paths to staging ref
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api repos/$GITHUB_REPOSITORY/git/ref/heads/main --jq .object.sha)" = "c17bcb4246a8fcfab87143a029d4da342b0fac71"
+          git -C live -c user.name='Aerial verified release' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Publish verified R18 terminal, winding rest and Graphite validity package 949a4881"
+          git -C live push origin HEAD:refs/heads/staging/verified-949a4881
+          echo "STAGED_COMMIT=$(git -C live rev-parse HEAD)"
+          echo "Main and Pages pointers have not been changed by this job."
+
