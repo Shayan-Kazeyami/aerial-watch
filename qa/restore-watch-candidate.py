@@ -39,3 +39,6 @@ for row in manifest:
 print(f'Exact source closure verified: {len(manifest)} files; restored {restored} binary assets.')
 unpack(fetch(CAP_BLOB),CAP)
 print('Frozen cap v2 bundle verified and applied. No repository or deployment writes.')
+
+unpack(fetch('5662eff57b730c29ae7292be891800618a6b6d8e'),'fd4c6701c3a18a21cccc7419f2c642aaf9f0b7b9b769106724a994a072534d7d')
+print('Portable exact-PNG fixtures and cap comparison test context applied.')

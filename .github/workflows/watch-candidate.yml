@@ -10,7 +10,7 @@ concurrency:
 jobs:
   regression:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - name: Check out only QA tooling
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -32,3 +32,27 @@ jobs:
         if: always()
         working-directory: candidate
         run: node scripts/validate.mjs
+      - name: Install pinned browser test harness
+        run: npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
+      - name: Software Chromium integrated viewer smoke
+        env:
+          CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
+          WATCH_QA_PNG: '1'
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory candidate > /tmp/watch-http.log 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null && break; sleep 1; done
+          curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null
+          cd qa/browser
+          npm test
+      - name: Preserve browser QA evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: watch-software-browser-qa
+          path: |
+            qa/browser/artifacts
+            qa/browser/html-report
+          if-no-files-found: ignore
+          retention-days: 7
