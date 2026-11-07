@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "ownerReleaseId": "87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1",
+  "ownerReleaseIds": [
+    "5c32ed10f90818f697328e03331a1ef2e3c9d8f488a2af1873625d4580215347",
+    "87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1",
+    "a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054",
+    "f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44",
+    "fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72"
+  ],
+  "canonicalOwnerReleaseIds": [
+    "5c32ed10f90818f697328e03331a1ef2e3c9d8f488a2af1873625d4580215347",
+    "87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1",
+    "a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054",
+    "f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44",
+    "fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72"
+  ],
+  "sourceReleaseId": "157aa272dd7642da096af8fe95b83e00991722dfac49d35d995c71a1a097db7b",
+  "routes": {
+    "aerial-assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "assets": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "case-assets": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "docs": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "leather-assets": "../5c32ed10f90818f697328e03331a1ef2e3c9d8f488a2af1873625d4580215347/",
+    "leather-compat-r12": "../87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/",
+    "open-front": "../a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054/",
+    "optimized-assets": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "premium-face": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "quality-study": "../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/",
+    "rebuild": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/",
+    "vendor": "../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/"
+  },
+  "reusedBytes": 231334251,
+  "transforms": [
+    "central GLTF/JSON asset URLs",
+    "KTX chunk directory base",
+    "Basis transcoder URL",
+    "HTML assets/srcset, dynamic poster and vendor import maps",
+    "first-party provenance"
+  ],
+  "limitation": "Browser QA and complete published inventory budget required before promotion."
+}
