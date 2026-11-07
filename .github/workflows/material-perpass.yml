@@ -1,0 +1,60 @@
+name: Single per-pass Balance compositor diagnostic
+on:
+  push:
+    branches: ['qa/watch-material-perpass-*']
+permissions:
+  contents: read
+jobs:
+  capture:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        camera: ['balance']
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out only QA tooling
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: qa
+      - name: Set up supported Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Restore verified source and frozen candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 qa/restore-watch-candidate.py
+      - name: Apply exact normalized hinge overlay
+        run: python3 qa/apply-hinge.py
+      - name: Apply exact combined delta
+        run: |
+          mv candidate "$RUNNER_TEMP/combined-candidate"
+          ln -s "$RUNNER_TEMP/combined-candidate" candidate
+          python3 qa/apply-hinge-to-combined-delta.py candidate qa/inputs/hinge-to-combined-delta.tar.gz --apply
+      - name: Apply guarded staged QA hooks with distinct source identity
+        run: python3 qa/apply-staged-qa.py
+      - name: Install pinned browser test harness
+        run: npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
+      - name: Studio material cameras and controlled slow load
+        env:
+          MATERIAL_CAMERA: ${{ matrix.camera }}
+          CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory candidate > /tmp/watch-http-materials.log 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null && break; sleep 1; done
+          cd qa/browser
+          npx playwright test --config=independent-camera.config.mjs
+      - name: Preserve rendered material and loading evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: watch-camera-${{ matrix.camera }}-qa
+          path: |
+            qa/browser/camera-diagnostic-artifacts
+          if-no-files-found: ignore
+          retention-days: 7
