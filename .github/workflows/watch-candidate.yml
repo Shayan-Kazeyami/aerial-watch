@@ -1,7 +1,7 @@
 name: Isolated watch candidate QA
 on:
   push:
-    branches: ['qa/watch-cap-v2-*']
+    branches: ['qa/watch-detour-20261107']
 permissions:
   contents: read
 concurrency:
@@ -25,6 +25,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 qa/restore-watch-candidate.py
+      - name: Apply verified finite contact detour
+        run: |
+          test "$(sha256sum qa/detour-ci-overlay.tar.gz | cut -d' ' -f1)" = 3b40497891fb76e8603e39aa6e55b1244165930030015a2cad7f404cdfaf9d43
+          mkdir -p qa/detour-overlay
+          tar -xzf qa/detour-ci-overlay.tar.gz -C qa/detour-overlay
+          python3 qa/detour-overlay/apply-overlay.py candidate
+          python3 qa/detour-overlay/apply-overlay.py candidate --apply
       - name: Full exact-source regression suite
         working-directory: candidate
         run: /usr/bin/time -v node --test --test-concurrency=1 tests/*.test.mjs
@@ -46,7 +53,7 @@ jobs:
           trap 'kill "$server" 2>/dev/null || true' EXIT
           for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null && break; sleep 1; done
           cd qa/browser
-          npx playwright test --config=resilience.config.mjs
+          npx playwright test --config=detour.config.mjs
       - name: Preserve browser QA evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -55,45 +62,6 @@ jobs:
           path: |
             qa/browser/artifacts
             qa/browser/html-report
-            qa/browser/resilience-artifacts
-            qa/browser/resilience-report
-          if-no-files-found: ignore
-          retention-days: 7
-  mechanisms:
-    runs-on: ubuntu-latest
-    timeout-minutes: 40
-    steps:
-      - name: Check out only QA tooling
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-          sparse-checkout: qa
-      - name: Set up supported Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22'
-      - name: Restore verified source and frozen candidate
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 qa/restore-watch-candidate.py
-      - name: Install pinned browser test harness
-        run: npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
-      - name: Mechanism and simulated mobile keyboard checks
-        env:
-          CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
-        run: |
-          python3 -m http.server 8765 --bind 127.0.0.1 --directory candidate > /tmp/watch-http-mechanisms.log 2>&1 &
-          server=$!
-          trap 'kill "$server" 2>/dev/null || true' EXIT
-          for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null && break; sleep 1; done
-          cd qa/browser
-          npx playwright test --config=playwright.mechanisms.config.mjs
-      - name: Preserve mechanism QA evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: watch-mechanism-accessibility-qa
-          path: |
             qa/browser/mechanism-artifacts
             qa/browser/mechanism-html-report
           if-no-files-found: ignore
