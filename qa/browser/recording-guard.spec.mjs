@@ -17,11 +17,11 @@ function decode(path,elapsedMs){
  const spanSeconds=times.length?times.at(-1)-times[0]:0,distinctFrameHashes=new Set(hashes).size,meanDecodedCadence=spanSeconds>0?(times.length-1)/spanSeconds:0;
  return {ffprobe,frames,md5,video,times,spanSeconds,decodedFrames:hashes.length,distinctFrameHashes,meanDecodedCadence,nativeCaptureElapsedMs:elapsedMs};
 }
-test('real native stream guard contract: invalid or sparse clips withheld, resources released, retry works',async({page},info)=>{
+test('real native stream guard contract: invalid or sparse clips withheld, resources released, one explicit requestFrame attempt',async({page},info)=>{
  test.setTimeout(720000);page.setDefaultTimeout(45000);
- const evidence={scope:'Actual native canvas stream and MediaRecorder, observation-only. Guard/error recovery acceptance is NOT usable-video success. Hosted SwiftShader is not physical S24, hardware performance or WebGPU acceptance.',attempts:[],errors:[],downloads:[],guardContractVerified:false,usableRecordingVerified:false};
+ const evidence={scope:'Actual native canvas stream and MediaRecorder, EXPLICIT requestFrame experiment, one attempt. Guard/error recovery acceptance is NOT usable-video success. Hosted SwiftShader is not physical S24, hardware performance or WebGPU acceptance.',attempts:[],errors:[],downloads:[],guardContractVerified:false,usableRecordingVerified:false};
  const downloads=[];page.on('download',d=>downloads.push(d));page.on('pageerror',e=>evidence.errors.push({type:'pageerror',message:e.message}));page.on('console',m=>{if(m.type()==='error')evidence.errors.push({type:'console-error',message:m.text()});});
- await installStreamProbe(page); // Default observation only. No requestFrame intervention.
+ await installStreamProbe(page,{requestFrames:true}); // Explicit diagnostic, not a production change.
  try{
   await page.goto(target,{waitUntil:'domcontentloaded'});await ready(page);await page.locator('#home').click();await ready(page);
   // Read real exported runtime identity before recording. This is a JSON download, not a clip.
@@ -29,7 +29,7 @@ test('real native stream guard contract: invalid or sparse clips withheld, resou
   evidence.adapter=await page.evaluate(()=>{const c=document.getElementById('assembly-canvas'),g=c.getContext('webgl2')||c.getContext('webgl'),x=g?.getExtension('WEBGL_debug_renderer_info');return {userAgent:navigator.userAgent,unmaskedRenderer:x?g.getParameter(x.UNMASKED_RENDERER_WEBGL):null,support:{captureStream:typeof c.captureStream==='function',mediaRecorder:typeof MediaRecorder==='function',webm:typeof MediaRecorder==='function'&&MediaRecorder.isTypeSupported('video/webm')}};});
   expect(evidence.adapter.support.captureStream).toBe(true);expect(evidence.adapter.support.mediaRecorder).toBe(true);expect(evidence.adapter.support.webm).toBe(true);
   await page.locator('#close').click();if(await page.locator('#motion').getAttribute('aria-pressed')!=='true')await page.locator('#motion').click();await expect(page.locator('#motion')).toHaveAttribute('aria-pressed','true');
-  for(let attempt=0;attempt<2;attempt++){
+  for(let attempt=0;attempt<1;attempt++){
    await capturePanel(page);const proxy=page.locator('#atelier-tools [data-proxy="record-scene"]');await expect(proxy).toBeEnabled();const before=await state(page);expect(before.animation||before.interiorAnimation).toBe(true);
    const start=await readStreamProbe(page),recorderOffset=start.recorders.length,streamOffset=start.streams.length,downloadOffset=downloads.length;const result={attempt,before};evidence.attempts.push(result);
    await proxy.click();
@@ -37,7 +37,7 @@ test('real native stream guard contract: invalid or sparse clips withheld, resou
    await expect.poll(async()=>{const p=await readStreamProbe(page);return p.recorders.slice(recorderOffset).some(r=>r.events.some(e=>e.name==='start'));},{timeout:60000,message:'Native MediaRecorder must start'}).toBe(true);
    await expect.poll(async()=>{const p=await readStreamProbe(page),st=await state(page);return p.recorders.slice(recorderOffset).some(r=>r.events.some(e=>e.name==='stop'&&e.state==='inactive'))&&!st.recordDisabled&&(downloads.length>downloadOffset||guardedRejection.test(st.status)||guardedRejection.test(st.notice||''));},{timeout:90000,message:'Real recorder must settle to a guarded rejection or actual download'}).toBe(true);
    await expect.poll(async()=>{const p=await readStreamProbe(page),tracks=p.streams.slice(streamOffset).flatMap(s=>s.tracks);return tracks.length>0&&tracks.every(t=>t.samples.at(-1)?.readyState==='ended');},{timeout:10000,message:'All native canvas video tracks must end'}).toBe(true);
-   result.after=await state(page);const p=await readStreamProbe(page);result.streams=p.streams.slice(streamOffset);result.recorders=p.recorders.slice(recorderOffset);expect(p.mode).toBe('OBSERVATION_ONLY');expect(result.streams).toHaveLength(1);expect(result.recorders).toHaveLength(1);for(const t of result.streams.flatMap(s=>s.tracks)){expect(t.requests).toBe(0);expect(t.samples.at(-1).readyState).toBe('ended');}
+   result.after=await state(page);const p=await readStreamProbe(page);result.streams=p.streams.slice(streamOffset);result.recorders=p.recorders.slice(recorderOffset);expect(p.mode).toBe('EXPERIMENT explicit track.requestFrame every250ms');expect(result.streams).toHaveLength(1);expect(result.recorders).toHaveLength(1);for(const t of result.streams.flatMap(s=>s.tracks)){expect(t.requests).toBeGreaterThan(0);expect(t.samples.at(-1).readyState).toBe('ended');}
    expect(result.after.quality).toBe(before.quality);expect(result.after.canvas).toEqual(before.canvas);expect(result.after.animation).toBe(before.animation);expect(result.after.interiorAnimation).toBe(before.interiorAnimation);
    result.playbackAdvanced=result.after.mechanismElapsed>before.mechanismElapsed||result.after.illustrativeElapsed>before.illustrativeElapsed;expect(result.playbackAdvanced).toBe(true);
    const clips=downloads.slice(downloadOffset);expect(clips.length).toBeLessThanOrEqual(1);

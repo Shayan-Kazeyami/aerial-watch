@@ -1,7 +1,7 @@
-name: Native recording validity and cleanup guard
+name: Explicit native requestFrame diagnostic
 on:
   push:
-    branches: ['qa/watch-recording-guard-*']
+    branches: ['qa/watch-request-frame-*']
 permissions:
   contents: read
 concurrency:
@@ -55,7 +55,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: watch-native-recording-guard-qa
+          name: watch-explicit-request-frame-qa
           path: |
             qa/browser/artifacts
             qa/browser/html-report
