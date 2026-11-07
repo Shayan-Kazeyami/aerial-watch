@@ -1,0 +1,37 @@
+name: Read completed shader diagnostic artifact
+on:
+  push:
+    branches: ['qa/watch-status-inspect-*']
+permissions:
+  actions: read
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Decode existing artifact only, no rendering
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.error,io,zipfile,json,os,hashlib
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+           def redirect_request(self,req,fp,code,msg,headers,newurl): return None
+          req=urllib.request.Request("https://api.github.com/repos/Shayan-Kazeyami/aerial-watch/actions/artifacts/"+str(13590329508)+"/zip",headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"})
+          try: response=urllib.request.build_opener(NoRedirect).open(req);b=response.read()
+          except urllib.error.HTTPError as e:
+           if e.code!=302: raise
+           b=urllib.request.urlopen(e.headers["Location"]).read()
+          z=zipfile.ZipFile(io.BytesIO(b));print("ZIP_SHA",hashlib.sha256(b).hexdigest(),"CRC",z.testzip())
+          d=json.loads(z.read(next(n for n in z.namelist() if n.endswith("staged-capture.json"))))
+          print("STATUS_META",json.dumps(d.get("shaderStatus")))
+          for p in d["seedMapping"]["points"]:
+           i=((p["targetXY"][1]-p["readXY"][1])*3+p["targetXY"][0]-p["readXY"][0])*4
+           print("SEED_STATUS",json.dumps({"xy":p["targetXY"],"raw":p["raw"][i:i+4],"rgba":p["rgba"][i:i+4],"nearestMaterial":p["hits"][0]["material"]["programKey"]}))
+          print("ERRORS",json.dumps({"before":d.get("beforeError"),"after":d.get("afterError"),"mapping":d["seedMapping"].get("error"),"contextLost":d.get("contextLost")}))
+          for n in z.namelist():
+           if n.endswith("camera-diagnostic.json"):
+            x=json.loads(z.read(n));print("CONSOLE",json.dumps(x.get("console")))
+          
+          PY
