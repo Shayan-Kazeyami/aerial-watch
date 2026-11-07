@@ -1,0 +1,95 @@
+name: Isolated transformed combined shared QA
+on:
+  push:
+    branches: ['qa/watch-shared-combined-20261107']
+permissions:
+  contents: read
+concurrency:
+  group: shared-watch-staging-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  shared-stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      LIVE_COMMIT: 2a8748aeabc70e75f10f63fa644bcad9f315f26f
+    steps:
+      - name: Check out QA tooling only
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: qa
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify pinned restore harness and restore exact approved source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo '7b1b0c10bdcf888017dd75955a1058cd0fc668191b4e0778070188826e9cbde4  qa/restore-watch-candidate.py' | sha256sum -c -
+          python3 qa/restore-watch-candidate.py
+          python3 qa/apply-hinge.py
+          mv candidate "$RUNNER_TEMP/combined-candidate"
+          ln -s "$RUNNER_TEMP/combined-candidate" candidate
+          python3 qa/apply-hinge-to-combined-delta.py candidate qa/inputs/hinge-to-combined-delta.tar.gz --apply
+          cd candidate && node scripts/validate.mjs
+      - name: Check out pinned live publication tree separately
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 2a8748aeabc70e75f10f63fa644bcad9f315f26f
+          path: live-pinned
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Resolve pinned commit to complete tree (private runner inputs)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(git -C live-pinned rev-parse HEAD)" = "$LIVE_COMMIT"
+          gh api "repos/$GITHUB_REPOSITORY/git/commits/$LIVE_COMMIT" > "$RUNNER_TEMP/live-commit.json"
+          TREE=$(jq -er '.tree.sha' "$RUNNER_TEMP/live-commit.json")
+          gh api "repos/$GITHUB_REPOSITORY/git/trees/$TREE?recursive=1" > "$RUNNER_TEMP/live-tree.json"
+      - name: Build full and sparse artifacts without changing source or live pointers
+        run: |
+          SOURCE_ROOT="$GITHUB_WORKSPACE/candidate" LIVE_ROOT="$GITHUB_WORKSPACE/live-pinned" STAGE_ROOT="$RUNNER_TEMP/cap-stage" LIVE_TREE_JSON="$RUNNER_TEMP/live-tree.json" LIVE_COMMIT_JSON="$RUNNER_TEMP/live-commit.json" node qa/combined-shared/stage-runner.mjs
+      - name: Add only new immutable sparse subtree to disposable served checkout
+        run: |
+          RELEASE=$(jq -er .sharedReleaseId "$RUNNER_TEMP/cap-stage/stage-report.json")
+          test ! -e "live-pinned/preview-b/releases/$RELEASE"
+          cp -a "$(cat "$RUNNER_TEMP/cap-stage/release-path.txt")" "live-pinned/preview-b/releases/$RELEASE"
+          # Tracked live files must remain byte-identical; only the new subtree may be untracked.
+          git -C live-pinned diff --exit-code
+          python3 qa/combined-shared/assert-additive-overlay.py "$RELEASE"
+          echo "WATCH_QA_URL=http://127.0.0.1:8765/preview-b/releases/$RELEASE/atelier-preview.html?quality=efficient" >> "$GITHUB_ENV"
+          echo "WATCH_QA_DIGEST=$(jq -er .transformedDigest "$RUNNER_TEMP/cap-stage/stage-report.json")" >> "$GITHUB_ENV"
+          mkdir -p shared-output
+          cp "$RUNNER_TEMP/cap-stage/stage-report.json" shared-output/
+          tar -czf shared-output/immutable-shared-release.tar.gz -C live-pinned "preview-b/releases/$RELEASE"
+          (cd shared-output && sha256sum immutable-shared-release.tar.gz > artifact-sha256.txt)
+      - name: Install existing pinned official Playwright test package only
+        run: |
+          npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
+          test -x /usr/bin/google-chrome
+      - name: Exercise exact transformed release URL alongside original owners and legacy pages
+        env:
+          CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
+          WATCH_QA_PNG: '1'
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory live-pinned > "$RUNNER_TEMP/watch-shared-http.log" 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for n in $(seq 1 30); do curl -fsS "$WATCH_QA_URL" >/dev/null && break; sleep 1; done
+          curl -fsS "$WATCH_QA_URL" >/dev/null
+          cd qa/browser
+          npx playwright test atelier.spec.mjs --config=playwright.shared.config.mjs
+      - name: Preserve only authorized transformed output and browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: watch-transformed-combined-shared-qa
+          path: |
+            shared-output
+            qa/browser/shared-artifacts
+            qa/browser/shared-report
+          if-no-files-found: ignore
+          retention-days: 7
