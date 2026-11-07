@@ -33,7 +33,10 @@ jobs:
           trap 'kill "$server" 2>/dev/null || true' EXIT
           for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null && break; sleep 1; done
           cd qa/browser
-          npx playwright test --config=playwright.mechanisms.config.mjs
+          status=0
+          npx playwright test --config=playwright.mechanisms.config.mjs || status=1
+          npx playwright test --config=resilience.config.mjs --grep='controlled slow real baseline' || status=1
+          exit "$status"
       - name: Preserve rendered material and loading evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -42,5 +45,6 @@ jobs:
           path: |
             qa/browser/mechanism-artifacts
             qa/browser/mechanism-html-report
+            qa/browser/resilience-artifacts
           if-no-files-found: ignore
           retention-days: 7
