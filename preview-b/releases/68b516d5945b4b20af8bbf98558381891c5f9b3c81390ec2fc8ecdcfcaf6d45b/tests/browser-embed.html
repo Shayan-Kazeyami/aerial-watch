@@ -1,9 +1,19 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aerial embed smoke check</title>
-<style>body{margin:0;font:16px system-ui;background:#f0ede7;color:#202a2c}header{padding:16px}button{font:inherit;padding:10px}iframe{display:block;width:100%;height:920px;border:0}p{max-width:80ch}</style></head>
-<body><header><strong>Integration test host</strong><p>This is a test wrapper, not the Kazeyami website. The viewer runs in an isolated iframe with relative asset paths. Check rendering, controls, downloads and file import, then remove and restore it.</p><button id="toggle" type="button">Remove viewer</button></header><main id="host"></main>
-<script type="module">
-const host=document.querySelector('#host'),button=document.querySelector('#toggle');
-function mount(){const frame=document.createElement('iframe');frame.src='../integrated-preview.html?quality=efficient&paused=1';frame.title='Aerial interactive watch';frame.allow='fullscreen';host.append(frame);button.textContent='Remove viewer';}
-button.onclick=()=>{if(host.firstChild){host.replaceChildren();button.textContent='Restore viewer';}else mount();};mount();
-</script></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archived preview · Aerial Watch</title>
+<style>body{margin:0;background:#111318;color:#eef0f3;font:17px/1.6 system-ui,sans-serif}main{max-width:42rem;margin:12vh auto;padding:2rem}h1{line-height:1.2}a{color:#a5d5ff}li{margin:1rem 0}small{color:#bbc1ca}</style>
+</head>
+<body><main>
+<h1>This preview has been archived</h1>
+<p>This older standalone Aerial Watch preview is no longer hosted here. The current viewer remains available, and the original files are preserved in Git history.</p>
+<ul>
+<li><a id="current" href="/aerial-watch/">Open the current Aerial Watch viewer</a></li>
+<li><a href="https://github.com/Shayan-Kazeyami/aerial-watch/tree/f3c983f77ca3099b1061946794f0bf4e711986c5/preview-b/releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b">Browse the original source snapshot on GitHub</a></li>
+</ul>
+<small>The snapshot is source code and assets, not an interactive hosted preview.</small>
+</main>
+<script>document.getElementById('current').href='/aerial-watch/'+location.search+location.hash;</script>
+</body></html>

@@ -1,27 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="color-scheme" content="dark"><title>Aerial — Finish review</title>
-  <link rel="stylesheet" href="material-review.css">
-  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archived preview · Aerial Watch</title>
+<style>body{margin:0;background:#111318;color:#eef0f3;font:17px/1.6 system-ui,sans-serif}main{max-width:42rem;margin:12vh auto;padding:2rem}h1{line-height:1.2}a{color:#a5d5ff}li{margin:1rem 0}small{color:#bbc1ca}</style>
 </head>
-<body>
-  <main>
-    <header><a href="./">AERIAL</a><span>Quality 01 / Material study</span></header>
-    <div class="intro"><div><p class="eyebrow">SURFACE, LIGHT AND SCALE</p><h1>Six finishes. One light.</h1></div>
-      <p>Identical 12 × 8 mm coupons reveal the difference between satin, polish, colour and texture. Select a finish to inspect it closer.</p></div>
-    <section class="review" aria-label="Material comparison">
-      <div class="toolbar">
-        <fieldset><legend>Lighting</legend><button id="neutral" aria-pressed="true">Neutral</button><button id="product" aria-pressed="false">Product</button></fieldset>
-        <fieldset><legend>Framing</legend><button id="hero" aria-pressed="true">All finishes</button><select id="sample" aria-label="Inspect one finish"><option value="">Select a close-up</option></select></fieldset>
-        <div class="capture-actions"><button id="capture">Save image</button><button id="save-view">Save view</button></div>
-      </div>
-      <div id="stage"><canvas id="finish-canvas" aria-label="Six physically based material coupons under fixed lighting"></canvas><p id="failure" role="alert" hidden></p></div>
-      <div id="caption-grid" class="caption-grid"></div>
-      <div class="readout"><p id="view-label" aria-live="polite">Neutral / All finishes</p><p id="render-size">Preparing render…</p></div>
-    </section>
-    <details><summary>How this comparison is made</summary><p>Scene dimensions are millimetres. The same coupon geometry, 0.06 mm bevel, camera, exposure and colour conversion are used for every material. Close-ups place each selected sample at the same point under the lights. Neutral uses white reflection cards and white lights. Product uses the watch’s photographic cards and warm/cool light palette. Surfaces use the watch’s shared finish library. The board is static and requests 2.5× resolution with up to 4× MSAA. Higher native pixel density is preserved within image-size and device limits; actual render dimensions are reported above.</p><p>These are authored appearance proposals. Coupon body thickness is 0.8 mm plus the bevel. Ruby uses an opaque coloured dielectric approximation so the main watch’s sapphire background retains the jewels; internal jewel transmission is not simulated. They are not measured alloy spectra, colour standards or production finish specifications. The two views compare appearance; they do not certify real materials.</p><p>Save image downloads the clean render. Save view downloads its JSON settings. A saved view can also be reproduced with the query parameters <code>?light=neutral&amp;sample=satin</code>; omit <code>sample</code> for the complete board.</p></details>
-    <a class="back" href="./">Return to the watch →</a>
-  </main><script type="module" src="material-review.js"></script>
+<body><main>
+<h1>This preview has been archived</h1>
+<p>This older standalone Aerial Watch preview is no longer hosted here. The current viewer remains available, and the original files are preserved in Git history.</p>
+<ul>
+<li><a id="current" href="/aerial-watch/">Open the current Aerial Watch viewer</a></li>
+<li><a href="https://github.com/Shayan-Kazeyami/aerial-watch/tree/f3c983f77ca3099b1061946794f0bf4e711986c5/preview-b/releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b">Browse the original source snapshot on GitHub</a></li>
+</ul>
+<small>The snapshot is source code and assets, not an interactive hosted preview.</small>
+</main>
+<script>document.getElementById('current').href='/aerial-watch/'+location.search+location.hash;</script>
 </body></html>
