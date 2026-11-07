@@ -1,0 +1,114 @@
+name: Isolated R18 winding source QA
+on:
+  push:
+    branches: ['qa/watch-r18-winding-20261108']
+permissions:
+  contents: read
+concurrency:
+  group: return-material-watch-qa-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  return-material-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      WATCH_QA_URL: 'http://127.0.0.1:8765/atelier-preview.html?quality=efficient&leather=craft14'
+      WATCH_QA_PNG: '1'
+    steps:
+      - name: Check out QA tooling only
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: qa
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify QA scripts and exact terminal overlay archive
+        run: |
+          set -euo pipefail
+          mkdir -p qa/return-material/output
+          echo 'a6384614c92eca59ca5dc321432df58ba95263552b0bc127910fa4a0da5c11ac  qa/terminal-ramp/restore-terminal.py' | sha256sum -c -
+          echo 'd6627e17a10af3192aefd7e430165f0badca1db93a2fe721d63cbe4cc2384f07  qa/terminal-ramp/verify-source-before-browser.mjs' | sha256sum -c -
+          echo '8950ba9253e6c18f0a740f634283b77d59137af8aeff6b8107a89a4276c57edb  qa/terminal-ramp/atelier-combined-r17.spec.mjs' | sha256sum -c -
+          echo '187616cdcb8e7689fc557ee4634e17fb994394cd610cecd3c3514937a0e2afdf  qa/terminal-ramp/atelier-terminal.spec.mjs' | sha256sum -c -
+          echo 'c81cb7fd288e54460aac24472043faa273320b0b0bb2e9e9f60d74ef0ddb0a5e  qa/terminal-ramp/playwright.terminal.config.mjs' | sha256sum -c -
+          python3 qa/terminal-ramp/restore-terminal.py qa/terminal-ramp/inputs qa/terminal-ramp/source qa/return-material/output/restore-receipt.json | tee qa/return-material/output/restore.log
+      - name: Verify and restore exact R18 material overlay
+        run: |
+          set -euo pipefail
+          echo 'd332954f153f8692c60a4095971b1e61333c347817147a50e560be7fa2098ba5  qa/return-material/restore-material.py' | sha256sum -c -
+          echo '6c992bdfd7f9c7d4f248e10cab6a9221f224b2a282dc42453965987ef87b49e1  qa/return-material/verify-source-before-browser.mjs' | sha256sum -c -
+          echo '94e1de6001d56b3dbad5a4676c4caab43dda703ac5d17dd09f7320578fe5ad5a  qa/return-material/atelier-combined-r18.spec.mjs' | sha256sum -c -
+          echo '8bc75ee39fc44c9c0d4fbb2984ed9addb1b7ec2e9db773f051ec5224babf96a2  qa/return-material/atelier-return-material.spec.mjs' | sha256sum -c -
+          echo 'b89501fb33175c6466e35f7b93fbd443e263995fecbe172a819aa71c9e7fb457  qa/return-material/playwright.return-material.config.mjs' | sha256sum -c -
+          python3 qa/return-material/restore-material.py qa/return-material/inputs qa/return-material/source qa/return-material/output/restore-material-receipt.json | tee qa/return-material/output/restore-material.log
+      - name: Restore exact combined source and synchronize AVIF geometry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo '7b1b0c10bdcf888017dd75955a1058cd0fc668191b4e0778070188826e9cbde4  qa/restore-watch-candidate.py' | sha256sum -c -
+          python3 qa/restore-watch-candidate.py 2>&1 | tee qa/return-material/output/restore-baseline.log
+          python3 qa/apply-hinge.py 2>&1 | tee qa/return-material/output/hinge.log
+          mv candidate "$RUNNER_TEMP/candidate"
+          ln -s "$RUNNER_TEMP/candidate" candidate
+          python3 qa/apply-hinge-to-combined-delta.py candidate qa/inputs/hinge-to-combined-delta.tar.gz --apply 2>&1 | tee qa/return-material/output/combined-delta.log
+          python3 qa/combined-shared/apply-variant-geometry-sync.py "$RUNNER_TEMP/candidate" 2>&1 | tee qa/return-material/output/variant-sync.log
+          SOURCE_ROOT="$RUNNER_TEMP/candidate" node qa/combined-shared/variant-sync.test.mjs 2>&1 | tee qa/return-material/output/variant-sync-test.log
+      - name: Install private terminal candidate into ephemeral source only
+        run: |
+          set -euo pipefail
+          EPHEMERAL_TERMINAL_INTEGRATION=1 node qa/terminal-ramp/source/install-terminal-candidate.mjs "$RUNNER_TEMP/candidate" "$GITHUB_WORKSPACE/qa/terminal-ramp/source/candidate" 2>&1 | tee qa/return-material/output/install.log
+          cp "$RUNNER_TEMP/candidate/terminal-overlay-receipt.json" qa/return-material/output/
+      - name: Install private return-material candidate over verified R17 source
+        run: |
+          set -euo pipefail
+          EPHEMERAL_TERMINAL_INTEGRATION=1 node qa/return-material/source/install-return-material-candidate.mjs "$RUNNER_TEMP/candidate" "$GITHUB_WORKSPACE/qa/return-material/source/candidate" 2>&1 | tee qa/return-material/output/install-material.log
+          cp "$RUNNER_TEMP/candidate/return-material-overlay-receipt.json" qa/return-material/output/
+      - name: Verify R18 baseline and apply isolated winding-only overlay
+        run: |
+          set -euo pipefail
+          node qa/return-material/verify-source-before-browser.mjs "$RUNNER_TEMP/candidate"
+          python3 qa/r18-winding/apply-winding.py "$RUNNER_TEMP/candidate" --apply | tee qa/return-material/output/winding-apply.log
+          cp "$RUNNER_TEMP/candidate/return-material-winding-receipt.json" qa/return-material/output/
+      - name: Validate source and full exact-source regression suite
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/candidate"
+          node scripts/validate.mjs 2>&1 | tee "$GITHUB_WORKSPACE/qa/return-material/output/validate.log"
+          /usr/bin/time -v node --test --test-concurrency=1 tests/*.test.mjs 2>&1 | tee "$GITHUB_WORKSPACE/qa/return-material/output/full-tests.log"
+      - name: Independently verify exact source bytes before browser
+        run: |
+          set -euo pipefail
+          python3 qa/r18-winding/verify-composed.py "$RUNNER_TEMP/candidate" 2>&1 | tee qa/return-material/output/pre-browser-identity.json
+      - name: Install pinned Playwright harness
+        run: |
+          set -euo pipefail
+          npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
+          test -x /usr/bin/google-chrome
+          cp qa/r18-winding/winding-rest.spec.mjs qa/browser/
+          cp qa/r18-winding/winding-rest.config.mjs qa/browser/
+      - name: Run real software-browser source QA
+        env:
+          CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory "$RUNNER_TEMP/candidate" > "$GITHUB_WORKSPACE/qa/return-material/output/http.log" 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for n in $(seq 1 30); do curl -fsS "$WATCH_QA_URL" >/dev/null && break; sleep 1; done
+          curl -fsS "$WATCH_QA_URL" >/dev/null
+          cd qa/browser
+          npx playwright test --config=winding-rest.config.mjs 2>&1 | tee "$GITHUB_WORKSPACE/qa/return-material/output/playwright.log"
+      - name: Preserve isolated QA logs and browser evidence only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: watch-r18-winding-source-qa
+          path: |
+            qa/return-material/output
+            qa/browser/mechanism-artifacts
+            qa/browser/mechanism-html-report
+          if-no-files-found: ignore
+          retention-days: 7
