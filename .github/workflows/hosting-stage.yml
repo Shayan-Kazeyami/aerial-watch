@@ -1,4 +1,4 @@
-name: Exact hosting stage browser QA
+name: Live hosting cleanup browser verification
 on:
   push:
     branches: ['qa/watch-hosting-stage-*']
@@ -30,29 +30,31 @@ jobs:
           node-version: '22'
       - name: Install existing pinned browser harness
         run: npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
-      - name: Test exact staged files under real Pages subpath
+      - name: Verify deployed production pages and controls
         env:
           STAGED_SITE: ${{ github.workspace }}/staged-site
-          HOSTING_QA_URL: http://127.0.0.1:8766/aerial-watch/
+          HOSTING_QA_URL: https://shayan-kazeyami.github.io/aerial-watch/
           HOSTING_QA_ARTIFACTS: ${{ github.workspace }}/qa/browser/hosting-stage-artifacts
           CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
         run: |
           test "$(git -C staged-site rev-parse HEAD)" = 2a8748aeabc70e75f10f63fa644bcad9f315f26f
           test -z "$(git -C staged-site status --porcelain)"
           test -x "$CHROMIUM_EXECUTABLE_PATH"
-          mkdir -p "$RUNNER_TEMP/hosting-stage-www"
-          ln -s "$GITHUB_WORKSPACE/staged-site" "$RUNNER_TEMP/hosting-stage-www/aerial-watch"
-          python3 -m http.server 8766 --bind 127.0.0.1 --directory "$RUNNER_TEMP/hosting-stage-www" > "$RUNNER_TEMP/hosting-stage-http.log" 2>&1 &
-          server=$!
-          trap 'kill "$server" 2>/dev/null || true' EXIT
-          for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8766/aerial-watch/ >/dev/null && break; sleep 1; done
-          curl -fsS http://127.0.0.1:8766/aerial-watch/ >/dev/null
+          notice=preview-b/releases/68b516d5945b4b20af8bbf98558381891c5f9b3c81390ec2fc8ecdcfcaf6d45b/index.html
+          expected=$(sha256sum "staged-site/$notice" | cut -d' ' -f1)
+          for n in $(seq 1 30); do
+            actual=$(curl -fsSL "https://shayan-kazeyami.github.io/aerial-watch/$notice?qa=2a8748ae" | sha256sum | cut -d' ' -f1)
+            test "$actual" = "$expected" && break
+            sleep 5
+          done
+          test "$actual" = "$expected"
+          test "$(curl -fsSL https://shayan-kazeyami.github.io/aerial-watch/index.html | sha256sum | cut -d' ' -f1)" = "$(sha256sum staged-site/index.html | cut -d' ' -f1)"
           node qa/browser/hosting-stage.cjs
       - name: Preserve limited QA evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: hosting-stage-browser-qa
+          name: hosting-live-browser-qa
           path: qa/browser/hosting-stage-artifacts
           if-no-files-found: ignore
           retention-days: 7
