@@ -31,7 +31,7 @@ jobs:
           echo 'a6384614c92eca59ca5dc321432df58ba95263552b0bc127910fa4a0da5c11ac  qa/terminal-ramp/restore-terminal.py' | sha256sum -c -
           echo 'd6627e17a10af3192aefd7e430165f0badca1db93a2fe721d63cbe4cc2384f07  qa/terminal-ramp/verify-source-before-browser.mjs' | sha256sum -c -
           echo '8950ba9253e6c18f0a740f634283b77d59137af8aeff6b8107a89a4276c57edb  qa/terminal-ramp/atelier-combined-r17.spec.mjs' | sha256sum -c -
-          echo '66a78816c2bc61f6f892942bdd57cb2e05549713683b32d050586332f5647c0c  qa/terminal-ramp/atelier-terminal.spec.mjs' | sha256sum -c -
+          echo '97d5d417b79b93e4820214cfc61b83ae39262bbdf2c0b0f085c27bfb9936e348  qa/terminal-ramp/atelier-terminal.spec.mjs' | sha256sum -c -
           echo 'c81cb7fd288e54460aac24472043faa273320b0b0bb2e9e9f60d74ef0ddb0a5e  qa/terminal-ramp/playwright.terminal.config.mjs' | sha256sum -c -
           python3 qa/terminal-ramp/restore-terminal.py qa/terminal-ramp/inputs qa/terminal-ramp/source qa/terminal-ramp/output/restore-receipt.json | tee qa/terminal-ramp/output/restore.log
       - name: Restore exact combined source and synchronize AVIF geometry
