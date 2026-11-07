@@ -29,7 +29,8 @@ jobs:
         run: |
           echo '7b1b0c10bdcf888017dd75955a1058cd0fc668191b4e0778070188826e9cbde4  qa/restore-watch-candidate.py' | sha256sum -c -
           python3 qa/restore-watch-candidate.py
-          cd candidate && node scripts/validate.mjs
+          python3 qa/shared-stage/apply-packaging-fix.py candidate
+          cd candidate && node --test tests/atelier-release-build.test.mjs && node scripts/validate.mjs
       - name: Check out pinned live publication tree separately
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
