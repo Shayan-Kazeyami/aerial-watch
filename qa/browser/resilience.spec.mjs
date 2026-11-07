@@ -12,7 +12,7 @@ function recorder(page,info){
 async function ready(page,expected={}){await page.waitForFunction(expected=>{const s=window.assemblyInspect?.(),c=s?.comparisonLoading;return s&&!s.loading&&!s.failed&&s.presentation?.phase==='ready'&&!s.presentation.pending.length&&!c?.loading&&!c?.failure&&(!c?.needed||(c.formReady&&c.architectureReady))&&Object.entries(expected).every(([k,v])=>s[k]===v);},expected,{timeout:240000});}
 async function panel(page,mode){await page.locator(`[data-mode="${mode}"]:visible`).first().click();await expect(page.locator('#context')).toBeVisible();}
 async function download(page,info,proxy,name){const wait=page.waitForEvent('download',{timeout:120000});await page.locator(`#atelier-tools [data-proxy="${proxy}"]`).click();const file=await wait;expect(await file.failure()).toBeNull();const path=info.outputPath(name);await file.saveAs(path);return path;}
-async function config(page,info,name){await ready(page);await panel(page,'capture');const path=await download(page,info,'export-config',name+'.json');const data=JSON.parse(await readFile(path,'utf8'));expect(data.capRefinement.active).toBe(true);expect(data.capRefinement.candidatePositionSHA256).toBe(sha);return {path,data};}
+async function config(page,info,name){await ready(page);await panel(page,'capture');const path=await download(page,info,'export-config',name+'.json');const data=JSON.parse(await readFile(path,'utf8'));expect(data.capRefinement.active).toBe(true);expect(data.capRefinement.candidatePositionSHA256).toBe(sha);expect(data.sourceAtCapture.status).toBe('verified');expect(data.sourceAtCapture.digest).toBe('947d891f95f7be19219ca3c7f7f2ca78aeae52fef8d41d0a7d42e48421a48063');expect(data.leatherCraft.candidate.geometryVerification.status).toBe('verified');expect(data.leatherCraft.candidate.geometryVerification.actualSha256).toBe('d473da297e6dd6565c8c98b3b3e36602f6ed7703c60e51a0205d2ac070825fb0');return {path,data};}
 async function boot(page){await page.goto(target,{waitUntil:'domcontentloaded'});await ready(page,{openWork:true});if(await page.locator('#motion').getAttribute('aria-pressed')==='true')await page.locator('#motion').click();}
 
 test('controlled missing and aborted raw model: visible reload retry recovers',async({page},info)=>{
@@ -75,4 +75,49 @@ test('actual WebGL context loss requires documented reload recovery',async({page
   await expect(page.locator('#atelier-retry')).toBeVisible();await expect(page.locator('#load-message')).toContainText('graphics context was lost');await expect(page.locator('#home')).toBeDisabled();await page.screenshot({path:info.outputPath('context-lost.png')});
   log.step('reload-recovery');await page.locator('#atelier-retry').click();await ready(page,{openWork:true});await config(page,info,'after-context-reload');await page.screenshot({path:info.outputPath('context-recovered.png')});
  }finally{await log.save();}
+});
+
+test('controlled slow real baseline preserves loading state until actual transfer resumes',async({page},info)=>{
+ const log=recorder(page,info);const url=new URL(target);url.searchParams.set('assets','raw');
+ let release;const gate=new Promise(resolve=>{release=resolve;});let held=false;
+ // One continuation per intercepted request. Cleanup waits for this handler after releasing its gate.
+ const route=async request=>{held=true;await gate;await request.continue();};
+ await page.route('**/rebuild/assembly.glb',route);
+ try{
+  log.step('held-real-baseline');await page.goto(url.href,{waitUntil:'domcontentloaded'});
+  await expect.poll(()=>held,{timeout:30000,message:'Raw baseline request must reach the controlled delay'}).toBe(true);
+  await page.waitForFunction(()=>typeof window.assemblyInspect==='function',null,{timeout:10000});
+  // Atelier intentionally hides legacy #loading while its opaque poster and selected-design status are shown.
+  // Validate that real pending UI and its interaction gate twice during a three-second hold.
+  for(let sample=0;sample<2;sample++){
+   await expect(page.locator('#studio-poster')).toBeVisible({timeout:10000});
+   await expect(page.locator('#studio-poster .atelier-loading-identity')).toBeVisible();
+   await expect(page.locator('#studio-poster .atelier-loading-identity')).toContainText('Preparing the selected watch');
+   await expect(page.locator('#atelier-state-label')).toBeVisible();await expect(page.locator('#atelier-state-label')).toHaveText('Preparing selected design');
+   await expect(page.locator('#assembly-canvas')).toHaveAttribute('aria-busy','true');await expect(page.locator('#assembly-canvas')).toHaveJSProperty('inert',true);
+   await expect(page.locator('#home')).toBeDisabled();await expect(page.locator('#inspection-controls')).toHaveJSProperty('disabled',true);
+   // Fieldset is a disabling container, not an actionable control. Check its
+   // actual property and every descendant control's effective disabled state.
+   const inheritedControls=page.locator('#inspection-controls button, #inspection-controls input, #inspection-controls select, #inspection-controls textarea');expect(await inheritedControls.count()).toBeGreaterThan(0);for(const control of await inheritedControls.all())await expect(control).toBeDisabled();await expect(page.locator('#motion')).toBeDisabled();
+   for(const control of await page.locator('.task-dock button').all())await expect(control).toBeDisabled();
+   await expect(page.locator('#atelier-retry')).toBeHidden();
+   const state=await page.evaluate(()=>{const poster=document.getElementById('studio-poster'),canvas=document.getElementById('assembly-canvas'),p=poster.getBoundingClientRect(),c=canvas.getBoundingClientRect(),style=getComputedStyle(poster);return {at:performance.now(),inspect:window.assemblyInspect?.()??null,bodyReady:document.body.dataset.ready,presentation:document.body.dataset.presentation,loadingText:document.getElementById('load-message').textContent,visiblePendingText:poster.innerText,poster:{backgroundColor:style.backgroundColor,opacity:style.opacity,coversCanvas:p.left<=c.left+1&&p.top<=c.top+1&&p.right>=c.right-1&&p.bottom>=c.bottom-1},legacyLoadingVisibility:getComputedStyle(document.getElementById('loading')).visibility};});
+   log.data.events.push({step:'held-sample',sample,state});
+   expect(state.bodyReady).toBe('false');expect(state.presentation).toBe('preparing');expect(state.inspect).not.toBeNull();expect(state.inspect.loading).toBe(true);expect(state.inspect.presentation.interactive).toBe(false);expect(state.inspect.failed).toBe(false);
+   expect(state.poster.backgroundColor).toBe('rgb(25, 27, 26)');expect(Number(state.poster.opacity)).toBe(1);expect(state.poster.coversCanvas).toBe(true);
+   if(sample===0)await page.waitForTimeout(3000);
+  }
+  await page.screenshot({path:info.outputPath('controlled-slow-loading.png')});
+  log.step('release-real-request');release();await ready(page,{openWork:true});
+  await expect(page.locator('#studio-poster')).toBeHidden();await expect(page.locator('#loading')).toBeHidden();await expect(page.locator('#assembly-canvas')).toHaveAttribute('aria-busy','false');await expect(page.locator('#assembly-canvas')).toHaveJSProperty('inert',false);await expect(page.locator('#home')).toBeEnabled();await expect(page.locator('#atelier-retry')).toBeHidden();
+  await config(page,info,'after-controlled-delay');await page.screenshot({path:info.outputPath('controlled-slow-ready.png')});
+  expect(log.data.events.filter(x=>x.event==='pageerror'||x.event==='requestfailed'||x.event==='response'||(x.event==='console'&&x.type==='error'))).toEqual([]);
+ }catch(error){
+  log.data.failureBeforeRelease={message:error.message,inspect:await page.evaluate(()=>window.assemblyInspect?.()).catch(()=>null)};
+  await page.screenshot({path:info.outputPath('controlled-slow-failure-before-release.png'),timeout:10000}).catch(()=>{});throw error;
+ }finally{
+  // release() is idempotent; unrouteAll(wait) prevents removal/page teardown racing request.continue().
+  // This test owns its only route. Do not use unroute(pattern) immediately after resolving the gate.
+  release();try{await page.unrouteAll({behavior:'wait'});}finally{await log.save();}
+ }
 });
