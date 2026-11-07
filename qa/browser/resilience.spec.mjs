@@ -76,3 +76,28 @@ test('actual WebGL context loss requires documented reload recovery',async({page
   log.step('reload-recovery');await page.locator('#atelier-retry').click();await ready(page,{openWork:true});await config(page,info,'after-context-reload');await page.screenshot({path:info.outputPath('context-recovered.png')});
  }finally{await log.save();}
 });
+
+test('controlled slow real baseline preserves loading state until actual transfer resumes',async({page},info)=>{
+ const log=recorder(page,info);const url=new URL(target);url.searchParams.set('assets','raw');
+ let release;const gate=new Promise(resolve=>{release=resolve;});let held=false;
+ const route=async request=>{held=true;await gate;await request.continue();};
+ await page.route('**/rebuild/assembly.glb',route);
+ try{
+  log.step('held-real-baseline');await page.goto(url.href,{waitUntil:'domcontentloaded'});
+  await expect.poll(()=>held,{timeout:30000,message:'Raw baseline request must reach the controlled delay'}).toBe(true);
+  expect(held).toBe(true);
+  // Two checks span a bounded three-second hold. Other genuine requests may finish.
+  for(let sample=0;sample<2;sample++){
+   await expect(page.locator('#loading')).toBeVisible();await expect(page.locator('#assembly-canvas')).toHaveAttribute('aria-busy','true');
+   await expect(page.locator('#home')).toBeDisabled();await expect(page.locator('#inspection-controls')).toBeDisabled();await expect(page.locator('#motion')).toBeDisabled();
+   const state=await page.evaluate(()=>({at:performance.now(),inspect:window.assemblyInspect?.()??null,bodyReady:document.body.dataset.ready,presentation:document.body.dataset.presentation,loadingText:document.getElementById('load-message').textContent}));
+   expect(state.bodyReady).not.toBe('true');expect(state.presentation).not.toBe('ready');if(state.inspect){expect(state.inspect.loading).toBe(true);expect(state.inspect.presentation.interactive).toBe(false);expect(state.inspect.failed).toBe(false);}
+   log.data.events.push({step:'held-sample',sample,state});if(sample===0)await page.waitForTimeout(3000);
+  }
+  await page.screenshot({path:info.outputPath('controlled-slow-loading.png')});
+  log.step('release-real-request');release();await ready(page,{openWork:true});
+  await expect(page.locator('#loading')).toBeHidden();await expect(page.locator('#assembly-canvas')).toHaveAttribute('aria-busy','false');await expect(page.locator('#home')).toBeEnabled();
+  await config(page,info,'after-controlled-delay');await page.screenshot({path:info.outputPath('controlled-slow-ready.png')});
+  expect(log.data.events.filter(x=>x.event==='pageerror'||x.event==='requestfailed'||x.event==='response'||(x.event==='console'&&x.type==='error'))).toEqual([]);
+ }finally{release();await page.unroute('**/rebuild/assembly.glb',route);await log.save();}
+});
