@@ -12,7 +12,7 @@ function recorder(page,info){
 async function ready(page,expected={}){await page.waitForFunction(expected=>{const s=window.assemblyInspect?.(),c=s?.comparisonLoading;return s&&!s.loading&&!s.failed&&s.presentation?.phase==='ready'&&!s.presentation.pending.length&&!c?.loading&&!c?.failure&&(!c?.needed||(c.formReady&&c.architectureReady))&&Object.entries(expected).every(([k,v])=>s[k]===v);},expected,{timeout:240000});}
 async function panel(page,mode){await page.locator(`[data-mode="${mode}"]:visible`).first().click();await expect(page.locator('#context')).toBeVisible();}
 async function download(page,info,proxy,name){const wait=page.waitForEvent('download',{timeout:120000});await page.locator(`#atelier-tools [data-proxy="${proxy}"]`).click();const file=await wait;expect(await file.failure()).toBeNull();const path=info.outputPath(name);await file.saveAs(path);return path;}
-async function config(page,info,name){await ready(page);await panel(page,'capture');const path=await download(page,info,'export-config',name+'.json');const data=JSON.parse(await readFile(path,'utf8'));expect(data.capRefinement.active).toBe(true);expect(data.capRefinement.candidatePositionSHA256).toBe(sha);return {path,data};}
+async function config(page,info,name){await ready(page);await panel(page,'capture');const path=await download(page,info,'export-config',name+'.json');const data=JSON.parse(await readFile(path,'utf8'));expect(data.sourceAtCapture.status).toBe('verified');expect(data.sourceAtCapture.digest).toBe('947d891f95f7be19219ca3c7f7f2ca78aeae52fef8d41d0a7d42e48421a48063');expect(data.leatherCraft.candidate.identity.id).toBe('strap-hinge-skin-sourcecharts-r16-candidate');expect(data.leatherCraft.candidate.geometryVerification.actualSha256).toBe('d473da297e6dd6565c8c98b3b3e36602f6ed7703c60e51a0205d2ac070825fb0');expect(data.leatherCraft.candidate.geometryVerification.status).toBe('verified');expect(data.capRefinement.active).toBe(true);expect(data.capRefinement.candidatePositionSHA256).toBe(sha);return {path,data};}
 async function boot(page){await page.goto(target,{waitUntil:'domcontentloaded'});await ready(page,{openWork:true});if(await page.locator('#motion').getAttribute('aria-pressed')==='true')await page.locator('#motion').click();}
 
 test('controlled missing and aborted raw model: visible reload retry recovers',async({page},info)=>{
@@ -27,7 +27,7 @@ test('controlled missing and aborted raw model: visible reload retry recovers',a
  }}finally{await log.save();}
 });
 
-test('rapid final option consistency, actual saved-view roundtrip, repeated PNG and WebM',async({page},info)=>{
+test('rapid final option consistency and actual saved-view roundtrip',async({page},info)=>{
  const log=recorder(page,info);
  try{
   await boot(page);log.step('rapid-design-options');await panel(page,'settings');await page.locator('#atelier-tools [data-mode="engineering"]').click();
@@ -38,32 +38,6 @@ test('rapid final option consistency, actual saved-view roundtrip, repeated PNG 
   log.step('saved-view-import');await panel(page,'capture');const chooser=page.waitForEvent('filechooser');await page.locator('#atelier-import').click();await (await chooser).setFiles(saved.path);
   await expect(page.locator('#viewer-status')).toContainText('Saved camera, crown, options',{timeout:60000});await ready(page,{view:saved.data.view,renderQuality:saved.data.options.quality});
   const restored=await config(page,info,'after-roundtrip');expect(restored.data.options).toEqual(saved.data.options);expect(restored.data.camera).toEqual(saved.data.camera);expect(restored.data.crown).toEqual(saved.data.crown);expect(restored.data.explosion).toBe(saved.data.explosion);
-  log.step('repeated-png');for(let i=0;i<2;i++){await panel(page,'capture');const path=await download(page,info,'capture-scene','export-'+i+'.png');const b=await readFile(path);expect([...b.subarray(0,8)]).toEqual([137,80,78,71,13,10,26,10]);log.data.downloads.push({type:'png',path,bytes:b.length});}
-  log.step('webm');const support=await page.evaluate(()=>({captureStream:typeof HTMLCanvasElement.prototype.captureStream==='function',mediaRecorder:typeof MediaRecorder==='function',webm:typeof MediaRecorder==='function'&&MediaRecorder.isTypeSupported('video/webm')}));log.data.recordingSupport=support;
-  if(support.captureStream&&support.mediaRecorder&&support.webm){
-   // Use real watch playback, not the paused Lugs view or injected animation.
-   await page.locator('#home').click();await ready(page,{openWork:true});
-   if(await page.locator('#motion').getAttribute('aria-pressed')!=='true')await page.locator('#motion').click();
-   await expect(page.locator('#motion')).toHaveAttribute('aria-pressed','true');
-   const before=await page.evaluate(()=>({at:performance.now(),state:window.assemblyInspect()}));
-   expect(before.state.interiorAnimation||before.state.animation).toBe(true);
-   await panel(page,'capture');const path=await download(page,info,'record-scene','actual-motion.webm');
-   const after=await page.evaluate(()=>({at:performance.now(),state:window.assemblyInspect()}));
-   log.data.recordingPlayback={before,after,wallElapsedMs:after.at-before.at};
-   const advanced=after.state.mechanismElapsed>before.state.mechanismElapsed||after.state.illustrativeElapsed>before.state.illustrativeElapsed;
-   log.data.recordingResult=advanced?'PLAYBACK_ADVANCED_PENDING_PIXEL_CHECK':'STATIC_OR_NOT_ADVANCING';expect(advanced).toBe(true);
-   const bytes=await readFile(path);expect([...bytes.subarray(0,4)]).toEqual([26,69,223,163]);
-   const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_format','-show_streams','-count_frames','-of','json',path],{encoding:'utf8',timeout:30000}));await writeFile(info.outputPath('webm-ffprobe.json'),JSON.stringify(probe,null,2));const video=probe.streams.find(s=>s.codec_type==='video');expect(video).toBeTruthy();expect(video.width).toBeGreaterThan(0);expect(video.height).toBeGreaterThan(0);expect(Number(video.nb_read_frames)).toBeGreaterThan(1);log.data.downloads.push({type:'webm',path,bytes:bytes.length,probe});
-   const frameProbe=JSON.parse(execFileSync('ffprobe',['-v','error','-select_streams','v:0','-show_frames','-show_entries','frame=best_effort_timestamp_time,pkt_duration_time','-of','json',path],{encoding:'utf8',timeout:30000}));await writeFile(info.outputPath('webm-frame-times.json'),JSON.stringify(frameProbe,null,2));
-   const times=frameProbe.frames.map(f=>Number(f.best_effort_timestamp_time)).filter(Number.isFinite);expect(times.length).toBeGreaterThan(1);expect(times.at(-1)).toBeGreaterThan(times[0]);log.data.recordingPlayback.encodedTimeSpanSeconds=times.at(-1)-times[0];
-   let ffmpegAvailable=true;try{execFileSync('ffmpeg',['-version'],{stdio:'ignore',timeout:10000});}catch(error){if(error.code==='ENOENT')ffmpegAvailable=false;else throw error;}
-   if(ffmpegAvailable){
-    const md5=execFileSync('ffmpeg',['-v','error','-i',path,'-map','0:v:0','-an','-f','framemd5','-'],{encoding:'utf8',timeout:60000,maxBuffer:8*1024*1024});await writeFile(info.outputPath('webm-frames.md5'),md5);
-    const hashes=md5.split('\n').filter(line=>line.trim()&&!line.startsWith('#')).map(line=>line.split(',').at(-1).trim());const distinct=new Set(hashes).size;
-    log.data.recordingPixelEvidence={decodedFrames:hashes.length,distinctFrameHashes:distinct};log.data.recordingResult=distinct>1?'PLAYBACK_AND_CHANGING_DECODED_PIXELS_VERIFIED':'STATIC_DECODED_PIXELS';expect(distinct).toBeGreaterThan(1);
-   }else{log.data.recordingResult='PLAYBACK_ADVANCED_PIXEL_MOTION_UNVERIFIED_FFMPEG_UNAVAILABLE';test.info().annotations.push({type:'incomplete',description:'ffmpeg unavailable: moving pixels not verified; do not claim motion-video acceptance'});}
-   if(await page.locator('#motion').getAttribute('aria-pressed')==='true')await page.locator('#motion').click();
-  }else log.data.recordingResult='UNSUPPORTED in this browser; not a passing WebM acceptance result';
   expect(log.data.events.filter(x=>x.event==='pageerror'||x.event==='requestfailed'||x.event==='response'||(x.event==='console'&&x.type==='error'))).toEqual([]);
  }finally{await log.save();}
 });

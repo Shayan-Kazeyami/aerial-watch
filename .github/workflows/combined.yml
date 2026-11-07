@@ -1,7 +1,7 @@
-name: Combined candidate exact-source QA
+name: Combined fault recovery and rapid option QA
 on:
   push:
-    branches: ['qa/watch-combined-*']
+    branches: ['qa/watch-combined-recovery-*']
 permissions:
   contents: read
 concurrency:
@@ -54,12 +54,12 @@ jobs:
           trap 'kill "$server" 2>/dev/null || true' EXIT
           for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null && break; sleep 1; done
           cd qa/browser
-          npx playwright test --config=playwright.config.mjs
+          npx playwright test --config=resilience.config.mjs
       - name: Preserve browser QA evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: watch-combined-browser-qa
+          name: watch-combined-recovery-qa
           path: |
             qa/browser/artifacts
             qa/browser/html-report
