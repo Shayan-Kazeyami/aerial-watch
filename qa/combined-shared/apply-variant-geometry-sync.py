@@ -16,7 +16,7 @@ assert all(result[k]==canonical[k] for k in canonical if k not in keys)
 assert all(result[k]==original[k] for k in keys)
 assert result['asset']['extras']['authoredGeometryId']=='strap-hinge-skin-sourcecharts-r16-candidate'
 blob=json.dumps(result,separators=(',',':'),ensure_ascii=False).encode()
-assert len(blob)==12934,('review unexpected variant bytes',len(blob))
+assert len(blob)==12931 and hashlib.sha256(blob).hexdigest()=='b903ee74ec81348181c3556adde17c9a7a7fccd92ff72e09946d2ef77fb9723a',('unexpected generated variant',len(blob))
 before=sha(r/'quality-study/viewer-revision.json')
 p=v.with_suffix('.sync-tmp');p.write_bytes(blob);p.replace(v)
 p=r/'deployment-manifest.json';m=json.loads(p.read_text())
