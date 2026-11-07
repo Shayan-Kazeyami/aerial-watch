@@ -1,0 +1,141 @@
+name: Isolated transformed R18 winding Graphite shared QA
+on:
+  push:
+    branches: ['qa/watch-shared-r18-20261108']
+permissions:
+  contents: read
+concurrency:
+  group: shared-watch-staging-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  shared-stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      LIVE_COMMIT: c17bcb4246a8fcfab87143a029d4da342b0fac71
+    steps:
+      - name: Check out QA tooling only
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: qa
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify QA scripts and exact terminal overlay archive
+        run: |
+          set -euo pipefail
+          mkdir -p qa/return-material/output
+          echo 'a6384614c92eca59ca5dc321432df58ba95263552b0bc127910fa4a0da5c11ac  qa/terminal-ramp/restore-terminal.py' | sha256sum -c -
+          echo 'd6627e17a10af3192aefd7e430165f0badca1db93a2fe721d63cbe4cc2384f07  qa/terminal-ramp/verify-source-before-browser.mjs' | sha256sum -c -
+          echo '8950ba9253e6c18f0a740f634283b77d59137af8aeff6b8107a89a4276c57edb  qa/terminal-ramp/atelier-combined-r17.spec.mjs' | sha256sum -c -
+          echo '187616cdcb8e7689fc557ee4634e17fb994394cd610cecd3c3514937a0e2afdf  qa/terminal-ramp/atelier-terminal.spec.mjs' | sha256sum -c -
+          echo 'c81cb7fd288e54460aac24472043faa273320b0b0bb2e9e9f60d74ef0ddb0a5e  qa/terminal-ramp/playwright.terminal.config.mjs' | sha256sum -c -
+          python3 qa/terminal-ramp/restore-terminal.py qa/terminal-ramp/inputs qa/terminal-ramp/source qa/return-material/output/restore-receipt.json | tee qa/return-material/output/restore.log
+      - name: Verify and restore exact R18 material overlay
+        run: |
+          set -euo pipefail
+          echo 'd332954f153f8692c60a4095971b1e61333c347817147a50e560be7fa2098ba5  qa/return-material/restore-material.py' | sha256sum -c -
+          echo '6c992bdfd7f9c7d4f248e10cab6a9221f224b2a282dc42453965987ef87b49e1  qa/return-material/verify-source-before-browser.mjs' | sha256sum -c -
+          echo '94e1de6001d56b3dbad5a4676c4caab43dda703ac5d17dd09f7320578fe5ad5a  qa/return-material/atelier-combined-r18.spec.mjs' | sha256sum -c -
+          echo '8bc75ee39fc44c9c0d4fbb2984ed9addb1b7ec2e9db773f051ec5224babf96a2  qa/return-material/atelier-return-material.spec.mjs' | sha256sum -c -
+          echo 'b89501fb33175c6466e35f7b93fbd443e263995fecbe172a819aa71c9e7fb457  qa/return-material/playwright.return-material.config.mjs' | sha256sum -c -
+          python3 qa/return-material/restore-material.py qa/return-material/inputs qa/return-material/source qa/return-material/output/restore-material-receipt.json | tee qa/return-material/output/restore-material.log
+      - name: Restore exact combined source and synchronize AVIF geometry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo '7b1b0c10bdcf888017dd75955a1058cd0fc668191b4e0778070188826e9cbde4  qa/restore-watch-candidate.py' | sha256sum -c -
+          python3 qa/restore-watch-candidate.py 2>&1 | tee qa/return-material/output/restore-baseline.log
+          python3 qa/apply-hinge.py 2>&1 | tee qa/return-material/output/hinge.log
+          mv candidate "$RUNNER_TEMP/candidate"
+          ln -s "$RUNNER_TEMP/candidate" candidate
+          python3 qa/apply-hinge-to-combined-delta.py candidate qa/inputs/hinge-to-combined-delta.tar.gz --apply 2>&1 | tee qa/return-material/output/combined-delta.log
+          python3 qa/combined-shared/apply-variant-geometry-sync.py "$RUNNER_TEMP/candidate" 2>&1 | tee qa/return-material/output/variant-sync.log
+          SOURCE_ROOT="$RUNNER_TEMP/candidate" node qa/combined-shared/variant-sync.test.mjs 2>&1 | tee qa/return-material/output/variant-sync-test.log
+      - name: Install private terminal candidate into ephemeral source only
+        run: |
+          set -euo pipefail
+          EPHEMERAL_TERMINAL_INTEGRATION=1 node qa/terminal-ramp/source/install-terminal-candidate.mjs "$RUNNER_TEMP/candidate" "$GITHUB_WORKSPACE/qa/terminal-ramp/source/candidate" 2>&1 | tee qa/return-material/output/install.log
+          cp "$RUNNER_TEMP/candidate/terminal-overlay-receipt.json" qa/return-material/output/
+      - name: Install private return-material candidate over verified R17 source
+        run: |
+          set -euo pipefail
+          EPHEMERAL_TERMINAL_INTEGRATION=1 node qa/return-material/source/install-return-material-candidate.mjs "$RUNNER_TEMP/candidate" "$GITHUB_WORKSPACE/qa/return-material/source/candidate" 2>&1 | tee qa/return-material/output/install-material.log
+          cp "$RUNNER_TEMP/candidate/return-material-overlay-receipt.json" qa/return-material/output/
+      - name: Verify R18 baseline and apply isolated winding and Graphite overlays
+        run: |
+          set -euo pipefail
+          node qa/return-material/verify-source-before-browser.mjs "$RUNNER_TEMP/candidate"
+          python3 qa/r18-winding-graphite/apply-composite.py "$RUNNER_TEMP/candidate" --apply | tee qa/return-material/output/winding-apply.log
+          cp "$RUNNER_TEMP/candidate/r18-winding-graphite-receipt.json" qa/return-material/output/
+      - name: Independently verify exact source bytes before browser
+        run: |
+          set -euo pipefail
+          python3 qa/r18-winding-graphite/verify-composed.py "$RUNNER_TEMP/candidate" 2>&1 | tee qa/return-material/output/pre-browser-identity.json
+      - name: Check out pinned live publication tree separately
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: c17bcb4246a8fcfab87143a029d4da342b0fac71
+          path: live-pinned
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Resolve pinned commit to complete tree (private runner inputs)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(git -C live-pinned rev-parse HEAD)" = "$LIVE_COMMIT"
+          gh api "repos/$GITHUB_REPOSITORY/git/commits/$LIVE_COMMIT" > "$RUNNER_TEMP/live-commit.json"
+          TREE=$(jq -er '.tree.sha' "$RUNNER_TEMP/live-commit.json")
+          gh api "repos/$GITHUB_REPOSITORY/git/trees/$TREE?recursive=1" > "$RUNNER_TEMP/live-tree.json"
+      - name: Build full and sparse artifacts without changing source or live pointers
+        run: |
+          SOURCE_ROOT="$RUNNER_TEMP/candidate" LIVE_ROOT="$GITHUB_WORKSPACE/live-pinned" STAGE_ROOT="$RUNNER_TEMP/cap-stage" LIVE_TREE_JSON="$RUNNER_TEMP/live-tree.json" LIVE_COMMIT_JSON="$RUNNER_TEMP/live-commit.json" node qa/r18-shared/stage-runner.mjs
+      - name: Add only new immutable sparse subtree to disposable served checkout
+        run: |
+          RELEASE=$(jq -er .sharedReleaseId "$RUNNER_TEMP/cap-stage/stage-report.json")
+          test ! -e "live-pinned/preview-b/releases/$RELEASE"
+          cp -a "$(cat "$RUNNER_TEMP/cap-stage/release-path.txt")" "live-pinned/preview-b/releases/$RELEASE"
+          # Tracked live files must remain byte-identical; only the new subtree may be untracked.
+          git -C live-pinned diff --exit-code
+          python3 qa/combined-shared/assert-additive-overlay.py "$RELEASE"
+          echo "WATCH_QA_URL=http://127.0.0.1:8765/preview-b/releases/$RELEASE/atelier-preview.html?quality=efficient" >> "$GITHUB_ENV"
+          echo "WATCH_QA_DIGEST=$(jq -er .transformedDigest "$RUNNER_TEMP/cap-stage/stage-report.json")" >> "$GITHUB_ENV"
+          mkdir -p shared-output
+          cp "$RUNNER_TEMP/cap-stage/stage-report.json" shared-output/
+          cp "$RUNNER_TEMP/variant-sync-receipt.json" shared-output/
+          tar -czf shared-output/immutable-shared-release.tar.gz -C live-pinned "preview-b/releases/$RELEASE"
+          (cd shared-output && sha256sum immutable-shared-release.tar.gz > artifact-sha256.txt)
+      - name: Install existing pinned official Playwright test package only
+        run: |
+          npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
+          test -x /usr/bin/google-chrome
+          cp qa/r18-shared/atelier.spec.mjs qa/browser/atelier.spec.mjs
+      - name: Exercise exact transformed release URL alongside original owners and legacy pages
+        env:
+          CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
+          WATCH_QA_PNG: '1'
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory live-pinned > "$RUNNER_TEMP/watch-shared-http.log" 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for n in $(seq 1 30); do curl -fsS "$WATCH_QA_URL" >/dev/null && break; sleep 1; done
+          curl -fsS "$WATCH_QA_URL" >/dev/null
+          cd qa/browser
+          npx playwright test atelier.spec.mjs --config=playwright.shared.config.mjs
+      - name: Preserve only authorized transformed output and browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: watch-transformed-r18-shared-qa
+          path: |
+            shared-output
+            qa/return-material/output/*receipt.json
+            qa/return-material/output/pre-browser-identity.json
+            qa/browser/shared-artifacts
+            qa/browser/shared-report
+          if-no-files-found: ignore
+          retention-days: 7
+
