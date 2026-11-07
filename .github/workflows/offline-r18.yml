@@ -96,7 +96,7 @@ jobs:
           python3 qa/offline/verify-composed.py "$RUNNER_TEMP/offline-roundtrip/source"
           cd "$RUNNER_TEMP/offline-roundtrip/source"
           node scripts/validate.mjs
-          node --input-type=module -e "import {buildAtelierRelease} from './scripts/build-atelier-release.mjs'; await buildAtelierRelease({sourceRoot:process.cwd(),outputRoot:process.env.RUNNER_TEMP+'/offline-closure-build',maxBytes:256*2**20}); console.log('Restored source full runtime dependency closure passed');"
+          node --input-type=module -e "import {buildAtelierRelease} from './scripts/build-atelier-release.mjs'; import {readdir} from 'node:fs/promises'; await buildAtelierRelease({sourceRoot:process.cwd(),publishedRootFiles:await readdir(process.cwd()),outputRoot:process.env.RUNNER_TEMP+'/offline-closure-build',maxBytes:256*2**20}); console.log('Restored source full runtime dependency closure passed');"
       - name: Save consolidated source backup and compact receipt only
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
