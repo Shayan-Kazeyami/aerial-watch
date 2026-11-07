@@ -1,7 +1,7 @@
 name: Isolated watch candidate QA
 on:
   push:
-    branches: ['qa/watch-winding-rest-20261107']
+    branches: ['qa/watch-winding-rest-visual-20261107']
 permissions:
   contents: read
 concurrency:
@@ -9,6 +9,10 @@ concurrency:
   cancel-in-progress: false
 jobs:
   regression:
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [native, candidate]
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -26,20 +30,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 qa/restore-watch-candidate.py
       - name: Apply isolated calibrated rest candidate
+        if: matrix.variant == 'candidate'
         run: python3 qa/winding-rest/apply.py candidate
-      - name: Full exact-source regression suite
-        working-directory: candidate
-        run: /usr/bin/time -v node --test --test-concurrency=1 tests/*.test.mjs
-      - name: Syntax and deployment identities
-        if: always()
-        working-directory: candidate
-        run: node scripts/validate.mjs
       - name: Install pinned browser test harness
         run: npm install --prefix qa/browser --ignore-scripts --no-audit --no-fund
       - name: Install official Ubuntu media inspection tools
         run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
       - name: Controlled browser recovery and real export regression
         env:
+          REST_VARIANT: ${{ matrix.variant }}
           CHROMIUM_EXECUTABLE_PATH: /usr/bin/google-chrome
         run: |
           command -v ffprobe
@@ -48,12 +47,12 @@ jobs:
           trap 'kill "$server" 2>/dev/null || true' EXIT
           for n in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/atelier-preview.html >/dev/null && break; sleep 1; done
           cd qa/browser
-          npx playwright test --config=winding-rest.config.mjs
+          npx playwright test --config=winding-rest-visual.config.mjs
       - name: Preserve browser QA evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: watch-software-browser-qa
+          name: winding-rest-visual-${{ matrix.variant }}
           path: |
             qa/browser/artifacts
             qa/browser/html-report
