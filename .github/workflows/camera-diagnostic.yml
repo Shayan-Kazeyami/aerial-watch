@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        camera: ['three-quarter', 'side', 'lug']
+        camera: ['back', 'buckle', 'crown', 'interior', 'train', 'balance', 'winding']
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:

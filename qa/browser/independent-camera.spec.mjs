@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';import {writeFile} from 'node:fs/promises';
+import {test,expect} from '@playwright/test';import {readFile,writeFile} from 'node:fs/promises';
 const target=process.env.WATCH_QA_URL||'http://127.0.0.1:8765/atelier-preview.html?quality=efficient';
 // One fresh Playwright context per test; use CI matrix camera per job if one GPU process stalls.
 const camera=process.env.MATERIAL_CAMERA||'three-quarter';
@@ -18,6 +18,7 @@ test(`independent Studio ${camera} capture, bounded scheduling diagnostic`,async
   mark('studio');await page.locator('[data-mode="quality"]:visible').first().click();await page.locator('#atelier-tools [data-quality="studio"]').click();await page.locator('#close').click();
   await expect(page.locator('#stage')).toHaveAttribute('data-camera-ready','true',{timeout:30000});let last=null,stable=0;
   for(let i=0;i<12;i++){const s=await sample('studio-'+i);expect(s.quality).toBe('studio');expect(s.view).toBe(camera);expect(s.animation).toBe(false);expect(s.interiorAnimation).toBe(false);const sig=JSON.stringify([s.camera,s.target,s.canvas]);stable=sig===last?stable+1:0;last=sig;if(stable>=2&&s.frames.frames>=beforeStudio.frames.frames+3)break;await page.waitForTimeout(500);}expect(stable).toBeGreaterThanOrEqual(2);expect(evidence.samples.at(-1).frames.frames).toBeGreaterThanOrEqual(beforeStudio.frames.frames+3);
-  mark('screenshot');await bounded(page.locator('#assembly-canvas').screenshot({path:info.outputPath(camera+'-studio.png'),timeout:30000}),35000,'actual canvas screenshot');await sample('after-screenshot');mark('complete');
+  mark('screenshot');await bounded(page.locator('#assembly-canvas').screenshot({path:info.outputPath(camera+'-studio.png'),timeout:30000}),35000,'actual canvas screenshot');await sample('after-screenshot');
+  await page.locator('[data-mode="capture"]:visible').first().click();const pending=page.waitForEvent('download',{timeout:60000});await page.locator('#atelier-tools [data-proxy="export-config"]').click();const file=await pending;expect(await file.failure()).toBeNull();const configPath=info.outputPath(camera+'-identity.json');await file.saveAs(configPath);const config=JSON.parse(await readFile(configPath,'utf8'));expect(config.capRefinement?.active).toBe(true);expect(config.capRefinement?.candidatePositionSHA256).toBe('f7876b6be8b445a8e72db355fd1dd2705bec13dc19754884ac765c90f8ee7ea2');expect(config.options.quality).toBe('studio');evidence.runtimeIdentity={cap:config.capRefinement,renderer:config.renderer,source:config.sourceAtCapture,options:config.options};mark('complete');
  }catch(error){evidence.failure={message:error.message,stack:error.stack};throw error;}finally{await writeFile(info.outputPath('camera-diagnostic.json'),JSON.stringify(evidence,null,2));}
 });
