@@ -1,0 +1,21 @@
+name: Cancel unintended duplicate QA run
+on:
+  push:
+    branches: ['qa/cancel-duplicate-42419413256']
+permissions:
+  actions: write
+  contents: read
+jobs:
+  stop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Cancel only duplicate run 42419413256
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import urllib.request,os
+          r=urllib.request.Request('https://api.github.com/repos/Shayan-Kazeyami/aerial-watch/actions/runs/42419413256/cancel',data=b'',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'},method='POST')
+          with urllib.request.urlopen(r) as response: print('Cancellation response',response.status)
+          PY
