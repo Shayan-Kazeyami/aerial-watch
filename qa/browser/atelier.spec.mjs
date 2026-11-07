@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 import {readFile,writeFile} from 'node:fs/promises';
 const base=process.env.WATCH_QA_URL||'http://127.0.0.1:8765/atelier-preview.html?quality=efficient';
 const candidateSHA='f7876b6be8b445a8e72db355fd1dd2705bec13dc19754884ac765c90f8ee7ea2';
-test('central hinge candidate: real KTX loading, cap and reset smoke',async({page},info)=>{
+test('combined candidate: exact source, hinge, cap and reset smoke',async({page},info)=>{
  const evidence={environment:'GitHub-hosted Chromium headless / requested ANGLE SwiftShader software WebGL. NOT S24, hardware performance, WebGPU parity or visual approval.',requestedURL:base,events:[],console:[],pageErrors:[],httpErrors:[],requestFailures:[],snapshots:[],steps:[]};
  let step='navigation';
  page.on('console',m=>{if(['warning','error'].includes(m.type()))evidence.console.push({step,type:m.type(),text:m.text(),location:m.location()});});
@@ -26,7 +26,7 @@ test('central hinge candidate: real KTX loading, cap and reset smoke',async({pag
   const pending=page.waitForEvent('download',{timeout:120000});await page.locator('#atelier-tools [data-proxy="export-config"]').click();
   const download=await pending;expect(await download.failure()).toBeNull();const path=info.outputPath(name+'.json');await download.saveAs(path);
   const config=JSON.parse(await readFile(path,'utf8'));evidence.snapshots.push({name,path,cap:config.capRefinement,renderer:config.renderer,GPU:config.GPU,options:config.options,warnings:config.warnings,sourceAtCapture:config.sourceAtCapture});
-  expect(config.premiumFace?.ready).toBe(true);expect(config.leatherCraft?.candidate?.identity?.id).toBe('strap-hinge-skin-sourcecharts-r16-candidate');expect(config.leatherCraft?.candidate?.geometryVerification?.actualSha256).toBe('d473da297e6dd6565c8c98b3b3e36602f6ed7703c60e51a0205d2ac070825fb0');expect(config.leatherCraft?.candidate?.geometryVerification?.status).toBe('verified');evidence.snapshots.at(-1).leather=config.leatherCraft;
+  expect(config.sourceAtCapture?.status).toBe('verified');expect(config.sourceAtCapture?.digest).toBe('947d891f95f7be19219ca3c7f7f2ca78aeae52fef8d41d0a7d42e48421a48063');expect(config.premiumFace?.ready).toBe(true);expect(config.leatherCraft?.candidate?.identity?.id).toBe('strap-hinge-skin-sourcecharts-r16-candidate');expect(config.leatherCraft?.candidate?.geometryVerification?.actualSha256).toBe('d473da297e6dd6565c8c98b3b3e36602f6ed7703c60e51a0205d2ac070825fb0');expect(config.leatherCraft?.candidate?.geometryVerification?.status).toBe('verified');evidence.snapshots.at(-1).leather=config.leatherCraft;
   expect(config.capRefinement?.active).toBe(true);expect(config.capRefinement?.fixedGeometry).toBe(true);expect(config.capRefinement?.candidatePositionSHA256).toBe(candidateSHA);
   expect(config.renderer?.backend).not.toMatch(/webgpu/i);return config;
  }
