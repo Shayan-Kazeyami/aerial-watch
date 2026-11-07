@@ -13,6 +13,7 @@ test('three real PNG JSON restore cycles with owned URL cleanup',async({page},in
  async function download(proxy,name){const pending=page.waitForEvent('download',{timeout:120000});await page.locator(`#atelier-tools [data-proxy="${proxy}"]`).click();const d=await pending;expect(await d.failure()).toBeNull();const path=info.outputPath(name);await d.saveAs(path);return {path,bytes:await readFile(path)};}
  try{
  await page.goto('http://127.0.0.1:8765/atelier-preview.html?quality=efficient',{waitUntil:'domcontentloaded'});await ready(page);if(await page.locator('#motion').getAttribute('aria-pressed')==='true')await page.locator('#motion').click();
+ const initialAnchors=await page.locator('a[download]').evaluateAll(a=>a.map(x=>({href:x.getAttribute('href'),download:x.download})));evidence.initialAnchors=initialAnchors;
  evidence.adapter=await page.evaluate(()=>{const g=document.querySelector('canvas').getContext('webgl2'),x=g.getExtension('WEBGL_debug_renderer_info');return {renderer:x?g.getParameter(x.UNMASKED_RENDERER_WEBGL):null,ua:navigator.userAgent};});
  for(let i=0;i<3;i++){
   await page.setViewportSize({width:1440-i*100,height:1000-i*40});await ready(page);await panel(page);await page.locator('#close').click();await expect(page.locator('#context')).toBeHidden();await panel(page);
@@ -27,6 +28,6 @@ test('three real PNG JSON restore cycles with owned URL cleanup',async({page},in
  expect(new Set(evidence.cycles.map(c=>c.pngSHA256)).size).toBe(3);
  // Actual manager retains download URLs for 60 seconds; observe natural cleanup, not synthetic pagehide/dispose.
  await expect.poll(()=>page.evaluate(()=>window.__urls.filter(x=>['image/png','application/json'].some(t=>x.type.startsWith(t))&&x.revoked===null).length),{timeout:75000,intervals:[1000]}).toBe(0);
- evidence.urls=await page.evaluate(()=>window.__urls);const exports=evidence.urls.filter(x=>['image/png','application/json'].some(t=>x.type.startsWith(t)));expect(exports.filter(x=>x.type==='image/png')).toHaveLength(3);expect(exports.filter(x=>x.type.startsWith('application/json'))).toHaveLength(6);expect(exports.every(x=>x.revoked!==null)).toBe(true);expect(await page.locator('a[download]').count()).toBe(0);expect(evidence.errors).toEqual([]);evidence.passed=true;
+ evidence.urls=await page.evaluate(()=>window.__urls);const exports=evidence.urls.filter(x=>['image/png','application/json'].some(t=>x.type.startsWith(t)));expect(exports.filter(x=>x.type==='image/png')).toHaveLength(3);expect(exports.filter(x=>x.type.startsWith('application/json'))).toHaveLength(6);expect(exports.every(x=>x.revoked!==null)).toBe(true);expect(await page.locator('a[download]').evaluateAll(a=>a.map(x=>({href:x.getAttribute('href'),download:x.download})))).toEqual(initialAnchors);expect(await page.locator('a[download][href^="blob:"]').count()).toBe(0);expect(evidence.errors).toEqual([]);evidence.passed=true;
  }finally{evidence.finalURLs=await page.evaluate(()=>window.__urls).catch(()=>null);await writeFile(info.outputPath('repeated-export-evidence.json'),JSON.stringify(evidence,null,2));}
 });
