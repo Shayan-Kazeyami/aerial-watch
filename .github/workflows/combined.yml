@@ -1,7 +1,7 @@
-name: Combined candidate exact-source QA
+name: Repeated real combined exports cleanup QA
 on:
   push:
-    branches: ['qa/watch-combined-*']
+    branches: ['qa/watch-repeated-exports-*']
 permissions:
   contents: read
 concurrency:
@@ -59,7 +59,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: watch-combined-browser-qa
+          name: watch-repeated-exports-qa
           path: |
             qa/browser/artifacts
             qa/browser/html-report
