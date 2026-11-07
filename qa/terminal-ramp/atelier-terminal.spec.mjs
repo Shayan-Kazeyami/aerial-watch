@@ -25,7 +25,7 @@ test('terminal upper and lower views with progressive full normal and reset',asy
   const outer=c.leatherCraft?.effectiveOuterMaterials||[];expect(outer.length).toBeGreaterThanOrEqual(2);for(const m of outer){expect(m.normalScale).toEqual([0.25,-0.25]);expect(m.maps?.normalMap).toBeTruthy();}if(mustBeFull)expect(c.progressiveNormal).toBe('full');
   evidence.snapshots.push({name,file,digest:c.sourceAtCapture.digest,geometry:c.leatherCraft.candidate.geometryVerification,progressiveNormal:c.progressiveNormal,normalIdentity:c.leatherCraft.candidate.normalIdentity,normalScale:outer.map(m=>({mesh:m.mesh,normalScale:m.normalScale,normalMap:m.maps.normalMap})),options:c.options,view:c.view,camera:c.camera});return c;
  }
- async function screenshot(name){await page.locator('#close').click();await page.waitForTimeout(1000);await settle();await page.screenshot({path:info.outputPath(name+'.png')});}
+ async function screenshot(name){if(await page.locator('#close').isVisible())await page.locator('#close').click();await page.waitForTimeout(1000);await settle();await page.screenshot({path:info.outputPath(name+'.png')});}
  async function loadCameraFromView(base,name,target){
   const config=structuredClone(base),from=base.camera.position.map((v,i)=>v-base.camera.target[i]),length=Math.hypot(...from),distance=20;config.camera.target=target;config.camera.position=target.map((v,i)=>v+from[i]/length*distance);config.camera.zoom=1;
   const file=info.outputPath(name+'-view-input.json');await writeFile(file,JSON.stringify(config,null,2));step='import-'+name;await panel('capture');await expect(page.locator('#atelier-import')).toBeEnabled();await page.locator('#atelier-import').click();await page.locator('#import-config').setInputFiles(file);
