@@ -42,7 +42,7 @@ test('terminal upper and lower views with progressive full normal and reset',asy
    const authored=await loadCameraFromView(lug,name,target);await screenshot(name);const actual=await save(name,{mustBeFull:true});expect(actual.options).toEqual(options);for(let i=0;i<3;i++){expect(actual.camera.target[i]).toBeCloseTo(authored.camera.target[i],3);expect(actual.camera.position[i]).toBeCloseTo(authored.camera.position[i],3);}expect(actual.view).toBe('lug');
   }
   // Camera-only underside views target the exact authored terminal return lip.
-  for(const [name,position]of [['upper-return-known-render',[16,15,-10]],['upper-return-exterior',[13.4,27.7,-12.3]],['upper-return-near',[10.4,26.7,-8.3]]]){
+  for(const [name,position]of [['upper-return-known-render',[16,15,-10]],['upper-return-exterior',[13.4,27.7,-12.3]],['upper-return-near',[10.7,27.9,-10.1]]]){
    const authored=await loadCameraFromView(lug,name,[9.4,22.7,-2.3],position);await screenshot(name);const actual=await save(name,{mustBeFull:true});expect(actual.options).toEqual(options);for(let i=0;i<3;i++){expect(actual.camera.target[i]).toBeCloseTo(authored.camera.target[i],3);expect(actual.camera.position[i]).toBeCloseTo(authored.camera.position[i],3);}
   }
   step='reset';await page.locator('#home').click();await settle();await screenshot('after-reset');const reset=await save('after-reset',{mustBeFull:true});expect(reset.options.openWork).toBe(true);expect(reset.camera.target).not.toEqual([8.5,-22.4,-0.95]);
