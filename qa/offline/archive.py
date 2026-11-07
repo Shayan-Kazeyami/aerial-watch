@@ -9,6 +9,7 @@ with tarfile.open(archive,'w:gz')as t:
  t.add(root,arcname='source')
  t.add(pathlib.Path(__file__).with_name('RESTORE.md'),arcname='RESTORE.md')
  t.add(pathlib.Path(__file__).with_name('verify-composed.py'),arcname='verify-composed.py')
+ t.add(pathlib.Path(__file__).with_name('guards.json'),arcname='guards.json')
 restore=out.parent/'offline-roundtrip';restore.mkdir()
 with tarfile.open(archive)as t:t.extractall(restore,filter='data')
 original={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest()for p in files if p.is_file()}

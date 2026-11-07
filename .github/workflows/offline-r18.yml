@@ -91,7 +91,7 @@ jobs:
           python3 qa/r18-winding-graphite/verify-composed.py "$RUNNER_TEMP/candidate" 2>&1 | tee qa/return-material/output/pre-browser-identity.json
       - name: Archive all source and verify roundtrip
         run: |
-          cp qa/r18-winding-graphite/verify-composed.py qa/offline/
+          cp qa/r18-winding-graphite/{verify-composed.py,guards.json} qa/offline/
           python3 qa/offline/archive.py "$RUNNER_TEMP/candidate" "$RUNNER_TEMP/offline-output"
           python3 qa/offline/verify-composed.py "$RUNNER_TEMP/offline-roundtrip/source"
           cd "$RUNNER_TEMP/offline-roundtrip/source"
