@@ -51,7 +51,7 @@ jobs:
           gh api "repos/$GITHUB_REPOSITORY/git/trees/$TREE?recursive=1" > "$RUNNER_TEMP/live-tree.json"
       - name: Build full and sparse artifacts without changing source or live pointers
         run: |
-          SOURCE_ROOT="$GITHUB_WORKSPACE/candidate" LIVE_ROOT="$GITHUB_WORKSPACE/live-pinned" STAGE_ROOT="$RUNNER_TEMP/cap-stage" LIVE_TREE_JSON="$RUNNER_TEMP/live-tree.json" LIVE_COMMIT_JSON="$RUNNER_TEMP/live-commit.json" node qa/combined-shared/stage-runner.mjs
+          SOURCE_ROOT="$RUNNER_TEMP/combined-candidate" LIVE_ROOT="$GITHUB_WORKSPACE/live-pinned" STAGE_ROOT="$RUNNER_TEMP/cap-stage" LIVE_TREE_JSON="$RUNNER_TEMP/live-tree.json" LIVE_COMMIT_JSON="$RUNNER_TEMP/live-commit.json" node qa/combined-shared/stage-runner.mjs
       - name: Add only new immutable sparse subtree to disposable served checkout
         run: |
           RELEASE=$(jq -er .sharedReleaseId "$RUNNER_TEMP/cap-stage/stage-report.json")
