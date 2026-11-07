@@ -33,6 +33,8 @@ jobs:
           mv candidate "$RUNNER_TEMP/combined-candidate"
           ln -s "$RUNNER_TEMP/combined-candidate" candidate
           python3 qa/apply-hinge-to-combined-delta.py candidate qa/inputs/hinge-to-combined-delta.tar.gz --apply
+          python3 qa/combined-shared/apply-variant-geometry-sync.py "$RUNNER_TEMP/combined-candidate"
+          SOURCE_ROOT="$RUNNER_TEMP/combined-candidate" node qa/combined-shared/variant-sync.test.mjs
           cd candidate && node scripts/validate.mjs
       - name: Check out pinned live publication tree separately
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -64,6 +66,7 @@ jobs:
           echo "WATCH_QA_DIGEST=$(jq -er .transformedDigest "$RUNNER_TEMP/cap-stage/stage-report.json")" >> "$GITHUB_ENV"
           mkdir -p shared-output
           cp "$RUNNER_TEMP/cap-stage/stage-report.json" shared-output/
+          cp "$RUNNER_TEMP/variant-sync-receipt.json" shared-output/
           tar -czf shared-output/immutable-shared-release.tar.gz -C live-pinned "preview-b/releases/$RELEASE"
           (cd shared-output && sha256sum immutable-shared-release.tar.gz > artifact-sha256.txt)
       - name: Install existing pinned official Playwright test package only

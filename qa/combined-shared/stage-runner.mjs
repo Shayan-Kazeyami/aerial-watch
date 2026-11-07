@@ -17,8 +17,8 @@ const sparse=await buildSharedAtelierRelease({ownerRoot:owner,candidateRoot:full
 const sparseManifest=JSON.parse(await fs.readFile(path.join(sparse.releasePath,'deployment-manifest.json'),'utf8'));
 const leather=sparseManifest.localFiles.filter(f=>f.path.startsWith('leather-assets/'));
 const leatherBytes=leather.reduce((n,f)=>n+f.sizeBytes,0);
-if(leather.length!==18||leatherBytes!==42471179||sparseManifest.references.some(f=>f.path.startsWith('leather-assets/')))throw Error('Unexpected leather directory ownership/cost');
-const changedLeatherBytes=8814096+12484,unchangedRecopiedLeatherBytes=leatherBytes-changedLeatherBytes;
+if(leather.length!==18||leatherBytes!==42469712||sparseManifest.references.some(f=>f.path.startsWith('leather-assets/')))throw Error('Unexpected leather directory ownership/cost');
+const changedLeatherBytes=8814096+12484+12934,unchangedRecopiedLeatherBytes=leatherBytes-changedLeatherBytes;
 // Count every physical staged byte, not just payload receipt; refs already live.
 async function bytes(root){let n=0;for(const e of await fs.readdir(root,{withFileTypes:true})){const p=path.join(root,e.name);if(e.isDirectory())n+=await bytes(p);else if(e.isFile())n+=(await fs.stat(p)).size;else throw Error('Unexpected artifact link');}return n;}
 const currentBytes=inventory.tree.filter(f=>f.type==='blob').reduce((n,f)=>n+f.size,0),addedBytes=await bytes(sparse.releasePath),reservedPromotionBytes=65536;
