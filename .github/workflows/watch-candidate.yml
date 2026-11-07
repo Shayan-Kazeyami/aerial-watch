@@ -1,0 +1,34 @@
+name: Isolated watch candidate QA
+on:
+  push:
+    branches: ['qa/watch-cap-v2-*']
+permissions:
+  contents: read
+concurrency:
+  group: watch-candidate-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out only QA tooling
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: qa
+      - name: Set up supported Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Restore verified source and frozen candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 qa/restore-watch-candidate.py
+      - name: Full exact-source regression suite
+        working-directory: candidate
+        run: /usr/bin/time -v node --test --test-concurrency=1 tests/*.test.mjs
+      - name: Syntax and deployment identities
+        if: always()
+        working-directory: candidate
+        run: node scripts/validate.mjs
