@@ -95,7 +95,10 @@ test('controlled slow real baseline preserves loading state until actual transfe
    await expect(page.locator('#studio-poster .atelier-loading-identity')).toContainText('Preparing the selected watch');
    await expect(page.locator('#atelier-state-label')).toBeVisible();await expect(page.locator('#atelier-state-label')).toHaveText('Preparing selected design');
    await expect(page.locator('#assembly-canvas')).toHaveAttribute('aria-busy','true');await expect(page.locator('#assembly-canvas')).toHaveJSProperty('inert',true);
-   await expect(page.locator('#home')).toBeDisabled();await expect(page.locator('#inspection-controls')).toBeDisabled();await expect(page.locator('#motion')).toBeDisabled();
+   await expect(page.locator('#home')).toBeDisabled();await expect(page.locator('#inspection-controls')).toHaveJSProperty('disabled',true);
+   // Fieldset is a disabling container, not an actionable control. Check its
+   // actual property and every descendant control's effective disabled state.
+   const inheritedControls=page.locator('#inspection-controls button, #inspection-controls input, #inspection-controls select, #inspection-controls textarea');expect(await inheritedControls.count()).toBeGreaterThan(0);for(const control of await inheritedControls.all())await expect(control).toBeDisabled();await expect(page.locator('#motion')).toBeDisabled();
    for(const control of await page.locator('.task-dock button').all())await expect(control).toBeDisabled();
    await expect(page.locator('#atelier-retry')).toBeHidden();
    const state=await page.evaluate(()=>{const poster=document.getElementById('studio-poster'),canvas=document.getElementById('assembly-canvas'),p=poster.getBoundingClientRect(),c=canvas.getBoundingClientRect(),style=getComputedStyle(poster);return {at:performance.now(),inspect:window.assemblyInspect?.()??null,bodyReady:document.body.dataset.ready,presentation:document.body.dataset.presentation,loadingText:document.getElementById('load-message').textContent,visiblePendingText:poster.innerText,poster:{backgroundColor:style.backgroundColor,opacity:style.opacity,coversCanvas:p.left<=c.left+1&&p.top<=c.top+1&&p.right>=c.right-1&&p.bottom>=c.bottom-1},legacyLoadingVisibility:getComputedStyle(document.getElementById('loading')).visibility};});
