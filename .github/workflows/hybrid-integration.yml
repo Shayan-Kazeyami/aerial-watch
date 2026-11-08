@@ -1,0 +1,30 @@
+name: Hybrid CASE integrated runtime
+on:
+  push:
+    branches: ['qa/hybrid-integration-20261108']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright numpy scipy
+      - run: python -m playwright install --with-deps chromium
+      - run: |
+          mkdir -p metal-recovery/cap-study integration-output
+          ln -s ../preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44 metal-recovery/source
+          node metal-recovery/decode.mjs
+          python metal-recovery/extract-default.py
+          python metal-recovery/cap-study/graft-field-v7.py
+          python metal-recovery/cap-study/export-v7.py
+          node --test metal-recovery/integration-study/hybrid-case.test.mjs | tee integration-output/unit-tests.txt
+          python metal-recovery/integration-study/install-ci.py
+      - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
+      - run: python metal-recovery/integration-study/qa-runtime.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hybrid-integration-evidence
+          path: integration-output
