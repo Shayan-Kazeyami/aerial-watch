@@ -1,0 +1,214 @@
+[
+  {
+    "input": "input-0-0.npz",
+    "before": 107297,
+    "after": 106287,
+    "removed": 1010,
+    "passes": [
+      {
+        "pass": 0,
+        "removed_vertices": 466,
+        "triangles": 106365
+      },
+      {
+        "pass": 1,
+        "removed_vertices": 39,
+        "triangles": 106287
+      },
+      {
+        "pass": 2,
+        "removed_vertices": 0,
+        "triangles": 106287
+      }
+    ],
+    "all_original_samples": 751079,
+    "final_max_sample_errors_position_mm_normal_component_uv": [
+      0.009992448512593222,
+      0.019924771219384407,
+      4.893876880784909e-05
+    ],
+    "boundary_and_nonmanifold_identical": true,
+    "hinge_faces_identical": true,
+    "expanded_repair_faces_identical": true,
+    "repair_intersecting_source_faces": 10550,
+    "protected_vertices": 12957,
+    "sample_rejections": 111,
+    "max_historical_samples_in_star": 42,
+    "seconds": 24.991140842437744
+  },
+  {
+    "input": "input-0-1.npz",
+    "before": 7246,
+    "after": 7246,
+    "removed": 0,
+    "passes": [
+      {
+        "pass": 0,
+        "removed_vertices": 0,
+        "triangles": 7246
+      }
+    ],
+    "all_original_samples": 50722,
+    "final_max_sample_errors_position_mm_normal_component_uv": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "boundary_and_nonmanifold_identical": true,
+    "hinge_faces_identical": true,
+    "expanded_repair_faces_identical": true,
+    "repair_intersecting_source_faces": 3436,
+    "protected_vertices": 3787,
+    "sample_rejections": 0,
+    "max_historical_samples_in_star": 0,
+    "seconds": 0.4732978343963623
+  },
+  {
+    "input": "input-0-2.npz",
+    "before": 35063,
+    "after": 30891,
+    "removed": 4172,
+    "passes": [
+      {
+        "pass": 0,
+        "removed_vertices": 994,
+        "triangles": 33075
+      },
+      {
+        "pass": 1,
+        "removed_vertices": 747,
+        "triangles": 31581
+      },
+      {
+        "pass": 2,
+        "removed_vertices": 345,
+        "triangles": 30891
+      }
+    ],
+    "all_original_samples": 245441,
+    "final_max_sample_errors_position_mm_normal_component_uv": [
+      0.009999606914633129,
+      0.019989446163429125,
+      4.990244715746828e-05
+    ],
+    "boundary_and_nonmanifold_identical": true,
+    "hinge_faces_identical": true,
+    "expanded_repair_faces_identical": true,
+    "repair_intersecting_source_faces": 15660,
+    "protected_vertices": 12097,
+    "sample_rejections": 270,
+    "max_historical_samples_in_star": 189,
+    "seconds": 7.428117036819458
+  },
+  {
+    "input": "input-2-0.npz",
+    "before": 63630,
+    "after": 62088,
+    "removed": 1542,
+    "passes": [
+      {
+        "pass": 0,
+        "removed_vertices": 478,
+        "triangles": 62674
+      },
+      {
+        "pass": 1,
+        "removed_vertices": 180,
+        "triangles": 62314
+      },
+      {
+        "pass": 2,
+        "removed_vertices": 113,
+        "triangles": 62088
+      }
+    ],
+    "all_original_samples": 445410,
+    "final_max_sample_errors_position_mm_normal_component_uv": [
+      0.009997475763276297,
+      0.01981770759182655,
+      4.6958527915474946e-05
+    ],
+    "boundary_and_nonmanifold_identical": true,
+    "hinge_faces_identical": true,
+    "expanded_repair_faces_identical": true,
+    "repair_intersecting_source_faces": 4918,
+    "protected_vertices": 9019,
+    "sample_rejections": 3215,
+    "max_historical_samples_in_star": 101,
+    "seconds": 21.13805913925171
+  },
+  {
+    "input": "input-2-1.npz",
+    "before": 23003,
+    "after": 17719,
+    "removed": 5284,
+    "passes": [
+      {
+        "pass": 0,
+        "removed_vertices": 1291,
+        "triangles": 20421
+      },
+      {
+        "pass": 1,
+        "removed_vertices": 942,
+        "triangles": 18537
+      },
+      {
+        "pass": 2,
+        "removed_vertices": 409,
+        "triangles": 17719
+      }
+    ],
+    "all_original_samples": 161021,
+    "final_max_sample_errors_position_mm_normal_component_uv": [
+      0.009992888016187189,
+      0.01979567911898622,
+      4.992781861379303e-05
+    ],
+    "boundary_and_nonmanifold_identical": true,
+    "hinge_faces_identical": true,
+    "expanded_repair_faces_identical": true,
+    "repair_intersecting_source_faces": 3084,
+    "protected_vertices": 4597,
+    "sample_rejections": 772,
+    "max_historical_samples_in_star": 153,
+    "seconds": 6.263758182525635
+  },
+  {
+    "input": "input-2-2.npz",
+    "before": 6494,
+    "after": 6062,
+    "removed": 432,
+    "passes": [
+      {
+        "pass": 0,
+        "removed_vertices": 116,
+        "triangles": 6262
+      },
+      {
+        "pass": 1,
+        "removed_vertices": 70,
+        "triangles": 6122
+      },
+      {
+        "pass": 2,
+        "removed_vertices": 30,
+        "triangles": 6062
+      }
+    ],
+    "all_original_samples": 45458,
+    "final_max_sample_errors_position_mm_normal_component_uv": [
+      7.626895124076443e-06,
+      8.959875407943407e-05,
+      3.6217563975649014e-07
+    ],
+    "boundary_and_nonmanifold_identical": true,
+    "hinge_faces_identical": true,
+    "expanded_repair_faces_identical": true,
+    "repair_intersecting_source_faces": 2217,
+    "protected_vertices": 1905,
+    "sample_rejections": 0,
+    "max_historical_samples_in_star": 107,
+    "seconds": 0.6801526546478271
+  }
+]

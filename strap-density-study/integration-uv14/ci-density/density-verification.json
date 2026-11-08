@@ -1,0 +1,86 @@
+{
+  "cutConfigSHA256": "42e5109444f8de5b66703e05d308b77c0bb6399ad298fbcb479383f427043180",
+  "rows": [
+    {
+      "input": "input-0-0.npz",
+      "before": 107297,
+      "after": 106287,
+      "removed": 1010,
+      "exactAttributeBytes": true,
+      "protectedFacesExactWinding": 20857,
+      "repairIntersectingSourceFaces": 10550,
+      "boundaryNonmanifoldExact": true,
+      "zeroArea": 0,
+      "inputSHA256": "982b39e5b4575f06386c98fe7df4e2060769f6eb3d352876e00832eb63db8989",
+      "outputSHA256": "a80cf3ad4bb7c652448ca98c436b33392fa4efe3f0bc0439c30ce8e1a3688bd9"
+    },
+    {
+      "input": "input-0-1.npz",
+      "before": 7246,
+      "after": 7246,
+      "removed": 0,
+      "exactAttributeBytes": true,
+      "protectedFacesExactWinding": 3450,
+      "repairIntersectingSourceFaces": 3436,
+      "boundaryNonmanifoldExact": true,
+      "zeroArea": 0,
+      "inputSHA256": "3c2ddf17b5c15fab8b8d8c6333dd345ee83b197f3a8ddd0c51a2663a44367131",
+      "outputSHA256": "afb86ce1d402865ad9cf66b3bc941baccc2d1a1ff02ab96a9c0133f7a3d4d8a2"
+    },
+    {
+      "input": "input-0-2.npz",
+      "before": 35063,
+      "after": 30891,
+      "removed": 4172,
+      "exactAttributeBytes": true,
+      "protectedFacesExactWinding": 19939,
+      "repairIntersectingSourceFaces": 15660,
+      "boundaryNonmanifoldExact": true,
+      "zeroArea": 0,
+      "inputSHA256": "251ffb33e6b1b26af60877a05afc68fbce50056eab3b21f6ebd01cd5447c74bb",
+      "outputSHA256": "6938be6b7a5e163623d5a7e22e2687ede725c93d89ea8cb8916bf9a1113648b2"
+    },
+    {
+      "input": "input-2-0.npz",
+      "before": 63630,
+      "after": 62088,
+      "removed": 1542,
+      "exactAttributeBytes": true,
+      "protectedFacesExactWinding": 14645,
+      "repairIntersectingSourceFaces": 4918,
+      "boundaryNonmanifoldExact": true,
+      "zeroArea": 0,
+      "inputSHA256": "586122fe5c317d2a28f7a068cb3f9549b3b820ee398e3cba9da551563daba81d",
+      "outputSHA256": "b83c18f815242fd2b9547221e54382f7b73672592d34d6375d8fbc0084c42e08"
+    },
+    {
+      "input": "input-2-1.npz",
+      "before": 23003,
+      "after": 17719,
+      "removed": 5284,
+      "exactAttributeBytes": true,
+      "protectedFacesExactWinding": 6982,
+      "repairIntersectingSourceFaces": 3084,
+      "boundaryNonmanifoldExact": true,
+      "zeroArea": 0,
+      "inputSHA256": "eb59fafef99321a18bb0212ac5ebd8bbacd3782b312fdab07afa186e3b622418",
+      "outputSHA256": "c684d7a5c46ee7aa5c8f02f9bab6b9f314c375e8934abefdecba7c291feecab4"
+    },
+    {
+      "input": "input-2-2.npz",
+      "before": 6494,
+      "after": 6062,
+      "removed": 432,
+      "exactAttributeBytes": true,
+      "protectedFacesExactWinding": 2231,
+      "repairIntersectingSourceFaces": 2217,
+      "boundaryNonmanifoldExact": true,
+      "zeroArea": 0,
+      "inputSHA256": "5f4de138a0b1aac3f1332760ba84e59cd1ff4c58a3e0d203223c89e411779a3f",
+      "outputSHA256": "69838de7bb3bbc85c8d0e774599e45f5df77a63d88342bcb7f6f7b58ba439688"
+    }
+  ],
+  "before": 242733,
+  "after": 230293,
+  "removed": 12440
+}

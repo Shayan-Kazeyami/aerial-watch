@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "status": "pinned locally verified source-density bundle; replacement requires fresh independent validation",
+  "sourceGeometrySHA256": "ae62f1a0e32f2bbe0e2591dff0a0664d676102e12b8f71db8e5adc1912f309c4",
+  "files": {
+    "reduce_expanded.py": "2c54a966f8110946ff22fc5d0af5b8d77db7bfeb6d73ed86a1516f39855d1575",
+    "verify.py": "572135f95b42c905aaddc4c69f093175d5f7e6eb9977899295afb85b9f02da86",
+    "report.json": "8d6f97c72594e52ced9ae68d48249fed4b5cea07e3161066e15a2fbe794e5217",
+    "verification.json": "0234671ba202487d4b137e69699d077fcfde4ead59fc88ca2e330a5910e0ad36",
+    "cut-config.json": "42e5109444f8de5b66703e05d308b77c0bb6399ad298fbcb479383f427043180",
+    "gated-0-0.npz": "a80cf3ad4bb7c652448ca98c436b33392fa4efe3f0bc0439c30ce8e1a3688bd9",
+    "gated-0-1.npz": "afb86ce1d402865ad9cf66b3bc941baccc2d1a1ff02ab96a9c0133f7a3d4d8a2",
+    "gated-0-2.npz": "6938be6b7a5e163623d5a7e22e2687ede725c93d89ea8cb8916bf9a1113648b2",
+    "gated-2-0.npz": "b83c18f815242fd2b9547221e54382f7b73672592d34d6375d8fbc0084c42e08",
+    "gated-2-1.npz": "c684d7a5c46ee7aa5c8f02f9bab6b9f314c375e8934abefdecba7c291feecab4",
+    "gated-2-2.npz": "69838de7bb3bbc85c8d0e774599e45f5df77a63d88342bcb7f6f7b58ba439688"
+  },
+  "sourceInputs": {
+    "input-0-0.npz": "982b39e5b4575f06386c98fe7df4e2060769f6eb3d352876e00832eb63db8989",
+    "input-0-1.npz": "3c2ddf17b5c15fab8b8d8c6333dd345ee83b197f3a8ddd0c51a2663a44367131",
+    "input-0-2.npz": "251ffb33e6b1b26af60877a05afc68fbce50056eab3b21f6ebd01cd5447c74bb",
+    "input-2-0.npz": "586122fe5c317d2a28f7a068cb3f9549b3b820ee398e3cba9da551563daba81d",
+    "input-2-1.npz": "eb59fafef99321a18bb0212ac5ebd8bbacd3782b312fdab07afa186e3b622418",
+    "input-2-2.npz": "5f4de138a0b1aac3f1332760ba84e59cd1ff4c58a3e0d203223c89e411779a3f"
+  }
+}

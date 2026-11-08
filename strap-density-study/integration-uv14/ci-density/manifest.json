@@ -1,0 +1,134 @@
+{
+  "sourceGeometrySHA256": "ae62f1a0e32f2bbe0e2591dff0a0664d676102e12b8f71db8e5adc1912f309c4",
+  "validatedProofAnchorSHA256": "4c72ebed0f4aa783c9ce7bfe5d8f05b74d71ff9087dd0f8db8d86b2a088faf5f",
+  "rows": [
+    {
+      "mesh": 0,
+      "primitive": 0,
+      "parts": [
+        "faces-0-0-000.txt",
+        "faces-0-0-001.txt",
+        "faces-0-0-002.txt",
+        "faces-0-0-003.txt",
+        "faces-0-0-004.txt",
+        "faces-0-0-005.txt",
+        "faces-0-0-006.txt",
+        "faces-0-0-007.txt",
+        "faces-0-0-008.txt",
+        "faces-0-0-009.txt",
+        "faces-0-0-010.txt",
+        "faces-0-0-011.txt",
+        "faces-0-0-012.txt",
+        "faces-0-0-013.txt",
+        "faces-0-0-014.txt",
+        "faces-0-0-015.txt",
+        "faces-0-0-016.txt"
+      ],
+      "indexSHA256": "7b4084cc0357f9ca025a666aee5bde2b84075dbcd04ce1ff7829be07e38eb214",
+      "triangles": 106287,
+      "validatedNPZSHA256": "a80cf3ad4bb7c652448ca98c436b33392fa4efe3f0bc0439c30ce8e1a3688bd9",
+      "sourceFacesSHA256": "990acf7815be6cec3158744bcb6e0136eec98b11c460ffbca254e091a2075399",
+      "attributes": {
+        "positions": "925b3616b9b90e530583b339e5796ec6e19f4761c1eefe7af9298459f962b240",
+        "normals": "89d1c333c76a396f43f411eff1c25df47b2b8c1ebe8f2ed1e9f8d08bdbf75676",
+        "uv": "26eaaa83dfd5c52dc42585688b0795b8fce4d842590eeb01cfac7b82621472cb"
+      }
+    },
+    {
+      "mesh": 0,
+      "primitive": 1,
+      "parts": [
+        "faces-0-1-000.txt",
+        "faces-0-1-001.txt"
+      ],
+      "indexSHA256": "f27e3be11d6ce6d2e7ef910e9004ff054aea8c02979c65cbd4ae4390488afcb5",
+      "triangles": 7246,
+      "validatedNPZSHA256": "afb86ce1d402865ad9cf66b3bc941baccc2d1a1ff02ab96a9c0133f7a3d4d8a2",
+      "sourceFacesSHA256": "f27e3be11d6ce6d2e7ef910e9004ff054aea8c02979c65cbd4ae4390488afcb5",
+      "attributes": {
+        "positions": "c881555c224c9d087ad53b684b39dac7f7b5a07161b1ff442e4dbd44bad02197",
+        "normals": "7b93466dcb18ec9f45602e6cad907ca429cea7fadb46b3e1127312288fd69595",
+        "uv": "7281d646128011adc8a8ddb03ec1c414850e7afad93a60361b9946c2e772d664"
+      }
+    },
+    {
+      "mesh": 0,
+      "primitive": 2,
+      "parts": [
+        "faces-0-2-000.txt",
+        "faces-0-2-001.txt",
+        "faces-0-2-002.txt",
+        "faces-0-2-003.txt",
+        "faces-0-2-004.txt"
+      ],
+      "indexSHA256": "6670db8cd5e05c53ab0bfee1a051c2093d3f93347c78e88cd1c4a7ab4c2aec27",
+      "triangles": 30891,
+      "validatedNPZSHA256": "6938be6b7a5e163623d5a7e22e2687ede725c93d89ea8cb8916bf9a1113648b2",
+      "sourceFacesSHA256": "ec63b5a1c26126f19efe1a18fbd3f9168fce0850295e7e049feaa8f25b882b20",
+      "attributes": {
+        "positions": "9a982551f59ed20c1bc16649fb61987b315bef47edc78a75be3977474bb37862",
+        "normals": "510d541387a2092ef8f04ad989092a627d4c814794e7f6872954ab4e367a7087",
+        "uv": "427e18c9529b8df9f7cf6a7d1c2a169c04a1392a2abfc459ea08d0233d48591d"
+      }
+    },
+    {
+      "mesh": 2,
+      "primitive": 0,
+      "parts": [
+        "faces-2-0-000.txt",
+        "faces-2-0-001.txt",
+        "faces-2-0-002.txt",
+        "faces-2-0-003.txt",
+        "faces-2-0-004.txt",
+        "faces-2-0-005.txt",
+        "faces-2-0-006.txt",
+        "faces-2-0-007.txt",
+        "faces-2-0-008.txt",
+        "faces-2-0-009.txt"
+      ],
+      "indexSHA256": "e30288de0f8ca8f75ba967ceb8cc978aa35978fac04d5cf250fa17a3a87b0795",
+      "triangles": 62088,
+      "validatedNPZSHA256": "b83c18f815242fd2b9547221e54382f7b73672592d34d6375d8fbc0084c42e08",
+      "sourceFacesSHA256": "67e3b95de80e32abe03189e28d5f9289245ec47966d44499a95a6be423105731",
+      "attributes": {
+        "positions": "aa254783db59b76904e5589fad3ab36b05001daae37b0e902f29b0b371365ae8",
+        "normals": "f76be3b6303a1993f5ecd8e522483240846d61aa26c44b3d217cee4b2d86928f",
+        "uv": "1270f6fbca63dda76059187026b2d169115825f35e3af1614d92d452dbe299cf"
+      }
+    },
+    {
+      "mesh": 2,
+      "primitive": 1,
+      "parts": [
+        "faces-2-1-000.txt",
+        "faces-2-1-001.txt",
+        "faces-2-1-002.txt"
+      ],
+      "indexSHA256": "2b48a850b951f5a43f40f2c1a157a43da45ac5ec1e36a93d360ef31b36b09611",
+      "triangles": 17719,
+      "validatedNPZSHA256": "c684d7a5c46ee7aa5c8f02f9bab6b9f314c375e8934abefdecba7c291feecab4",
+      "sourceFacesSHA256": "b73dc1a0f5ba3577e3d9f6e581bd3e241186847b9e22b307f483c54cdbf9a352",
+      "attributes": {
+        "positions": "85712106a2860cfd6b37b729c4b88ccf6489cb3d8fd3ed51a2d2c1a08aaee0f7",
+        "normals": "9d6586197c5d49e729535bf8b71db7b82dd252bf024ba363da86f006ce4f5bb0",
+        "uv": "bac6f81dd1a05a29b88d28ad33690ef8c178aa411f8963f557cd17b515d77b53"
+      }
+    },
+    {
+      "mesh": 2,
+      "primitive": 2,
+      "parts": [
+        "faces-2-2-000.txt"
+      ],
+      "indexSHA256": "725def1fd929c5f05ede6a208a2dbca12dc5cc537d6bead45bc644a745e4a08c",
+      "triangles": 6062,
+      "validatedNPZSHA256": "69838de7bb3bbc85c8d0e774599e45f5df77a63d88342bcb7f6f7b58ba439688",
+      "sourceFacesSHA256": "80d6387e716c968a4ca4c93f77bfc5e3a0a02b594d2cb09edd434bf3fc9bafd5",
+      "attributes": {
+        "positions": "7bf3befdb524d6bd41136b1e0c0e13a55e505bbcbc54e5bd2f79d112de52f560",
+        "normals": "758345d7bac7f9a090f668eceb7da4f49974adc4820c48ecf12f8699d5e6185f",
+        "uv": "1ec728205e8ba77341a73d66bbb477824c2b30398cfc11e91a7fdde7c8a91ea9"
+      }
+    }
+  ]
+}

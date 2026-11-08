@@ -1,0 +1,9 @@
+import numpy as np,json
+from pathlib import Path
+O=Path(__file__).resolve().parent;end=O.name.removeprefix('wide-uv14-') if O.name!='wide-uv14' else 'upper-left';D=O.parent/f'neck-v13-qa/{end}/strap-density-study';src=[]
+for m in range(3):
+ z=np.load(D/f'input-0-{m}.npz');src.append(z['positions'][z['faces']].astype('<f4'))
+rows=[];boundary=[];nonmanifold=[]
+for label,t in [('source',np.concatenate(src).astype(float)),('candidate',np.load(O/'output.npz')['triangles'][:,:,:3].astype(float))]:
+ p,iv=np.unique(t.reshape(-1,3),axis=0,return_inverse=True);f=iv.reshape(-1,3);u,c=np.unique(np.sort(f,axis=1),axis=0,return_counts=True);a=np.linalg.norm(np.cross(t[:,1]-t[:,0],t[:,2]-t[:,0]),axis=1)/2;e=np.concatenate([f[:,[0,1]],f[:,[1,2]],f[:,[2,0]]]);u,ids,cnt=np.unique(np.sort(e,axis=1),axis=0,return_inverse=True,return_counts=True);w=np.bincount(ids,weights=np.where(e[:,0]<e[:,1],1,-1));boundary.append({tuple(map(tuple,p[x]))for x in u[cnt==1]});nonmanifold.append({tuple(map(tuple,p[x]))for x in u[cnt>2]});rows.append(dict(label=label,faces=len(t),zeroArea=int((a==0).sum()),duplicateGeometricFaces=int((c>1).sum()),windingMismatch=int(((cnt==2)&(w!=0)).sum()),nonfinite=int((~np.isfinite(t)).sum()),boundary=len(boundary[-1]),nonmanifold=len(nonmanifold[-1])))
+report={'rows':rows,'exactBoundaryMatch':boundary[0]==boundary[1],'exactNonmanifoldMatch':nonmanifold[0]==nonmanifold[1]};(O/'quality.json').write_text(json.dumps(report,indent=2));print(report);assert report['exactBoundaryMatch'] and report['exactNonmanifoldMatch'];assert all(rows[1][k]==0 for k in ['zeroArea','duplicateGeometricFaces','windingMismatch','nonfinite'])

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 2,
+  "status": "private provisional; not installed; lower-left gate pending",
+  "coordinateSystem": "actual R18 source mesh coordinates",
+  "ends": [
+    {
+      "name": "upper-left",
+      "mesh": 0,
+      "xSign": -1,
+      "hingeZSign": -1,
+      "xCut": 8.5,
+      "yCut": -3.5,
+      "zCut": 20,
+      "gateStatus": "parent-selected",
+      "source": "strap-density-study/neck-v13-qa/upper-left/cut-config.json"
+    },
+    {
+      "name": "upper-right",
+      "mesh": 0,
+      "xSign": 1,
+      "hingeZSign": -1,
+      "xCut": 8.5,
+      "yCut": -3.5,
+      "zCut": 20,
+      "gateStatus": "parent-selected",
+      "source": "strap-density-study/neck-v13-qa/upper-right/cut-config.json"
+    },
+    {
+      "name": "lower-left",
+      "mesh": 2,
+      "xSign": -1,
+      "hingeZSign": 1,
+      "xCut": 8.2,
+      "yCut": -3.5,
+      "zCut": 20,
+      "gateStatus": "pending-own-source-gate",
+      "source": "parent provisional instruction; await LL gate"
+    },
+    {
+      "name": "lower-right",
+      "mesh": 2,
+      "xSign": 1,
+      "hingeZSign": 1,
+      "xCut": 8.5,
+      "yCut": -3.5,
+      "zCut": 20,
+      "gateStatus": "parent-selected",
+      "source": "strap-density-study/neck-v13-qa/lower-right/cut-config.json"
+    }
+  ]
+}
