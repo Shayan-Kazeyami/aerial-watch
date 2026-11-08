@@ -5,10 +5,10 @@ s=(ROOT/'assembly-review.js').read_text();s=s.replace('composer.render();','meta
 async def run():
  async with async_playwright() as p:
   b=await p.chromium.launch(headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
-  page=await b.new_page(viewport={'width':1000,'height':800},device_scale_factor=1);errors=[];page.on('pageerror',lambda e:errors.append(str(e)));await page.goto('http://127.0.0.1:8765/'+str(ROOT)+'/atelier-preview.html?quality=low',wait_until='domcontentloaded');await page.wait_for_function('window.assemblyInspect && !assemblyInspect().loading',timeout=240000)
+  page=await b.new_page(viewport={'width':1000,'height':800},device_scale_factor=1);errors=[];page.on('pageerror',lambda e:errors.append(str(e)));await page.goto('http://127.0.0.1:8765/'+str(ROOT)+'/atelier-preview.html?quality=low',wait_until='domcontentloaded');await page.wait_for_function('window.assemblyInspect && !assemblyInspect().loading && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden',timeout=240000)
   pathlib.Path('metal-output').mkdir(exist_ok=True);states=[]
   hybrid=await page.evaluate('()=>__metalLoadHybrid()');whole=await page.evaluate('()=>__metalWhole()');await page.wait_for_timeout(1500);await page.screenshot(timeout=180000,path='metal-output/whole-candidate.png')
-  base=await b.new_page(viewport={'width':1000,'height':800},device_scale_factor=1);await base.goto('http://127.0.0.1:8765/'+str(ROOT)+'/atelier-preview.html?quality=low',wait_until='domcontentloaded');await base.wait_for_function('window.assemblyInspect && !assemblyInspect().loading',timeout=240000);baseline=await base.evaluate('()=>__metalWhole()');await base.wait_for_timeout(1500);await base.screenshot(timeout=180000,path='metal-output/whole-baseline.png');await base.close()
+  base=await b.new_page(viewport={'width':1000,'height':800},device_scale_factor=1);await base.goto('http://127.0.0.1:8765/'+str(ROOT)+'/atelier-preview.html?quality=low',wait_until='domcontentloaded');await base.wait_for_function('window.assemblyInspect && !assemblyInspect().loading && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden',timeout=240000);baseline=await base.evaluate('()=>__metalWhole()');await base.wait_for_timeout(1500);await base.screenshot(timeout=180000,path='metal-output/whole-baseline.png');await base.close()
   pathlib.Path('metal-output/whole-state.json').write_text(json.dumps({'candidate':whole,'baseline':baseline},indent=2))
   for sx in [-1,1]:
    for sy in [-1,1]:
@@ -17,6 +17,7 @@ async def run():
       r=await page.evaluate('(v)=>__metalQA(...v)',[sx,sy,sz,plain]);states.append(r);await page.wait_for_timeout(1500);await page.screenshot(timeout=180000,path=f'metal-output/root-{sx}-{sy}-{sz}-{plain}.png')
   for sx in [-1,1]:
    for sy in [-1,1]:
-    r=await page.evaluate('(v)=>__metalQA(...v)',[sx,sy,1,False,True]);states.append(r);await page.wait_for_timeout(1500);await page.screenshot(timeout=180000,path=f'metal-output/bridge-{sx}-{sy}.png')
+    for plain in [False,True]:
+     r=await page.evaluate('(v)=>__metalQA(...v)',[sx,sy,1,plain,True]);states.append(r);await page.wait_for_timeout(1500);await page.screenshot(timeout=180000,path=f'metal-output/bridge-{sx}-{sy}-{plain}.png')
   pathlib.Path('metal-output/report.json').write_text(json.dumps({'states':states,'errors':errors},indent=2));await b.close()
 asyncio.run(run())

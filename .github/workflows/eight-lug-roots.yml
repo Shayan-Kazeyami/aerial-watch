@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - run: python -m pip install playwright numpy
+      - run: python -m pip install playwright numpy scipy
       - run: python -m playwright install --with-deps chromium
       - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
       - run: |
@@ -18,8 +18,8 @@ jobs:
           ln -s ../preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44 metal-recovery/source
           node metal-recovery/decode.mjs
           python metal-recovery/extract-default.py
-          python metal-recovery/cap-study/graft.py
-          python metal-recovery/cap-study/export.py
+          python metal-recovery/cap-study/graft-smooth-v3.py
+          python metal-recovery/cap-study/export-v3.py
       - run: python qa-metal.py
       - uses: actions/upload-artifact@v4
         if: always()
