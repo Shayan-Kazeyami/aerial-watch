@@ -26,4 +26,4 @@ jobs:
         if: always()
         with:
           name: quality-resize-counts-${{ matrix.case }}
-          path: quality-resize-counts-output
+          path: quality-triage-output
