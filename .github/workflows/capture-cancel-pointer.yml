@@ -1,0 +1,36 @@
+name: Isolated capture cancellation pointer
+on:
+  push:
+    branches: ['qa/capture-cancel-pointer-20261108']
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [cancel]
+    env:
+      CASE: ${{ matrix.case }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.64.1 pillow
+      - run: python -m playwright install --with-deps chromium
+      - run: python -m http.server 8766 --bind 127.0.0.1 > /tmp/host-server.log 2>&1 &
+      - run: timeout 15m python qa/cross-origin/cancel-pointer.py
+      - name: Summarize and verify evidence
+        if: always()
+        run: |
+          test -f capture-cancel-pointer-output/${{ matrix.case }}.json
+          python -c "import json; x=json.load(open('capture-cancel-pointer-output/${{ matrix.case }}.json')); print(json.dumps({k:x.get(k) for k in ('case','status','file','errors','exception','diagnostics','events')}))"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: capture-cancel-pointer-${{ matrix.case }}
+          path: capture-cancel-pointer-output
+          if-no-files-found: error
