@@ -10,7 +10,8 @@ async def run():
    for normal in [True]:
     await page.evaluate("()=>{__strapQaView('close','source');__strapQaQuality('balanced');}")
     await page.evaluate('(enabled)=>__strapQaNormalMap(enabled)',normal)
-    for view in ['cap-context','close','upper']:
+    for view in ['close','neck']:
+     if view=='neck': await page.evaluate('()=>__strapQaRake()')
      for variant in ['source','candidate']:
       print('CAPTURE',view,variant,'normal',normal,flush=True);state=await page.evaluate('(a)=>__strapQaView(...a)',[view,variant]);states.append(state);(OUT/'states.json').write_text(json.dumps(states,indent=2));capture=await page.evaluate('()=>__strapQaCapture()');(OUT/f'{view}-{variant}.png').write_bytes(base64.b64decode(capture.pop('png').split(',')[1]));(OUT/f'{view}-{variant}-capture.json').write_text(json.dumps(capture,indent=2));print('SAVED',view,variant,flush=True)
    for i in range(0,len(states),2):assert [m['maps']for m in states[i]['upper']]==[m['maps']for m in states[i+1]['upper']],'KTX maps changed'
