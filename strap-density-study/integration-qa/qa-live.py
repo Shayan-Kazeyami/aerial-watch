@@ -20,7 +20,6 @@ async def run():
    await q.evaluate('__strapWhole()');whole=await q.evaluate('__strapQaCapture()');assert whole['effectiveQuality']=='efficient';(OUT/f'{END}-whole.png').write_bytes(base64.b64decode(whole.pop('png').split(',')[1]));report['whole']=whole
    prefix=END.replace('-','/')
    await q.evaluate('(p)=>__strapQaLit(...p.split("/"))',prefix)
-   await q.evaluate('(p)=>__strapQaLit(...p.split("/"))',prefix)
    await q.evaluate('(v)=>{__strapQaView(v,"native");__strapQaQuality("balanced")}',prefix+'/context')
    for kind in ['context','close','body','neck']:
     if kind=='neck':await q.evaluate('(p)=>{__strapQaRake(...p.split("/"));}',prefix)
