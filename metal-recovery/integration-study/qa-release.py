@@ -1,6 +1,6 @@
 import asyncio,json,pathlib
 from playwright.async_api import async_playwright
-ROOT=json.loads(pathlib.Path('integration-output/sealed-release.json').read_text())['releasePath']
+ROOT='preview-b/releases/'+json.loads(pathlib.Path('integration-output/sealed-release.json').read_text())['releaseId']
 OUT=pathlib.Path('integration-output');OUT.mkdir(exist_ok=True)
 READY='window.assemblyInspect && !assemblyInspect().loading && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden'
 async def run():
