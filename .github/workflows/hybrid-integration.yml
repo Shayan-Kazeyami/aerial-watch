@@ -19,7 +19,9 @@ jobs:
           python metal-recovery/extract-default.py
           python metal-recovery/cap-study/graft-field-v7.py
           python metal-recovery/cap-study/export-v7.py
-          node --test metal-recovery/integration-study/hybrid-case.test.mjs | tee integration-output/unit-tests.txt
+          npm ci --prefix metal-recovery --ignore-scripts --no-audit --no-fund
+          node metal-recovery/pack-hybrid-v7.mjs
+          node --test metal-recovery/integration-study/*.test.mjs | tee integration-output/unit-tests.txt
           python metal-recovery/integration-study/install-ci.py
       - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
       - run: python metal-recovery/integration-study/qa-runtime.py

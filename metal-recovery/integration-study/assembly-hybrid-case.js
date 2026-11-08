@@ -8,7 +8,11 @@ const identity=m=>m?.elements?.every((v,i)=>v===(i%5===0?1:0));
 const attr=(g,n)=>n==='index'?g.index:g.attributes[n];
 function resources(root){const geometries=new Set(),materials=new Set(),textures=new Set();root.traverse(o=>{if(!o.isMesh)return;geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])if(m){materials.add(m);for(const v of Object.values(m))if(v?.isTexture)textures.add(v);}});return {geometries,materials,textures};}
 function releaseCandidate(root,protectedResources){if(!root)return;const r=resources(root),errors=[];for(const kind of ['geometries','materials','textures'])for(const x of r[kind])if(!protectedResources[kind].has(x))try{x.dispose();}catch(e){errors.push(e);}if(errors.length)throw new AggregateError(errors,'Candidate cleanup failed.');}
-export function loadHybridCaseAsset(options={},data=DEFAULT_DATA){return loadGLTFAsset(data.url,{disposeUnused:gltf=>releaseCandidate(gltf.scene,{geometries:new Set(),materials:new Set(),textures:new Set()}),...options,expectedSHA256:data.glbSHA256});}
+export function loadHybridCaseAsset(options={},data=DEFAULT_DATA){
+ const prepared={disposeUnused:gltf=>releaseCandidate(gltf.scene,{geometries:new Set(),materials:new Set(),textures:new Set()}),...options};
+ if(data.delivery)return import('./assembly-hybrid-delivery.js').then(m=>m.loadHybridCaseDelivery(prepared,data));
+ return loadGLTFAsset(data.url,{...prepared,expectedSHA256:data.glbSHA256});
+}
 export async function installHybridCase(root,{loadCandidate,signal,privateStudy=false,data=DEFAULT_DATA}={}){
  signal?.throwIfAborted();
  if(data.acceptance!=='verified'&&!privateStudy)throw Error('Hybrid CASE has not passed release acceptance.');
@@ -31,7 +35,7 @@ export async function installHybridCase(root,{loadCandidate,signal,privateStudy=
   const loaded=await loadCandidate();loadedRoot=(loaded.gltf||loaded).scene;
   if(!loadedRoot?.traverse)throw Error('Candidate scene is required.');
   signal?.throwIfAborted();
-  if(loaded.metrics?.verifiedSHA256!==data.glbSHA256)throw Error('Candidate transfer digest was not verified.');
+  if(loaded.metrics?.verifiedSHA256!==(data.delivery?.gzipSHA256??data.glbSHA256)||(loaded.metrics?.verifiedGLBSHA256??loaded.metrics?.verifiedSHA256)!==data.glbSHA256)throw Error('Candidate transfer digest was not verified.');
   const meshes=[];loadedRoot.traverse(o=>{if(o.isMesh)meshes.push(o);});loadedRoot.updateMatrixWorld(true);
   if(meshes.length!==1||meshes[0].userData?.assemblyId!=='CASE')throw Error('Candidate must contain only CASE.');
   const m=meshes[0];m.updateMatrix();if(!identity(m.matrix)||!identity(m.matrixWorld))throw Error('Unexpected candidate transform.');
@@ -53,7 +57,7 @@ export async function installHybridCase(root,{loadCandidate,signal,privateStudy=
   mesh.geometry=candidate;
  }catch(error){candidate?.dispose();try{releaseCandidate(loadedRoot,protectedResources);}catch(cleanup){throw new AggregateError([error,cleanup],'Hybrid preparation and cleanup failed.');}throw error;}
  let disposed=false;
- return {mesh,audit:Object.freeze({revision:data.revision,privateOnly:data.acceptance!=='verified',glbSHA256:data.glbSHA256,triangles:candidate.index.count/3,capRadiusMM:data.capsRadiusMM,sourceMaterialPreserved:true,fixedGeometry:true}),
+ return {mesh,audit:Object.freeze({revision:data.revision,privateOnly:data.acceptance!=='verified',glbSHA256:data.glbSHA256,rawReferenceSHA256:data.rawReferenceSHA256??data.glbSHA256,transportSHA256:data.delivery?.gzipSHA256??data.glbSHA256,delivery:data.delivery?.encoding??'raw',triangles:candidate.index.count/3,capRadiusMM:data.capsRadiusMM,sourceMaterialPreserved:true,fixedGeometry:true}),
   get active(){return !disposed&&mesh.geometry===candidate;},get ownsGeometry(){return !disposed&&mesh.geometry===candidate;},
   dispose(){if(disposed)return;disposed=true;if(mesh.geometry===candidate)mesh.geometry=original;candidate.dispose();}};
 }

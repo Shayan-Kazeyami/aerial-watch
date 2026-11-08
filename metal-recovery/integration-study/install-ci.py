@@ -2,9 +2,11 @@ from pathlib import Path
 import shutil
 root=Path('preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db48668510c8')
 here=Path('metal-recovery/integration-study')
-for name in ['assembly-hybrid-case.js','assembly-hybrid-case-data.js']:
- shutil.copyfile(here/name,root/name)
-(root/'hybrid-case-assets').mkdir(exist_ok=True);shutil.copyfile('metal-recovery/cap-study/hybrid-field-v7.glb',root/'hybrid-case-assets/hybrid-field-v7.glb')
+for name in ['assembly-hybrid-case.js','assembly-hybrid-case-data.js','assembly-hybrid-delivery.js']:
+ shutil.copyfile(here/('assembly-hybrid-case-data.compressed.js' if name=='assembly-hybrid-case-data.js' else name),root/name)
+(root/'hybrid-case-assets').mkdir(exist_ok=True);shutil.copyfile('metal-recovery/cap-study/hybrid-field-v7.meshopt.glb.gz',root/'hybrid-case-assets/hybrid-field-v7.meshopt.glb.gz')
+(root/'vendor/meshopt').mkdir(parents=True,exist_ok=True)
+for file in ['meshopt_decoder.mjs','LICENSE.md','PROVENANCE.json']:shutil.copyfile(Path('metal-recovery/source/vendor/meshopt')/file,root/'vendor/meshopt'/file)
 s=(root/'assembly-review.js').read_text()
 def replace(old,new):
  global s
