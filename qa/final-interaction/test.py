@@ -1,6 +1,6 @@
 import asyncio,json,pathlib,os,traceback
 from playwright.async_api import async_playwright
-out=pathlib.Path('qa-deliverables/final-interaction-regression/output');out.mkdir(exist_ok=True)
+out=pathlib.Path('qa-deliverables/final-interaction-regression/output');out.mkdir(parents=True,exist_ok=True)
 r={'release':'a8c129a21c1ba3529f372d00bf94e0edcadc295931cae5dee0770f5c92c31473','tests':{},'errors':[],'backend':'local Chromium SwiftShader'}
 def save(): (out/'report.json').write_text(json.dumps(r,indent=2))
 async def main():
