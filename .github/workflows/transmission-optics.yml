@@ -1,0 +1,39 @@
+name: Sealed rear optical transmission gate
+on:
+  push:
+    branches: ['qa/transmission-optics-20261108']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      # Change only this value to live on the QA branch AFTER guarded main promotion.
+      RELEASE_QA_MODE: sealed
+      RELEASE_RECEIPT: transmission-output/sealed-release.json
+      RELEASE_QA_RESIZE: '0'
+      RELEASE_QA_SUPPLEMENTAL: only
+      RELEASE_QA_SOURCE_GLASS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: transmission-sealed-release
+          path: transmission-output
+          run-id: 42473659744
+          github-token: ${{ github.token }}
+      - run: tar xzf transmission-output/sealed-release.tar.gz
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.64.1
+      - run: python -m playwright install --with-deps chromium
+      - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
+      - run: timeout 25m python qa-deliverables/transmission-release/qa/qa.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: transmission-optics-${{ env.RELEASE_QA_MODE }}
+          path: transmission-qa-output
