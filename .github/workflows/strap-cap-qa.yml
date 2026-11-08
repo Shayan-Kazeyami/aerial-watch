@@ -16,7 +16,7 @@ jobs:
       - run: python -m pip install numpy==2.5.4 scipy==1.18.1 triangle==20250106 shapely==2.2.0 playwright==1.64.1
       - run: python -m playwright install --with-deps chromium
       - name: Regenerate bounded private candidate
-        run: python strap-qa/regenerate-all.py preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db48668510c8/leather-assets/r14 strap-output/generated
+        run: python strap-qa/regenerate-shell.py preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db48668510c8/leather-assets/r14 strap-output/generated
       - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
       - run: python strap-qa/qa.py
       - uses: actions/upload-artifact@v4
@@ -26,5 +26,5 @@ jobs:
           path: |
             strap-output/*.png
             strap-output/*.json
-            strap-density-study/combined-ordered-v9/*.json
-            strap-density-study/combined-ordered-v9/round-cap-candidate
+            strap-density-study/shell/uv-v10/*.json
+            strap-density-study/shell/uv-v10/round-cap-candidate
