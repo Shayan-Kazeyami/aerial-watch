@@ -19,7 +19,7 @@ async def main():
     if case=='failure':await route.abort('failed');return
    await route.continue_()
   try:
-   if case in ['slow','failure']:await q.route(lambda url:'assembly.glb' in url,asset)
+   if case in ['slow','failure']:await q.route(lambda url:'rebuild__assembly.meshopt.glb.gz' in url or '/rebuild/assembly.glb' in url,asset)
    await q.goto(base,wait_until='domcontentloaded',timeout=60000)
    if case=='slow':
     await asyncio.wait_for(entered.wait(),240);await q.wait_for_timeout(1500);r['gated']=await q.evaluate('({loading:!document.getElementById("loading").hidden,interactive:window.assemblyInspect?.().presentation.interactive,disabled:document.querySelector("[data-mode=inside]").disabled})');assert r['gated']['loading'] and not r['gated']['interactive'] and r['gated']['disabled'];save();release.set()
