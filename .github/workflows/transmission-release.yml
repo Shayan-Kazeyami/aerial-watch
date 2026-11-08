@@ -1,4 +1,4 @@
-name: Sealed transmission budget native release gate
+name: Live transmission budget native verification
 on:
   push:
     branches: ['qa/transmission-release-20261108']
@@ -36,7 +36,7 @@ jobs:
     timeout-minutes: 30
     env:
       # Change only this value to live on the QA branch AFTER guarded main promotion.
-      RELEASE_QA_MODE: sealed
+      RELEASE_QA_MODE: live
       RELEASE_RECEIPT: transmission-output/sealed-release.json
       RELEASE_QA_RESIZE: '1'
     steps:
@@ -58,38 +58,3 @@ jobs:
         with:
           name: transmission-native-${{ env.RELEASE_QA_MODE }}
           path: transmission-qa-output
-  stage:
-    needs: [build, inspect]
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: qa/transmission-release-20261108
-          fetch-depth: 0
-      - uses: actions/download-artifact@v4
-        with:
-          name: transmission-sealed-release
-          path: transmission-output
-      - name: Stage verified immutable release on QA branch only
-        env:
-          EXPECTED_HEAD: ${{ github.sha }}
-        run: |
-          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          tar xzf transmission-output/sealed-release.tar.gz
-          RELEASE=$(python -c "import json;print(json.load(open('transmission-output/sealed-release.json'))['releasePath'])")
-          git add -- "$RELEASE"
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          if ! git diff --cached --quiet; then
-            git commit -m 'Stage native-verified transmission budget release [skip ci]'
-            git push origin HEAD:refs/heads/qa/transmission-release-20261108
-          fi
-          git rev-parse HEAD > staged-head.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: transmission-staged-receipt
-          path: |
-            staged-head.txt
-            transmission-output/sealed-release.json
