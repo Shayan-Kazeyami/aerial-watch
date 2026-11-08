@@ -4,20 +4,20 @@ on:
     branches: ['qa/strap-cap-20261108']
 permissions:
   contents: read
+  actions: read
 jobs:
   generate:
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/download-artifact@v4
         with:
-          python-version: '3.12'
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: python -m pip install numpy==2.3.5 scipy==1.17.0 triangle==20250106 shapely==2.2.0
-      - run: python strap-density-study/ci/final-uv14/regenerate.py
+          name: uv14-sealed-candidate
+          run-id: 42460466880
+          github-token: ${{ github.token }}
+          path: reused
+      - run: python strap-density-study/ci/final-uv14/restore-artifact.py
       - name: Pack immutable sealed release
         run: |
           python - <<'PY'
@@ -33,6 +33,13 @@ jobs:
             strap-output
             strap-density-study/ci-final-candidate/round-cap-candidate
             strap-density-study/ci-final-candidate/*.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uv14-geometry-proof
+          path: |
+            strap-density-study/ci-final-candidate/round-cap-candidate
+            strap-density-study/ci-final-candidate/*.json
+            strap-output/sealed-release.json
   inspect:
     needs: generate
     runs-on: ubuntu-24.04
