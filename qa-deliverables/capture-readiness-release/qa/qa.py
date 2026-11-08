@@ -2,7 +2,8 @@ import asyncio,json,os,pathlib,traceback,hashlib
 from urllib.parse import urlparse
 from playwright.async_api import async_playwright
 from PIL import Image
-BASE=pathlib.Path(__file__).parent
+BASE=pathlib.Path(__file__).resolve().parent
+def fixture_path(p):return p.resolve().relative_to(pathlib.Path.cwd().resolve()).as_posix()
 case=os.environ['CASE'];assert case in ['native','cross-origin','cancel']
 receipt=json.loads(pathlib.Path(os.environ.get('RELEASE_RECEIPT','capture-readiness-output/sealed-release.json')).read_text())
 root=receipt['releasePath'];rid=receipt['releaseId'];assert root=='preview-b/releases/'+rid
@@ -13,7 +14,7 @@ assert expected['atelier-preview.js']=='8357f7524dd8fb712764b83b9cdc1f4c0dcb1f28
 viewer='http://127.0.0.1:8765/'+root+'/atelier-preview.html'
 home=BASE/'generated-home.html'
 home.write_text('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<meta name="theme-color" content="#191b1a">\n<title>Aerial — Kazeyami Studio</title>\n<link rel="icon" href="data:,">\n<link rel="stylesheet" href="/watch-home-fcaad311.css">\n<script defer>window.addEventListener("DOMContentLoaded",()=>{const entry=new URL("__VIEWER__",location.href);entry.search=location.search;entry.hash=location.hash;document.getElementById("watch-viewer").src=entry.href;});</script>\n</head>\n<body>\n<iframe id="watch-viewer" title="Aerial interactive watch studio" allowfullscreen></iframe>\n<noscript><p>This interactive watch requires JavaScript. Enable JavaScript, then <a href="./preview-b/releases/__RID__/atelier-preview.html">open the Aerial watch studio</a>.</p></noscript>\n</body>\n</html>\n\n\n'.replace('__VIEWER__',viewer).replace('__RID__',rid))
-homeURL='http://127.0.0.1:8765/'+str(home)+'?quality=efficient&leather=craft14'
+homeURL='http://127.0.0.1:8765/'+fixture_path(home)+'?quality=efficient&leather=craft14'
 wrapper=BASE/'generated-wrapper.html';wrapper.write_text('<!doctype html><meta charset="utf-8"><title>Cross-origin capture gate</title><div style="width:100%;height:min(850px,85vh);min-height:480px;background:#111616"><iframe title="Watch host" style="display:block;width:100%;height:100%;border:0" src="'+homeURL.replace('&','&amp;')+'" allowfullscreen></iframe></div>')
 out=pathlib.Path('capture-readiness-qa-output');out.mkdir(exist_ok=True)
 r={'case':case,'release':rid,'status':'starting','events':[],'errors':[],'modules':{},'scope':'Local sealed native and cross-origin browser capture gate; no live-host, hardware or reliability guarantee.'}
@@ -49,9 +50,9 @@ async def main():
    if case=='native':
     await page.goto(homeURL,wait_until='domcontentloaded');host=page
    else:
-    await page.goto('http://127.0.0.1:8766/'+str(wrapper),wait_until='domcontentloaded')
-    await page.wait_for_function("document.querySelector('iframe')?.contentWindow !== null")
-    host=await (await page.query_selector('iframe')).content_frame();assert host
+    await page.goto('http://127.0.0.1:8766/'+fixture_path(wrapper),wait_until='domcontentloaded')
+    outer=await page.wait_for_selector('iframe',state='attached',timeout=60000);assert outer
+    host=await outer.content_frame();assert host
    await host.wait_for_selector('#watch-viewer',timeout=60000)
    q=await (await host.query_selector('#watch-viewer')).content_frame();assert q
    await q.wait_for_function('window.assemblyInspect && !assemblyInspect().loading && !assemblyInspect().failed && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden',timeout=300000)
