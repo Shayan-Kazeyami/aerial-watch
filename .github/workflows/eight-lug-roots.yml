@@ -20,6 +20,12 @@ jobs:
           python metal-recovery/extract-default.py
           python metal-recovery/cap-study/graft-smooth-v4.py
           python metal-recovery/cap-study/export-v4.py
+          python metal-recovery/cap-study/normal-control.py
+          python metal-recovery/cap-study/export-v5.py
+          python metal-recovery/cap-study/graft-wide-v6.py
+          python metal-recovery/cap-study/export-v6.py
+          python metal-recovery/cap-study/graft-field-v7.py
+          python metal-recovery/cap-study/export-v7.py
       - run: python qa-metal.py
       - uses: actions/upload-artifact@v4
         if: always()
