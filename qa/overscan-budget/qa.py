@@ -17,7 +17,7 @@ async def run():
       if 'append'in op:s+=op['append'];continue
       assert op['old']in s,(name,op['old'][:150]);s=s.replace(op['old'],op['new'],1)
      report['patched'].append(name)
-    if name=='assembly-review.js':s+='\n'+HOOK
+    if name=='assembly-review.js':s=s.replace('composer.render();','budgetQaApply();composer.render();');s+='\n'+HOOK
     if name=='three.module.js':
      old='_this.setRenderTarget( transmissionRenderTarget );';assert old in s
      s=s.replace(old,old+'''\n globalThis.__qaTransmissionTarget={width:transmissionRenderTarget.width,height:transmissionRenderTarget.height,viewport:Array.from(_gl.getParameter(_gl.VIEWPORT)),scale:_this.transmissionResolutionScale};''')

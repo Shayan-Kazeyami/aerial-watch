@@ -29,16 +29,16 @@ window.__strapQaLit=(half,side)=>{const sx=side==='left'?-1:1,sy=half==='lower'?
 
 window.__strapWhole=()=>{strapQaState=null;for(const[o,v]of strapQaVisibility)o.visible=v;depthBounds=[];camera.up.set(0,0,1);camera.position.set(65,-90,80);controls.target.set(0,0,0);camera.fov=35;camera.near=.1;camera.updateProjectionMatrix();camera.lookAt(controls.target);dirty=true;};
 window.__strapControls=()=>{const refs=strapUpper().map(m=>({m,g:m.geometry,mat:m.material}));$('reset').click();const finish=$('finish');finish.checked=false;finish.dispatchEvent(new Event('change'));finish.checked=true;finish.dispatchEvent(new Event('change'));return {sameGeometry:refs.every(r=>r.m.geometry===r.g),sameMaterials:refs.every(r=>r.m.material===r.mat),triangles:strapUpper().reduce((n,m)=>n+m.geometry.index.count/3,0),hybrid:hybridCaseSnapshot()};};
+let budgetPose=null;function budgetQaApply(){if(!budgetPose)return;cameraTween=null;camera.position.fromArray(budgetPose.position);controls.target.fromArray(budgetPose.target);controls.minDistance=0;controls.maxDistance=Infinity;camera.fov=budgetPose.fov;camera.zoom=1;camera.aspect=800/600;camera.lookAt(controls.target);camera.updateProjectionMatrix();camera.updateMatrixWorld(true);}
 window.__budgetConfigure=(mode,view)=>{
- const stage=$('stage');stage.style.width='1100px';stage.style.height='740px';stage.style.minHeight='740px';stage.style.maxHeight='none';
+ const stage=$('stage');stage.style.width='800px';stage.style.height='600px';stage.style.minHeight='600px';stage.style.maxHeight='none';
  __strapWhole();applyClockPose(clock.seek(0));renderingQuality(mode);resize();
  if(view==='front'){camera.position.set(0,-9,90);controls.target.set(0,0,0);camera.fov=35;}
  if(view==='oblique'){camera.position.set(45,-60,35);controls.target.set(0,0,0);camera.fov=30;}
- camera.lookAt(controls.target);camera.updateMatrixWorld(true);camera.updateProjectionMatrix();
+ budgetPose={position:camera.position.toArray(),target:controls.target.toArray(),fov:camera.fov};budgetQaApply();
  // Same rendering state for both variants; do not turn off effects to hide differences.
  return {quality,stage:stage.getBoundingClientRect().toJSON(),camera:camera.position.toArray(),target:controls.target.toArray(),fov:camera.fov};
 };
 window.__budgetCapture=()=>{
- const costs=[];for(let n=0;n<1;n++){const t=performance.now();composer.render();renderer.getContext().finish();costs.push(performance.now()-t);}
- return {...__strapQaCapture(),transmission:backendIdentity.transmission,overscan:backendIdentity.overscan,actualTarget:window.__qaTransmissionTarget,cpuBlockingMS:costs,scope:'SwiftShader blocking submission timing only; not hardware GPU timing or device FPS.'};
+ budgetQaApply();const start=performance.now();const cap=__strapQaCapture();return {...cap,transmission:backendIdentity.transmission,overscan:backendIdentity.overscan,actualTarget:window.__qaTransmissionTarget,captureWallMS:performance.now()-start,scope:'Software-rendered capture wall time includes export and is not hardware GPU timing or device FPS.'};
 };
