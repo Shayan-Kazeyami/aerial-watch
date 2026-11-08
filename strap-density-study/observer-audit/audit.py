@@ -18,14 +18,14 @@ async def main():
     try:frames.append(await f.evaluate('({url:location.href,calls:window.__observerAudit||[],loading:window.assemblyInspect?.().loading})'))
     except:pass
    result['cases'].append({'case':name,'frames':frames});(OUT/'result.json').write_text(json.dumps(result,indent=2));return frame
-  await q.goto(URL);f=await sample('iframe-initial');direct=f.url
+  await q.goto(URL,wait_until='domcontentloaded');f=await sample('iframe-initial');direct=f.url
   # All tab task buttons, repeated DOM state changes, valid select changes.
-  controls=await f.evaluate('''()=>{let clicked=[];for(const e of document.querySelectorAll('[data-task]')){e.click();clicked.push(e.dataset.task)}for(const e of document.querySelectorAll('select')){e.dispatchEvent(new Event('change',{bubbles:true}))}return clicked}''');result['controls']=controls
+  controls=await f.evaluate('''()=>{let clicked=[];for(const e of document.querySelectorAll('[data-mode]')){e.click();clicked.push(e.dataset.mode)}for(const e of document.querySelectorAll('select')){e.dispatchEvent(new Event('change',{bubbles:true}))}return clicked}''');result['controls']=controls
   await sample('iframe-controls',False)
-  await q.reload();await sample('iframe-reload')
-  await q.goto('about:blank');await q.go_back();await sample('iframe-back')
-  await q.goto(direct);await sample('direct')
-  await q.reload();await sample('direct-reload')
+  await q.reload(wait_until='domcontentloaded');await sample('iframe-reload')
+  await q.goto('about:blank');await q.go_back(wait_until='domcontentloaded');await sample('iframe-back')
+  await q.goto(direct,wait_until='domcontentloaded');await sample('direct')
+  await q.reload(wait_until='domcontentloaded');await sample('direct-reload')
   await b.close()
  (OUT/'result.json').write_text(json.dumps(result,indent=2));print(json.dumps({'errors':result['errors'],'cases':[(x['case'],sum(len(f['calls'])for f in x.get('frames',[])))for x in result['cases']]}))
 asyncio.run(main())
