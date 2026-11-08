@@ -26,5 +26,5 @@ jobs:
           path: |
             strap-output/*.png
             strap-output/*.json
-            strap-density-study/shell/loft-v1/*.json
-            strap-density-study/shell/loft-v1/round-cap-candidate
+            strap-density-study/shell/top-v3/*.json
+            strap-density-study/shell/top-v3/round-cap-candidate
