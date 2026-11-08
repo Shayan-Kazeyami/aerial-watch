@@ -1,0 +1,8 @@
+{
+  "atelier-preview.js": [
+    {
+      "old": "  const timeout=setTimeout(()=>finish(new Error('The full watch view did not finish resizing. Please try again.')),10000);",
+      "new": "  const timeout=setTimeout(()=>finish(new Error('The full watch view did not finish resizing. Please try again.')),30000);"
+    }
+  ]
+}
