@@ -26,7 +26,7 @@ async def main():
    for fr in q.frames:
     try:entry['frames'].append(await fr.evaluate('({url:location.href,calls:window.__observerAudit||[],inspect:window.assemblyInspect?.(),loadingHidden:document.getElementById("loading")?.hidden})'))
     except Exception as e:entry['frames'].append({'url':fr.url,'snapshotError':str(e)})
-   save()
+   save();print('PHASE',name,entry['ready'],flush=True)
    assert entry['ready'],entry.get('readinessError')
    return f
   async def tabs(f,name):
@@ -37,11 +37,22 @@ async def main():
   async def remount(name):
    await q.evaluate('''()=>{const old=document.getElementById('watch-viewer'),src=old.src;old.remove();let f=document.createElement('iframe');f.id='watch-viewer';f.style='width:100vw;height:100vh;border:0';f.src=src;document.body.append(f)}''');await sample(name)
   try:
-   await q.goto(URL,wait_until='domcontentloaded',timeout=60000);f=await sample('native-interactive');direct=f.url
-   await tabs(f,'native-tabs');await remount('native-remount-1');await remount('native-remount-2')
+   direct='https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/0c468cf914b608e0d67036aa0a25fe16bb6c2802b0e90a940677f43466e19ff1/atelier-preview.html'
    wrapper=URL+'__observer-wrapper.html'
-   await q.route(wrapper,lambda route:route.fulfill(content_type='text/html',body='<!doctype html><meta charset="utf-8"><title>Private same-origin wrapper QA</title><style>html,body{margin:0}iframe{width:100vw;height:100vh;border:0}</style><iframe id="watch-viewer" src='+json.dumps(direct)+'></iframe>'))
-   await q.goto(wrapper,wait_until='domcontentloaded',timeout=60000);f=await sample('wrapper-interactive');await tabs(f,'wrapper-tabs');await remount('wrapper-remount-1');await remount('wrapper-remount-2')
+   async def wrapper_route(route):
+    await route.fulfill(content_type='text/html',body='<!doctype html><meta charset="utf-8"><title>Private same-origin wrapper QA</title><style>html,body{margin:0}iframe{width:100vw;height:100vh;border:0}</style><iframe id="watch-viewer" src='+json.dumps(direct)+'></iframe>')
+   await q.route(wrapper,wrapper_route)
+   await q.goto(wrapper,wait_until='domcontentloaded',timeout=60000)
+   for _ in range(300):
+    f=next((f for f in q.frames if 'atelier-preview.html' in f.url),None)
+    if f:break
+    await q.wait_for_timeout(100)
+   assert f,'No initial child frame'
+   await f.wait_for_function('window.__observerAudit?.some(e=>e.id==="viewer-status")',timeout=60000)
+   result['abortedStartup']=await f.evaluate('({url:location.href,calls:window.__observerAudit,inspect:window.assemblyInspect?.()||null})');save()
+   assert not (result['abortedStartup']['inspect']or{}).get('presentation',{}).get('interactive',False),'Startup was already interactive, not an in-flight case'
+   await remount('wrapper-after-startup-teardown');f=next(f for f in q.frames if 'atelier-preview.html'in f.url)
+   await tabs(f,'wrapper-tabs');await remount('wrapper-remount-ready')
    result['completed']=True
   except Exception as e:result['failure']=str(e)
   finally:save();await b.close()
