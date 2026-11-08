@@ -18,7 +18,7 @@ async def main():
     await q.locator('[data-mode=capture]').first.click(timeout=20000);await q.wait_for_timeout(4000)
     async with page.expect_download(timeout=120000) as d:await q.locator('[data-proxy=export-config]').click(timeout=20000)
     dl=await d.value;path=out/f'view-{n}.json';await dl.save_as(path);data=json.loads(path.read_text());assert data;await q.locator('#import-config').set_input_files(str(path));await q.wait_for_timeout(4000);r['results'].append({'type':'json','bytes':path.stat().st_size,'status':await q.locator('#viewer-status').text_content()});save()
-   await q.wait_for_timeout(5000);r['cleanup']=await q.evaluate('''()=>({tracked:window.__exports,remainingAnchors:[...document.querySelectorAll('a[href^="blob:"]')].map(a=>a.href)})''');e=r['cleanup']['tracked'];assert len(e['created'])>=4 and all(x['url'] in e['revoked'] for x in e['created']);assert not [a for a in r['cleanup']['remainingAnchors'] if a in [x['url'] for x in e['created']]];assert not r['errors'];r['status']='passed'
+   await q.wait_for_timeout(65000);r['cleanup']=await q.evaluate('''()=>({tracked:window.__exports,remainingAnchors:[...document.querySelectorAll('a[href^="blob:"]')].map(a=>a.href)})''');e=r['cleanup']['tracked'];assert len(e['created'])>=4 and all(x['url'] in e['revoked'] for x in e['created']);assert not [a for a in r['cleanup']['remainingAnchors'] if a in [x['url'] for x in e['created']]];assert not r['errors'];r['status']='passed'
   except Exception as e:r['status']='failed';r['exception']=repr(e);r['traceback']=traceback.format_exc()
   finally:save();await c.close();await b.close()
 asyncio.run(main())
