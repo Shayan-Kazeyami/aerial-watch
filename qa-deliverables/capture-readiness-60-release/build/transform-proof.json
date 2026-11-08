@@ -1,0 +1,46 @@
+{
+  "scope": "Private transform proof only. Full historical owner validation and sealing requires complete CI repository.",
+  "sourcePatchReconstruction": [
+    {
+      "name": "atelier-preview.js",
+      "sha256": "9fa6ab550905e783fcc515b6764fa5ce92043d00035083d0865b1a8eb93516c1"
+    }
+  ],
+  "changedPaths": [
+    "atelier-preview.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json",
+    "shared-release-build.json"
+  ],
+  "unchangedReferenceEntries": 120,
+  "owner": "a8c129a21c1ba3529f372d00bf94e0edcadc295931cae5dee0770f5c92c31473",
+  "geometryIdentity": {
+    "bytes": 8579970,
+    "sha256": "8da7de21efcceacadcf21e0fa9cd866b678ecc8d49d0fdbd947d485004e2e5c7",
+    "bufferIndex": 0
+  },
+  "changes": [
+    {
+      "path": "atelier-preview.js",
+      "previousSHA256": "2056258d342b2b3d3239a53e6d9be5ef8cb69d29ab4735ac6b7fb5ff345f8382",
+      "sha256": "9fa6ab550905e783fcc515b6764fa5ce92043d00035083d0865b1a8eb93516c1",
+      "bytes": 33575
+    }
+  ],
+  "allowedChangedPaths": [
+    "atelier-preview.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json",
+    "shared-release-build.json"
+  ],
+  "actualChangedPaths": [
+    "atelier-preview.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json",
+    "shared-release-build.json"
+  ],
+  "preservedLocalFiles": 152,
+  "referenceCount": 120,
+  "importOwnerPathsPreserved": true,
+  "revisionDigest": "72519c3ec4bbcdcec39b3cd1c6f7bd221316a81e8de62083d97e0f16e82fad66"
+}
