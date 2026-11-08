@@ -7,7 +7,13 @@ permissions:
 jobs:
   compare:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [baseline, candidate]
+    env:
+      BUDGET_VARIANT: ${{ matrix.variant }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -16,9 +22,9 @@ jobs:
       - run: python -m pip install playwright==1.64.1
       - run: python -m playwright install --with-deps chromium
       - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
-      - run: python qa/overscan-budget/qa.py
+      - run: timeout 16m python qa/overscan-budget/qa.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: overscan-budget-comparison
+          name: overscan-budget-${{ matrix.variant }}
           path: budget-output

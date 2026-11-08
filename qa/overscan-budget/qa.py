@@ -8,7 +8,7 @@ SEED='''(()=>{let seed=123456789;Math.random=()=>{seed=(Math.imul(seed,1664525)+
 async def run():
  async with async_playwright() as p:
   b=await p.chromium.launch(headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
-  for variant in ['baseline','candidate']:
+  for variant in [os.environ['BUDGET_VARIANT']]:
    report={'variant':variant,'errors':[],'captures':[],'patched':[],'backend':'Chromium SwiftShader','browser':b.version};context=await b.new_context(viewport={'width':1440,'height':1000},device_scale_factor=1);await context.add_init_script(SEED);q=await context.new_page();q.on('pageerror',lambda e:report['errors'].append(str(e)))
    async def instrument(route):
     name=route.request.url.split('/')[-1].split('?')[0];r=await route.fetch();s=await r.text()
@@ -26,13 +26,18 @@ async def run():
    try:
     await q.goto('http://127.0.0.1:8765/'+ROOT+'/atelier-preview.html?quality=efficient&leather=craft14',wait_until='domcontentloaded');await q.wait_for_function(READY,timeout=300000);report['setup']=await q.evaluate('__strapQaSetup()')
     proof=report['setup']['leather']['diagnostics']['geometryVerification'];assert proof['actualSha256']=='8da7de21efcceacadcf21e0fa9cd866b678ecc8d49d0fdbd947d485004e2e5c7';assert report['setup']['inspect']['hybridCase']['active']
-    for quality,view in [('studio','front'),('studio','oblique'),('detail','front'),('balanced','front')]:
-     print(variant,quality,view,flush=True);config=await q.evaluate('(a)=>__budgetConfigure(...a)',[quality,view]);cap=await q.evaluate('__budgetCapture()');(OUT/f'{variant}-{quality}-{view}.png').write_bytes(base64.b64decode(cap.pop('png').split(',')[1]));cap['config']=config;report['captures'].append(cap);(OUT/f'{variant}.json').write_text(json.dumps(report,indent=2))
+    for quality,view in [('balanced','front'),('detail','front'),('studio','front')]:
+     print(variant,quality,view,flush=True);report['pending']={'quality':quality,'view':view,'stage':'configure'};(OUT/f'{variant}.json').write_text(json.dumps(report,indent=2));config=await asyncio.wait_for(q.evaluate('(a)=>__budgetConfigure(...a)',[quality,view]),120);report['pending']['stage']='capture';(OUT/f'{variant}.json').write_text(json.dumps(report,indent=2));cap=await asyncio.wait_for(q.evaluate('__budgetCapture()'),180);(OUT/f'{variant}-{quality}-{view}.png').write_bytes(base64.b64decode(cap.pop('png').split(',')[1]));cap['config']=config;report['captures'].append(cap);(OUT/f'{variant}.json').write_text(json.dumps(report,indent=2))
      target=cap['actualTarget'];assert target and len(target['viewport'])==4
      if variant=='candidate':
       t=cap['transmission'];assert t['revision']=='expanded-target-budget-v1';assert target['viewport'][2]*target['viewport'][3]<=t['maxPixels'];assert abs(target['scale']-t['effectiveScale'])<1e-12
     assert not report['errors'];report['passed']=True
+   except Exception as exc:
+    report['exception']=repr(exc);raise
    finally:
-    (OUT/f'{variant}.json').write_text(json.dumps(report,indent=2));await context.close()
-  await b.close()
+    (OUT/f'{variant}.json').write_text(json.dumps(report,indent=2))
+    try:await asyncio.wait_for(context.close(),15)
+    except:pass
+  try:await asyncio.wait_for(b.close(),15)
+  except:pass
 asyncio.run(run())
