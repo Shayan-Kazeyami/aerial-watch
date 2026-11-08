@@ -1,42 +1,50 @@
-import asyncio,json,pathlib,threading,http.server,functools,os
+import asyncio,json,pathlib,os
 from playwright.async_api import async_playwright
-ROOT=os.environ.get('AUDIT_ROOT','/tmp/aerial-current-backup-smoke'); OUT=pathlib.Path('strap-density-study/observer-audit')
-server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(http.server.SimpleHTTPRequestHandler,directory=ROOT));threading.Thread(target=server.serve_forever,daemon=True).start();URL=os.environ.get('AUDIT_URL',f'http://127.0.0.1:{server.server_port}/')
-INIT=r'''(()=>{window.__observerAudit=[];let original=MutationObserver.prototype.observe;MutationObserver.prototype.observe=function(target,options){let e={url:location.href,target:target?.nodeName,id:target?.id,valid:target instanceof Node,stack:new Error().stack};try{let r=original.call(this,target,options);window.__observerAudit.push(e);return r}catch(err){e.error=String(err);window.__observerAudit.push(e);console.error('OBSERVE_FAILED',JSON.stringify(e));throw err}}})()'''
+OUT=pathlib.Path('strap-density-study/observer-audit');OUT.mkdir(parents=True,exist_ok=True)
+URL=os.environ.get('AUDIT_URL','https://shayan-kazeyami.github.io/aerial-watch/')
+INIT=r'''(()=>{window.__observerAudit=[];let original=MutationObserver.prototype.observe;MutationObserver.prototype.observe=function(target,options){let e={url:location.href,target:target?.nodeName,id:target?.id,valid:target instanceof Node,stack:new Error().stack};try{let r=original.call(this,target,options);window.__observerAudit.push(e);return r}catch(err){e.error=String(err);window.__observerAudit.push(e);throw err}}})()'''
+READY='window.assemblyInspect && !assemblyInspect().loading && !assemblyInspect().failed && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden'
 async def main():
- result={'root':ROOT,'cases':[],'errors':[]}
+ result={'url':URL,'cases':[],'errors':[],'completed':False}
+ def save():(OUT/'result.json').write_text(json.dumps(result,indent=2))
  async with async_playwright() as p:
-  b=await p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or None,headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']);c=await b.new_context(viewport={'width':800,'height':640});await c.add_init_script(INIT);q=await c.new_page();q.on('pageerror',lambda e:result['errors'].append(str(e)));q.on('console',lambda m:result['errors'].append(m.text)if 'OBSERVE_FAILED' in m.text else None)
-  async def sample(name,wait=True):
-   if 'atelier-preview.html' not in q.url:
+  b=await p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE')or None,headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']);c=await b.new_context(viewport={'width':800,'height':640});await c.add_init_script(INIT)
+  q=await c.new_page();q.on('pageerror',lambda e:result['errors'].append({'message':str(e),'stack':getattr(e,'stack',None)}))
+  async def sample(name):
+   entry={'case':name,'ready':False};result['cases'].append(entry)
+   f=None
+   try:
     for _ in range(300):
-     if any('atelier-preview.html' in f.url for f in q.frames):break
+     f=next((f for f in q.frames if 'atelier-preview.html' in f.url),None)
+     if f:break
      await q.wait_for_timeout(100)
-   frame=next((f for f in q.frames if 'atelier-preview.html' in f.url),q.main_frame)
-   if wait:
-    try:await frame.wait_for_function('window.assemblyInspect && !assemblyInspect().loading',timeout=120000)
-    except Exception as e:result['cases'].append({'case':name,'readyError':str(e)})
-   await q.wait_for_timeout(500)
-   frames=[]
-   for f in q.frames:
-    try:frames.append(await f.evaluate('({url:location.href,calls:window.__observerAudit||[],loading:window.assemblyInspect?.().loading,failed:window.assemblyInspect?.().failed,interactive:window.assemblyInspect?.().presentation?.interactive})'))
-    except:pass
-   result['cases'].append({'case':name,'frames':frames});(OUT/'result.json').write_text(json.dumps(result,indent=2));return frame
-  await q.goto(URL,wait_until='domcontentloaded',timeout=60000);f=await sample('iframe-initial');direct=f.url
-  assert 'atelier-preview.html' in direct, 'No viewer frame; diagnostic cannot proceed'
-  result['controls']=await f.evaluate("""()=>{let clicked=[];for(const e of document.querySelectorAll('button[data-mode]')){e.click();clicked.push(e.dataset.mode)}return clicked}""")
-  await sample('iframe-controls',False)
-  for name,action in [('iframe-reload',lambda:q.reload(wait_until='domcontentloaded',timeout=60000))]:
-   try:await action();await sample(name)
-   except Exception as e:result['cases'].append({'case':name,'navigationError':str(e)})
-  # Independent page preserves direct comparison even if reload stalls.
-  await q.close();q=await c.new_page();q.on('pageerror',lambda e:result['errors'].append(str(e)))
-  await q.goto(direct,wait_until='domcontentloaded',timeout=60000);await sample('direct')
+    assert f, 'No live viewer frame'
+    await f.wait_for_function(READY,timeout=300000)
+    entry['ready']=True
+   except Exception as e:entry['readinessError']=str(e)
+   entry['frames']=[]
+   for fr in q.frames:
+    try:entry['frames'].append(await fr.evaluate('({url:location.href,calls:window.__observerAudit||[],inspect:window.assemblyInspect?.(),loadingHidden:document.getElementById("loading")?.hidden})'))
+    except Exception as e:entry['frames'].append({'url':fr.url,'snapshotError':str(e)})
+   save()
+   assert entry['ready'],entry.get('readinessError')
+   return f
+  async def tabs(f,name):
+   values=await f.locator('button[data-mode]').evaluate_all('(es)=>es.map(e=>e.dataset.mode)')
+   for value in values:
+    await f.locator(f'button[data-mode="{value}"]').evaluate('(e)=>e.click()');await q.wait_for_timeout(100)
+   result.setdefault('tabs',{})[name]=values;await sample(name)
+  async def remount(name):
+   await q.evaluate('''()=>{const old=document.getElementById('watch-viewer'),src=old.src;old.remove();let f=document.createElement('iframe');f.id='watch-viewer';f.style='width:100vw;height:100vh;border:0';f.src=src;document.body.append(f)}''');await sample(name)
   try:
-   await q.goto('about:blank',wait_until='domcontentloaded',timeout=60000);await q.go_back(wait_until='domcontentloaded',timeout=60000);await sample('direct-back')
-  except Exception as e:result['cases'].append({'case':'direct-back','navigationError':str(e)})
-  try:await q.reload(wait_until='domcontentloaded',timeout=60000);await sample('direct-reload')
-  except Exception as e:result['cases'].append({'case':'direct-reload','navigationError':str(e)})
-  await b.close()
- (OUT/'result.json').write_text(json.dumps(result,indent=2));print(json.dumps({'errors':result['errors'],'cases':[(x['case'],sum(len(f['calls'])for f in x.get('frames',[])))for x in result['cases']]}))
+   await q.goto(URL,wait_until='domcontentloaded',timeout=60000);f=await sample('native-interactive');direct=f.url
+   await tabs(f,'native-tabs');await remount('native-remount-1');await remount('native-remount-2')
+   wrapper=URL+'__observer-wrapper.html'
+   await q.route(wrapper,lambda route:route.fulfill(content_type='text/html',body='<!doctype html><meta charset="utf-8"><title>Private same-origin wrapper QA</title><style>html,body{margin:0}iframe{width:100vw;height:100vh;border:0}</style><iframe id="watch-viewer" src='+json.dumps(direct)+'></iframe>'))
+   await q.goto(wrapper,wait_until='domcontentloaded',timeout=60000);f=await sample('wrapper-interactive');await tabs(f,'wrapper-tabs');await remount('wrapper-remount-1');await remount('wrapper-remount-2')
+   result['completed']=True
+  except Exception as e:result['failure']=str(e)
+  finally:save();await b.close()
+ print(json.dumps({'completed':result['completed'],'cases':[(x['case'],x['ready'])for x in result['cases']],'errors':result['errors'],'failure':result.get('failure')}))
+ assert result['completed'] and not result['errors'],'Diagnostic incomplete or page error; inspect exact report'
 asyncio.run(main())
