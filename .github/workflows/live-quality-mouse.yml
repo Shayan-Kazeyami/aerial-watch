@@ -1,0 +1,35 @@
+name: Isolated quality trusted mouse triage
+on:
+  push:
+    branches: ['qa/live-quality-mouse-20261108']
+permissions:
+  contents: read
+jobs:
+  exports:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [after_studio]
+    env:
+      CASE: ${{ matrix.case }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.64.1
+      - run: python -m playwright install --with-deps chromium
+      - run: timeout 15m python qa/final-interaction/quality-mouse-triage.py
+      - name: Summarize result and verify artifact exists
+        if: always()
+        run: |
+          test -f quality-mouse-output/after_studio.json
+          python -c "import json; x=json.load(open('quality-mouse-output/after_studio.json')); print(json.dumps({k:x.get(k) for k in ('case','checks','errors','setup_error')}))"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-mouse-${{ matrix.case }}
+          path: quality-mouse-output
+          if-no-files-found: error
