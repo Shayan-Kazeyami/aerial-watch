@@ -10,10 +10,10 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - run: python -m pip install numpy playwright
+      - run: python -m pip install numpy scipy triangle shapely playwright
       - run: python -m playwright install --with-deps chromium
       - name: Regenerate bounded private candidate
-        run: python strap-qa/regenerate.py preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db48668510c8/leather-assets/r14 strap-output/generated
+        run: python strap-qa/regenerate-shell.py preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db48668510c8/leather-assets/r14 strap-output/generated
       - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
       - run: python strap-qa/qa.py
       - uses: actions/upload-artifact@v4
@@ -23,5 +23,5 @@ jobs:
           path: |
             strap-output/*.png
             strap-output/*.json
-            strap-output/generated/*.json
-            strap-output/generated/round-cap-candidate
+            strap-density-study/shell/loft-v1/*.json
+            strap-density-study/shell/loft-v1/round-cap-candidate
