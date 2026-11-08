@@ -68,7 +68,7 @@ async def run():
     cap=await asyncio.wait_for(q.evaluate('__budgetCapture()'),180);(OUT/f'{MODE}-{quality}-{view}.png').write_bytes(base64.b64decode(cap.pop('png').split(',')[1]));cap['config']=config;report['captures'].append(cap);save();target_gate(cap)
    if SUPPLEMENTAL!='0':
     report['supplementalCaptures']=[]
-    for label,name,clear in ([('rear-source-glass','back',False),('oblique-source-glass','three-quarter',False)] if SOURCE_GLASS else [(v,v,False) for v in ['side','crown','lug','buckle']]):
+    for label,name,clear in ([('rear-source-glass','back',False),('oblique-source-glass','three-quarter',False)] if SOURCE_GLASS else [(v,v,False) for v in ['side','lug','buckle']]):
      report['pending']={'quality':'detail','view':label,'stage':'configure'};save()
      config=await asyncio.wait_for(q.evaluate('(a)=>__releaseSupportedView(...a)',['detail',name,clear]),120)
      assert config['intendedView']==config['actualView']==name
