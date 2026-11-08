@@ -4,11 +4,12 @@ ROOT='preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db4
 OUT=pathlib.Path('integration-output');OUT.mkdir(exist_ok=True)
 READY='window.assemblyInspect && !assemblyInspect().loading && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden'
 async def run():
- report={'errors':[],'states':[]};page=None
+ report={'errors':[],'console':[],'states':[]};page=None
  async with async_playwright() as p:
   b=await p.chromium.launch(headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   async def open_mode(mode):
-   q=await b.new_page(viewport={'width':1000,'height':800},device_scale_factor=1);q.on('pageerror',lambda e:report['errors'].append({'mode':mode,'error':str(e)}));await q.goto('http://127.0.0.1:8765/'+ROOT+'/atelier-preview.html?caseStudy='+mode+'&quality=low',wait_until='domcontentloaded');await q.wait_for_function(READY,timeout=300000);return q
+   nonlocal page
+   q=await b.new_page(viewport={'width':1000,'height':800},device_scale_factor=1);page=q;q.on('console',lambda m: report['console'].append({'mode':mode,'type':m.type,'text':m.text}) if m.type in ['warning','error'] else None);q.on('pageerror',lambda e:report['errors'].append({'mode':mode,'error':str(e)}));await q.goto('http://127.0.0.1:8765/'+ROOT+'/atelier-preview.html?caseStudy='+mode+'&quality=low',wait_until='domcontentloaded');await q.wait_for_function('('+READY+') || (window.assemblyInspect && assemblyInspect().failed)',timeout=300000);snapshot=await q.evaluate('assemblyInspect()');assert not snapshot['failed'],snapshot;return q
   try:
    page=await open_mode('hybrid-study');report['initial']=await page.evaluate('assemblyInspect()');a=report['initial']['hybridCase'];assert a['active'] and a['ownsGeometry'] and a['triangles']==501830 and a['glbSHA256']=='15c26797577ca7643247f1e4fa05d9f789d75f58a9c6d84fb7ec0727dd685be2';assert not report['initial']['parametricCase']['enabled']
    report['controls']=await page.evaluate('__hybridControls()');assert report['controls']['sameGeometry'] and report['controls']['hybrid']['active']

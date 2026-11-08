@@ -1,7 +1,7 @@
 export const HYBRID_CASE_DATA = Object.freeze({
   "revision": "hybrid-source-cap015-v7-private",
   "acceptance": "pending-visual-verification",
-  "url": "case-assets/hybrid-field-v7.glb",
+  "url": "hybrid-case-assets/hybrid-field-v7.glb",
   "glbSHA256": "15c26797577ca7643247f1e4fa05d9f789d75f58a9c6d84fb7ec0727dd685be2",
   "capsRadiusMM": 0.15,
   "fields": {
