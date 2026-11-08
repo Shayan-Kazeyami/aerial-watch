@@ -61,7 +61,7 @@ window.__releaseQualityStableMaps=()=>{
 };
 // Supplemental coverage uses existing named views and the supported inspection event.
 window.__releaseSupportedView=(mode,name,transparentBackplate=false)=>{
- if(!['side','crown','lug','buckle'].includes(name)||!document.querySelector(`[data-view="${name}"]`))throw Error('Unsupported supplemental view '+name);
+ if(!['face'].includes(name)||!document.querySelector(`[data-view="${name}"]`))throw Error('Unsupported supplemental view '+name);
  budgetPose=null;__strapWhole();camera.up.set(0,1,0);camera.fov=32;camera.zoom=1;
  const stage=$('stage');stage.style.width='800px';stage.style.height='600px';stage.style.minHeight='600px';stage.style.maxHeight='none';
  stopTour();interiorView=false;isolated=null;$('movement-only').checked=false;visibility();
