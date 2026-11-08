@@ -53,6 +53,7 @@ async def main():
     host=await outer.content_frame();assert host
    await host.wait_for_selector('#watch-viewer',timeout=90000)
    assert urlparse(host.url).scheme=='https' and urlparse(host.url).netloc=='shayan-kazeyami.github.io' and urlparse(host.url).path=='/aerial-watch/'
+   await host.wait_for_function("rid=>document.getElementById('watch-viewer')?.getAttribute('src')?.includes(rid)",arg=rid,timeout=90000)
    r['homepageURL']=host.url;r['iframeEntry']=await host.locator('#watch-viewer').get_attribute('src');save()
    q=await (await host.query_selector('#watch-viewer')).content_frame();assert q
    await q.wait_for_function('window.assemblyInspect && !assemblyInspect().loading && !assemblyInspect().failed && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden',timeout=300000)
