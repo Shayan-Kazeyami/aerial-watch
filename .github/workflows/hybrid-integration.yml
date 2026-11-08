@@ -13,6 +13,7 @@ jobs:
       - run: python -m pip install playwright numpy scipy
       - run: python -m playwright install --with-deps chromium
       - run: |
+          set -euo pipefail
           mkdir -p metal-recovery/cap-study integration-output
           ln -s ../preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44 metal-recovery/source
           node metal-recovery/decode.mjs

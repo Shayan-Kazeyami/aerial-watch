@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {createHash}from'node:crypto';import {register}from'node:module';
 import {loadHybridCaseDelivery}from'./assembly-hybrid-delivery.js';import{installHybridCase}from'./assembly-hybrid-case.js';import{HYBRID_CASE_DATA as data}from'./assembly-hybrid-case-data.compressed.js';
-register('../source/scripts/three-module-map.mjs',import.meta.url);
+register('./three-module-map.mjs',import.meta.url);
 const {GLTFLoader}=await import('../source/vendor/loaders/GLTFLoader.js');const {MeshoptDecoder}=await import('../source/vendor/meshopt/meshopt_decoder.mjs');
 const b=fs.readFileSync(new URL('../cap-study/hybrid-field-v7.meshopt.glb.gz',import.meta.url)),buffer=()=>b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);
 const options=(loader=new GLTFLoader())=>({loader,baseURL:'http://localhost/',timeoutMs:10000,fetcher:async()=>({ok:true,headers:new Map(),arrayBuffer:async()=>buffer()})});const config={decoderFactory:async()=>MeshoptDecoder};
