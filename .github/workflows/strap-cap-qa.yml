@@ -1,4 +1,4 @@
-name: UV15 phase-aligned sealed native four-end gate
+name: UV15 deployed Pages four-end verification
 on:
   push:
     branches: ['qa/strap-cap-20261108']
@@ -69,12 +69,12 @@ jobs:
       - run: python -m pip install playwright==1.64.1
       - run: python -m playwright install --with-deps chromium
       - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
-      - run: python strap-density-study/integration-qa/qa.py
+      - run: python strap-density-study/integration-qa/qa-live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: uv15-native-${{ matrix.end }}
-          path: strap-integration-output
+          name: uv15-live-${{ matrix.end }}
+          path: strap-live-output
   stage:
     needs: [generate, inspect]
     runs-on: ubuntu-24.04
