@@ -1,0 +1,14 @@
+import fs from 'node:fs/promises';import path from 'node:path';import {createHash}from'node:crypto';
+import {stageSharedRelease}from'./release-tools/scripts/stage-shared-release.mjs';
+import {readReleaseOwners}from'./release-tools/scripts/read-release-owners.mjs';
+const owner='preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db48668510c8';
+await readReleaseOwners({ownerRoot:owner});
+const old=JSON.parse(await fs.readFile(owner+'/deployment-manifest.json')),buffers=new Map();
+for(const f of old.localFiles)if(!['deployment-manifest.json','release-receipt.json'].includes(f.path))buffers.set(f.path,await fs.readFile('hybrid-release-work/'+f.path));
+for(const f of ['assembly-hybrid-case.js','assembly-hybrid-case-data.js','assembly-hybrid-delivery.js','hybrid-case-assets/hybrid-field-v7.meshopt.glb.gz'])buffers.set(f,await fs.readFile('hybrid-release-work/'+f));
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const files=[...buffers].filter(([p])=>!p.includes('/')&&/\.(js|css|html)$/.test(p)).sort(([a],[b])=>a<b?-1:a>b?1:0).map(([p,b])=>({path:p,bytes:b.length,sha256:sha(b)}));
+const revision={schemaVersion:1,algorithm:'SHA-256',scope:'Build-transformed local first-party viewer JS, CSS and HTML; shared asset/vendor identities are in schema-2 deployment manifest.',canonicalization:'SHA-256 of UTF-8 JSON.stringify(files), ordered lexicographically by path.',digest:sha(JSON.stringify(files)),files};
+buffers.set('quality-study/viewer-revision.json',Buffer.from(JSON.stringify(revision,null,2)+'\n'));buffers.set('quality-study/viewer-revision.js',Buffer.from('export default '+JSON.stringify(revision)+';\n'));
+const meta=JSON.parse(buffers.get('shared-release-build.json'));meta.predecessorReleaseId=path.basename(owner);meta.hybridIntegration={sourceRawSHA256:'15c26797577ca7643247f1e4fa05d9f789d75f58a9c6d84fb7ec0727dd685be2',verifiedCI:42439071676,default:true};buffers.set('shared-release-build.json',Buffer.from(JSON.stringify(meta,null,2)+'\n'));
+const result=await stageSharedRelease({localBuffers:buffers,references:old.references,ownerRoot:owner,outputRoot:'preview-b'});await readReleaseOwners({ownerRoot:result.releasePath});await fs.writeFile('integration-output/sealed-release.json',JSON.stringify({...result,rollbackMain:'c86b4c2d7e0d1ef1868af34d550de1427a624e75',rollbackRelease:path.basename(owner)},null,2));console.log(result);

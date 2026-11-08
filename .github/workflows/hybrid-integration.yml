@@ -1,9 +1,9 @@
-name: Hybrid CASE integrated runtime
+name: Hybrid CASE sealed release gate
 on:
   push:
     branches: ['qa/hybrid-integration-20261108']
 permissions:
-  contents: read
+  contents: write
 jobs:
   inspect:
     runs-on: ubuntu-latest
@@ -23,9 +23,18 @@ jobs:
           npm ci --prefix metal-recovery --ignore-scripts --no-audit --no-fund
           node metal-recovery/pack-hybrid-v7.mjs
           node --test metal-recovery/integration-study/*.test.mjs | tee integration-output/unit-tests.txt
-          python metal-recovery/integration-study/install-ci.py
+          python metal-recovery/integration-study/prepare-release.py
+          node metal-recovery/integration-study/build-release.mjs
       - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
-      - run: python metal-recovery/integration-study/qa-runtime.py
+      - run: python metal-recovery/integration-study/qa-release.py
+      - name: Publish verified sealed candidate on QA branch only
+        run: |
+          set -euo pipefail
+          RELEASE=$(python -c "import json;print(json.load(open('integration-output/sealed-release.json'))['releasePath'])")
+          git add "$RELEASE"
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Stage verified immutable hybrid CASE release [skip ci]'
+          git push origin HEAD:qa/hybrid-integration-20261108
+          git rev-parse HEAD > integration-output/staged-head.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
