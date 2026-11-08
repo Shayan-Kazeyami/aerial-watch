@@ -59,3 +59,27 @@ window.__releaseQualityStableMaps=()=>{
  for(const r of releaseReferences)r.maps=Object.fromEntries(['map','normalMap','roughnessMap'].map(k=>[k,r.material[k]]));
  return {before,stable:__releaseInvariant(),scope:'After all quality changes and resize checks; progressive normal-map upgrades may replace texture objects, never geometry/materials. Subsequent controls must preserve these stable map objects.'};
 };
+// Supplemental coverage uses existing named views and the supported inspection event.
+window.__releaseSupportedView=(mode,name,transparentBackplate=false)=>{
+ if(!['back','three-quarter'].includes(name)||!document.querySelector(`[data-view="${name}"]`))throw Error('Unsupported supplemental view '+name);
+ budgetPose=null;__strapWhole();camera.up.set(0,1,0);camera.fov=32;camera.zoom=1;
+ const stage=$('stage');stage.style.width='800px';stage.style.height='600px';stage.style.minHeight='600px';stage.style.maxHeight='none';
+ stopTour();interiorView=false;isolated=null;$('movement-only').checked=false;visibility();
+ document.dispatchEvent(new CustomEvent('atelier:inspection',{detail:{key:'transparentBackplate',value:transparentBackplate}}));
+ applyClockPose(clock.seek(0));renderingQuality(mode);resize();view(name,false);
+ budgetPose={position:camera.position.toArray(),target:controls.target.toArray(),fov:camera.fov};budgetQaApply();
+ const direction=camera.position.clone().sub(controls.target).normalize().toArray();
+ const rearCrystal=exterior.find(m=>m.userData.assemblyId==='REAR-CRYSTAL');
+ const optical=m=>m?{name:m.name,visible:m.visible,material:m.material.name,transmission:m.material.transmission??null,opacity:m.material.opacity,transparent:m.material.transparent}:null;
+ return {intendedView:name,actualView:currentView,quality,transparentBackplateRequested:transparentBackplate,inspectionDisplay:{...inspectionDisplay},stage:stage.getBoundingClientRect().toJSON(),camera:{position:camera.position.toArray(),target:controls.target.toArray(),up:camera.up.toArray(),fov:camera.fov,direction},backplate:optical(backplate?.mesh),rearCrystal:optical(rearCrystal),lightingShot:lighting.shot,source:'Existing view(name,false) and atelier:inspection event; no invented view ID.'};
+};
+window.__releaseRestoreBackplate=()=>document.dispatchEvent(new CustomEvent('atelier:inspection',{detail:{key:'transparentBackplate',value:false}}));
+// QA-only startup drain after ordinary default-entry proof, at explicitly selected Efficient.
+window.__releaseDrain=()=>{composer.render();renderer.getContext().finish();return {quality,viewport:{width:renderer.domElement.width,height:renderer.domElement.height},transmission:backendIdentity.transmission,scope:'Software queue drain only; not a speed/FPS measurement.'};};
+// Optional scoped rear inspection, unused by front/live capture gates.
+window.__releaseRearHideStrap=(enabled=true)=>{
+ if(currentView!=='back')throw Error('Hide strap diagnostic requires supported Reverse view first');
+ document.dispatchEvent(new CustomEvent('atelier:inspection',{detail:{key:'hideStrap',value:enabled}}));
+ if(inspectionDisplay.hideStrap!==enabled)throw Error('Supported rear hide-strap control did not apply');
+ return {view:currentView,inspectionDisplay:{...inspectionDisplay},strap:strapInspectionSnapshot(model),source:'Supported atelier:inspection hideStrap event; no manual mesh visibility override.'};
+};
