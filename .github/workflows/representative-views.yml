@@ -1,0 +1,32 @@
+name: Representative native views
+on:
+  push:
+    branches: ['qa/representative-views-20261108']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.64.1
+      - run: python -m playwright install --with-deps chromium
+      - name: Prepare immutable receipt
+        run: |
+          mkdir -p transmission-output
+          echo '{"releaseId":"a8c129a21c1ba3529f372d00bf94e0edcadc295931cae5dee0770f5c92c31473","releasePath":"preview-b/releases/a8c129a21c1ba3529f372d00bf94e0edcadc295931cae5dee0770f5c92c31473"}' > transmission-output/sealed-release.json
+          test -f preview-b/releases/a8c129a21c1ba3529f372d00bf94e0edcadc295931cae5dee0770f5c92c31473/deployment-manifest.json
+      - run: python -m http.server 8765 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
+      - run: timeout 20m python qa-representative/qa.py
+        env:
+          RELEASE_QA_MODE: sealed
+          RELEASE_QA_SUPPLEMENTAL: only
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: representative-native-views
+          path: transmission-qa-output
