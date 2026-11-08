@@ -1,0 +1,36 @@
+{
+  "assembly-review.js": [
+    {
+      "old": "  if(Math.abs(renderer.getPixelRatio()-resolution.pixelRatio)>.00001){renderer.setPixelRatio(resolution.pixelRatio);composer.setPixelRatio(resolution.pixelRatio);}\n",
+      "new": "  renderer.aerialTransmissionRequest={scale:resolution.transmissionScale,maxPixels:resolution.maxTransmissionPixels};\n  if(Math.abs(renderer.getPixelRatio()-resolution.pixelRatio)>.00001){renderer.setPixelRatio(resolution.pixelRatio);composer.setPixelRatio(resolution.pixelRatio);}\n"
+    },
+    {
+      "old": "    viewport:{width:renderer.domElement.clientWidth,height:renderer.domElement.clientHeight,pixelRatio:renderer.getPixelRatio(),drawingBufferWidth:renderer.domElement.width,drawingBufferHeight:renderer.domElement.height,msaaSamples:composer.renderTarget1.samples,transmissionScale:backendIdentity.transmission?.effectiveScale??renderer.transmissionResolutionScale,requestedTransmissionScale:renderer.transmissionResolutionScale},\n",
+      "new": "    viewport:{width:renderer.domElement.clientWidth,height:renderer.domElement.clientHeight,pixelRatio:renderer.getPixelRatio(),drawingBufferWidth:renderer.domElement.width,drawingBufferHeight:renderer.domElement.height,msaaSamples:composer.renderTarget1.samples,transmissionScale:backendIdentity.transmission?.effectiveScale??renderer.transmissionResolutionScale,requestedTransmissionScale:backendIdentity.transmission?.requestedScale??renderer.transmissionResolutionScale},\n"
+    }
+  ],
+  "assembly-render-pipeline.js": [
+    {
+      "old": "{overscanPlan,withExpandedProjection}",
+      "new": "{overscanPlan,withExpandedProjection,resolveTransmissionResolution}"
+    },
+    {
+      "old": "    plan=overscanPlan({width,height,pixelRatio:ratio,margin,maxTextureSize:renderer.capabilities.maxTextureSize,transmissionScale:renderer.transmissionResolutionScale??1,budgetBytes:Math.max(384*1024*1024,Math.floor(width*ratio)*Math.floor(height*ratio)*192+128*1024*1024)});identity.overscan={...plan,budgetPolicy:'Existing quality-profile base allocation plus at most 128 MiB extra above 384 MiB; conservative estimate, not measured GPU memory.'};\n    identity.transmission={requestedScale:renderer.transmissionResolutionScale,effectiveScale:renderer.transmissionResolutionScale,scope:gpuRender?'dedicated opaque-only mipmapped node transmission target':'independent WebGL transmission target'};\n",
+      "new": "    const transmissionRequest=renderer.aerialTransmissionRequest||{scale:renderer.transmissionResolutionScale??1,maxPixels:Infinity};\n    plan=overscanPlan({width,height,pixelRatio:ratio,margin,maxTextureSize:renderer.capabilities.maxTextureSize,transmissionScale:transmissionRequest.scale,budgetBytes:Math.max(384*1024*1024,Math.floor(width*ratio)*Math.floor(height*ratio)*192+128*1024*1024)});identity.overscan={...plan,budgetPolicy:'Existing quality-profile base allocation plus at most 128 MiB extra above 384 MiB; conservative estimate, not measured GPU memory.'};\n    const transmission=resolveTransmissionResolution({renderWidth:plan.renderWidth,renderHeight:plan.renderHeight,requestedScale:transmissionRequest.scale,maxPixels:transmissionRequest.maxPixels,maxTextureSize:renderer.capabilities.maxTextureSize});\n    renderer.transmissionResolutionScale=transmission.effectiveScale;\n    identity.transmission={...transmission,revision:'expanded-target-budget-v1',scope:gpuRender?'dedicated opaque-only mipmapped node transmission target':'independent WebGL transmission target'};\n"
+    }
+  ],
+  "assembly-resolution.js": [
+    {
+      "old": "    requestedTransmissionScale:profile.transmissionScale,transmissionLimited:transmissionScale<profile.transmissionScale,\n",
+      "new": "    maxTransmissionPixels:profile.maxTransmissionPixels||profile.maxPixels,\n    requestedTransmissionScale:profile.transmissionScale,transmissionLimited:transmissionScale<profile.transmissionScale,\n"
+    },
+    {
+      "append": "\n"
+    }
+  ],
+  "assembly-overscan.js": [
+    {
+      "append": "\n// Clamp the glass target against the actual expanded scene dimensions, not\n// the pre-overscan canvas. This never reduces the main scene resolution.\nexport function resolveTransmissionResolution({renderWidth,renderHeight,requestedScale=1,maxPixels=Infinity,maxTextureSize=Infinity}={}) {\n  if(!(renderWidth>0&&renderHeight>0&&Number.isFinite(renderWidth)&&Number.isFinite(renderHeight)))throw new TypeError('Positive finite transmission dimensions required.');\n  if(!(requestedScale>0&&Number.isFinite(requestedScale)))throw new TypeError('Positive finite transmission scale required.');\n  if(!(maxPixels>=1&&maxTextureSize>=1))throw new TypeError('Positive transmission budgets required.');\n  const scale=Math.min(requestedScale,Math.sqrt(maxPixels/(renderWidth*renderHeight)),maxPixels/Math.max(renderWidth,renderHeight),maxTextureSize/Math.max(renderWidth,renderHeight));\n  const width=Math.max(1,Math.floor(renderWidth*scale)),height=Math.max(1,Math.floor(renderHeight*scale));\n  return {requestedScale,effectiveScale:scale,width,height,pixels:width*height,maxPixels,limited:scale<requestedScale};\n}\n"
+    }
+  ]
+}
