@@ -16,13 +16,13 @@ async def run():
   try:
    await q.goto('http://127.0.0.1:8765/'+ROOT+'/atelier-preview.html?quality=efficient&leather=craft14',wait_until='domcontentloaded');await q.wait_for_function('('+READY+') || (window.assemblyInspect && assemblyInspect().failed)',timeout=300000)
    report['setup']=await q.evaluate('__strapQaSetup()');i=report['setup']['inspect'];assert not i['failed'];assert i['hybridCase']['active'] and i['hybridCase']['triangles']==501830;assert sum(x['triangles']for x in report['setup']['bodies'])==EXPECTED['bodyTriangles'],report['setup']['bodies'];assert report['setup']['leather']['ready'];proof=report['setup']['leather']['diagnostics']['geometryVerification'];assert proof['status']=='verified' and proof['actualSha256']==EXPECTED['sha256'] and proof['actualBytes']==EXPECTED['bytes'],proof;report['browser']=b.version
-   report['controls']=await q.evaluate('__strapControls()');assert report['controls']['sameGeometry'] and report['controls']['sameMaterials'];assert report['controls']['hybrid']['active']
    await q.evaluate('__strapWhole()');whole=await q.evaluate('__strapQaCapture()');assert whole['effectiveQuality']=='efficient';(OUT/f'{END}-whole.png').write_bytes(base64.b64decode(whole.pop('png').split(',')[1]));report['whole']=whole
    prefix=END.replace('-','/')
    await q.evaluate('(v)=>{__strapQaView(v,"native");__strapQaQuality("balanced")}',prefix+'/context')
    for kind in ['context','close','body','neck']:
     if kind=='neck':await q.evaluate('(p)=>{__strapQaLit(...p.split("/"));__strapQaRake(...p.split("/"));}',prefix)
     state=await q.evaluate('(v)=>__strapQaView(v,"native")',prefix+'/'+kind);report['states'].append(state);cap=await q.evaluate('__strapQaCapture()');assert cap['effectiveQuality']=='balanced';(OUT/f'{END}-{kind}.png').write_bytes(base64.b64decode(cap.pop('png').split(',')[1]));(OUT/f'{END}-{kind}.json').write_text(json.dumps(cap,indent=2))
+   report['controls']=await q.evaluate('__strapControls()');assert report['controls']['sameGeometry'] and report['controls']['sameMaterials'];assert report['controls']['hybrid']['active']
    report['final']=await q.evaluate('assemblyInspect()');assert report['final']['hybridCase']['active'];assert not report['errors'];report['passed']=True
   finally:
    (OUT/f'{END}-report.json').write_text(json.dumps(report,indent=2));await b.close()
