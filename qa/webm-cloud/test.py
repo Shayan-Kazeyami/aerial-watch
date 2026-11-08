@@ -11,7 +11,7 @@ async def main():
   try:
    await page.goto(r['target']+'?quality=efficient&leather=craft14',wait_until='domcontentloaded',timeout=60000);await page.wait_for_function("document.querySelector('#watch-viewer')?.contentWindow?.location.href.includes('atelier-preview.html')",timeout=60000);q=await (await page.query_selector('#watch-viewer')).content_frame();await q.wait_for_function('window.assemblyInspect && !assemblyInspect().loading && !assemblyInspect().failed && assemblyInspect().presentation.interactive && document.getElementById("loading").hidden',timeout=300000);r['requests']=requests;assert any(r['expectedRelease'] in x for x in requests),requests
    r['proof']=await q.evaluate('__proof()');proof=r['proof'];assert proof['leather']['geometryVerification']['actualSha256']=='8da7de21efcceacadcf21e0fa9cd866b678ecc8d49d0fdbd947d485004e2e5c7' and proof['leather']['geometryVerification']['actualBytes']==8579970 and proof['hybrid']['active'] and proof['hybrid']['triangles']==501830
-   r['browser']=b.version;r['before']=await q.evaluate('assemblyInspect()');await q.locator('[data-mode=capture]').first.click(timeout=90000);await q.wait_for_timeout(4000);await page.screenshot(path=str(out/'before.png'))
+   r['browser']=b.version;r['before']=await q.evaluate('assemblyInspect()');await q.locator('[data-mode=capture]').first.click(timeout=90000);await q.wait_for_timeout(4000)
    r['events'].append({'event':'click','time':time.time()});save()
    try:
     async with page.expect_download(timeout=120000) as d: await q.locator('[data-proxy=record-scene]').click(timeout=90000)
@@ -20,7 +20,7 @@ async def main():
     p2=subprocess.run(['ffmpeg','-v','error','-i',str(path),'-f','null','-'],capture_output=True,text=True,timeout=120);r['decode']={'returncode':p2.returncode,'err':p2.stderr}
     p3=subprocess.run(['ffmpeg','-y','-v','error','-i',str(path),'-vf','select=eq(n\\,0)+eq(n\\,10)+eq(n\\,30)','-vsync','0',str(out/'frame-%02d.png')],capture_output=True,text=True,timeout=120);r['frames']={'returncode':p3.returncode,'err':p3.stderr,'files':[x.name for x in out.glob('frame-*.png')]};r['status']='downloaded' if p1.returncode==0 and p2.returncode==0 else 'decode-failed'
    except Exception as e:r['status']='no-download';r['downloadException']=repr(e)
-   r['after']=await q.evaluate('assemblyInspect()');r['viewerStatus']=await q.locator('#viewer-status').text_content();await page.screenshot(path=str(out/'after.png'));save()
+   r['after']=await q.evaluate('assemblyInspect()');r['viewerStatus']=await q.locator('#viewer-status').text_content();save()
   except Exception as e:r['status']='failed';r['exception']=repr(e);r['traceback']=traceback.format_exc()
   finally:save();await c.close();await b.close()
 asyncio.run(main())
