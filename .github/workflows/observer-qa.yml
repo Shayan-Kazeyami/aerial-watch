@@ -1,0 +1,25 @@
+name: Bounded live iframe observer diagnostics
+on:
+  push:
+    branches: ['qa/observer-20261108']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.64.1
+      - run: python -m playwright install --with-deps chromium
+      - run: python strap-density-study/observer-audit/audit.py
+        env:
+          AUDIT_URL: https://shayan-kazeyami.github.io/aerial-watch/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: observer-live-diagnostic
+          path: strap-density-study/observer-audit/result.json
