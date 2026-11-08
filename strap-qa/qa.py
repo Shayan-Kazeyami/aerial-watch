@@ -11,7 +11,8 @@ async def run():
     await page.evaluate("()=>{__strapQaView('upper/right/close','source');__strapQaQuality('balanced');}")
     await page.evaluate('(enabled)=>__strapQaNormalMap(enabled)',normal)
     prefix=os.environ['STRAP_QA_END'].replace('-','/')
-    for view in [prefix+'/'+v for v in ['context','close','body','neck']]:
+    await page.evaluate('(p)=>__strapQaLit(...p.split("/"))',prefix)
+    for view in [prefix+'/'+v for v in ['context','close','neck']]:
      if view.endswith('/neck'):await page.evaluate('(p)=>__strapQaRake(...p.split("/"))',prefix)
      for variant in ['source','candidate']:
       print('CAPTURE',view,variant,'normal',normal,flush=True);label=view.replace('/','-');state=await page.evaluate('(a)=>__strapQaView(...a)',[view,variant]);states.append(state);(OUT/'states.json').write_text(json.dumps(states,indent=2));capture=await page.evaluate('()=>__strapQaCapture()');(OUT/f'{label}-{variant}.png').write_bytes(base64.b64decode(capture.pop('png').split(',')[1]));(OUT/f'{label}-{variant}-capture.json').write_text(json.dumps(capture,indent=2));print('SAVED',view,variant,flush=True)

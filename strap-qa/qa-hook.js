@@ -24,3 +24,5 @@ const strapQaNormalMaps=new Map();window.__strapQaNormalMap=(enabled)=>{for(cons
 window.__strapQaQuality=(name)=>{renderingQuality(name);return quality;};
 
 let strapRaking=null;window.__strapQaRake=(half,side)=>{if(!strapRaking){strapRaking=new THREE.DirectionalLight(0xffffff,3);scene.add(strapRaking,strapRaking.target);}const sx=side==='left'?-1:1,sy=half==='lower'?-1:1;strapRaking.position.set(sx*12,sy*20,-2);strapRaking.target.position.set(sx*9.94,sy*22.4,-2.5);};
+
+window.__strapQaLit=(half,side)=>{const sx=side==='left'?-1:1,sy=half==='lower'?-1:1;const key=new THREE.DirectionalLight(0xffffff,8);key.position.set(sx*20,sy*17,5);key.target.position.set(sx*9.94,sy*22.4,-1);scene.add(key,key.target);scene.add(new THREE.AmbientLight(0xffffff,2));};
