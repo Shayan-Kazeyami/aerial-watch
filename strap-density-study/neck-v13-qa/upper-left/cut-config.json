@@ -1,0 +1,8 @@
+{
+  "xCut": 8.5,
+  "yCut": -3.5,
+  "source": "upper-left own source canonical X reflection",
+  "scopeExpansionXmm": 0.9,
+  "scopeExpansionYmm": 0.5,
+  "reason": "stable degree2 interface; neck weighted turnP95 4.64deg vs57.7deg at old cut"
+}

@@ -1,6 +1,6 @@
 import asyncio,json,pathlib,base64,os
 from playwright.async_api import async_playwright
-ROOT=pathlib.Path('preview-b/releases/949a4881d119910ca28bdf5ef4d67dfdebc59df579e02a6de946db48668510c8');OUT=pathlib.Path('strap-output');OUT.mkdir(exist_ok=True)
+ROOT=pathlib.Path('preview-b/releases/43e516fa6ed3a4be7e8b308bc35c1955dc811b710042e38cdbaeaf868b7c8932');OUT=pathlib.Path('strap-output');OUT.mkdir(exist_ok=True)
 s=(ROOT/'assembly-review.js').read_text();assert 'composer.render();'in s;s=s.replace('composer.render();','strapQaApply();composer.render();');s+='\n'+pathlib.Path('strap-qa/qa-hook.js').read_text();(ROOT/'assembly-review.js').write_text(s)
 async def run():
  async with async_playwright() as p:
