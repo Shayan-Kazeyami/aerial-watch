@@ -35,7 +35,7 @@ if(new URLSearchParams(location.search).get('leather')==='compat12'){
  window.addEventListener('pagehide',()=>observer.disconnect());window.addEventListener('pageshow',event=>{if(event.persisted){observer.observe(warning);measure();}});
 }
 let presentationState={enabled:true,interactive:false,phase:'preparing',message:'Preparing the selected dial and leather.',warnings:[]};
-let mode='explore', ready=false, failed=false, explodeAvailable=false, crownDragAvailable=false, explodeAmount=0, selectedBefore=false;
+let mode='explore', ready=false, failed=false, explodeAvailable=false, crownDragAvailable=false, explodeAmount=0, selectedBefore=false, selectedIdentity='';
 const tools=$('atelier-tools');
 const navigation=createAtelierNavigation();
 const inspectionControls=document.querySelector('.inspection-tools');
@@ -53,7 +53,8 @@ function syncNavigation(){
 function returnFromSelection(){
  const state=navigation.returnFromSelection();
  setMode(state.tool||state.experience,{activate:false,navigate:false});
- if(!state.tool)closeContext();
+ if(!state.tool){closeContext();$('assembly-canvas').focus();}
+ else $('close').focus();
 }
 
 let inspectionDisplay={wireframe:false,solidWireframe:false,transparent:false,transparentBackplate:false,hideStrap:false};
@@ -225,7 +226,7 @@ function sync(){syncErrorDetails();if(!$('retry').hidden&&$('inspection-controls
  if(mode==='selection')updateText('context-title',$('part-name').textContent||titles.selection);
  if(mode==='components'){updateText('atelier-count',$('search-count').textContent);const list=$('atelier-component-list'),source=$('component-list');if(list.dataset.signature!==source.innerHTML){list.innerHTML=source.innerHTML;list.querySelectorAll('button').forEach(b=>{b.removeAttribute('id');b.disabled=!ready;});list.dataset.signature=source.innerHTML;}tools.querySelectorAll('[data-scope]').forEach(b=>{b.disabled=!ready;b.setAttribute('aria-pressed',String(b.dataset.scope===$('component-scope').value));});$('atelier-search').disabled=!ready;if(document.activeElement!==$('atelier-search'))$('atelier-search').value=$('component-search').value;}
  if($('atelier-design-retry'))$('atelier-design-retry').hidden=!$('retry-proposal');if($('atelier-explosion'))$('atelier-explosion').disabled=!ready||!explodeAvailable;if($('atelier-reassemble'))$('atelier-reassemble').disabled=!ready||!explodeAvailable;if($('atelier-import'))$('atelier-import').disabled=!ready;if($('atelier-scrub'))$('atelier-scrub').disabled=!ready;
- const selected=!$('selection').hidden;const newSelection=selected&&!selectedBefore;const clearedSelection=!selected&&selectedBefore;selectedBefore=selected;if(clearedSelection&&mode==='selection'&&!$('context').hidden)returnFromSelection();if(newSelection){navigation.select();setMode('selection',{activate:false,navigate:false});}if(crownDragAvailable)updateText('atelier-crown-direct','Drag the crown up or down to turn it. Click or tap the dot to pull or push. Hold and drag to turn; these buttons also work with touch and keyboard.');
+ const selected=!$('selection').hidden,identity=selected?$('part-name').textContent:'';const newSelection=selected&&(!selectedBefore||identity!==selectedIdentity);const clearedSelection=!selected&&selectedBefore;selectedBefore=selected;selectedIdentity=identity;if(clearedSelection&&mode==='selection'&&!$('context').hidden)returnFromSelection();if(newSelection){navigation.select();setMode('selection',{activate:false,navigate:false});}if(crownDragAvailable)updateText('atelier-crown-direct','Drag the crown up or down to turn it. Click or tap the dot to pull or push. Hold and drag to turn; these buttons also work with touch and keyboard.');
 }
 document.addEventListener('click',event=>{const el=event.target.closest('button');if(!el||bridge.contains(el))return;if(el.dataset.inspection){if(ready)document.dispatchEvent(new CustomEvent('atelier:inspection',{detail:{key:el.dataset.inspection,value:!inspectionDisplay[el.dataset.inspection]}}));return;}if(el.dataset.mode){const next=el.dataset.mode;if(!$('context').contains(el))panelOpener=el;if(next===mode&&!$('context').hidden){closeContext();return;}const resume=next===navigation.snapshot().experience;setMode(next,{activate:!resume||next==='explore'});if(event.detail===0&&next!=='explore')$('close').focus();return;}if(el.hasAttribute('data-return-selection')){returnFromSelection();return;}if(el.id==='atelier-inspection-reset'){if(ready)for(const key of ['wireframe','solidWireframe','transparent','transparentBackplate','hideStrap'])if(inspectionDisplay[key])document.dispatchEvent(new CustomEvent('atelier:inspection',{detail:{key,value:false}}));return;}if(el.hasAttribute('data-reseat-crown')){reseatCrown();return;}if(el.dataset.proxy){if(['capture-scene','record-scene'].includes(el.dataset.proxy)){void captureAtFullStage(el.dataset.proxy);return;}proxy(el.dataset.proxy);if(el.dataset.proxy==='clear')$('assembly-canvas').focus();return;}if(el.dataset.camera){camera(el.dataset.camera);return;}if(el.dataset.quality){change('render-quality',el.dataset.quality);return;}if(el.dataset.scope){change('component-scope',el.dataset.scope);return;}if(el.dataset.key){const b=[...$('component-list').querySelectorAll('button')].find(x=>x.dataset.key===el.dataset.key);if(ready)b?.click();sync();if(mode!=='selection'){navigation.select();setMode('selection',{activate:false,navigate:false});}if(event.detail===0)$('close').focus();return;}if(el.id==='atelier-import')$('import-config').click();if(el.id==='atelier-reassemble')sendExplosion(0);});
 tools.addEventListener('change',e=>{if(e.target.dataset.check)change(e.target.dataset.check,e.target.checked);});
@@ -254,7 +255,7 @@ function handleAtelierExplosionState(event){
  const restoreFocus=$('context').contains(document.activeElement)||document.activeElement===$('import-config')||document.activeElement===document.body;
  // Adopt the already-restored selection before sync() observes it. Never select,
  // reseat the crown, reset the explosion, or move the imported camera here.
- selectedBefore=!$('selection').hidden;
+ selectedBefore=!$('selection').hidden;selectedIdentity=selectedBefore?$('part-name').textContent:'';
  const nextMode=resolveRestoredAtelierMode({...detail,amount:explodeAmount});
  panelOpener=document.querySelector(`.task-dock [data-mode="${nextMode}"]`)||document.querySelector('.atelier-more');
  navigation.restore({experience:Number(detail.amount)>0?'explode':detail.crownPulled||detail.view==='crown'?'time':detail.interior?'inside':'explore',tool:nextMode==='explore'?null:nextMode});

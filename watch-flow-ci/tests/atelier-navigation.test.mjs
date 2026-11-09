@@ -35,3 +35,11 @@ test('integration keeps the actual controls, utility indicator and one-click cro
  assert.match(js,/Active inspection:/);assert.match(js,/value:false/);assert.match(js,/Click or tap the dot to pull or push/);assert.doesNotMatch(js,/Double-click to pull or push/);
  assert.match(css,/\.inspection-tools\{display:grid/);assert.doesNotMatch(css,/\.inspection-tools\{position:absolute/);
 });
+
+test('selection return restores visible focus and new component identity can reopen its inspector',()=>{
+ const js=readFileSync(new URL('../atelier-preview.js',import.meta.url),'utf8');
+ assert.match(js,/if\(!state.tool\)\{closeContext\(\);\$\('assembly-canvas'\).focus\(\);\}/);
+ assert.match(js,/else \$\('close'\).focus\(\)/);
+ assert.match(js,/identity!==selectedIdentity/);
+ assert.match(js,/selectedBefore=selected;selectedIdentity=identity/);
+});
