@@ -24,7 +24,8 @@ async def main():
    for dy in [6,12,18]:await session.send('Input.dispatchTouchEvent',{'type':'touchMove','touchPoints':[{'x':x,'y':y-dy}]})
    await session.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});assert (await page.evaluate('__polishQA.state().crown'))['pulled'];record('touch visible, tap pulls, hold/drag turns');record('projected update CPU cost',await page.evaluate('__polishCost'));await page.wait_for_function("!!document.querySelector('.crown-halo polygon')",timeout=10000);await page.add_style_tag(content='.crown-halo{animation:none!important;opacity:.45!important}');await shot(page,'mobile-outline-dot.png');await page.emulate_media(reduced_motion='reduce');assert await page.locator('.crown-hotspot-dot').evaluate('(e)=>getComputedStyle(e).animationName')=='none';record('reduced motion disables animation');assert not report['errors'],report['errors'];report['passed']=True
   except Exception as e:report['passed']=False;report['failure']=repr(e);raise
-  finally:(O/'polish-report.json').write_text(json.dumps(report,indent=2));
+  finally:
+   (O/'polish-report.json').write_text(json.dumps(report,indent=2));
    try:await asyncio.wait_for(browser.close(),15)
    except asyncio.TimeoutError:pass
 asyncio.run(main())
