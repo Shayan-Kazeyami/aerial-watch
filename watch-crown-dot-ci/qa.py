@@ -1,4 +1,4 @@
-import asyncio,json,pathlib
+import asyncio,json,pathlib,base64
 from playwright.async_api import async_playwright
 O=pathlib.Path('watch-crown-dot-output');C=pathlib.Path(json.loads((O/'build.json').read_text())['releasePath']);C=C.relative_to(pathlib.Path.cwd()) if C.is_absolute() else C;B=pathlib.Path('preview-b/releases/457c5eba8f27ffecf7710adc2fb3ef10a2ac326af781f19232fad75328dc2bd4')
 HOOK=r'''
@@ -22,6 +22,8 @@ async def main():
    nonlocal browser
    if browser:await browser.close()
    browser=await p.chromium.launch(headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']);context=await browser.new_context(viewport={'width':430 if mobile else 1000,'height':850 if mobile else 800},device_scale_factor=1,is_mobile=mobile,has_touch=mobile);page=await context.new_page();page.set_default_timeout(45000);page.on('pageerror',lambda e:report['errors'].append(str(e)));await page.goto(f'http://127.0.0.1:8765/{root}/qa-atelier.html?quality=efficient',wait_until='domcontentloaded');await page.wait_for_function('window.__dotQA && assemblyInspect().presentation.interactive',timeout=240000);await page.evaluate('__dotQA.pause();__dotQA.focus()');await page.wait_for_function('!__dotQA.snapshot().moving',timeout=45000);return page,context
+  async def shot(page,name):
+   await page.evaluate('__dotQA.pause()');await page.wait_for_timeout(2000);session=await page.context.new_cdp_session(page);image=await asyncio.wait_for(session.send('Page.captureScreenshot',{'format':'png','fromSurface':False,'captureBeyondViewport':False}),timeout=45);(O/name).write_bytes(base64.b64decode(image['data']));await session.detach()
   def record(name,data=None):report['checks'].append({'check':name,'data':data});print(name,json.dumps(data),flush=True);(O/'qa-report.json').write_text(json.dumps(report,indent=2))
   try:
    for label,root in [('baseline',B),('candidate',C)]:
@@ -34,11 +36,11 @@ async def main():
     await dot.focus();await page.keyboard.press('Enter');await page.wait_for_function('!__dotQA.snapshot().crown.pulled');old=await page.evaluate('__dotQA.snapshot().crown.degrees');await page.keyboard.press('ArrowUp');await page.wait_for_function('(d)=>__dotQA.snapshot().crown.degrees<d',arg=old);record('keyboard toggle and rotation')
     rect=await dot.bounding_box();await page.mouse.move(rect['x']+22,rect['y']+22);await page.mouse.down();await page.mouse.move(rect['x']+22,rect['y']+10);await page.keyboard.press('Escape');await page.mouse.up();assert not (await page.evaluate('__dotQA.snapshot()'))['hotspot']['dragging'];record('Escape releases gesture')
     old=await page.evaluate('__dotQA.snapshot().camera');r=await page.locator('#assembly-canvas').bounding_box();await page.mouse.move(r['x']+40,r['y']+r['height']*.45);await page.mouse.down();await page.mouse.move(r['x']+110,r['y']+r['height']*.5,steps=6);await page.mouse.up();await page.wait_for_timeout(500);assert old!=await page.evaluate('__dotQA.snapshot().camera');record('orbit outside dot still works')
-    await page.evaluate('__dotQA.focus()');await page.wait_for_function('!__dotQA.snapshot().moving');await page.wait_for_timeout(600);await page.screenshot(path=str(O/'desktop-dot.png'),timeout=90000)
+    await page.evaluate('__dotQA.focus()');await page.wait_for_function('!__dotQA.snapshot().moving');await page.wait_for_timeout(600);await shot(page,'desktop-dot.png')
    page,context=await fresh(C,True);dot=page.locator('.crown-hotspot');await dot.wait_for(state='visible');rect=await dot.bounding_box();x=rect['x']+22;y=rect['y']+22;before=await page.evaluate('__dotQA.snapshot()');await page.touchscreen.tap(x,y);await page.wait_for_function('__dotQA.snapshot().crown.pulled');assert before['stage']==(await page.evaluate('__dotQA.snapshot()'))['stage'];record('touch tap pulls without panel resize')
    old=await page.evaluate('__dotQA.snapshot().crown.degrees');session=await context.new_cdp_session(page);await session.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':x,'y':y}]});
    for dy in [6,12,18,24]:await session.send('Input.dispatchTouchEvent',{'type':'touchMove','touchPoints':[{'x':x,'y':y-dy}]})
-   await session.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});await page.wait_for_function('(d)=>Math.abs(__dotQA.snapshot().crown.degrees-d)>1',arg=old);state=await page.evaluate('__dotQA.snapshot()');assert state['crown']['pulled'];record('touch drag turns without toggling',state['crown']);await page.wait_for_timeout(800);await page.screenshot(path=str(O/'mobile-dot.png'),timeout=90000);assert not report['errors'],report['errors'];report['passed']=True
+   await session.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});await page.wait_for_function('(d)=>Math.abs(__dotQA.snapshot().crown.degrees-d)>1',arg=old);state=await page.evaluate('__dotQA.snapshot()');assert state['crown']['pulled'];record('touch drag turns without toggling',state['crown']);await page.wait_for_timeout(800);await shot(page,'mobile-dot.png');assert not report['errors'],report['errors'];report['passed']=True
   except Exception as e:report['passed']=False;report['failure']=repr(e);raise
   finally:(O/'qa-report.json').write_text(json.dumps(report,indent=2));await browser.close()
 asyncio.run(main())
