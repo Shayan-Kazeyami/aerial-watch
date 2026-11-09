@@ -1,4 +1,4 @@
-const RELEASE='./preview-b/releases/e1d2072ce848df1e154b9d2db9de5b1612fb081df3330cb82e3fc6dc428a7640/atelier-preview.html';
+const RELEASE='./preview-b/releases/922fcc6539853bd0c0306ef90315f1dd65708110e367657e96d8f5928b74af4d/atelier-preview.html';
 // These are preparation milestones, not measured byte/time percentages. The UI
 // intentionally has no numeric percentage and exposes the estimate to AT.
 const WEIGHTS={baseline:25,proposal:10,premiumFace:15,leather:30,antialias:6};
