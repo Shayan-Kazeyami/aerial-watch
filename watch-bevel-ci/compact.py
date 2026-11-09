@@ -1,0 +1,2 @@
+import numpy as np
+D=np.load('watch-bevel/wide-cap.npz');p,n,u=D['position'],D['normal'],D['uv'];f=np.r_[np.fromfile('watch-bevel/protected-ix.bin','u4').reshape(-1,3),np.fromfile('watch-bevel/root-opt-0.004.bin','u4').reshape(-1,3)];ids=np.unique(f);rev=np.full(len(p),-1);rev[ids]=np.arange(len(ids));np.savez('watch-bevel/candidate.npz',position=p[ids],normal=n[ids],uv=u[ids],index=rev[f].astype('u4'));print(len(ids),len(f))

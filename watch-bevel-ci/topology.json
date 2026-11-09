@@ -1,0 +1,35 @@
+{
+  "baseline": {
+    "triangles": 501830,
+    "vertices": 257042,
+    "weldedVertices": 250913,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "degenerate": 0,
+    "flippedToNormal": 0,
+    "minNormalLength": 0.9999998807907104,
+    "maxNormalLength": 1.0000001192092896
+  },
+  "wide-cap": {
+    "triangles": 506702,
+    "vertices": 259478,
+    "weldedVertices": 253349,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "degenerate": 0,
+    "flippedToNormal": 0,
+    "minNormalLength": 0.9999998807907104,
+    "maxNormalLength": 1.0000001192092896
+  },
+  "candidate": {
+    "triangles": 371636,
+    "vertices": 191375,
+    "weldedVertices": 185816,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "degenerate": 0,
+    "flippedToNormal": 0,
+    "minNormalLength": 0.9999998807907104,
+    "maxNormalLength": 1.0000001192092896
+  }
+}

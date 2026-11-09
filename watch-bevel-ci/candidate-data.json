@@ -1,0 +1,44 @@
+{
+  "revision": "hybrid-cap030-density-r01",
+  "acceptance": "pending",
+  "url": "hybrid-case-assets/hybrid-cap030-density-r01.meshopt.glb.gz",
+  "glbSHA256": "98cad8cac8bc2ef8abcfc214e59e0cba8c928ddf4e2992763280fe9df5c58c89",
+  "capsRadiusMM": 0.3,
+  "fields": {
+    "position": {
+      "count": 191375,
+      "itemSize": 3,
+      "type": "Float32Array",
+      "sha256": "cb2d68da78cf0354592863bbf617ba88e8d081f8adb652f1204952bae80b48f2"
+    },
+    "normal": {
+      "count": 191375,
+      "itemSize": 3,
+      "type": "Float32Array",
+      "sha256": "d3aed839ff4589406617ce4046aa481bae69c4b5b304ad01d9db66be93fe307e"
+    },
+    "uv": {
+      "count": 191375,
+      "itemSize": 2,
+      "type": "Float32Array",
+      "sha256": "0a423de020a7244c4f22b57ca80ebf755a0f632ad2e14ffb98263085f43397af"
+    },
+    "index": {
+      "count": 1114908,
+      "itemSize": 1,
+      "type": "Uint32Array",
+      "sha256": "bb14f7114bb48d3735b42969a855dcd0185c87623002bea97d9b0a499c07e98c"
+    }
+  },
+  "rawReferenceSHA256": "b92410762928ff4c99370b09affb0c5a7ea88e34475867e5591de0139dec4ce9",
+  "delivery": {
+    "url": "hybrid-case-assets/hybrid-cap030-density-r01.meshopt.glb.gz",
+    "gzipBytes": 4159629,
+    "gzipSHA256": "9b90e16e2af689c32861936a0ec2e95a773edc5b541c5527fcde3bb6285d4f68",
+    "glbBytes": 4916572,
+    "glbSHA256": "98cad8cac8bc2ef8abcfc214e59e0cba8c928ddf4e2992763280fe9df5c58c89",
+    "rawCandidateSHA256": "b92410762928ff4c99370b09affb0c5a7ea88e34475867e5591de0139dec4ce9",
+    "roundtrip": "all decoded attribute/index byte arrays identical",
+    "encoding": "meshopt-gzip"
+  }
+}

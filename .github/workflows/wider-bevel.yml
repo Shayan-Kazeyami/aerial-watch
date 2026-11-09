@@ -1,0 +1,33 @@
+name: Wider lug bevel and density combined QA
+on:
+  push:
+    branches: ['qa/wider-bevel-20261109']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node watch-bevel-ci/build.mjs
+      - run: python -m pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - run: python -m http.server 8765 --bind 127.0.0.1 >/tmp/server.log 2>&1 &
+      - run: python watch-bevel-ci/qa.py
+      - run: |
+          python - <<'PY'
+          import json,tarfile,pathlib
+          p=pathlib.Path(json.load(open('watch-bevel-output/build.json'))['releasePath'])
+          for n in ['qa-review.js','qa-atelier.js','qa-atelier.html']:
+            (p/n).unlink(missing_ok=True)
+          with tarfile.open('watch-bevel-output/sealed-release.tar.gz','w:gz') as tar: tar.add(p,arcname=p.name)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wider-bevel-evidence
+          path: watch-bevel-output

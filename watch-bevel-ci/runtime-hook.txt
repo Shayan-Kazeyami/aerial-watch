@@ -1,0 +1,27 @@
+// Contextual actions live beside the picked object; legacy controls remain available.
+const contextualUI=createContextualUI({canvas:renderer.domElement,
+ available:()=>!loading&&!failed&&!lifecycle.disposed&&!cameraTween&&presentationGate.snapshot().interactive,
+ pick(event){
+  if(loading||failed)return null;
+  const rect=renderer.domElement.getBoundingClientRect(),ray=new THREE.Raycaster();
+  ray.setFromCamera(new THREE.Vector2((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1),camera);
+  const candidates=[...meshes(),...craftParts,...openPlates,...(premiumFace?.meshes||[])].filter(mesh=>{
+   if(!mesh.visible||mesh.userData.inspectionTransparent)return false;
+   for(let parent=mesh.parent;parent;parent=parent.parent)if(!parent.visible)return false;
+   return true;
+  });
+  return ray.intersectObjects(candidates,false)[0]?.object||null;
+ },
+ describe(mesh){
+  const group=groups.find(entry=>entry.parts.includes(mesh)),kind=contextKind(mesh.userData);
+  const click=id=>()=>$(id)?.click();
+  if(kind==='crown')return {label:'Crown',hint:'Drag up or down to turn. Pull out to set the hands.',actions:explosion?.active?[{label:'View crown',run:focusCrown}]:[
+   {label:crownInteraction.snapshot().pulled?'Push crown in':'Pull out · set time',run:click('crown-pull')},
+   {label:'Turn left',run:click('crown-left')},{label:'Turn right',run:click('crown-right')} ]};
+  if(kind==='case')return {label:group?.label||'Watch case',hint:'Explore the mechanism beneath the case.',actions:[{label:'Look inside',run:click('inspect-motion')},{label:'Inspect case',run:()=>{if(group)select(mesh);else view('lug');}}]};
+  if(kind==='strap'||/leather|strap|buckle|keeper/i.test(mesh.name))return {label:group?.label||'Leather strap',hint:'Inspect the strap and its attachment.',actions:[{label:'View lugs',run:()=>view('lug')},{label:'View buckle',run:()=>view('buckle')}]};
+  return {label:group?.label||mesh.name||'Watch detail',hint:'Inspect this component without leaving the watch.',actions:group?[{label:'Inspect component',run:()=>select(mesh)}]:[{label:'Look inside',run:click('inspect-motion')}]};
+ }
+});
+resources.own('object contextual interactions',()=>contextualUI.dispose());
+controls.addEventListener('start',contextualUI.hide);
