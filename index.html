@@ -6,15 +6,16 @@
 <meta name="theme-color" content="#191b1a">
 <title>Aerial — Kazeyami Studio</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="./watch-home-loading-v2.css">
-<script type="module" src="./watch-home-loading-v2.js"></script>
+<link rel="stylesheet" href="./watch-home-loading-v3.css">
+<script type="module" src="./watch-home-loading-v3.js"></script>
 </head>
 <body>
 <iframe id="watch-viewer" title="Aerial interactive watch studio" allowfullscreen></iframe>
-<section id="watch-loading" aria-label="Watch loading progress"><span id="watch-loading-label">Loading watch…</span><progress id="watch-progress" aria-label="Watch preparation"></progress><span id="watch-loading-detail" role="status" aria-live="polite"></span></section>
+<section id="watch-loading" aria-label="Watch loading progress"><span id="watch-loading-label">Loading watch…</span><div id="watch-progress" role="progressbar" aria-label="Watch preparation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Loading watch, estimated preparation progress"><span id="watch-progress-fill" aria-hidden="true"></span></div></section>
 <noscript><p>This interactive watch requires JavaScript. Enable JavaScript, then <a href="./preview-b/releases/e1d2072ce848df1e154b9d2db9de5b1612fb081df3330cb82e3fc6dc428a7640/atelier-preview.html">open the Aerial watch studio</a>.</p></noscript>
 </body>
 </html>
+
 
 
 
