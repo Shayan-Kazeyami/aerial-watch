@@ -1,4 +1,4 @@
-const RELEASE='./preview-b/releases/457c5eba8f27ffecf7710adc2fb3ef10a2ac326af781f19232fad75328dc2bd4/atelier-preview.html';
+const RELEASE='./preview-b/releases/e1d2072ce848df1e154b9d2db9de5b1612fb081df3330cb82e3fc6dc428a7640/atelier-preview.html';
 export function loadingState(snapshot,{failed=false,ready=false}={}){
  if(failed||['error','asset-error','disposed'].includes(snapshot?.phase))return {hidden:true,state:'error'};
  if(ready||snapshot?.interactive)return {hidden:true,state:'ready'};
