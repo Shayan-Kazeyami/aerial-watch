@@ -1,0 +1,32 @@
+name: Inspect verified navigation evidence
+on:
+  push:
+    branches: ['qa/atelier-navigation-evidence-20261110']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: Shayan-Kazeyami/aerial-watch
+          run-id: 42692724635
+          path: evidence
+      - run: python -m pip install pillow
+      - name: Read verified render evidence
+        run: |
+          python - <<'PY'
+          import pathlib,base64,io,json
+          from PIL import Image
+          for p in pathlib.Path('evidence').rglob('*.png'):
+              im=Image.open(p);im.thumbnail((1180,850));buf=io.BytesIO();im.save(buf,format='JPEG',quality=87)
+              print('IMAGE_START '+p.name)
+              for line in __import__('textwrap').wrap(base64.b64encode(buf.getvalue()).decode(),1000): print(line)
+              print('IMAGE_END '+p.name)
+          for p in pathlib.Path('evidence').rglob('*.json'):
+              if p.name in ['report.json','build.json']:
+                  print('JSON_START '+str(p));print(p.read_text());print('JSON_END '+str(p))
+          PY
