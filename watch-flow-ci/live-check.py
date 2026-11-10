@@ -35,7 +35,7 @@ async def main():
    await frame.locator('body[data-ready="true"]').wait_for(timeout=240000)
    await page.locator('#watch-loading').wait_for(state='hidden',timeout=30000)
    src=await page.locator('#watch-viewer').get_attribute('src');assert RID in src
-   inner=next(f for f in page.frames if RID in f.url)
+   inner=next(f for f in page.frames if f!=page.main_frame and '/preview-b/releases/'+RID+'/' in f.url)
    runtime=await inner.evaluate('assemblyInspect()');assert runtime['presentation']['interactive'] and runtime['renderQuality']=='studio'
    assert await frame.locator('.inspection-tools').count()==0
    async def pose():return await inner.evaluate('({camera:assemblyInspect().camera,target:assemblyInspect().target,view:assemblyInspect().view,interior:assemblyInspect().interiorView})')
