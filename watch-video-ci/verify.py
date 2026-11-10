@@ -9,18 +9,18 @@ def save():
  (OUT/'report.json').write_text(json.dumps(R,indent=2));print('REPORT '+json.dumps(R),flush=True)
 async def main():
  async with async_playwright() as p:
-  browser=await p.chromium.launch(headless=MODE!='headed',channel='chromium',args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-background-timer-throttling','--disable-renderer-backgrounding','--disable-backgrounding-occluded-windows'])
+  browser=await p.chromium.launch(headless=False,channel='chromium',args=['--no-sandbox','--disable-dev-shm-usage','--use-angle='+('gl' if MODE=='mesa' else 'swiftshader'),'--enable-unsafe-swiftshader','--disable-background-timer-throttling','--disable-renderer-backgrounding','--disable-backgrounding-occluded-windows'])
   try:
-   ctx=await browser.new_context(viewport={'width':800,'height':600},accept_downloads=True,device_scale_factor=1)
+   ctx=await browser.new_context(viewport={'width':640,'height':480},accept_downloads=True,device_scale_factor=1)
    await ctx.add_init_script("""(()=>{window.__recordQA={raf:0,events:[],captures:[]};const q=window.__recordQA,raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=fn=>raf(t=>{q.raf++;fn(t)});const cap=HTMLCanvasElement.prototype.captureStream;HTMLCanvasElement.prototype.captureStream=function(f){q.captures.push({width:this.width,height:this.height,rate:f,raf:q.raf,t:performance.now()});return cap.call(this,f)};const start=MediaRecorder.prototype.start,stop=MediaRecorder.prototype.stop;MediaRecorder.prototype.start=function(...a){q.events.push({type:'start',raf:q.raf,t:performance.now(),mime:this.mimeType});this.addEventListener('dataavailable',e=>{q.events.push({type:'data',bytes:e.data.size,raf:q.raf,t:performance.now()});q.blob=e.data});this.addEventListener('stop',()=>q.events.push({type:'stopped',raf:q.raf,t:performance.now()}));return start.apply(this,a)};MediaRecorder.prototype.stop=function(...a){q.events.push({type:'stop-request',raf:q.raf,t:performance.now()});return stop.apply(this,a)}})()""")
    page=await ctx.new_page();page.set_default_timeout(90000);page.on('pageerror',lambda e:R['errors'].append(str(e)))
-   await page.goto(HOME+'?quality=efficient&verify=webm-'+MODE,wait_until='domcontentloaded',timeout=90000)
-   frame=page.frame_locator('#watch-viewer');await frame.locator('body[data-ready="true"]').wait_for(timeout=240000);await page.locator('#watch-loading').wait_for(state='hidden',timeout=90000)
-   inner=next(f for f in page.frames if RID in f.url);R['frame']=inner.url;R['browser']=browser.version
-   R['before']=await inner.evaluate('(()=>{const s=assemblyInspect();return {quality:s.renderQuality,viewport:s.viewport,presentation:s.presentation,GPU:s.GPU,performance:s.performance,clock:s.clock}})()');R['checks'].append('current immutable live release loaded with Smooth quality');save()
+   await page.goto(HOME+'preview-b/releases/'+RID+'/atelier-preview.html?quality=efficient&face=svg04&leather=craft14&finish=brushed&crystal=clear&cap=satin&assets=meshopt&light=softbox&antialias=smaa&verify=webm-'+MODE,wait_until='domcontentloaded',timeout=90000)
+   frame=page;await frame.locator('body[data-ready="true"]').wait_for(timeout=240000)
+   inner=page;R['frame']=inner.url;R['browser']=browser.version
+   R['before']=await inner.evaluate('(()=>{const s=assemblyInspect();return {quality:s.renderQuality,viewport:s.viewport,presentation:s.presentation,GPU:s.GPU,performance:s.performance,clock:s.clock}})()');R['checks'].append('same live immutable viewer opened top-level at 640x480 with Smooth quality');save()
    await frame.locator('.task-dock [data-mode=capture]').click()
    try:
-    async with page.expect_download(timeout=150000) as pending:
+    async with page.expect_download(timeout=90000) as pending:
      await frame.locator('[data-proxy=record-scene]').click()
     dl=await pending.value;path=OUT/'aerial-watch.webm';await dl.save_as(path)
     R['download']={'name':dl.suggested_filename,'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
