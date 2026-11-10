@@ -1,0 +1,47 @@
+name: Verify navigation release
+on:
+  push:
+    branches: ['qa/atelier-navigation-release-20261110']
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        scope: [desktop, mobile]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test watch-flow-ci/tests/*.test.mjs
+      - name: Verify exact release and preserved crown
+        run: |
+          python - <<'PY'
+          import json,pathlib,hashlib,subprocess
+          root=pathlib.Path('preview-b/releases/99d5275244fdabbc301fba262d59e612e7f511121e5e79a5dae5bf936e222e75'); m=json.loads((root/'deployment-manifest.json').read_text())
+          canonical={k:m[k] for k in ['schemaVersion','localFiles','references']}
+          assert hashlib.sha256(json.dumps(canonical,separators=(',',':')).encode()).hexdigest()=='99d5275244fdabbc301fba262d59e612e7f511121e5e79a5dae5bf936e222e75'
+          for f in m['localFiles']+m['references']:
+              p=(root.parent/f['ownerReleaseId'] if 'ownerReleaseId' in f else root)/f['path']; b=p.read_bytes()
+              assert len(b)==f['sizeBytes'] and hashlib.sha256(b).hexdigest()==f['sha256'],str(p)
+          for p in root.glob('*.js'): subprocess.run(['node','--check',str(p)],check=True)
+          base=root.parent/'922fcc6539853bd0c0306ef90315f1dd65708110e367657e96d8f5928b74af4d'
+          for p in ['assembly-review.js','assembly-crown-hotspot.js']:
+              assert (root/p).read_bytes()==(base/p).read_bytes(),p
+          assert not list(root.glob('qa-*'))
+          out=pathlib.Path('watch-flow-output');out.mkdir(exist_ok=True);(out/'build.json').write_text(json.dumps({'releaseId':'99d5275244fdabbc301fba262d59e612e7f511121e5e79a5dae5bf936e222e75','releasePath':str(root)}))
+          print('Exact immutable release: 159 local files, 120 verified references. Crown bytes preserved.')
+          PY
+      - run: python -m pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - run: python -m http.server 8765 --bind 127.0.0.1 >/tmp/server.log 2>&1 &
+      - run: timeout 22m env QA_SCOPE=${{ matrix.scope }} python -u watch-flow-ci/qa.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: navigation-release-${{ matrix.scope }}
+          path: watch-flow-output
