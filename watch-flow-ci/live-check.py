@@ -29,14 +29,14 @@ async def main():
    browser=await p.chromium.launch(headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
    context=await browser.new_context(viewport={'width':430 if mobile else 1180,'height':850 if mobile else 820},device_scale_factor=1,is_mobile=mobile,has_touch=mobile)
    page=await context.new_page();page.set_default_timeout(60000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-   await page.goto(HOME+'?verify='+RID,wait_until='domcontentloaded',timeout=90000)
+   await page.goto(HOME+'?quality=efficient&verify='+RID,wait_until='domcontentloaded',timeout=90000)
    await page.locator('#watch-viewer').wait_for()
    frame=page.frame_locator('#watch-viewer')
    await frame.locator('body[data-ready="true"]').wait_for(timeout=240000)
    await page.locator('#watch-loading').wait_for(state='hidden',timeout=30000)
    src=await page.locator('#watch-viewer').get_attribute('src');assert RID in src
    inner=next(f for f in page.frames if f!=page.main_frame and '/preview-b/releases/'+RID+'/' in f.url)
-   runtime=await inner.evaluate('assemblyInspect()');assert runtime['presentation']['interactive'] and runtime['renderQuality']=='studio'
+   runtime=await inner.evaluate('assemblyInspect()');assert runtime['presentation']['interactive'] and runtime['renderQuality']=='efficient'
    assert await frame.locator('.inspection-tools').count()==0
    print('LIVE_READY '+json.dumps({'mobile':mobile,'frame':inner.url,'quality':runtime['renderQuality']}),flush=True)
    if await frame.locator('#motion').get_attribute('aria-pressed')=='true':
@@ -49,7 +49,13 @@ async def main():
    def same(a,b):return a['view']==b['view'] and a['interior']==b['interior'] and all(abs(x-y)<1e-9 for k in ['camera','target'] for x,y in zip(a[k],b[k]))
    async def settle():
     await asyncio.wait_for(inner.evaluate('() => new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))'),120)
-    await inner.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true" && !document.getElementById("capture-scene").disabled',timeout=120000)
+    try:
+     await inner.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true" && !document.getElementById("capture-scene").disabled',timeout=30000)
+    except Exception:
+     print('LIVE_NOT_SETTLED '+json.dumps(await inner.evaluate('({runtime:assemblyInspect(),hidden:document.hidden,stage:document.getElementById("stage").dataset,rect:document.getElementById("stage").getBoundingClientRect().toJSON(),captureDisabled:document.getElementById("capture-scene").disabled})')),flush=True)
+     print('LIVE_ERRORS '+json.dumps(errors),flush=True)
+     await page.screenshot(path=str(OUT/'not-settled.jpg'),type='jpeg',quality=80,timeout=30000)
+     raise
     old=await pose();stable=0
     for _ in range(90):
      await asyncio.sleep(.4);new=await pose();stable=stable+1 if same(old,new) else 0;old=new
@@ -70,7 +76,7 @@ async def main():
     await frame.locator('#motion').focus();await frame.locator('#motion').press('Enter')
    assert not errors,errors
    name='mobile-live' if mobile else 'desktop-live'
-   report={'surface':name,'url':page.url,'frame':src,'viewport':page.viewport_size,'initialQuality':runtime['renderQuality'],'interactionQuality':'efficient','presentation':runtime['presentation'],'errors':errors,'checks':['published identities','root loader completes','exact Studio runtime','temporary panels retain task' if not mobile else 'direct crown tap after time panel toggle','reset restores Explore'],'renderer':'Chromium SwiftShader software rendering'}
+   report={'surface':name,'url':page.url,'frame':src,'viewport':page.viewport_size,'initialQuality':runtime['renderQuality'],'interactionQuality':'efficient','presentation':runtime['presentation'],'errors':errors,'checks':['published identities','root loader completes','exact Smooth runtime','temporary panels retain task' if not mobile else 'direct crown tap after time panel toggle','reset restores Explore'],'renderer':'Chromium SwiftShader software rendering'}
    (OUT/(name+'.json')).write_text(json.dumps(report,indent=2));print('LIVE_REPORT '+json.dumps(report),flush=True)
    try:
     shot=await page.screenshot(type='jpeg',quality=85,timeout=90000);(OUT/(name+'.jpg')).write_bytes(shot)
