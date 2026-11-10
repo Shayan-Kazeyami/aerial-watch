@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install playwright
       - run: python -m playwright install --with-deps chromium
-      - run: which ffprobe && which ffmpeg
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg && ffprobe -version
       - run: timeout 12m xvfb-run -a env MODE=${{ matrix.mode }} python -u watch-video-ci/verify.py
       - uses: actions/upload-artifact@v4
         if: always()
