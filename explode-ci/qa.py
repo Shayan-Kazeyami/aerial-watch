@@ -29,6 +29,7 @@ async def main():
    if not mobile:
     page=await fresh(BASE);await page.locator('.task-dock [data-mode=explode]').click();await settle(page);assert (await state(page))['amount']==0;await page.locator('#atelier-explosion').fill('100');await settle(page);s=await state(page);assert not any(x['wrapper'] for x in s['parts']);await shot(page,'before-exploded.png');record('baseline reproduces tab no-op and stationary internals')
    page=await fresh(mobile=mobile);before=await state(page);await shot(page,SCOPE+'-assembled.png')
+   assert (await page.evaluate('fetch("./quality-study/viewer-revision.json").then(r=>r.json())'))['digest']==report['build']['revision'];record('expected immutable viewer revision',report['build']['revision'])
    b=page.locator('.task-dock [data-mode=explode]');await (b.tap() if mobile else b.click());await settle(page);after=await state(page)
    assert after['amount']==1 and after['target']==1;assert all(x['wrapper'] for x in after['parts']);assert all(a['local']==b['local'] for a,b in zip(before['parts'],after['parts']));assert sum(l['sourceParts'] for l in after['layers'])==166;assert len([l for l in after['layers'] if l['sourceParts']])==6
    assert all(sum((a-b)**2 for a,b in zip(x['world'],y['world']))>25 for x,y in zip(before['parts'],after['parts']))
@@ -39,9 +40,12 @@ async def main():
    await b.click();await settle(page);assert (await state(page))['amount']==1;record('dock click explodes again after reassembly')
    await page.locator('#atelier-explosion').fill('20');await page.locator('#atelier-explosion').fill('85');await page.locator('#atelier-reassemble').click();await page.locator('#atelier-explode-full').click();await settle(page);assert (await state(page))['amount']==1;record('interrupted and reversed transitions settle correctly')
    await page.locator('.task-dock [data-mode=inside]').click();await settle(page);assert (await state(page))['amount']==0;record('Inside restores assembled movement')
-   await b.click();await settle(page);await page.locator('#home').click();await settle(page);assert (await state(page))['amount']==0;assert await page.locator('.task-dock [data-mode=explore]').get_attribute('aria-pressed')=='true';record('Reset restores assembled Explore')
+   await b.click();await settle(page);assert await page.locator('#home').is_visible();assert await page.locator('#home').is_enabled();await (page.locator('#home').tap() if mobile else page.locator('#home').click());await settle(page);assert (await state(page))['amount']==0;assert await page.locator('.task-dock [data-mode=explore]').get_attribute('aria-pressed')=='true';record('Reset restores assembled Explore')
    if mobile:
     await b.tap();await settle(page);buttons=await page.locator('#atelier-reassemble,#atelier-explode-full').evaluate_all('(els)=>els.map(e=>({height:e.getBoundingClientRect().height,width:e.getBoundingClientRect().width}))');assert all(x['height']>=44 and x['width']>=44 for x in buttons);record('touch controls meet 44px minimum',buttons)
+    for mode in ['inside','time','quality','settings','capture']:
+     await page.locator('.quality' if mode=='quality' else '.atelier-more' if mode=='settings' else '.task-dock [data-mode='+mode+']').tap();await settle(page);assert await page.locator('#home').is_visible();await page.locator('#home').tap();await settle(page);assert (await state(page))['amount']==0
+    record('mobile Reset reachable from Inside, Time, Quality, Studio tools and Capture')
    assert not report['errors'],report['errors'];report['passed']=True
   except Exception as e:report['passed']=False;report['failure']=repr(e);raise
   finally:

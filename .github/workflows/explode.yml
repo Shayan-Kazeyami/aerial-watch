@@ -24,7 +24,7 @@ jobs:
           import json,pathlib,shutil
           root=pathlib.Path(json.loads(pathlib.Path('explode-output/build.json').read_text())['releasePath'])
           testroot=pathlib.Path('explode-unit');testroot.mkdir(exist_ok=True)
-          for name in ['assembly-explode.js','assembly-review.js','assembly-framing.js']: shutil.copyfile(root/name,testroot/name)
+          for name in ['assembly-explode.js','assembly-review.js','assembly-framing.js','atelier-preview.js','atelier-preview.css','atelier-navigation.js']: shutil.copyfile(root/name,testroot/name)
           shutil.copytree('explode-ci/tests',testroot/'tests',dirs_exist_ok=True)
           manifest=json.loads((root/'deployment-manifest.json').read_text())
           for f in manifest['references']:

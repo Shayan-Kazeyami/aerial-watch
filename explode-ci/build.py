@@ -2,13 +2,13 @@ import pathlib,hashlib,json,shutil
 BASE_ID='99d5275244fdabbc301fba262d59e612e7f511121e5e79a5dae5bf936e222e75'
 root=pathlib.Path('preview-b/releases');base=root/BASE_ID;stage=root/'explode-stage'
 shutil.copytree(base,stage,dirs_exist_ok=True)
-for name in ['assembly-explode.js','assembly-review.js','atelier-preview.js']:
+for name in ['assembly-explode.js','assembly-review.js','atelier-preview.js','atelier-preview.css']:
  shutil.copyfile(pathlib.Path('explode-ci')/name,stage/name)
 m=json.loads((base/'deployment-manifest.json').read_text());files={f['path']:dict(f) for f in m['localFiles']}
 def sha(b):return hashlib.sha256(b).hexdigest()
 def info(p):
  b=(stage/p).read_bytes();return {'path':p,'sizeBytes':len(b),'sha256':sha(b)}
-for name in ['assembly-explode.js','assembly-review.js','atelier-preview.js']:files[name]=info(name)
+for name in ['assembly-explode.js','assembly-review.js','atelier-preview.js','atelier-preview.css']:files[name]=info(name)
 revision_files=[{'path':f['path'],'bytes':f['sizeBytes'],'sha256':f['sha256']} for f in sorted(files.values(),key=lambda f:f['path']) if '/' not in f['path'] and pathlib.Path(f['path']).suffix in ['.html','.js','.css']]
 rev={'schemaVersion':1,'algorithm':'SHA-256','scope':'Build-transformed local first-party viewer JS, CSS and HTML; shared asset/vendor identities are in schema-2 deployment manifest.','canonicalization':'SHA-256 of UTF-8 JSON.stringify(files), ordered lexicographically by path.','digest':sha(json.dumps(revision_files,separators=(',',':')).encode()),'files':revision_files}
 (stage/'quality-study/viewer-revision.json').write_text(json.dumps(rev,indent=2)+'\n')
@@ -24,5 +24,5 @@ stage.rename(dest)
 for f in canonical['localFiles']+canonical['references']:
  p=(root/f['ownerReleaseId'] if 'ownerReleaseId'in f else dest)/f['path'];b=p.read_bytes();assert len(b)==f['sizeBytes'] and sha(b)==f['sha256'],str(p)
 out=pathlib.Path('explode-output');out.mkdir(exist_ok=True);(out/'build.json').write_text(json.dumps({'releaseId':rid,'revision':rev['digest'],'releasePath':str(dest)}));print('BUILD',rid,rev['digest'],flush=True)
-for f in ['assembly-explode.js','assembly-review.js','atelier-preview.js','quality-study/viewer-revision.json','quality-study/viewer-revision.js','deployment-manifest.json','release-receipt.json']:
+for f in ['assembly-explode.js','assembly-review.js','atelier-preview.js','atelier-preview.css','quality-study/viewer-revision.json','quality-study/viewer-revision.js','deployment-manifest.json','release-receipt.json']:
  p=out/'release'/f;p.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(dest/f,p)
