@@ -39,7 +39,12 @@ async def main():
    runtime=await inner.evaluate('assemblyInspect()');assert runtime['presentation']['interactive'] and runtime['renderQuality']=='studio'
    assert await frame.locator('.inspection-tools').count()==0
    print('LIVE_READY '+json.dumps({'mobile':mobile,'frame':inner.url,'quality':runtime['renderQuality']}),flush=True)
-   if await frame.locator('#motion').get_attribute('aria-pressed')=='true':await frame.locator('#motion').click()
+   if await frame.locator('#motion').get_attribute('aria-pressed')=='true':
+    await frame.locator('#motion').focus();await frame.locator('#motion').press('Enter')
+   await frame.locator('.quality').focus();await frame.locator('.quality').press('Enter')
+   await frame.locator('[data-quality="efficient"]').focus();await frame.locator('[data-quality="efficient"]').press('Enter')
+   await inner.wait_for_function('assemblyInspect().renderQuality==="efficient"');await page.keyboard.press('Escape')
+   print('LIVE_INTERACTION_PROFILE efficient',flush=True)
    async def pose():return await inner.evaluate('({camera:assemblyInspect().camera,target:assemblyInspect().target,view:assemblyInspect().view,interior:assemblyInspect().interiorView})')
    def same(a,b):return a['view']==b['view'] and a['interior']==b['interior'] and all(abs(x-y)<1e-9 for k in ['camera','target'] for x,y in zip(a[k],b[k]))
    async def settle():
@@ -61,10 +66,11 @@ async def main():
     await inner.wait_for_function('document.getElementById("crown-pull").getAttribute("aria-pressed")==="true"')
    await frame.locator('#home').click();await settle();assert await frame.locator('#context').is_hidden()
    assert await frame.locator('.task-dock [data-mode="explore"]').get_attribute('aria-pressed')=='true'
-   if await frame.locator('#motion').get_attribute('aria-pressed')=='true':await frame.locator('#motion').click()
+   if await frame.locator('#motion').get_attribute('aria-pressed')=='true':
+    await frame.locator('#motion').focus();await frame.locator('#motion').press('Enter')
    assert not errors,errors
    name='mobile-live' if mobile else 'desktop-live'
-   report={'surface':name,'url':page.url,'frame':src,'viewport':page.viewport_size,'quality':runtime['renderQuality'],'presentation':runtime['presentation'],'errors':errors,'checks':['published identities','root loader completes','exact Studio runtime','temporary panels retain task' if not mobile else 'direct crown tap after time panel toggle','reset restores Explore'],'renderer':'Chromium SwiftShader software rendering'}
+   report={'surface':name,'url':page.url,'frame':src,'viewport':page.viewport_size,'initialQuality':runtime['renderQuality'],'interactionQuality':'efficient','presentation':runtime['presentation'],'errors':errors,'checks':['published identities','root loader completes','exact Studio runtime','temporary panels retain task' if not mobile else 'direct crown tap after time panel toggle','reset restores Explore'],'renderer':'Chromium SwiftShader software rendering'}
    (OUT/(name+'.json')).write_text(json.dumps(report,indent=2));print('LIVE_REPORT '+json.dumps(report),flush=True)
    try:
     shot=await page.screenshot(type='jpeg',quality=85,timeout=90000);(OUT/(name+'.jpg')).write_bytes(shot)
