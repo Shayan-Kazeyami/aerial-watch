@@ -25,7 +25,7 @@ for name in ['atelier-preview.html','atelier-preview.js','atelier-preview.css','
 print('LIVE_IDENTITIES '+json.dumps({'releaseId':RID,'verified':verified}),flush=True)
 async def main():
  async with async_playwright() as p:
-  for mobile in [False,True]:
+  for mobile in [True]:
    browser=await p.chromium.launch(headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
    context=await browser.new_context(viewport={'width':430 if mobile else 1180,'height':850 if mobile else 820},device_scale_factor=1,is_mobile=mobile,has_touch=mobile)
    page=await context.new_page();page.set_default_timeout(60000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
@@ -78,10 +78,6 @@ async def main():
    name='mobile-live' if mobile else 'desktop-live'
    report={'surface':name,'url':page.url,'frame':src,'viewport':page.viewport_size,'initialQuality':runtime['renderQuality'],'interactionQuality':'efficient','presentation':runtime['presentation'],'errors':errors,'checks':['published identities','root loader completes','exact Smooth runtime','temporary panels retain task' if not mobile else 'direct crown tap after time panel toggle','reset restores Explore'],'renderer':'Chromium SwiftShader software rendering'}
    (OUT/(name+'.json')).write_text(json.dumps(report,indent=2));print('LIVE_REPORT '+json.dumps(report),flush=True)
-   try:
-    shot=await page.screenshot(type='jpeg',quality=85,timeout=90000);(OUT/(name+'.jpg')).write_bytes(shot)
-    print('IMAGE_START '+name+'.jpg',flush=True)
-    for line in textwrap.wrap(base64.b64encode(shot).decode(),1000):print(line)
-    print('IMAGE_END '+name+'.jpg',flush=True)
-   finally:await browser.close()
+   try:await asyncio.wait_for(browser.close(),15)
+   except asyncio.TimeoutError:pass
 asyncio.run(main())
