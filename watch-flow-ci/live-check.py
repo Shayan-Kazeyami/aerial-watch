@@ -38,9 +38,13 @@ async def main():
    inner=next(f for f in page.frames if f!=page.main_frame and '/preview-b/releases/'+RID+'/' in f.url)
    runtime=await inner.evaluate('assemblyInspect()');assert runtime['presentation']['interactive'] and runtime['renderQuality']=='studio'
    assert await frame.locator('.inspection-tools').count()==0
+   print('LIVE_READY '+json.dumps({'mobile':mobile,'frame':inner.url,'quality':runtime['renderQuality']}),flush=True)
+   if await frame.locator('#motion').get_attribute('aria-pressed')=='true':await frame.locator('#motion').click()
    async def pose():return await inner.evaluate('({camera:assemblyInspect().camera,target:assemblyInspect().target,view:assemblyInspect().view,interior:assemblyInspect().interiorView})')
    def same(a,b):return a['view']==b['view'] and a['interior']==b['interior'] and all(abs(x-y)<1e-9 for k in ['camera','target'] for x,y in zip(a[k],b[k]))
    async def settle():
+    await asyncio.wait_for(inner.evaluate('() => new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))'),120)
+    await inner.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true" && !document.getElementById("capture-scene").disabled',timeout=120000)
     old=await pose();stable=0
     for _ in range(90):
      await asyncio.sleep(.4);new=await pose();stable=stable+1 if same(old,new) else 0;old=new
@@ -49,7 +53,7 @@ async def main():
    if not mobile:
     await frame.locator('.task-dock [data-mode="inside"]').click();before=await settle()
     await frame.locator('.quality').click();assert await frame.locator('.task-dock [data-mode="inside"]').get_attribute('aria-pressed')=='true'
-    await page.keyboard.press('Escape');assert await frame.locator('#context').is_hidden();assert same(before,await pose())
+    await page.keyboard.press('Escape');assert await frame.locator('#context').is_hidden();after=await pose();print('LIVE_POSE '+json.dumps({'before':before,'after':after}),flush=True);assert same(before,after)
     await frame.locator('.atelier-more').click();await frame.locator('[data-inspection="wireframe"]').click();await frame.locator('#atelier-inspection-reset').click();await frame.locator('#close').click()
    else:
     await frame.locator('.task-dock [data-mode="time"]').tap();await settle();await frame.locator('.task-dock [data-mode="time"]').tap()
