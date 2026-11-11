@@ -780,7 +780,8 @@ const crownHotspot=createCrownHotspot({canvas:renderer.domElement,
  },
  getOutline(){if(!crownAnchorMesh||!crownOutlineVertices)return '';const r=renderer.domElement.getBoundingClientRect(),points=[];for(const vertex of crownOutlineVertices){crownAnchorProjected.copy(vertex).applyMatrix4(crownAnchorMesh.matrixWorld).project(camera);if(crownAnchorProjected.z>-1&&crownAnchorProjected.z<1)points.push({x:r.left+(crownAnchorProjected.x+1)*r.width/2,y:r.top+(1-crownAnchorProjected.y)*r.height/2});}return convexOutline(points);},
  onToggle(){stopTour();setCrownPulled(!crownInteraction.snapshot().pulled);dirty=true;},
- onTurn(degrees){stopTour();crownInteraction.turn(degrees);dirty=true;},
+ // Continuous hold input is already time-integrated; do not restart the discrete-stroke tween.
+ onTurn(degrees){stopTour();crownInteraction.cancel();crownInteraction.turn(degrees);crownInteraction.finish();dirty=true;},
  onCancel(){crownInteraction.cancel();dirty=true;}
 });resources.own('crown direct hotspot',()=>crownHotspot.dispose());
 
