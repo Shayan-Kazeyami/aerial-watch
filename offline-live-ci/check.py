@@ -8,7 +8,7 @@ async def main():
   b=await p.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']);page=await b.new_page(viewport={'width':640,'height':480});page.set_default_timeout(180000);page.on('pageerror',lambda e:R['errors'].append(str(e)))
   try:
    await page.goto('https://shayan-kazeyami.github.io/aerial-watch/?quality=efficient&face=svg04&leather=craft14&finish=brushed&crystal=clear&cap=satin&assets=meshopt&light=softbox&antialias=smaa',wait_until='domcontentloaded')
-   await page.wait_for_function('document.getElementById("watch-viewer").src.includes("'+RID+'")');frame=page.frame(url=lambda u:RID in u);assert frame
+   await page.wait_for_function('document.getElementById("watch-viewer").src.includes("'+RID+'")');await page.frame_locator('#watch-viewer').locator('body[data-ready="true"]').wait_for(timeout=240000);frame=page.frame(url=lambda u:RID in u);assert frame
    await frame.locator('body[data-ready="true"]').wait_for(timeout=240000)
    proof=await frame.evaluate('''async()=>{const r=await(await fetch('./quality-study/viewer-revision.json')).json();const files=await Promise.all(['assembly-video-frame.js','assembly-offline-video.js','assembly-video-export.js','assembly-review.js','assembly-framing.js'].map(async p=>{const b=await(await fetch(p)).arrayBuffer();return {path:p,sha256:Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b))).map(x=>x.toString(16).padStart(2,'0')).join('')};}));return {r,files};}''');assert proof['r']['digest']==REV
    by={x['path']:x['sha256'] for x in proof['r']['files']}
