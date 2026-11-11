@@ -1,0 +1,20 @@
+name: Verify published video export
+on:
+  push:
+    branches: ['qa/offline-video-live-20261111']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright
+      - run: python -m playwright install chromium
+      - run: python -u offline-live-ci/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: published-video-evidence
+          path: live-video-output
