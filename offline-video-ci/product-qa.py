@@ -5,6 +5,7 @@ O=pathlib.Path('offline-output');BUILD=json.loads((O/'build.json').read_text());
 def save():
  (O/(SCOPE+'-report.json')).write_text(json.dumps(R,indent=2));print('REPORT '+json.dumps(R),flush=True)
 def record(name):R['checks'].append(name);save()
+def same(a,b):return len(a)==len(b) and all(abs(x-y)<1e-8 for x,y in zip(a,b))
 async def main():
  async with async_playwright() as p:
   browser=await p.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
@@ -21,9 +22,9 @@ async def main():
    if await page.locator('#motion').get_attribute('aria-pressed')=='true':await page.locator('#motion').click()
    before=await page.evaluate('assemblyInspect()');assert not before['animation'] and not before['interiorAnimation']
    await page.evaluate('window.__holdVideoSetup=true');await start();await page.locator('.aerial-video-dialog[open]').wait_for();assert await page.locator('.aerial-video-dialog button').is_enabled();await page.locator('.aerial-video-dialog button').click();await inactive();await page.evaluate('window.__holdVideoSetup=false;window.__releaseVideoSetup()');await page.wait_for_timeout(100)
-   after=await page.evaluate('assemblyInspect()');assert before['camera']==after['camera'] and before['target']==after['target'] and before['mechanismElapsed']==after['mechanismElapsed'];assert not downloads;assert await page.locator('.aerial-video-dialog').get_attribute('open') is None
+   after=await page.evaluate('assemblyInspect()');R['setupRestore']={k:{'before':before[k],'after':after[k]} for k in ['camera','target','mechanismElapsed']};save();assert same(before['camera'],after['camera']) and same(before['target'],after['target']) and abs(before['mechanismElapsed']-after['mechanismElapsed'])<1e-8;assert not downloads;assert await page.locator('.aerial-video-dialog').get_attribute('open') is None
    assert await page.evaluate('document.activeElement===document.querySelector(".task-dock [data-mode=capture]")');record('Cancel remains available during stalled encoder setup; exact paused state and keyboard focus restore')
-   await start();await page.wait_for_function('assemblyInspect().videoExport.progress?.completed>=2',timeout=120000);await page.keyboard.press('Escape');await inactive();after=await page.evaluate('assemblyInspect()');assert before['camera']==after['camera'] and before['mechanismElapsed']==after['mechanismElapsed'];assert not downloads;record('Escape cancels partial render without download and restores the paused pose')
+   await start();await page.wait_for_function('assemblyInspect().videoExport.progress?.completed>=2',timeout=120000);await page.keyboard.press('Escape');await inactive();after=await page.evaluate('assemblyInspect()');assert same(before['camera'],after['camera']) and abs(before['mechanismElapsed']-after['mechanismElapsed'])<1e-8;assert not downloads;record('Escape cancels partial render without download and restores the paused pose')
    await start();await page.wait_for_function('assemblyInspect().videoExport.progress?.completed>=1',timeout=120000);await page.set_viewport_size({'width':440 if mobile else 660,'height':700 if mobile else 480});await inactive();assert not downloads;record('resizing cancels safely with no mixed-size video')
    await page.set_viewport_size({'width':430 if mobile else 640,'height':700 if mobile else 480});await page.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true"')
    if mobile:
@@ -41,7 +42,7 @@ async def main():
      state=await page.evaluate('assemblyInspect().videoExport');print('VIDEO_PROGRESS '+json.dumps(state),flush=True)
      if not state['active']:break
    dl=await pending.value;path=O/'aerial-eight-second-motion.webm';await dl.save_as(path);R['renderSeconds']=time.monotonic()-started;await inactive();after=await page.evaluate('assemblyInspect()');R['afterFull']=after
-   assert before['camera']==after['camera'] and before['target']==after['target'];assert before['animation']==after['animation'] and before['interiorAnimation']==after['interiorAnimation'];assert not after['videoExport']['active']
+   assert same(before['camera'],after['camera']) and same(before['target'],after['target']);assert before['animation']==after['animation'] and before['interiorAnimation']==after['interiorAnimation'];assert not after['videoExport']['active']
    container=av.open(str(path));stream=container.streams.video[0];frames=list(container.decode(video=0));assert len(frames)==240
    R['decoder']={'name':'PyAV / FFmpeg','codec':stream.codec_context.name,'width':stream.width,'height':stream.height,'frames':len(frames),'duration':container.duration/av.time_base,'timestamps':[float(f.pts*f.time_base) for f in frames]};assert abs(R['decoder']['duration']-8)<.01;assert all(abs(t-i/30)<.0011 for i,t in enumerate(R['decoder']['timestamps']))
    hashes=[]

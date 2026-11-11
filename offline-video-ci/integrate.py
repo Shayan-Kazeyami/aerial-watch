@@ -53,6 +53,7 @@ if($('record-scene')){
  needle='  animationFrame=requestAnimationFrame(frame);';assert s.count(needle)==1
  s=s.replace(needle,needle+'\n  if(frameVideo.active){last=time;return;}')
  s=s.replace('window.assemblyInspect = () => ({explosion:', 'window.assemblyInspect = () => ({videoExport:{active:frameVideo.active,progress:frameVideo.progress},explosion:')
+ s=s.replace("configurationRequest++;if($('import-config'))","configurationRequest++;pendingCaptures.delete('import-config');if($('import-config'))")
  s=s.replace('  const request=++configurationRequest;','  const request=++configurationRequest;pendingCaptures.add(\'import-config\');')
  s=s.replace("    const restoredInspection=resolveInspectionState(config.inspection);","    if(frameVideo.active)throw new Error('Wait for video rendering to finish before restoring a view.');\n    const restoredInspection=resolveInspectionState(config.inspection);")
  s=s.replace("finally{if(request===configurationRequest)input.value='';}","finally{if(request===configurationRequest){input.value='';pendingCaptures.delete('import-config');}}")

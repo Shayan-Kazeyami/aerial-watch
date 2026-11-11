@@ -20,8 +20,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: SKIP_FFMPEG_TESTS=1 node --test offline-video-ci/tests/*.test.mjs
       - run: python offline-video-ci/build.py
+      - run: |
+          ROOT=$(python -c "import json;print(json.load(open('offline-output/build.json'))['releasePath'])")
+          SKIP_FFMPEG_TESTS=1 AERIAL_RUNTIME_TEST_PATH="$ROOT/assembly-review.js" node --test offline-video-ci/tests/*.test.mjs
+          for f in "$ROOT"/*.js; do node --check "$f" || exit 1; done
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
