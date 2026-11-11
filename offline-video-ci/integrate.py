@@ -13,7 +13,7 @@ def integrate(root):
  new="""const frameVideo=createOfflineVideoExport({canvas:renderer.domElement,
   begin(){
     const presentation=presentationGate.snapshot();
-    if(loading||failed||contextLost||!presentation.interactive||!presentation.canRender||presentation.pending.length||proposalLoading||comparisonDetails.snapshot().loading||['waiting-for-first-frame','upgrading'].includes(progressiveNormalState)||pendingCaptures.has('import-config')||cameraTween||crownInteraction.active||crownVisual?.active||explosion?.animating)throw new Error('Wait for the watch view to settle, then render again.');
+    if(loading||failed||contextLost||!presentation.interactive||!presentation.canRender||(presentation.enabled&&presentation.pending.length)||proposalLoading||comparisonDetails.snapshot().loading||['waiting-for-first-frame','upgrading'].includes(progressiveNormalState)||pendingCaptures.has('import-config')||cameraTween||crownInteraction.active||crownVisual?.active||explosion?.animating)throw new Error('Wait for the watch view to settle, then render again.');
     const saved={clock:clock.snapshot(),controlsEnabled:controls.enabled};
     controls.enabled=false;clock.setRunning('mechanism',false);clock.setRunning('hands',false);return saved;
   },
