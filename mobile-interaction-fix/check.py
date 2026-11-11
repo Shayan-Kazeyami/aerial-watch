@@ -47,11 +47,13 @@ async def main():
    released=await frame.evaluate('__crownQA()');assert not released['hotspot']['dragging'];assert not released['state']['pulled'];assert abs(released['state']['degrees']-center['state']['degrees'])<.001
    print('HOLD PASS',flush=True)
    R['crownHold']={'first':a,'continued':bstate,'center':center,'released':released}
+   # Freeze optional watch playback after hold acceptance for deterministic software-rendered screenshots.
+   await frame.evaluate("()=>{for(const id of ['animate','animate-movement']){const e=document.getElementById(id);e.checked=false;e.dispatchEvent(new Event('change',{bubbles:true}))}}")
    targets=await frame.locator('.task-dock button').evaluate_all('(els)=>els.map(e=>({width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height}))')
    assert all(t['width']>=44 and t['height']>=44 for t in targets),targets
    assert not await frame.locator('.motion-tools').is_visible()
    (OUT/'assembled-inventory.json').write_text(json.dumps(await frame.evaluate('watchGeometryInventory()'),indent=2))
-   await page.screenshot(path=str(OUT/'assembled.png'))
+   await page.screenshot(animations='disabled',path=str(OUT/'assembled.png'))
    R['initial']=await frame.evaluate(SNAP);R['initialRequests']=len(R['requests']);R['initialNavigation']=len(R['navigation'])
    async def settle(name):
     await frame.wait_for_timeout(400)
@@ -74,7 +76,7 @@ async def main():
      await frame.wait_for_function('assemblyInspect().explosion.amount>.1',timeout=60000)
      await settle('explode-moved')
      (OUT/'exploded-inventory.json').write_text(json.dumps(await frame.evaluate('watchGeometryInventory()'),indent=2))
-     await page.screenshot(path=str(OUT/'exploded.png'))
+     await page.screenshot(animations='disabled',path=str(OUT/'exploded.png'))
      await frame.locator('#atelier-explosion').evaluate("e=>{e.value='37';e.dispatchEvent(new Event('input',{bubbles:true}))}")
      amount=await frame.evaluate('assemblyInspect().explosion.amount')
      assert abs(amount-.37)<.001, f'slider did not immediately follow input: {amount}'
@@ -101,7 +103,7 @@ async def main():
    except Exception:pass
    raise
   finally:
-   try:await asyncio.wait_for(page.screenshot(path=str(OUT/'final.png')),15)
+   try:await asyncio.wait_for(page.screenshot(animations='disabled',path=str(OUT/'final.png')),15)
    except Exception:pass
    (OUT/'report.json').write_text(json.dumps(R,indent=2));print('MOBILE_PANEL_REPORT',json.dumps({k:v for k,v in R.items() if k not in ['requests','steps']}),flush=True);await asyncio.wait_for(b.close(),15)
 asyncio.run(asyncio.wait_for(main(),480))
