@@ -34,7 +34,8 @@ async def main():
    async def touch(kind,points):await cdp.send('Input.dispatchTouchEvent',{'type':kind,'touchPoints':points})
    await touch('touchStart',[{'x':x,'y':y}]);await touch('touchMove',[{'x':x,'y':y-22}])
    await page.wait_for_timeout(800);a=await frame.evaluate('__crownQA()')
-   await page.wait_for_timeout(800);bstate=await frame.evaluate('__crownQA()')
+   await frame.wait_for_function('__crownQA().hotspot.turns>'+str(a['hotspot']['turns']),timeout=15000)
+   bstate=await frame.evaluate('__crownQA()')
    assert bstate['state']['degrees']>a['state']['degrees']+.1,(a,bstate)
    await touch('touchMove',[{'x':x,'y':y}]);await page.wait_for_timeout(500)
    center=await frame.evaluate('__crownQA()');await page.wait_for_timeout(500)
@@ -86,5 +87,6 @@ async def main():
    assert not R['errors'],R['errors'];R['passed']=True
   except Exception as e:R['passed']=False;R['failure']=repr(e);R['traceback']=traceback.format_exc();raise
   finally:
+   await page.screenshot(path=str(OUT/'final.png'))
    (OUT/'report.json').write_text(json.dumps(R,indent=2));print('MOBILE_PANEL_REPORT',json.dumps({k:v for k,v in R.items() if k not in ['requests','steps']}),flush=True);await b.close()
 asyncio.run(main())
