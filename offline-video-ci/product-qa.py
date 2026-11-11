@@ -38,6 +38,7 @@ async def main():
    started=time.monotonic()
    async with page.expect_download(timeout=1800000) as pending:
     await start()
+    await page.locator(".aerial-video-dialog[open]").wait_for(timeout=90000)
     for _ in range(360):
      await page.wait_for_timeout(5000)
      state=await page.evaluate('assemblyInspect().videoExport');print('VIDEO_PROGRESS '+json.dumps(state),flush=True)
@@ -55,7 +56,11 @@ async def main():
     if i in [0,60,120,180,239]:Image.frombytes('RGB',(rgb.width,rgb.height),packed).save(O/f'frame-{i:03d}.png')
    R['uniqueDecodedFrames']=len(set(hashes));assert len(set(hashes))>=230;(O/'frame-hashes.json').write_text(json.dumps(hashes));container.seek(6*av.time_base);seekframe=next(container.decode(video=0));R['seekTimestamp']=float(seekframe.pts*seekframe.time_base);assert abs(R['seekTimestamp']-6)<.05;container.close()
    R['download']={'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()};assert len(downloads)==1;assert not R['errors'],R['errors'];record('actual UI produced a complete seekable eight-second 240-frame watch video and restored live controls');R['passed']=True
-  except Exception as e:R['passed']=False;R['failure']=repr(e);R['traceback']=traceback.format_exc();raise
+  except Exception as e:
+   R['passed']=False;R['failure']=repr(e);R['traceback']=traceback.format_exc()
+   try:R['failureState']=await page.evaluate('({runtime:document.getElementById("viewer-status")?.textContent,shell:document.getElementById("status")?.textContent,inspect:window.assemblyInspect?.()})')
+   except:pass
+   raise
   finally:
    save()
    try:await asyncio.wait_for(browser.close(),15)
