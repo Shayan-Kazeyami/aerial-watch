@@ -10,6 +10,10 @@ async def main():
  async with async_playwright() as p:
   b=await p.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   page=await b.new_page(viewport={'width':430,'height':932},device_scale_factor=3,is_mobile=True,has_touch=True)
+  async def instrument(route):
+   response=await route.fetch()
+   await route.fulfill(response=response,body=(await response.text())+'\n'+pathlib.Path('mobile-performance-fix/inventory-append.js').read_text())
+  await page.route('**/assembly-review.js*',instrument)
   page.set_default_timeout(90000);await page.add_init_script(INIT)
   page.on('pageerror',lambda e:R['errors'].append(str(e)))
   page.on('request',lambda req:R['requests'].append({'url':req.url,'type':req.resource_type}))
@@ -22,6 +26,8 @@ async def main():
     frame=next(f for f in page.frames if f!=page.main_frame and 'atelier-preview' in f.url)
    await frame.locator('body[data-ready=true]').wait_for(timeout=300000)
    await frame.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true"',timeout=300000)
+   (OUT/'assembled-inventory.json').write_text(json.dumps(await frame.evaluate('watchGeometryInventory()'),indent=2))
+   await page.screenshot(path=str(OUT/'assembled.png'))
    R['initial']=await frame.evaluate(SNAP);R['initialRequests']=len(R['requests']);R['initialNavigation']=len(R['navigation'])
    async def settle(name):
     await frame.wait_for_timeout(400)
@@ -39,6 +45,11 @@ async def main():
     if mode=='explode':
      await frame.wait_for_function('assemblyInspect().explosion.amount>.1',timeout=60000)
      await settle('explode-moved')
+     (OUT/'exploded-inventory.json').write_text(json.dumps(await frame.evaluate('watchGeometryInventory()'),indent=2))
+     await page.screenshot(path=str(OUT/'exploded.png'))
+     await frame.locator('#atelier-explosion').evaluate("e=>{e.value='37';e.dispatchEvent(new Event('input',{bubbles:true}))}")
+     amount=await frame.evaluate('assemblyInspect().explosion.amount')
+     assert abs(amount-.37)<.001, f'slider did not immediately follow input: {amount}'
     if mode!='explore' and await frame.locator('#close').is_visible():
      await frame.locator('#close').tap(force=True);await settle(mode+'-close')
    # Repeated interaction catches stale listeners and allocation churn.
