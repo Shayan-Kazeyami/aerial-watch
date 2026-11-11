@@ -41,7 +41,10 @@ async def main():
     for _ in range(360):
      await page.wait_for_timeout(5000)
      state=await page.evaluate('assemblyInspect().videoExport');print('VIDEO_PROGRESS '+json.dumps(state),flush=True)
-     if not state['active']:break
+     if not state['active']:
+      await page.wait_for_timeout(500)
+      if not downloads:raise AssertionError('Export ended without download: '+await page.locator('#viewer-status').text_content())
+      break
    dl=await pending.value;path=O/'aerial-eight-second-motion.webm';await dl.save_as(path);R['renderSeconds']=time.monotonic()-started;await inactive();after=await page.evaluate('assemblyInspect()');R['afterFull']=after
    assert same(before['camera'],after['camera']) and same(before['target'],after['target']);assert before['animation']==after['animation'] and before['interiorAnimation']==after['interiorAnimation'];assert not after['videoExport']['active']
    container=av.open(str(path));stream=container.streams.video[0];frames=list(container.decode(video=0));assert len(frames)==240
@@ -58,3 +61,4 @@ async def main():
    try:await asyncio.wait_for(browser.close(),15)
    except asyncio.TimeoutError:pass
 asyncio.run(main())
+
