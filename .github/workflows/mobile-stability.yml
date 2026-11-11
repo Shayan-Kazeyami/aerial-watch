@@ -1,0 +1,24 @@
+name: Mobile stability regression
+on:
+  push:
+    branches: [qa/mobile-stability-20261111]
+permissions:
+  contents: read
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python mobile-performance-fix/build.py
+      - run: |
+          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
+          WATCH_URL="$(cat mobile-performance-fix/url.txt)" QA_STRICT=1 python -u mobile-performance-fix/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-stability-evidence
+          path: |
+            mobile-output
+            mobile-panel-evidence
