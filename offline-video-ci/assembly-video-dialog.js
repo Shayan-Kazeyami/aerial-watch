@@ -8,6 +8,10 @@ export function createVideoExportDialog({onCancel=()=>{},doc=globalThis.document
  doc.head.append(style);doc.body.append(dialog);
  const progress=dialog.querySelector('progress'),message=dialog.querySelector('.aerial-video-progress'),button=dialog.querySelector('button');let lastAnnouncement=-1;
  const cancel=event=>{event?.preventDefault();if(button.disabled)return;button.disabled=true;message.textContent='Cancelling and restoring the watch…';onCancel();};
+ // Native modality prevents pointer interaction, but document-level hotkeys
+ // still receive bubbled events. Keep Home/Escape from changing the watch.
+ // Do not prevent the default: Escape must still request native cancellation.
+ dialog.addEventListener('keydown',event=>event.stopPropagation());
  button.addEventListener('click',cancel);dialog.addEventListener('cancel',cancel);
  return {
   open(){button.disabled=false;progress.value=0;lastAnnouncement=-1;message.textContent='Preparing the video…';dialog.showModal();},
