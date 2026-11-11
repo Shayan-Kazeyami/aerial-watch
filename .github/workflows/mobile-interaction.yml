@@ -1,0 +1,27 @@
+name: Mobile interaction regression
+on:
+  push:
+    branches: [qa/mobile-interaction-20261111]
+permissions:
+  contents: read
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: npm install --prefix mobile-interaction-fix playwright
+      - run: node --test mobile-interaction-fix/crown-hold.test.mjs
+      - run: python mobile-interaction-fix/build.py
+      - run: |
+          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
+          BASE_URL=http://127.0.0.1:8765/mobile-interaction-fix/ node mobile-interaction-fix/browser-check.mjs
+          WATCH_URL="$(cat mobile-interaction-fix/url.txt)" QA_STRICT=1 python -u mobile-interaction-fix/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-stability-evidence
+          path: |
+            mobile-output
+            mobile-panel-evidence
