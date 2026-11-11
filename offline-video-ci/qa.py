@@ -1,4 +1,5 @@
-import asyncio,json,pathlib,subprocess,hashlib,time,traceback
+import asyncio,json,pathlib,subprocess,hashlib,time,traceback,av
+from PIL import Image
 from playwright.async_api import async_playwright
 O=pathlib.Path('offline-output');RID='36f0aca93a5c9e1cf01e0237aabcc0c71ee96fbfc2cc64394b74b35c32cf75e8'
 R={'identity':json.loads((O/'identity.json').read_text()),'errors':[]}
@@ -17,11 +18,15 @@ async def main():
     result=await page.evaluate('__offlineQA.start(2000)')
    dl=await pending.value;path=O/'aerial-offline-motion.webm';await dl.save_as(path);R['renderSeconds']=time.monotonic()-started;R['run']=result
    assert result['before']['camera']==result['after']['camera'];assert result['before']['target']==result['after']['target'];assert not result['after']['busy']
-   probe=subprocess.run(['ffprobe','-v','error','-count_frames','-show_streams','-show_format','-of','json',str(path)],capture_output=True,text=True,timeout=120);assert probe.returncode==0,probe.stderr;R['ffprobe']=json.loads(probe.stdout)
-   v=next(s for s in R['ffprobe']['streams'] if s['codec_type']=='video');assert int(v['nb_read_frames'])==60;assert abs(float(R['ffprobe']['format']['duration'])-2)<.01
-   decode=subprocess.run(['ffmpeg','-v','error','-i',str(path),'-f','framemd5','-'],capture_output=True,text=True,timeout=120);assert decode.returncode==0,decode.stderr
-   (O/'frames.md5').write_text(decode.stdout);hashes=[line.split(',')[-1].strip() for line in decode.stdout.splitlines() if not line.startswith('#')];R['uniqueDecodedFrames']=len(set(hashes));assert len(set(hashes))>=50
-   extract=subprocess.run(['ffmpeg','-y','-v','error','-i',str(path),'-vf','select=eq(n\\,0)+eq(n\\,30)+eq(n\\,59)','-vsync','0',str(O/'frame-%02d.png')],capture_output=True,text=True,timeout=120);assert extract.returncode==0,extract.stderr
+   container=av.open(str(path));stream=container.streams.video[0];frames=list(container.decode(video=0));assert len(frames)==60
+   R['decoder']={'name':'PyAV / FFmpeg','codec':stream.codec_context.name,'width':stream.width,'height':stream.height,'frames':len(frames),'duration':container.duration/av.time_base,'timestamps':[float(f.pts*f.time_base) for f in frames]}
+   assert abs(R['decoder']['duration']-2)<.01
+   assert all(abs(t-i/30)<.0011 for i,t in enumerate(R['decoder']['timestamps']))
+   hashes=[]
+   for i,frame in enumerate(frames):
+    rgb=frame.reformat(format='rgb24');raw=bytes(rgb.planes[0]);stride=rgb.planes[0].line_size;packed=b''.join(raw[y*stride:y*stride+rgb.width*3] for y in range(rgb.height));hashes.append(hashlib.sha256(packed).hexdigest())
+    if i in [0,30,59]:Image.frombytes('RGB',(rgb.width,rgb.height),packed).save(O/f'frame-{i:03d}.png')
+   R['uniqueDecodedFrames']=len(set(hashes));assert len(set(hashes))>=50;(O/'frame-hashes.json').write_text(json.dumps(hashes));container.close()
    R['download']={'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()};assert not R['errors'],R['errors'];R['passed']=True
   except Exception as e:R['passed']=False;R['failure']=repr(e);R['traceback']=traceback.format_exc();raise
   finally:

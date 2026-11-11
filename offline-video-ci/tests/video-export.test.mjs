@@ -15,14 +15,14 @@ test('offline export samples every frame at deterministic time and restores stat
  assert(h.frames.every(f=>f.closed));assert.equal(h.instances[0].state,'closed');assert.deepEqual(h.end,[{saved:'pose'}]);assert.equal(h.exporter.active,false);
 });
 test('a slow render does not alter encoded sample times',async()=>{
- const h=setup({renderFrame:()=>new Promise(resolve=>setTimeout(resolve,5))});await h.exporter.start({durationMs:100,frameRate:30});assert.deepEqual(h.encoded.map(x=>x.timestamp),[0,33333,66667]);
+ const h=setup({renderFrame:()=>{const stop=Date.now()+5;while(Date.now()<stop){}}});await h.exporter.start({durationMs:100,frameRate:30});assert.deepEqual(h.encoded.map(x=>x.timestamp),[0,33333,66667]);
 });
 test('cancel while rendering restores, closes and permits a new export',async()=>{
  let count=0;const h=setup({renderFrame:()=>{if(++count===2)h.exporter.cancel();}});await assert.rejects(h.exporter.start({durationMs:1000}),{name:'AbortError'});assert.equal(h.frames.length,1);assert.equal(h.end.length,1);assert.equal(h.instances[0].state,'closed');assert.equal(h.exporter.active,false);
  await h.exporter.start({durationMs:100});assert.equal(h.end.length,2);
 });
 test('duplicates are rejected and disposal permanently closes exporter',async()=>{
- let release;const h=setup({renderFrame:()=>new Promise(resolve=>{release=resolve;})});const task=h.exporter.start({durationMs:100});await new Promise(r=>setTimeout(r,0));await assert.rejects(h.exporter.start(),/already rendering/);h.exporter.dispose();await assert.rejects(task,{name:'AbortError'});release?.();await assert.rejects(h.exporter.start(),/has closed/);assert.equal(h.end.length,1);
+ let release;const h=setup({yieldTask:()=>new Promise(resolve=>{release=resolve;})});const task=h.exporter.start({durationMs:100});await new Promise(r=>setTimeout(r,0));await assert.rejects(h.exporter.start(),/already rendering/);h.exporter.dispose();await assert.rejects(task,{name:'AbortError'});release?.();await assert.rejects(h.exporter.start(),/has closed/);assert.equal(h.end.length,1);
 });
 test('resize aborts instead of mixing dimensions',async()=>{
  const h=setup({yieldTask:async()=>{h.canvas.width=100;}});await assert.rejects(h.exporter.start({durationMs:100}),/changed size/);assert.equal(h.end.length,1);assert(h.frames.every(f=>f.closed));
@@ -40,10 +40,22 @@ test('memory is bounded and failure retains no active session',async()=>{
 test('unsupported encoders leave scene untouched',async()=>{
  const h=setup();h.setSupported(false);await assert.rejects(h.exporter.start(),/cannot encode/);assert.equal(h.renders.length,0);assert.equal(h.end.length,0);assert.equal(h.exporter.active,false);
 });
-test('render and encoding timeouts are bounded',async()=>{
- const h=setup({timeoutMs:10,renderFrame:()=>new Promise(()=>{})});await assert.rejects(h.exporter.start(),/Watch frame render timed out/);assert.equal(h.end.length,1);assert.equal(h.exporter.active,false);
+test('UI scheduling timeout is bounded',async()=>{
+ const h=setup({timeoutMs:10,yieldTask:()=>new Promise(()=>{})});await assert.rejects(h.exporter.start(),/Video render scheduling timed out/);assert.equal(h.end.length,1);assert.equal(h.exporter.active,false);
 });
 test('invalid dimensions, duration and frame rate fail before scene begins',async()=>{
  for(const opts of [{durationMs:0},{frameRate:0},{durationMs:31000},{frameRate:61}]){const h=setup();await assert.rejects(h.exporter.start(opts));assert.equal(h.end.length,0);}
  const h=setup();h.canvas.width=0;await assert.rejects(h.exporter.start(),/dimensions/);assert.equal(h.end.length,0);
+});
+
+test('async scene hooks are rejected before scene work begins',async()=>{
+ for(const name of ['begin','renderFrame','end']){const h=setup({[name]:async()=>{}});await assert.rejects(h.exporter.start(),/must be synchronous/);assert.equal(h.renders.length,0);assert.equal(h.end.length,0);}
+});
+test('late old encoder callbacks cannot affect a replacement export',async()=>{
+ let release;const h=setup();await h.exporter.start({durationMs:100});const old=h.instances[0];
+ const next=h.exporter.start({durationMs:100});old.callbacks.error(Error('stale failure'));old.callbacks.output({byteLength:999999999});await next;assert.equal(h.end.length,2);
+});
+test('encoder flush timeout restores scene and releases owned resources',async()=>{
+ class Encoder{static async isConfigSupported(config){return {supported:true,config};}constructor(){this.state='configured';this.encodeQueueSize=4;}configure(){}encode(){}flush(){return new Promise(()=>{});}close(){this.state='closed';}}
+ const h=setup({Encoder,timeoutMs:10});await assert.rejects(h.exporter.start({durationMs:100}),/Video encoding timed out/);assert.equal(h.end.length,1);assert.equal(h.exporter.active,false);assert(h.frames.every(f=>f.closed));
 });

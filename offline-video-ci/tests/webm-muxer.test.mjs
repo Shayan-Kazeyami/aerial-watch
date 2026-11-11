@@ -31,7 +31,7 @@ test('input validation and bounded output',()=>{
  for(const patch of [{width:0},{height:NaN},{frameRate:Infinity},{durationMs:0},{codec:'h264'},{expectedFrames:2},{chunks:[]},{chunks:[chunk(0,'delta')]},{chunks:[chunk(),chunk()]},{chunks:[chunk(-1)]},{chunks:[chunk(100000)]},{chunks:[{...chunk(),duration:200000}]},{maxOutputBytes:1024,chunks:[{...chunk(),data:new Uint8Array(1024)}]}]) assert.throws(()=>muxWebM({...options,...patch}));
  const original=chunk();assert.deepEqual(muxWebM(options),muxWebM({...options,chunks:[{type:'key',timestamp:0,byteLength:3,copyTo(out){out.set(original.data);}}]}));
 });
-for(const codec of ['vp8','vp9'])test(`real ${codec}: ffprobe metadata, decoding and seeking`,async()=>{
+for(const codec of ['vp8','vp9'])test(`real ${codec}: ffprobe metadata, decoding and seeking`,{skip:process.env.SKIP_FFMPEG_TESTS==='1'},async()=>{
  const dir=await mkdtemp(join(tmpdir(),'webm-test-'));
  try{
  const ivf=join(dir,'source.ivf'), webm=join(dir,'output.webm');
