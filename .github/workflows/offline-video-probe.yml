@@ -1,0 +1,40 @@
+name: Diagnose watch encoder recovery
+on:
+  push:
+    branches: ['qa/offline-watch-video-20261111']
+concurrency:
+  group: offline-watch-video-probe
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        scope: [probe]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: python offline-video-ci/build.py
+      - run: |
+          ROOT=$(python -c "import json;print(json.load(open('offline-output/build.json'))['releasePath'])")
+          SKIP_FFMPEG_TESTS=1 AERIAL_RUNTIME_TEST_PATH="$ROOT/assembly-review.js" node --test offline-video-ci/tests/*.test.mjs
+          for f in "$ROOT"/*.js; do node --check "$f" || exit 1; done
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright av pillow
+      - run: python -m playwright install chromium
+      - run: python -m http.server 8765 > /tmp/watch-http.log 2>&1 &
+      - run: timeout 34m env QA_SCOPE=${{ matrix.scope }} python -u offline-video-ci/encoder-probe.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: offline-watch-video-${{ matrix.scope }}
+          path: offline-output
+
