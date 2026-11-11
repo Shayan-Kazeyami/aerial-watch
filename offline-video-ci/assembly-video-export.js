@@ -9,7 +9,7 @@ const positive=(value,name)=>{if(!Number.isFinite(value)||value<=0)throw new Typ
 // must finish their mutations before returning, and must not start background
 // work. This never replaces a failed real-time recording with a sparse clip.
 export function createFrameVideoExporter({canvas,begin=()=>{},renderFrame,end=()=>{},onProgress=()=>{},
-  Encoder=globalThis.VideoEncoder,Frame=globalThis.VideoFrame,mux=muxWebM,
+  Encoder=globalThis.VideoEncoder,Frame=globalThis.VideoFrame,createFrame=(source,metadata)=>new Frame(source,metadata),mux=muxWebM,
   yieldTask=()=>new Promise(resolve=>setTimeout(resolve,0)),timeoutMs=60000,
   schedule=setTimeout,unschedule=clearTimeout,maxOutputBytes=128*1024*1024}={}){
  let active=null,disposed=false;
@@ -80,7 +80,7 @@ export function createFrameVideoExporter({canvas,begin=()=>{},renderFrame,end=()
      const timestamp=Math.round(index*1000000/frameRate),next=Math.round((index+1)*1000000/frameRate);
      synchronous(renderFrame,[index/frameRate,{index,frameCount,frameRate,context}],'Watch frame render');check(session);
      let frame;
-     try{frame=new Frame(canvas,{timestamp,duration:next-timestamp,alpha:'discard'});encoder.encode(frame,{keyFrame:index===0||index%Math.round(frameRate*2)===0});}
+     try{frame=createFrame(canvas,{timestamp,duration:next-timestamp,alpha:'discard'});encoder.encode(frame,{keyFrame:index===0||index%Math.round(frameRate*2)===0});}
      finally{frame?.close();}
      if(encoder.encodeQueueSize>=4)await bounded(session,encoder.flush(),'Video encoding');
      check(session);onProgress({completed:index+1,total:frameCount,phase:'rendering'});await bounded(session,yieldTask(),'Video render scheduling');
@@ -100,3 +100,4 @@ export function createFrameVideoExporter({canvas,begin=()=>{},renderFrame,end=()
   },
  };
 }
+

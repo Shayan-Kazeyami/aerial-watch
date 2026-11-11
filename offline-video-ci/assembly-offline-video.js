@@ -1,10 +1,12 @@
+import {createReadbackVideoFrame} from './assembly-video-frame.js';
 import {createFrameVideoExporter} from './assembly-video-export.js';
 import {createVideoExportDialog} from './assembly-video-dialog.js';
 
-export function createOfflineVideoExport({canvas,begin,renderFrame,end,onProgress=()=>{},doc=globalThis.document,win=globalThis.window}={}){
+export function createOfflineVideoExport({canvas,gl,begin,renderFrame,end,onProgress=()=>{},doc=globalThis.document,win=globalThis.window}={}){
  let disposed=false,progress=null,exporter;
  const dialog=createVideoExportDialog({doc,onCancel:()=>exporter.cancel()});
- exporter=createFrameVideoExporter({canvas,
+ const snapshot=createReadbackVideoFrame({canvas,gl,doc});
+ exporter=createFrameVideoExporter({canvas,createFrame:(_,metadata)=>snapshot(metadata),
   begin,
   renderFrame,
   end,
@@ -27,3 +29,4 @@ export function createOfflineVideoExport({canvas,begin,renderFrame,end,onProgres
   dispose(){if(disposed)return;disposed=true;win.removeEventListener('pagehide',cancel);win.removeEventListener('resize',cancel);doc.removeEventListener('visibilitychange',hidden);exporter.dispose();dialog.dispose();},
  };
 }
+

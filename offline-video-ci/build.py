@@ -4,7 +4,7 @@ root=pathlib.Path('preview-b/releases');base=root/BASE_ID;stage=root/'offline-vi
 shutil.copytree(base,stage,dirs_exist_ok=True)
 from integrate import integrate
 integrate(stage)
-MODULES=['assembly-video-export.js','assembly-webm-muxer.js','assembly-video-dialog.js','assembly-offline-video.js']
+MODULES=['assembly-video-frame.js','assembly-video-export.js','assembly-webm-muxer.js','assembly-video-dialog.js','assembly-offline-video.js']
 CHANGED=MODULES+['assembly-review.js','atelier-preview.js','assembly-framing.js']
 for name in MODULES:shutil.copyfile(pathlib.Path('offline-video-ci')/name,stage/name)
 m=json.loads((base/'deployment-manifest.json').read_text());files={f['path']:dict(f) for f in m['localFiles']}

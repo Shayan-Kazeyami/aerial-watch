@@ -34,6 +34,8 @@ async def main():
    await page.evaluate("""(()=>{const native=File.prototype.text;File.prototype.text=function(){return new Promise(resolve=>window.__releaseImport=()=>native.call(this).then(resolve))}})()""")
    await page.locator('#import-config').set_input_files({'name':'pending-view.json','mimeType':'application/json','buffer':b'{}'})
    await start();await page.wait_for_function('document.getElementById("viewer-status").textContent.includes("Wait for the saved view")');assert not await page.evaluate('assemblyInspect().videoExport.active');await page.evaluate('__releaseImport()');await page.wait_for_function('document.getElementById("import-config").value===""');record('pending saved-view import cannot race a video render')
+   # Keep all cancellation/framing checks at640px; software-rendered full clip uses a smaller real viewport.
+   await page.set_viewport_size({'width':360,'height':480});await page.wait_for_timeout(1500);await page.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true"')
    await page.locator('#motion').click();assert await page.locator('#motion').get_attribute('aria-pressed')=='true';before=await page.evaluate('assemblyInspect()');R['beforeFull']=before;save()
    started=time.monotonic()
    async with page.expect_download(timeout=1800000) as pending:
