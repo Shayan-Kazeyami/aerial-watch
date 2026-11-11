@@ -59,3 +59,10 @@ if($('record-scene')){
  s=s.replace("finally{if(request===configurationRequest)input.value='';}","finally{if(request===configurationRequest){input.value='';pendingCaptures.delete('import-config');}}")
  p.write_text(s)
  p=root/'atelier-preview.js';s=p.read_text().replace("${button('Record 8s video','record-scene')}","${button('Save 8s video','record-scene')}").replace('Downloads stay on this device. Video availability depends on browser support.','Downloads stay on this device. Rendering builds every video frame and may take longer than 8 seconds. Older browsers use live recording.');p.write_text(s)
+
+ # Both side panels and bottom sheets are UI-only resizes. Viewport dimensions
+ # distinguish these from window/orientation changes; stage width cannot.
+ p=root/'assembly-framing.js';s=p.read_text()
+ old='previous.viewportWidth===next.viewportWidth&&previous.viewportHeight===next.viewportHeight&&\n  Math.abs(previous.width-next.width)<.5'
+ new='previous.viewportWidth===next.viewportWidth&&previous.viewportHeight===next.viewportHeight'
+ assert s.count(old)==1;s=s.replace(old,new).replace('Panel-only stage height changes','Panel-only stage width/height changes');p.write_text(s)

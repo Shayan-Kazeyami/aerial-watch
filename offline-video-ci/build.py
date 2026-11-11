@@ -5,7 +5,7 @@ shutil.copytree(base,stage,dirs_exist_ok=True)
 from integrate import integrate
 integrate(stage)
 MODULES=['assembly-video-export.js','assembly-webm-muxer.js','assembly-video-dialog.js','assembly-offline-video.js']
-CHANGED=MODULES+['assembly-review.js','atelier-preview.js']
+CHANGED=MODULES+['assembly-review.js','atelier-preview.js','assembly-framing.js']
 for name in MODULES:shutil.copyfile(pathlib.Path('offline-video-ci')/name,stage/name)
 m=json.loads((base/'deployment-manifest.json').read_text());files={f['path']:dict(f) for f in m['localFiles']}
 def sha(b):return hashlib.sha256(b).hexdigest()
@@ -29,3 +29,4 @@ for f in canonical['localFiles']+canonical['references']:
 out=pathlib.Path('offline-output');out.mkdir(exist_ok=True);(out/'build.json').write_text(json.dumps({'releaseId':rid,'revision':rev['digest'],'releasePath':str(dest)}));print('BUILD',rid,rev['digest'],flush=True)
 for f in CHANGED+['quality-study/viewer-revision.json','quality-study/viewer-revision.js','deployment-manifest.json','release-receipt.json']:
  p=out/'release'/f;p.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(dest/f,p)
+
