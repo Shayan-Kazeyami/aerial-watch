@@ -26,6 +26,7 @@ async def main():
     frame=next(f for f in page.frames if f!=page.main_frame and 'atelier-preview' in f.url)
    await frame.locator('body[data-ready=true]').wait_for(timeout=300000)
    await frame.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true"',timeout=300000)
+   print('READY',flush=True)
    # Real CDP touch: stationary offset must keep turning; center/release stops.
    dot=frame.locator('.crown-hotspot')
    await dot.wait_for(state='visible')
@@ -34,7 +35,7 @@ async def main():
    async def touch(kind,points):await cdp.send('Input.dispatchTouchEvent',{'type':kind,'touchPoints':points})
    await touch('touchStart',[{'x':x,'y':y}]);await touch('touchMove',[{'x':x,'y':y-22}])
    await page.wait_for_timeout(800);a=await frame.evaluate('__crownQA()')
-   await frame.wait_for_function('__crownQA().hotspot.turns>'+str(a['hotspot']['turns']),timeout=15000)
+   await asyncio.wait_for(frame.wait_for_function('__crownQA().hotspot.turns>'+str(a['hotspot']['turns']),timeout=15000),20)
    bstate=await frame.evaluate('__crownQA()')
    assert bstate['state']['degrees']>a['state']['degrees']+.1,(a,bstate)
    await touch('touchMove',[{'x':x,'y':y}]);await page.wait_for_timeout(500)
@@ -42,6 +43,7 @@ async def main():
    stopped=await frame.evaluate('__crownQA()');assert abs(center['state']['degrees']-stopped['state']['degrees'])<.001
    await touch('touchEnd',[]);await page.wait_for_timeout(500)
    released=await frame.evaluate('__crownQA()');assert not released['hotspot']['dragging'];assert not released['state']['pulled']
+   print('HOLD PASS',flush=True)
    R['crownHold']={'first':a,'continued':bstate,'center':center,'released':released}
    targets=await frame.locator('.task-dock button').evaluate_all('(els)=>els.map(e=>({width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height}))')
    assert all(t['width']>=44 and t['height']>=44 for t in targets),targets
@@ -53,6 +55,7 @@ async def main():
     await frame.wait_for_timeout(400)
     # Real rendered frame after layout, no arbitrary success from DOM alone.
     await frame.evaluate('''()=>new Promise((resolve,reject)=>{let n=0;const start=performance.now();function tick(){if(++n>=2)return resolve();if(performance.now()-start>60000)return reject(new Error('frame timeout'));requestAnimationFrame(tick)}requestAnimationFrame(tick)})''')
+    print('STEP',name,flush=True)
     s=await frame.evaluate(SNAP);R['steps'].append({'name':name,**s})
     assert s['timeOrigin']==R['initial']['timeOrigin'],f'{name}: document restarted'
     assert not s['qa']['contexts'],f'{name}: context loss'
@@ -85,8 +88,15 @@ async def main():
    R['writesAfterReady']=[w for w in R['steps'][-1]['qa']['writes'] if w['t']>R['initial']['qa']['writes'][-1]['t']] if R['initial']['qa']['writes'] else R['steps'][-1]['qa']['writes']
    if STRICT:assert not [w for w in R['writesAfterReady'] if w['id']=='assembly-canvas'],'canvas dimension write during UI interaction'
    assert not R['errors'],R['errors'];R['passed']=True
-  except Exception as e:R['passed']=False;R['failure']=repr(e);R['traceback']=traceback.format_exc();raise
+  except Exception as e:
+   R['passed']=False;R['failure']=repr(e);R['traceback']=traceback.format_exc()
+   try:
+    R['crownFailure']=await asyncio.wait_for(frame.evaluate('__crownQA()'),5)
+    await asyncio.wait_for(cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]}),5)
+   except Exception:pass
+   raise
   finally:
-   await page.screenshot(path=str(OUT/'final.png'))
-   (OUT/'report.json').write_text(json.dumps(R,indent=2));print('MOBILE_PANEL_REPORT',json.dumps({k:v for k,v in R.items() if k not in ['requests','steps']}),flush=True);await b.close()
-asyncio.run(main())
+   try:await asyncio.wait_for(page.screenshot(path=str(OUT/'final.png')),15)
+   except Exception:pass
+   (OUT/'report.json').write_text(json.dumps(R,indent=2));print('MOBILE_PANEL_REPORT',json.dumps({k:v for k,v in R.items() if k not in ['requests','steps']}),flush=True);await asyncio.wait_for(b.close(),15)
+asyncio.run(asyncio.wait_for(main(),480))
