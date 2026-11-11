@@ -38,11 +38,13 @@ async def main():
    await asyncio.wait_for(frame.wait_for_function('__crownQA().hotspot.turns>'+str(a['hotspot']['turns']),timeout=15000),20)
    bstate=await frame.evaluate('__crownQA()')
    assert bstate['state']['degrees']>a['state']['degrees']+.1,(a,bstate)
-   await touch('touchMove',[{'x':x,'y':y}]);await page.wait_for_timeout(500)
-   center=await frame.evaluate('__crownQA()');await page.wait_for_timeout(500)
+   await touch('touchMove',[{'x':x,'y':y}])
+   await frame.wait_for_function('__crownQA().hotspot.pointerMoves>=2',timeout=30000)
+   center=await frame.evaluate('__crownQA()')
+   await frame.wait_for_function('__crownQA().hotspot.updates>='+str(center['hotspot']['updates']+2),timeout=30000)
    stopped=await frame.evaluate('__crownQA()');assert abs(center['state']['degrees']-stopped['state']['degrees'])<.001
    await touch('touchEnd',[]);await page.wait_for_timeout(500)
-   released=await frame.evaluate('__crownQA()');assert not released['hotspot']['dragging'];assert not released['state']['pulled']
+   released=await frame.evaluate('__crownQA()');assert not released['hotspot']['dragging'];assert not released['state']['pulled'];assert abs(released['state']['degrees']-center['state']['degrees'])<.001
    print('HOLD PASS',flush=True)
    R['crownHold']={'first':a,'continued':bstate,'center':center,'released':released}
    targets=await frame.locator('.task-dock button').evaluate_all('(els)=>els.map(e=>({width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height}))')
