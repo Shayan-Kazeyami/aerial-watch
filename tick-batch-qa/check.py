@@ -16,6 +16,7 @@ async def main():
    await page.goto(URL,wait_until='domcontentloaded',timeout=120000);await page.locator('body[data-ready=true]').wait_for(timeout=300000);await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000)
    await page.evaluate('tickQA.freeze()');await page.wait_for_function('tickQA.state().settled',timeout=180000)
    async def compare(state):
+    await page.evaluate('tickQA.freeze()');await page.wait_for_function('tickQA.state().settled',timeout=180000)
     data={}
     for name,on in [('before',False),('after',True)]:
      d=await page.evaluate('(on)=>tickQA.set(on)',on);data[name]=d
