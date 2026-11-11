@@ -105,5 +105,7 @@ async def main():
   finally:
    try:await asyncio.wait_for(page.screenshot(animations='disabled',path=str(OUT/'final.png')),15)
    except Exception:pass
-   (OUT/'report.json').write_text(json.dumps(R,indent=2));print('MOBILE_PANEL_REPORT',json.dumps({k:v for k,v in R.items() if k not in ['requests','steps']}),flush=True);await asyncio.wait_for(b.close(),15)
+   (OUT/'report.json').write_text(json.dumps(R,indent=2));print('MOBILE_PANEL_REPORT',json.dumps({k:v for k,v in R.items() if k not in ['requests','steps']}),flush=True)
+   try:await asyncio.wait_for(b.close(),15)
+   except TimeoutError:print('Browser cleanup exceeded15s after report saved',flush=True)
 asyncio.run(asyncio.wait_for(main(),480))
