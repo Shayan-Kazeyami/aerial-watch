@@ -276,3 +276,8 @@
     inset:44px 0 calc(80px + env(safe-area-inset-bottom,0px)); transition:none;
   }
 }
+/* Keep all five primary actions in distinct equal cells in every panel state. */
+@media(max-width:680px){
+ .atelier-live .task-dock{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;}
+ .atelier-live .task-dock button{width:100%;min-width:44px;}
+}

@@ -57,6 +57,9 @@ async def main():
     await frame.wait_for_timeout(400)
     # Real rendered frame after layout, no arbitrary success from DOM alone.
     await frame.evaluate('''()=>new Promise((resolve,reject)=>{let n=0;const start=performance.now();function tick(){if(++n>=2)return resolve();if(performance.now()-start>60000)return reject(new Error('frame timeout'));requestAnimationFrame(tick)}requestAnimationFrame(tick)})''')
+    boxes=await frame.locator('.task-dock button').evaluate_all('(els)=>els.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,w:r.width,h:r.height}})')
+    assert all(v['w']>=44 and v['h']>=44 for v in boxes),boxes
+    assert all(boxes[i]['x']+boxes[i]['w']<=boxes[i+1]['x']+.5 for i in range(len(boxes)-1)),boxes
     print('STEP',name,flush=True)
     s=await frame.evaluate(SNAP);R['steps'].append({'name':name,**s})
     assert s['timeOrigin']==R['initial']['timeOrigin'],f'{name}: document restarted'
