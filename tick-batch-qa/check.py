@@ -3,8 +3,8 @@ from playwright.async_api import async_playwright
 from PIL import Image,ImageChops,ImageStat
 OUT=pathlib.Path('tick-output');OUT.mkdir(exist_ok=True)
 RID='30cb294bff1ad0f4d3fa10f5937c4610877e382d4cca2aab5cae777ddbc1e5e7'
-URL='http://127.0.0.1:8765/preview-b/releases/'+RID+'/atelier-preview.html?tickBatch=1&quality=efficient'
-R={'release':RID,'setup':'Chromium SwiftShader mobile430x932 DPR3 Smooth WebGL2','states':{},'errors':[]}
+URL=os.environ.get('WATCH_URL','http://127.0.0.1:8765/preview-b/releases/'+RID+'/atelier-preview.html?tickBatch=1&quality=efficient')
+R={'release':URL.split('/releases/')[1].split('/')[0],'setup':'Chromium SwiftShader mobile430x932 DPR3 Smooth WebGL2','states':{},'errors':[]}
 async def main():
  async with async_playwright() as p:
   b=await p.chromium.launch(headless=True,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-dev-shm-usage'])
@@ -14,7 +14,7 @@ async def main():
   await page.route('**/assembly-review.js*',instrument);page.on('pageerror',lambda e:R['errors'].append(str(e)))
   try:
    await page.goto(URL,wait_until='domcontentloaded',timeout=120000);await page.locator('body[data-ready=true]').wait_for(timeout=300000);await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000)
-   await page.evaluate('tickQA.freeze()')
+   await page.evaluate('tickQA.freeze()');await page.wait_for_function('tickQA.state().settled',timeout=180000)
    async def compare(state):
     data={}
     for name,on in [('before',False),('after',True)]:
@@ -28,6 +28,19 @@ async def main():
    await page.locator('.task-dock [data-mode=explode]').tap(force=True);await page.wait_for_function('assemblyInspect().explosion.amount===1&&!assemblyInspect().explosion.animating',timeout=180000);await compare('exploded')
    await page.locator('#atelier-explosion').evaluate("e=>{e.value='37';e.dispatchEvent(new Event('input',{bubbles:true}))}");assert abs(await page.evaluate('assemblyInspect().explosion.amount')-.37)<.001;await compare('partial')
    await page.locator('#home').tap(force=True);await page.wait_for_function('assemblyInspect().explosion.amount===0',timeout=180000);await compare('reset')
+   # Actual integration fallback: diagnostic inspection uses original individually inspectable ticks.
+   for key in ['wireframe','solidWireframe','transparent']:
+    await page.evaluate("key=>document.dispatchEvent(new CustomEvent('atelier:inspection',{detail:{key,value:true}}))",key)
+    assert not await page.evaluate('tickQA.state().enabled'),key
+    await page.evaluate("key=>document.dispatchEvent(new CustomEvent('atelier:inspection',{detail:{key,value:false}}))",key)
+    assert await page.evaluate('tickQA.state().enabled'),key
+   # Animate original movement with batching active; no separate tick transforms are lost.
+   start=await page.evaluate('tickQA.state().clock.mechanism')
+   await page.locator('#play-motion').evaluate('e=>e.click()')
+   await page.wait_for_function('(start)=>tickQA.state().clock.mechanism>start+.1',arg=start,timeout=180000)
+   assert await page.evaluate('tickQA.state().enabled')
+   await page.evaluate('tickQA.freeze()')
+   R['inspectionFallbacks']=['wireframe','solidWireframe','transparent'];R['movementAnimationWithBatch']=True
    assert not R['errors'];R['passed']=True
   except Exception as e:R['passed']=False;R['failure']=repr(e);raise
   finally:
