@@ -14,7 +14,8 @@ jobs:
       - run: python mobile-performance-fix/build.py
       - run: |
           python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
-          WATCH_URL="$(cat mobile-performance-fix/url.txt)" QA_STRICT=1 python -u mobile-performance-fix/check.py
+          for n in $(seq 1 30); do curl -fsSL https://shayan-kazeyami.github.io/aerial-watch/ | grep -q watch-home-mobile-fa54b64d && break; sleep 10; done
+          WATCH_URL="https://shayan-kazeyami.github.io/aerial-watch/" QA_STRICT=1 python -u mobile-performance-fix/check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
