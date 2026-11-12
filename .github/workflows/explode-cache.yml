@@ -18,7 +18,7 @@ jobs:
       - run: python explode-performance/build.py
       - run: |
           python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
-          node explode-performance/browser-check.mjs
+          BASE_URL="https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/1b013b90cdd2d448fbe5c88bc90e28786ba3424600fb43d35ddabed0707d9158/atelier-preview.html" CANDIDATE_URL="https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/6b2118bcfb83c3cac2631fff21e487cba67971454dd787eb0da62f2c7caccf68/atelier-preview.html" node explode-performance/browser-check.mjs
           python explode-performance/compare.py
       - uses: actions/upload-artifact@v4
         if: always()
