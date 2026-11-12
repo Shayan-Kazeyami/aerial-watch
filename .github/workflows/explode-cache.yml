@@ -1,0 +1,29 @@
+name: Exploded view transform cache comparison
+on:
+  push:
+    branches: [qa/explode-cache-20261112]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install --no-save playwright && npx playwright install --with-deps chromium && python -m pip install pillow
+      - run: |
+          mkdir -p explode-performance/vendor
+          cp preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/three.*js explode-performance/vendor/
+          node --test explode-performance/tests/*.test.mjs
+      - run: python explode-performance/build.py
+      - run: |
+          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
+          node explode-performance/browser-check.mjs
+          python explode-performance/compare.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: explode-cache-evidence
+          path: |
+            explode-performance/evidence
+            mobile-output
