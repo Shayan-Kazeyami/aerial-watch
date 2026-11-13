@@ -1,4 +1,4 @@
-import asyncio,json,pathlib,traceback,os,hashlib,math,base64
+import asyncio,json,pathlib,traceback,os,hashlib,math,base64,gzip
 from playwright.async_api import async_playwright
 Q=pathlib.Path('strap-combined-qa');MODE=os.environ.get('QA_ASSETS','meshopt');assert MODE in ('raw','meshopt');CAND=(Q/'release-id.txt').read_text().strip();SOURCE='75756356ca7b944a5143c519b75d3cac2f8aa62cfcf40302b249f7eefda85f69';O=pathlib.Path('strap-combined-evidence-'+MODE);O.mkdir(exist_ok=True);BUILD=json.loads((Q/'build-report.json').read_text());R={'sourceRelease':SOURCE,'candidateRelease':CAND,'assetMode':MODE,'setup':'Actual sealed assets; instrumentation only, no geometry route overlays. Chromium SwiftShader, not hardware FPS. Matched AO off; seeded randomness.','variants':{}}
 def compare_rows(a,b,tolerance=False):
@@ -50,6 +50,7 @@ async def run():
     start=len(requests);r['poses']=[]
     for amount,pulled in[(0,False),(.25,False),(.5,True),(.75,True),(1,False),(0,False)]:
      await page.evaluate('([a,p])=>leatherQAPose(a,p)',[amount,pulled]);await page.evaluate('leatherQAFrames(8)');s=await page.evaluate('leatherQASnapshot()');assert s['canvas']==r['initialLeather']['canvas'] and s['timeOrigin']==r['initialLeather']['timeOrigin'];assert [x['matrix']for x in s['rows']]==[x['matrix']for x in r['initialLeather']['rows']];r['poses'].append({'amount':amount,'pulled':pulled,'keepers':await page.evaluate('springQASnapshot()'),'springbars':await page.evaluate('springQASnapshot("^SPRINGBAR")')})
+    (O/(variant+'-hardware.json.gz')).write_bytes(gzip.compress(json.dumps(await page.evaluate('leatherQAContactData()'),separators=(',',':')).encode()))
     r['assetRefetches']=[u for u in requests[start:]if any(u.split('?')[0].endswith(x)for x in['.glb','.gltf','.bin','.glb.gz'])];assert not r['assetRefetches'];await page.screenshot(path=str(O/(variant+'-assembled.png')))
     await asyncio.gather(*tasks);transport=r['transport'];assert len(transport)==1,transport
     manifest=json.loads(pathlib.Path('preview-b/releases',rid,'deployment-manifest.json').read_text());logical='rebuild/assembly.glb'if MODE=='raw'else'optimized-assets/rebuild__assembly.meshopt.glb.gz';spec=next(x for x in manifest['localFiles']if x['path']==logical);assert transport[0]['sha256']==spec['sha256'] and transport[0]['bytes']==spec['sizeBytes'],transport
