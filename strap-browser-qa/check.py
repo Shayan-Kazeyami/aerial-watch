@@ -17,14 +17,17 @@ async def main():
     await page.goto('http://127.0.0.1:8765/preview-b/releases/'+RID+'/atelier-preview.html?quality=efficient&normalStream=1',wait_until='domcontentloaded',timeout=120000)
     await page.locator('body[data-ready=true]').wait_for(timeout=300000);await page.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true"',timeout=300000)
     await page.wait_for_function('leatherQASnapshot().proof?.status==="verified"',timeout=300000)
-    r['initial']=await page.evaluate('leatherQAFrames(4)');assert not r['initial']['failed'];expected='06a72fb672bb249fe86d19af6b4934c94869dd56b46283b8d1858ae1b91b4815' if variant=='candidate' else '97377092fcfc6f5a7e934e083f71a1d5e99c9d2007a1b5c3ba38a2b6a6dc61e3';assert r['initial']['proof']['actualSha256']==expected,r['initial']['proof']
+    r['initial']=await page.evaluate('leatherQAFrames(4)');assert not r['initial']['failed'];expected='f7e7a7638b7ac58a3d3f568cbbcc0baa989d840d9b989e10b0c72485298ed0d5' if variant=='candidate' else '97377092fcfc6f5a7e934e083f71a1d5e99c9d2007a1b5c3ba38a2b6a6dc61e3';assert r['initial']['proof']['actualSha256']==expected,r['initial']['proof']
     await page.wait_for_function('''()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent).progressiveNormal==='full'}''',timeout=300000)
     r['diagnostics']=await page.evaluate('''()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent)}''');start=len(requests);r['poses']=[]
     for amount,pulled in [(0,False),(.25,False),(.5,True),(.75,True),(1,False),(0,False)]:
      await page.evaluate('([a,p])=>leatherQAPose(a,p)',[amount,pulled]);s=await page.evaluate('leatherQAFrames(4)');assert s['canvas']==r['initial']['canvas'];assert s['timeOrigin']==r['initial']['timeOrigin'];assert [x['matrix'] for x in s['rows']]==[x['matrix'] for x in r['initial']['rows']],'Strap attachment matrices changed';r['poses'].append(s)
     r['assetRefetches']=[u for u in requests[start:] if any(u.split('?')[0].endswith(x) for x in ['.glb','.bin','.gltf'])];assert not r['assetRefetches'];await page.screenshot(path=str(O/(variant+'-assembled.png')))
     contacts=await page.evaluate('leatherQAContactData()');(O/(variant+'-hardware.json.gz')).write_bytes(gzip.compress(json.dumps(contacts).encode()));assert len(contacts['hardware'])>0
-    await page.evaluate('leatherQAPose(1,false)');await page.evaluate('leatherQAFrames(4)');await page.screenshot(path=str(O/(variant+'-exploded.png')));assert not errors;assert all(any(t['ready'] for t in x['maps']) for x in r['initial']['rows'] if x['material'].startswith('leather /'))
+    await page.evaluate('leatherQAPose(1,false)');await page.evaluate('leatherQAFrames(4)');await page.screenshot(path=str(O/(variant+'-exploded.png')))
+    for macro,label in [(False,'strap'),(True,'puncture')]:
+     await page.evaluate('leatherQAFocus',macro);await page.evaluate('leatherQAFrames(5)');await page.locator('#assembly-canvas').screenshot(path=str(O/(variant+'-'+label+'.png')))
+    assert not errors;assert all(any(t['ready'] for t in x['maps']) for x in r['initial']['rows'] if x['material'].startswith('leather /'))
     r['passed']=True
    except Exception as e:r.update(passed=False,error=repr(e),traceback=traceback.format_exc());raise
    finally:(O/'report.json').write_text(json.dumps(report,indent=2));await context.close()
