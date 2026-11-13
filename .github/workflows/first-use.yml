@@ -16,10 +16,29 @@ jobs:
       - run: |
           python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
           WATCH_URL="$(cat first-use-qa/url.txt)" python -u first-use-qa/check.py
+      - name: Verify live release and repeat touch checks
+        run: |
+          python - <<'PY'
+          import urllib.request,time
+          base='https://shayan-kazeyami.github.io/aerial-watch/'
+          for attempt in range(20):
+           try:
+            text=urllib.request.urlopen(base+'?first-use-release=5a244846').read().decode()
+            loader=urllib.request.urlopen(base+'watch-home-first-use-7bff2470.js').read().decode()
+            assert 'watch-home-first-use-7bff2470.js' in text
+            assert '7bff24707c244be0a28d8731300db86a183696552a1e76f3af53b99c74e76670' in loader
+            print('PASS live root routes to expected immutable release');break
+           except Exception:
+            if attempt==19:raise
+            time.sleep(15)
+          PY
+          mv first-use-output first-use-local-output
+          WATCH_URL="https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/7bff24707c244be0a28d8731300db86a183696552a1e76f3af53b99c74e76670/atelier-preview.html" python -u first-use-qa/check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: first-use-evidence
           path: |
             first-use-output
+            first-use-local-output
             mobile-output
