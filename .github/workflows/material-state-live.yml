@@ -1,8 +1,8 @@
-name: Material-state batching live release check
+name: Watch live release check
 on:
   push:
     branches: [main]
-    paths: [index.html, watch-home-batch-3e9e591c.js, next-bottleneck-qa/live.py, .github/workflows/material-state-live.yml]
+    paths: [index.html, watch-home-crown-51e744f3.js, next-bottleneck-qa/live.py, .github/workflows/material-state-live.yml]
 permissions:
   contents: read
 jobs:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=3e9e591cbf61eaabb0b8dc9909c157514c9d14144b0dabdaa8543c368d0f4466 python next-bottleneck-qa/live.py
+      - run: EXPECTED_RELEASE=51e744f388b6989632e125d50090f119ce36bd8781a9cb16587ecb3f5a7d2aad python next-bottleneck-qa/live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
