@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: caseback-integrated-private
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -32,6 +32,9 @@ jobs:
       - run: |
           python -m http.server 8765 >/tmp/caseback-integration-http.log 2>&1 &
           QA_ASSETS=${{ matrix.assets }} QA_VIEWPORT=${{ matrix.viewport }} python -u case-topology-lane/caseback-integration/check.py
+          if [ '${{ matrix.assets }}' = 'meshopt' ] && [ '${{ matrix.viewport }}' = '430x932' ]; then
+            QA_ASSETS=fallback QA_VIEWPORT=430x932 python -u case-topology-lane/caseback-integration/check.py
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -2,7 +2,7 @@ import asyncio,json,os,pathlib,traceback,hashlib
 from playwright.async_api import async_playwright
 P=pathlib.Path('crown-unified-qa');OUT=pathlib.Path('case-topology-lane/caseback-integration/evidence-'+os.environ['QA_ASSETS']+'-'+os.environ['QA_VIEWPORT']);OUT.mkdir(exist_ok=True)
 RID=(P/'release-id.txt').read_text().strip();W,H=map(int,os.environ.get('QA_VIEWPORT','430x932').split('x'))
-MODE=os.environ['QA_ASSETS'];Q=pathlib.Path('case-topology-lane/caseback-integration');source=pathlib.Path('preview-b/releases',RID,'assembly-review.js').read_bytes().decode();needle='function initializeBaseline(result,metadata){';assert source.count(needle)==1;wrapper=(source.replace(needle,needle+'window.casebackLoadedAssetDelivery=result.metrics?.assetDelivery;')+'\n'+(P/'probe.js').read_bytes().decode()+'\n'+(Q/'proof.js').read_bytes().decode()).encode();EXPECTED_WRAPPER=hashlib.sha256(wrapper).hexdigest()
+MODE=os.environ['QA_ASSETS'];REQUEST_MODE='meshopt'if MODE=='fallback'else MODE;Q=pathlib.Path('case-topology-lane/caseback-integration');source=pathlib.Path('preview-b/releases',RID,'assembly-review.js').read_bytes().decode();needle='function initializeBaseline(result,metadata){';assert source.count(needle)==1;wrapper=(source.replace(needle,needle+'window.casebackLoadedAssetDelivery=result.metrics?.assetDelivery;')+'\n'+(P/'probe.js').read_bytes().decode()+'\n'+(Q/'proof.js').read_bytes().decode()).encode();EXPECTED_WRAPPER=hashlib.sha256(wrapper).hexdigest()
 R={'assetMode':MODE,'expectedQAWrapperSHA256':EXPECTED_WRAPPER,'release':RID,'viewport':[W,H],'errors':[],'setup':'Chromium SwiftShader touch emulation, not physical-device FPS'}
 async def main():
  async with async_playwright() as p:
@@ -17,8 +17,11 @@ async def main():
   async def response(res):
    if 'assembly-review-caseback-integrated-private-qa.js' in res.url:R['executedQAWrapperSHA256']=hashlib.sha256(await res.body()).hexdigest()
   page.on('response',response)
+  if MODE=='fallback':
+   async def failCompressed(route):R['forcedCompressedFailures']=R.get('forcedCompressedFailures',0)+1;await route.fulfill(status=503,body='Deliberate QA failure to test canonical raw fallback')
+   await page.route('**/optimized-assets/rebuild__assembly.meshopt.glb.gz*',failCompressed)
   try:
-   await page.goto('http://127.0.0.1:8765/preview-b/releases/'+RID+'/atelier-preview.html?quality=efficient&assets='+MODE,wait_until='domcontentloaded',timeout=120000)
+   await page.goto('http://127.0.0.1:8765/preview-b/releases/'+RID+'/atelier-preview.html?quality=efficient&assets='+REQUEST_MODE,wait_until='domcontentloaded',timeout=120000)
    await page.locator('body[data-ready=true]').wait_for(timeout=300000)
    await page.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true"',timeout=300000)
    inventory=await page.evaluate('watchGeometryInventory()')
@@ -37,7 +40,9 @@ async def main():
    assert proof['keeper']=={'count':2,'sharedGeometry':True,'sharedPosition':True,'sharedNormal':True,'positionNormalBytes':18432}
    assert proof['springbar']=={'count':2,'sharedPosition':True,'sharedNormal':True,'distinctUV':True}
    assert proof['leatherProof']['status']=='verified' and proof['leatherProof']['actualSha256']=='f7e7a7638b7ac58a3d3f568cbbcc0baa989d840d9b989e10b0c72485298ed0d5'
-   assert proof['delivery']['used']==MODE and not proof['delivery']['fallbackReason'],proof['delivery']
+   assert proof['delivery']['used']==('raw'if MODE=='fallback'else MODE),proof['delivery']
+   if MODE=='fallback':assert proof['delivery']['fallbackReason'] and R['forcedCompressedFailures']==1,proof['delivery']
+   else:assert not proof['delivery']['fallbackReason'],proof['delivery']
    await page.evaluate('prepareCrownMeshTouch()');await page.evaluate('mobileAuditFrames(4)')
    point=await page.evaluate('crownMeshPoint()');assert point,'No ray-confirmed mesh point outside hotspot';R['meshPoint']=point
    cdp=await page.context.new_cdp_session(page)
