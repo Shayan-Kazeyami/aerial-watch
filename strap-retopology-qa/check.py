@@ -13,7 +13,7 @@ async def main():
   try:
    await page.goto(URL,wait_until='domcontentloaded',timeout=120000);await page.locator('body[data-ready=true]').wait_for(timeout=300000);await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000)
    R['init']=await page.evaluate('rimQA.init()');print('INIT',R['init'],flush=True)
-   for state in ['assembled','part','left','upper','lower']:
+   for state in ['assembled','part','macro','upper','lower']:
     await page.evaluate('rimQA.freeze()');await page.wait_for_function('rimQA.settled()',timeout=180000);await page.evaluate('(s)=>rimQA.pose(s)',state);data={}
     for name,candidate in [('before',False),('after',True)]:
      data[name]=await page.evaluate('(c)=>rimQA.set(c)',candidate);await page.locator('#assembly-canvas').screenshot(path=str(O/(state+'-'+name+'.png')),animations='disabled',timeout=120000)
