@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const base='crown-stream-qa/recovery-51e744f3/preview-b/releases/51e744f388b6989632e125d50090f119ce36bd8781a9cb16587ecb3f5a7d2aad/';
+const old=fs.readFileSync(base+'atelier-preview.js','utf8'),next=fs.readFileSync('compact-explode-qa/atelier-preview.js','utf8');
+const extract=s=>s.match(/ explode:\(\)=>`([^`]+)`,/)[1];
+assert.equal(old.replace(extract(old),''),next.replace(extract(next),''),'Only explode markup changes; all listeners/state unchanged.');
+for(const id of['atelier-explosion','atelier-explosion-value','atelier-explode-full','atelier-reassemble','atelier-explosion-note'])assert.equal((extract(next).match(new RegExp(`id="${id}"`,'g'))||[]).length,1);
+const markup=Function('explodeAmount','explodeAvailable','return `'+extract(next)+'`;')(.37,true);
+assert.match(markup,/value="37"/);assert.match(markup,/aria-label="Explode fully"/);assert.match(markup,/aria-label="Reassemble"/);assert.match(markup,/aria-describedby="atelier-explosion-note"/);
+const css=fs.readFileSync('compact-explode-qa/atelier-preview.css','utf8'),original=fs.readFileSync(base+'atelier-preview.css','utf8');assert.ok(css.startsWith(original));assert.ok(!css.slice(original.length).includes('#stage'));assert.ok(!css.slice(original.length).includes('canvas{'));
+const section='<section class="context-card" id="context" data-tool="explode" aria-labelledby="context-title"><div class="context-top"><span class="eyebrow">AERIAL / ATELIER</span><button id="close" aria-label="Close contextual tool">×</button></div><h2 id="context-title">Separate layers</h2><div id="atelier-tools">'+markup+'</div><p id="atelier-panel-status" class="tool-note">Exploded construction view. The movement separates into mainplate, train, winding, balance and bridge layers. Motion is paused.</p></section>';
+fs.writeFileSync('compact-explode-qa/layout-fixture.html','<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="atelier-preview.css"><body class="atelier-live" data-panel-open="true"><main class="atelier">'+section+'</main>');
+console.log('Source checks passed. Fixture generated; geometry and runtime untouched.');
