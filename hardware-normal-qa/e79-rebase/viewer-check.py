@@ -15,7 +15,7 @@ async def main():
   browser=await p.chromium.launch(args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   try:
    for mode in ['candidate','baked']:
-    context=await browser.new_context(viewport={'width':800,'height':800},device_scale_factor=1);page=await context.new_page();page.set_default_timeout(180000);page.on('pageerror',lambda e:report['errors'].append(str(e)))
+    context=await browser.new_context(viewport={'width':800,'height':800},device_scale_factor=1);page=await context.new_page();page.set_default_timeout(180000);page.on('pageerror',lambda e:report['errors'].append(str(e)));page.on('request',lambda r:report.setdefault('requests-'+mode,[]).append(r.url))
     async def route(r):
      response=await r.fetch();body=await response.body();report.setdefault('baselineModuleSHA256',hashlib.sha256(body).hexdigest())
      if mode=='candidate':
@@ -29,7 +29,8 @@ async def main():
       report.setdefault('bakedRouteURLs',[]).append(r.request.url)
       await r.fulfill(path=str(R/'e79-rebase/assembly-normal-candidate.glb'))
      await page.route('**/rebuild/assembly.glb*',baked_route)
-    await page.goto(URL,wait_until='domcontentloaded');await page.wait_for_function('window.__normalQa&&window.assemblyInspect?.().presentation.interactive',timeout=300000);print(mode,'ready',flush=True)
+    await page.goto(URL,wait_until='domcontentloaded');await page.wait_for_function('window.__normalQa&&window.assemblyInspect?.().presentation.interactive',timeout=300000);print(mode,'ready',flush=True);print('GLB requests',mode,[x for x in report.get('requests-'+mode,[]) if 'glb' in x],flush=True);
+    if mode=='baked':assert report.get('bakedRouteURLs'), 'baked route did not intercept any request'
     await page.evaluate('__reuseQa.show({view:"movement",pose:0})');record={'audit':await page.evaluate('__normalQa.audit()'),'protectedNormals':await page.evaluate('__normalQa.protectedNormals()'),'hashes':await page.evaluate('__reuseQa.hashSources()'),'poses':await page.evaluate('__reuseQa.validatePoses()'),'states':[]};report['runs'][mode]=record
     cases=[('assembled',dict(view='watch')),('exploded',dict(view='watch',explode=1)),('movement',dict(view='movement'))]+[(f'part-{sid}',dict(sid=sid,view='movement',zoom=1.4))for sid in [9,12,21,26,39,71,125,126,128]]
     if mode=='baseline-repeat':cases=[cases[0],cases[2],cases[4]]
