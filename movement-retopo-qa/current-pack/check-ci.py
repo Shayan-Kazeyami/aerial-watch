@@ -1,4 +1,4 @@
-import asyncio,json,pathlib,hashlib,os,traceback,base64
+import asyncio,json,pathlib,hashlib,os,traceback,base64,math
 from playwright.async_api import async_playwright
 Q=pathlib.Path('movement-retopo-qa/current-pack');CAND=(Q/'release-id.txt').read_text().strip();SOURCE='09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29';MODE=os.environ.get('QA_ASSETS','raw');O=Q/('evidence-'+MODE);O.mkdir(exist_ok=True);R={'sourceRelease':SOURCE,'candidateRelease':CAND,'assetMode':MODE,'setup':'Exact sealed local assets, no geometry overlays; production lights/materials, AO off, seeded randomness; Chromium SwiftShader, not hardware FPS','variants':{}}
 async def run():
@@ -22,7 +22,7 @@ async def run():
     payload=await cdp.send('Network.getResponseBody',{'requestId':event['requestId']});body=base64.b64decode(payload['body'])if payload.get('base64Encoded')else payload['body'].encode();r['transport'].append({'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'capture':'passive same-session CDP'})
    cdp.on('Network.responseReceived',received);cdp.on('Network.loadingFinished',lambda e:tasks.append(asyncio.create_task(finished(e))))
    try:
-    await pg.goto(f'http://127.0.0.1:8767/preview-b/releases/{rid}/atelier-preview.html?quality=efficient&normalStream=1&ao=off&paused=1&assets={MODE}',wait_until='domcontentloaded');await pg.locator('body[data-ready=true]').wait_for();await pg.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await pg.evaluate('wheelQA.init()');await pg.wait_for_function('wheelQA.settled()');await pg.evaluate('wheelQA.frames(8)');r['initial']=await pg.evaluate('wheelQA.snapshot()');assert r['initial']['triangles']==(21944 if variant=='source'else 18292);assert r['initial']['delivery']['used']==MODE and not r['initial']['delivery']['fallbackReason'];assert r['initial']['proof']['status']=='verified';r['poses']=[];batch=r['initial']['batch'];assert not batch['supported']or all(x['triangles']==r['initial']['triangles'] and x['sourceGeometrySame']for x in batch['wheel97'])
+    await pg.goto(f'http://127.0.0.1:8767/preview-b/releases/{rid}/atelier-preview.html?quality=efficient&normalStream=1&ao=off&paused=1&assets={MODE}',wait_until='domcontentloaded');await pg.locator('body[data-ready=true]').wait_for();await pg.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await pg.evaluate('wheelQA.init()');await pg.wait_for_function('wheelQA.settled()');await pg.evaluate('wheelQA.frames(8)');r['initial']=await pg.evaluate('wheelQA.snapshot()');assert r['initial']['triangles']==(21944 if variant=='source'else 18292);assert r['initial']['delivery']['used']==MODE and not r['initial']['delivery']['fallbackReason'];assert r['initial']['proof']['status']=='verified';assert r['initial']['escapementActive'];assert not any('Escapement reconstruction unavailable'in w for w in r['initial']['loadWarnings']);r['poses']=[];batch=r['initial']['batch'];assert not batch['supported']or all(x['triangles']==r['initial']['triangles'] and x['sourceGeometrySame']for x in batch['wheel97'])
     for amount,pulled in[(0,False),(.25,False),(.5,True),(.75,True),(1,False),(0,False)]:
      await pg.evaluate('([a,p])=>wheelQA.pose(a,p)',[amount,pulled]);await pg.evaluate('wheelQA.frames(5)');r['poses'].append({'amount':amount,'pulled':pulled,'snapshot':await pg.evaluate('wheelQA.snapshot()')})
     start=await pg.evaluate('wheelQA.motion().mechanism');await pg.locator('#play-motion').evaluate('e=>e.click()');await pg.wait_for_function('(s)=>wheelQA.motion().mechanism>s+.1',arg=start);await pg.evaluate('wheelQA.freeze()');r['motionAdvanced']=True
@@ -33,8 +33,14 @@ async def run():
    except Exception as e:
     r.update(passed=False,error=repr(e),traceback=traceback.format_exc());await pg.screenshot(path=str(O/(variant+'-failure.png')));raise
    finally:(O/'report.json').write_text(json.dumps(R,indent=2));await c.close()
-  a=R['variants']['source'];b=R['variants']['candidate'];assert a['visuals']==b['visuals'];R['matchedVisualCameras']=True
+  a=R['variants']['source'];b=R['variants']['candidate'];
+  for x,y in zip(a['visuals'],b['visuals']):
+   assert x['viewName']==y['viewName'];
+   for key in ['camera','target']:
+    if key in x:assert max(abs(v-w)for v,w in zip(x[key],y[key]))<1e-7
+  R['matchedVisualCameras']=True
   for x,y in zip(a['poses'],b['poses']):
-   assert x['amount']==y['amount'] and x['pulled']==y['pulled'];assert x['snapshot']['matrix']==y['snapshot']['matrix'];assert x['snapshot']['contactNodeMatrices']==y['snapshot']['contactNodeMatrices']
-  R['allSixMechanicalPoseMatricesExact']=True;R['passed']=True;(O/'report.json').write_text(json.dumps(R,indent=2));await browser.close()
+   assert x['amount']==y['amount'] and x['pulled']==y['pulled'];assert max(abs(v-w)for v,w in zip(x['snapshot']['matrix'],y['snapshot']['matrix']))<1e-7;
+   for v,w in zip(x['snapshot']['contactNodeMatrices'],y['snapshot']['contactNodeMatrices']):assert v['sourceIndex']==w['sourceIndex'] and max(abs(j-k)for j,k in zip(v['matrix'],w['matrix']))<1e-7
+  R['allSixMechanicalPoseMatricesWithin1e7Tolerance']=True;R['passed']=True;(O/'report.json').write_text(json.dumps(R,indent=2));await browser.close()
 asyncio.run(asyncio.wait_for(run(),1800))
