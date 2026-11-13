@@ -47,7 +47,7 @@ def compose(source, destination):
         values[ai] = np.frombuffer(data, '<u4' if key=='index' else '<f4')
     p = values[718].reshape(-1,3); normal = values[719].reshape(-1,3); index = values[720]
     assert np.isfinite(p).all() and np.isfinite(normal).all()
-    assert len(p) == len(normal) == 18757 and len(index) == 17812*3 and index.max() < len(p)
+    assert len(p) == len(normal) == manifest['candidateVertices'] and len(index) == manifest['candidateTriangles']*3 and index.max() < len(p)
     assert np.max(np.abs(np.linalg.norm(normal,axis=1)-1)) < 2e-7
     oldp = np.frombuffer(raw(718),'<f4').reshape(-1,3)
     bounds_delta = float(np.max(np.abs(np.concatenate([p.min(0)-oldp.min(0),p.max(0)-oldp.max(0)]))))
@@ -71,7 +71,7 @@ def compose(source, destination):
     jb=json.dumps(doc,separators=(',',':')).encode(); jb+=b' '*((-len(jb))%4)
     result=struct.pack('<IIIII',0x46546c67,2,28+len(jb)+offset,len(jb),0x4e4f534a)+jb+struct.pack('<II',offset,0x004e4942)+b''.join(chunks)
     destination.parent.mkdir(parents=True,exist_ok=True); destination.write_bytes(result)
-    report={'sourceSHA256':sha(before),'candidateSHA256':sha(result),'sourceBytes':len(before),'candidateBytes':len(result),'mesh':mesh_id,'sourceIndex':97,'beforeTriangles':21944,'afterTriangles':17812,'maxBoundsDeltaMm':bounds_delta,'axialPlanesExact':True,'onlyChangedAccessors':[718,719,720],'allOtherAccessorBytesUnchanged':True,'allNodesMaterialsAndMeshIdentitiesUnchanged':True,'accessors':records,'status':'Local serialized candidate, exact-current raw/meshopt and mechanical/contact QA pending'}
+    report={'sourceSHA256':sha(before),'candidateSHA256':sha(result),'sourceBytes':len(before),'candidateBytes':len(result),'mesh':mesh_id,'sourceIndex':97,'beforeTriangles':21944,'afterTriangles':manifest['candidateTriangles'],'maxBoundsDeltaMm':bounds_delta,'axialPlanesExact':True,'onlyChangedAccessors':[718,719,720],'allOtherAccessorBytesUnchanged':True,'allNodesMaterialsAndMeshIdentitiesUnchanged':True,'accessors':records,'status':'Local serialized candidate, exact-current raw/meshopt and mechanical/contact QA pending'}
     destination.with_suffix('.json').write_text(json.dumps(report,indent=2)+'\n')
     print({k:v for k,v in report.items() if k!='accessors'})
 

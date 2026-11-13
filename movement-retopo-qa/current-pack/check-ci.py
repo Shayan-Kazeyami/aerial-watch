@@ -10,6 +10,10 @@ async def run():
    async def instrument(route):
     response=await route.fetch();s=await response.text();needle='function initializeBaseline(result,metadata){';assert s.count(needle)==1;s=s.replace(needle,needle+'window.wheelQAAssetDelivery=result.metrics?.assetDelivery;window.wheelQAParserJSON=(result.gltf||result).parser.json;')+'\n'+(Q/'probe.js').read_text();await route.fulfill(response=response,body=s)
    await pg.route('**/assembly-review.js*',instrument)
+   async def batch_probe(route):
+    response=await route.fetch();s=await response.text();needle='audit.batches=batches.length;';assert s.count(needle)==1;s=s.replace(needle,needle+"audit.wheel97=batches.flatMap(x=>x.entries).filter(x=>x.mesh.userData.sourceIndex===97).map(x=>({triangles:x.geometry.index.count/3,vertices:x.geometry.attributes.position.count,sourceGeometrySame:x.mesh.geometry===x.geometry}));");await route.fulfill(response=response,body=s)
+   await pg.route('**/assembly-mechanism-batch.js*',batch_probe)
+
    asset_ids=set()
    def received(event):
     if event['response']['url'].split('?')[0].endswith(('/rebuild/assembly.glb','/optimized-assets/rebuild__assembly.meshopt.glb.gz')):asset_ids.add(event['requestId'])
@@ -18,7 +22,7 @@ async def run():
     payload=await cdp.send('Network.getResponseBody',{'requestId':event['requestId']});body=base64.b64decode(payload['body'])if payload.get('base64Encoded')else payload['body'].encode();r['transport'].append({'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'capture':'passive same-session CDP'})
    cdp.on('Network.responseReceived',received);cdp.on('Network.loadingFinished',lambda e:tasks.append(asyncio.create_task(finished(e))))
    try:
-    await pg.goto(f'http://127.0.0.1:8767/preview-b/releases/{rid}/atelier-preview.html?quality=efficient&normalStream=1&ao=off&paused=1&assets={MODE}',wait_until='domcontentloaded');await pg.locator('body[data-ready=true]').wait_for();await pg.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await pg.evaluate('wheelQA.init()');await pg.wait_for_function('wheelQA.settled()');await pg.evaluate('wheelQA.frames(8)');r['initial']=await pg.evaluate('wheelQA.snapshot()');assert r['initial']['triangles']==(21944 if variant=='source'else 17812);assert r['initial']['delivery']['used']==MODE and not r['initial']['delivery']['fallbackReason'];assert r['initial']['proof']['status']=='verified';r['poses']=[]
+    await pg.goto(f'http://127.0.0.1:8767/preview-b/releases/{rid}/atelier-preview.html?quality=efficient&normalStream=1&ao=off&paused=1&assets={MODE}',wait_until='domcontentloaded');await pg.locator('body[data-ready=true]').wait_for();await pg.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await pg.evaluate('wheelQA.init()');await pg.wait_for_function('wheelQA.settled()');await pg.evaluate('wheelQA.frames(8)');r['initial']=await pg.evaluate('wheelQA.snapshot()');assert r['initial']['triangles']==(21944 if variant=='source'else 18292);assert r['initial']['delivery']['used']==MODE and not r['initial']['delivery']['fallbackReason'];assert r['initial']['proof']['status']=='verified';r['poses']=[];batch=r['initial']['batch'];assert not batch['supported']or all(x['triangles']==r['initial']['triangles'] and x['sourceGeometrySame']for x in batch['wheel97'])
     for amount,pulled in[(0,False),(.25,False),(.5,True),(.75,True),(1,False),(0,False)]:
      await pg.evaluate('([a,p])=>wheelQA.pose(a,p)',[amount,pulled]);await pg.evaluate('wheelQA.frames(5)');r['poses'].append({'amount':amount,'pulled':pulled,'snapshot':await pg.evaluate('wheelQA.snapshot()')})
     start=await pg.evaluate('wheelQA.motion().mechanism');await pg.locator('#play-motion').evaluate('e=>e.click()');await pg.wait_for_function('(s)=>wheelQA.motion().mechanism>s+.1',arg=start);await pg.evaluate('wheelQA.freeze()');r['motionAdvanced']=True

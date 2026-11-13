@@ -1,26 +1,31 @@
 {
   "sourceIndex": 97,
   "sourceVertices": 22846,
-  "candidateVertices": 18757,
+  "candidateVertices": 18997,
   "sourceTriangles": 21944,
-  "candidateTriangles": 17812,
+  "candidateTriangles": 18292,
   "sourcePositionNormalIndexBytes": 811632,
-  "candidatePositionNormalIndexBytes": 663912,
-  "exactPositionTriangleStreamPreserved": true,
+  "candidatePositionNormalIndexBytes": 675432,
+  "exactPositionTriangleStreamPreserved": false,
   "normalQuantizationStep": 0.0001,
   "normalQuantizationMaxAngularChangeDegrees": 0.003865127971296901,
   "files": {
     "position.bin": {
-      "bytes": 225084,
-      "sha256": "a80ee76933a849c63a07b0630b3db07c8aaba2d9923c869d78f01479da818de0"
+      "bytes": 227964,
+      "sha256": "cc9bfaa3485145992da2f5fe7f6ba23101d13f9fc50b02eab8b47436b1591fcf"
     },
     "normal.bin": {
-      "bytes": 225084,
-      "sha256": "6a8ac53d85bb7319e9790dec3765ddf5467aa1e518ece763f74ff137fbece6e0"
+      "bytes": 227964,
+      "sha256": "916988f2a2df88e721e57b45945df713cf3bb1d253851051f2872d2380f2bf1c"
     },
     "index.bin": {
-      "bytes": 213744,
-      "sha256": "d6e525b318fcbb3a9ed1680c785daa668b4d2c5ca3c0f720a47960e8e2a1f1e3"
+      "bytes": 219504,
+      "sha256": "ff257857c78075cef33b7017b19122b63b2737d99e5543ad4193050a7df09d38"
     }
-  }
+  },
+  "capRetopology": "fixed contour/side tuples;120 radial cap interior samples, constrained local Delaunay flips",
+  "sideTriangleTuplesExact": true,
+  "closedManifold": true,
+  "degenerateTriangles": 0,
+  "volumeMM3": 2.6356018771690306
 }

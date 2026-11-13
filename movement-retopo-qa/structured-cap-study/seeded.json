@@ -1,0 +1,18 @@
+{
+  "status": "local cap-topology candidate only, not serialized/PBR validated",
+  "method": "exact fixed-boundary constrained local Delaunay edge flips; no contour or side-normal changes",
+  "flips": 17768,
+  "radialInteriorPoints": 120,
+  "before": {
+    "maxEdgeMM": 3.1358135272943355,
+    "p99EdgeMM": 2.8800225872172844
+  },
+  "after": {
+    "maxEdgeMM": 1.8306874010893133,
+    "p99EdgeMM": 0.3774581563123357
+  },
+  "allBoundaryEdgesExact": true,
+  "beforeCapTriangles": 4458,
+  "afterCapTriangles": 4698,
+  "totalTriangles": 18292
+}
