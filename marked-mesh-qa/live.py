@@ -7,11 +7,18 @@ async def run():
   try:
    for attempt in range(20):
     await page.goto('https://shayan-kazeyami.github.io/aerial-watch/?mesh='+rid[:12],wait_until='domcontentloaded');await page.wait_for_timeout(15000);frames=[f for f in page.frames if rid in f.url]
-    if frames:break
-   assert frames,'Public loader does not select tested release';f=frames[0];await f.locator('body[data-ready=true]').wait_for(timeout=300000);await f.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000);R['release']=rid;R['url']=page.url
+    if frames:print('Release iframe found',flush=True);break
+   assert frames,'Public loader does not select tested release';f=frames[0];await f.locator('body[data-ready=true]').wait_for(timeout=300000);await f.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000);print('Viewer ready',flush=True);R['release']=rid;R['url']=page.url
    for w,h in [(430,932),(932,430)]:
-    await page.set_viewport_size({'width':w,'height':h});await page.wait_for_timeout(1500);before=await f.locator('#assembly-canvas').bounding_box();await f.locator('.task-dock [data-mode=explode]').tap(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===1&&!assemblyInspect().explosion.animating');assert f in page.frames;await page.screenshot(path=str(O/f'{w}-exploded.png'));await f.locator('#home').tap(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===0&&!assemblyInspect().explosion.animating');after=await f.locator('#assembly-canvas').bounding_box();assert before==after;(O/f'{w}-inspect.json').write_text(json.dumps(await f.evaluate('assemblyInspect()'),indent=2));R['viewports'][str(w)]={'explodeReset':True,'canvasStable':True};await page.screenshot(path=str(O/f'{w}-assembled.png'))
+    print('Checking viewport',w,h,flush=True);await page.set_viewport_size({'width':w,'height':h});await page.wait_for_timeout(1500);before=await f.locator('#assembly-canvas').bounding_box();await f.locator('.task-dock [data-mode=explode]').tap(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===1&&!assemblyInspect().explosion.animating');assert f in page.frames;await page.screenshot(path=str(O/f'{w}-exploded.png'));await f.locator('#home').tap(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===0&&!assemblyInspect().explosion.animating');after=await f.locator('#assembly-canvas').bounding_box();assert before==after;(O/f'{w}-inspect.json').write_text(json.dumps(await f.evaluate('assemblyInspect()'),indent=2));R['viewports'][str(w)]={'explodeReset':True,'canvasStable':True};await page.screenshot(path=str(O/f'{w}-assembled.png'))
    assert not R['errors'];R['passed']=True
-  except Exception as e:R['passed']=False;R['failure']=repr(e);raise
-  finally:(O/'report.json').write_text(json.dumps(R,indent=2));await b.close()
+  except Exception as e:
+   R['passed']=False;R['failure']=repr(e);print(json.dumps(R),flush=True)
+   try:await asyncio.wait_for(page.screenshot(path=str(O/'failure.png')),15)
+   except Exception:pass
+   raise
+  finally:
+   (O/'report.json').write_text(json.dumps(R,indent=2));print(json.dumps(R),flush=True)
+   try:await asyncio.wait_for(b.close(),15)
+   except Exception:pass
 asyncio.run(run())

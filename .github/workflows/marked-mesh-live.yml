@@ -1,8 +1,8 @@
 name: Marked mesh live release check
 on:
   push:
-    branches: [main]
-    paths: [watch-home-mesh-b38ddef3.js]
+    branches: [qa/marked-live-20261113]
+    paths: [marked-mesh-qa/live.py, .github/workflows/marked-mesh-live.yml]
 permissions:
   contents: read
 jobs:
