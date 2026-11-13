@@ -11,14 +11,14 @@ with sync_playwright() as pw:
  try:
   page.goto(url,wait_until='domcontentloaded',timeout=60000);page.wait_for_function('window.__ringQA?.status().ready',timeout=300000)
   r['setup']=page.evaluate('window.__ringQA.setup()');assert r['setup']['visible'] and r['setup']['rootvisible'];page.wait_for_timeout(6000);r['before']=page.evaluate('window.__ringQA.lock()');page.wait_for_timeout(2000)
-  canvas=page.locator('#stage canvas').first
-  canvas.screenshot(path='qa-seconds-ring/evidence/original.png',timeout=60000)
-  r['candidate']=page.evaluate('window.__ringQA.set(true)');page.wait_for_timeout(2000);canvas.screenshot(path='qa-seconds-ring/evidence/candidate.png',timeout=60000);r['after']=page.evaluate('window.__ringQA.status()')
+  canvas=page.locator('#stage canvas').first; rect=canvas.evaluate('(e)=>{const r=e.getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width,height:r.height}}');r['canvas_rect']=rect
+  page.screenshot(path='qa-seconds-ring/evidence/original.png',timeout=60000)
+  r['candidate']=page.evaluate('window.__ringQA.set(true)');page.wait_for_timeout(2000);page.screenshot(path='qa-seconds-ring/evidence/candidate.png',timeout=60000);r['after']=page.evaluate('window.__ringQA.status()')
   for field in ['camera','target','zoom','world','projection']:
    assert r['before'][field]==r['after'][field],f'camera changed: {field}'
   r['images']={}
   for name in ['original','candidate']:
-   im=Image.open('qa-seconds-ring/evidence/'+name+'.png').convert('RGB'); st=ImageStat.Stat(im); colors=len(im.getcolors(maxcolors=10000000) or []);r['images'][name]={'size':im.size,'stddev':st.stddev,'unique_colors':colors};assert colors>100 and max(st.stddev)>5,'blank image'
+   im=Image.open('qa-seconds-ring/evidence/'+name+'.png').convert('RGB'); im=im.crop((max(0,int(rect['x'])),max(0,int(rect['y'])),min(im.width,int(rect['x']+rect['width'])),min(im.height,int(rect['y']+rect['height'])))); im.save('qa-seconds-ring/evidence/'+name+'-canvas.png'); st=ImageStat.Stat(im); colors=len(im.getcolors(maxcolors=10000000) or []);r['images'][name]={'size':im.size,'stddev':st.stddev,'unique_colors':colors};assert colors>100 and max(st.stddev)>5,'blank image'
   r['complete']=True
  except Exception as e:r['error']=repr(e);print('QA FAILURE',repr(e),flush=True)
  finally:open('qa-seconds-ring/evidence/report.json','w').write(json.dumps(r,indent=2));browser.close()
