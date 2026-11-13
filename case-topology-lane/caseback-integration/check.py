@@ -2,8 +2,8 @@ import asyncio,json,os,pathlib,traceback,hashlib
 from playwright.async_api import async_playwright
 P=pathlib.Path('crown-unified-qa');OUT=pathlib.Path('case-topology-lane/caseback-integration/evidence-'+os.environ['QA_ASSETS']+'-'+os.environ['QA_VIEWPORT']);OUT.mkdir(exist_ok=True)
 RID=(P/'release-id.txt').read_text().strip();W,H=map(int,os.environ.get('QA_VIEWPORT','430x932').split('x'))
-MODE=os.environ['QA_ASSETS'];Q=pathlib.Path('case-topology-lane/caseback-integration');source=pathlib.Path('preview-b/releases',RID,'assembly-review.js').read_bytes().decode();needle='function initializeBaseline(result,metadata){';assert source.count(needle)==1;wrapper=(source.replace(needle,needle+'window.casebackLoadedAssetDelivery=result.metrics?.assetDelivery;')+'\n'+(P/'probe.js').read_bytes().decode()+'\n'+(Q/'proof.js').read_bytes().decode()).encode();expected=hashlib.sha256(wrapper).hexdigest()
-R={'assetMode':MODE,'expectedQAWrapperSHA256':expected,'release':RID,'viewport':[W,H],'errors':[],'setup':'Chromium SwiftShader touch emulation, not physical-device FPS'}
+MODE=os.environ['QA_ASSETS'];Q=pathlib.Path('case-topology-lane/caseback-integration');source=pathlib.Path('preview-b/releases',RID,'assembly-review.js').read_bytes().decode();needle='function initializeBaseline(result,metadata){';assert source.count(needle)==1;wrapper=(source.replace(needle,needle+'window.casebackLoadedAssetDelivery=result.metrics?.assetDelivery;')+'\n'+(P/'probe.js').read_bytes().decode()+'\n'+(Q/'proof.js').read_bytes().decode()).encode();EXPECTED_WRAPPER=hashlib.sha256(wrapper).hexdigest()
+R={'assetMode':MODE,'expectedQAWrapperSHA256':EXPECTED_WRAPPER,'release':RID,'viewport':[W,H],'errors':[],'setup':'Chromium SwiftShader touch emulation, not physical-device FPS'}
 async def main():
  async with async_playwright() as p:
   browser=await p.chromium.launch(args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
@@ -28,7 +28,7 @@ async def main():
    expectedParts={'CASE':239896,'CROWN':20540,'CROWN-TUBE':1536,'CASEBACK':16728}
    R['integratedGeometry']={r['userData'].get('assemblyId'):r['triangles'] for r in inventory['rows'] if r['userData'].get('assemblyId') in expectedParts}
    assert R['integratedGeometry']==expectedParts,R['integratedGeometry']
-   assert R['executedQAWrapperSHA256']==expected
+   assert R['executedQAWrapperSHA256']==EXPECTED_WRAPPER
    proof=await page.evaluate('casebackIntegratedProof()');R['sealedAssetProof']=proof
    expectedHashes={'position':'dcb0f019a5115a1355305b4b3a65a10258b57f4b69843cf08a892e308baa3c86','normal':'8daa2f12cfe7837c4a5e66ff27988eecb5a4a5c5b6cae25c08223da6717116d0','uv':'038513f0103424dca92c9be6adf8c17b1d4fbb216e9ea8f6d96aa30aa5d9e723','index':'a38f85bc8389d37d1294f1e28bc1d0fd9db700007e309d44fc6e11c91d48e680'}
    assert proof['caseback']['hashes']==expectedHashes
