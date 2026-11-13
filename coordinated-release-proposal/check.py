@@ -13,7 +13,7 @@ async def main():
    name=res.url.split('?')[0].split('/')[-1]
    if name in ['assembly-mechanism-batch.js','assembly-hardware-canonical-data.js','assembly-optimized-loading.js','assembly-leather-authoring-identity.js','viewer-revision.js']:served[res.url.split('?')[0]]=hashlib.sha256(await res.body()).hexdigest()
   page.on('response',executed)
-  requests=[];page.on('request',lambda q:requests.append(q.url));page.on('pageerror',lambda e:R['errors'].append(str(e)))
+  requests=[];R['requests']=requests;R['fallbackRetryPolicy']='Unchanged e79 fetchAsset retries a503 once; require2 deliberate failures per compressed owned asset before raw fallback';page.on('request',lambda q:requests.append(q.url));page.on('pageerror',lambda e:R['errors'].append(str(e)))
   async def instrument(route):
    await route.fulfill(status=200,content_type='text/javascript',body=wrapper)
   async def atelier(route):
@@ -52,7 +52,7 @@ async def main():
    assert proof['springbar']=={'count':2,'sharedPosition':True,'sharedNormal':True,'distinctUV':True}
    assert proof['leatherProof']['status']=='verified' and proof['leatherProof']['actualSha256']=='f7e7a7638b7ac58a3d3f568cbbcc0baa989d840d9b989e10b0c72485298ed0d5'
    assert proof['delivery']['used']==('raw'if MODE=='fallback'else 'meshopt'if MODE=='default'else MODE),proof['delivery']
-   if MODE=='fallback':assert proof['delivery']['fallbackReason'] and R['forcedCompressedFailures']==1,proof['delivery']
+   if MODE=='fallback':assert proof['delivery']['fallbackReason'] and R['forcedCompressedFailures']==2,proof['delivery']
    else:assert not proof['delivery']['fallbackReason'],proof['delivery']
    full=await page.evaluate('releaseFullProof()');R['fullReleaseProof']=full
    expected=json.loads((P/'expected-normal-hashes.json').read_text());assert sorted(full['serializedSources'],key=lambda x:x['sourceIndex'])==expected,'Serialized normal/source parity lost'
@@ -140,7 +140,7 @@ async def main():
    assert not R['errors'];R['requests']=requests
    if MODE in ['meshopt','default']:assert not any('/rebuild/assembly.glb' in u or '/premium-face/face-svg04.glb' in u for u in requests),'Unexpected compressed fallback'
    if MODE=='raw':assert any('/rebuild/assembly.glb' in u for u in requests)and any('/premium-face/face-svg04.glb' in u for u in requests),'Actual raw assets not exercised'
-   if MODE=='fallback':assert R.get('forcedFaceFailures')==1 and any('/premium-face/face-svg04.glb' in u for u in requests),'Face fallback not exercised'
+   if MODE=='fallback':assert R.get('forcedFaceFailures')==2 and any('/premium-face/face-svg04.glb' in u for u in requests),'Face fallback not exercised'
    R['passed']=True
   except Exception as e:R.update(passed=False,failure=repr(e),traceback=traceback.format_exc());raise
   finally:

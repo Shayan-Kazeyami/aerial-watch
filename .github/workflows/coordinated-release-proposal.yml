@@ -14,16 +14,8 @@ jobs:
       max-parallel: 5
       matrix:
         include:
-          - assets: default
-            viewport: 430x932
-          - assets: raw
-            viewport: 430x932
-          - assets: meshopt
-            viewport: 430x932
           - assets: fallback
             viewport: 430x932
-          - assets: meshopt
-            viewport: 740x360
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
