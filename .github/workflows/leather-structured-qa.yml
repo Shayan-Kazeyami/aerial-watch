@@ -1,0 +1,24 @@
+name: Leather structured topology browser QA
+on:
+  push:
+    branches: [qa/leather-structured-v2-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install numpy playwright && python -m playwright install --with-deps chromium
+      - run: python strap-browser-qa/apply_candidate.py
+      - run: |
+          python -m http.server 8765 >/tmp/strap-server.log 2>&1 &
+          python strap-browser-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: leather-structured-browser-evidence
+          path: |
+            strap-browser-evidence
+            strap-browser-qa/export-report.json
