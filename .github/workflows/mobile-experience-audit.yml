@@ -1,0 +1,19 @@
+name: Current mobile experience audit
+on:
+  push:
+    branches: [qa/mobile-experience-20261113]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: QA_OUTPUT=mobile-experience-evidence python mobile-experience-audit/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-experience-evidence
+          path: mobile-experience-evidence
