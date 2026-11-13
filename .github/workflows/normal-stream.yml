@@ -1,20 +1,22 @@
-name: Progressive normal cold-load investigation
+name: Progressive normal immutable release gate
 on:
   push:
     branches: [qa/normal-stream-20261113]
 permissions:
   contents: read
 jobs:
-  measure:
+  stage:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+      - run: node --test normal-stream-qa/fetch.test.mjs normal-stream-qa/capture-detail.test.mjs normal-stream-qa/lifecycle.test.mjs normal-stream-qa/defaults.test.mjs
       - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
-      - run: node --test normal-stream-qa/fetch.test.mjs normal-stream-qa/capture-detail.test.mjs normal-stream-qa/lifecycle.test.mjs
-      - run: python normal-stream-qa/check.py
+      - run: |
+          python -m http.server 8765 > /tmp/watch-http.log 2>&1 &
+          python normal-stream-qa/stage-check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: normal-stream-evidence
-          path: normal-stream-evidence
+          name: normal-stream-stage-evidence
+          path: normal-stream-stage-evidence

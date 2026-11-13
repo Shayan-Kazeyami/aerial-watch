@@ -1,0 +1,374 @@
+:root{color-scheme:dark;--bg:#191b1a;--ink:#eeeae1;--muted:#a3a7a0;--gold:#d6c4a4;--line:#ffffff19}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:14px}button,a,input{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:5px}button{border:0}button:hover{color:#fff}svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}button, a{touch-action:manipulation}button[hidden],[hidden]{display:none!important}.masthead{height:88px;display:flex;align-items:center;justify-content:space-between;margin:0 42px;border-bottom:1px solid var(--line);position:relative;z-index:2}.wordmark{font-size:21px;letter-spacing:5px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:17px}.wordmark span{font-size:9px;letter-spacing:3px;border-left:1px solid #77776e;padding:8px 0 8px 17px}.masthead-note{font-size:9px;letter-spacing:2.4px;color:var(--muted)}.quality{background:transparent;border:1px solid #ffffff26;border-radius:24px;min-height:40px;padding:0 15px;display:flex;align-items:center;gap:9px;font-size:11px}.quality-value{color:var(--gold);margin-left:5px}.quality-dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}.atelier{height:calc(100svh - 88px);min-height:590px;position:relative;isolation:isolate;overflow:hidden}.object-stage{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;z-index:-1;padding-bottom:95px;background:radial-gradient(ellipse at 54% 40%,#41444135,transparent 65%)}.object-stage img{display:block;width:min(78vh,760px);height:min(78vh,760px);object-fit:contain;max-width:90vw;max-height:90vw;mask-image:radial-gradient(ellipse 49% 58% at 50% 49%,#000 56%,#000b 72%,transparent 100%)}.title-block{position:absolute;left:5%;top:13%;pointer-events:none}.eyebrow{font-size:9px;letter-spacing:2px;color:var(--gold);font-weight:400;margin:0 0 22px}h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(48px,5.5vw,82px);letter-spacing:-3px;line-height:1.05;margin:0}h1 span{display:block;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin-top:22px;color:#c5c6bd}.intro{font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.6;color:var(--muted);margin-top:36px}.study-label{position:absolute;top:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:10px;color:#b5b8b0}.study-label span{width:4px;height:4px;background:var(--gold);border-radius:50%}.home{position:absolute;right:42px;top:20px;background:transparent;display:flex;align-items:center;gap:9px;font-size:11px;min-height:40px;color:#b8bbb3}.home svg{width:16px}.home kbd{border:1px solid #ffffff25;border-radius:4px;font:9px Arial;padding:4px;color:#8d938a}.object-caption{position:absolute;left:5%;bottom:170px;display:flex;flex-direction:column;gap:10px;font-size:9px;letter-spacing:1.7px;color:#858b82}.object-caption span:first-child{color:var(--gold)}.bottom-zone{position:absolute;bottom:58px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:17px}.interaction-hint{text-align:center;font-size:10px;line-height:1.9;color:#bac0b6;white-space:nowrap}.interaction-hint i{font-style:normal;padding:0 8px;color:#737b70}.hint-keyboard{margin-left:16px;color:#929b8d}.interaction-hint small{display:block;font-size:9px;color:#848b80}.hint-touch{display:none}.task-dock{display:flex;gap:4px;padding:6px;background:#2b2b29ed;border:1px solid #ffffff20;border-radius:19px;box-shadow:0 18px 60px #0006;backdrop-filter:blur(24px)}.task-dock button{width:94px;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:transparent;border-radius:13px;font-size:11px;color:#b7bcb3;transition:background .2s,color .2s}.task-dock button:hover{background:#ffffff0a;color:var(--ink)}.task-dock button[aria-pressed=true]{background:var(--ink);color:#272c25;box-shadow:0 3px 10px #0002}.task-dock button svg{width:20px;height:20px}.context-card{position:absolute;right:42px;top:50%;transform:translateY(-54%);width:280px;padding:22px;background:#272725f2;border:1px solid #ffffff20;border-radius:16px;box-shadow:0 20px 60px #0003;backdrop-filter:blur(20px)}.context-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.context-top .eyebrow{font-size:8px;letter-spacing:1.6px;margin:0}.context-top button{background:transparent;font-size:23px;width:32px;height:32px;color:#b1b7a9;margin:-12px -10px -8px 0}.context-card h2{font:400 26px/1.15 Georgia,serif;letter-spacing:-.6px;margin:0 0 12px}.context-card>p:not(.prototype-note){font-size:12px;line-height:1.65;color:#aeb4a7;margin:0 0 18px}.prototype-note{font-size:10px;line-height:1.5;color:var(--gold);border-top:1px solid var(--line);padding-top:13px;margin:16px 0 0}.slider-heading{display:flex;justify-content:space-between;font-size:11px;margin-top:22px}.slider-heading output{color:var(--gold);font-variant-numeric:tabular-nums}input[type=range]{accent-color:var(--gold);width:100%;margin:15px 0 5px;min-height:24px;cursor:ew-resize}.slider-labels{display:flex;justify-content:space-between;font-size:9px;color:#939d8b}.inline-action{margin-top:20px;padding:10px 0;width:100%;display:flex;justify-content:space-between;background:transparent;border-top:1px solid var(--line);font-size:11px;color:var(--ink)}.gesture{display:flex;gap:12px;margin:17px 0}.gesture>span{font-size:10px;color:var(--gold);padding-top:3px}.gesture p{margin:0;font-size:11px;color:#9fa894;line-height:1.6}.gesture strong{display:block;font-weight:400;color:var(--ink)}.keyboard-note{font-size:10px;line-height:1.5;color:#9fa894}.quality-choices{display:flex;gap:5px}.quality-choices button{background:transparent;border:1px solid var(--line);border-radius:6px;padding:11px 8px;font-size:11px;flex:1}.quality-choices button[aria-pressed=true]{background:var(--gold);color:#242823}footer{position:absolute;bottom:0;left:42px;right:42px;height:38px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;color:#777f72;font-size:8px;letter-spacing:1px}footer span:nth-child(2){letter-spacing:.4px}.sr-only{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+@media(min-width:1450px){.object-stage img{width:min(85vh,920px);height:min(85vh,920px)}}
+@media(max-width:1050px){.masthead-note{display:none}.title-block{left:4%;top:12%}h1{font-size:55px}.context-card{right:24px;width:245px;padding:18px}.intro{font-size:14px}.object-stage{padding-left:90px}.object-caption{left:4%}.hint-keyboard{display:none}.home{right:24px}.home kbd{display:none}.study-label{left:4%;transform:none}.title-block .eyebrow{margin-bottom:16px;font-size:8px}}
+@media(max-width:680px){.masthead{height:68px;margin:0 20px}.wordmark{font-size:15px;letter-spacing:3px;gap:10px}.wordmark span{font-size:7px;letter-spacing:2px;padding-left:10px}.quality{min-height:36px;padding:0 10px;gap:6px;font-size:10px}.quality-value{margin-left:0}.atelier{height:calc(100svh - 68px);min-height:580px}.title-block{left:24px;top:66px}.title-block .eyebrow{display:none}h1{font-size:40px;letter-spacing:-1.5px}h1 span{font-size:8px;margin-top:10px;letter-spacing:2.7px}.intro{display:none}.study-label{left:24px;top:20px;font-size:8px}.home{right:20px;top:50px;font-size:10px;gap:6px}.object-stage{padding:0 0 90px;align-items:center}.object-stage img{width:105vw;height:105vw;max-width:105vw;max-height:105vw}.object-caption{display:none}.bottom-zone{bottom:52px;width:calc(100% - 32px);gap:12px}.task-dock{width:100%;justify-content:space-between;gap:2px;padding:5px;border-radius:17px}.task-dock button{width:20%;height:59px;font-size:10px;gap:7px}.hint-desktop{display:none}.hint-touch{display:inline}.interaction-hint{font-size:9px}.interaction-hint small{font-size:8px}.context-card{top:auto;bottom:172px;right:16px;left:16px;width:auto;transform:none;padding:17px 20px;border-radius:15px;background:#272725fa}.context-card h2{font-size:23px;margin-bottom:7px}.context-card>p:not(.prototype-note){font-size:11px;margin-bottom:10px;line-height:1.45}.context-top{margin-bottom:9px}.prototype-note{font-size:9px;margin-top:10px;padding-top:9px}.slider-heading{margin-top:12px}input[type=range]{margin-top:6px}.inline-action{margin-top:10px;padding:8px 0 0}.gesture{margin:10px 0}.keyboard-note{font-size:9px;margin-bottom:0}footer{left:20px;right:20px;font-size:7px;height:35px;letter-spacing:.3px}footer span:first-child{display:none}}
+@media(max-height:730px) and (min-width:681px){.atelier{min-height:500px}.title-block{top:17%}.intro{margin-top:22px}.context-card{top:47%;padding:17px}.object-stage{padding-bottom:95px}.object-stage img{width:76vh;height:76vh}.object-caption{bottom:160px}.bottom-zone{gap:9px;bottom:48px}.task-dock button{height:56px}.context-card>p:not(.prototype-note){font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Review refinement: readable, touchable controls without a control wall. */
+.quality{min-height:44px;font-size:12px}.home{min-height:44px;font-size:12px}.task-dock button{font-size:12px}.interaction-hint{font-size:12px;color:#d0d2ca;line-height:1.7}.interaction-hint small{font-size:10px;color:#a9aea3}.hint-keyboard{color:#b7beb0}.intro{font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.7;color:#b3b9ad}.study-label{font-size:11px;color:#c3c8bc}.context-top button{min-width:44px;min-height:44px}.context-card>p:not(.prototype-note){font-size:12px;color:#bdc3b7}.slider-heading,.inline-action,.quality-choices button,.gesture p{font-size:12px}.inline-action,.quality-choices button{min-height:44px}.slider-labels{font-size:10px;color:#b2baaa}.prototype-note{color:#ddcbaa}.bottom-zone{gap:10px}.motion-tools{display:flex;align-items:center;gap:10px;padding:0 7px;border-radius:25px;background:#20221feb;border:1px solid #ffffff12}.motion-tools button{display:flex;align-items:center;gap:8px;background:transparent;min-height:44px;padding:0 9px;font-size:12px;color:#e0e3d9}.motion-prototype{font-size:10px;color:#b4bca9;padding-right:14px;border-right:1px solid #ffffff25}.motion-tools .tour{color:#d9c6a4}.motion-tools #motion{min-width:70px}.object-caption{bottom:195px}
+@media(max-width:680px){.quality{min-height:44px;font-size:12px;padding:0 9px}.quality-dot{display:none}.quality-value{font-size:11px}.home{font-size:12px;top:53px}.study-label{font-size:10px}.task-dock button{font-size:12px;min-height:62px}.bottom-zone{bottom:47px;gap:8px}.interaction-hint{font-size:12px}.interaction-hint small{font-size:10px}.motion-tools{gap:3px}.motion-tools button{font-size:12px}.motion-prototype{font-size:9px;padding-right:8px}.context-card{bottom:227px}.context-card>p:not(.prototype-note){font-size:12px}.prototype-note{font-size:10px}.object-stage{padding-bottom:125px}.masthead{margin:0 16px}.wordmark{font-size:14px;letter-spacing:2px;gap:7px}.wordmark span{font-size:7px;padding-left:7px}.hint-keyboard{display:none}}
+
+.motion-tools svg{display:block;width:15px;height:15px}.motion-tools #motion-icon{display:flex}
+
+/* Live viewer shell. Existing runtime IDs live in a hidden bridge. */
+.object-stage{z-index:0;padding:0;background:none;pointer-events:none}.object-stage #stage{position:absolute;inset:0 0 166px;pointer-events:auto}.object-stage canvas{display:block;width:100%;height:100%;touch-action:none;outline-offset:-4px;cursor:grab}.object-stage canvas:active{cursor:grabbing}.object-stage .studio-poster{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}.object-stage .studio-poster img{height:100%;width:auto;max-width:100%;max-height:100%;object-fit:contain}.object-stage #loading{position:absolute;bottom:30px;left:25%;right:25%;text-align:center;pointer-events:none}.loading-mark{display:none}#load-message{font-size:12px;color:#d2c8b6;background:#20211de8;padding:12px;border-radius:9px}.title-block,.study-label,.home,.object-caption,.bottom-zone,.context-card,footer,.atelier-more,.atelier-status{z-index:2}.title-block{pointer-events:none}.study-label{pointer-events:none}.context-card{max-height:calc(100% - 180px);overflow:auto;scrollbar-width:thin;width:310px}.context-card button,.context-card input,.context-card select{font:12px Arial;min-height:44px}.context-card button{border:1px solid #ffffff24;border-radius:7px;padding:9px 12px;background:#ffffff05;color:var(--ink)}.context-card button:hover{background:#ffffff12}.context-card button[aria-pressed=true]{color:#242823;background:var(--gold)}.context-card .context-top button{border:0;background:transparent;font-size:23px;padding:0}.context-card p{font-size:12px;line-height:1.6;color:#c1c6b9}.tool-row{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.tool-row>*{flex:1}.tool-stack{display:grid;gap:8px;margin:12px 0}.tool-stack label{display:flex;align-items:center;gap:9px;font-size:12px;min-height:36px}.tool-stack input[type=checkbox]{min-height:20px;width:18px;accent-color:var(--gold)}.context-card input[type=search],.context-card select{width:100%;background:#1b1d19;border:1px solid #ffffff30;color:var(--ink);padding:10px;border-radius:6px}.context-card input[type=range]{min-height:44px}.tool-note{font-size:11px!important;color:#d2c3a6!important}.tool-list{list-style:none;padding:0;margin:8px 0;max-height:180px;overflow:auto}.tool-list button{width:100%;text-align:left;margin:3px 0}.tool-list button[aria-pressed=true]{background:var(--gold);color:#222}.context-card details{border-top:1px solid #ffffff20;margin-top:12px;padding-top:5px}.context-card summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:12px}.context-card pre{white-space:pre-wrap;font:10px/1.5 monospace;max-height:200px;overflow:auto;color:#c7cdbf}.context-card a{color:var(--gold);font-size:12px}.atelier-live button:disabled{opacity:.45;cursor:not-allowed}.atelier-status{position:absolute;bottom:190px;left:5%;max-width:240px;font-size:11px;line-height:1.5;color:#b9c0b0;pointer-events:none}.object-caption{display:none}.atelier-more{position:absolute;right:42px;bottom:62px;background:transparent;color:#d5c7af;font-size:12px;min-height:44px;padding:0 12px;border:1px solid #ffffff24;border-radius:22px}footer a{color:#a7ad9f;text-decoration:none}.motion-tools{gap:5px}.motion-prototype{border:0;padding-right:3px}.motion-tools #atelier-slow[aria-pressed=true]{color:var(--gold)}.atelier-live .bottom-zone{pointer-events:none}.atelier-live .bottom-zone button,.atelier-live .task-dock,.atelier-live .motion-tools{pointer-events:auto}
+@media(max-width:1050px){.context-card{width:280px}.atelier-status{display:none}.atelier-more{right:20px;bottom:136px}.title-block{top:14%}.hint-keyboard{display:none}}
+@media(max-width:680px){.object-stage #stage{inset:90px 0 195px}.object-stage #loading{left:20px;right:20px;bottom:15px}.context-card{width:auto;max-height:calc(100% - 260px);bottom:220px;top:auto;left:16px;right:16px;transform:none}.atelier-more{top:0;right:16px;bottom:auto;font-size:11px;border:0;min-height:44px}.study-label{font-size:9px;max-width:65%;white-space:normal;top:16px}.title-block{top:66px}.motion-tools{gap:0}.motion-tools button{padding:0 7px}.motion-prototype{font-size:9px;max-width:50px}.context-card .tool-list{max-height:140px}.atelier-status{display:none}.atelier-live .hint-keyboard{display:none}}
+
+#atelier-retry{position:absolute;z-index:3;top:60px;left:50%;transform:translateX(-50%);border:1px solid #d6c4a466;border-radius:22px;background:#242621;color:#eeeae1;min-height:44px;padding:0 20px;font-size:12px}@media(max-width:680px){#atelier-retry{top:145px}}
+
+.atelier-live[data-failed=true] .hint-desktop,.atelier-live[data-failed=true] .hint-touch,.atelier-live[data-failed=true] .hint-keyboard{display:none}.atelier-live[data-failed=true] #loading{left:5%;right:auto;bottom:110px;width:245px;text-align:left}.atelier-live[data-failed=true] #load-message{padding:0;background:none;line-height:1.6}@media(max-width:680px){.atelier-live[data-failed=true] #loading{left:20px;right:20px;width:auto;bottom:12px;text-align:center}.atelier-live[data-failed=true] #load-message{background:#20211de8;padding:8px;font-size:11px}}
+
+.atelier-live[data-ready=true] .study-label{display:none}
+
+/* Bounded accessibility review: preserve announcements and reserve model space. */
+#atelier-panel-status{border-top:1px solid #ffffff20;margin:14px 0 0;padding-top:10px;line-height:1.5}.context-top{position:sticky;top:-22px;background:#272725;z-index:1;padding:10px 0}.study-label>span#atelier-state-label{width:auto;height:auto;background:none;border-radius:0}.atelier-more[aria-pressed=true]{color:#eeeae1;border-color:#d6c4a4}.quality[aria-expanded=true]{border-color:#d6c4a4}
+@media(max-width:1050px){.atelier-status{display:block!important;position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap}.context-top{top:-18px}}
+@media(max-width:680px){.atelier{min-height:min(580px,calc(100svh - 68px))}.context-card{max-height:min(42svh,calc(100% - 260px))}.context-top{top:-17px}#atelier-panel-status{font-size:11px!important}.study-label{max-width:calc(100% - 140px)}}
+
+/* Desktop already has the persistent live status; keep its mobile panel copy. */
+@media(min-width:1051px){#atelier-panel-status{display:none}}
+
+/* Never leak intermediate WebGL assemblies through the static reference mask. */
+.atelier-live .object-stage .studio-poster{background:#191b1a}
+.atelier-live:not([data-ready=true]) #assembly-canvas{pointer-events:none}
+.atelier-live[data-ready=true][data-presentation=degraded] .study-label{display:flex}
+
+/* Pending Atelier already has the reference label and live status; avoid the motion dock. */
+.atelier-live[data-ready=false]:not([data-failed=true]) #loading{visibility:hidden}
+
+/* Narrow task panels: keep core actions above explanatory/status copy. */
+@media(max-width:680px){
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]){padding:10px 14px;max-height:calc(100% - 228px)}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) .context-top{top:-10px;height:44px;min-height:44px;margin:0 0 4px;padding:0;justify-content:flex-end}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) .context-top .eyebrow{display:none}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) .context-top button{margin:0;min-width:44px;min-height:44px}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) #context-title{position:absolute;top:22px;left:14px;right:62px;font-size:20px;line-height:1.1;margin:0;pointer-events:none;z-index:2}
+ .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) #atelier-panel-status{margin:8px 0 0;padding-top:8px;line-height:1.35}
+ .context-card[data-tool=capture] .capture-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:4px 0}
+ .context-card[data-tool=capture] .capture-actions button{min-width:0;min-height:44px;padding:8px 6px;font-size:12px;line-height:1.2}
+ .context-card[data-tool=capture] :is(.capture-intro,.capture-support){display:none}
+ .context-card[data-tool=time] #atelier-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .context-card[data-tool=time] #atelier-tools :is(.tool-stack,.tool-row){display:contents}
+ .context-card[data-tool=time] #atelier-tools button{order:1;min-height:44px;padding:8px 6px;min-width:0}
+ .context-card[data-tool=time] [data-proxy=crown-pull]{grid-column:1/-1}
+ .context-card[data-tool=time] #atelier-crown-state{grid-column:1/-1;order:0;margin:0;font-size:11px;line-height:1.3}
+ .context-card[data-tool=time] #atelier-crown-help{grid-column:1/-1;order:2;margin:0;font-size:11px;line-height:1.3}
+ .context-card[data-tool=time] #atelier-crown-direct{display:none}
+ .context-card[data-tool=explode] #atelier-tools>p:first-child{display:none}
+ .context-card[data-tool=explode] .slider-heading{margin-top:6px}
+ .context-card[data-tool=explode] input[type=range]{margin:4px 0;min-height:44px}
+ .context-card[data-tool=explode] .tool-row{margin:6px 0}
+ .context-card[data-tool=explode] #atelier-explosion-note[data-available=true]{display:none}
+}
+
+/* Narrow open tools reserve a real, unobscured canvas above the measured panel. */
+@media(max-width:680px){
+ .atelier-live[data-panel-open=true] .context-card{bottom:130px;max-height:calc(100% - 300px)}
+ .atelier-live[data-panel-open=true] .object-stage #stage{top:16px;bottom:calc(130px + var(--atelier-panel-height,240px) + 12px)}
+ .atelier-live[data-panel-open=true] :is(.title-block,.interaction-hint){display:none}
+ .atelier-live[data-panel-open=true] .motion-tools{position:absolute;left:0;bottom:calc(100svh - 68px - 47px - 60px);width:max-content;padding:0 5px}
+ .atelier-live[data-panel-open=true] .motion-tools>:not(#motion){display:none}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #context-title{right:168px;font-size:18px}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] [data-proxy=crown-focus]{position:absolute;top:10px;right:58px;width:100px;height:44px;z-index:3}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-tools [data-proxy=crown-pull]{grid-column:auto;order:1}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-tools [data-proxy=crown-reset]{order:1}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-tools :is([data-proxy=crown-left],[data-proxy=crown-right]){order:2}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-crown-help{order:3}
+}
+
+/* Four real presets, equally discoverable at every viewport width. */
+.quality-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.quality-actions button{min-width:0;min-height:44px}
+
+/* Mobile object-first layout: one compact identity row, one tool strip, one dock.
+   Keep the renderer's quality unchanged; this deliberately increases canvas area. */
+@media(max-width:680px){
+ .atelier-live{--atelier-safe-bottom:env(safe-area-inset-bottom,0px);--atelier-safe-top:env(safe-area-inset-top,0px);--atelier-header-height:calc(48px + var(--atelier-safe-top));--atelier-dock-bottom:calc(6px + var(--atelier-safe-bottom));--atelier-stage-bottom:calc(136px + var(--atelier-safe-bottom));overflow:hidden}
+ .atelier-live .masthead{height:var(--atelier-header-height);padding-top:var(--atelier-safe-top);margin:0 12px}
+ .atelier-live .wordmark{min-height:44px;align-items:center;font-size:12px;letter-spacing:1.8px;gap:6px}
+ .atelier-live .wordmark span{font-size:7px;letter-spacing:1.5px;padding-left:6px}
+ .atelier-live .quality{min-height:44px;font-size:11px;padding:0 10px;border-color:transparent}
+ .atelier-live .atelier{height:calc(100svh - var(--atelier-header-height));height:calc(100dvh - var(--atelier-header-height));min-height:0}
+ .atelier-live .title-block{top:0;left:12px;height:44px;display:flex;align-items:center;max-width:calc(100% - 154px)}
+ .atelier-live h1{font-size:25px;letter-spacing:-.8px;line-height:1}
+ .atelier-live h1 span{font-size:7px;letter-spacing:1.2px;margin-top:4px}
+ .atelier-live .home{top:0;right:104px;width:44px;height:44px;min-height:44px;justify-content:center;padding:0}
+ .atelier-live .home span{display:none}
+ .atelier-live .home svg{width:19px;height:19px}
+ .atelier-live .atelier-more{top:0;right:8px;bottom:auto;min-height:44px;padding:0 8px;font-size:11px}
+ .atelier-live .object-stage #stage{inset:44px 0 var(--atelier-stage-bottom)}
+ .atelier-live .bottom-zone{bottom:var(--atelier-dock-bottom);width:calc(100% - 16px);gap:0;padding:0;border:1px solid #ffffff20;border-radius:16px;background:#262824f5;box-shadow:0 8px 30px #0003}
+ .atelier-live .motion-tools{position:static;display:flex;justify-content:center;width:100%;min-height:44px;padding:0 4px;gap:0;border:0;border-bottom:1px solid #ffffff12;border-radius:0;background:transparent;box-shadow:none}
+ .atelier-live .motion-tools button{min-height:44px;padding:0 8px;font-size:12px}
+ .atelier-live .motion-prototype{font-size:9px;max-width:none;padding:0 5px 0 0}
+ .atelier-live .motion-tools .tour svg{width:13px;height:13px}
+ .atelier-live .task-dock{min-height:64px;padding:3px;gap:0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none}
+ .atelier-live .task-dock button{height:58px;min-height:44px;min-width:44px;font-size:11px;gap:4px}
+ .atelier-live .task-dock button svg{height:18px;width:18px}
+ .atelier-live .interaction-hint{position:absolute;bottom:calc(100% + 5px);font-size:10px;line-height:16px;margin:0;pointer-events:none}
+ .atelier-live .interaction-hint small{display:none}
+ .atelier-live footer{display:none}
+ .atelier-live .study-label{top:48px;left:12px;max-width:calc(100% - 24px);font-size:10px}
+ .atelier-live #atelier-retry{top:90px}
+ /* Panels retain every primary action. Only supplementary text may overflow at
+    extreme viewport/font sizes; the two-column Capture/Time grids stay intact. */
+ .atelier-live[data-panel-open=true] .context-card{bottom:calc(120px + var(--atelier-safe-bottom));max-height:calc(100% - 272px - var(--atelier-safe-bottom));left:8px;right:8px}
+ .atelier-live[data-panel-open=true] .object-stage #stage{top:44px;bottom:calc(128px + var(--atelier-safe-bottom) + var(--atelier-panel-height,240px))}
+ .atelier-live[data-panel-open=true] .motion-tools{position:static;left:auto;bottom:auto;width:100%;padding:0 4px}
+ .atelier-live[data-panel-open=true] .motion-tools>:not(#motion){display:flex}
+ .atelier-live[data-panel-open=true] .motion-tools .motion-prototype{display:block}
+ .atelier-live[data-panel-open=true] .context-card:is([data-tool=capture],[data-tool=time],[data-tool=explode]) #atelier-panel-status{font-size:10px!important;line-height:1.25;margin-top:6px;padding-top:6px}
+}
+
+/* Neutral first paint: never present a historical render as the selected design. */
+.atelier-loading-identity{font:400 22px/1.5 Georgia,serif;letter-spacing:.24em;text-align:center;color:#d5c7af}.atelier-loading-identity span{display:block;margin-top:10px;font:11px/1.5 Arial,sans-serif;letter-spacing:.03em;color:#a7ad9f}
+.atelier-live[data-failed=true] .atelier-loading-identity span{display:none}
+
+.atelier-live[data-ready=true][data-comparison=true] .study-label{display:flex}
+
+/* A selected-design failure keeps the neutral cover and an actionable error. */
+.atelier-live[data-presentation=asset-error] #loading{visibility:visible!important}
+
+/* Compact task study r1: the tool is a control surface, not a second page. */
+@media(max-width:680px){
+ .atelier-live[data-panel-open=true] .context-card{padding:4px 10px 8px;border-radius:14px;bottom:calc(108px + var(--atelier-safe-bottom));max-height:calc(100% - 276px - var(--atelier-safe-bottom))}
+ .atelier-live[data-panel-open=true] .object-stage #stage{top:0;bottom:calc(116px + var(--atelier-safe-bottom) + var(--atelier-panel-height,200px))}
+ .atelier-live[data-panel-open=true] .task-dock{min-height:52px}
+ .atelier-live[data-panel-open=true] .task-dock button{height:46px;min-height:44px;gap:2px}
+ .atelier-live[data-panel-open=true] .context-card .context-top{position:static;height:44px;min-height:44px;margin:0;padding:0;justify-content:flex-end;background:transparent}
+ .atelier-live[data-panel-open=true] .context-top .eyebrow{display:none}
+ .atelier-live[data-panel-open=true] .context-card #context-title{position:absolute;top:4px;left:10px;right:58px;font:500 16px/44px Arial,sans-serif;letter-spacing:0;margin:0;pointer-events:none;z-index:2}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #context-title{right:158px;font-size:15px}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] [data-proxy=crown-focus]{top:4px;right:54px;width:98px}
+ .atelier-live[data-panel-open=true] .context-card .tool-row,.atelier-live[data-panel-open=true] .context-card .tool-stack{margin:4px 0;gap:4px}
+ .atelier-live[data-panel-open=true] .context-card button{min-height:44px;padding:6px;font-size:12px;line-height:1.2}
+ .atelier-live[data-panel-open=true] .context-card .context-top button{font-size:23px;padding:0;min-width:44px}
+ .atelier-live[data-panel-open=true] .context-card :is(.inside-switches,.studio-switches){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+ .atelier-live[data-panel-open=true] .context-card .tool-stack label{min-height:44px;line-height:1.3}
+ .atelier-live[data-panel-open=true] .context-card .studio-views{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+ .atelier-live[data-panel-open=true] .studio-views button{min-width:44px;padding:4px 2px;font-size:11px}
+ .atelier-live[data-panel-open=true] .panel-intro{display:none}
+ /* The persistent role=status still announces updates. Suppress only redundant
+    opening hints visually; genuine action/error messages remain visible. */
+ .atelier-live[data-panel-open=true] #atelier-panel-status[data-task-hint=true]{position:absolute;top:0;left:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0;padding:0;border:0}
+ .atelier-live[data-panel-open=true] #atelier-panel-status{font-size:11px!important;line-height:1.3;margin:4px 0 0;padding-top:4px}
+ .atelier-live[data-panel-open=true] #atelier-render-state{font-size:11px;line-height:1.3;margin:4px 0 0}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-tools{gap:4px}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-crown-state{font-size:11px;line-height:1.3}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=time] #atelier-crown-help{font-size:11px;line-height:1.3}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=explode] .slider-heading{margin-top:0}
+ .atelier-live[data-panel-open=true] .context-card[data-tool=explode] .slider-labels{margin:0}
+}
+
+/* Error evidence stays with the neutral cover, including cropped mobile views. */
+.atelier-live .studio-poster:has(#atelier-error-details:not([hidden])){flex-direction:column;gap:12px;padding:18px;box-sizing:border-box;overflow:auto;justify-content:center}
+#atelier-error-details{pointer-events:auto;max-width:560px;width:100%;box-sizing:border-box;text-align:center;color:#e1d7c7;letter-spacing:normal;font:12px/1.5 Arial,sans-serif}
+#atelier-error-details p{margin:4px 0 10px;white-space:pre-wrap;overflow-wrap:anywhere}
+#atelier-error-details button{min-height:44px;padding:10px 16px;border:1px solid #9d927a;border-radius:22px;background:#242720;color:#f4eee4;font:12px Arial,sans-serif;cursor:pointer}
+#atelier-error-details textarea{box-sizing:border-box;width:100%;height:130px;background:#171a16;color:#e1d7c7;border:1px solid #777;padding:8px;font:11px/1.4 monospace;user-select:text}
+@media(max-width:680px){.atelier-live .studio-poster:has(#atelier-error-details:not([hidden])){gap:6px;padding:12px}.atelier-live .studio-poster:has(#atelier-error-details:not([hidden])) .atelier-loading-identity{font-size:19px}#atelier-error-details{font-size:11px}}
+
+/* Normal-flow compatibility status: never cover title, tools or canvas controls. */
+#atelier-leather-compat-warning{position:static;margin:0 42px;border-bottom:1px solid #ffffff19;color:#d9c6a4;font:11px/1.5 Arial,sans-serif;box-sizing:border-box}
+#atelier-leather-compat-warning summary{min-height:44px;padding:10px 0;cursor:pointer;touch-action:manipulation;list-style-position:inside;align-content:center}
+#atelier-leather-compat-warning summary::after{content:' · Details';color:#aeb5a8;font-size:10px}
+#atelier-leather-compat-warning summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:4px}
+#atelier-leather-compat-warning p{margin:0;padding:0 0 10px;max-width:620px;color:#c1c6b9}
+.atelier-live[data-leather-compat=true] .atelier{height:calc(100svh - 88px - var(--atelier-compat-height,44px));height:calc(100dvh - 88px - var(--atelier-compat-height,44px));min-height:0}
+@media(max-width:680px){#atelier-leather-compat-warning{margin:0 12px;font-size:11px}.atelier-live[data-leather-compat=true] .atelier{height:calc(100svh - var(--atelier-header-height) - var(--atelier-compat-height,44px));height:calc(100dvh - var(--atelier-header-height) - var(--atelier-compat-height,44px))}}
+
+/* Inspection is a deliberate tool, not a permanent overlay on the watch. */
+.atelier-live .inspection-section{margin:0 0 12px;padding:0 0 12px;border-bottom:1px solid #ffffff20}
+.atelier-live .inspection-section h3{font:500 12px/1.4 Arial,sans-serif;color:#d5c7af;margin:0 0 8px}
+.atelier-live .inspection-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.atelier-live .inspection-tools button{min-width:0;min-height:44px;padding:7px;border:1px solid #ffffff24;border-radius:7px;background:#ffffff05;color:#c8ccbf;font:12px/1.3 Arial,sans-serif;cursor:pointer;touch-action:manipulation}
+.atelier-live .inspection-tools button[aria-pressed=true]{background:#b9a680;color:#1c2019;border-color:#d1bd96}
+.atelier-live .inspection-tools button:focus-visible{outline:2px solid #dfc999;outline-offset:2px}
+.atelier-live .inspection-tools [hidden],.atelier-live .inspection-label-compact{display:none}
+.atelier-live #atelier-inspection-reset{width:100%;margin-top:6px;min-height:44px}
+.atelier-live .atelier-more[data-inspection-active=true]{border-color:#b9a680;color:#eee0bd;background:#3d382b}
+.atelier-live .selection-back{width:100%;text-align:left;margin-bottom:10px;color:#d5c7af}
+
+/* Short landscape viewports keep the watch and all primary controls on screen. */
+.atelier-live .motion-tools button{min-width:44px}
+@media(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
+ .atelier-live{--atelier-header-height:calc(48px + env(safe-area-inset-top,0px));--atelier-short-bottom:calc(6px + env(safe-area-inset-bottom,0px));overflow:hidden}
+ .atelier-live .masthead{height:var(--atelier-header-height);padding-top:env(safe-area-inset-top,0px);margin:0 12px}
+ .atelier-live .wordmark{font-size:14px;letter-spacing:2px;gap:10px}
+ .atelier-live .quality{min-height:44px}
+ .atelier-live .masthead-note,.atelier-live .title-block,.atelier-live footer,.atelier-live .interaction-hint{display:none}
+ .atelier-live .atelier,.atelier-live[data-leather-compat=true] .atelier{height:calc(100svh - var(--atelier-header-height) - var(--atelier-compat-height,0px));height:calc(100dvh - var(--atelier-header-height) - var(--atelier-compat-height,0px));min-height:0}
+ .atelier-live .home{top:0;right:8px;min-height:44px}
+ .atelier-live .atelier-more{top:0;right:126px;bottom:auto;min-height:44px}
+ .atelier-live .object-stage #stage{inset:44px 0 calc(80px + env(safe-area-inset-bottom,0px))}
+ .atelier-live .bottom-zone{left:8px;right:8px;bottom:var(--atelier-short-bottom);width:auto;transform:none;flex-direction:row;justify-content:space-between;gap:8px}
+ .atelier-live .motion-tools,.atelier-live[data-panel-open=true] .motion-tools{position:static;left:auto;bottom:auto;transform:none;width:auto;flex-shrink:0;gap:0;padding:0 3px}
+ .atelier-live[data-panel-open=true] .motion-tools>:not(#motion){display:flex}
+ .atelier-live .motion-tools button{min-width:44px;padding:0 6px;font-size:11px}
+ .atelier-live .motion-prototype{font-size:9px}
+ .atelier-live .task-dock{flex:1;min-width:0;gap:0;padding:3px;justify-content:space-between}
+ .atelier-live .task-dock button{width:20%;min-width:44px;height:54px;min-height:44px;font-size:10px;gap:3px}
+ .atelier-live #context{top:44px;bottom:calc(80px + env(safe-area-inset-bottom,0px));left:auto;right:8px;width:300px;max-height:none;transform:none;padding:10px 14px;overflow:auto}
+ .atelier-live #context .context-top{position:sticky;top:-10px;height:44px;min-height:44px;margin:0;padding:0}
+ .atelier-live .context-top .eyebrow{display:none}
+ .atelier-live .context-top button{margin:0 0 0 auto;width:44px;height:44px}
+ .atelier-live .context-card h2{font-size:20px;margin:0 0 8px}
+ .atelier-live[data-panel-open=true] #context #context-title{position:static;left:auto;right:auto;font-size:20px;margin:0 0 8px}
+ .atelier-live #context[data-tool=quality]{padding:4px 8px}
+ .atelier-live #context[data-tool=quality] .context-top{top:-4px}
+ .atelier-live #context[data-tool=quality] #context-title,.atelier-live[data-panel-open=true] #context[data-tool=quality] #context-title{position:absolute;top:14px;left:10px;right:60px;margin:0;font-size:18px;z-index:2}
+ .atelier-live #context[data-tool=quality] #atelier-tools>p{display:none}
+ .atelier-live #context[data-tool=quality] #atelier-panel-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0;padding:0;border:0}
+ .atelier-live .quality-actions{gap:6px}
+ .atelier-live .quality-actions button{padding:6px;min-height:44px}
+ .atelier-live:has(#context:not([hidden])) .object-stage #stage{inset:44px 324px calc(80px + env(safe-area-inset-bottom,0px)) 0}
+}
+
+
+
+/* Mobile sheets overlay a stable rendering surface. Resizing the WebGL canvas
+   for every tool switch clears it and reallocates composer/transmission targets. */
+@media(max-width:680px){
+ .atelier-live[data-panel-open=true] .object-stage #stage{inset:44px 0 var(--atelier-stage-bottom)}
+}
+@media(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
+ .atelier-live[data-panel-open=true] .object-stage #stage,
+ .atelier-live:has(#context:not([hidden])) .object-stage #stage{inset:44px 0 calc(80px + env(safe-area-inset-bottom,0px))}
+}
+/* Let horizontal finger scrubbing own the range gesture instead of scrolling
+   the sheet. The range retains native keyboard and accessibility behavior. */
+.atelier-live #atelier-explosion{touch-action:pan-y;}
+/* Mobile focus: one action dock, secondary motion controls in Studio tools.
+   Both panel states share the same stage rectangle: overlays never reframe it. */
+@media (max-width:680px) {
+  .atelier-live { --atelier-stage-bottom:calc(80px + env(safe-area-inset-bottom,0px)); }
+  .atelier-live .bottom-zone { background:transparent; border:0; box-shadow:none; }
+  .atelier-live .motion-tools,.atelier-live .interaction-hint { display:none; }
+  .atelier-live .task-dock {
+    min-height:64px; padding:3px; border:1px solid #ffffff24;
+    border-radius:16px; background:#252723f5; box-shadow:0 8px 26px #0003;
+  }
+  .atelier-live .task-dock button,
+  .atelier-live:has(#context:not([hidden])) .task-dock button {
+    min-width:44px; min-height:54px; height:54px; gap:4px; font-size:11px;
+  }
+  .atelier-live:has(#context:not([hidden])) .task-dock { min-height:64px; }
+  .atelier-live .object-stage #stage,
+  .atelier-live:has(#context:not([hidden])) .object-stage #stage {
+    inset:44px 0 var(--atelier-stage-bottom); transition:none;
+  }
+  .atelier-live .context-card,
+  .atelier-live:has(#context:not([hidden])) .context-card {
+    bottom:calc(80px + env(safe-area-inset-bottom,0px));
+    max-height:calc(100% - 144px - env(safe-area-inset-bottom,0px));
+    overscroll-behavior:contain;
+  }
+  .atelier-live .context-card button { min-height:44px; }
+  .atelier-live .context-card .context-top { min-height:44px; }
+  .atelier-live .context-card .tool-row { flex-wrap:wrap; }
+}
+@media (min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape) {
+  .atelier-live .motion-tools,.atelier-live .interaction-hint { display:none; }
+  .atelier-live .object-stage #stage,
+  .atelier-live:has(#context:not([hidden])) .object-stage #stage {
+    inset:44px 0 calc(80px + env(safe-area-inset-bottom,0px)); transition:none;
+  }
+}
+/* Keep all five primary actions in distinct equal cells in every panel state. */
+@media(max-width:680px){
+ .atelier-live .task-dock{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;}
+ .atelier-live .task-dock button{width:100%;min-width:44px;}
+}
+
+/* First-use help overlays the unchanged stage and never captures gestures. */
+.atelier-live .atelier-first-use{position:absolute;z-index:5;top:55px;left:50%;transform:translateX(-50%);margin:0;padding:7px 12px;max-width:calc(100% - 32px);box-sizing:border-box;border:1px solid #ffffff24;border-radius:99px;background:#18201ddd;color:#e9ebe5;font:11px/1.4 system-ui,sans-serif;letter-spacing:.01em;white-space:nowrap;pointer-events:none;user-select:none}
+.atelier-live .atelier-first-use[hidden]{display:none}
+@media(max-height:450px) and (orientation:landscape){.atelier-live .atelier-first-use{top:46px;padding:4px 10px}}
+
+/* Short landscape: one header row and a compact dock leave the object room.
+   Tool sheets overlay the same stage rectangle in both open/closed states. */
+@media(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
+ .atelier-live{--atelier-header-height:calc(45px + env(safe-area-inset-top,0px))}
+ .atelier-live .quality{font-size:11px;min-height:44px;padding:0 10px;border:0}
+ .atelier-live .quality-dot{display:none}
+ .atelier-live .masthead{pointer-events:none}
+ .atelier-live .masthead>a,.atelier-live .masthead>button{pointer-events:auto}
+ .atelier-live .home{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:124px;width:44px;height:44px;justify-content:center}
+ .atelier-live .home span,.atelier-live .home kbd{display:none}
+ .atelier-live .atelier-more{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:176px;min-height:44px;width:90px;padding:0 8px;font-size:11px;border:0}
+ .atelier-live .object-stage #stage,
+ .atelier-live[data-panel-open=true] .object-stage #stage,
+ .atelier-live:has(#context:not([hidden])) .object-stage #stage{inset:0 0 calc(68px + env(safe-area-inset-bottom,0px))}
+ .atelier-live .bottom-zone{left:50%;right:auto;width:min(500px,calc(100% - 24px));transform:translateX(-50%);bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+ .atelier-live .task-dock{width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-radius:16px;box-shadow:0 8px 26px #0003}
+ .atelier-live .task-dock button,.atelier-live:has(#context:not([hidden])) .task-dock button{width:100%;height:50px;min-height:50px;font-size:11px;gap:3px}
+ .atelier-live #context{top:0;bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+ .atelier-live .atelier-first-use{top:8px}
+}
+
+@media(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
+ .atelier-live #context{max-height:none;padding:8px 12px}
+ .atelier-live #context .context-top{top:-8px}
+ .atelier-live #context #context-title,
+ .atelier-live[data-panel-open=true] #context #context-title{position:absolute;top:16px;left:12px;right:56px;margin:0;font-size:18px}
+}
+
+/* Explicit open-sheet selector wins over earlier :has() portrait sizing.
+   The title sits above the sticky close row rather than behind its paint. */
+@media(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
+ body.atelier-live[data-panel-open=true] #context.context-card{
+  top:0;bottom:calc(68px + env(safe-area-inset-bottom,0px));max-height:none;
+  left:auto;right:8px;width:min(300px,calc(100% - 24px));padding:8px 12px;
+ }
+ body.atelier-live #context #context-title,
+ body.atelier-live[data-panel-open=true] #context #context-title{
+  z-index:2;top:18px;left:12px;right:56px;font:500 18px/24px Arial,sans-serif;letter-spacing:0;
+ }
+ body.atelier-live #context .context-top{background:transparent}
+}
+
+/* Compact mobile separation tool. Controls overlay the unchanged canvas.
+   Both endpoints remain available after any partial slider adjustment. */
+.explode-compact-label{display:none}
+@media(max-width:680px), (min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
+ body.atelier-live #context.context-card[data-tool=explode]{
+  top:auto;height:auto;max-height:calc(100% - 96px);padding:4px 10px 8px;
+ }
+ body.atelier-live #context[data-tool=explode] .context-top{
+  position:static;top:auto;height:44px;min-height:44px;margin:0;padding:0;background:transparent;
+ }
+ body.atelier-live #context[data-tool=explode] #context-title{
+  position:absolute;top:4px;left:10px;right:112px;margin:0;
+  font:500 16px/44px Arial,sans-serif;letter-spacing:0;white-space:nowrap;
+ }
+ body.atelier-live #context[data-tool=explode] #atelier-tools{
+  display:grid;grid-template-columns:minmax(0,1fr) 44px 64px;gap:8px;align-items:center;
+ }
+ body.atelier-live #context[data-tool=explode] .slider-heading,
+ body.atelier-live #context[data-tool=explode] .tool-row{display:contents}
+ body.atelier-live #context[data-tool=explode] #atelier-explosion-value{
+  position:absolute;top:4px;right:58px;min-width:44px;height:44px;
+  display:flex;align-items:center;justify-content:flex-end;font-size:12px;
+ }
+ body.atelier-live #context[data-tool=explode] #atelier-explosion{
+  grid-column:1;grid-row:1;width:100%;min-width:0;height:44px;min-height:44px;margin:0;
+ }
+ body.atelier-live #context[data-tool=explode] #atelier-reassemble{grid-column:3;grid-row:1}
+ body.atelier-live #context[data-tool=explode] #atelier-explode-full{grid-column:2;grid-row:1}
+ body.atelier-live #context[data-tool=explode] :is(#atelier-reassemble,#atelier-explode-full){
+  min-width:44px;width:100%;height:44px;min-height:44px;margin:0;padding:4px;font-size:12px;
+ }
+ body.atelier-live #context[data-tool=explode] .explode-compact-label{display:inline}
+ body.atelier-live #context[data-tool=explode] .explode-wide-label,
+ body.atelier-live #context[data-tool=explode] .slider-labels,
+ body.atelier-live #context[data-tool=explode] #atelier-tools>p:first-child{display:none}
+ /* Preserve programmatic naming/help without a repeated paragraph over the watch. */
+ body.atelier-live #context[data-tool=explode] label[for=atelier-explosion],
+ body.atelier-live #context[data-tool=explode] #atelier-explosion-note,
+ body.atelier-live #context[data-tool=explode] #atelier-panel-status{
+  display:block;position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;margin:0!important;padding:0!important;border:0;
+ }
+}
