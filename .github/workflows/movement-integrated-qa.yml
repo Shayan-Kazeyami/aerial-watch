@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: cat movement-qa-fixture/part-*.b64 | base64 -d | tar xz
-      - run: cat movement-qa-fixture/final97.b64 | base64 -d | tar xz
+      - run: cat movement-qa-fixture/compact97.b64 | base64 -d | tar xz
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
       - run: python -u movement-qa-fixture/integrated-check.py
       - uses: actions/upload-artifact@v4
