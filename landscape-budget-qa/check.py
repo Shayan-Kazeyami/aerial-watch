@@ -8,7 +8,7 @@ P=pathlib.Path('landscape-budget-qa');O=pathlib.Path('landscape-budget-evidence'
 BASELINE='5de340263d2bcb0a992914d7b0aa64176493934711907480b62bcad07bd486ca'
 RID='fad7fffe84d3b72678dc0cfc7864c18e6bf779b4da88bb40d11aefedddcbb91c'
 PROBE=b'''\nwindow.landscapeQA=()=>({quality,profile:qualityProfiles[quality],ao:ao.enabled,shadows:renderer.shadowMap.enabled,bloom:bloom.enabled,pixelRatio:renderer.getPixelRatio(),normalStream:new URL(location.href).searchParams.get('normalStream'),canvas:[renderer.domElement.width,renderer.domElement.height],origin:performance.timeOrigin});'''
-R={'baselineMain':'8363a039','baselineRelease':BASELINE,'candidateRelease':RID,'candidateDefaultsSHA256':hashlib.sha256((P/'atelier-defaults.js').read_bytes()).hexdigest(),'stageRevision':os.getenv('GITHUB_SHA'),'scope':'Exact immutable candidate root iframe + actual matchMedia; read-only probe only. Software GPU; no physical-device speed claim. Desktop/explicit Studio verify initialized policy without waiting for expensive completed rendering.','cases':[]}
+R={'baselineMain':'8363a039','baselineRelease':BASELINE,'candidateRelease':RID,'candidateDefaultsSHA256':hashlib.sha256((P/'atelier-defaults.js').read_bytes()).hexdigest(),'stageRevision':os.getenv('GITHUB_SHA'),'scope':'Exact immutable candidate root iframe + actual matchMedia; read-only probe only. Software GPU; no physical-device speed claim. Direct-entry/desktop/explicit Studio verify initialized policy without waiting for expensive completed rendering.','cases':[]}
 def save():(O/'report.json').write_text(json.dumps(R,indent=2))
 async def ev(frame,expression,arg=None):return await asyncio.wait_for(frame.evaluate(expression,arg),90)
 async def run_case(browser,name,width,height,touch,query,expected,stream,render=False):
@@ -22,9 +22,15 @@ async def run_case(browser,name,width,height,touch,query,expected,stream,render=
  await page.route('**/assembly-review.js*',instrument)
  page.on('pageerror',lambda e:out['errors'].append(str(e)));page.on('request',lambda r:out['requests'].append({'url':r.url,'type':r.resource_type}));page.on('framenavigated',lambda f:out['navigations'].append(f.url));page.on('console',lambda m:out['console'].append({'type':m.type,'text':m.text}))
  try:
-  await page.goto('http://127.0.0.1:8765/'+query,wait_until='domcontentloaded',timeout=180000)
-  await page.frame_locator('#watch-viewer').locator('body').wait_for()
-  f=next(f for f in page.frames if 'atelier-preview' in f.url);assert RID in f.url,f.url
+  direct=name=='direct-touch-landscape'
+  entry='http://127.0.0.1:8765/'+(f'preview-b/releases/{RID}/atelier-preview.html'if direct else'')+query
+  out['entryMode']='direct'if direct else'root-iframe'
+  await page.goto(entry,wait_until='domcontentloaded',timeout=180000)
+  if direct:f=page.main_frame
+  else:
+   await page.frame_locator('#watch-viewer').locator('body').wait_for()
+   f=next(f for f in page.frames if 'atelier-preview' in f.url)
+  assert RID in f.url,f.url
   await f.wait_for_function('!!window.landscapeQA',timeout=300000)
   out['iframeURL']=f.url;out['media']=await ev(f,"({coarse:matchMedia('(pointer:coarse)').matches,width:innerWidth,height:innerHeight})")
   assert out['media']=={'coarse':touch,'width':width,'height':height},out['media']
@@ -40,6 +46,9 @@ async def run_case(browser,name,width,height,touch,query,expected,stream,render=
    await f.locator('body[data-ready=true]').wait_for(timeout=300000)
    await f.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=240000)
    before=await ev(f,"()=>{window.__landscapeCanvas=document.getElementById('assembly-canvas');return landscapeQA()}")
+   assert before['quality']=='efficient'and before['pixelRatio']==1 and not before['ao']and not before['shadows']and not before['bloom'],before
+   out['readySmooth']=before;save()
+   await asyncio.wait_for(page.screenshot(path=str(O/(name+'-smooth-ready.png'))),45)
    # Real quality control: deliberate Balanced must survive both rotations.
    await f.locator('[data-mode=quality]').first.click(force=True)
    await f.locator('#context [data-quality=balanced]').click(force=True)
@@ -49,7 +58,14 @@ async def run_case(browser,name,width,height,touch,query,expected,stream,render=
    out['rotations']=[]
    for w,h in [(height,width),(width,height)]:
     await page.set_viewport_size({'width':w,'height':h});await f.wait_for_function('innerWidth===%d&&innerHeight===%d'%(w,h))
-    state=await ev(f,'landscapeQA()');out['rotations'].append(state)
+    # ResizeObserver and its render must settle; do not accept only a new innerWidth.
+    await ev(f,'new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+    state=await ev(f,'landscapeQA()')
+    await ev(f,'new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+    settled=await ev(f,'landscapeQA()');assert settled['canvas']==state['canvas'],(state,settled)
+    size=await ev(f,"()=>{const r=document.getElementById('stage').getBoundingClientRect();return [r.width,r.height]}")
+    assert all(abs(actual-int(css*settled['pixelRatio']))<=1 for actual,css in zip(settled['canvas'],size)),(settled,size)
+    state=settled;out['rotations'].append(state)
     assert state['quality']=='balanced'and state['origin']==before['origin']and state['normalStream']==stream,state
     assert await ev(f,"document.getElementById('assembly-canvas')===window.__landscapeCanvas")
    assert len(out['navigations'])==nav
@@ -67,7 +83,7 @@ async def run_case(browser,name,width,height,touch,query,expected,stream,render=
   except Exception as e:out['closeError']=repr(e)
   save()
 async def main():
- cases=[('touch-landscape',932,430,True,'?qa=landscape-default','efficient','1',True),('touch-portrait',430,932,True,'?qa=portrait-default','efficient','1',True),('fine-desktop',1440,800,False,'?qa=desktop-default','studio',None,False),('touch-explicit-studio',932,430,True,'?quality=studio&qa=explicit-studio','studio',None,False),('touch-explicit-zero',932,430,True,'?normalStream=0&qa=explicit-zero','efficient','0',False)]
+ cases=[('direct-touch-landscape',932,430,True,'?qa=direct-default','efficient','1',False),('touch-landscape',932,430,True,'?qa=landscape-default','efficient','1',True),('touch-portrait',430,932,True,'?qa=portrait-default','efficient','1',True),('fine-desktop',1440,800,False,'?qa=desktop-default','studio',None,False),('touch-explicit-studio',932,430,True,'?quality=studio&qa=explicit-studio','studio',None,False),('touch-explicit-zero',932,430,True,'?normalStream=0&qa=explicit-zero','efficient','0',False)]
  selected=os.getenv('LANDSCAPE_CASE')
  if selected:cases=[x for x in cases if x[0]==selected];assert cases,'Unknown LANDSCAPE_CASE'
  async with async_playwright()as p:
