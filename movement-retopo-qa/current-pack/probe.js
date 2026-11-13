@@ -1,0 +1,19 @@
+const wheelQAArray=a=>a.isInterleavedBufferAttribute?a.data.array:a.array;
+const wheelQAHash=async a=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',a.buffer.slice(a.byteOffset,a.byteOffset+a.byteLength)))).map(x=>x.toString(16).padStart(2,'0')).join('');
+let wheelQAMesh,wheelQASavedVisible=new Map(),wheelQAWires=new Map();
+window.wheelQA={
+ init(){controls.enableDamping=false;this.freeze();wheelQAMesh=source.find(o=>o.userData.sourceIndex===97);if(!wheelQAMesh)throw Error('Missing wheel97');return this.snapshot()},
+ freeze(){stopTour();for(const n of ['animate','animate-movement']){const e=$(n);if(e){e.checked=false;e.dispatchEvent(new Event('change',{bubbles:true}));}}dirty=true},
+ frames(n=4){dirty=true;return new Promise(resolve=>{function tick(){if(--n<=0)resolve();else requestAnimationFrame(tick)}requestAnimationFrame(tick)})},
+ settled(){return !cameraTween&&!crownInteraction.active&&!explosion?.animating&&!['upgrading','waiting-for-first-frame'].includes(progressiveNormalState)},
+ async snapshot(){model.updateMatrixWorld(true);const o=wheelQAMesh,g=o.geometry;g.computeBoundingBox();return{name:o.name,sourceIndex:o.userData.sourceIndex,triangles:g.index.count/3,vertices:g.attributes.position.count,positionHash:await wheelQAHash(wheelQAArray(g.attributes.position)),normalHash:await wheelQAHash(wheelQAArray(g.attributes.normal)),indexHash:await wheelQAHash(g.index.array),matrix:o.matrixWorld.toArray(),bounds:[g.boundingBox.min.toArray(),g.boundingBox.max.toArray()],material:o.material.name,delivery:window.wheelQAAssetDelivery,proof:leatherGeometryProof,batch:mechanismBatch?.snapshot(),clock:clock.snapshot(),camera:{position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),target:controls.target.toArray()},contactNodeMatrices:source.filter(m=>[93,95,97,98,99,100,101,102].includes(m.userData.sourceIndex)).map(m=>({sourceIndex:m.userData.sourceIndex,matrix:m.matrixWorld.toArray()}))}},
+ pose(amount,pulled=false){resetMotion();setCrownPulled(pulled);crownVisual.finish();explosion.setAmount(amount,{instant:true});dirty=true},
+ visual(viewName){this.freeze();resetMotion();explosion.setAmount(0,{instant:true});cameraTween=null;mechanismBatch?.setEnabled(false);for(const [o,v]of wheelQASavedVisible)o.visible=v;wheelQASavedVisible.clear();for(const [m,v]of wheelQAWires)m.wireframe=v;wheelQAWires.clear();
+ if(viewName==='assembled'||viewName==='exploded'){visibility();if(viewName==='exploded')explosion.setAmount(1,{instant:true});view('face',false,{explosionEnvelope:viewName==='exploded'});dirty=true;return {viewName}}
+ scene.traverse(o=>{if(o.isMesh){wheelQASavedVisible.set(o,o.visible);o.visible=o===wheelQAMesh}});for(let a=wheelQAMesh;a;a=a.parent)a.visible=true;
+ model.updateMatrixWorld(true);let target=new THREE.Vector3(0,0,0).applyMatrix4(wheelQAMesh.matrixWorld),direction=new THREE.Vector3(0,2,.75).transformDirection(wheelQAMesh.matrixWorld),distance=32;
+ if(viewName.includes('macro')){target=new THREE.Vector3(0,0,3.1).applyMatrix4(wheelQAMesh.matrixWorld);direction=new THREE.Vector3(0,2,.9).transformDirection(wheelQAMesh.matrixWorld);distance=9}
+ if(viewName.includes('wire')){wheelQAWires.set(wheelQAMesh.material,wheelQAMesh.material.wireframe);wheelQAMesh.material.wireframe=true}
+ controls.target.copy(target);camera.position.copy(target).addScaledVector(direction,distance);camera.zoom=1;camera.lookAt(target);camera.updateProjectionMatrix();controls.update();dirty=true;return{viewName,camera:camera.position.toArray(),target:target.toArray(),distance,originalMinDistance:controls.minDistance,material:wheelQAMesh.material.name,lighting:'unchanged production lighting and materials; wire diagnostic only'}},
+ motion(){return clock.snapshot()},batch(on){mechanismBatch?.setEnabled(on);dirty=true;return mechanismBatch?.snapshot()}
+};

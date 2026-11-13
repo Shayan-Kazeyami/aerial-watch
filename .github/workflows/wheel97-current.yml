@@ -1,0 +1,38 @@
+name: Wheel97 exact current pack QA
+on:
+  push:
+    branches: [qa/wheel97-current-20261114]
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        assets: [raw, meshopt]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install numpy playwright && python -m playwright install --with-deps chromium
+      - run: |
+          python - <<'PY'
+          import pathlib,base64,gzip,tarfile,io,json
+          q=pathlib.Path('movement-retopo-qa');t=tarfile.open(fileobj=io.BytesIO(gzip.decompress(base64.b64decode((q/'compact97.b64').read_bytes()))))
+          out=q/'runtime97';out.mkdir(exist_ok=True)
+          for key in ['position','normal','index']:(out/(key+'.bin')).write_bytes(t.extractfile('movement-fixture/data/97-after-'+key+'.bin').read())
+          PY
+          python movement-retopo-qa/current-pack/build-ci.py
+      - run: |
+          python -m http.server 8767 --directory movement-retopo-qa/current-pack/serve >/tmp/wheel-http.log 2>&1 &
+          QA_ASSETS=${{ matrix.assets }} python movement-retopo-qa/current-pack/check-ci.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wheel97-current-${{ matrix.assets }}
+          path: |
+            movement-retopo-qa/current-pack/evidence-*
+            movement-retopo-qa/current-pack/release
+            movement-retopo-qa/current-pack/*report.json
+            movement-retopo-qa/current-pack/release-id.txt
+            movement-retopo-qa/current-pack/fetch/*json

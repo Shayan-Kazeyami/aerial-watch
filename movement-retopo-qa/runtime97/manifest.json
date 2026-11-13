@@ -1,0 +1,26 @@
+{
+  "sourceIndex": 97,
+  "sourceVertices": 22846,
+  "candidateVertices": 18757,
+  "sourceTriangles": 21944,
+  "candidateTriangles": 17812,
+  "sourcePositionNormalIndexBytes": 811632,
+  "candidatePositionNormalIndexBytes": 663912,
+  "exactPositionTriangleStreamPreserved": true,
+  "normalQuantizationStep": 0.0001,
+  "normalQuantizationMaxAngularChangeDegrees": 0.003865127971296901,
+  "files": {
+    "position.bin": {
+      "bytes": 225084,
+      "sha256": "a80ee76933a849c63a07b0630b3db07c8aaba2d9923c869d78f01479da818de0"
+    },
+    "normal.bin": {
+      "bytes": 225084,
+      "sha256": "6a8ac53d85bb7319e9790dec3765ddf5467aa1e518ece763f74ff137fbece6e0"
+    },
+    "index.bin": {
+      "bytes": 213744,
+      "sha256": "d6e525b318fcbb3a9ed1680c785daa668b4d2c5ca3c0f720a47960e8e2a1f1e3"
+    }
+  }
+}
