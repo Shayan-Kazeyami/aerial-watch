@@ -76,14 +76,14 @@ async def main():
     await frame.wait_for_function('v=>Math.abs(assemblyInspect().explosion.amount-v)<.06',arg=fraction,timeout=60000)
     value=float(await slider.input_value())/100;s=await settle('native-range-drag');assert abs(value-fraction)<.06 and abs(s['explosion']['amount']-value)<.025,(value,s)
     return {'target':fraction,'actualInput':value,'actualExplosion':s['explosion']['amount'],'input':'CDP native touch drag'if MOBILE else'native mouse drag'}
-   async def explode_reset(label):
+   async def explode_reset(label,expected_quality):
     await close_panel();await activate('.task-dock [data-mode="explode"]');await frame.locator('#atelier-explosion').wait_for(state='visible')
     await frame.wait_for_function('assemblyInspect().explosion.amount>.1',timeout=60000)
     drag=await drag_slider(.37)
     await activate('#atelier-reassemble');await frame.wait_for_function('assemblyInspect().explosion.amount<.001',timeout=60000)
-    await settle(label+'-reassembled');await close_panel();await activate('#home')
+    reassembled=await settle(label+'-reassembled');assert reassembled['renderQuality']==expected_quality,reassembled;await close_panel();await activate('#home')
     await frame.wait_for_function('assemblyInspect().explosion.amount<.001',timeout=60000)
-    state=await settle(label+'-home-reset');return {'drag':drag,'qualityAfterReset':state['renderQuality']}
+    state=await settle(label+'-home-reset');return {'drag':drag,'qualityBeforeReset':reassembled['renderQuality'],'qualityAfterReset':state['renderQuality']}
    await capture('initial-uninstrumented')
    if not MOBILE:
     assert R['initial']['media']=={'fine':True,'hover':True},R['initial']['media']
@@ -108,7 +108,7 @@ async def main():
     await frame.wait_for_function('q=>assemblyInspect().renderQuality===q',arg=quality,timeout=120000)
     await frame.wait_for_function('q=>[...document.querySelectorAll("#context [data-quality]")].find(e=>e.dataset.quality===q)?.getAttribute("aria-pressed")==="true"',arg=quality,timeout=30000)
     selected=await settle('quality-'+quality+'-selected');await close_panel();await capture('quality-'+quality+'-'+str(len(R['qualityCycles'])))
-    behavior=await explode_reset('quality-'+quality);assert behavior['qualityAfterReset']==quality,behavior
+    behavior=await explode_reset('quality-'+quality,quality);assert behavior['qualityAfterReset']==R['initial']['renderQuality'],behavior
     R['qualityCycles'].append({'requested':quality,'selected':selected,'behavior':behavior})
    R['newNavigation']=R['navigation'][initial_nav:];R['newAssetRequests']=[r for r in R['requests'][initial_requests:]if r['url'].split('?')[0].endswith(('.glb','.gz','.bin'))]
    assert not R['newNavigation'];assert not R['newAssetRequests'],R['newAssetRequests']
