@@ -9,7 +9,7 @@ async def run_case(p,name,stream,fail=False,camera=None):
  out={'name':name,'errors':[],'responses':[],'transfers':[]};R['cases'].append(out)
  async def module(route):await route.fulfill(status=200,content_type='text/javascript',body=(P/'assembly-review.js').read_text()+'\n'+(P/'probe.js').read_text())
  async def fetch_module(route):await route.fulfill(status=200,content_type='text/javascript',body=(P/'assembly-fetch-progressive-normal.js').read_text())
- await page.route('**/assembly-review.js',module);await page.route('**/assembly-fetch-progressive-normal.js',fetch_module)
+ await page.route('**/assembly-review.js*',module);await page.route('**/assembly-fetch-progressive-normal.js',fetch_module)
  upgrade_gate=asyncio.Event()
  if stream and not fail:
   async def gate_high_chunk(route):
