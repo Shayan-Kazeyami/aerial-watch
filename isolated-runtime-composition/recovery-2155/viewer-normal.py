@@ -11,7 +11,7 @@ async def run():
   async def review(route):
    response=await route.fetch();await route.fulfill(response=response,body=(await response.text())+'\n'+(D/'viewer-probe.js').read_text())
   async def batch(route):
-   response=await route.fetch();s=(D/'composed-canonical-batch.js').read_text().replace("'../hardware-reuse-qa/integration/changes/assembly-hardware-canonical-data.js'","'./assembly-hardware-canonical-data.js'").replace('if(!previous||','if(!window.__matrixCacheEnabled||!previous||').replace('batch.setMatrixAt(id,matrix);','window.__matrixWrites=(window.__matrixWrites||0)+1;batch.setMatrixAt(id,matrix);');await route.fulfill(response=response,body=s)
+   response=await route.fetch();s=(D/'composed-canonical-batch.js').read_text().replace("'../hardware-reuse-qa/integration/changes/assembly-hardware-canonical-data.js'","'./assembly-hardware-canonical-data.js'").replace('sourceIndex:e.mesh.userData.sourceIndex','batchUuid:batch.uuid,sourceIndex:e.mesh.userData.sourceIndex').replace('if(!previous||','if(!window.__matrixCacheEnabled||!previous||').replace('batch.setMatrixAt(id,matrix);','window.__matrixWrites=(window.__matrixWrites||0)+1;batch.setMatrixAt(id,matrix);');await route.fulfill(response=response,body=s)
   async def canonical(route):await route.fulfill(status=200,content_type='text/javascript',body=(D/'assembly-hardware-canonical-data.js').read_text())
   await page.route('**/assembly-hardware-canonical-data.js*',canonical)
   await page.route('**/assembly-review.js*',review);await page.route('**/assembly-mechanism-batch.js*',batch)

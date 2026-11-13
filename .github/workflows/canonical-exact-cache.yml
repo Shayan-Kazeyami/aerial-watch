@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [baked-raw, baked-meshopt]
+        mode: [current, baked-raw, baked-meshopt]
     env:
       COMPOSE_MODE: ${{ matrix.mode }}
     steps:
