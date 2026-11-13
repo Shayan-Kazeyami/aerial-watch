@@ -14,17 +14,17 @@ async def run():
   await page.route('**/assembly-review.js*',instrument);page.on('pageerror',lambda e:R['errors'].append(str(e)))
   try:
    await page.goto(URL,wait_until='domcontentloaded');await page.locator('body[data-ready=true]').wait_for(timeout=300000);await page.wait_for_function('plateIntegrationQA.ready()',timeout=300000)
-   R['init']=await page.evaluate('plateIntegrationQA.init()');assert R['init']['release']==RELEASE
+   print('INIT START',flush=True);R['init']=await page.evaluate('plateIntegrationQA.init()');assert R['init']['release']==RELEASE
    gate=json.loads((ROOT/'current-raw-hash-gate.json').read_text())
    for target in R['init']['source']['targets']:
     expected=next(x for x in gate['rows']if x['sourceIndex']==target['sid'])['attrs'];assert target['positionHash']==expected['POSITION'];assert target['normalHash']==expected['NORMAL']
    for spec in [{'name':'assembled','view':'showcase'},{'name':'front','view':'face'},{'name':'exploded','view':'showcase','explode':1},{'name':'moving-7','view':'interior','time':7},{'name':'moving-23','view':'interior','time':23},{'name':'crown-pulled','view':'showcase','pulled':True},{'name':'reset','view':'showcase'}]:
-    name=spec.pop('name');await page.evaluate('(s)=>plateIntegrationQA.pose(s)',spec);row={};R['poses'][name]=row
+    name=spec.pop('name');print('POSE',name,flush=True);await page.evaluate('(s)=>plateIntegrationQA.pose(s)',spec);row={};R['poses'][name]=row
     for label,mode in [('baseline','baseline'),('candidate','candidate'),('bevel','bevel'),('baseline-repeat','baseline')]:
-     data=await page.evaluate('(m)=>plateIntegrationQA.set(m)',mode);row[label]=data
+     print('SET',name,label,flush=True);data=await asyncio.wait_for(page.evaluate('(m)=>plateIntegrationQA.set(m)',mode),timeout=120);row[label]=data
      await page.locator('#assembly-canvas').screenshot(path=str(O/f'{name}-{label}.png'));print(name,label,flush=True)
      if label!='baseline-repeat':
-      contacts=await page.evaluate('plateIntegrationQA.contacts()');(O/f'{name}-{label}-contacts.json.gz').write_bytes(gzip.compress(json.dumps(contacts,separators=(',',':')).encode()))
+      print('CONTACTS',name,label,flush=True);contacts=await asyncio.wait_for(page.evaluate('plateIntegrationQA.contacts()'),timeout=120);(O/f'{name}-{label}-contacts.json.gz').write_bytes(gzip.compress(json.dumps(contacts,separators=(',',':')).encode()))
      assert not data['loading']and not data['failed'];assert all(x['materialSame']for x in data['targets']);assert not data['AO']and not data['bloom']
      if mode!='baseline':
       for target in data['targets']:
@@ -35,6 +35,6 @@ async def run():
     a=Image.open(O/f'{name}-baseline.png').convert('RGB');b=Image.open(O/f'{name}-baseline-repeat.png').convert('RGB');assert not ImageChops.difference(a,b).getbbox(),'A/B/A drift'
     row['baselineRepeatPixelExact']=True
    assert not R['errors'];R['passed']=True
-  except Exception as e:R['passed']=False;R['failure']=repr(e);print('FAIL',repr(e),flush=True);raise
+  except Exception as e:R['passed']=False;R['failure']=repr(e);R['pageText']=await page.locator('body').inner_text();print('FAIL',repr(e),flush=True);raise
   finally:(O/'report.json').write_text(json.dumps(R,indent=2));await browser.close()
 asyncio.run(run())
