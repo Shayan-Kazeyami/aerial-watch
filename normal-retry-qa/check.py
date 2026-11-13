@@ -5,9 +5,30 @@ P=pathlib.Path('normal-retry-qa');O=pathlib.Path('normal-retry-evidence');O.mkdi
 RID=os.getenv('RETRY_RELEASE')or(P/'release-id.txt').read_text().strip()
 BASE=f'http://127.0.0.1:8765/preview-b/releases/{RID}/atelier-preview.html'
 FULL='bb022255b999645d468cc2b62100cef7c4226c3df136ab1732b40c107655d585';LOW='5d8aa10702589424c1157d9a58a7f75aca265569d7c8fac09525a00af19455bc'
-PROBE=b'''\nwindow.retryQA=()=>({detail:currentCaptureDetail(),controller:progressiveNormal?.snapshot(),state:progressiveNormalState,crownActive:crownInteraction.active||!!crownVisual?.active,warnings:loadWarnings.filter(x=>x==='Full-resolution leather normal unavailable'),stable:{camera:{p:camera.position.toArray(),t:controls.target.toArray(),zoom:camera.zoom},quality,explosion:explosion?.amount,crown:crownInteraction.snapshot(),geometry:craftParts.map(x=>x.geometry.uuid),normals:(leatherDetails?.meshes??[]).map(x=>{const m=finishMaterials.get(x)||x.material;return {name:m.name,scale:m.normalScale?.toArray()??null}}),origin:performance.timeOrigin},canvasSame:renderer.domElement===(window.__retryCanvas??=renderer.domElement)});'''
+PROBE=b'''\nwindow.retryQA=()=>({detail:currentCaptureDetail(),controller:progressiveNormal?.snapshot(),state:progressiveNormalState,diagnostic:{now:performance.now(),cameraTween:cameraTween?{elapsed:cameraTween.elapsed,duration:cameraTween.duration}:null,controlsDamping:controls.enableDamping,explosionAnimating:explosion?.animating,motion:{hands:$('animate').checked,movement:$('animate-movement').checked},clock:clock.snapshot()},crownActive:crownInteraction.active||!!crownVisual?.active,warnings:loadWarnings.filter(x=>x==='Full-resolution leather normal unavailable'),stable:{camera:{p:camera.position.toArray(),t:controls.target.toArray(),zoom:camera.zoom},quality,explosion:explosion?.amount,crown:crownInteraction.snapshot(),geometry:craftParts.map(x=>x.geometry.uuid),normals:(leatherDetails?.meshes??[]).map(x=>{const m=finishMaterials.get(x)||x.material;return {name:m.name,scale:m.normalScale?.toArray()??null}}),origin:performance.timeOrigin},canvasSame:renderer.domElement===(window.__retryCanvas??=renderer.domElement)});'''
 R={'release':RID,'stageRevision':os.getenv('GITHUB_SHA'),'scope':'Exact module with read-only appended probe, controlled HTTP503 faults; still-view softwareGPU QA.','cases':[]}
 def save():(O/'report.json').write_text(json.dumps(R,indent=2))
+def recursive_diff(a,b,path='$'):
+ if type(a)is not type(b):return [{'path':path,'before':a,'after':b,'reason':'type'}]
+ if isinstance(a,dict):
+  changes=[]
+  for k in sorted(a.keys()|b.keys()):
+   if k not in a or k not in b:changes.append({'path':path+'.'+k,'before':a.get(k),'after':b.get(k),'reason':'key'})
+   else:changes.extend(recursive_diff(a[k],b[k],path+'.'+k))
+  return changes
+ if isinstance(a,list):
+  if len(a)!=len(b):return [{'path':path,'beforeLength':len(a),'afterLength':len(b)}]
+  return [d for i,(x,y)in enumerate(zip(a,b))for d in recursive_diff(x,y,f'{path}[{i}]')]
+ if a==b:return []
+ d={'path':path,'before':a,'after':b}
+ if isinstance(a,(int,float))and not isinstance(a,bool):d['delta']=b-a;d['absoluteDelta']=abs(b-a)
+ return [d]
+def record_snapshot(out,label,snapshot,reference=None):
+ out.setdefault('snapshots',{})[label]=snapshot
+ if reference is not None:
+  differences=recursive_diff(reference['stable'],snapshot['stable']);out.setdefault('preservationDiffs',{})[label]=differences
+  out.setdefault('maxNumericDelta',{})[label]=max((d.get('absoluteDelta',0)for d in differences),default=0)
+ save()
 async def ev(f,s):return await asyncio.wait_for(f.evaluate(s),180)
 async def state(f,phase):
  end=time.monotonic()+240
@@ -39,7 +60,7 @@ async def run(browser,w,h):
  page.on('pageerror',lambda e:out['errors'].append(str(e)));page.on('request',lambda r:out['requests'].append({'url':r.url,'type':r.resource_type}))
  try:
   await page.goto(BASE,wait_until='domcontentloaded');await page.locator('body[data-ready=true]').wait_for(timeout=300000);await page.wait_for_function('!!window.retryQA',timeout=180000)
-  initial=await state(page,'failed');assert initial['detail']['activeNormalIdentity']['sha256']==LOW and not initial['detail']['ready'];assert len(initial['warnings'])==1
+  initial=await state(page,'failed');record_snapshot(out,'initial-failure',initial);assert initial['detail']['activeNormalIdentity']['sha256']==LOW and not initial['detail']['ready'];assert len(initial['warnings'])==1
   manifest=await(await ctx.request.get(BASE.replace('atelier-preview.html','deployment-manifest.json'))).json();assert out['moduleSHA']==next(x['sha256']for x in manifest['localFiles']if x['path']=='assembly-review.js')
   out['pause']=await ev(page,"""()=>{const read=()=>[document.getElementById('animate').checked,document.getElementById('animate-movement').checked];const before=read();if(before.some(Boolean))document.getElementById('play-motion').onclick();return {before,after:read()}}""")
   assert not any(out['pause']['after'])
@@ -49,16 +70,17 @@ async def run(browser,w,h):
   await page.locator('[data-mode=capture]').first.click(force=True);await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await layout(page,out,'failed');await shot(page,name+'-failed')
   for id in ['capture-scene','record-scene']:assert await page.locator(f'#context [data-proxy={id}]').is_disabled()
   assert await page.locator('#context [data-proxy=export-config]').is_enabled()
+  preconfig=await ev(page,'retryQA()');record_snapshot(out,'before-config-download',preconfig)
   p=await download(page,'#context [data-proxy=export-config]',name+'-pending.json');c=json.loads(p.read_text())['leatherCraft']['candidate'];assert c['normalIdentity']['sha256']==LOW and not c['detail']['ready'];out['pendingIdentity']=c['normalIdentity']
-  before=await ev(page,'retryQA()');start=len(out['requests'])
-  await page.locator('#atelier-retry-detail').click();second=await state(page,'failed');assert second['controller']['attempts']==2 and len(second['warnings'])==1;assert second['stable']==before['stable'];assert second['canvasSame']
+  before=await ev(page,'retryQA()');record_snapshot(out,'before-retry',before,preconfig);start=len(out['requests'])
+  await page.locator('#atelier-retry-detail').click();second=await state(page,'failed');record_snapshot(out,'second-failure',second,before);assert second['controller']['attempts']==2 and len(second['warnings'])==1;assert second['stable']==before['stable'];assert second['canvasSame']
   # DOM click honors disabled state; repeated user-equivalent click cannot restart.
   await page.locator('#atelier-retry-detail').evaluate('(b)=>{b.click();b.click();b.click()}');await page.wait_for_function('retryQA().state==="upgrading"');await asyncio.sleep(.2)
-  pending=await ev(page,'retryQA()');assert pending['controller']['attempts']==3 and len(out['faults'])==3;assert pending['stable']==before['stable'];assert not pending['detail']['ready'];assert pending['detail']['activeNormalIdentity']['sha256']==LOW
+  pending=await ev(page,'retryQA()');record_snapshot(out,'pending-third',pending,before);assert pending['controller']['attempts']==3 and len(out['faults'])==3;assert pending['stable']==before['stable'];assert not pending['detail']['ready'];assert pending['detail']['activeNormalIdentity']['sha256']==LOW
   await layout(page,out,'pending')
   try:await shot(page,name+'-pending',30)
   finally:gate.set()
-  full=await state(page,'full');assert full['detail']['ready']and full['detail']['activeNormalIdentity']['sha256']==FULL;assert full['stable']==before['stable']and full['canvasSame'];assert full['controller']['retainedLowBytes']==0 and full['controller']['attempts']==3 and not full['warnings'];assert len(out['faults'])==3
+  full=await state(page,'full');record_snapshot(out,'full-third',full,before);assert full['detail']['ready']and full['detail']['activeNormalIdentity']['sha256']==FULL;assert full['stable']==before['stable']and full['canvasSame'];assert full['controller']['retainedLowBytes']==0 and full['controller']['attempts']==3 and not full['warnings'];assert len(out['faults'])==3
   assert not any(r['type']=='document'or r['url'].split('?')[0].endswith(('.glb','.glb.gz','/geometry.bin'))for r in out['requests'][start:])
   for id in ['capture-scene','record-scene']:assert await page.locator(f'#context [data-proxy={id}]').is_enabled()
   await layout(page,out,'full');await shot(page,name+'-full');out['final']=full
@@ -70,7 +92,10 @@ async def run(browser,w,h):
     at+=n+12
    assert len(configs)==1;candidate=configs[0]['leatherCraft']['candidate'];assert candidate['normalIdentity']['sha256']==FULL and candidate['detail']['ready'];out['png']={'bytes':len(b),'identity':candidate['normalIdentity']}
   assert not out['errors'];out['passed']=True
- except Exception as e:out.update(passed=False,failure=repr(e),traceback=traceback.format_exc())
+ except Exception as e:
+  out.update(passed=False,failure=repr(e),traceback=traceback.format_exc());save()
+  try:record_snapshot(out,'failure-final',await asyncio.wait_for(page.evaluate('window.retryQA?.()'),15),locals().get('before'))
+  except Exception as diagnostic:out['finalSnapshotError']=repr(diagnostic)
  finally:
   gate.set();save()
   try:await asyncio.wait_for(ctx.close(),20)
