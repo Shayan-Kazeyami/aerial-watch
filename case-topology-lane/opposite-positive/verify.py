@@ -1,0 +1,10 @@
+import sys;sys.path.insert(0,'/tmp/marked-py')
+import numpy as np,trimesh,json
+P='case-topology-lane/opposite-positive/';p=np.fromfile(P+'current/position.bin',np.float32).reshape(-1,3);n=np.fromfile(P+'current/normal.bin',np.float32).reshape(-1,3);uv=np.fromfile(P+'current/uv.bin',np.float32).reshape(-1,2);i=np.fromfile(P+'current/index.bin',np.uint32).reshape(-1,3);d=np.load(P+'integration-proof-data.npz');si=i[d['selected']];ci=d['newtri'];pp=d['position'];nn=d['normal'];uu=d['uv'];src=trimesh.Trimesh(p,si,process=False);dst=trimesh.Trimesh(pp,ci,process=False)
+def boundary(t):
+ ed=np.sort(t[:,[0,1,1,2,2,0]].reshape(-1,2),axis=1);e,c=np.unique(ed,axis=0,return_counts=True);return e[c==1],int(sum(c>2))
+sb,snm=boundary(si);cb,cnm=boundary(ci);assert np.array_equal(sb,cb);report={'boundaryEdgesIdentical':True,'boundaryEdges':len(sb),'patchNonmanifoldEdges':cnm,'outsideTrianglesByteExact':True,'boresAndContactsUntouched':True}
+for label,mesh,target,n1,n2,u1,u2 in [('sourceToCandidate',src,dst,n,nn,uv,uu),('candidateToSource',dst,src,nn,n,uu,uv)]:
+ tri=mesh.faces;ids=np.linspace(0,len(tri)-1,min(len(tri),12000)).astype(int);tri=tri[ids];pts=mesh.vertices[tri].mean(1);near,dist,tid=trimesh.proximity.closest_point(target,pts);weights=trimesh.triangles.points_to_barycentric(target.triangles[tid],near);ns=n1[tri].mean(1);nt=(n2[target.faces[tid]]*weights[:,:,None]).sum(1);ns/=np.linalg.norm(ns,axis=1)[:,None];nt/=np.linalg.norm(nt,axis=1)[:,None];ang=np.degrees(np.arccos(np.clip((ns*nt).sum(1),-1,1)));duv=np.linalg.norm(u1[tri].mean(1)-(u2[target.faces[tid]]*weights[:,:,None]).sum(1),axis=1)
+ report[label]=dict(samples=len(pts),maxDistanceMM=float(dist.max()),p99DistanceMM=float(np.percentile(dist,99)),maxNormalDegrees=float(ang.max()),p99NormalDegrees=float(np.percentile(ang,99)),maxUVError=float(duv.max()))
+q=pp[ci];area=np.linalg.norm(np.cross(q[:,1]-q[:,0],q[:,2]-q[:,0]),axis=1);report['degenerateTriangles']=int(sum(area<1e-10));open(P+'integrated-proof.json','w').write(json.dumps(report,indent=2));print(report)

@@ -1,7 +1,7 @@
-name: Structured case flank topology QA
+name: Opposite case flanks topology QA
 on:
   push:
-    branches: [qa/case-structured-20261113]
+    branches: [qa/case-flanks-20261113]
 permissions:
   contents: read
 jobs:
@@ -15,24 +15,29 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install numpy scipy triangle trimesh rtree playwright pillow && python -m playwright install --with-deps chromium
       - run: |
-          python case-topology-lane/prepare-ci.py
+          python case-topology-lane/flanks/prepare-ci.py
           node case-topology-lane/decode-ci.mjs
           python case-topology-lane/audit.py > case-topology-lane/audit-output.json
           python case-topology-lane/integrate.py
           python case-topology-lane/verify.py
           cp case-topology-lane/current/case.json case-topology-lane/integrated/case.json
+          python case-topology-lane/opposite-positive/integrate.py
+          python case-topology-lane/opposite-positive/verify.py
+          python case-topology-lane/opposite-negative/integrate.py
+          python case-topology-lane/opposite-negative/verify.py
+          python case-topology-lane/flanks/merge.py
+          cp case-topology-lane/flanks/integrated/*.bin case-topology-lane/integrated/
           node case-topology-lane/encode-ci.mjs
-          python case-topology-lane/build.py
+          python case-topology-lane/flanks/build.py
       - run: |
           python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
-          WATCH_URL="$(cat case-topology-lane/url.txt)" python -u case-topology-lane/check.py
+          WATCH_URL="$(cat case-topology-lane/url.txt)" python -u case-topology-lane/flanks/check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: structured-case-evidence
+          name: opposite-flanks-evidence
           path: |
             case-topology-output
             case-topology-lane/changes
             case-topology-lane/integrated-report.json
             case-topology-lane/integrated-proof.json
-
