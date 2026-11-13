@@ -1,0 +1,25 @@
+name: Hardware release-relative integration acceptance
+on:
+  push:
+    branches: [qa/hardware-release-integration-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python hardware-reuse-qa/integration/build.py
+      - run: |
+          python -m http.server 8877 >/tmp/hardware-release-http.log 2>&1 &
+          python hardware-reuse-qa/integration/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hardware-release-relative-evidence
+          path: |
+            hardware-reuse-qa/integration/evidence
+            hardware-reuse-qa/integration/changes
+            hardware-reuse-qa/integration/build-report.json
