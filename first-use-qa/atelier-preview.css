@@ -307,3 +307,10 @@
  .atelier-live #context{top:0;bottom:calc(68px + env(safe-area-inset-bottom,0px))}
  .atelier-live .atelier-first-use{top:8px}
 }
+
+@media(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
+ .atelier-live #context{max-height:none;padding:8px 12px}
+ .atelier-live #context .context-top{top:-8px}
+ .atelier-live #context #context-title,
+ .atelier-live[data-panel-open=true] #context #context-title{position:absolute;top:16px;left:12px;right:56px;margin:0;font-size:18px}
+}
