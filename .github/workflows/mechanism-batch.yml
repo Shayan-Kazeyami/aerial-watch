@@ -1,7 +1,7 @@
-name: Mechanism render batching quality comparison
+name: Live mechanism batching verification
 on:
   push:
-    branches: [qa/mechanism-batch-20261113]
+    branches: [qa/mechanism-batch-live-20261113]
 permissions:
   contents: read
 jobs:
@@ -11,11 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
-      - run: node mechanism-batch-qa/test.mjs
-      - run: python mechanism-batch-qa/build.py
       - run: |
-          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
-          WATCH_URL="$(cat mechanism-batch-qa/url.txt)" python -u mechanism-batch-qa/check.py
+          python mechanism-batch-qa/wait-live.py
+          WATCH_URL="https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/ff188ba605b3868d174bec75b643470c86fb164c706c5ff0b2d4ee89c2472947/atelier-preview.html" python -u mechanism-batch-qa/check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
