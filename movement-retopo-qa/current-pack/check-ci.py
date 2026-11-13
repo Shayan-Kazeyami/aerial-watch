@@ -1,19 +1,22 @@
-import asyncio,json,pathlib,hashlib,os,traceback
+import asyncio,json,pathlib,hashlib,os,traceback,base64
 from playwright.async_api import async_playwright
 Q=pathlib.Path('movement-retopo-qa/current-pack');CAND=(Q/'release-id.txt').read_text().strip();SOURCE='09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29';MODE=os.environ.get('QA_ASSETS','raw');O=Q/('evidence-'+MODE);O.mkdir(exist_ok=True);R={'sourceRelease':SOURCE,'candidateRelease':CAND,'assetMode':MODE,'setup':'Exact sealed local assets, no geometry overlays; production lights/materials, AO off, seeded randomness; Chromium SwiftShader, not hardware FPS','variants':{}}
 async def run():
  async with async_playwright()as p:
   browser=await p.chromium.launch(args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   for variant,rid in [('source',SOURCE),('candidate',CAND)]:
-   c=await browser.new_context(viewport={'width':1100,'height':1000},device_scale_factor=1);pg=await c.new_page();pg.set_default_timeout(300000);r={'errors':[],'transport':[]};R['variants'][variant]=r;pg.on('pageerror',lambda e:r['errors'].append(str(e)));tasks=[]
+   c=await browser.new_context(viewport={'width':1100,'height':1000},device_scale_factor=1);pg=await c.new_page();cdp=await c.new_cdp_session(pg);await cdp.send('Network.enable',{'maxTotalBufferSize':134217728,'maxResourceBufferSize':67108864});pg.set_default_timeout(300000);r={'errors':[],'transport':[]};R['variants'][variant]=r;pg.on('pageerror',lambda e:r['errors'].append(str(e)));tasks=[]
    await pg.add_init_script('Math.random=(()=>{let s=192837465;return ()=>((s=(1664525*s+1013904223)>>>0)/4294967296)})();')
    async def instrument(route):
     response=await route.fetch();s=await response.text();needle='function initializeBaseline(result,metadata){';assert s.count(needle)==1;s=s.replace(needle,needle+'window.wheelQAAssetDelivery=result.metrics?.assetDelivery;window.wheelQAParserJSON=(result.gltf||result).parser.json;')+'\n'+(Q/'probe.js').read_text();await route.fulfill(response=response,body=s)
    await pg.route('**/assembly-review.js*',instrument)
-   async def response(resp):
-    if resp.url.split('?')[0].endswith(('/rebuild/assembly.glb','/optimized-assets/rebuild__assembly.meshopt.glb.gz')):
-     b=await resp.body();r['transport'].append({'url':resp.url,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
-   pg.on('response',lambda resp:tasks.append(asyncio.create_task(response(resp))))
+   asset_ids=set()
+   def received(event):
+    if event['response']['url'].split('?')[0].endswith(('/rebuild/assembly.glb','/optimized-assets/rebuild__assembly.meshopt.glb.gz')):asset_ids.add(event['requestId'])
+   async def finished(event):
+    if event['requestId'] not in asset_ids:return
+    payload=await cdp.send('Network.getResponseBody',{'requestId':event['requestId']});body=base64.b64decode(payload['body'])if payload.get('base64Encoded')else payload['body'].encode();r['transport'].append({'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'capture':'passive same-session CDP'})
+   cdp.on('Network.responseReceived',received);cdp.on('Network.loadingFinished',lambda e:tasks.append(asyncio.create_task(finished(e))))
    try:
     await pg.goto(f'http://127.0.0.1:8767/preview-b/releases/{rid}/atelier-preview.html?quality=efficient&normalStream=1&ao=off&paused=1&assets={MODE}',wait_until='domcontentloaded');await pg.locator('body[data-ready=true]').wait_for();await pg.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await pg.evaluate('wheelQA.init()');await pg.wait_for_function('wheelQA.settled()');await pg.evaluate('wheelQA.frames(8)');r['initial']=await pg.evaluate('wheelQA.snapshot()');assert r['initial']['triangles']==(21944 if variant=='source'else 17812);assert r['initial']['delivery']['used']==MODE and not r['initial']['delivery']['fallbackReason'];assert r['initial']['proof']['status']=='verified';r['poses']=[]
     for amount,pulled in[(0,False),(.25,False),(.5,True),(.75,True),(1,False),(0,False)]:
