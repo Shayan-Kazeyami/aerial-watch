@@ -25,6 +25,13 @@ async def main():
    async def touch(t,x=None,y=None):await cdp.send('Input.dispatchTouchEvent',{'type':t,'touchPoints':[] if x is None else [{'x':x,'y':y}]})
    initial=await page.evaluate('mobileAuditSnapshot()');startrequests=len(requests)
    for surface in ['mesh','dot']:
+    previous=None;stable=0
+    for settleAttempt in range(40):
+     snap=await page.evaluate('mobileAuditFrames(2)')
+     stable=stable+1 if previous==snap['camera'] else 0
+     previous=snap['camera']
+     if stable>=2:break
+    assert stable>=2,'Pre-gesture camera never settled'
     if surface=='mesh':point=await page.evaluate('crownMeshPoint()')
     else:
      bb=await page.locator('.crown-hotspot').bounding_box();point={'x':bb['x']+bb['width']/2,'y':bb['y']+bb['height']/2}
@@ -33,7 +40,7 @@ async def main():
     await touch('touchMove',x,y);a=await page.evaluate('mobileAuditFrames(4)');b=await page.evaluate('mobileAuditFrames(4)');assert a['state']['degrees']==b['state']['degrees']
     await touch('touchMove',x,y+22);c=await page.evaluate('mobileAuditFrames(4)');assert c['state']['degrees']<b['state']['degrees']-.1
     await touch('touchEnd');a=await page.evaluate('mobileAuditFrames(4)');b=await page.evaluate('mobileAuditFrames(4)');assert a['state']['degrees']==b['state']['degrees']
-    assert a['camera']==before['camera'] and b['camera']==before['camera'],'Crown gesture moved camera'
+    assert a['camera']==before['camera'] and b['camera']==before['camera'],('Crown gesture moved camera',surface,before['camera'],a['camera'],b['camera'])
     assert b['orbitEnabled']==before['orbitEnabled'],'Orbit ownership not restored'
     assert not await page.locator('#context[data-tool="time"]').is_visible(),'Unsolicited Time panel'
     R[surface]={'continued':True,'neutralStops':True,'reversal':True,'releaseStops':True}
