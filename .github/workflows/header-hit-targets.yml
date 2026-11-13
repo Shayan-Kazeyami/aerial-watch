@@ -1,0 +1,22 @@
+name: Header hit-target regression
+on:
+  push:
+    branches: [qa/webgpu-header-fix-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
+          node --test webgpu-controls-qa/benchmark.test.mjs
+          python webgpu-controls-qa/header-check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: header-hit-targets
+          path: header-evidence
