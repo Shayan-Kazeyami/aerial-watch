@@ -1,4 +1,5 @@
 import asyncio,json,pathlib
+from urllib.parse import urlsplit,urlunsplit,parse_qs,urlencode
 from playwright.async_api import async_playwright
 O=pathlib.Path('movement-integrated-evidence');O.mkdir(exist_ok=True);R={'errors':[],'note':'Current live watch intercepted in QA browser only; no production changes; SwiftShader not phone FPS'}
 async def main():
@@ -15,7 +16,7 @@ async def main():
     frames=[f for f in pg.frames if 'atelier-preview.html' in f.url]
     if frames:f=frames[0];break
     await pg.wait_for_timeout(1000)
-   assert f,'No viewer iframe';await f.locator('body[data-ready=true]').wait_for(timeout=300000);await f.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000);R['url']=f.url;R['init']=await f.evaluate('movementTopologyQA.init()');assert R['init']['before']==21944 and R['init']['after']==17812
+   assert f,'No viewer iframe';u=urlsplit(f.url);q=parse_qs(u.query);q.update(quality=['efficient'],paused=['1'],ao=['off']);await pg.goto(urlunsplit((u.scheme,u.netloc,u.path,urlencode(q,doseq=True),u.fragment)),wait_until='domcontentloaded');f=pg.main_frame;await f.locator('body[data-ready=true]').wait_for(timeout=300000);await f.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000);R['url']=f.url;R['init']=await f.evaluate('movementTopologyQA.init()');R['markedRegionHits']=await f.evaluate('movementTopologyQA.identifyMark()');assert R['init']['before']==21944 and R['init']['after']==17812
    async def compare(name,macro=False):
     await f.evaluate('movementTopologyQA.freeze()');await f.wait_for_function('movementTopologyQA.settled()',timeout=180000);await f.evaluate('(m)=>movementTopologyQA.pose(m)',macro);states={}
     for mode,on in [('before',False),('after',True)]:
