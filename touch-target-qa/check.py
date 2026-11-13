@@ -11,7 +11,7 @@ async def main():
   page.set_default_timeout(30000)
   await page.goto(URL,wait_until='domcontentloaded',timeout=120000)
   await page.locator('body[data-ready=true]').wait_for(timeout=300000)
-  await page.evaluate("""window.trace=[];for(const name of ['pointerdown','pointerup','touchstart','touchend','click','atelier:explode','atelier:explode-state'])document.addEventListener(name,e=>trace.push({type:name,target:e.target.tagName,detail:name.startsWith('atelier:')?e.detail:null}),true)""")
+  await page.evaluate("""window.trace=[];for(const name of ['pointerdown','pointerup','touchstart','touchend','click','atelier:explode','atelier:explode-state'])document.addEventListener(name,e=>trace.push({type:name,target:e.target.tagName,trusted:e.isTrusted,id:e.target.id,detail:name.startsWith('atelier:')?e.detail:null}),true)""")
   cdp=await page.context.new_cdp_session(page)
   async def tap(x,y):
    await cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':x,'y':y}]})
@@ -30,7 +30,9 @@ async def main():
    await tap(x,y)
    R['tests'].append({'label':label,'hit':target,'trace':await page.evaluate('trace'),'panel':await page.locator('#context').get_attribute('data-tool')})
    events=R['tests'][-1]['trace']
-   assert sum(e['type']=='click' for e in events)==1
+   print(json.dumps(R['tests'][-1]),flush=True)
+   (OUT/'report.json').write_text(json.dumps(R,indent=2))
+   assert sum(e['type']=='click' and e['trusted'] for e in events)==1
    assert any(e['type']=='atelier:explode-state' and e['detail']['amount']==1 for e in events)
    await page.evaluate('trace=[]')
    box=await page.locator('#home').bounding_box()
