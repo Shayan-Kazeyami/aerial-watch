@@ -2,7 +2,7 @@
 No route interception, source injection, programmatic UI events or force=True.
 Long mobile lifecycle/reload sweeps belong to the independent recovery worker.
 """
-import asyncio, json, os, pathlib, traceback, time
+import asyncio, json, os, pathlib, traceback, time, base64
 from playwright.async_api import async_playwright
 from PIL import Image, ImageStat
 Q=pathlib.Path('coordinated-release-proposal')
@@ -57,7 +57,13 @@ async def main():
     if await frame.locator('#close').is_visible():
      await activate('#close');await frame.locator('#context').wait_for(state='hidden')
    async def capture(name):
-    await settle(name+'-capture');path=O/(name+'.png');await frame.locator('#assembly-canvas').screenshot(path=str(path),animations='disabled',timeout=180000)
+    before=await settle(name+'-capture');path=O/(name+'.png')
+    # Capture the actually visible stage directly from the compositor, not the
+    # overscan canvas element that Playwright tries to scroll/stabilize.
+    box=await frame.locator('#stage').bounding_box();viewport=host.viewport_size
+    x=max(0,box['x']);y=max(0,box['y']);w=min(viewport['width'],box['x']+box['width'])-x;h=min(viewport['height'],box['y']+box['height'])-y;assert w>100 and h>100
+    shot=await asyncio.wait_for(cdp.send('Page.captureScreenshot',{'format':'png','fromSurface':True,'captureBeyondViewport':False,'clip':{'x':x,'y':y,'width':w,'height':h,'scale':1}}),180)
+    path.write_bytes(base64.b64decode(shot['data']));R.setdefault('captures',[]).append({'name':name,'method':'CDP compositor visible-stage clip; no renderer hook/scroll/quality change','clip':box,'before':before,'after':await frame.evaluate(SNAP)})
     im=Image.open(path).convert('RGB');stat=ImageStat.Stat(im);colors=len(im.getcolors(maxcolors=10000000)or[])
     assert max(stat.stddev)>5 and colors>100,(name,'plausibly blank canvas',stat.stddev,colors)
     R.setdefault('captures',[]).append({'name':name,'size':list(im.size),'stddev':stat.stddev,'colors':colors})
