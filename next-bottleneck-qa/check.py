@@ -9,7 +9,7 @@ async def run():
   errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   async def intercept(route):
    response=await route.fetch();await route.fulfill(response=response,body=(await response.text())+'\n'+pathlib.Path('next-bottleneck-qa/probe.js').read_text())
-  await page.route('**/assembly-review.js',intercept)
+  await page.route('**/assembly-review.js*',intercept)
   try:
    await page.goto('https://shayan-kazeyami.github.io/aerial-watch/?probe=b38ddef3',wait_until='domcontentloaded')
    await page.wait_for_timeout(10000);f=next(f for f in page.frames if RID in f.url)
