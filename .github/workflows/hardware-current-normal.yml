@@ -1,0 +1,23 @@
+name: Current hardware curvature normals QA
+on:
+  push:
+    branches: [qa/hardware-curvature-current-20261114]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          mkdir -p hardware-normal-qa
+          tar -xzf hardware-current-fixture.tar.gz -C hardware-normal-qa
+          python -m http.server 8886 >/tmp/hardware-normal-server.log 2>&1 &
+          python hardware-normal-qa/resume-check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hardware-current-normal-evidence
+          path: hardware-normal-qa/evidence-current
