@@ -1,0 +1,20 @@
+name: Live mesh registry verification
+on:
+  push:
+    branches: [qa/mesh-registry-live-20261113]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python mesh-registry-qa/wait-deploy.py
+      - run: WATCH_URL="https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/255ce38c7fc861da5a909fa814a04e40705404d103e6b5a9d617095934ba309e/atelier-preview.html" python -u mesh-registry-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mesh-registry-live-evidence
+          path: mesh-registry-output
