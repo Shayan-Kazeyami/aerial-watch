@@ -1,0 +1,32 @@
+name: Caseback structured meridian isolated QA
+on:
+  push:
+    branches: [qa/caseback-meridian-20261114]
+permissions:
+  contents: read
+concurrency:
+  group: caseback-meridian-private
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: |
+          python -m http.server 8768 --bind 127.0.0.1 >/tmp/caseback-http.log 2>&1 &
+          python -u case-topology-lane/recovery-remaining/check-caseback.py
+          python -c "import json; r=json.load(open('case-topology-lane/recovery-remaining/evidence/report.json')); assert r['passed'],r"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: caseback-meridian-private-evidence
+          path: |
+            case-topology-lane/recovery-remaining/evidence
+            case-topology-lane/recovery-remaining/append-caseback.js
+            case-topology-lane/recovery-remaining/check-caseback.py
+            /tmp/caseback-http.log
