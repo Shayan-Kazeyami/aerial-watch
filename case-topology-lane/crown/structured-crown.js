@@ -23,5 +23,7 @@ export function createStructuredCrownCandidate(mesh){
  }
  for(let j=0;j<rings.length-1;j++){const a=rings[j],b=rings[j+1];for(let k=0;k<a.length;k++){const next=(k+1)%a.length;push(a[k],a[next],b[next]);push(a[k],b[next],b[k]);}}
  if(removed!==10752||ix.length/3-result.length/3!==5376)throw Error('Unexpected crown patch size');
- const candidate=g.clone();candidate.setIndex(result);candidate.computeBoundingBox();candidate.computeBoundingSphere();return candidate;
+ const candidate=g.clone(),used=[...new Set(result)].sort((a,b)=>a-b),remap=new Uint32Array(p.count);used.forEach((v,i)=>remap[v]=i);
+ for(const [name,a]of Object.entries(g.attributes)){if(!a.array)throw Error('Unsupported interleaved crown attribute');const data=new a.array.constructor(used.length*a.itemSize);for(let j=0;j<used.length;j++)for(let k=0;k<a.itemSize;k++)data[j*a.itemSize+k]=a.array[used[j]*a.itemSize+k];candidate.setAttribute(name,new a.constructor(data,a.itemSize,a.normalized));}
+ candidate.setIndex(result.map(i=>remap[i]));candidate.computeBoundingBox();candidate.computeBoundingSphere();return candidate;
 }
