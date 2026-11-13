@@ -1,0 +1,19 @@
+:root{color-scheme:dark;background:#191b1a;color:#eeeae1;font-family:Arial,Helvetica,sans-serif}
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+#watch-viewer{display:block;width:100%;height:100vh;height:100dvh;border:0;background:#191b1a}
+#watch-loading{position:fixed;z-index:2;left:50%;top:calc(50% + 72px);transform:translateX(-50%);width:min(280px,calc(100% - 48px));padding:14px 18px;background:#191b1af5;border:1px solid #d5c7af24;border-radius:10px;pointer-events:none;text-align:center;box-sizing:border-box}
+#watch-loading[hidden]{display:none}
+#watch-loading-label{display:block;color:#d5c7af;font-size:12px;letter-spacing:.04em}
+#watch-progress{display:block;width:100%;height:3px;margin:12px 0 0;border:0;border-radius:3px;overflow:hidden;background:#d5c7af20}
+#watch-progress-fill{display:block;height:100%;width:100%;background:#d5c7af;transform:scaleX(0);transform-origin:left;transition:transform .65s ease-out}
+@media(prefers-reduced-motion:reduce){#watch-progress-fill{transition:none}}
+@media(max-height:500px){#watch-loading{top:16px;left:50%;padding:9px 14px}}
+noscript{z-index:3;position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:#191b1a}noscript p{max-width:36rem;line-height:1.6}a{color:#d6c4a4}a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+/* A quiet compositor-only activity cue keeps long preparation phases visibly
+   alive. It does not change the estimated fill or invent byte percentages. */
+#watch-progress{position:relative}
+#watch-progress::after{content:"";position:absolute;inset:0 auto 0 0;width:35%;background:linear-gradient(90deg,transparent,#fff9,transparent);opacity:0;pointer-events:none}
+#watch-loading[data-state=loading] #watch-progress::after{opacity:.7;animation:watch-loading-activity 1.8s ease-in-out infinite}
+@keyframes watch-loading-activity{from{transform:translateX(-120%)}to{transform:translateX(400%)}}
+@media(prefers-reduced-motion:reduce){#watch-loading[data-state=loading] #watch-progress::after{animation:none;opacity:0}}
+
