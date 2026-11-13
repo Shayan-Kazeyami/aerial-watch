@@ -1,0 +1,1 @@
+Isolated exact matrix-cache QA only. Baseline b84a51ec / immutable e79b2236. No production changes.
