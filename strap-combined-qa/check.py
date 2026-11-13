@@ -1,4 +1,4 @@
-import asyncio,json,pathlib,traceback,os,hashlib,math
+import asyncio,json,pathlib,traceback,os,hashlib,math,base64
 from playwright.async_api import async_playwright
 Q=pathlib.Path('strap-combined-qa');MODE=os.environ.get('QA_ASSETS','meshopt');assert MODE in ('raw','meshopt');CAND=(Q/'release-id.txt').read_text().strip();SOURCE='75756356ca7b944a5143c519b75d3cac2f8aa62cfcf40302b249f7eefda85f69';O=pathlib.Path('strap-combined-evidence-'+MODE);O.mkdir(exist_ok=True);BUILD=json.loads((Q/'build-report.json').read_text());R={'sourceRelease':SOURCE,'candidateRelease':CAND,'assetMode':MODE,'setup':'Actual sealed assets; instrumentation only, no geometry route overlays. Chromium SwiftShader, not hardware FPS. Matched AO off; seeded randomness.','variants':{}}
 def compare_rows(a,b,tolerance=False):
@@ -23,11 +23,20 @@ async def run():
    async def instrument(route):
     response=await route.fetch();text=await response.text();needle='function initializeBaseline(result,metadata){';assert text.count(needle)==1;text=text.replace(needle,needle+'window.springQAAssetDelivery=result.metrics?.assetDelivery;window.combinedParserJSON=(result.gltf||result).parser.json;')+'\n'+(Q/'probe.js').read_text();await route.fulfill(response=response,body=text)
    await page.route('**/assembly-review.js*',instrument)
-   async def asset_response(response):
-    name=response.url.split('?')[0]
+   # Read on the CDP session whose retention limits we configure, not Playwright's
+   # separate internal inspector session. No transport routes or asset substitutions.
+   asset_ids=set()
+   def asset_received(event):
+    name=event['response']['url'].split('?')[0]
     if name.endswith('/rebuild/assembly.glb') or name.endswith('/optimized-assets/rebuild__assembly.meshopt.glb.gz'):
-     b=await response.body();r['transport'].append({'url':response.url,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
-   page.on('response',lambda x:tasks.append(asyncio.create_task(asset_response(x))))
+     asset_ids.add(event['requestId'])
+   async def asset_finished(event):
+    if event['requestId']not in asset_ids:return
+    payload=await cdp.send('Network.getResponseBody',{'requestId':event['requestId']})
+    body=base64.b64decode(payload['body'])if payload.get('base64Encoded')else payload['body'].encode()
+    r['transport'].append({'requestId':event['requestId'],'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'capture':'passive same-session CDP'})
+   cdp.on('Network.responseReceived',asset_received)
+   cdp.on('Network.loadingFinished',lambda event:tasks.append(asyncio.create_task(asset_finished(event))))
    try:
     await page.goto('http://127.0.0.1:8765/preview-b/releases/'+rid+'/atelier-preview.html?quality=efficient&normalStream=1&ao=off&assets='+MODE,wait_until='domcontentloaded',timeout=120000)
     await page.locator('body[data-ready=true]').wait_for(timeout=300000);await asyncio.gather(*tasks);await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await page.wait_for_function('leatherQASnapshot().proof?.status==="verified"');await page.evaluate('leatherQAFrames(6)');r['initialLeather']=await page.evaluate('leatherQASnapshot()');expected='f7e7a7638b7ac58a3d3f568cbbcc0baa989d840d9b989e10b0c72485298ed0d5'if variant=='candidate'else'97377092fcfc6f5a7e934e083f71a1d5e99c9d2007a1b5c3ba38a2b6a6dc61e3';assert r['initialLeather']['proof']['actualSha256']==expected;assert not r['initialLeather']['failed']
