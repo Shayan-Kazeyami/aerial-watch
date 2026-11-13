@@ -1,0 +1,37 @@
+{
+  "sourceIndex": 116,
+  "neighborSourceIndex": 118,
+  "classification": "Reproducible real new overlap in the exact stored float32 geometry; quantization-scale near-contact sliver, not random boolean arithmetic noise.",
+  "candidateDisposition": "Hold/reject2668-triangle candidate for promotion under no-new-overlap criterion. Retain original2724-triangle116; this gives up56triangle saving. Do not move or round118 to hide overlap.",
+  "evidence": {
+    "scaleAndOriginTestCount": 6,
+    "addedIntersectionVolumeRange": [
+      3.2289755672685414e-11,
+      3.2289758103730887e-11
+    ],
+    "solverToleranceLocal": [
+      3.793119192123413e-12,
+      3.793119192123413e-12,
+      3.4368965625762937e-12,
+      3.793119192123413e-12
+    ],
+    "sliver": {
+      "worldZ": -28.649999991059303,
+      "sliverThickness": 2.9802318834981634e-08,
+      "midSlabCrossSectionArea": 0.001083465266229905,
+      "predictedVolumeAreaTimesThickness": 3.228977731081189e-11,
+      "baselinePlane116": -28.650000005960464,
+      "neighborPlane118": -28.649999976158146
+    },
+    "float32ULPAt0point3": 2.9802322387695312e-08,
+    "offsetTestFinding": "Negative one-ULP axial diagnostic offset removes both baseline and new overlaps; positive one-ULP doubles extra volume. Diagnostic transforms only, not a proposed production fix.",
+    "relativeAddedOverlapToBaseline": 0.0007960545347315659
+  },
+  "limitations": "No CAD/manufacturing tolerance is known. A tiny positive exact-geometry overlap must not be called safe merely because it is below an arbitrary tolerance.",
+  "files": [
+    "116-contact-scale-probe.json",
+    "116-contact-offset-probe.json",
+    "116-contact-slice.json"
+  ],
+  "liveChanged": false
+}

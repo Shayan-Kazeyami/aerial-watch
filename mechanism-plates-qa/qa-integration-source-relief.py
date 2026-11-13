@@ -29,6 +29,11 @@ async def run():
      if mode!='baseline':
       for target in data['targets']:
        
+       if target['sid']==116:
+        expected=next(x for x in gate['rows']if x['sourceIndex']==116)['attrs']
+        assert target['triangles']==2724
+        for k,v in [('position','POSITION'),('normal','NORMAL'),('index','indices')]:assert target[k+'Hash']==expected[v]
+        continue
        if mode=='candidate' and target['sid']==100:continue
        directory='source-preserving-front-bevel'if mode=='bevel'and target['sid']==100 else'exact-seams';d=ROOT/directory/str(target['sid'])
        for k in ['position','normal','index']:assert target[k+'Hash']==hashlib.sha256((d/f'{k}.bin').read_bytes()).hexdigest()
