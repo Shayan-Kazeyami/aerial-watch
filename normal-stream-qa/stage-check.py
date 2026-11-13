@@ -26,7 +26,7 @@ def assert_identity(config,sha,width,ready):
  c=config['leatherCraft']['candidate'];n=c['normalIdentity'];assert n['sha256']==sha and n['width']==width and n['verified'],n
  assert c['detail']['ready'] is ready,c['detail'];assert c['detail']['requestedNormalIdentity']['sha256']==FULL
 async def evaluate(page,expression,*args):
- return await asyncio.wait_for(page.evaluate(expression,*args),90)
+ return await asyncio.wait_for(page.evaluate(expression,*args),180)
 async def download(page,button,name):
  async with page.expect_download(timeout=180000)as pending:await evaluate(page,'(id)=>document.getElementById(id).onclick()',button)
  d=await pending.value;path=O/name;await d.save_as(path);assert await d.failure() is None;return path

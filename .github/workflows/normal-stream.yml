@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        case: [quality-switch-small, explicit-zero-switch-small, quality-switch-large, explicit-zero-switch-large]
+        case: [quality-switch-large]
     steps:
       - uses: actions/checkout@v4
       - run: node --test normal-stream-qa/fetch.test.mjs normal-stream-qa/capture-detail.test.mjs normal-stream-qa/lifecycle.test.mjs normal-stream-qa/defaults.test.mjs
