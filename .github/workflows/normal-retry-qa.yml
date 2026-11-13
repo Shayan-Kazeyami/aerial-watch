@@ -1,0 +1,26 @@
+name: In-place normal detail recovery
+on:
+  push:
+    branches: [qa/normal-retry-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [portrait, landscape]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: node --test normal-retry-qa/controller.test.mjs normal-retry-qa/capture-detail.test.mjs
+      - run: |
+          python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
+          RETRY_VIEWPORT=${{ matrix.viewport }} python normal-retry-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: normal-retry-${{ matrix.viewport }}
+          path: normal-retry-evidence
