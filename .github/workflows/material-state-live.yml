@@ -2,7 +2,7 @@ name: Watch live release check
 on:
   push:
     branches: [main]
-    paths: [index.html, watch-home-webgpu-f0148dab.js, webgpu-controls-qa/live.py, .github/workflows/material-state-live.yml]
+    paths: [index.html, watch-home-geometry-75756356.js, case-topology-lane/integration/public-live.py, .github/workflows/material-state-live.yml]
 permissions:
   contents: read
 jobs:
@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=f0148dab28e427621143d47b157bc7802ebab4f661d2d530e2162c4508b4b485 python webgpu-controls-qa/live.py
+      - run: EXPECTED_RELEASE=75756356ca7b944a5143c519b75d3cac2f8aa62cfcf40302b249f7eefda85f69 python case-topology-lane/integration/public-live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: webgpu-benchmark-live
-          path: webgpu-controls-live
+          name: case-crown-tube-live
+          path: case-integrated-live
