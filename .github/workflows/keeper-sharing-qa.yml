@@ -1,0 +1,23 @@
+name: Keeper rigid reuse isolated runtime QA
+on:
+  push:
+    branches: [qa/keeper-sharing-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          python -m http.server 8765 >/tmp/springbar-server.log 2>&1 &
+          python keeper-browser-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: keeper-sharing-browser-evidence
+          path: |
+            keeper-browser-evidence
+
