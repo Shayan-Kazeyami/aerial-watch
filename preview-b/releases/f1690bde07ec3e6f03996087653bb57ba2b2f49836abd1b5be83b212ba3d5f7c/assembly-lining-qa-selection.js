@@ -1,0 +1,5 @@
+// Private combined QA only. Baseline is the default.
+export const LINING_VARIANTS=Object.freeze({"baseline":{"url":"leather-assets/r14/leather.gltf","sha256":"d79028d52a24eddcc77585715653fd688b29cb92e76f26c091c5c80177bb2e53","codec":"baseline","geometrySha256":"e351ee28eabab061d834854ab26098197239901b630db75d89e13fbbaf698d4a","modifiedImages":[],"dimensionsPreserved":true,"privateOnly":true},"avif-gentle":{"url":"leather-assets/r14/leather-qa-avif-gentle.gltf","sha256":"190126a6ca428f726bc6eeb814f1c1990ca10396847fa25b5062b8f98bc4f46e","codec":"avif-gentle","geometrySha256":"e351ee28eabab061d834854ab26098197239901b630db75d89e13fbbaf698d4a","modifiedImages":[0,1,2],"dimensionsPreserved":true,"privateOnly":true}});
+const key=new URLSearchParams(globalThis.location?.search||'').get('liningCodec')||'baseline';
+if(!Object.hasOwn(LINING_VARIANTS,key))throw Error('Unknown private lining codec');
+export const LINING_QA=Object.freeze({revision:'combined-lining-parallel-qa-r1',...LINING_VARIANTS[key]});

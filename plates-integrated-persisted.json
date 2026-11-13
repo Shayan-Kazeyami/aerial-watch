@@ -1,0 +1,7 @@
+{
+  "releaseId": "f1690bde07ec3e6f03996087653bb57ba2b2f49836abd1b5be83b212ba3d5f7c",
+  "baseRelease": "e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6",
+  "testedCommit": "106fcb4a4f477485ecd8a4da0c9268b6eed30ff6",
+  "verifiedRun": 43506746484,
+  "scope": "QA release only, no production pointer changed"
+}
