@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
       - run: |
           python qa-seconds-ring/server.py > /tmp/qa-ring-server.log 2>&1 &
           python qa-seconds-ring/check.py
