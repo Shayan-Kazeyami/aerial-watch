@@ -1,0 +1,59 @@
+name: Persist verified combined strap release on QA branch
+on:
+  push:
+    branches: [qa/strap-persist-20261113]
+permissions:
+  contents: read
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 0113998d9f79d40246862335ed517a4dd226d23f
+      - uses: actions/download-artifact@v4
+        with:
+          name: strap-combined-raw
+          run-id: 43486119952
+          github-token: ${{ github.token }}
+          path: verified-raw
+      - uses: actions/download-artifact@v4
+        with:
+          name: strap-combined-meshopt
+          run-id: 43486119952
+          github-token: ${{ github.token }}
+          path: verified-meshopt
+      - run: |
+          python - <<'PY'
+          import pathlib,json,hashlib,shutil
+          rid='09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29'
+          baseid='75756356ca7b944a5143c519b75d3cac2f8aa62cfcf40302b249f7eefda85f69'
+          for mode in ['raw','meshopt']:
+           root=pathlib.Path('verified-'+mode);r=json.loads((root/('strap-combined-evidence-'+mode)/'report.json').read_text())
+           assert r['passed'] and r['matchedVisualCameras'] and r['candidateRelease']==rid and r['sourceRelease']==baseid
+           assert all(v['passed'] and not v['pageErrors'] for v in r['variants'].values())
+          a=pathlib.Path('verified-raw/strap-combined-qa/release');b=pathlib.Path('verified-meshopt/strap-combined-qa/release')
+          assert (a/'deployment-manifest.json').read_bytes()==(b/'deployment-manifest.json').read_bytes()
+          m=json.loads((a/'deployment-manifest.json').read_text());assert m['releaseId']==rid
+          canonical={k:m[k]for k in ['schemaVersion','localFiles','references']}
+          assert hashlib.sha256(json.dumps(canonical,separators=(',',':')).encode()).hexdigest()==rid
+          base=pathlib.Path('preview-b/releases')/baseid;dest=base.parent/rid
+          for f in m['localFiles']:
+           source=a/f['path'] if(a/f['path']).exists()else base/f['path'];data=source.read_bytes()
+           assert len(data)==f['sizeBytes'] and hashlib.sha256(data).hexdigest()==f['sha256'],f['path']
+           if(a/f['path']).exists():assert data==(b/f['path']).read_bytes(),f['path']
+           out=dest/f['path'];out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(data)
+          for f in m['references']:
+           p=base.parent/f['ownerReleaseId']/f['path'];data=p.read_bytes()
+           assert len(data)==f['sizeBytes'] and hashlib.sha256(data).hexdigest()==f['sha256'],f['path']
+          for n in ['deployment-manifest.json','release-receipt.json']:shutil.copyfile(a/n,dest/n)
+          pathlib.Path('strap-combined-persisted.json').write_text(json.dumps({'releaseId':rid,'baseRelease':baseid,'verifiedRun':43486119952,'contactExportRun':43487017815,'scope':'QA release only; no production pointers changed'},indent=2)+'\n')
+          PY
+          test "$(git ls-remote origin refs/heads/qa/strap-combined-20261113 | cut -f1)" = "0113998d9f79d40246862335ed517a4dd226d23f"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview-b/releases/09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29 strap-combined-persisted.json
+          git commit -m 'Persist exact raw and meshopt verified leather keeper release on QA branch only'
+          git push origin HEAD:refs/heads/qa/strap-combined-20261113
