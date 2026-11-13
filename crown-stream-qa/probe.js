@@ -25,3 +25,13 @@ window.__crownQA=()=>({state:crownInteraction.snapshot(),hotspot:crownHotspot.sn
 const mobileAudit={poseCalls:0,poseMs:0};const originalApplyClockPose=applyClockPose;applyClockPose=function(...args){const t=performance.now();try{return originalApplyClockPose(...args)}finally{mobileAudit.poseCalls++;mobileAudit.poseMs+=performance.now()-t}};
 window.mobileAuditSnapshot=()=>({...__crownQA(),...mobileAudit,settingSeconds,explosion:explosion.snapshot(),crown:crownVisual?.active,canvas:[renderer.domElement.width,renderer.domElement.height],timeOrigin:performance.timeOrigin});
 window.mobileAuditFrames=(n=4)=>new Promise(resolve=>{function tick(){if(--n<=0)resolve(mobileAuditSnapshot());else requestAnimationFrame(tick)}requestAnimationFrame(tick)});
+window.crownPoseParity=async()=>{
+ async function capture(){model.updateMatrixWorld(true);const matrices=[],geometry=[];const seen=new Set();model.traverse(o=>{if(!o.isMesh)return;matrices.push([o.name,...o.matrixWorld.elements]);const a=o.geometry?.attributes.position;if(a&&!seen.has(a)){seen.add(a);geometry.push(a)}});const hashes=await Promise.all(geometry.map(async a=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new Uint8Array(a.array.buffer,a.array.byteOffset,a.array.byteLength)))).map(x=>x.toString(16).padStart(2,'0')).join('')));return{matrices,hashes,crown:crownInteraction.snapshot(),winding:winding.snapshot(),settingSeconds};}
+ const results=[];
+ for(const pulled of[false,true]){
+  async function run(immediate){resetMotion();setCrownPulled(pulled);crownVisual.finish();for(const d of[2,2,2,-2,-2,12,-12,3.5]){if(immediate)crownInteraction.turn(d,{immediate:true});else{crownInteraction.cancel();crownInteraction.turn(d);crownInteraction.finish()}}return capture()}
+  const original=await run(false),candidate=await run(true);let maxMatrixDifference=0;for(let i=0;i<original.matrices.length;i++)for(let j=1;j<17;j++)maxMatrixDifference=Math.max(maxMatrixDifference,Math.abs(original.matrices[i][j]-candidate.matrices[i][j]));
+  results.push({pulled,maxMatrixDifference,positionsExact:JSON.stringify(original.hashes)===JSON.stringify(candidate.hashes),crownExact:JSON.stringify(original.crown)===JSON.stringify(candidate.crown),windingExact:JSON.stringify(original.winding)===JSON.stringify(candidate.winding),settingExact:original.settingSeconds===candidate.settingSeconds,meshCount:original.matrices.length,geometryCount:original.hashes.length});
+ }
+ resetMotion();return results;
+};

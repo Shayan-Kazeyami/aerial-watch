@@ -15,7 +15,7 @@ export function createCrownInteraction({onChange=()=>{},onSetTime=()=>{},onPull=
     restore(state={pulled:false,degrees:0}){if(disposed)return snapshot();if(typeof state.pulled!=='boolean'||!Number.isFinite(state.degrees)||Math.abs(state.degrees)>3600000)throw new TypeError('Invalid saved crown state.');
       const changed=pulled!==state.pulled;pulled=state.pulled;degrees=state.degrees;cancel();if(changed)onPull(pulled);return publish();},
     setPulled(value){if(disposed)return snapshot();const next=!!value;if(next!==pulled){cancel();pulled=next;onPull(pulled);}return publish();},
-    turn(delta,{immediate=false}={}){if(disposed)return snapshot();if(!Number.isFinite(delta)||!Number.isFinite(target+delta))throw new TypeError('Crown turn must be finite.');
+    turn(delta,{immediate=false}={}){if(disposed)return snapshot();if(!Number.isFinite(delta)||!Number.isFinite((immediate?degrees:target)+delta))throw new TypeError('Crown turn must be finite.');
       if(!delta)return snapshot();
       // Streamed pointer/hold input is already time-integrated. Drop any
       // unshown discrete target and publish only its new committed pose.

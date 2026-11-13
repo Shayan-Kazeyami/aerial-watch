@@ -12,7 +12,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
       - run: ln -s ../preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor crown-stream-qa/vendor && node --test crown-stream-qa/unit.mjs
-      - run: QA_OUTPUT=mobile-experience-evidence python crown-stream-qa/check.py
+      - run: |
+          python -m http.server 8765 >/tmp/crown-http.log 2>&1 &
+          QA_OUTPUT=mobile-experience-evidence python crown-stream-qa/stage-check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
