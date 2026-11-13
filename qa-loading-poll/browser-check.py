@@ -1,10 +1,15 @@
-import asyncio,json,pathlib,hashlib
+import asyncio,json,pathlib,hashlib,base64
 from playwright.async_api import async_playwright
 O=pathlib.Path('qa-loading-poll/evidence');O.mkdir(parents=True,exist_ok=True)
 R={'scope':'Actual public e79 root and iframe, injected one failed core module, authentic Reload button; isolated wrapper response only','arms':{}}
 async def arm(browser,name):
  ctx=await browser.new_context(viewport={'width':430,'height':932},is_mobile=True,has_touch=True,device_scale_factor=1)
  page=await ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+ async def capture(path):
+  cdp=await ctx.new_cdp_session(page)
+  result=await asyncio.wait_for(cdp.send('Page.captureScreenshot',{'format':'png','fromSurface':True,'captureBeyondViewport':False}),90)
+  path.write_bytes(base64.b64decode(result['data']))
+  await cdp.detach()
  await page.add_init_script("""if(window===top){const set=window.setInterval.bind(window),clear=window.clearInterval.bind(window);window.pollProbe={ticks:0,active:[]};window.setInterval=(f,ms,...a)=>{let id=set(()=>{if(ms===250)pollProbe.ticks++;f(...a)},ms);if(ms===250)pollProbe.active.push(id);return id};window.clearInterval=id=>{pollProbe.active=pollProbe.active.filter(x=>x!==id);clear(id)}}""")
  src=pathlib.Path('qa-loading-poll/'+name+'.mjs').read_text()
  async def wrapper(route):
@@ -27,7 +32,7 @@ async def arm(browser,name):
  assert await page.locator('#watch-loading').is_hidden()
  if name=='candidate':assert first['active']==second['active']==[] and first['ticks']==second['ticks']
  else:assert len(second['active'])==1 and second['ticks']>first['ticks']
- await page.screenshot(path=str(O/(name+'-failed.png')))
+ await capture(O/(name+'-failed.png'))
  # Actual supported fatal-failure recovery is reload, not Retry detail.
  await f.locator('#atelier-retry').tap()
  await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body?.dataset.ready==='true'",timeout=360000)
@@ -36,7 +41,8 @@ async def arm(browser,name):
  ready=await page.evaluate('JSON.parse(JSON.stringify(pollProbe))')
  assert ready['active']==[]
  assert await page.locator('#watch-loading').is_hidden()
- await page.screenshot(path=str(O/(name+'-recovered.png')))
+ R['arms'][name]={'failureFirst':first,'failureSecond':second,'ready':ready,'recoveryReady':True,'rootReloadReady':False};(O/'report.json').write_text(json.dumps(R,indent=2))
+ await capture(O/(name+'-recovered.png'))
  # Repeat fatal flow through explicit root reload, then real iframe reload recovery.
  await page.reload(wait_until='domcontentloaded')
  await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body?.dataset.ready==='true'",timeout=360000)
