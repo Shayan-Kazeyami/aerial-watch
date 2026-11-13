@@ -1,0 +1,41 @@
+name: Persist exact tested plates release to QA only
+on:
+  push:
+    branches: [qa/plates-persist-20261114]
+permissions:
+  contents: read
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 106fcb4a4f477485ecd8a4da0c9268b6eed30ff6
+      - uses: actions/download-artifact@v4
+        with:
+          name: plates-caseback-sealed-evidence
+          run-id: 43506746484
+          github-token: ${{ github.token }}
+          path: tested
+      - run: |
+          python - <<'PY'
+          import pathlib,json,hashlib,shutil
+          rid='f1690bde07ec3e6f03996087653bb57ba2b2f49836abd1b5be83b212ba3d5f7c';baseid='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6';a=pathlib.Path('tested');m=json.loads((a/'release/deployment-manifest.json').read_text());assert m['releaseId']==rid;can={k:m[k]for k in['schemaVersion','localFiles','references']};assert hashlib.sha256(json.dumps(can,separators=(',',':')).encode()).hexdigest()==rid
+          for mode in['raw','meshopt','fallback']:
+           r=json.loads((a/f'evidence-{mode}/report.json').read_text());assert r['passed']and not r['errors']and r['release']==rid and len(r['poses'])==7 and r['executedWrapperSHA256']==r['expectedWrapperSHA256']
+          base=pathlib.Path('preview-b/releases')/baseid;dest=base.parent/rid
+          for f in m['localFiles']:
+           p=a/'release'/f['path'];p=p if p.exists()else base/f['path'];b=p.read_bytes();assert len(b)==f['sizeBytes']and hashlib.sha256(b).hexdigest()==f['sha256'];d=dest/f['path'];d.parent.mkdir(parents=True,exist_ok=True);d.write_bytes(b)
+          for f in m['references']:
+           b=(base.parent/f['ownerReleaseId']/f['path']).read_bytes();assert len(b)==f['sizeBytes']and hashlib.sha256(b).hexdigest()==f['sha256']
+          for n in['deployment-manifest.json','release-receipt.json']:shutil.copyfile(a/'release'/n,dest/n)
+          pathlib.Path('plates-integrated-persisted.json').write_text(json.dumps({'releaseId':rid,'baseRelease':baseid,'testedCommit':'106fcb4a4f477485ecd8a4da0c9268b6eed30ff6','verifiedRun':43506746484,'scope':'QA release only, no production pointer changed'},indent=2))
+          PY
+          test "$(git ls-remote origin refs/heads/qa/plates-caseback-sealed-20261114 | cut -f1)" = "106fcb4a4f477485ecd8a4da0c9268b6eed30ff6"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview-b/releases/f1690bde07ec3e6f03996087653bb57ba2b2f49836abd1b5be83b212ba3d5f7c plates-integrated-persisted.json
+          git commit -m 'Persist exact sealed tested plate release to QA branch only'
+          git push origin HEAD:refs/heads/qa/plates-caseback-sealed-20261114
