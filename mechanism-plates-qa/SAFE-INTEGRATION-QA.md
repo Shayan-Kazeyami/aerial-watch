@@ -1,0 +1,1 @@
+QA only. Baseline main f3c23832f6cb8af3463248355dd7f69ab5e7b6bf release09e3. Source100 original profile retained except one subtractive front-bore rim relief, +840 triangles. No production assembly changes or deployment. Other four exact-seam candidates included. Original reduced source100 rejected for contact regression.
