@@ -1,0 +1,80 @@
+{
+  "segments": 16,
+  "patchBefore": 29470,
+  "patchAfter": 8064,
+  "before": {
+    "triangles": 371636,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "degenerate": 0,
+    "flipped": 0
+  },
+  "after": {
+    "triangles": 350230,
+    "boundaryEdges": 0,
+    "nonmanifoldEdges": 0,
+    "degenerate": 0,
+    "flipped": 0
+  },
+  "originalAttributeBytesUnchanged": true,
+  "allOutsideTrianglesByteExact": true,
+  "boundaryLoopsByteExact": true,
+  "angularSamples": 252,
+  "allUVTransitionTrianglesPreserved": 504,
+  "allChangedPatchUVsZero": true,
+  "sourceToCandidate": {
+    "samples": 132867,
+    "maxMM": 0.00018585535934598872,
+    "meanMM": 8.140877160602443e-06,
+    "p99MM": 1.44905180852927e-05,
+    "maxNormalDegrees": 0.12133284053489936,
+    "p99NormalDegrees": 0.03645668833228577,
+    "maxUV": 0.0,
+    "p99UV": 0.0
+  },
+  "candidateToSource": {
+    "samples": 36540,
+    "maxMM": 0.00018573493854062505,
+    "meanMM": 8.201241248917236e-06,
+    "p99MM": 2.308226541570594e-05,
+    "maxNormalDegrees": 0.11951015996137505,
+    "p99NormalDegrees": 0.04242493665608717,
+    "maxUV": 0.0,
+    "p99UV": 0.0
+  },
+  "compaction": {
+    "sourceVertices": 191375,
+    "uncompactedVertices": 195155,
+    "compactVertices": 180672,
+    "outsideOrderedCornerByteProof": {
+      "position": {
+        "before": "161c820254b732f413e2233dcf4a8dfff410fa831e0d0b9a2e516dddd15d1826",
+        "after": "161c820254b732f413e2233dcf4a8dfff410fa831e0d0b9a2e516dddd15d1826"
+      },
+      "normal": {
+        "before": "de13e441e7943f434885bc15ed873afd10feaeb511f6b79c7481c02a47df56fa",
+        "after": "de13e441e7943f434885bc15ed873afd10feaeb511f6b79c7481c02a47df56fa"
+      },
+      "uv": {
+        "before": "b8d9c97842aecaeb74ad525ccafa6ae126f3c05fea0cd9dcb427aaaa644dbc3e",
+        "after": "b8d9c97842aecaeb74ad525ccafa6ae126f3c05fea0cd9dcb427aaaa644dbc3e"
+      }
+    },
+    "originalIndexComponents": 28,
+    "candidateIndexComponents": 28,
+    "originalRawAttributeIndexBytes": 10583632,
+    "candidateRawAttributeIndexBytes": 9984264,
+    "candidateRawGLBBytes": 9985280,
+    "groups": "one primitive, no groups; unchanged"
+  },
+  "sourceDigestVerified": "98cad8cac8bc2ef8abcfc214e59e0cba8c928ddf4e2992763280fe9df5c58c89",
+  "sourceDecodedFieldDigestsVerified": true,
+  "storage": {
+    "sourceGzipBytes": 4159629,
+    "candidateGzipBytes": 4017662,
+    "savedGzipBytes": 141967,
+    "sourceMeshoptGLBBytes": 4916572,
+    "candidateMeshoptGLBBytes": 4694872,
+    "meshoptRoundtrip": "all decoded attribute/index byte arrays identical"
+  }
+}
