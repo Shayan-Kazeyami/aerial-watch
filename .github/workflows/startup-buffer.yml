@@ -1,7 +1,7 @@
-name: Startup buffering byte identity and visual QA
+name: Live startup memory verification
 on:
   push:
-    branches: [qa/startup-buffer-20261113]
+    branches: [qa/startup-buffer-live-20261113]
 permissions:
   contents: read
 jobs:
@@ -13,10 +13,9 @@ jobs:
       - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
       - run: node startup-buffer-qa/test.mjs preview-b/releases/ff188ba605b3868d174bec75b643470c86fb164c706c5ff0b2d4ee89c2472947/hybrid-case-assets/hybrid-innerseat-density-r02.meshopt.glb.gz
       - run: node --expose-gc startup-buffer-qa/ownership-test.mjs
-      - run: python startup-buffer-qa/build.py
       - run: |
-          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
-          WATCH_URL="$(cat startup-buffer-qa/url.txt)" python -u startup-buffer-qa/check.py
+          python startup-buffer-qa/wait-live.py
+          WATCH_URL="https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/7455e9604154e6db2a17531090f9dd8fae4fb003b8dac67b393eeac538ab94e7/atelier-preview.html" python -u startup-buffer-qa/check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
