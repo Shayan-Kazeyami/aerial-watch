@@ -1,0 +1,26 @@
+name: Orientation-safe compact touch budget
+on:
+  push:
+    branches: [qa/landscape-budget-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [touch-landscape, touch-portrait, fine-desktop, touch-explicit-studio, touch-explicit-zero]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: node --test landscape-budget-qa/defaults.test.mjs
+      - run: |
+          python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
+          LANDSCAPE_CASE=${{ matrix.case }} python landscape-budget-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: landscape-budget-${{ matrix.case }}
+          path: landscape-budget-evidence
