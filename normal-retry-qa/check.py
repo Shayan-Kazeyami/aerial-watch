@@ -37,6 +37,18 @@ async def state(f,phase):
   if s['state']==phase:return s
   await asyncio.sleep(.5)
  raise TimeoutError('Expected '+phase)
+async def settle(page,out,label):
+ deadline=time.monotonic()+60;previous=None;consecutive=0;samples=[]
+ while time.monotonic()<deadline:
+  await ev(page,'new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+  snapshot=await ev(page,'retryQA()');d=snapshot['diagnostic']
+  quiet=not d['cameraTween']and not d['explosionAnimating']and not snapshot['crownActive']and not any(d['motion'].values())
+  consecutive=consecutive+1 if quiet and previous is not None and snapshot['stable']==previous['stable'] else 0
+  samples.append({'now':d['now'],'quiet':quiet,'consecutiveEqual':consecutive,'differences':recursive_diff(previous['stable'],snapshot['stable'])if previous else []})
+  out.setdefault('settleGates',{})[label]=samples;save()
+  if consecutive>=2:return snapshot
+  previous=snapshot;await asyncio.sleep(.25)
+ raise TimeoutError('Exact quiet state did not settle: '+label)
 async def shot(page,name,timeout=180):await asyncio.wait_for(page.screenshot(path=str(O/(name+'.png')),timeout=timeout*1000),timeout)
 async def layout(page,out,label):
  result=await page.locator('#context').evaluate("""p=>{const r=p.getBoundingClientRect();return {box:[r.x,r.y,r.width,r.height],viewport:[innerWidth,innerHeight],horizontal:p.scrollWidth>p.clientWidth+1,controls:[...p.querySelectorAll('button,input')].filter(x=>x.getClientRects().length).map(x=>({id:x.id,w:x.getBoundingClientRect().width,h:x.getBoundingClientRect().height}))}}""")
@@ -70,20 +82,24 @@ async def run(browser,w,h):
   await page.locator('[data-mode=capture]').first.click(force=True);await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await layout(page,out,'failed');await shot(page,name+'-failed')
   for id in ['capture-scene','record-scene']:assert await page.locator(f'#context [data-proxy={id}]').is_disabled()
   assert await page.locator('#context [data-proxy=export-config]').is_enabled()
-  preconfig=await ev(page,'retryQA()');record_snapshot(out,'before-config-download',preconfig)
+  preconfig=await settle(page,out,'before-config');record_snapshot(out,'before-config-download',preconfig)
   p=await download(page,'#context [data-proxy=export-config]',name+'-pending.json');c=json.loads(p.read_text())['leatherCraft']['candidate'];assert c['normalIdentity']['sha256']==LOW and not c['detail']['ready'];out['pendingIdentity']=c['normalIdentity']
-  before=await ev(page,'retryQA()');record_snapshot(out,'before-retry',before,preconfig);start=len(out['requests'])
+  before=await settle(page,out,'before-retry');record_snapshot(out,'before-retry',before,preconfig);start=len(out['requests'])
   await page.locator('#atelier-retry-detail').click();second=await state(page,'failed');record_snapshot(out,'second-failure',second,before);assert second['controller']['attempts']==2 and len(second['warnings'])==1;assert second['stable']==before['stable'];assert second['canvasSame']
+  out['focusAfterRetry']=await ev(page,"({id:document.activeElement?.id,proxy:document.activeElement?.dataset?.proxy??null})");assert out['focusAfterRetry']['id']=='atelier-detail-status'
   # DOM click honors disabled state; repeated user-equivalent click cannot restart.
   await page.locator('#atelier-retry-detail').evaluate('(b)=>{b.click();b.click();b.click()}');await page.wait_for_function('retryQA().state==="upgrading"');await asyncio.sleep(.2)
   pending=await ev(page,'retryQA()');record_snapshot(out,'pending-third',pending,before);assert pending['controller']['attempts']==3 and len(out['faults'])==3;assert pending['stable']==before['stable'];assert not pending['detail']['ready'];assert pending['detail']['activeNormalIdentity']['sha256']==LOW
+  retry=page.locator('#atelier-retry-detail');assert await retry.is_visible()and await retry.is_disabled();assert(await retry.inner_text())=='Retrying…'
+  out['focusWhilePending']=await ev(page,"({id:document.activeElement?.id,proxy:document.activeElement?.dataset?.proxy??null})");assert out['focusWhilePending']['id']=='atelier-detail-status'
   await layout(page,out,'pending')
   try:await shot(page,name+'-pending',30)
   finally:gate.set()
   full=await state(page,'full');record_snapshot(out,'full-third',full,before);assert full['detail']['ready']and full['detail']['activeNormalIdentity']['sha256']==FULL;assert full['stable']==before['stable']and full['canvasSame'];assert full['controller']['retainedLowBytes']==0 and full['controller']['attempts']==3 and not full['warnings'];assert len(out['faults'])==3
+  out['focusAfterSuccess']=await ev(page,"({id:document.activeElement?.id,proxy:document.activeElement?.dataset?.proxy??null})");assert out['focusAfterSuccess']['proxy']=='capture-scene';assert await page.locator('#atelier-retry-detail').is_hidden()
   assert not any(r['type']=='document'or r['url'].split('?')[0].endswith(('.glb','.glb.gz','/geometry.bin'))for r in out['requests'][start:])
   for id in ['capture-scene','record-scene']:assert await page.locator(f'#context [data-proxy={id}]').is_enabled()
-  await layout(page,out,'full');await shot(page,name+'-full');out['final']=full
+  await layout(page,out,'full');await shot(page,name+'-full-ui');out['final']=full
   if w<500:
    p=await download(page,'#context [data-proxy=capture-scene]',name+'-full.png');b=p.read_bytes();assert b[:8]==b'\x89PNG\r\n\x1a\n';at=8;configs=[]
    while at<len(b):
