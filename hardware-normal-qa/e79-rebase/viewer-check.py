@@ -12,7 +12,7 @@ async def main():
  assert hashlib.sha256(pathlib.Path(f'preview-b/releases/{RID}/rebuild/assembly.glb').read_bytes()).hexdigest()=='4a4ae04e5808e705c9a2a96778343578365d100edfed3991d8ff90aeba85d06f'
  assert hashlib.sha256(pathlib.Path(f'preview-b/releases/{RID}/assembly-review.js').read_bytes()).hexdigest()=='91fcb25fbcc71e7e259dc603ba019d8c626e8506399dc14cf3c12075cc0fa4ee'
  async with async_playwright()as p:
-  browser=await p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
+  browser=await p.chromium.launch(args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   try:
    for mode in ['candidate','baked']:
     context=await browser.new_context(viewport={'width':800,'height':800},device_scale_factor=1);page=await context.new_page();page.set_default_timeout(180000);page.on('pageerror',lambda e:report['errors'].append(str(e)))
