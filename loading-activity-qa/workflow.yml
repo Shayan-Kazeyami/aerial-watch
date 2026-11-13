@@ -1,0 +1,21 @@
+name: Loading activity acceptance
+on:
+  push:
+    branches: [qa/loading-activity-20261113]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          python -m http.server 8765 >/tmp/loading-server.log 2>&1 &
+          python loading-activity-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: loading-activity-evidence
+          path: loading-activity-evidence
