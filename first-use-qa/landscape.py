@@ -6,7 +6,7 @@ async def main():
  async with async_playwright() as p:
   browser=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   try:
-   for width,height in [(844,390),(568,320)]:
+   for width,height in [(844,390),(568,320),(932,430)]:
     page=await browser.new_page(viewport={'width':width,'height':height},device_scale_factor=2,is_mobile=True,has_touch=True,reduced_motion='reduce')
     page.set_default_timeout(30000);page.on('pageerror',lambda e:R['errors'].append(str(e)))
     await page.goto(pathlib.Path('first-use-qa/url.txt').read_text().strip())
