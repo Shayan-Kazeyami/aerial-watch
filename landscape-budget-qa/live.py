@@ -1,0 +1,40 @@
+import asyncio,json,pathlib,os,time,re,urllib.request,urllib.parse
+from playwright.async_api import async_playwright
+O=pathlib.Path('landscape-budget-live');O.mkdir(exist_ok=True);R={'errors':[],'viewports':{},'setup':'Live GitHub Pages Chromium SwiftShader functional check; not hardware FPS'};rid=os.environ['EXPECTED_RELEASE']
+async def run():
+ # Wait for deployment with cheap HTTP reads before initializing the expensive viewer.
+ base='https://shayan-kazeyami.github.io/aerial-watch/'
+ for attempt in range(120):
+  try:
+   root=await asyncio.to_thread(lambda:urllib.request.urlopen(base+'?release-probe='+rid[:12]+'&attempt='+str(attempt),timeout=20).read().decode())
+   scripts=re.findall(r'<script[^>]+src=[\"\']([^\"\']+)',root)
+   loader=next(s for s in scripts if 'watch-home-' in s)
+   body=await asyncio.to_thread(lambda:urllib.request.urlopen(urllib.parse.urljoin(base,loader)+'?release-probe='+rid[:12],timeout=20).read().decode())
+   if rid in body:print('Public loader ready before browser startup',flush=True);break
+  except Exception as error:print('Deployment preflight',type(error).__name__,flush=True)
+  await asyncio.sleep(5)
+ else:raise AssertionError('Deployment preflight did not find expected release')
+ async with async_playwright()as p:
+  b=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']);page=await b.new_page(viewport={'width':932,'height':430},device_scale_factor=3,is_mobile=True,has_touch=True);page.set_default_timeout(180000);page.on('pageerror',lambda e:R['errors'].append(str(e)))
+  try:
+   for attempt in range(20):
+    await page.goto('https://shayan-kazeyami.github.io/aerial-watch/?mesh='+rid[:12],wait_until='domcontentloaded');await page.wait_for_timeout(15000);frames=[f for f in page.frames if rid in f.url]
+    if frames:print('Release iframe found',flush=True);break
+   assert frames,'Public loader does not select tested release';f=frames[0];await f.locator('body[data-ready=true]').wait_for(timeout=300000);await f.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=300000);print('Viewer ready',flush=True);R['release']=rid;R['url']=page.url;R['initialQuality']=(await f.evaluate('assemblyInspect()'))['renderQuality'];assert R['initialQuality']=='efficient';assert 'normalStream=1' in f.url
+   assert 'normalStream=1' in f.url,f.url
+   await f.wait_for_function('''()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent).progressiveNormal==='full'}''',timeout=240000)
+   config=await f.evaluate('''()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent)}''');detail=config['leatherCraft']['candidate']['detail'];assert detail['ready'] and detail['activeNormalIdentity']['width']==4096;assert detail['activeNormalIdentity']['sha256']=='bb022255b999645d468cc2b62100cef7c4226c3df136ab1732b40c107655d585';R['detail']=detail;R['normalTransfer']=config['progressiveNormalMetrics']
+   (O/'full-detail-config.json').write_text(json.dumps(config,indent=2))
+   for w,h in [(430,932),(932,430)]:
+    print('Checking viewport',w,h,flush=True);await page.set_viewport_size({'width':w,'height':h});await page.wait_for_timeout(1500);before=await f.locator('#assembly-canvas').bounding_box();await f.locator('.task-dock [data-mode=explode]').tap(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===1&&!assemblyInspect().explosion.animating');assert f in page.frames;panel=await f.locator('#context').bounding_box();assert panel['height']<=130.5,panel;await page.screenshot(path=str(O/f'{w}-exploded.png'));await f.locator('#home').tap(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===0&&!assemblyInspect().explosion.animating');after=await f.locator('#assembly-canvas').bounding_box();assert before==after;(O/f'{w}-inspect.json').write_text(json.dumps(await f.evaluate('assemblyInspect()'),indent=2));R['viewports'][str(w)]={'explodeReset':True,'canvasStable':True,'panelHeight':panel['height']};await page.screenshot(path=str(O/f'{w}-assembled.png'))
+   assert not R['errors'];R['passed']=True
+  except Exception as e:
+   R['passed']=False;R['failure']=repr(e);print(json.dumps(R),flush=True)
+   try:await asyncio.wait_for(page.screenshot(path=str(O/'failure.png')),15)
+   except Exception:pass
+   raise
+  finally:
+   (O/'report.json').write_text(json.dumps(R,indent=2));print(json.dumps(R),flush=True)
+   try:await asyncio.wait_for(b.close(),15)
+   except Exception:pass
+asyncio.run(run())
