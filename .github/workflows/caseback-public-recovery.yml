@@ -1,0 +1,19 @@
+name: Watch caseback full public recovery check
+on:
+  push:
+    branches: [qa/caseback-public-recovery-20261114]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: EXPECTED_RELEASE=e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 python case-topology-lane/caseback-integration/public-live-recovery.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: caseback-integrated-live
+          path: caseback-integrated-live
