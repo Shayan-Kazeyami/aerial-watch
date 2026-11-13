@@ -1,0 +1,24 @@
+name: Live case inner-seat geometry verification
+on:
+  push:
+    branches: [qa/case-inner-seat-live-20261113]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python -c "import urllib.request; s=urllib.request.urlopen('https://shayan-kazeyami.github.io/aerial-watch/').read().decode(); assert 'watch-home-case-58afec99.js' in s"
+      - run: |
+          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
+          WATCH_URL="https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/58afec995ed68ca32bbed7e3c135a47d668445bcfc4fbc655820e3164c6a224c/atelier-preview.html" python -u case-fillet-qa/live-check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: case-inner-seat-evidence
+          path: |
+            case-fillet-output
+            mobile-output
