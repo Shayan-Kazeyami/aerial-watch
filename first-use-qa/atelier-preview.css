@@ -290,14 +290,14 @@
 /* Short landscape: one header row and a compact dock leave the object room.
    Tool sheets overlay the same stage rectangle in both open/closed states. */
 @media(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
- .atelier-live{--atelier-header-height:calc(44px + env(safe-area-inset-top,0px))}
+ .atelier-live{--atelier-header-height:calc(45px + env(safe-area-inset-top,0px))}
  .atelier-live .quality{font-size:11px;min-height:44px;padding:0 10px;border:0}
  .atelier-live .quality-dot{display:none}
  .atelier-live .masthead{pointer-events:none}
  .atelier-live .masthead>a,.atelier-live .masthead>button{pointer-events:auto}
- .atelier-live .home{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:116px;width:44px;height:44px;justify-content:center}
+ .atelier-live .home{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:124px;width:44px;height:44px;justify-content:center}
  .atelier-live .home span,.atelier-live .home kbd{display:none}
- .atelier-live .atelier-more{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:168px;min-height:44px;width:90px;padding:0 8px;font-size:11px;border:0}
+ .atelier-live .atelier-more{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:176px;min-height:44px;width:90px;padding:0 8px;font-size:11px;border:0}
  .atelier-live .object-stage #stage,
  .atelier-live[data-panel-open=true] .object-stage #stage,
  .atelier-live:has(#context:not([hidden])) .object-stage #stage{inset:0 0 calc(68px + env(safe-area-inset-bottom,0px))}
