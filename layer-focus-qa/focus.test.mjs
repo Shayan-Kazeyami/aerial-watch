@@ -51,3 +51,4 @@ test('explicit full rect matches legacy no-rect framing',()=>{
  const a=fixture(),b=fixture(),c=createLayerFocus({...b,getFrameOptions:()=>({aspect:b.camera.aspect,fill:.65,rect:{left:0,top:0,right:1,bottom:1}})});
  a.c.focus('train');c.focus('train');for(const k of ['p','q','t'])for(let i=0;i<cam(a)[k].length;i++)assert.ok(Math.abs(cam(a)[k][i]-cam(b)[k][i])<1e-12);
 });
+test('scalar state getters track focus without enumerating members',()=>{const f=fixture();assert.equal(f.c.selected,null);assert.equal(f.c.active,false);f.c.focus('train');assert.equal(f.c.selected,'train');assert.equal(f.c.active,true);f.c.overview();assert.equal(f.c.selected,null);assert.equal(f.c.active,false);});
