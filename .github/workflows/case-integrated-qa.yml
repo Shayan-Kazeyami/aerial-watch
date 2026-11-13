@@ -2,7 +2,10 @@ name: Case crown tube integrated release QA
 on:
   push:
     branches: [qa/case-integrated-20261113]
-    paths: ['case-topology-lane/**', '.github/workflows/case-integrated-qa.yml']
+    paths: ['case-topology-lane/**', '.github/workflows/case-integrated-qa.yml', 'layer-focus-qa/check.py', 'crown-unified-qa/probe.js']
+concurrency:
+  group: case-integrated-qa-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
