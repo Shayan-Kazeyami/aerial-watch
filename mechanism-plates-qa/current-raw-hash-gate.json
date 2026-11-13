@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "rawSHA256": "e471d63c55ce81bbc82257602341ae0ce98d96f98a7d078baa1aa4ca72d2d258",
+  "rows": [
+    {
+      "sourceIndex": 41,
+      "attrs": {
+        "POSITION": "a08cdc2d4fb1c3e0ae1583c5e5bbd78cd99c09ac13d156cf40807847a3e944ff",
+        "NORMAL": "d3928e64877f429c6155f106fb973b256c357b9ddbffec2c5c2dc0c80b36d7c2",
+        "indices": "c306a51d24e26e146cbf4762ebf197c360638784b4e1a7bc748ea5ed5250b605"
+      }
+    },
+    {
+      "sourceIndex": 70,
+      "attrs": {
+        "POSITION": "7f6601df0876eeee69bbfcfd5901842072b57fe142644db0f33350ac2492100f",
+        "NORMAL": "86b8caea50966b9540ec1d6637d790eb86af9310b44b532924ec920ec2f52ceb",
+        "indices": "59109c405c2bb46455b75048b95551d31d22545008f725c07394f45c20f69ebe"
+      }
+    },
+    {
+      "sourceIndex": 100,
+      "attrs": {
+        "POSITION": "09a055913ab8e4d4f0efe9430846fdd724ba5b919e8e1dfc467af9b294271c9c",
+        "NORMAL": "37f81331c1ce6471346b248269be463e12d526e78435a9c24948873b07a19a5c",
+        "indices": "ad5e0f6899e723d316ba95a7324066f91030ae62fc9e7706bfaccd8e1a31aa82"
+      }
+    },
+    {
+      "sourceIndex": 116,
+      "attrs": {
+        "POSITION": "f2cd5df9d1b8fe937182e5160cbb16f0e93277551fd261706808c634dfc0b7c2",
+        "NORMAL": "9ac23c98071d0bd8ccf55f34d5d5d0a0247e7f08c8e15feff47cad3ebe09a7d0",
+        "indices": "5fb4579772449baeac638993fed2bb9f0ac7660ef1e7f43b2c30a4aae0e1304c"
+      }
+    },
+    {
+      "sourceIndex": 141,
+      "attrs": {
+        "POSITION": "5fde2636069783c6c049e2164c5d05e0cda8db6912133bcb1326327067bae9a0",
+        "NORMAL": "7d76fb9683456f2c97846558447a6bdf4055a5a5fc013e6ccc99a321b936099f",
+        "indices": "8a70ab2cf135207d901b69357244b68e0318d875335eea92cb748e46fe80d54b"
+      }
+    }
+  ]
+}
