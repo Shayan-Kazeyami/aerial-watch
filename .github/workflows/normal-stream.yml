@@ -7,16 +7,20 @@ permissions:
 jobs:
   stage:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [default-smooth, explicit-zero-switch-small, quality-switch-small, explicit-zero, default-studio]
     steps:
       - uses: actions/checkout@v4
       - run: node --test normal-stream-qa/fetch.test.mjs normal-stream-qa/capture-detail.test.mjs normal-stream-qa/lifecycle.test.mjs normal-stream-qa/defaults.test.mjs
       - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
       - run: |
           python -m http.server 8765 > /tmp/watch-http.log 2>&1 &
-          python normal-stream-qa/stage-check.py
+          STAGE_CASE=${{ matrix.case }} python normal-stream-qa/stage-check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: normal-stream-stage-evidence
+          name: normal-stream-stage-${{ matrix.case }}
           path: normal-stream-stage-evidence
