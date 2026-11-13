@@ -15,6 +15,7 @@ jobs:
           mkdir -p hardware-retopo-qa
           tar -xzf hardware-fixture.tar.gz -C hardware-retopo-qa
           ln -s ../../preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor hardware-retopo-qa/fixture/vendor
+          sed -i 's|./vendor/RoomEnvironment.js|./vendor/environments/RoomEnvironment.js|g' hardware-retopo-qa/fixture/index.html
           python -m http.server 8876 --directory hardware-retopo-qa >/tmp/hardware-server.log 2>&1 &
           python hardware-retopo-qa/capture.py
       - uses: actions/upload-artifact@v4
