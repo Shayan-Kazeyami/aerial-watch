@@ -1,0 +1,29 @@
+name: Unified crown gesture acceptance
+on:
+  push:
+    branches: [qa/crown-unified-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [430x932, 740x360]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          RID=$(cat crown-unified-qa/release-id.txt)
+          cp preview-b/releases/$RID/assembly-crown-hotspot.js crown-unified-qa/
+          node --test crown-unified-qa/gesture.test.mjs
+      - run: |
+          python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
+          QA_VIEWPORT=${{ matrix.viewport }} python crown-unified-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crown-unified-${{ matrix.viewport }}
+          path: crown-unified-evidence
