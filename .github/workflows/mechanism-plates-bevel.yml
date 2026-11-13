@@ -28,5 +28,5 @@ jobs:
           name: mechanism-plates-material-evidence
           path: |
             mechanism-plates-qa/material-qa
-            mechanism-plates-qa/bevel-trial-invariants.json
-            mechanism-plates-qa/bevel-trial-report.json
+            mechanism-plates-qa/exact-seams-topology.json
+            mechanism-plates-qa/front-bevel-trial-report.json

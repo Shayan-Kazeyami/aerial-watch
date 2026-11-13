@@ -3,7 +3,7 @@ from playwright.async_api import async_playwright
 O=pathlib.Path('mechanism-plates-qa/material-qa');O.mkdir(exist_ok=True)
 release='f0148dab28e427621143d47b157bc7802ebab4f661d2d530e2162c4508b4b485'
 base=pathlib.Path('preview-b/releases')/release
-URL=f'http://127.0.0.1:8873/{base}/atelier-preview.html?quality=efficient&normalStream=1&plateQA=bevel-v1'
+URL=f'http://127.0.0.1:8873/{base}/atelier-preview.html?quality=efficient&normalStream=1&plateQA=front-bevel-v2'
 R={'expectedRelease':release,'url':URL,'sourceDigest':hashlib.sha256((base/'assembly-review.js').read_bytes()).hexdigest(),'probeDigest':hashlib.sha256(pathlib.Path('mechanism-plates-qa/bevel-probe.js').read_bytes()).hexdigest(),'errors':[],'setup':'Chromium SwiftShader, 900x900 DPR1, current viewer effective metal; AO/bloom disabled equally for matched QA; no device FPS claims'}
 async def run():
  async with async_playwright()as p:
@@ -19,6 +19,12 @@ async def run():
     for state in ['baseline','delaunay','bevel','baseline']:
      name=state if state not in R[pose] else state+'-repeat';R[pose][name]=await page.evaluate('(s)=>plateQA.set(s)',state);await page.locator('#assembly-canvas').screenshot(path=str(O/f'{pose}-{name}.png'),timeout=180000);print(pose,name,flush=True)
     assert len({json.dumps(x['camera'],sort_keys=True)for x in R[pose].values()})==1
+    assert all(x['materialSame'] for x in R[pose].values()),'Material assignment drift'
+    assert len({json.dumps(x['material'],sort_keys=True)for x in R[pose].values()})==1
+    from PIL import Image,ImageChops,ImageStat
+    a=Image.open(O/f'{pose}-baseline.png').convert('RGB');z=Image.open(O/f'{pose}-baseline-repeat.png').convert('RGB');assert not ImageChops.difference(a,z).getbbox(),'A/B/A baseline pixel drift'
+    if pose!='whole':
+     x=Image.open(O/f'{pose}-bevel.png').convert('RGB');y=Image.open(O/f'{pose}-delaunay.png').convert('RGB');assert ImageChops.difference(x,y).getbbox(),'Bevel render is a no-op'
    assert R['init']['release']==release;assert not R['errors'];R['passed']=True
   except Exception as e:
    R['passed']=False;R['failure']=repr(e);print('FAIL',repr(e),flush=True)
