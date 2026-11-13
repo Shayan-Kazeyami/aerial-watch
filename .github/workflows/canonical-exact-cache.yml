@@ -1,4 +1,4 @@
-name: Canonical normal reuse unbatched reference
+name: Canonical baked raw cache and reference proof
 on:
   push:
     branches: [qa/canonical-exact-cache-20261114]
@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [baked-raw, baked-meshopt]
+        mode: [baked-raw]
     env:
       COMPOSE_MODE: ${{ matrix.mode }}
     steps:
@@ -28,9 +28,14 @@ jobs:
           node hardware-normal-qa/e79-rebase/ci-encode.mjs
         if: matrix.mode != 'current'
       - run: python -m pip install playwright pillow numpy && python -m playwright install --with-deps chromium
-      - run: python isolated-runtime-composition/recovery-2155/reference-viewer.py
+      - run: |
+          python isolated-runtime-composition/recovery-2155/viewer-normal.py
+          mv isolated-runtime-composition/recovery-2155/viewer-evidence isolated-runtime-composition/recovery-2155/cache-raw-evidence
+          python isolated-runtime-composition/recovery-2155/reference-viewer.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: canonical-normal-reference-${{ matrix.mode }}-evidence
-          path: isolated-runtime-composition/recovery-2155/viewer-evidence
+          name: canonical-baked-raw-complete-evidence
+          path: |
+            isolated-runtime-composition/recovery-2155/viewer-evidence
+            isolated-runtime-composition/recovery-2155/cache-raw-evidence

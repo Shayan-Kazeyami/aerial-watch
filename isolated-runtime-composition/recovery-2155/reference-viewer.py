@@ -9,7 +9,10 @@ async def run():
   b=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   page=await b.new_page(viewport={'width':640,'height':640},device_scale_factor=1);page.set_default_timeout(300000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   async def review(route):
-   response=await route.fetch();await route.fulfill(response=response,body=(await response.text())+'\n'+(D/'reference-probe.js').read_text())
+   response=await route.fetch();body=await response.text()
+   if MODE=='baked-raw':
+    marker="optIn:new URLSearchParams(location.search).get('assets')==='meshopt'";assert marker in body;body=body.replace(marker,'optIn:false')
+   await route.fulfill(response=response,body=body+'\n'+(D/'reference-probe.js').read_text())
   async def batch(route):
    response=await route.fetch();s=(D/'composed-canonical-batch.js').read_text().replace("'../hardware-reuse-qa/integration/changes/assembly-hardware-canonical-data.js'","'./assembly-hardware-canonical-data.js'").replace('sourceIndex:e.mesh.userData.sourceIndex','batchUuid:batch.uuid,sourceIndex:e.mesh.userData.sourceIndex').replace('if(!previous||','if(!window.__matrixCacheEnabled||!previous||').replace('batch.setMatrixAt(id,matrix);','window.__matrixWrites=(window.__matrixWrites||0)+1;batch.setMatrixAt(id,matrix);');await route.fulfill(response=response,body=s)
   async def canonical(route):await route.fulfill(status=200,content_type='text/javascript',body=(D/'assembly-hardware-canonical-data.js').read_text())
@@ -33,7 +36,7 @@ async def run():
     await page.route('**/optimized-assets/rebuild__assembly.meshopt.glb.gz*',compressed);await page.route('**/assembly-optimized-loading.js*',size)
   results=[]
   try:
-   await page.goto('https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/'+RID+'/atelier-preview.html?normalStream=1'+('&assets=meshopt' if MODE=='baked-meshopt' else ''),wait_until='domcontentloaded');await page.locator('body[data-ready=true]').wait_for();await page.wait_for_function('window.matrixCacheQA && document.querySelector("#stage").dataset.cameraReady==="true"');await page.evaluate('matrixCacheQA.freeze()');await page.wait_for_timeout(1000)
+   await page.goto('https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/'+RID+'/atelier-preview.html?normalStream=1'+('&assets=meshopt' if MODE=='baked-meshopt' else '&assets=raw'),wait_until='domcontentloaded');await page.locator('body[data-ready=true]').wait_for();await page.wait_for_function('window.matrixCacheQA && document.querySelector("#stage").dataset.cameraReady==="true"');await page.evaluate('matrixCacheQA.freeze()');await page.wait_for_timeout(1000)
    from PIL import Image
    import numpy as np
    cases=[('movement',dict(view='movement')),('exploded-movement',dict(view='movement',explode=1,pose=4)),('assembled',dict(view='watch'))]+[(f'part-{sid}',dict(sid=sid,view='movement',zoom=1.4))for sid in [12,21,26,39,40,71,125,126,128]]
