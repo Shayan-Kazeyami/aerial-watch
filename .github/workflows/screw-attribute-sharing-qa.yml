@@ -1,0 +1,19 @@
+name: isolated screw sharing QA
+on:
+  push:
+    branches: [qa/screw-attribute-sharing-20261114]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python isolated-screw-sharing/viewer.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screw-sharing-evidence
+          path: isolated-screw-sharing/evidence
