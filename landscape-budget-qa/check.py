@@ -10,7 +10,13 @@ RID='fad7fffe84d3b72678dc0cfc7864c18e6bf779b4da88bb40d11aefedddcbb91c'
 PROBE=b'''\nwindow.landscapeQA=()=>({quality,profile:qualityProfiles[quality],ao:ao.enabled,shadows:renderer.shadowMap.enabled,bloom:bloom.enabled,pixelRatio:renderer.getPixelRatio(),normalStream:new URL(location.href).searchParams.get('normalStream'),canvas:[renderer.domElement.width,renderer.domElement.height],origin:performance.timeOrigin});'''
 R={'baselineMain':'8363a039','baselineRelease':BASELINE,'candidateRelease':RID,'candidateDefaultsSHA256':hashlib.sha256((P/'atelier-defaults.js').read_bytes()).hexdigest(),'stageRevision':os.getenv('GITHUB_SHA'),'scope':'Exact immutable candidate root iframe + actual matchMedia; read-only probe only. Software GPU; no physical-device speed claim. Direct-entry/desktop/explicit Studio verify initialized policy without waiting for expensive completed rendering.','cases':[]}
 def save():(O/'report.json').write_text(json.dumps(R,indent=2))
-async def ev(frame,expression,arg=None):return await asyncio.wait_for(frame.evaluate(expression,arg),90)
+async def ev(frame,expression,arg=None):return await asyncio.wait_for(frame.evaluate(expression,arg),180)
+async def still_screenshot(page,frame,out,label):
+ state=await ev(frame,"""()=>{const state=()=>({hands:document.getElementById('animate').checked,movement:document.getElementById('animate-movement').checked});const before=state(),button=document.getElementById('play-motion');if(before.hands||before.movement){if(button.disabled)throw Error('Motion pause control disabled');button.onclick();}return {before,after:state()};}""")
+ assert not state['after']['hands']and not state['after']['movement'],state
+ out.setdefault('stillScreenshots',[]).append({'label':label,'motion':state,'scope':'Paused through existing motion control; still-view QA, not interactive speed evidence.'});save()
+ await ev(frame,'new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+ await asyncio.wait_for(page.screenshot(path=str(O/(label+'.png')),timeout=180000),180)
 async def run_case(browser,name,width,height,touch,query,expected,stream,render=False):
  out={'name':name,'viewport':[width,height],'touch':touch,'errors':[],'requests':[],'navigations':[],'console':[],'startedAt':time.time()};R['cases'].append(out)
  ctx=await browser.new_context(viewport={'width':width,'height':height},is_mobile=touch,has_touch=touch,device_scale_factor=1);page=await ctx.new_page();page.set_default_timeout(90000)
@@ -48,7 +54,7 @@ async def run_case(browser,name,width,height,touch,query,expected,stream,render=
    before=await ev(f,"()=>{window.__landscapeCanvas=document.getElementById('assembly-canvas');return landscapeQA()}")
    assert before['quality']=='efficient'and before['pixelRatio']==1 and not before['ao']and not before['shadows']and not before['bloom'],before
    out['readySmooth']=before;save()
-   await asyncio.wait_for(page.screenshot(path=str(O/(name+'-smooth-ready.png'))),45)
+   await still_screenshot(page,f,out,name+'-smooth-ready')
    # Real quality control: deliberate Balanced must survive both rotations.
    await f.locator('[data-mode=quality]').first.click(force=True)
    await f.locator('#context [data-quality=balanced]').click(force=True)
@@ -71,7 +77,7 @@ async def run_case(browser,name,width,height,touch,query,expected,stream,render=
    assert len(out['navigations'])==nav
    assert not any(r['type']=='document'or r['url'].split('?')[0].endswith(('.glb','.glb.gz','/geometry.bin'))for r in out['requests'][count:])
    out['rotationPassed']=True
-   await asyncio.wait_for(page.screenshot(path=str(O/(name+'.png'))),45)
+   await still_screenshot(page,f,out,name)
   assert not out['errors'],out['errors'];out['passed']=True
  except Exception as e:
   out['passed']=False;out['failure']=repr(e);out['traceback']=traceback.format_exc()
