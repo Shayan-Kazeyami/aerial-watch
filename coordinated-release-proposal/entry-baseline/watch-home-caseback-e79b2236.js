@@ -54,4 +54,3 @@ export function startLoadingBar({frame,panel,bar,fill,label,win=window}){
 }
 if(typeof document!=='undefined')startLoadingBar({frame:document.getElementById('watch-viewer'),panel:document.getElementById('watch-loading'),bar:document.getElementById('watch-progress'),fill:document.getElementById('watch-progress-fill'),label:document.getElementById('watch-loading-label')});
 
-

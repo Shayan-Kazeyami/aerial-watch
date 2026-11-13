@@ -2,7 +2,7 @@ import asyncio,json,os,pathlib,traceback,hashlib
 from playwright.async_api import async_playwright
 P=pathlib.Path('coordinated-release-proposal');OUT=P/('evidence-'+os.environ['QA_ASSETS']+'-'+os.environ['QA_VIEWPORT']);OUT.mkdir(exist_ok=True)
 RID=(P/'release-id.txt').read_text().strip();W,H=map(int,os.environ.get('QA_VIEWPORT','430x932').split('x'))
-MODE=os.environ['QA_ASSETS'];REQUEST_MODE='meshopt'if MODE in ['fallback','default']else MODE;Q=P;source=P.joinpath('staging/preview-b/releases',RID,'assembly-review.js').read_bytes().decode();needle='function initializeBaseline(result,metadata){';assert source.count(needle)==1;wrapper=(source.replace(needle,needle+'window.casebackLoadedAssetDelivery=result.metrics?.assetDelivery;')+'\n'+(P/'crown-probe.js').read_bytes().decode()+'\n'+(Q/'caseback-proof.js').read_bytes().decode()+'\n'+(Q/'full-probe.js').read_bytes().decode()).encode();EXPECTED_WRAPPER=hashlib.sha256(wrapper).hexdigest()
+MODE=os.environ['QA_ASSETS'];REQUEST_MODE='meshopt'if MODE in ['fallback','default']else MODE;Q=P;source=P.joinpath('staging/preview-b/releases',RID,'assembly-review.js').read_bytes().decode();needle='function initializeBaseline(result,metadata){';assert source.count(needle)==1;wrapper=(source.replace(needle,needle+'window.casebackLoadedAssetDelivery=result.metrics?.assetDelivery;').replace('if(mesh.userData.sourceIndex!==undefined)source.push(mesh);else exterior.push(mesh);',"if(mesh.userData.sourceIndex!==undefined){source.push(mesh);const a=mesh.geometry.attributes.normal.array,bytes=new Uint8Array(a.buffer,a.byteOffset,a.byteLength).slice();(window.__releaseSerializedNormalHashes??=[]).push(crypto.subtle.digest('SHA-256',bytes).then(h=>({sourceIndex:mesh.userData.sourceIndex,normalSHA256:[...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('')})));}else exterior.push(mesh);")+'\n'+(P/'crown-probe.js').read_bytes().decode()+'\n'+(Q/'caseback-proof.js').read_bytes().decode()+'\n'+(Q/'full-probe.js').read_bytes().decode()).encode();EXPECTED_WRAPPER=hashlib.sha256(wrapper).hexdigest()
 R={'assetMode':MODE,'expectedQAWrapperSHA256':EXPECTED_WRAPPER,'release':RID,'viewport':[W,H],'errors':[],'setup':'Chromium SwiftShader touch emulation, not physical-device FPS'}
 async def main():
  async with async_playwright() as p:
@@ -55,12 +55,12 @@ async def main():
    if MODE=='fallback':assert proof['delivery']['fallbackReason'] and R['forcedCompressedFailures']==1,proof['delivery']
    else:assert not proof['delivery']['fallbackReason'],proof['delivery']
    full=await page.evaluate('releaseFullProof()');R['fullReleaseProof']=full
-   expected=json.loads((P/'expected-normal-hashes.json').read_text());assert sorted(full['sources'],key=lambda x:x['sourceIndex'])==expected,'Serialized normal/source parity lost'
+   expected=json.loads((P/'expected-normal-hashes.json').read_text());assert sorted(full['serializedSources'],key=lambda x:x['sourceIndex'])==expected,'Serialized normal/source parity lost'
    build=json.loads((P/'build-report.json').read_text());assert full['revision']['digest']==build['viewerRevisionDigest'];assert full['three']=='187'
    assert full['ring']['vertices']==3088 and full['ring']['indices']==9216;assert full['ring']['userData']['premiumFacePart'] and full['ring']['userData']['designRevision']=='B-SVG-04'
    assert full['batch']['reusedEntries']==57 and full['batch']['rejectedReuse']==0
    assert full['batch']['originalGeometryBufferBytes']-full['batch']['allocatedGeometryBufferBytes']==5037456
-   R['runtimeCacheGuards']=await page.evaluate('releaseRuntimeCheck()')
+   R['normalComparisonScope']='All166 decoded serialized normal hashes captured before existing e79 crown/winding/setting/spring private display derivation; runtime normals separately checked immutable across composed renders';R['runtimeCacheGuards']=await page.evaluate('releaseRuntimeCheck()');assert R['runtimeCacheGuards']['sourceNormalsUnchangedAcrossRender']
    manifest=json.loads(P.joinpath('staging/preview-b/releases',RID,'deployment-manifest.json').read_text());byname={f['path']:f for f in manifest['localFiles']}
    for url,h in served.items():
     if '/'+RID+'/' in url:

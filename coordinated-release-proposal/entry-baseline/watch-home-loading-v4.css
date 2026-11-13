@@ -16,4 +16,3 @@ noscript{z-index:3;position:fixed;inset:0;display:grid;place-items:center;paddin
 #watch-loading[data-state=loading] #watch-progress::after{opacity:.7;animation:watch-loading-activity 1.8s ease-in-out infinite}
 @keyframes watch-loading-activity{from{transform:translateX(-120%)}to{transform:translateX(400%)}}
 @media(prefers-reduced-motion:reduce){#watch-loading[data-state=loading] #watch-progress::after{animation:none;opacity:0}}
-
