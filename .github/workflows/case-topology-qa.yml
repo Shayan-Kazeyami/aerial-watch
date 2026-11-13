@@ -1,7 +1,7 @@
-name: Opposite case flanks topology QA
+name: Crown tube structured topology QA
 on:
   push:
-    branches: [qa/case-flanks-20261113]
+    branches: [qa/crown-tube-20261113]
 permissions:
   contents: read
 jobs:
@@ -16,28 +16,15 @@ jobs:
       - run: python -m pip install numpy scipy triangle trimesh rtree playwright pillow && python -m playwright install --with-deps chromium
       - run: |
           python case-topology-lane/flanks/prepare-ci.py
-          node case-topology-lane/decode-ci.mjs
-          python case-topology-lane/audit.py > case-topology-lane/audit-output.json
-          python case-topology-lane/integrate.py
-          python case-topology-lane/verify.py
-          cp case-topology-lane/current/case.json case-topology-lane/integrated/case.json
-          python case-topology-lane/opposite-positive/integrate.py
-          python case-topology-lane/opposite-positive/verify.py
-          python case-topology-lane/opposite-negative/integrate.py
-          python case-topology-lane/opposite-negative/verify.py
-          python case-topology-lane/flanks/merge.py
-          cp case-topology-lane/flanks/integrated/*.bin case-topology-lane/integrated/
-          node case-topology-lane/encode-ci.mjs
-          python case-topology-lane/flanks/build.py
+          echo "http://127.0.0.1:8765/preview-b/releases/b38ddef36d153be511c40fc6d51795308a50440635edf1c97c39a725120cfdd3/atelier-preview.html" > case-topology-lane/url.txt
       - run: |
           python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
-          WATCH_URL="$(cat case-topology-lane/url.txt)" python -u case-topology-lane/flanks/check.py
+          WATCH_URL="$(cat case-topology-lane/url.txt)" python -u case-topology-lane/hardware/check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: opposite-flanks-evidence
+          name: crown-tube-evidence
           path: |
             case-topology-output
-            case-topology-lane/changes
-            case-topology-lane/integrated-report.json
-            case-topology-lane/integrated-proof.json
+            case-topology-lane/hardware/139/package.json
+            case-topology-lane/hardware/139/report.json

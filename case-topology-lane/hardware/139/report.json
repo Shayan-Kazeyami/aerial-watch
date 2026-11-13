@@ -1,0 +1,21 @@
+{
+  "before": 4412,
+  "after": 1536,
+  "radialSegments": 96,
+  "status": "geometry candidate; actual render, runtime transform/material/hard-edge integration pending",
+  "sourceToCandidate": {
+    "maxMM": 0.0004462113733756853,
+    "p99MM": 0.0004461870080484154,
+    "maxNormalDeg": 0.8526827687023569,
+    "p99NormalDeg": 0.8510650431890006
+  },
+  "candidateToSource": {
+    "maxMM": 0.00044615127719710174,
+    "p99MM": 0.0004461364813807754,
+    "maxNormalDeg": 0.31522714895254333,
+    "p99NormalDeg": 0.31522714895254333
+  },
+  "sourceHasUV": false,
+  "candidateBoundaryEdges": 0,
+  "candidateNonmanifoldEdges": 0
+}
