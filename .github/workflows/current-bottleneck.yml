@@ -12,7 +12,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright pillow numpy && python -m playwright install --with-deps chromium
       - run: node next-bottleneck-qa/unit.mjs
-      - run: python next-bottleneck-qa/check.py
+      - run: |
+          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
+          python next-bottleneck-qa/stage-check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
