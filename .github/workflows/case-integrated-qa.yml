@@ -1,0 +1,91 @@
+name: Case crown tube integrated release QA
+on:
+  push:
+    branches: [qa/case-integrated-20261113]
+    paths: ['case-topology-lane/**', '.github/workflows/case-integrated-qa.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [430x932, 740x360]
+        assets: [raw, meshopt]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy scipy triangle trimesh rtree playwright pillow && python -m playwright install --with-deps chromium
+      - run: |
+          python case-topology-lane/integration/prepare-ci.py
+          python case-topology-lane/integration/bake.py preview-b/releases/8da6179fe4cc360db298c64720b76933d2325d3a5c65b237aa7c83dc18178803/rebuild/assembly.glb
+          cp case-topology-lane/integration/changes/structured-assembly-assets/assembly.glb case-topology-lane/integration/delivery-source/rebuild/assembly.glb
+          node case-topology-lane/integration/delivery-source/scripts/build-lossless-assets.mjs rebuild/assembly.glb
+          python case-topology-lane/flanks/prepare-ci.py
+          node case-topology-lane/decode-ci.mjs
+          python case-topology-lane/audit.py > case-topology-lane/audit-output.json
+          python case-topology-lane/integrate.py
+          python case-topology-lane/opposite-positive/integrate.py
+          python case-topology-lane/opposite-negative/integrate.py
+          python case-topology-lane/flanks/merge.py
+          cp case-topology-lane/flanks/integrated/*.bin case-topology-lane/integrated/
+          cp case-topology-lane/current/case.json case-topology-lane/integrated/case.json
+          node case-topology-lane/encode-ci.mjs
+          mkdir -p case-topology-lane/flanks/changes
+          cp -r case-topology-lane/changes/* case-topology-lane/flanks/changes/
+          WATCH_BASE=preview-b/releases/8da6179fe4cc360db298c64720b76933d2325d3a5c65b237aa7c83dc18178803 python case-topology-lane/integration/build.py
+          python case-topology-lane/integration/stage.py
+          node --test crown-unified-qa/gesture.test.mjs
+          python - <<'PY'
+          import pathlib
+          for name in ['case-topology-lane/integration/check.py','layer-focus-qa/check.py']:
+           p=pathlib.Path(name);s=p.read_text().replace('quality=efficient','quality=efficient&assets=${{ matrix.assets }}')
+           if name.startswith('layer-'):s=s.replace("atelier-preview.html'","atelier-preview.html?quality=efficient&assets=${{ matrix.assets }}'")
+           p.write_text(s)
+          PY
+      - run: |
+          python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
+          QA_VIEWPORT=${{ matrix.viewport }} python case-topology-lane/integration/check.py
+          FOCUS_VIEWPORT=${{ matrix.viewport }} python layer-focus-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: case-integrated-${{ matrix.viewport }}-${{ matrix.assets }}
+          path: |
+            crown-unified-evidence
+            layer-focus-evidence
+            case-topology-lane/integration/release
+            case-topology-lane/integration/bake-report.json
+            case-topology-lane/integration/delivery-source/optimized-assets/audit.json
+            case-integrated-release.json
+  persist-qa:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: qa/case-integrated-20261113
+      - uses: actions/download-artifact@v4
+        with:
+          name: case-integrated-430x932-raw
+          path: artifact
+      - run: |
+          python - <<'PY'
+          import pathlib,json,shutil,hashlib
+          a=pathlib.Path('artifact');r=json.loads((a/'case-integrated-release.json').read_text());rid=r['releaseId'];base=pathlib.Path('preview-b/releases')/r['baseRelease'];patch=a/'case-topology-lane/integration/release';dest=pathlib.Path('preview-b/releases')/rid;m=json.loads((patch/'deployment-manifest.json').read_text())
+          for name in [f['path']for f in m['localFiles']]+['deployment-manifest.json','release-receipt.json']:
+           src=patch/name if(patch/name).exists()else base/name;out=dest/name;out.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,out)
+          for f in m['localFiles']:assert hashlib.sha256((dest/f['path']).read_bytes()).hexdigest()==f['sha256']
+          shutil.copyfile(a/'case-integrated-release.json','case-integrated-release.json')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview-b/releases/$(python -c "import json;print(json.load(open('case-integrated-release.json'))['releaseId'])") case-integrated-release.json
+          git commit -m 'Persist tested case crown tube immutable release on QA branch only'
+          git push origin HEAD:refs/heads/qa/case-integrated-20261113

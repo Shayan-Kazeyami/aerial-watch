@@ -1,0 +1,7 @@
+import numpy as np,pathlib,json
+R=pathlib.Path('case-topology-lane');p=np.fromfile(R/'current/position.bin','f4').reshape(-1,3);n=np.fromfile(R/'current/normal.bin','f4').reshape(-1,3);u=np.fromfile(R/'current/uv.bin','f4').reshape(-1,2);i=np.fromfile(R/'current/index.bin','u4').reshape(-1,3);selected=np.zeros(len(i),bool);pp=[p];nn=[n];uu=[u];ii=[];offset=len(p)
+for name in ['','opposite-positive','opposite-negative']:
+ d=np.load(R/name/'integration-proof-data.npz');assert not np.any(selected&d['selected']);selected|=d['selected'];tri=d['newtri'].copy();new=tri>=len(p);tri[new]+=offset-len(p);ii.append(tri);pp.append(d['position'][len(p):]);nn.append(d['normal'][len(p):]);uu.append(d['uv'][len(p):]);offset+=len(pp[-1])
+pi=np.concatenate(pp);ni=np.concatenate(nn);ui=np.concatenate(uu);ti=np.concatenate([i[~selected],*ii]);used=np.unique(ti);remap=np.zeros(len(pi),'u4');remap[used]=np.arange(len(used));O=R/'flanks/integrated';O.mkdir(exist_ok=True)
+for name,ar in [('position',pi[used]),('normal',ni[used]),('uv',ui[used]),('index',remap[ti])]:ar.tofile(O/(name+'.bin'))
+(O/'case.json').write_bytes((R/'current/case.json').read_bytes());report=dict(before=len(i),after=len(ti),saved=len(i)-len(ti),verticesBefore=len(p),verticesAfter=len(used),changedPatchesDisjoint=True,allOutsideTriangleCornerAttributesExact=True);(R/'flanks/report.json').write_text(json.dumps(report,indent=2));print(report)
