@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "texture": "outer-normal-4k.ktx2",
+  "bytes": 16562348,
+  "sha256": "bb022255b999645d468cc2b62100cef7c4226c3df136ab1732b40c107655d585",
+  "chunks": [
+    {
+      "uri": "outer-normal-4k.ktx2.part0",
+      "bytes": 8388608,
+      "sha256": "32f662b3984b3efaf87889db2c8d0ba0779593de08390085d3d414ea0eea5a0b"
+    },
+    {
+      "uri": "outer-normal-4k.ktx2.part1",
+      "bytes": 8173740,
+      "sha256": "e80c0155d8346517e1c6c0b46def43e06a97e21b1ed64f18d17b4fc64c816c49"
+    }
+  ]
+}
