@@ -25,6 +25,7 @@ async def main():
   await page.route('**/assembly-review.js*',instrument)
   try:
    await page.goto('http://127.0.0.1:8765/?quality=efficient&paused=1',wait_until='domcontentloaded');frame=await getframe();await frame.locator('body[data-ready=true]').wait_for();await frame.locator('.masthead .quality').click();await frame.locator('.debug-benchmark summary').click();await frame.locator('#atelier-benchmark-start').wait_for(state='visible');await frame.wait_for_function("!document.getElementById('atelier-benchmark-start').disabled",timeout=300000)
+   assert await frame.evaluate("!document.querySelector('.crown-hotspot')||getComputedStyle(document.querySelector('.crown-hotspot')).visibility==='hidden'");R['sceneAffordanceOccludedByPanel']=True
    R['initialIndicator']=await frame.locator('#atelier-backend-indicator').inner_text();assert R['initialIndicator']=='WebGL2';await page.screenshot(path=str(OUT/'controls-before.png'),full_page=True)
    initialURL=page.url;initialView=await frame.evaluate('qaBenchmarkView()');await frame.locator('#atelier-benchmark-start').click()
    # The real run uses production durations and renderer reloads, not synthetic frames.
