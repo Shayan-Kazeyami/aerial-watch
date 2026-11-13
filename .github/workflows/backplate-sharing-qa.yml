@@ -1,0 +1,31 @@
+name: Isolated backplate sharing PBR QA
+on:
+  push:
+    branches: [qa/backplate-sharing-20261114]
+    paths: [qa-backplate-sharing/**, .github/workflows/backplate-sharing-qa.yml]
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python qa-backplate-sharing/prepare.py
+      - run: |
+          python -m http.server 8871 --bind 127.0.0.1 >/tmp/backplate-server.log 2>&1 &
+          python -u qa-backplate-sharing/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backplate-sharing-real-pbr-raw-meshopt
+          path: |
+            qa-backplate-sharing/*.png
+            qa-backplate-sharing/render-results.json
+            qa-backplate-sharing/freshness-and-render-inputs.json
+            qa-backplate-sharing/original.mjs
+            qa-backplate-sharing/candidate.mjs
