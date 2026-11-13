@@ -3,7 +3,7 @@ from playwright.async_api import async_playwright
 R=pathlib.Path('hardware-normal-qa');O=R/'offline-bake/evidence';O.mkdir(exist_ok=True)
 RID='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6'
 BASE='.'
-URL=f'http://127.0.0.1:8886/{BASE}/preview-b/releases/{RID}/atelier-preview.html?quality=efficient&normalStream=1&paused=1'
+URL=f'http://127.0.0.1:8886/{BASE}/preview-b/releases/{RID}/atelier-preview.html?quality=efficient&normalStream=1&paused=1&assets=raw'
 probe=(R/'probe.js').read_text().replace('mechanismBatch?.build(source);renderer.info.reset();','ao.enabled=false;mechanismBatch?.build(source);renderer.info.reset();')
 # AO is deliberately off identically for both sides to avoid stochastic AO as a confound.
 extra='''\nwindow.__normalQa.toggle=(enabled)=>{if(window.__hardwareNormalAudit)window.__hardwareNormalAudit.restore();window.__hardwareNormalAudit=enabled?repairHardwareCurvatureNormals(source):null;mechanismBatch?.build(source);return window.__normalQa.audit();};\n'''
