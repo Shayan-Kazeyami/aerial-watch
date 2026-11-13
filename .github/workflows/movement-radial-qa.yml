@@ -1,0 +1,22 @@
+name: Movement radial topology PBR QA
+on:
+  push:
+    branches: [qa/movement-radial-20261113]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: cat movement-qa-fixture/part-*.b64 | base64 -d | tar xz
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          python -m http.server 8765 >/tmp/http.log 2>&1 &
+          python movement-fixture/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: movement-radial-evidence
+          path: movement-evidence
