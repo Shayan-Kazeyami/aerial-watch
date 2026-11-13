@@ -1,0 +1,30 @@
+name: Mechanical layer focus acceptance
+on:
+  push:
+    branches: [qa/layer-focus-20261113]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [430x932, 740x360]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          RID=$(cat layer-focus-qa/release-id.txt)
+          cp preview-b/releases/$RID/{assembly-layer-focus.js,assembly-explode.js,assembly-framing.js} layer-focus-qa/
+          ln -s ../preview-b/releases/$RID/vendor layer-focus-qa/vendor
+          node --test layer-focus-qa/focus.test.mjs
+      - run: |
+          python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
+          FOCUS_VIEWPORT=${{ matrix.viewport }} python layer-focus-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: layer-focus-${{ matrix.viewport }}
+          path: layer-focus-evidence
