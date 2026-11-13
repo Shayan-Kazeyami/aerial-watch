@@ -2,12 +2,13 @@ let sourceNormalState=[];
 function snapshotNormals(){sourceNormalState=source.map(m=>({mesh:m,geometry:m.geometry,attribute:m.geometry.attributes.normal,array:m.geometry.attributes.normal?.array,values:m.geometry.attributes.normal?.array.slice()}));if(sourceNormalState.length!==166)throw Error("Expected exact 166 source meshes");}
 
 window.matrixCacheQA={
- freeze(){snapshotNormals();for(const id of ['animate','animate-movement']){const e=$(id);e.checked=false;e.dispatchEvent(new Event('change',{bubbles:true}));}stopTour();cameraTween=null;dirty=true;},
+ freeze(){for(const id of ['animate','animate-movement']){const e=$(id);e.checked=false;e.dispatchEvent(new Event('change',{bubbles:true}));}stopTour();cameraTween=null;dirty=true;},
  async dynamic(){const result=[];for(let i=0;i<12;i++){const r=await this.sample({cache:true,explode:i/11,finish:i%2===0,pose:i*.731,frames:3});delete r.png;if(!r.normalSourcesUnchanged||r.maxCorrectedMatrixError>2e-6)throw Error('dynamic composition mismatch');result.push(r)}return result},
  async sample({cache=true,explode=0,finish=true,pose=0,frames=2}){
   window.__matrixCacheEnabled=cache;$('finish').checked=finish;updateMaterials();visibility();renderingQuality('efficient');registerExplosionParts();explosion.setAmount(explode,{instant:true});
   clock.seek(pose,{track:'mechanism'});clock.seek(pose,{track:'hands'});applyClockPose(clock.snapshot());
   registerExplosionParts();if(explosion.active)explosion.update(0);
+  snapshotNormals();
   const writes=window.__matrixWrites||0;let cpu=0;
   for(let i=0;i<frames;i++){
    const depth=updateInspectionDepth(camera,controls.target,depthBounds,ao);renderer.info.reset();const start=performance.now();
