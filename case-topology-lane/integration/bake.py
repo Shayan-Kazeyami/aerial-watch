@@ -15,8 +15,16 @@ for patchdir in [R/'crown/bake-patch',R/'hardware/139/bake-patch']:
   a['count']=len(arr)
   if key=='POSITION':a['min']=arr.min(0).tolist();a['max']=arr.max(0).tolist()
   assert ai not in reps;reps[ai]=arr.tobytes();changed[ai]=patch['meshName']
+# Share bit-identical springbar positions/normals, retaining separate UV charts.
+assert raw(444)==raw(448) and raw(445)==raw(449) and raw(446)!=raw(450)
+assert j['meshes'][143]['primitives'][0]['attributes']=={'POSITION':444,'NORMAL':445,'TEXCOORD_0':446}
+assert j['meshes'][144]['primitives'][0]['attributes']=={'POSITION':448,'NORMAL':449,'TEXCOORD_0':450}
+assert j['meshes'][143]['primitives'][0]['indices']==j['meshes'][144]['primitives'][0]['indices']==447
+j['meshes'][144]['primitives'][0]['attributes'].update(POSITION=444,NORMAL=445)
+expectedMeshes=copy.deepcopy(original['meshes']);expectedMeshes[144]['primitives'][0]['attributes'].update(POSITION=444,NORMAL=445)
+assert j['meshes']==expectedMeshes
 parts=[];offset=0;records=[]
 for ai,a in enumerate(j['accessors']):
  v=j['bufferViews'][a['bufferView']];src=raw(ai);data=reps.get(ai,src);v.update(byteOffset=offset,byteLength=len(data),buffer=0);parts.extend([data,bytes((-len(data))%4)]);offset+=len(data)+(-len(data))%4;records.append({'accessor':ai,'changedMesh':changed.get(ai),'bytes':len(data),'sha256':sha(data),'byteIdenticalToSource':data==src})
-for k in ['nodes','meshes','materials','scenes','scene','textures','images','samplers']:assert j.get(k)==original.get(k),k
-j['buffers']=[{'byteLength':offset}];jb=json.dumps(j,separators=(',',':')).encode();jb+=b' '*((-len(jb))%4);glb=struct.pack('<IIIII',0x46546c67,2,28+len(jb)+offset,len(jb),0x4e4f534a)+jb+struct.pack('<II',offset,0x004e4942)+b''.join(parts);dest=out/'changes/structured-assembly-assets';dest.mkdir(parents=True,exist_ok=True);(dest/'assembly.glb').write_bytes(glb);rep={'sourceSHA256':sha(b),'candidateSHA256':sha(glb),'sourceBytes':len(b),'candidateBytes':len(glb),'changedAccessors':len(changed),'allOtherAccessorBytesUnchanged':True,'allNodesMeshesMaterialsExtrasUnchanged':True,'accessors':records};(out/'bake-report.json').write_text(json.dumps(rep,indent=2));print({k:v for k,v in rep.items() if k!='accessors'})
+for k in ['nodes','materials','scenes','scene','textures','images','samplers']:assert j.get(k)==original.get(k),k
+j['buffers']=[{'byteLength':offset}];jb=json.dumps(j,separators=(',',':')).encode();jb+=b' '*((-len(jb))%4);glb=struct.pack('<IIIII',0x46546c67,2,28+len(jb)+offset,len(jb),0x4e4f534a)+jb+struct.pack('<II',offset,0x004e4942)+b''.join(parts);dest=out/'changes/structured-assembly-assets';dest.mkdir(parents=True,exist_ok=True);(dest/'assembly.glb').write_bytes(glb);rep={'sourceSHA256':sha(b),'candidateSHA256':sha(glb),'sourceBytes':len(b),'candidateBytes':len(glb),'changedAccessors':len(changed),'allOtherAccessorBytesUnchanged':True,'allNodesMaterialsExtrasUnchanged':True,'meshReferenceChanges':{'mesh':144,'POSITION':[448,444],'NORMAL':[449,445],'UVRetained':450},'springbarCanonicalBytesEqual':True,'accessors':records};(out/'bake-report.json').write_text(json.dumps(rep,indent=2));print({k:v for k,v in rep.items() if k!='accessors'})

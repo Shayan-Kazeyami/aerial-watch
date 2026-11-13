@@ -1,6 +1,6 @@
 import pathlib,json,hashlib,re,shutil,os
 R=pathlib.Path('case-topology-lane/integration');out=R/'release';out.mkdir(exist_ok=True)
-base=pathlib.Path(os.environ.get('WATCH_BASE','webgpu-controls-qa/recovery-c8b1cb38/preview-b/releases/c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633'))
+base=pathlib.Path(os.environ.get('WATCH_BASE','webgpu-controls-qa/recovery-f0148dab/preview-b/releases/f0148dab28e427621143d47b157bc7802ebab4f661d2d530e2162c4508b4b485'))
 m=json.loads((base/'deployment-manifest.json').read_text());files={f['path']:dict(f)for f in m['localFiles']};sha=lambda b:hashlib.sha256(b).hexdigest();audit=json.loads((R/'delivery-source/optimized-assets/audit.json').read_text())['outputs'][0];bake=json.loads((R/'bake-report.json').read_text())
 def put(n,b):
  p=out/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b);files[n]={'path':n,'sizeBytes':len(b),'sha256':sha(b)}

@@ -1,0 +1,620 @@
+{
+  "initialRows": [
+    {
+      "name": "Springbar_UPPER",
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.220446049250313e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.220446049250313e-16,
+        0,
+        0,
+        22.399999618530273,
+        -0.949999988079076,
+        1
+      ],
+      "attrs": {
+        "position": {
+          "count": 2266,
+          "itemSize": 3,
+          "bytes": 27192,
+          "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+        },
+        "normal": {
+          "count": 2266,
+          "itemSize": 3,
+          "bytes": 27192,
+          "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+        },
+        "uv": {
+          "count": 2266,
+          "itemSize": 2,
+          "bytes": 18128,
+          "hash": "f0b479db80d50162bebff0c523e11a3eaa139a75ec0053d3efa114d4dc291e52"
+        }
+      },
+      "triangles": 3596,
+      "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+    },
+    {
+      "name": "Springbar_LOWER",
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.220446049250313e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.220446049250313e-16,
+        0,
+        0,
+        -22.399999618530273,
+        -0.949999988079066,
+        1
+      ],
+      "attrs": {
+        "position": {
+          "count": 2266,
+          "itemSize": 3,
+          "bytes": 27192,
+          "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+        },
+        "normal": {
+          "count": 2266,
+          "itemSize": 3,
+          "bytes": 27192,
+          "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+        },
+        "uv": {
+          "count": 2266,
+          "itemSize": 2,
+          "bytes": 18128,
+          "hash": "4dd2ba5a647e48268bc94fd891e056b7cb65c7a0f2106a1a0d554435f7eb82d7"
+        }
+      },
+      "triangles": 3596,
+      "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+    }
+  ],
+  "poseRows": [
+    [
+      {
+        "name": "Springbar_UPPER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          22.399999618530273,
+          -0.949999988079076,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "f0b479db80d50162bebff0c523e11a3eaa139a75ec0053d3efa114d4dc291e52"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      },
+      {
+        "name": "Springbar_LOWER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          -22.399999618530273,
+          -0.949999988079066,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "4dd2ba5a647e48268bc94fd891e056b7cb65c7a0f2106a1a0d554435f7eb82d7"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      }
+    ],
+    [
+      {
+        "name": "Springbar_UPPER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          22.399999618530273,
+          -0.949999988079076,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "f0b479db80d50162bebff0c523e11a3eaa139a75ec0053d3efa114d4dc291e52"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      },
+      {
+        "name": "Springbar_LOWER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          -22.399999618530273,
+          -0.949999988079066,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "4dd2ba5a647e48268bc94fd891e056b7cb65c7a0f2106a1a0d554435f7eb82d7"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      }
+    ],
+    [
+      {
+        "name": "Springbar_UPPER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          22.399999618530273,
+          -0.949999988079076,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "f0b479db80d50162bebff0c523e11a3eaa139a75ec0053d3efa114d4dc291e52"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      },
+      {
+        "name": "Springbar_LOWER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          -22.399999618530273,
+          -0.949999988079066,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "4dd2ba5a647e48268bc94fd891e056b7cb65c7a0f2106a1a0d554435f7eb82d7"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      }
+    ],
+    [
+      {
+        "name": "Springbar_UPPER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          22.399999618530273,
+          -0.949999988079076,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "f0b479db80d50162bebff0c523e11a3eaa139a75ec0053d3efa114d4dc291e52"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      },
+      {
+        "name": "Springbar_LOWER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          -22.399999618530273,
+          -0.949999988079066,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "4dd2ba5a647e48268bc94fd891e056b7cb65c7a0f2106a1a0d554435f7eb82d7"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      }
+    ],
+    [
+      {
+        "name": "Springbar_UPPER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          22.399999618530273,
+          -0.949999988079076,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "f0b479db80d50162bebff0c523e11a3eaa139a75ec0053d3efa114d4dc291e52"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      },
+      {
+        "name": "Springbar_LOWER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          -22.399999618530273,
+          -0.949999988079066,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "4dd2ba5a647e48268bc94fd891e056b7cb65c7a0f2106a1a0d554435f7eb82d7"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      }
+    ],
+    [
+      {
+        "name": "Springbar_UPPER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          22.399999618530273,
+          -0.949999988079076,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "f0b479db80d50162bebff0c523e11a3eaa139a75ec0053d3efa114d4dc291e52"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      },
+      {
+        "name": "Springbar_LOWER",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          -22.399999618530273,
+          -0.949999988079066,
+          1
+        ],
+        "attrs": {
+          "position": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "98100e582b03223850f473ea6339779af8bf466a235bbf1891c02fc08d62e7d7"
+          },
+          "normal": {
+            "count": 2266,
+            "itemSize": 3,
+            "bytes": 27192,
+            "hash": "8410928419f551721ddcee9bc7f4aa9cf8d39d0ce328231f3e95495dcfad68a3"
+          },
+          "uv": {
+            "count": 2266,
+            "itemSize": 2,
+            "bytes": 18128,
+            "hash": "4dd2ba5a647e48268bc94fd891e056b7cb65c7a0f2106a1a0d554435f7eb82d7"
+          }
+        },
+        "triangles": 3596,
+        "indexHash": "54975c964f8ad1887f96b3e387b3d8833fd52ec42c766b24aa7ff8321882658e"
+      }
+    ]
+  ]
+}

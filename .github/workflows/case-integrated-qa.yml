@@ -25,7 +25,7 @@ jobs:
       - run: python -m pip install numpy scipy triangle trimesh rtree playwright pillow && python -m playwright install --with-deps chromium
       - run: |
           python case-topology-lane/integration/prepare-ci.py
-          python case-topology-lane/integration/bake.py preview-b/releases/c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633/rebuild/assembly.glb
+          python case-topology-lane/integration/bake.py preview-b/releases/f0148dab28e427621143d47b157bc7802ebab4f661d2d530e2162c4508b4b485/rebuild/assembly.glb
           cp case-topology-lane/integration/changes/structured-assembly-assets/assembly.glb case-topology-lane/integration/delivery-source/rebuild/assembly.glb
           node case-topology-lane/integration/delivery-source/scripts/build-lossless-assets.mjs rebuild/assembly.glb
           python case-topology-lane/flanks/prepare-ci.py
@@ -40,7 +40,7 @@ jobs:
           node case-topology-lane/encode-ci.mjs
           mkdir -p case-topology-lane/flanks/changes
           cp -r case-topology-lane/changes/* case-topology-lane/flanks/changes/
-          WATCH_BASE=preview-b/releases/c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633 python case-topology-lane/integration/build.py
+          WATCH_BASE=preview-b/releases/f0148dab28e427621143d47b157bc7802ebab4f661d2d530e2162c4508b4b485 python case-topology-lane/integration/build.py
           python case-topology-lane/integration/stage.py
           node --test crown-unified-qa/gesture.test.mjs
           python - <<'PY'
@@ -54,6 +54,7 @@ jobs:
           python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
           QA_VIEWPORT=${{ matrix.viewport }} python case-topology-lane/integration/check.py
           FOCUS_VIEWPORT=${{ matrix.viewport }} python layer-focus-qa/check.py
+          QA_ASSETS=${{ matrix.assets }} python mesh-strap-lane/springbar-qa/integrated-springbar-check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -61,6 +62,7 @@ jobs:
           path: |
             crown-unified-evidence
             layer-focus-evidence
+            integrated-springbar-evidence-*
             case-topology-lane/integration/release
             case-topology-lane/integration/bake-report.json
             case-topology-lane/integration/delivery-source/optimized-assets/audit.json
