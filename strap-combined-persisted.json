@@ -1,0 +1,7 @@
+{
+  "releaseId": "09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29",
+  "baseRelease": "75756356ca7b944a5143c519b75d3cac2f8aa62cfcf40302b249f7eefda85f69",
+  "verifiedRun": 43486119952,
+  "contactExportRun": 43487017815,
+  "scope": "QA release only; no production pointers changed"
+}
