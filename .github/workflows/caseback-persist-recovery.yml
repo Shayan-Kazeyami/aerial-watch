@@ -1,0 +1,80 @@
+name: Persist exact tested caseback QA release only
+on:
+  push:
+    branches: [qa/caseback-persist-20261114]
+permissions:
+  contents: read
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 160a1ed9b52619918ca9afe2eba1664007e45589
+      - uses: actions/download-artifact@v4
+        with:
+          name: caseback-integrated-raw-430x932
+          run-id: 43493919847
+          github-token: ${{ github.token }}
+          path: tested-raw
+      - uses: actions/download-artifact@v4
+        with:
+          name: caseback-integrated-meshopt-430x932
+          run-id: 43493919847
+          github-token: ${{ github.token }}
+          path: tested-meshopt
+      - uses: actions/download-artifact@v4
+        with:
+          name: caseback-integrated-raw-740x360
+          run-id: 43493919847
+          github-token: ${{ github.token }}
+          path: tested-landscape-raw
+      - uses: actions/download-artifact@v4
+        with:
+          name: caseback-integrated-meshopt-740x360
+          run-id: 43493919847
+          github-token: ${{ github.token }}
+          path: tested-landscape-meshopt
+      - uses: actions/download-artifact@v4
+        with:
+          name: caseback-exact-fallback-recovery
+          run-id: 43497017317
+          github-token: ${{ github.token }}
+          path: tested-fallback
+      - run: |
+          python - <<'PY'
+          import pathlib,json,hashlib,shutil
+          rid='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6'
+          baseid='09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29'
+          roots=[pathlib.Path(x) for x in ['tested-raw','tested-meshopt','tested-landscape-raw','tested-landscape-meshopt','tested-fallback']]
+          manifests=[];reports=[]
+          selected=['evidence-raw-430x932','evidence-meshopt-430x932','evidence-raw-740x360','evidence-meshopt-740x360','evidence-fallback-430x932']
+          for root,evidence in zip(roots,selected):
+           q=root/'case-topology-lane/caseback-integration' if(root/'case-topology-lane/caseback-integration').exists()else root
+           m=json.loads((q/'release/deployment-manifest.json').read_text());assert m['releaseId']==rid;manifests.append((q/'release/deployment-manifest.json').read_bytes())
+           for p in [q/evidence/'report.json']:
+            r=json.loads(p.read_text());assert r['passed']and not r['errors']and r['release']==rid;assert r['executedQAWrapperSHA256']==r['expectedQAWrapperSHA256'];reports.append(r)
+          old=roots[1]/'evidence-fallback-430x932/report.json';old=old if old.exists()else roots[1]/'case-topology-lane/caseback-integration/evidence-fallback-430x932/report.json'
+          superseded=json.loads(old.read_text());assert superseded['passed'] is False and superseded['forcedCompressedFailures']==2
+          fallback=reports[-1];assert fallback['forcedCompressedFailures']>=1
+          expected='http://127.0.0.1:8765/preview-b/releases/'+rid+'/optimized-assets/rebuild__assembly.meshopt.glb.gz'
+          assert all(u==expected for u in fallback['forcedCompressedFailureURLs'])
+          assert len(reports)==5 and all(m==manifests[0]for m in manifests)
+          a=roots[0]/'case-topology-lane/caseback-integration' if(roots[0]/'case-topology-lane/caseback-integration').exists()else roots[0]
+          m=json.loads(manifests[0]);canonical={k:m[k]for k in ['schemaVersion','localFiles','references']};assert hashlib.sha256(json.dumps(canonical,separators=(',',':')).encode()).hexdigest()==rid
+          base=pathlib.Path('preview-b/releases')/baseid;dest=base.parent/rid
+          for f in m['localFiles']:
+           p=a/'release'/f['path'];p=p if p.exists()else base/f['path'];b=p.read_bytes();assert len(b)==f['sizeBytes']and hashlib.sha256(b).hexdigest()==f['sha256'];d=dest/f['path'];d.parent.mkdir(parents=True,exist_ok=True);d.write_bytes(b)
+          for f in m['references']:
+           b=(base.parent/f['ownerReleaseId']/f['path']).read_bytes();assert len(b)==f['sizeBytes']and hashlib.sha256(b).hexdigest()==f['sha256']
+          for name in ['deployment-manifest.json','release-receipt.json']:shutil.copyfile(a/'release'/name,dest/name)
+          pathlib.Path('caseback-integrated-persisted.json').write_text(json.dumps({'releaseId':rid,'baseRelease':baseid,'testedCommit':'160a1ed9b52619918ca9afe2eba1664007e45589','verifiedRun':43493919847,'fallbackRun':43497017317,'fallbackCommit':'91e7397a0beaa09b2d76f07868a1d98a71328a19','selectedReports':selected,'supersededFallbackFailure':superseded,'scope':'QA release only; no production pointer changed'},indent=2)+'\n')
+          PY
+          test "$(git ls-remote origin refs/heads/qa/caseback-integrated-20261114 | cut -f1)" = "160a1ed9b52619918ca9afe2eba1664007e45589"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 caseback-integrated-persisted.json
+          git commit -m 'Persist exact sealed and tested caseback release on QA branch only'
+          git push origin HEAD:refs/heads/qa/caseback-integrated-20261114
