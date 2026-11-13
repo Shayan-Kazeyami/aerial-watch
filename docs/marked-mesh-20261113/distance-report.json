@@ -1,0 +1,86 @@
+{
+  "leather-0-0": {
+    "sourceToCandidate": {
+      "samples": 52220,
+      "maxMm": 0.009820664470263047,
+      "p99Mm": 0.002687260150406568
+    },
+    "candidateToSource": {
+      "samples": 40529,
+      "maxMm": 0.00988999195237541,
+      "p99Mm": 0.0025620984065418675
+    }
+  },
+  "leather-2-0": {
+    "sourceToCandidate": {
+      "samples": 49507,
+      "maxMm": 0.006410686758147568,
+      "p99Mm": 0.0026107191232805868
+    },
+    "candidateToSource": {
+      "samples": 37270,
+      "maxMm": 0.006620938710805605,
+      "p99Mm": 0.002414324443736214
+    }
+  },
+  "leather-2-1": {
+    "sourceToCandidate": {
+      "samples": 31028,
+      "maxMm": 0.009423402160641272,
+      "p99Mm": 0.0026583619446210473
+    },
+    "candidateToSource": {
+      "samples": 23684,
+      "maxMm": 0.009430135258197955,
+      "p99Mm": 0.002283510017283551
+    }
+  },
+  "leather-0-2": {
+    "sourceToCandidate": {
+      "samples": 32157,
+      "maxMm": 0.008167630976118962,
+      "p99Mm": 0.002507304446301172
+    },
+    "candidateToSource": {
+      "samples": 24845,
+      "maxMm": 0.007994658891843762,
+      "p99Mm": 0.0020872167994616894
+    }
+  },
+  "leather-0-1": {
+    "sourceToCandidate": {
+      "samples": 17575,
+      "maxMm": 0.00303031842969902,
+      "p99Mm": 0.0010196957443394574
+    },
+    "candidateToSource": {
+      "samples": 13289,
+      "maxMm": 0.0030674522338268455,
+      "p99Mm": 0.0007665279984404585
+    }
+  },
+  "case": {
+    "sourceToCandidate": {
+      "samples": 77115,
+      "maxMm": 0.00934587718500463,
+      "p99Mm": 0.003101618797755641
+    },
+    "candidateToSource": {
+      "samples": 60483,
+      "maxMm": 0.011462503103145314,
+      "p99Mm": 0.0025038907207305615
+    }
+  },
+  "leather-2-2": {
+    "sourceToCandidate": {
+      "samples": 17756,
+      "maxMm": 0.0018855650554233609,
+      "p99Mm": 0.0008905903688028777
+    },
+    "candidateToSource": {
+      "samples": 13613,
+      "maxMm": 0.0018849755465875117,
+      "p99Mm": 0.0006918744237765906
+    }
+  }
+}

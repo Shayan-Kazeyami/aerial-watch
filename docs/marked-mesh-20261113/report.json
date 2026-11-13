@@ -1,0 +1,136 @@
+{
+  "url": "http://127.0.0.1:8765/preview-b/releases/b38ddef36d153be511c40fc6d51795308a50440635edf1c97c39a725120cfdd3/atelier-preview.html",
+  "setup": "Chromium SwiftShader; mobile430x932 DPR3 Smooth; fixed cameras, paused animation; not phone FPS",
+  "states": {
+    "assembled": {
+      "meanAbsoluteDifference255": 0.30237284101727185,
+      "pixelsDifferenceOver2": 10668,
+      "pixels": 2941200,
+      "beforeCalls": 438,
+      "afterCalls": 438,
+      "beforeTriangles": 3335075,
+      "afterTriangles": 3172191
+    },
+    "front-close": {
+      "meanAbsoluteDifference255": 0.009886894238179428,
+      "pixelsDifferenceOver2": 1431,
+      "pixels": 2941200,
+      "beforeCalls": 428,
+      "afterCalls": 428,
+      "beforeTriangles": 3266563,
+      "afterTriangles": 3103679
+    },
+    "lug-upper": {
+      "meanAbsoluteDifference255": 0.021271929824561404,
+      "pixelsDifferenceOver2": 4214,
+      "pixels": 2941200,
+      "beforeCalls": 246,
+      "afterCalls": 246,
+      "beforeTriangles": 2743257,
+      "afterTriangles": 2580373
+    },
+    "lug-upper-side": {
+      "meanAbsoluteDifference255": 0.034546896958157665,
+      "pixelsDifferenceOver2": 2251,
+      "pixels": 2941200,
+      "beforeCalls": 92,
+      "afterCalls": 92,
+      "beforeTriangles": 2010007,
+      "afterTriangles": 1847123
+    },
+    "lug-lower": {
+      "meanAbsoluteDifference255": 0.007912756697946416,
+      "pixelsDifferenceOver2": 671,
+      "pixels": 2941200,
+      "beforeCalls": 196,
+      "afterCalls": 196,
+      "beforeTriangles": 2566775,
+      "afterTriangles": 2403891
+    },
+    "lug-lower-side": {
+      "meanAbsoluteDifference255": 0.06178781903078109,
+      "pixelsDifferenceOver2": 8019,
+      "pixels": 2941200,
+      "beforeCalls": 84,
+      "afterCalls": 84,
+      "beforeTriangles": 2072939,
+      "afterTriangles": 1910055
+    },
+    "lug-upper-left": {
+      "meanAbsoluteDifference255": 0.041040278344439914,
+      "pixelsDifferenceOver2": 4150,
+      "pixels": 2941200,
+      "beforeCalls": 104,
+      "afterCalls": 104,
+      "beforeTriangles": 2131911,
+      "afterTriangles": 1969027
+    },
+    "lug-lower-left": {
+      "meanAbsoluteDifference255": 0.059982206809012194,
+      "pixelsDifferenceOver2": 10602,
+      "pixels": 2941200,
+      "beforeCalls": 106,
+      "afterCalls": 106,
+      "beforeTriangles": 2155415,
+      "afterTriangles": 1992531
+    },
+    "exploded": {
+      "meanAbsoluteDifference255": 0.0040110612448433745,
+      "pixelsDifferenceOver2": 1176,
+      "pixels": 2941200,
+      "beforeCalls": 438,
+      "afterCalls": 438,
+      "beforeTriangles": 3335075,
+      "afterTriangles": 3172191
+    },
+    "reset": {
+      "meanAbsoluteDifference255": 0.0072362754431297876,
+      "pixelsDifferenceOver2": 1713,
+      "pixels": 2941200,
+      "beforeCalls": 438,
+      "afterCalls": 438,
+      "beforeTriangles": 3335075,
+      "afterTriangles": 3172191
+    }
+  },
+  "errors": [],
+  "init": [
+    {
+      "name": "Case_\u00b7_continuous_middle_and_integrated_lugs",
+      "before": 350230,
+      "after": 287622
+    },
+    {
+      "name": "Upper_strap__strap-lug-density-r16_1",
+      "before": 107920,
+      "after": 102816
+    },
+    {
+      "name": "Upper_strap__strap-lug-density-r16_2",
+      "before": 13239,
+      "after": 11527
+    },
+    {
+      "name": "Upper_strap__strap-lug-density-r16_3",
+      "before": 22933,
+      "after": 20173
+    },
+    {
+      "name": "Lower_strap__strap-lug-density-r16_1",
+      "before": 68380,
+      "after": 63588
+    },
+    {
+      "name": "Lower_strap__strap-lug-density-r16_2",
+      "before": 21542,
+      "after": 18732
+    },
+    {
+      "name": "Lower_strap__strap-lug-density-r16_3",
+      "before": 13217,
+      "after": 11561
+    }
+  ],
+  "movementAndExplosion": true,
+  "passed": true
+}

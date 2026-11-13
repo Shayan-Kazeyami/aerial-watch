@@ -1,0 +1,46 @@
+{
+  "leather": [
+    {
+      "mesh": 0,
+      "primitive": 0,
+      "before": 107920,
+      "after": 102816
+    },
+    {
+      "mesh": 0,
+      "primitive": 1,
+      "before": 13239,
+      "after": 11527
+    },
+    {
+      "mesh": 0,
+      "primitive": 2,
+      "before": 22933,
+      "after": 20173
+    },
+    {
+      "mesh": 2,
+      "primitive": 0,
+      "before": 68380,
+      "after": 63588
+    },
+    {
+      "mesh": 2,
+      "primitive": 1,
+      "before": 21542,
+      "after": 18732
+    },
+    {
+      "mesh": 2,
+      "primitive": 2,
+      "before": 13217,
+      "after": 11561
+    }
+  ],
+  "case": {
+    "before": 350230,
+    "after": 287622
+  },
+  "leatherBytesBefore": 8579970,
+  "leatherBytesAfter": 8084280
+}

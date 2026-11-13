@@ -1,0 +1,44 @@
+{
+  "leather-0-0": {
+    "exactProtectedTriangles": 86127,
+    "before": 107920,
+    "after": 102816,
+    "newDegenerateFaces": 0
+  },
+  "leather-2-0": {
+    "exactProtectedTriangles": 48013,
+    "before": 68380,
+    "after": 63588,
+    "newDegenerateFaces": 0
+  },
+  "leather-2-1": {
+    "exactProtectedTriangles": 9658,
+    "before": 21542,
+    "after": 18732,
+    "newDegenerateFaces": 0
+  },
+  "leather-0-2": {
+    "exactProtectedTriangles": 9836,
+    "before": 22933,
+    "after": 20173,
+    "newDegenerateFaces": 0
+  },
+  "leather-0-1": {
+    "exactProtectedTriangles": 6120,
+    "before": 13239,
+    "after": 11527,
+    "newDegenerateFaces": 0
+  },
+  "case": {
+    "exactProtectedTriangles": 245651,
+    "before": 350230,
+    "after": 287622,
+    "newDegenerateFaces": 0
+  },
+  "leather-2-2": {
+    "exactProtectedTriangles": 6120,
+    "before": 13217,
+    "after": 11561,
+    "newDegenerateFaces": 0
+  }
+}

@@ -1,0 +1,20 @@
+name: Marked mesh live release check
+on:
+  push:
+    branches: [main]
+    paths: [watch-home-mesh-b38ddef3.js]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: EXPECTED_RELEASE=b38ddef36d153be511c40fc6d51795308a50440635edf1c97c39a725120cfdd3 python marked-mesh-qa/live.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: marked-mesh-live
+          path: marked-live
