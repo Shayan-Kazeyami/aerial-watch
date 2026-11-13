@@ -7,7 +7,7 @@ async def run():
  async with async_playwright() as p:
   b=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']);page=await b.new_page(viewport={'width':430,'height':932},is_mobile=True,has_touch=True,device_scale_factor=1);page.set_default_timeout(90000);await page.add_init_script(INIT)
   for name in ['atelier-preview.js','atelier-preview.css']:
-   async def patch(route,n=name):await route.fulfill(status=200,body=(P/n).read_bytes(),content_type='text/css' if n.endswith('css') else 'text/javascript')
+   async def patch(route,request,n=name):await route.fulfill(status=200,body=(P/n).read_bytes(),content_type='text/css' if n.endswith('css') else 'text/javascript')
    await page.route('**/'+name,patch)
   page.on('pageerror',lambda e:R['errors'].append(str(e)));page.on('request',lambda q:R['requests'].append(q.url));page.on('framenavigated',lambda f:R['navigation'].append(f.url))
   try:
