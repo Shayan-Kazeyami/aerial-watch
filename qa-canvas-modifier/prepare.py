@@ -13,7 +13,7 @@ for f in m['localFiles']+m['references']:
 source=(OUT/'assembly-review.js').read_text();assert hashlib.sha256(source.encode()).hexdigest()=='91fcb25fbcc71e7e259dc603ba019d8c626e8506399dc14cf3c12075cc0fa4ee'
 anchor="renderer.domElement.addEventListener('keydown', event => {\n  if (loading || failed) return;"
 assert source.count(anchor)==1
-candidate=source.replace(anchor,anchor+"\n  if (event.ctrlKey || event.metaKey || event.altKey) return;")
+candidate=source.replace(anchor,anchor+"\n  if ((event.ctrlKey || event.metaKey || event.altKey) && ['+','=','-','_'].includes(event.key)) return;")
 hook="""
 window.__modifierQA={
  events:[],
@@ -22,4 +22,4 @@ window.__modifierQA={
 renderer.domElement.addEventListener('keydown',event=>{window.__modifierQA.events.push({key:event.key,ctrl:event.ctrlKey,meta:event.metaKey,alt:event.altKey,prevented:event.defaultPrevented});});
 """
 (OUT/'assembly-review.js').write_text(candidate+hook)
-(P/'source-proof.json').write_text(json.dumps({'baseMain':'b84a51ec91b715aa70408e8bff6e988e29d93edb','canonicalRelease':m['releaseId'],'sourceSHA256':hashlib.sha256(source.encode()).hexdigest(),'candidateSHA256':hashlib.sha256(candidate.encode()).hexdigest(),'runtimeQASHA256':hashlib.sha256((candidate+hook).encode()).hexdigest(),'onlySemanticChange':'Ignore Ctrl/Meta/Alt before canvas camera shortcut handling','canonicalFilesModified':False,'generatedFixtureOnly':True},indent=2))
+(P/'source-proof.json').write_text(json.dumps({'baseMain':'b84a51ec91b715aa70408e8bff6e988e29d93edb','canonicalRelease':m['releaseId'],'sourceSHA256':hashlib.sha256(source.encode()).hexdigest(),'candidateSHA256':hashlib.sha256(candidate.encode()).hexdigest(),'runtimeQASHA256':hashlib.sha256((candidate+hook).encode()).hexdigest(),'onlySemanticChange':'Ignore Ctrl/Meta/Alt only for canvas +/=/-/_ camera zoom shortcuts; Home/reset handling unchanged','canonicalFilesModified':False,'generatedFixtureOnly':True},indent=2))
