@@ -1,0 +1,95 @@
+{
+  "releaseId": "e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6",
+  "baseRelease": "09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29",
+  "testedCommit": "160a1ed9b52619918ca9afe2eba1664007e45589",
+  "verifiedRun": 43493919847,
+  "fallbackRun": 43497017317,
+  "fallbackCommit": "91e7397a0beaa09b2d76f07868a1d98a71328a19",
+  "selectedReports": [
+    "evidence-raw-430x932",
+    "evidence-meshopt-430x932",
+    "evidence-raw-740x360",
+    "evidence-meshopt-740x360",
+    "evidence-fallback-430x932"
+  ],
+  "supersededFallbackFailure": {
+    "assetMode": "fallback",
+    "expectedQAWrapperSHA256": "977a46a53fcd3666d716e605a865fa6a52703866ddd87479594450cf4d64f62e",
+    "release": "e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6",
+    "viewport": [
+      430,
+      932
+    ],
+    "errors": [],
+    "setup": "Chromium SwiftShader touch emulation, not physical-device FPS",
+    "executedQAWrapperSHA256": "977a46a53fcd3666d716e605a865fa6a52703866ddd87479594450cf4d64f62e",
+    "forcedCompressedFailures": 2,
+    "faceGeometry": {
+      "SVG_broad_sloped_champagne_wall": 21172,
+      "SVG_champagne_aperture_rim": 6080,
+      "SVG_lower_champagne_rim_lip": 5888
+    },
+    "integratedGeometry": {
+      "CASE": 239896,
+      "CROWN": 20540,
+      "CASEBACK": 16728,
+      "CROWN-TUBE": 1536
+    },
+    "sealedAssetProof": {
+      "caseback": {
+        "canonicalTriangles": 16728,
+        "displayTriangles": 16728,
+        "hashes": {
+          "position": "dcb0f019a5115a1355305b4b3a65a10258b57f4b69843cf08a892e308baa3c86",
+          "normal": "8daa2f12cfe7837c4a5e66ff27988eecb5a4a5c5b6cae25c08223da6717116d0",
+          "uv": "038513f0103424dca92c9be6adf8c17b1d4fbb216e9ea8f6d96aa30aa5d9e723",
+          "index": "a38f85bc8389d37d1294f1e28bc1d0fd9db700007e309d44fc6e11c91d48e680"
+        },
+        "cap": {
+          "capTriangles": 2160,
+          "capAreaMM2": 777.1554592858047,
+          "scope": "CASEBACK meaningful axial cap corner normals only; private expanded corners"
+        },
+        "material": "OM10 / case"
+      },
+      "keeper": {
+        "count": 2,
+        "sharedGeometry": true,
+        "sharedPosition": true,
+        "sharedNormal": true,
+        "positionNormalBytes": 18432
+      },
+      "springbar": {
+        "count": 2,
+        "sharedPosition": true,
+        "sharedNormal": true,
+        "distinctUV": true
+      },
+      "leatherProof": {
+        "status": "verified",
+        "id": "strap-lug-density-r16",
+        "scope": "actual GLTF parser geometry buffer bytes, not pixels or hardware",
+        "actualBytes": 8044710,
+        "actualSha256": "f7e7a7638b7ac58a3d3f568cbbcc0baa989d840d9b989e10b0c72485298ed0d5",
+        "expectedBytes": 8044710,
+        "expectedSha256": "f7e7a7638b7ac58a3d3f568cbbcc0baa989d840d9b989e10b0c72485298ed0d5"
+      },
+      "delivery": {
+        "requested": "meshopt",
+        "used": "raw",
+        "originalURL": "rebuild/assembly.glb",
+        "optimizedURL": "optimized-assets/rebuild__assembly.meshopt.glb.gz",
+        "fallbackReason": {
+          "stage": "compressed-load",
+          "name": "Error",
+          "message": "Asset http://127.0.0.1:8765/preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/optimized-assets/rebuild__assembly.meshopt.glb.gz could not load (503)."
+        },
+        "pipelineMs": 495.3999999999651
+      }
+    },
+    "passed": false,
+    "failure": "AssertionError({'requested': 'meshopt', 'used': 'raw', 'originalURL': 'rebuild/assembly.glb', 'optimizedURL': 'optimized-assets/rebuild__assembly.meshopt.glb.gz', 'fallbackReason': {'stage': 'compressed-load', 'name': 'Error', 'message': 'Asset http://127.0.0.1:8765/preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/optimized-assets/rebuild__assembly.meshopt.glb.gz could not load (503).'}, 'pipelineMs': 495.3999999999651})",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/aerial-watch/aerial-watch/case-topology-lane/caseback-integration/check.py\", line 44, in main\n    if MODE=='fallback':assert proof['delivery']['fallbackReason'] and R['forcedCompressedFailures']==1,proof['delivery']\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'requested': 'meshopt', 'used': 'raw', 'originalURL': 'rebuild/assembly.glb', 'optimizedURL': 'optimized-assets/rebuild__assembly.meshopt.glb.gz', 'fallbackReason': {'stage': 'compressed-load', 'name': 'Error', 'message': 'Asset http://127.0.0.1:8765/preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/optimized-assets/rebuild__assembly.meshopt.glb.gz could not load (503).'}, 'pipelineMs': 495.3999999999651}\n"
+  },
+  "scope": "QA release only; no production pointer changed"
+}
