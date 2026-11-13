@@ -27,7 +27,7 @@ async def main():
     if mode=='baked':
      async def compressed_length_route(r):
       response=await r.fetch();body=await response.body();assert b'const GZIP_DECODED_BYTES=14192960;' in body
-      await r.fulfill(response=response,body=body.replace(b'const GZIP_DECODED_BYTES=14192960;',b'const GZIP_DECODED_BYTES=14193432;'))
+      await r.fulfill(response=response,body=body.replace(b'const GZIP_DECODED_BYTES=14192960;',('const GZIP_DECODED_BYTES='+str(json.loads((R/'e79-rebase/encoding-report.json').read_text())['meshoptBytes'])+';').encode()))
      await page.route('**/assembly-optimized-loading.js*',compressed_length_route)
 
     if mode=='baked':
@@ -36,7 +36,9 @@ async def main():
       await r.fulfill(path=str(R/'e79-rebase/optimized-assets/rebuild__assembly.meshopt.glb.gz'))
      await page.route('**/optimized-assets/rebuild__assembly.meshopt.glb.gz*',baked_route)
     await page.goto(URL,wait_until='domcontentloaded');await page.wait_for_function('window.__normalQa&&window.assemblyInspect?.().presentation.interactive',timeout=300000);print(mode,'ready',flush=True);print('GLB requests',mode,[x for x in report.get('requests-'+mode,[]) if 'glb' in x],flush=True);
-    if mode=='baked':assert report.get('bakedRouteURLs'), 'baked route did not intercept any request'
+    if mode=='baked':
+     assert report.get('bakedRouteURLs'), 'baked route did not intercept any request'
+     assert not any('/rebuild/assembly.glb' in u for u in report.get('requests-baked',[])), 'compressed gate unexpectedly fell back to raw'
     await page.evaluate('__reuseQa.show({view:"movement",pose:0})');record={'audit':await page.evaluate('__normalQa.audit()'),'protectedNormals':await page.evaluate('__normalQa.protectedNormals()'),'hashes':await page.evaluate('__reuseQa.hashSources()'),'poses':await page.evaluate('__reuseQa.validatePoses()'),'states':[]};report['runs'][mode]=record
     cases=[('assembled',dict(view='watch')),('exploded',dict(view='watch',explode=1)),('movement',dict(view='movement'))]+[(f'part-{sid}',dict(sid=sid,view='movement',zoom=1.4))for sid in [9,12,21,26,39,71,125,126,128]]
     if mode=='baseline-repeat':cases=[cases[0],cases[2],cases[4]]
