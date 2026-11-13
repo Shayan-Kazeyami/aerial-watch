@@ -18,7 +18,8 @@ async def run():
     await f.locator('.task-dock [data-mode=explode]').tap(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===1&&!assemblyInspect().explosion.animating');after=await f.evaluate(SNAP);assert before==after,(before,after)
     panel=await f.locator('#context').bounding_box();assert w>1050 or panel['height']<=130.5,panel
     assert await f.locator('#context').evaluate('e=>e.scrollHeight<=e.clientHeight+1')
-    labels=await f.locator('#context-title,#atelier-explosion-value,#close').evaluate_all('(es)=>es.map(e=>{let r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height}})')
+    labels=await f.locator('#context-title,#atelier-explosion-value,#close').evaluate_all('(es)=>es.map(e=>{let r=e.getBoundingClientRect();return {id:e.id,x:r.x,y:r.y,w:r.width,h:r.height}})')
+    labels={v['id']:v for v in labels};labels=[labels[k] for k in ['context-title','atelier-explosion-value','close']]
     if w<=1050:
      assert labels[0]['x']+labels[0]['w']<=labels[1]['x']+1,labels
      assert labels[1]['x']+labels[1]['w']<=labels[2]['x']+1,labels
