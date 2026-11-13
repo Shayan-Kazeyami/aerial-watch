@@ -19,7 +19,7 @@ async def main():
    async def compare(name,macro=False):
     await f.evaluate('movementTopologyQA.freeze()');await f.wait_for_function('movementTopologyQA.settled()',timeout=180000);await f.evaluate('(m)=>movementTopologyQA.pose(m)',macro);states={}
     for mode,on in [('before',False),('after',True)]:
-     states[mode]=await f.evaluate('(on)=>movementTopologyQA.set(on)',on);await f.locator('#assembly-canvas').screenshot(path=str(O/f'{name}-{mode}.png'))
+     states[mode]=await f.evaluate('(on)=>movementTopologyQA.set(on)',on);await pg.screenshot(path=str(O/f'{name}-{mode}.png'))
     assert states['before']['camera']==states['after']['camera'];assert states['before']['matrix']==states['after']['matrix'];assert states['before']['material']==states['after']['material'];R[name]=states
    await compare('assembled');await f.locator('.task-dock [data-mode=explode]').click(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===1&&!assemblyInspect().explosion.animating',timeout=180000);await compare('exploded');await compare('wheel-macro',True);await f.locator('#home').click(force=True);await f.wait_for_function('assemblyInspect().explosion.amount===0&&!assemblyInspect().explosion.animating',timeout=180000);await compare('reset')
    start=await f.evaluate('movementTopologyQA.motion().mechanism');await f.locator('#play-motion').evaluate('e=>e.click()');await f.wait_for_function('(s)=>movementTopologyQA.motion().mechanism>s+.1',arg=start,timeout=180000);await f.evaluate('movementTopologyQA.freeze()');R['motionAdvanced']=True;assert not R['errors'];R['passed']=True
