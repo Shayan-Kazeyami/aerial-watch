@@ -1230,7 +1230,7 @@ function frame(time) {
       controls.minDistance=depth.minimumDistance;
       if(firstRender)startupDiagnostics.mark('first-frame-submit-start');
       renderer.info.reset();const gpuSample=gpuTiming.begin();
-      try{if(!loading)mechanismBatch?.build(source);mechanismBatch?.beforeRender();try{composer.render();}finally{mechanismBatch?.afterRender();}renderedFrames++;dirty=false;presentationGate.rendered(!premiumRequested||premiumActive());
+      try{if(!loading)mechanismBatch?.build(source);try{mechanismBatch?.beforeRender();composer.render();}finally{mechanismBatch?.afterRender();}renderedFrames++;dirty=false;presentationGate.rendered(!premiumRequested||premiumActive());
        if(pendingCaptureFrame!==null){
         const requestId=pendingCaptureFrame;pendingCaptureFrame=null;const r=$('stage').getBoundingClientRect();
         document.dispatchEvent(new CustomEvent('atelier:capture-frame-rendered',{detail:{requestId,dimensions:[r.width,r.height,renderer.domElement.width,renderer.domElement.height]}}));
