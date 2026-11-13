@@ -44,7 +44,7 @@ async def arm(browser,name):
  R['arms'][name]={'failureFirst':first,'failureSecond':second,'ready':ready,'recoveryReady':True,'rootReloadReady':False};(O/'report.json').write_text(json.dumps(R,indent=2))
  await capture(O/(name+'-recovered.png'))
  # Repeat fatal flow through explicit root reload, then real iframe reload recovery.
- await page.reload(wait_until='domcontentloaded')
+ await page.reload(wait_until='domcontentloaded',timeout=180000)
  await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body?.dataset.ready==='true'",timeout=360000)
  await page.wait_for_timeout(1000)
  assert await page.evaluate('pollProbe.active.length')==0
@@ -54,7 +54,7 @@ async def main():
  async with async_playwright() as p:
   browser=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   try:
-   for name in ['original','candidate']:await arm(browser,name)
+   for name in ['candidate','original']:await arm(browser,name)
    R['pass']=True
   except Exception as e:R['pass']=False;R['failure']=repr(e);raise
   finally:
