@@ -25,6 +25,11 @@ async def main():
     await page.wait_for_function('assemblyInspect().explosion.amount===1&&!assemblyInspect().explosion.animating')
     assert await canvas.bounding_box()==rect
     await page.screenshot(path=str(OUT/f'{width}-explode.png'))
+    slider=page.locator('#atelier-explosion');await slider.scroll_into_view_if_needed()
+    sb=await slider.bounding_box();assert sb and sb['y']+sb['height']<=height-60,sb
+    await slider.tap(position={'x':sb['width']*.25,'y':sb['height']/2})
+    await page.wait_for_function('assemblyInspect().explosion.amount<0.7')
+
     await page.locator('#close').tap();assert await canvas.bounding_box()==rect
     await page.locator('.atelier-more').tap();await page.locator('#context').wait_for(state='visible');assert await canvas.bounding_box()==rect
     await page.screenshot(path=str(OUT/f'{width}-tools.png'))
