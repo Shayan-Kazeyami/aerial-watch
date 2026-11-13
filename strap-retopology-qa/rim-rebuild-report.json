@@ -1,0 +1,26 @@
+{
+  "beforeTriangles": 60864,
+  "afterTriangles": 21172,
+  "beforeVertices": 33893,
+  "afterVertices": 15450,
+  "contourSamplesRetained": 1216,
+  "depthColumnsHistogram": {
+    "2": 401,
+    "3": 3,
+    "4": 642,
+    "5": 15,
+    "6": 2,
+    "7": 13,
+    "8": 4,
+    "9": 40,
+    "10": 4,
+    "11": 40,
+    "12": 2,
+    "14": 2,
+    "15": 2,
+    "17": 46
+  },
+  "depthToleranceMM": 0.00025,
+  "normalVectorTolerance": 0.002,
+  "method": "Reconstruct structured shell from original 33-depth authored profiles; adaptive depth knots and zipper connectivity; full contour preserved; no edge collapse."
+}

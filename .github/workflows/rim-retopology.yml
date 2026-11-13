@@ -1,0 +1,22 @@
+name: Authored rim depth-loop reconstruction QA
+on:
+  push:
+    branches: [qa/rim-retopology-20261113]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install numpy playwright pillow && python -m playwright install --with-deps chromium
+      - run: python strap-retopology-qa/prepare_render.py
+      - run: |
+          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
+          python -u strap-retopology-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rim-retopology-evidence
+          path: rim-remesh-evidence
