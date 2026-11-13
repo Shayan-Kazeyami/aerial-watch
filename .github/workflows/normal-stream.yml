@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: node --test normal-stream-qa/fetch.test.mjs normal-stream-qa/capture-detail.test.mjs normal-stream-qa/lifecycle.test.mjs
       - run: python normal-stream-qa/check.py
       - uses: actions/upload-artifact@v4
         if: always()

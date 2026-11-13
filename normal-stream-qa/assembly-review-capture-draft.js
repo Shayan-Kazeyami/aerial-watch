@@ -981,7 +981,7 @@ function initializeBaseline(result,metadata){
      progressiveNormal=createProgressiveUpgrade({lowBytes:result.progressiveNormalBytes,
       fetchFull:({low,signal})=>fetchProgressiveNormal({low,signal,onMetrics:metrics=>{progressiveNormalMetrics=metrics;},baseURL:new URL('leather-assets/r14/',location.href).href}),
       decodeFull:(bytes,{signal})=>decodeFullKtx({bytes,signal,renderer,makeLoader:async()=>{const {KTX2Loader}=await import('./vendor/loaders/KTX2Loader.js');return new KTX2Loader().setTranscoderPath(assetURL('vendor/libs/basis/')).setWorkerLimit(2);}}),
-      adopt:texture=>{leatherDetails.upgradeOuterNormal(texture);texture.dispose();installedNormalIdentity={bytes:R14_NORMAL_IDENTITY.bytes,sha256:progressiveNormalMetrics?.verifiedSHA256,verified:progressiveNormalMetrics?.verifiedSHA256===R14_NORMAL_IDENTITY.sha256};progressiveNormalState='full';dirty=true;},
+      adopt:texture=>{leatherDetails.upgradeOuterNormal(texture);texture.dispose();installedNormalIdentity={bytes:R14_NORMAL_IDENTITY.bytes,sha256:progressiveNormalMetrics?.verifiedSHA256,verified:progressiveNormalMetrics?.verifiedSHA256===R14_NORMAL_IDENTITY.sha256};progressiveNormalState='full';updateMaterials();dirty=true;},
       onError:error=>{progressiveNormalState='failed';loadWarnings.push('Full-resolution leather normal unavailable');console.warn('Progressive normal upgrade failed; initial texture retained.',error);announce('Full-resolution leather could not load. The initial texture remains; reload to retry.');}
      });resources.own('Progressive leather normal',()=>progressiveNormal.dispose());
     }
@@ -1066,7 +1066,10 @@ function restoreInspectionState(state){
 
 function currentCaptureDetail(){
  const maps=(leatherDetails?.meshes??[]).flatMap(mesh=>{const material=finishMaterials.get(mesh)||mesh.material;return Array.isArray(material)?material:[material]}).filter(m=>/^leather \/ /i.test(m.name)&&/R14/.test(m.name)).map(m=>m.normalMap);
- const texture=maps[0],consistent=!!texture&&maps.every(t=>t===texture);
+ const texture=maps[0];
+ const outerMeshes=(leatherDetails?.meshes??[]).filter(mesh=>{const base=finishMaterials.get(mesh);return base&&/^leather \/ /i.test(base.name)&&/R14/.test(base.name)});
+ const renderedMaps=outerMeshes.flatMap(mesh=>Array.isArray(mesh.material)?mesh.material:[mesh.material]).map(m=>m.normalMap).filter(Boolean);
+ const consistent=!!texture&&maps.every(t=>t===texture)&&renderedMaps.every(t=>t===texture);
  return captureDetailPolicy({required:new URLSearchParams(location.search).get('leather')==='craft14',phase:progressiveNormalState,activeNormal:consistent&&installedNormalIdentity?{...installedNormalIdentity,width:texture.image?.width,height:texture.image?.height,mipLevels:texture.mipmaps?.length}:null});
 }
 function captureConfiguration({clockStamp}={}){
