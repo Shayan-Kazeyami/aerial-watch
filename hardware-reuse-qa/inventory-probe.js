@@ -1,0 +1,15 @@
+window.__triangleInventory=()=>{
+ const rows=[];
+ scene.traverse(m=>{
+  if(!m.isMesh)return;const g=m.geometry;if(!g?.attributes.position)return;
+  let effective=m.visible;for(let p=m.parent;p&&effective;p=p.parent)effective=p.visible;
+  const count=g.index?.count??g.attributes.position.count,instances=m.isInstancedMesh?m.count:1;
+  const material=Array.isArray(m.material)?m.material:[m.material];const groups=g.groups.length?g.groups:[{start:0,count,materialIndex:0}];
+  const start=Math.min(count,Math.max(0,g.drawRange.start||0)),end=Math.min(count,start+(Number.isFinite(g.drawRange.count)?g.drawRange.count:count));
+  const ranges=groups.filter(group=>material[group.materialIndex||0]?.visible!==false).map(group=>[Math.max(start,group.start),Math.min(end,group.start+group.count)]).filter(([a,b])=>b>a).sort((a,b)=>a[0]-b[0]);
+  let visibleIndices=0,lastStart=-1,lastEnd=-1;for(const[a,b]of ranges){if(a>lastEnd){if(lastEnd>=lastStart)visibleIndices+=Math.max(0,lastEnd-lastStart);lastStart=a;lastEnd=b;}else lastEnd=Math.max(lastEnd,b);}if(lastEnd>=lastStart)visibleIndices+=Math.max(0,lastEnd-lastStart);
+  rows.push({name:m.name,sourceIndex:m.userData.sourceIndex??null,assemblyId:m.userData.assemblyId??null,description:m.userData.description??null,geometryId:g.id,isBatchedMesh:!!m.isBatchedMesh,isInstancedMesh:!!m.isInstancedMesh,isFloor:m===floor,isTickCache:!!m.userData.batchedTickNames,ownVisible:m.visible,effectiveVisible:effective,vertices:g.attributes.position.count,rawTriangles:count/3,instances,rawInstanceExpandedTriangles:count/3*instances,visibleRangeInstanceExpandedTriangles:effective?visibleIndices/3*instances:0,materialNames:material.map(a=>a?.name),drawRange:{start,end},userData:m.userData});
+ });
+ const sum=(rs,k)=>rs.reduce((n,r)=>n+r[k],0),nonCache=rows.filter(r=>!r.isBatchedMesh&&!r.isTickCache),watch=nonCache.filter(r=>!r.isFloor),visible=watch.filter(r=>r.effectiveVisible);
+ return{method:'Post-batch-restoration scene traversal. Raw resident triangles include hidden mesh/copy allocations. Logical watch excludes3 mechanism batches, tick derived caches, and floor; effective-visible triangles honor ancestors, material visibility,draw ranges and instance count. Not frustum-culling or multipass submissions.',residentMeshObjects:rows.length,residentRawTriangles:sum(rows,'rawTriangles'),residentInstanceExpandedTriangles:sum(rows,'rawInstanceExpandedTriangles'),nonCacheNonFloorObjects:watch.length,nonCacheNonFloorResidentTriangles:sum(watch,'rawInstanceExpandedTriangles'),logicalEffectiveVisibleWatchObjects:visible.length,logicalEffectiveVisibleWatchTriangles:sum(visible,'visibleRangeInstanceExpandedTriangles'),floorTriangles:sum(rows.filter(r=>r.isFloor),'rawTriangles'),derivedCopies:rows.filter(r=>r.isBatchedMesh||r.isTickCache).map(r=>({name:r.name,triangles:r.rawTriangles,effectiveVisible:r.effectiveVisible})),sourceOccurrences:source.length,sourceTriangles:source.reduce((s,m)=>s+(m.geometry.index?.count??m.geometry.attributes.position.count)/3,0),rendererSubmittedTriangles:renderer.info.render.triangles,rendererSubmittedCalls:renderer.info.render.calls??renderer.info.render.drawCalls,rows};
+};
