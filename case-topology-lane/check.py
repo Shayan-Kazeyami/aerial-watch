@@ -19,7 +19,7 @@ async def main():
     assert data['before']['camera']==data['after']['camera'],state+' camera drift'
     a=Image.open(OUT/(state+'-before.png')).convert('RGB');z=Image.open(OUT/(state+'-after.png')).convert('RGB');diff=ImageChops.difference(a,z);stat=ImageStat.Stat(diff);mean=sum(stat.mean)/3;changed=sum(max(p)>2 for p in diff.getdata());diff.save(OUT/(state+'-diff.png'))
     r={'meanAbsoluteDifference255':mean,'pixelsDifferenceOver2':changed,'pixels':a.width*a.height,'beforeCalls':data['before']['inventory']['rendererInfo']['render']['calls'],'afterCalls':data['after']['inventory']['rendererInfo']['render']['calls'],'beforeTriangles':data['before']['inventory']['rendererInfo']['render']['triangles'],'afterTriangles':data['after']['inventory']['rendererInfo']['render']['triangles']};R['states'][state]=r;print(state,r,flush=True);
-   await compare('assembled');await compare('front-close','front-close');await compare('side','side');await compare('side-close','side-close');await compare('side-wire','side-wire');assert not R['errors'];R['passed']=True
+   await compare('assembled');await compare('front-close','front-close');await compare('side','side');await compare('side-close','side-close');await compare('side-wire','side-wire');await compare('crown','crown');await compare('crown-close','crown-close');await compare('crown-wire','crown-wire');assert not R['errors'];R['passed']=True
   except Exception as e:R['passed']=False;R['failure']=repr(e);raise
   finally:
    (OUT/'report.json').write_text(json.dumps(R,indent=2));print(json.dumps(R),flush=True)
