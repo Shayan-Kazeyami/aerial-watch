@@ -20,10 +20,12 @@ async def main():
      assert after['camera']==before['camera'] and after['target']==before['target'],(route,chord,'camera moved')
      assert not event['prevented'],(route,chord,event)
      rr['cases'].append({'chord':chord,'before':before,'after':after,'event':event,'browserZoomObserved':after['dpr']!=before['dpr'] or after['innerWidth']!=before['innerWidth'] or after['visualScale']!=before['visualScale']})
-    for chord,factor in [('=',1.15),('-',1/1.15),('Shift+=',1.15),('Shift+-',1/1.15)]:
+    for chord,factor in [('=',1.15),('-',1/1.15),('Shift+Equal',1.15),('Shift+Minus',1/1.15)]:
      before=await page.evaluate('__modifierQA.snapshot()');await page.keyboard.press(chord);await page.wait_for_timeout(250);after=await page.evaluate('__modifierQA.snapshot()');event=await page.evaluate('__modifierQA.events.at(-1)')
      assert abs(after['zoom']-before['zoom']*factor)<1e-10,(route,chord,before,after)
      assert event['prevented'],(route,chord,event)
+     if chord=='Shift+Equal':assert event['key']=='+',event
+     if chord=='Shift+Minus':assert event['key']=='_',event
      rr['cases'].append({'chord':chord,'before':before,'after':after,'event':event,'plainWatchZoomVerified':True})
     await canvas.screenshot(path=str(O/(route+'-canvas-focused.png')))
     rr['delivery']=await page.evaluate('assemblyInspect().delivery||assemblyInspect().assets||null')
