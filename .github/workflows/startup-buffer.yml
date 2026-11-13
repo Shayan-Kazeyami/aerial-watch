@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
       - run: node startup-buffer-qa/test.mjs preview-b/releases/ff188ba605b3868d174bec75b643470c86fb164c706c5ff0b2d4ee89c2472947/hybrid-case-assets/hybrid-innerseat-density-r02.meshopt.glb.gz
+      - run: node --expose-gc startup-buffer-qa/ownership-test.mjs
       - run: python startup-buffer-qa/build.py
       - run: |
           python -m http.server 8765 >/tmp/watch-http.log 2>&1 &

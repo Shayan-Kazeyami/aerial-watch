@@ -2,7 +2,7 @@ import pathlib,hashlib,json,shutil
 BASE_ID='ff188ba605b3868d174bec75b643470c86fb164c706c5ff0b2d4ee89c2472947'
 root=pathlib.Path('preview-b/releases');base=root/BASE_ID;stage=root/'startup-buffer-qa-stage'
 shutil.copytree(base,stage,dirs_exist_ok=True)
-CHANGED=['assembly-loading.js','assembly-optimized-loading.js','assembly-byte-collector.js']
+CHANGED=['assembly-loading.js','assembly-optimized-loading.js','assembly-byte-collector.js','assembly-prepared-asset.js']
 for name in CHANGED:
  (stage/name).parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(pathlib.Path('startup-buffer-qa')/name,stage/name)
 m=json.loads((base/'deployment-manifest.json').read_text());files={f['path']:dict(f) for f in m['localFiles']}
