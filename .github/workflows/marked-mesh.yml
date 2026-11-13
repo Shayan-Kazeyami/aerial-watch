@@ -18,6 +18,8 @@ jobs:
           node marked-mesh-qa/simplify-target.mjs
           for i in 1 2 3 4 5 6 7; do python marked-mesh-qa/protect.py; node marked-mesh-qa/resimplify.mjs; done
           python marked-mesh-qa/protect.py --verify
+          python marked-mesh-qa/exact-proof.py
+          python marked-mesh-qa/distance.py
           python marked-mesh-qa/pack.py
           node marked-mesh-qa/encode.mjs
           python marked-mesh-qa/build.py
@@ -32,3 +34,5 @@ jobs:
             marked-output
             marked-mesh-qa/build.json
             marked-mesh-qa/pack-report.json
+            marked-mesh-qa/protected-proof.json
+            marked-mesh-qa/distance-report.json
