@@ -1,4 +1,4 @@
-import asyncio,json,pathlib
+import asyncio,json,pathlib,base64
 from playwright.async_api import async_playwright
 D=pathlib.Path('runtime-matrix-cache-audit');O=D/'viewer-evidence';O.mkdir(exist_ok=True)
 RID='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6'
@@ -16,7 +16,7 @@ async def run():
    await page.goto('https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/'+RID+'/atelier-preview.html?normalStream=1',wait_until='domcontentloaded');await page.locator('body[data-ready=true]').wait_for();await page.wait_for_function('window.matrixCacheQA && document.querySelector("#stage").dataset.cameraReady==="true"');await page.evaluate('matrixCacheQA.freeze()');await page.wait_for_timeout(1000)
    for explode,finish,pose in [(0,True,0),(1,True,1),(1,False,4),(0,True,17)]:
     for cache in [False,True]:
-     cfg=dict(cache=cache,explode=explode,finish=finish,pose=pose,frames=3);r=await page.evaluate('(cfg)=>matrixCacheQA.sample(cfg)',cfg);results.append(r);print(json.dumps({k:r[k] for k in ['cache','explode','finish','pose','writes','render','cpuSubmissionMs']}),flush=True);await page.locator('#assembly-canvas').screenshot(path=str(O/f'{explode}-{finish}-{pose}-{cache}.png'));(O/'results.json').write_text(json.dumps(results,indent=2))
+     cfg=dict(cache=cache,explode=explode,finish=finish,pose=pose,frames=3);r=await page.evaluate('(cfg)=>matrixCacheQA.sample(cfg)',cfg);png=r.pop('png');(O/f'{explode}-{finish}-{pose}-{cache}.png').write_bytes(base64.b64decode(png.split(',')[1]));results.append(r);print(json.dumps({k:r[k] for k in ['cache','explode','finish','pose','writes','render','cpuSubmissionMs']}),flush=True);(O/'results.json').write_text(json.dumps(results,indent=2))
    (O/'errors.json').write_text(json.dumps(errors));assert not errors,errors
    from PIL import Image
    import numpy as np
