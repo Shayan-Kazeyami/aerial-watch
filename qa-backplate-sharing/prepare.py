@@ -1,4 +1,4 @@
-import json,struct,gzip,hashlib
+import json,struct,gzip,hashlib,shutil
 from pathlib import Path
 p=Path('qa-backplate-sharing');base=Path('preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6');manifest=json.load(open(base/'deployment-manifest.json'));report=[]
 for route,name in [('raw','rebuild/assembly.glb'),('meshopt','optimized-assets/rebuild__assembly.meshopt.glb.gz')]:
@@ -9,7 +9,11 @@ for route,name in [('raw','rebuild/assembly.glb'),('meshopt','optimized-assets/r
  jb=json.dumps(j,separators=(',',':')).encode();jb+=b' '*((-len(jb))%4);out=struct.pack('<III',0x46546c67,2,28+len(jb)+len(binary))+struct.pack('<II',len(jb),0x4e4f534a)+jb+struct.pack('<II',len(binary),0x004e4942)+binary;(p/(route+'-rear-only.glb')).write_bytes(out);report.append({'route':route,'canonical_input':str(f),'canonical_sha256':entry['sha256'],'all_binary_buffer_bytes_preserved':True,'harness_asset_sha256':hashlib.sha256(out).hexdigest(),'scope':'Exact real rear-crystal geometry source;scene reachability/material metadata reduced for isolated PBR/picking harness;not wholeviewer'})
 (p/'freshness-and-render-inputs.json').write_text(json.dumps({'main_commit':'b84a51ec91b715aa70408e8bff6e988e29d93edb','canonical_release':'e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6','module_sha256':hashlib.sha256((base/'assembly-backplate.js').read_bytes()).hexdigest(),'routes':report},indent=2));print(report)
 
+
+for ref in manifest['references']:
+ if ref['path'].startswith('vendor/'):
+  source=base.parent/ref['ownerReleaseId']/ref['path'];data=source.read_bytes();assert hashlib.sha256(data).hexdigest()==ref['sha256'];dest=p/ref['path'];dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
 module=(base/'assembly-backplate.js').read_text();assert hashlib.sha256(module.encode()).hexdigest()=='2d074b1e93189ccb54a2c5400f407c3ec29e949a714a0dab17f168c3789cf38a'
-module=module.replace("'./vendor/three.module.js'","'../preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/vendor/three.module.js'")
+module=module.replace("'./vendor/three.module.js'","'./vendor/three.module.js'")
 (p/'original.mjs').write_text(module)
 (p/'candidate.mjs').write_text(module.replace('rearCrystal.geometry.clone()','rearCrystal.geometry').replace('geometry.dispose();material.dispose();','material.dispose();'))

@@ -1,7 +1,7 @@
-import * as THREE from '../preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/vendor/three.module.js';
-import {GLTFLoader} from '../preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/vendor/loaders/GLTFLoader.js';
-import {MeshoptDecoder} from '../preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/vendor/meshopt/meshopt_decoder.mjs';
-import {RoomEnvironment} from '../preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/vendor/environments/RoomEnvironment.js';
+import * as THREE from './vendor/three.module.js';
+import {GLTFLoader} from './vendor/loaders/GLTFLoader.js';
+import {MeshoptDecoder} from './vendor/meshopt/meshopt_decoder.mjs';
+import {RoomEnvironment} from './vendor/environments/RoomEnvironment.js';
 import {createBackplate as original} from './original.mjs';import {createBackplate as candidate} from './candidate.mjs';
 const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setSize(900,700);renderer.setPixelRatio(1);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;document.body.appendChild(renderer.domElement);
 const scene=new THREE.Scene();scene.background=new THREE.Color('#171a20');const pmrem=new THREE.PMREMGenerator(renderer);const room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;const light=new THREE.DirectionalLight(0xffffff,4);light.position.set(-20,-30,30);scene.add(light);scene.add(new THREE.AmbientLight(0xffffff,.35));const camera=new THREE.PerspectiveCamera(38,900/700,.01,1000);const ray=new THREE.Raycaster();let glass,plate,route,api;

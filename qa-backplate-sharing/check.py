@@ -4,7 +4,7 @@ from playwright.async_api import async_playwright
 p=Path('qa-backplate-sharing');rows=[];sources=[];errors=[]
 async def main():
  async with async_playwright() as pw:
-  b=await pw.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']);page=await b.new_page(viewport={'width':900,'height':700});page.on('pageerror',lambda e:errors.append(str(e)));await page.goto('http://127.0.0.1:8871/qa-backplate-sharing/harness.html');await page.wait_for_function('window.ready===true',timeout=60000)
+  b=await pw.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']);page=await b.new_page(viewport={'width':900,'height':700});page.on('pageerror',lambda e:(errors.append(str(e)),print('PAGEERROR',str(e),flush=True)));await page.goto('http://127.0.0.1:8871/qa-backplate-sharing/harness.html');await page.wait_for_function('window.ready===true',timeout=60000)
   for route in ['raw','meshopt']:
    sources.append(await page.evaluate('(r)=>setup(r)',route))
    for view in ['front','oblique','edge']:
