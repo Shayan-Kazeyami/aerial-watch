@@ -7,15 +7,22 @@ permissions:
 jobs:
   qa:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
-      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python -m pip install playwright pillow numpy && python -m playwright install --with-deps chromium
       - run: |
+          python qa-seconds-ring/pack.py preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/premium-face/face-svg04.glb
+          node qa-seconds-ring/encode.mjs
           python qa-seconds-ring/server.py > /tmp/qa-ring-server.log 2>&1 &
           python qa-seconds-ring/check.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: seconds-ring-normal-qa-evidence
-          path: qa-seconds-ring/evidence
+          path: |
+            qa-seconds-ring/evidence
+            qa-seconds-ring/packed-asset-proof.json
+            qa-seconds-ring/encoding-report.json
+            qa-seconds-ring/face-svg04-seconds-candidate.glb
+            qa-seconds-ring/optimized-assets
