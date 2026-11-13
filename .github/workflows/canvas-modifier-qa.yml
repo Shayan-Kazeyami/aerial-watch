@@ -1,0 +1,28 @@
+name: Canvas modifier-key guard accessibility QA
+on:
+  push:
+    branches: [qa/canvas-modifier-guard-20261114]
+    paths: [qa-canvas-modifier/**, .github/workflows/canvas-modifier-qa.yml]
+permissions:
+  contents: read
+jobs:
+  keys:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python qa-canvas-modifier/prepare.py
+      - run: |
+          python -m http.server 8874 --bind 127.0.0.1 >/tmp/modifier-server.log 2>&1 &
+          python -u qa-canvas-modifier/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: canvas-modifier-guard-browser-raw-meshopt
+          path: |
+            qa-canvas-modifier/evidence
+            qa-canvas-modifier/source-proof.json
