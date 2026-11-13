@@ -83,7 +83,7 @@ export function createMechanismBatch({THREE,scene,renderer,maxBytes=32*1024*1024
     batch.visible=any;
    }
   },afterRender:restore,
-  snapshot(){return {...audit,enabled,entries:batches.flatMap(({entries})=>entries.filter(e=>e.correction).map(e=>({sourceIndex:e.mesh.userData.sourceIndex,canonical:e.canonical.userData.sourceIndex,instanceId:e.id,maxPositionErrorMM:e.maxPosition,maxNormalError:e.maxNormal}))) };},
+  snapshot(){return {...audit,enabled,entries:batches.flatMap(({batch,entries})=>entries.filter(e=>e.correction).map(e=>({sourceIndex:e.mesh.userData.sourceIndex,canonical:e.canonical.userData.sourceIndex,instanceId:e.id,maxPositionErrorMM:e.maxPosition,maxNormalError:e.maxNormal,lastInstanceVisible:batch.getVisibleAt(e.id)}))) };},
   dispose(){if(disposed)return;restore();disposed=true;for(const {batch} of batches){batch.removeFromParent();batch.dispose();}batches.length=0;}
  };
 }
