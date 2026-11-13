@@ -1,0 +1,32 @@
+name: Mechanism plates bore material QA
+on:
+  push:
+    branches: [qa/mechanism-plates-bevel-20261113]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile,base64,io
+          zipfile.ZipFile(io.BytesIO(base64.b64decode(Path('mechanism-plates-qa/fixture-bevel.b64').read_text()))).extractall('.')
+          PY
+          python -m http.server 8873 >/tmp/watch-http.log 2>&1 &
+          python -u mechanism-plates-qa/qa-bevel.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mechanism-plates-material-evidence
+          path: |
+            mechanism-plates-qa/material-qa
+            mechanism-plates-qa/bevel-trial-invariants.json
+            mechanism-plates-qa/bevel-trial-report.json
