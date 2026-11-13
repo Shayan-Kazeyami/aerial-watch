@@ -8,6 +8,8 @@ for f in m['localFiles']+m['references']:
  src=BASE.parent/f['ownerReleaseId']/f['path'] if 'ownerReleaseId' in f else BASE/f['path']
  b=src.read_bytes();assert hashlib.sha256(b).hexdigest()==f['sha256'],str(src)
  dest=OUT/f['path'];dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(b)
+ if 'ownerReleaseId' in f:
+  sibling=P/f['ownerReleaseId']/f['path'];sibling.parent.mkdir(parents=True,exist_ok=True);sibling.write_bytes(b)
 source=(OUT/'assembly-review.js').read_text();assert hashlib.sha256(source.encode()).hexdigest()=='91fcb25fbcc71e7e259dc603ba019d8c626e8506399dc14cf3c12075cc0fa4ee'
 anchor="renderer.domElement.addEventListener('keydown', event => {\n  if (loading || failed) return;"
 assert source.count(anchor)==1
