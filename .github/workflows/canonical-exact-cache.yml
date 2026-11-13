@@ -1,0 +1,19 @@
+name: Canonical exact cache composed regression
+on:
+  push:
+    branches: [qa/canonical-exact-cache-20261114]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright pillow numpy && python -m playwright install --with-deps chromium
+      - run: python isolated-runtime-composition/recovery-2155/viewer.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: canonical-exact-cache-evidence
+          path: isolated-runtime-composition/recovery-2155/viewer-evidence
