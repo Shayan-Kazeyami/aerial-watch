@@ -21,7 +21,7 @@ async def run():
      for batch in [True,False]:
       cfg=dict(profile=profile,explode=explode,finish=finish,batch=batch)
       result=await f.evaluate('(cfg)=>bottleneckQA.sample(cfg)',cfg);data.append(result);print(json.dumps({**cfg,'render':result['render'],'batchState':result['batch']}),flush=True)
-      await f.locator('#assembly-canvas').screenshot(path=str(O/f'{profile}-{explode}-{finish}-{batch}.png'))
+      await f.locator('#assembly-canvas').screenshot(style='.crown-hotspot,.crown-halo{visibility:hidden!important}',path=str(O/f'{profile}-{explode}-{finish}-{batch}.png'))
       (O/'results.json').write_text(json.dumps(data,indent=2))
    (O/'errors.json').write_text(json.dumps(errors));assert not errors
    from PIL import Image
