@@ -22,3 +22,32 @@ test('invalid aspect rejects without state mutation',()=>{const f=fixture(),c=cr
 test('focus relaxes minDistance, retains maxDistance and restores limits on every exit',()=>{for(const exit of ['overview','cancel','dispose']){const f=fixture();f.controls.minDistance=9;f.controls.maxDistance=999;f.c.focus('balance');assert.equal(f.controls.minDistance,.25);assert.equal(f.controls.maxDistance,999);f.c[exit]();assert.equal(f.controls.minDistance,9);assert.equal(f.controls.maxDistance,999);}});
 test('reframe uses changed aspect/fill without overwriting overview snapshot',()=>{const f=fixture(),original=cam(f),visible=flags(f);let fill=.65;const c=createLayerFocus({...f,getFrameOptions:()=>({aspect:f.camera.aspect,fill})});assert.equal(c.reframe(),false);c.focus('train');const first=cam(f);f.camera.aspect=.6;fill=.5;assert.equal(c.reframe(),true);assert.notDeepEqual(cam(f),first);c.restore({camera:true});assert.deepEqual(cam(f),original);assert.deepEqual(flags(f),visible);});
 test('invalid reframe preserves active state and camera',()=>{const f=fixture();let fill=.65;const c=createLayerFocus({...f,getFrameOptions:()=>({aspect:1.2,fill})});c.focus('train');const before=cam(f),v=flags(f);fill=0;assert.equal(c.reframe(),false);assert.deepEqual(cam(f),before);assert.deepEqual(flags(f),v);});
+test('reapplyVisibility repairs material-refresh visibility without reframing user orbit or replacing return state',()=>{const f=fixture(),original=cam(f),v=flags(f);assert.equal(f.c.reapplyVisibility(),false);f.c.focus('train');f.camera.position.add(new Vector3(2,1,0));f.controls.target.add(new Vector3(.1,0,0));f.camera.lookAt(f.controls.target);const orbited=cam(f);f.outer.visible=true;f.parts[0].visible=true;f.parts[2].visible=false;f.authored.visible=true;f.hidden.visible=true;assert.equal(f.c.reapplyVisibility(),true);assert.equal(f.outer.visible,false);assert.equal(f.parts[0].visible,false);assert.equal(f.parts[2].visible,true);assert.equal(f.authored.visible,false);assert.equal(f.hidden.visible,false);assert.equal(f.hiddenParent.visible,false);assert.deepEqual(cam(f),orbited);assert.equal(f.c.snapshot().selected,'train');f.c.overview();assert.deepEqual(cam(f),original);assert.deepEqual(flags(f),v);assert.equal(f.c.reapplyVisibility(),false);f.c.dispose();assert.equal(f.c.reapplyVisibility(),false);});
+for(const [name,aspect,rect]of [
+ ['portrait bottom exclusion',430/760,{left:0,top:0,right:1,bottom:(694-92)/760}],
+ ['landscape right exclusion',740/247,{left:0,top:0,right:432/740,bottom:1}],
+ ['deep asymmetric inset',1.3,{left:.12,top:.08,right:.48,bottom:.63}]
+])test(name+' fits actual transformed 3D corners inside inset rectangle',()=>{
+ const f=fixture(),original=cam(f),v=flags(f),p=poses(f);f.camera.aspect=aspect;
+ f.root.rotation.set(.6,.4,.2);f.root.scale.set(1.2,.8,2.5);
+ const c=createLayerFocus({...f,getFrameOptions:()=>({aspect,fill:.85,rect})});
+ assert.equal(c.focus('train'),true);
+ const mesh=f.parts[2],b=mesh.geometry.boundingBox;
+ const cx=(rect.left+rect.right)/2,cy=(rect.top+rect.bottom)/2,hw=(rect.right-rect.left)*.85/2,hh=(rect.bottom-rect.top)*.85/2;
+ for(const x of[b.min.x,b.max.x])for(const y of[b.min.y,b.max.y])for(const z of[b.min.z,b.max.z]){
+  const ndc=new Vector3(x,y,z).applyMatrix4(mesh.matrixWorld).project(f.camera),u=(ndc.x+1)/2,w=(1-ndc.y)/2;
+  assert.ok(u>=cx-hw-1e-9&&u<=cx+hw+1e-9&&w>=cy-hh-1e-9&&w<=cy+hh+1e-9&&ndc.z>=-1&&ndc.z<=1,JSON.stringify({u,w,rect}));
+ }
+ assert.deepEqual(poses(f),p);c.overview();assert.deepEqual(cam(f),original);assert.deepEqual(flags(f),v);
+});
+test('invalid safe rectangles reject initial focus and reframe without state changes',()=>{
+ const f=fixture();let rect;const c=createLayerFocus({...f,getFrameOptions:()=>({aspect:f.camera.aspect,rect})});
+ for(const bad of [null,{}, {left:0,top:0,right:NaN,bottom:1},{left:-.1,top:0,right:1,bottom:1},{left:0,top:0,right:1.1,bottom:1},{left:.5,top:0,right:.5,bottom:1},{left:0,top:.8,right:1,bottom:.2}]){
+  rect=bad;const before=cam(f),v=flags(f);assert.equal(c.focus('train'),false);assert.deepEqual(cam(f),before);assert.deepEqual(flags(f),v);
+ }
+ rect=undefined;c.focus('train');const before=cam(f),v=flags(f),s=c.snapshot();rect={left:0,top:0,right:1,bottom:Infinity};assert.equal(c.reframe(),false);assert.deepEqual(cam(f),before);assert.deepEqual(flags(f),v);assert.deepEqual(c.snapshot(),s);
+});
+test('explicit full rect matches legacy no-rect framing',()=>{
+ const a=fixture(),b=fixture(),c=createLayerFocus({...b,getFrameOptions:()=>({aspect:b.camera.aspect,fill:.65,rect:{left:0,top:0,right:1,bottom:1}})});
+ a.c.focus('train');c.focus('train');for(const k of ['p','q','t'])for(let i=0;i<cam(a)[k].length;i++)assert.ok(Math.abs(cam(a)[k][i]-cam(b)[k][i])<1e-12);
+});
