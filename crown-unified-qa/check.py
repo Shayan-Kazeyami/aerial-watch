@@ -24,17 +24,40 @@ async def main():
     if surface=='mesh':point=await page.evaluate('crownMeshPoint()')
     else:
      bb=await page.locator('.crown-hotspot').bounding_box();point={'x':bb['x']+bb['width']/2,'y':bb['y']+bb['height']/2}
-    x,y=point['x'],point['y'];await touch('touchStart',x,y);await touch('touchMove',x,y-22)
+    x,y=point['x'],point['y'];before=await page.evaluate('mobileAuditSnapshot()');await touch('touchStart',x,y);await touch('touchMove',x,y-22)
     a=await page.evaluate('mobileAuditFrames(4)');b=await page.evaluate('mobileAuditFrames(4)');assert b['state']['degrees']>a['state']['degrees']+.1,(surface,a,b)
     await touch('touchMove',x,y);a=await page.evaluate('mobileAuditFrames(4)');b=await page.evaluate('mobileAuditFrames(4)');assert a['state']['degrees']==b['state']['degrees']
     await touch('touchMove',x,y+22);c=await page.evaluate('mobileAuditFrames(4)');assert c['state']['degrees']<b['state']['degrees']-.1
     await touch('touchEnd');a=await page.evaluate('mobileAuditFrames(4)');b=await page.evaluate('mobileAuditFrames(4)');assert a['state']['degrees']==b['state']['degrees']
-    assert not await page.locator('.motion-tools').is_visible(),'Unsolicited Time panel'
+    assert a['camera']==before['camera'] and b['camera']==before['camera'],'Crown gesture moved camera'
+    assert b['orbitEnabled']==before['orbitEnabled'],'Orbit ownership not restored'
+    assert not await page.locator('#context[data-tool="time"]').is_visible(),'Unsolicited Time panel'
     R[surface]={'continued':True,'neutralStops':True,'reversal':True,'releaseStops':True}
     # Reset while an actual held touch remains down must stop either input owner.
-    await touch('touchStart',x,y);await touch('touchMove',x,y-22);await page.evaluate('mobileAuditFrames(3)');await page.evaluate('resetMotion()')
+    await touch('touchStart',x,y);await touch('touchMove',x,y-22);await page.evaluate('mobileAuditFrames(3)');await page.evaluate('crownQAReset()')
     a=await page.evaluate('mobileAuditFrames(4)');b=await page.evaluate('mobileAuditFrames(4)');assert a['state']['degrees']==b['state']['degrees'],(surface,'reset continued')
     await touch('touchEnd');await page.evaluate('prepareCrownMeshTouch()');await page.evaluate('mobileAuditFrames(3)')
+    # Both entry surfaces use the same tap and time-setting behavior.
+    if surface=='mesh':point=await page.evaluate('crownMeshPoint()')
+    else:
+     bb=await page.locator('.crown-hotspot').bounding_box();point={'x':bb['x']+bb['width']/2,'y':bb['y']+bb['height']/2}
+    x,y=point['x'],point['y'];before=await page.evaluate('mobileAuditSnapshot()')
+    await touch('touchStart',x,y);await touch('touchEnd');after=await page.evaluate('mobileAuditFrames(4)')
+    assert after['state']['pulled']!=before['state']['pulled'];assert after['settingSeconds']==before['settingSeconds']
+    await page.wait_for_function('!mobileAuditSnapshot().crown')
+    if surface=='mesh':point=await page.evaluate('crownMeshPoint()')
+    else:
+     bb=await page.locator('.crown-hotspot').bounding_box();point={'x':bb['x']+bb['width']/2,'y':bb['y']+bb['height']/2}
+    x,y=point['x'],point['y'];await touch('touchStart',x,y);await touch('touchMove',x,y-22)
+    setting=await page.evaluate('mobileAuditFrames(4)');assert setting['settingSeconds']!=after['settingSeconds']
+    await touch('touchCancel');a=await page.evaluate('mobileAuditFrames(4)');b=await page.evaluate('mobileAuditFrames(4)');assert a['settingSeconds']==b['settingSeconds']
+    R[surface].update(tapOnce=True,settingHold=True,cancelStops=True)
+    await page.evaluate('prepareCrownMeshTouch()');await page.evaluate('mobileAuditFrames(3)')
+
+   await page.locator('.crown-hotspot').focus();before=await page.evaluate('mobileAuditSnapshot()');await page.keyboard.press('ArrowUp');after=await page.evaluate('mobileAuditFrames(4)');assert after['state']['degrees']>before['state']['degrees'];R['keyboardTurns']=True
+   await page.locator('.task-dock [data-mode="time"]').tap();assert await page.locator('#context[data-tool="time"]').is_visible();R['explicitTimePanel']=True
+   await page.locator('.task-dock [data-mode="explore"]').tap()
+   R['poseParity']=await page.evaluate('crownPoseParity()');assert all(v['maxMatrixDifference']<1e-12 and all(v[k]for k in['positionsExact','crownExact','windingExact','settingExact'])for v in R['poseParity'])
    final=await page.evaluate('mobileAuditSnapshot()');assert final['canvas']==initial['canvas'];assert final['timeOrigin']==initial['timeOrigin']
    R['newAssetRequests']=[u for u in requests[startrequests:] if any(u.split('?')[0].endswith(ext)for ext in['.glb','.gz','.bin'])];assert not R['newAssetRequests']
    await page.screenshot(path=str(OUT/'crown.png'),animations='disabled');assert not R['errors'];R['passed']=True

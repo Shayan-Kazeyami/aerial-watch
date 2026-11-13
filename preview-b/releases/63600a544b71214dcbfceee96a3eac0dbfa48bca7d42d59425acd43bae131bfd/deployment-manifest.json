@@ -683,8 +683,8 @@
     },
     {
       "path": "atelier-preview.js",
-      "sizeBytes": 41774,
-      "sha256": "e17bd6aa21fec94ca402cb4310b208df8aa025d701861b3d6eb239138ed363d5"
+      "sizeBytes": 41875,
+      "sha256": "3f8be5e80bdf0bf39b4b922e18491ddb51d93f7b8e41837232ba9fa8f0e9ad17"
     },
     {
       "path": "avif-detect.js",
@@ -839,12 +839,12 @@
     {
       "path": "quality-study/viewer-revision.js",
       "sizeBytes": 18943,
-      "sha256": "929b377f2b16437cc8976a83c58486da024dc884f6a70841e6b9f931a8f7b389"
+      "sha256": "9fa934c9aa251056bfba25d892badb9558c814ff1afdbca980d194de2910b65f"
     },
     {
       "path": "quality-study/viewer-revision.json",
       "sizeBytes": 23953,
-      "sha256": "900a54304c3e674901061a29ddf5e34985caca0b07019aedf3efbb92f60cfd22"
+      "sha256": "6370297801925882c76615d45e649111f953d760924a3abe1873fc6f5628ef26"
     },
     {
       "path": "release-redirect.js",
@@ -1589,7 +1589,7 @@
       "ownerReleaseId": "f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44"
     }
   ],
-  "releaseId": "07380805dca54a1298886b4da0c43b82b88f95b987fa5248f44dcda249cf6a48",
+  "releaseId": "63600a544b71214dcbfceee96a3eac0dbfa48bca7d42d59425acd43bae131bfd",
   "referenceLayout": "../<ownerReleaseId>/<path>",
   "assetClosure": {
     "gltfCount": 20,

@@ -45,3 +45,6 @@ window.crownMeshPoint=()=>{
  for(let y=Math.ceil(bounds.top);y<bounds.bottom;y+=2)for(let x=Math.ceil(bounds.left);x<bounds.right;x+=2){if(x>=dot.left-2&&x<=dot.right+2&&y>=dot.top-2&&y<=dot.bottom+2)continue;if(document.elementFromPoint(x,y)!==renderer.domElement)continue;if(hitCrown({clientX:x,clientY:y}))return{x,y,bounds,dot:dot.toJSON()};}return null;
 };
 window.prepareCrownMeshTouch=()=>{cancelCrownGesture();resetMotion();view('crown',false);cameraTween=null;controls.update();dirty=true;};
+const unifiedSnapshot=window.mobileAuditSnapshot;
+window.mobileAuditSnapshot=()=>({...unifiedSnapshot(),camera:{p:camera.position.toArray(),q:camera.quaternion.toArray(),t:controls.target.toArray(),zoom:camera.zoom},orbitEnabled:controls.enabled});
+window.crownQAReset=()=>resetMotion();

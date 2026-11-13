@@ -3,7 +3,7 @@
   "algorithm": "SHA-256",
   "scope": "Build-transformed local first-party viewer JS, CSS and HTML; shared asset/vendor identities are in schema-2 deployment manifest.",
   "canonicalization": "SHA-256 of UTF-8 JSON.stringify(files), ordered lexicographically by path.",
-  "digest": "7f3cc5fc82694637eef05cb558258ec42719ecb6e37f598469cc987085f67da6",
+  "digest": "330d6334d1132d7b6dfda560183a83142a4af12e06b75101b785fa221cc5de3a",
   "files": [
     {
       "path": "assembly-ao-shadow-reuse.js",
@@ -682,8 +682,8 @@
     },
     {
       "path": "atelier-preview.js",
-      "bytes": 41774,
-      "sha256": "e17bd6aa21fec94ca402cb4310b208df8aa025d701861b3d6eb239138ed363d5"
+      "bytes": 41875,
+      "sha256": "3f8be5e80bdf0bf39b4b922e18491ddb51d93f7b8e41837232ba9fa8f0e9ad17"
     },
     {
       "path": "avif-detect.js",
