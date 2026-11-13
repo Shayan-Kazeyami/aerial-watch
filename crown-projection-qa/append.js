@@ -42,7 +42,7 @@ caseQA.set=async(candidate)=>{projectionForceUncached=!candidate;return caseOrig
 window.projectionExercise=()=>{
  crownHotspot.update();
  if(!crownOutlineVertices)throw Error('no crown vertices');
- const r=renderer.domElement.getBoundingClientRect();
+ const r=renderer.domElement.getBoundingClientRect().toJSON();
  const get=()=>crownOutlineCache.get(crownOutlineVertices,crownAnchorMesh.matrixWorld,camera.matrixWorldInverse,camera.projectionMatrix,r);
  projectionForceUncached=false;crownOutlineCache.clear();const expected=get(),start=crownOutlineCache.snapshot();
  for(let i=0;i<600;i++)if(get()!==expected)throw Error('cached output drift');
