@@ -1,5 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import{webcrypto}from'node:crypto';import{fetchProgressiveNormal as run}from'./assembly-fetch-progressive-normal.js';
-const B='compact-explode-qa/recovery-ce5580ac/preview-b/releases/ce5580ac6f1299485a507149235bee5135360b538564d3d28921d72da84b415b/leather-assets/r14/';
+const baselineRoots=['preview-b/releases/ce5580ac6f1299485a507149235bee5135360b538564d3d28921d72da84b415b/','compact-explode-qa/recovery-ce5580ac/preview-b/releases/ce5580ac6f1299485a507149235bee5135360b538564d3d28921d72da84b415b/'];
+const B=baselineRoots.map(root=>root+'leather-assets/r14/').find(root=>['normal-2048-existing-mips.ktx2','outer-normal-4k.ktx2.part0','outer-normal-4k.ktx2.part1'].every(name=>fs.existsSync(root+name)));
+if(!B)throw Error('Verified ce5580ac normal fixtures missing from checkout and local recovery.');
 const low=new Uint8Array(fs.readFileSync(B+'normal-2048-existing-mips.ktx2')),p0=new Uint8Array(fs.readFileSync(B+'outer-normal-4k.ktx2.part0')),p1=new Uint8Array(fs.readFileSync(B+'outer-normal-4k.ktx2.part1')),full=Buffer.concat([p0,p1]);
 const baseURL='https://watch.example/release/leather-assets/r14/',range='bytes 4389496-8388607/8388608';globalThis.location={href:'https://watch.example/viewer'};
 const response=(body,status=200,headers={})=>new Response(body,{status,headers});

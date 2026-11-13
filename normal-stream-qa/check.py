@@ -7,9 +7,9 @@ BASE='https://shayan-kazeyami.github.io/aerial-watch/'
 async def run_case(p,name,stream,fail=False,camera=None):
  b=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']);page=await b.new_page(viewport={'width':430,'height':932},device_scale_factor=1,is_mobile=True,has_touch=True);page.set_default_timeout(180000)
  out={'name':name,'errors':[],'responses':[],'transfers':[]};R['cases'].append(out)
- async def module(route):await route.fulfill(status=200,content_type='text/javascript',body=(P/'assembly-review.js').read_text()+'\n'+(P/'probe.js').read_text())
+ async def module(route):await route.fulfill(status=200,content_type='text/javascript',body=(P/'assembly-review-capture-draft.js').read_text()+'\n'+(P/'probe.js').read_text())
  async def fetch_module(route):await route.fulfill(status=200,content_type='text/javascript',body=(P/'assembly-fetch-progressive-normal.js').read_text())
- await page.route('**/assembly-review.js*',module);await page.route('**/assembly-fetch-progressive-normal.js',fetch_module)
+ await page.route('**/assembly-capture-detail-policy.js',lambda route:route.fulfill(status=200,content_type='text/javascript',body=(P/'assembly-capture-detail-policy.js').read_text()));await page.route('**/assembly-review.js*',module);await page.route('**/assembly-fetch-progressive-normal.js',fetch_module)
  upgrade_gate=asyncio.Event()
  if stream and not fail:
   async def gate_high_chunk(route):
@@ -27,9 +27,9 @@ async def run_case(p,name,stream,fail=False,camera=None):
  cdp.on('Network.responseReceived',response);cdp.on('Network.loadingFinished',lambda e:out['transfers'].append(e))
  start=time.monotonic()
  try:
-  await page.goto(BASE+f'?quality=efficient&normalStream={int(stream)}&qa=normal-{name}',wait_until='domcontentloaded',timeout=180000);await page.frame_locator('#watch-viewer').locator('body[data-ready=true]').wait_for(timeout=360000);f=next(x for x in page.frames if 'atelier-preview' in x.url);out['observedReadyMs']=(time.monotonic()-start)*1000;out['ready']=await f.evaluate('normalQA.snapshot()');print('READY',name,out['observedReadyMs'],out['ready']['state'],flush=True)
+  await page.goto(BASE+f'?quality=efficient&normalStream={int(stream)}&qa=normal-{name}',wait_until='domcontentloaded',timeout=180000);await page.frame_locator('#watch-viewer').locator('body[data-ready=true]').wait_for(timeout=360000);f=next(x for x in page.frames if 'atelier-preview' in x.url);out['observedReadyMs']=(time.monotonic()-start)*1000;out['ready']=await f.evaluate('normalQA.snapshot()');out['captureReady']=await f.evaluate('normalQA.auditCapture()');print('READY',name,out['observedReadyMs'],out['ready']['state'],flush=True)
   await f.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=180000)
-  await f.add_style_tag(content='.crown-hotspot,.crown-outline,.crown-guide{visibility:hidden!important}')
+  await f.add_style_tag(content='.crown-hotspot,.crown-halo,.atelier-first-use{visibility:hidden!important}')
   out['frozen']=await f.evaluate('c=>normalQA.freeze(c)',camera);camera=out['frozen']['camera'];out['camera']=camera
   await f.locator('#assembly-canvas').screenshot(path=str(O/f'{name}-initial.png'),timeout=180000)
   if stream:
@@ -42,7 +42,7 @@ async def run_case(p,name,stream,fail=False,camera=None):
     await cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':x,'y':y}]});await cdp.send('Input.dispatchTouchEvent',{'type':'touchMove','touchPoints':[{'x':x,'y':y-22}]});a=await f.evaluate('normalQA.frames(3)');assert a['state']=='upgrading',a;upgrade_gate.set();out['upgradeCompletionGate']='Final high chunk released only after real held input; does not affect first-interactive timing';await f.wait_for_function('normalQA.snapshot().state==="full"',timeout=240000);z=await f.evaluate('normalQA.frames(3)');assert z['crown']['degrees']>a['crown']['degrees'],(a,z);out['heldAcrossUpgrade']={'before':a['state'],'after':z['state'],'degreesBefore':a['crown']['degrees'],'degreesAfter':z['crown']['degrees']}
     await cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]});a=await f.evaluate('normalQA.frames(3)');z=await f.evaluate('normalQA.frames(3)');assert a['crown']['degrees']==z['crown']['degrees'];out['releasedStops']=True
     await f.add_style_tag(content='.crown-hotspot{visibility:hidden!important}');await f.evaluate('c=>normalQA.freeze(c)',camera)
-  out['final']=await f.evaluate('normalQA.snapshot()');out['observedFullMs']=(time.monotonic()-start)*1000
+  out['final']=await f.evaluate('normalQA.snapshot()');out['captureFinal']=await f.evaluate('normalQA.auditCapture()');out['observedFullMs']=(time.monotonic()-start)*1000
   if not fail:
    assert any(t.get('width')==4096 for t in out['final']['filtering']['textures']);await f.locator('#assembly-canvas').screenshot(path=str(O/f'{name}-final.png'),timeout=180000)
   assert not out['errors'];out['passed']=True;return camera
