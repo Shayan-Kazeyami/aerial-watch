@@ -15,6 +15,10 @@ async def main():
    await page.goto('http://127.0.0.1:8765/preview-b/releases/'+RID+'/atelier-preview.html?quality=efficient',wait_until='domcontentloaded',timeout=120000)
    await page.locator('body[data-ready=true]').wait_for(timeout=300000)
    await page.wait_for_function('document.getElementById("stage").dataset.cameraReady==="true"',timeout=300000)
+   inventory=await page.evaluate('watchGeometryInventory()')
+   expected={'SVG_broad_sloped_champagne_wall':21172,'SVG_champagne_aperture_rim':6080,'SVG_lower_champagne_rim_lip':5888}
+   R['faceGeometry']={r['name']:r['triangles'] for r in inventory['rows'] if r['name'] in expected}
+   assert R['faceGeometry']==expected,R['faceGeometry']
    await page.evaluate('prepareCrownMeshTouch()');await page.evaluate('mobileAuditFrames(4)')
    point=await page.evaluate('crownMeshPoint()');assert point,'No ray-confirmed mesh point outside hotspot';R['meshPoint']=point
    cdp=await page.context.new_cdp_session(page)
