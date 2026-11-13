@@ -24,7 +24,11 @@ async def main():
       body=body.replace(marker,b"  window.__hardwareNormalAudit=repairHardwareCurvatureNormals(source);resources.own('hardware normal QA rollback',()=>window.__hardwareNormalAudit.restore());\n"+marker,1)
      body+=probe.encode();report.setdefault('executedModuleSHA256',{})[mode]=hashlib.sha256(body).hexdigest();await r.fulfill(response=response,body=body)
     await page.route('**/assembly-review.js*',route)
-    if mode=='baked':await page.route('**/rebuild/assembly.glb',lambda r:r.fulfill(path=str(R/'e79-rebase/assembly-normal-candidate.glb'))) 
+    if mode=='baked':
+     async def baked_route(r):
+      report.setdefault('bakedRouteURLs',[]).append(r.request.url)
+      await r.fulfill(path=str(R/'e79-rebase/assembly-normal-candidate.glb'))
+     await page.route('**/rebuild/assembly.glb*',baked_route)
     await page.goto(URL,wait_until='domcontentloaded');await page.wait_for_function('window.__normalQa&&window.assemblyInspect?.().presentation.interactive',timeout=300000);print(mode,'ready',flush=True)
     await page.evaluate('__reuseQa.show({view:"movement",pose:0})');record={'audit':await page.evaluate('__normalQa.audit()'),'protectedNormals':await page.evaluate('__normalQa.protectedNormals()'),'hashes':await page.evaluate('__reuseQa.hashSources()'),'poses':await page.evaluate('__reuseQa.validatePoses()'),'states':[]};report['runs'][mode]=record
     cases=[('assembled',dict(view='watch')),('exploded',dict(view='watch',explode=1)),('movement',dict(view='movement'))]+[(f'part-{sid}',dict(sid=sid,view='movement',zoom=1.4))for sid in [9,12,21,26,39,71,125,126,128]]
@@ -32,7 +36,7 @@ async def main():
     for name,params in cases:
      state=await page.evaluate('(p)=>__reuseQa.show(p)',params);image=state.pop('image');(O/f'{mode}-{name}.png').write_bytes(base64.b64decode(image.split(',')[1]));state['case']=name;record['states'].append(state);(O/'report.json').write_text(json.dumps(report,indent=2));print(mode,name,flush=True)
     await context.close()
-   a=report['runs']['candidate'];b=report['runs']['baked'];assert a['hashes']==b['hashes'];report['runtimeNormalParity']=True;
+   a=report['runs']['candidate'];b=report['runs']['baked'];assert report.get('bakedRouteURLs'), 'baked route did not intercept any request';assert a['hashes']==b['hashes'];report['runtimeNormalParity']=True;
    # Remaining protected normal/pose/draw checks
    assert a['poses']==b['poses'];assert a['protectedNormals']==b['protectedNormals'];assert len(a['audit']['applied'])==92;assert not a['audit']['skipped']
    for x,y in zip(a['hashes'],b['hashes']):assert x['sid']==y['sid']and x['index']==y['index']and x['attributes']['position']==y['attributes']['position']
