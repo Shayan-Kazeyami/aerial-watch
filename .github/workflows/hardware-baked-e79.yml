@@ -17,6 +17,9 @@ jobs:
           node hardware-normal-qa/ci-bake.mjs preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/rebuild/assembly.glb
           node hardware-normal-qa/e79-rebase/ci-encode.mjs
           python -m http.server 8886 >/tmp/hardware-normal-server.log 2>&1 &
+          python hardware-normal-qa/e79-rebase/viewer-check.py
+          mv hardware-normal-qa/offline-bake/evidence hardware-normal-qa/offline-bake/evidence-raw
+          mkdir -p hardware-normal-qa/offline-bake/evidence
           python hardware-normal-qa/e79-rebase/viewer-check-meshopt.py
       - uses: actions/upload-artifact@v4
         if: always()
@@ -24,4 +27,5 @@ jobs:
           name: hardware-baked-e79-evidence
           path: |
             hardware-normal-qa/offline-bake/evidence
+            hardware-normal-qa/offline-bake/evidence-raw
             hardware-normal-qa/e79-rebase/report.json
