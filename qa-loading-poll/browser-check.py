@@ -18,7 +18,7 @@ async def arm(browser,name):
   else:await route.continue_()
  await page.route('**/assembly-review.js*',core)
  await page.goto('https://shayan-kazeyami.github.io/aerial-watch/?poll-qa='+name,wait_until='domcontentloaded',timeout=120000)
- await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body.dataset.failed==='true'",timeout=180000)
+ await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body?.dataset.failed==='true'",timeout=180000)
  f=page.frames[1]
  await page.wait_for_timeout(1000)
  first=await page.evaluate('JSON.parse(JSON.stringify(pollProbe))')
@@ -30,7 +30,7 @@ async def arm(browser,name):
  await page.screenshot(path=str(O/(name+'-failed.png')))
  # Actual supported fatal-failure recovery is reload, not Retry detail.
  await f.locator('#atelier-retry').tap()
- await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body.dataset.ready==='true'",timeout=360000)
+ await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body?.dataset.ready==='true'",timeout=360000)
  f=page.frames[1]
  await page.wait_for_timeout(1500)
  ready=await page.evaluate('JSON.parse(JSON.stringify(pollProbe))')
@@ -39,7 +39,7 @@ async def arm(browser,name):
  await page.screenshot(path=str(O/(name+'-recovered.png')))
  # Repeat fatal flow through explicit root reload, then real iframe reload recovery.
  await page.reload(wait_until='domcontentloaded')
- await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body.dataset.ready==='true'",timeout=360000)
+ await page.wait_for_function("document.querySelector('#watch-viewer').contentDocument?.body?.dataset.ready==='true'",timeout=360000)
  await page.wait_for_timeout(1000)
  assert await page.evaluate('pollProbe.active.length')==0
  R['arms'][name]={'injectedFailures':failures,'failureFirst':first,'failureSecond':second,'ready':ready,'recoveryReady':True,'rootReloadReady':True,'pageerrors':errors,'wrapperSHA256':hashlib.sha256(src.encode()).hexdigest()}
