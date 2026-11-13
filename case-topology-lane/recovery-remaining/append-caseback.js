@@ -23,7 +23,7 @@ window.casebackQA={
  freeze(){stopTour();for(const n of ['animate','animate-movement']){const e=$(n);e.checked=false;e.dispatchEvent(new Event('change',{bubbles:true}));}dirty=true;},
  settled(){return !cameraTween&&!crownInteraction.active&&!explosion?.animating&&!['upgrading','waiting-for-first-frame'].includes(progressiveNormalState)},
  pose(mode){cameraTween=null;cbMesh.geometry=cbDisplayBefore;cbMesh.material=cbMat;resetExplosion(true);if(mode!=='assembled'){isolated=new Set([cbMesh]);visibility();scene.updateMatrixWorld(true);const center=cbDisplayBefore.boundingBox.getCenter(new THREE.Vector3());let point,dir,dist;
-   if(mode==='back'){point=center;dir=new THREE.Vector3(.2,-1,.3);dist=65;}
+   if(mode==='back'){point=center;dir=new THREE.Vector3(.2,-1,.3);dist=115;}
    else if(mode==='edge'){point=new THREE.Vector3(19.25,-3.25,0);dir=new THREE.Vector3(.8,-.7,.8);dist=10;}
    else if(mode==='bore'){point=new THREE.Vector3(18.2,-3.35,0);dir=new THREE.Vector3(.2,-1,.3);dist=15;}
    else {point=new THREE.Vector3(15.72,-3.3,0);dir=new THREE.Vector3(-.6,-.8,.5);dist=mode.includes('macro')?4.5:11;}
