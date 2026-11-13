@@ -38,6 +38,7 @@ async def main():
    initial_nav=len(R['navigation']);initial_requests=len(R['requests']);origin=R['initial']['timeOrigin']
    cdp=await context.new_cdp_session(host)
    async def settle(name):
+    await frame.wait_for_function('document.body.dataset.ready==="true"&&document.getElementById("stage").dataset.cameraReady==="true"&&!assemblyInspect().explosion.animating',timeout=180000)
     await frame.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
     s=await frame.evaluate(SNAP);R['steps'].append({'name':name,**s});(O/'report.json').write_text(json.dumps(R,indent=2))
     assert s['timeOrigin']==origin and s['canvasSame'],(name,'document/canvas replaced')
