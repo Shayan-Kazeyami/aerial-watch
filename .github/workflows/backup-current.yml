@@ -1,0 +1,17 @@
+name: Current standalone runtime backup
+on:
+  push:
+    branches: [qa/backup-current-20261113]
+permissions:
+  contents: read
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python backup-current/build.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aerial-standalone-backup
+          path: Aerial-Watch-Standalone-54a5579b.zip
+          compression-level: 0
