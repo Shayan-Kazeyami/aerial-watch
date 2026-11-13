@@ -1,20 +1,20 @@
-name: Watch live release check
+name: Watch caseback live release check
 on:
   push:
     branches: [main]
-    paths: [index.html, watch-home-strap-09e3e0ae.js, strap-combined-qa/public-live.py, .github/workflows/material-state-live.yml]
+    paths: [index.html, watch-home-caseback-e79b2236.js, case-topology-lane/caseback-integration/public-live.py, .github/workflows/material-state-live.yml]
 permissions:
   contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29 python strap-combined-qa/public-live.py
+      - run: EXPECTED_RELEASE=e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 python case-topology-lane/caseback-integration/public-live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: strap-combined-live
-          path: strap-combined-live
+          name: caseback-integrated-live
+          path: caseback-integrated-live
