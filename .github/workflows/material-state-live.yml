@@ -2,7 +2,7 @@ name: Watch live release check
 on:
   push:
     branches: [main]
-    paths: [index.html, watch-home-explode-ce5580ac.js, compact-explode-qa/live.py, .github/workflows/material-state-live.yml]
+    paths: [index.html, watch-home-normal-5de34026.js, normal-stream-qa/live.py, .github/workflows/material-state-live.yml]
 permissions:
   contents: read
 jobs:
@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=ce5580ac6f1299485a507149235bee5135360b538564d3d28921d72da84b415b python compact-explode-qa/live.py
+      - run: EXPECTED_RELEASE=5de340263d2bcb0a992914d7b0aa64176493934711907480b62bcad07bd486ca python normal-stream-qa/live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: compact-explode-live
-          path: marked-live
+          name: normal-stream-live
+          path: normal-stream-live
