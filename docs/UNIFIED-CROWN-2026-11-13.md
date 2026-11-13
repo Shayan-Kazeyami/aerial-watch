@@ -1,0 +1,11 @@
+# Unified direct crown interaction, 2026-11-13
+
+Baseline main b139b1d0 / release 21474059. Candidate 63600a544b71214dcbfceee96a3eac0dbfa48bca7d42d59425acd43bae131bfd.
+
+The white-dot interaction and actual crown mesh now share one continuous displacement-rate gesture. Stationary off-center holds keep turning, neutral/release stop, and immediate pose updates avoid a discrete-tween backlog. Direct taps pull/push without automatically opening the Time sheet. Explicit Set time controls and keyboard access remain. Matching-pointer capture and cancellation restore the previous orbit enabled state; reset, reseat, view, Escape, blur, hidden state and disposal stop input. Direct mesh picking checks nearest visible model geometry rather than allowing interaction through the case. Dot-only anchor disappearance cancels dot gestures, but does not cancel a captured direct mesh gesture while the scene remains available.
+
+11 CPU mock-DOM/integration tests pass. Exact staged run 43458024973 at e020630afb20444351116633605fc7f7b2690853 passed 430×932 and 740×360 Chromium SwiftShader touch emulation. Actual CDP touch starts on a ray-confirmed crown surface outside the dot hitbox. Both surfaces pass stationary hold, dead zone, reversal, release, reset during hold, single tap, setting hold, pointercancel, exact camera/orbit ownership, keyboard turning and explicit Time sheet. No model refetch or canvas resize; no JS errors. All 417 mesh matrices and position buffers match original mechanics for identical winding/setting inputs. Actual screenshots inspected. Artifacts 14054882880 and 14054573703.
+
+Initial staged run 43457265865 passed direct hold/recenter/reverse/release, then failed because the test called module-scoped resetMotion from page scope. The QA-only accessor was corrected; production cancellation was not bypassed. Public follow-through and runtime recovery are separate subsequent gates. This is functional touch-emulation evidence, not physical-phone FPS or hardware latency. Rear occlusion behavior is implemented and code-reviewed; exhaustive real-scene occlusion coverage is not claimed.
+
+Rollback: restore root index loader selection to watch-home-layer-21474059.js. The prior release and backups are retained.

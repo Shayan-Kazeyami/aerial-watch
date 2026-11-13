@@ -2,7 +2,7 @@ name: Watch live release check
 on:
   push:
     branches: [main]
-    paths: [index.html, watch-home-layer-21474059.js, layer-focus-qa/live.py, .github/workflows/material-state-live.yml]
+    paths: [index.html, watch-home-crown-63600a54.js, crown-unified-qa/live.py, .github/workflows/material-state-live.yml]
 permissions:
   contents: read
 jobs:
@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=214740598c3327efb618f559ce587911d3893bd97a060a53172277877480a8b2 python layer-focus-qa/live.py
+      - run: EXPECTED_RELEASE=63600a544b71214dcbfceee96a3eac0dbfa48bca7d42d59425acd43bae131bfd python crown-unified-qa/live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: layer-focus-live
-          path: layer-focus-live
+          name: crown-unified-live
+          path: crown-unified-live
