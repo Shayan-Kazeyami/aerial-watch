@@ -2,7 +2,7 @@ name: Watch live release check
 on:
   push:
     branches: [main]
-    paths: [index.html, watch-home-webgpu-c8b1cb38.js, webgpu-controls-qa/live.py, .github/workflows/material-state-live.yml]
+    paths: [index.html, watch-home-webgpu-f0148dab.js, webgpu-controls-qa/live.py, .github/workflows/material-state-live.yml]
 permissions:
   contents: read
 jobs:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633 python webgpu-controls-qa/live.py
+      - run: EXPECTED_RELEASE=f0148dab28e427621143d47b157bc7802ebab4f661d2d530e2162c4508b4b485 python webgpu-controls-qa/live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
