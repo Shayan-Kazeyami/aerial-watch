@@ -18,7 +18,7 @@ jobs:
       - run: |
           RID=$(cat layer-focus-qa/release-id.txt)
           cp preview-b/releases/$RID/{assembly-layer-focus.js,assembly-explode.js,assembly-framing.js} layer-focus-qa/
-          ln -s ../preview-b/releases/$RID/vendor layer-focus-qa/vendor
+          ln -s ../preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor layer-focus-qa/vendor
           node --test layer-focus-qa/focus.test.mjs
       - run: |
           python -m http.server 8765 >/tmp/watch-server.log 2>&1 &
