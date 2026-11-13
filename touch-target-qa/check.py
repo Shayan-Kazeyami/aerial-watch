@@ -11,7 +11,6 @@ async def main():
   await page.goto(URL,wait_until='domcontentloaded',timeout=120000)
   await page.locator('body[data-ready=true]').wait_for(timeout=300000)
   await page.evaluate("""window.trace=[];for(const name of ['pointerdown','pointerup','touchstart','touchend','click','atelier:explode','atelier:explode-state'])document.addEventListener(name,e=>trace.push({type:name,target:e.target.tagName,detail:name.startsWith('atelier:')?e.detail:null}),true)""")
-  await page.locator('#motion').click()
   cdp=await page.context.new_cdp_session(page)
   async def tap(x,y):
    await cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':x,'y':y}]})
