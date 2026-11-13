@@ -1,5 +1,5 @@
 import pathlib,base64,gzip,json,shutil,hashlib,os
-R=pathlib.Path('case-topology-lane/integration');base=pathlib.Path('preview-b/releases/8da6179fe4cc360db298c64720b76933d2325d3a5c65b237aa7c83dc18178803');m=json.loads((base/'deployment-manifest.json').read_text())
+R=pathlib.Path('case-topology-lane/integration');base=pathlib.Path('preview-b/releases/c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633');m=json.loads((base/'deployment-manifest.json').read_text())
 for f in m['references']:
  src=base.parent/f['ownerReleaseId']/f['path'];b=src.read_bytes();assert len(b)==f['sizeBytes']and hashlib.sha256(b).hexdigest()==f['sha256'];dst=base/f['path'];dst.parent.mkdir(parents=True,exist_ok=True)
  if not dst.exists():shutil.copyfile(src,dst)

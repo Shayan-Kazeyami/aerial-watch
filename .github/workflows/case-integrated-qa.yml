@@ -25,7 +25,7 @@ jobs:
       - run: python -m pip install numpy scipy triangle trimesh rtree playwright pillow && python -m playwright install --with-deps chromium
       - run: |
           python case-topology-lane/integration/prepare-ci.py
-          python case-topology-lane/integration/bake.py preview-b/releases/8da6179fe4cc360db298c64720b76933d2325d3a5c65b237aa7c83dc18178803/rebuild/assembly.glb
+          python case-topology-lane/integration/bake.py preview-b/releases/c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633/rebuild/assembly.glb
           cp case-topology-lane/integration/changes/structured-assembly-assets/assembly.glb case-topology-lane/integration/delivery-source/rebuild/assembly.glb
           node case-topology-lane/integration/delivery-source/scripts/build-lossless-assets.mjs rebuild/assembly.glb
           python case-topology-lane/flanks/prepare-ci.py
@@ -40,7 +40,7 @@ jobs:
           node case-topology-lane/encode-ci.mjs
           mkdir -p case-topology-lane/flanks/changes
           cp -r case-topology-lane/changes/* case-topology-lane/flanks/changes/
-          WATCH_BASE=preview-b/releases/8da6179fe4cc360db298c64720b76933d2325d3a5c65b237aa7c83dc18178803 python case-topology-lane/integration/build.py
+          WATCH_BASE=preview-b/releases/c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633 python case-topology-lane/integration/build.py
           python case-topology-lane/integration/stage.py
           node --test crown-unified-qa/gesture.test.mjs
           python - <<'PY'

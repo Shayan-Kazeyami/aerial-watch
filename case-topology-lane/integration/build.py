@@ -1,6 +1,6 @@
 import pathlib,json,hashlib,re,shutil,os
 R=pathlib.Path('case-topology-lane/integration');out=R/'release';out.mkdir(exist_ok=True)
-base=pathlib.Path(os.environ.get('WATCH_BASE','strap-retopology-qa/publish/recovery-8da6179f/preview-b/releases/8da6179fe4cc360db298c64720b76933d2325d3a5c65b237aa7c83dc18178803'))
+base=pathlib.Path(os.environ.get('WATCH_BASE','webgpu-controls-qa/recovery-c8b1cb38/preview-b/releases/c8b1cb38f7f87904017b32735ca917b4216225cfd8f0a612590aafe689ada633'))
 m=json.loads((base/'deployment-manifest.json').read_text());files={f['path']:dict(f)for f in m['localFiles']};sha=lambda b:hashlib.sha256(b).hexdigest();audit=json.loads((R/'delivery-source/optimized-assets/audit.json').read_text())['outputs'][0];bake=json.loads((R/'bake-report.json').read_text())
 def put(n,b):
  p=out/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b);files[n]={'path':n,'sizeBytes':len(b),'sha256':sha(b)}
@@ -19,3 +19,6 @@ for f in can['localFiles']+refs:
 # Preserve promoted face files exactly, both raw and meshopt.
 for n in ['premium-face/face-svg04.glb','optimized-assets/premium-face__face-svg04.meshopt.glb']:assert files[n]==next(f for f in m['localFiles']if f['path']==n)
 (R/'release-id.txt').write_text(rid);print(rid)
+
+# Preserve all benchmark UI/runtime files exactly from latest manifest.
+for n in ["assembly-review.js","atelier-preview.js","atelier-preview.html","atelier-preview.css","assembly-debug-benchmark.js","atelier-benchmark-run.js","atelier-renderer-tools.js"]:assert files[n]==next(f for f in m["localFiles"]if f["path"]==n)
