@@ -21,6 +21,7 @@ jobs:
           echo "$RID" > crown-unified-qa/release-id.txt
           echo "$RID" > layer-focus-qa/release-id.txt
           cp preview-b/releases/$RID/assembly-crown-hotspot.js crown-unified-qa/
+          cp preview-b/releases/$RID/assembly-review.js crown-unified-qa/
           node --test crown-unified-qa/gesture.test.mjs
           python - <<'PY'
           import pathlib
