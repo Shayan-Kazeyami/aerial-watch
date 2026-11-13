@@ -28,7 +28,7 @@ export function createMechanismBatch({THREE,scene,renderer,maxBytes=32*1024*1024
     if(!canonical)return {mesh,geometry:mesh.geometry,renderGeometry:mesh.geometry,correction:null};
     const a=canonical.geometry,b=mesh.geometry,pa=a.attributes.position,pb=b.attributes.position,na=a.attributes.normal,nb=b.attributes.normal;
     const keys=Object.keys(a.attributes).sort().join(',');
-    let valid=keys===Object.keys(b.attributes).sort().join(',')&&keys==='normal,position'&&pa.count===pb.count&&na?.count===nb?.count&&a.index?.count===b.index?.count;
+    let valid=!!a.index&&!!b.index&&keys===Object.keys(b.attributes).sort().join(',')&&keys==='normal,position'&&pa.count===pb.count&&na?.count===nb?.count&&a.index?.count===b.index?.count;
     if(valid)for(let i=0;i<a.index.count;i++)if(a.index.getX(i)!==b.index.getX(i)){valid=false;break;}
     const correction=new THREE.Matrix4().fromArray(row.matrix),p=new THREE.Vector3(),n=new THREE.Vector3(),normalMatrix=new THREE.Matrix3().getNormalMatrix(correction),other=new THREE.Vector3();
     let maxPosition=0,maxNormal=0;

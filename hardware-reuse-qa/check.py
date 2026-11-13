@@ -1,15 +1,16 @@
 import asyncio,json,pathlib,base64,hashlib,traceback
 from playwright.async_api import async_playwright
-R=pathlib.Path('hardware-reuse-qa');O=R/'evidence';O.mkdir(exist_ok=True);RID='09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29';URL=f'http://127.0.0.1:8877/preview-b/releases/{RID}/atelier-preview.html?quality=efficient&normalStream=1&face=svg04&leather=craft14&finish=brushed&crystal=clear&cap=satin&assets=meshopt&light=softbox&antialias=smaa&tickBatch=1';rows=json.loads(pathlib.Path('hardware-retopo-qa/reuse-audit.json').read_text())if pathlib.Path('hardware-retopo-qa/reuse-audit.json').exists()else json.loads((R/'reuse-audit.json').read_text());report={'sourceRelease':RID,'errors':[],'runs':{}};probe=(R/'probe.js').read_text()
+R=pathlib.Path('hardware-reuse-qa');O=R/'evidence';O.mkdir(exist_ok=True);RID='09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29';URL=f'http://127.0.0.1:8877/preview-b/releases/{RID}/atelier-preview.html?quality=efficient&normalStream=1&face=svg04&leather=craft14&finish=brushed&crystal=clear&cap=satin&assets=meshopt&light=softbox&antialias=smaa&tickBatch=1';rows=json.loads(pathlib.Path('hardware-retopo-qa/reuse-audit.json').read_text())if pathlib.Path('hardware-retopo-qa/reuse-audit.json').exists()else json.loads((R/'reuse-audit.json').read_text());report={'fixtureRandom':'seeded LCG 434893964, both contexts','sourceMain':'f3c23832f6cb8af3463248355dd7f69ab5e7b6bf','sourceRelease':RID,'errors':[],'runs':{}};probe=(R/'probe.js').read_text()
 async def main():
  async with async_playwright()as p:
   b=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']);
   for mode in ['baseline','candidate']:
    ctx=await b.new_context(viewport={'width':1000,'height':1000},device_scale_factor=1);page=await ctx.new_page();page.set_default_timeout(240000);page.on('pageerror',lambda e:report['errors'].append(str(e)))
    async def route(r):
-    response=await r.fetch();body=await response.body();report.setdefault('baselineModuleSHA256',hashlib.sha256(body).hexdigest());await r.fulfill(response=response,body=body+probe.encode())
-   async def candidate(r):await r.fulfill(status=200,content_type='text/javascript',body=(R/'candidate-batch.js').read_bytes())
-   await page.add_init_script('Math.random=()=>0.5');await page.route('**/assembly-review.js*',route)
+    response=await r.fetch();body=await response.body();report.setdefault('baselineModuleSHA256',hashlib.sha256(body).hexdigest());assert report['baselineModuleSHA256']=='91fcb25fbcc71e7e259dc603ba019d8c626e8506399dc14cf3c12075cc0fa4ee';await r.fulfill(response=response,body=body+probe.encode())
+   async def candidate(r):
+    body=(R/'candidate-batch.js').read_bytes();report['candidateModuleSHA256']=hashlib.sha256(body).hexdigest();await r.fulfill(status=200,content_type='text/javascript',body=body)
+   await page.add_init_script('(()=>{let seed=434893964;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}})()');await page.route('**/assembly-review.js*',route)
    if mode=='candidate':await page.route('**/assembly-mechanism-batch.js*',candidate)
    try:
     await page.goto(URL,wait_until='domcontentloaded');await page.wait_for_function('window.__reuseQa?.ready&&window.assemblyInspect?.().presentation.interactive',timeout=300000);print(mode,'ready',flush=True)
