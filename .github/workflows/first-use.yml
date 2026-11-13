@@ -17,6 +17,27 @@ jobs:
           python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
           WATCH_URL="$(cat first-use-qa/url.txt)" python -u first-use-qa/check.py
           python -u first-use-qa/landscape.py
+      - name: Verify public landscape release
+        run: |
+          python - <<'PY'
+          import urllib.request,time,pathlib
+          base='https://shayan-kazeyami.github.io/aerial-watch/'
+          rid='832a0ce0005cffdf950455dcb578c805724bf92d29a81f9ca209ab59efdead51'
+          for attempt in range(20):
+           try:
+            root=urllib.request.urlopen(base+'?landscape=bd69056').read().decode()
+            js=urllib.request.urlopen(base+'watch-home-landscape-832a0ce0.js').read().decode()
+            assert 'watch-home-landscape-832a0ce0.js' in root and rid in js
+            print('PASS live entry routes to expected landscape release');break
+           except Exception:
+            if attempt==19:raise
+            time.sleep(15)
+          pathlib.Path('first-use-qa/url.txt').write_text(base+'preview-b/releases/'+rid+'/atelier-preview.html')
+          PY
+          mv first-use-output first-use-local-output
+          mv landscape-output landscape-local-output
+          WATCH_URL="$(cat first-use-qa/url.txt)" python -u first-use-qa/check.py
+          python -u first-use-qa/landscape.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -24,4 +45,6 @@ jobs:
           path: |
             first-use-output
             landscape-output
+            first-use-local-output
+            landscape-local-output
             mobile-output
