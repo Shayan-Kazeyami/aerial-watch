@@ -15,6 +15,8 @@ jobs:
           mkdir -p hardware-normal-qa
           tar -xzf hardware-current-fixture.tar.gz -C hardware-normal-qa
           python -m http.server 8886 >/tmp/hardware-normal-server.log 2>&1 &
+          cp qa-hardware-current-check.py hardware-normal-qa/resume-check.py
+          cp qa-hardware-source-manifest.json hardware-normal-qa/source-manifest.json
           python hardware-normal-qa/resume-check.py
       - uses: actions/upload-artifact@v4
         if: always()
