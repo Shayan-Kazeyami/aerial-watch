@@ -1,0 +1,22 @@
+name: Movement topology integrated watch QA
+on:
+  push:
+    branches: [qa/movement-radial-20261113]
+    paths: [movement-qa-fixture/integrated-append.js, movement-qa-fixture/integrated-check.py, .github/workflows/movement-integrated-qa.yml]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: cat movement-qa-fixture/part-*.b64 | base64 -d | tar xz
+      - run: cat movement-qa-fixture/final97.b64 | base64 -d | tar xz
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -u movement-qa-fixture/integrated-check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: movement-integrated-evidence
+          path: movement-integrated-evidence
