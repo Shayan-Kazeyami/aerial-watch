@@ -41,7 +41,7 @@ export function createMechanismBatch({THREE,scene,renderer,maxBytes=32*1024*1024
     }
     let count=0;for(const [material,n] of cohorts)if(n>count){batch.material=material;count=n;}
 
-    for(const {mesh,geometry,id} of entries){let visible=mesh.visible&&mesh.geometry===geometry&&mesh.material===batch.material&&mesh.matrixWorld.determinant()>0;
+    for(const {mesh,geometry,id} of entries){let visible=count>0&&mesh.visible&&mesh.geometry===geometry&&mesh.material===batch.material&&!mesh.material.transparent&&!(mesh.material.transmission>0)&&mesh.matrixWorld.determinant()>0;
      for(let p=mesh.parent;p&&visible;p=p.parent)visible=p.visible;
      batch.setVisibleAt(id,visible);
      if(visible){batch.setMatrixAt(id,mesh.matrixWorld);hidden.push(mesh);mesh.visible=false;any=true;}
