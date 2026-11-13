@@ -1,0 +1,44 @@
+name: Caseback sealed integration raw meshopt QA
+on:
+  push:
+    branches: [qa/caseback-integrated-20261114]
+    paths: ['case-topology-lane/caseback-integration/**', '.github/workflows/caseback-integrated-qa.yml']
+permissions:
+  contents: read
+concurrency:
+  group: caseback-integrated-private
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        viewport: [430x932,740x360]
+        assets: [raw,meshopt]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy playwright pillow && python -m playwright install --with-deps chromium
+      - run: |
+          WATCH_BASE=preview-b/releases/09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29 python case-topology-lane/caseback-integration/bake.py
+          node case-topology-lane/caseback-integration/encode.mjs
+          WATCH_BASE=preview-b/releases/09e3e0ae0d5b40ddfefdbb3b3987b6dd74ec9a746f5e4f4e0731771b89230a29 python case-topology-lane/caseback-integration/build.py
+          node --test crown-unified-qa/gesture.test.mjs
+      - run: |
+          python -m http.server 8765 >/tmp/caseback-integration-http.log 2>&1 &
+          QA_ASSETS=${{ matrix.assets }} QA_VIEWPORT=${{ matrix.viewport }} python -u case-topology-lane/caseback-integration/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: caseback-integrated-${{ matrix.assets }}-${{ matrix.viewport }}
+          path: |
+            case-topology-lane/caseback-integration/evidence-*
+            case-topology-lane/caseback-integration/release
+            case-topology-lane/caseback-integration/bake-report.json
+            case-topology-lane/caseback-integration/encoding-report.json
+            case-topology-lane/caseback-integration/build-report.json
