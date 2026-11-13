@@ -6,7 +6,9 @@ R={'release':RID,'mode':mode,'viewport':[W,H],'errors':[],'notes':'Chromium soft
 async def main():
  async with async_playwright() as p:
   args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']
-  if mode=='webgpu':args+=['--enable-unsafe-webgpu']
+  if mode.startswith('webgpu'):args+=['--enable-unsafe-webgpu']
+  if mode=='webgpu-vulkan':args+=['--use-vulkan=swiftshader','--enable-features=Vulkan']
+  R['browserFlags']=args
   browser=await p.chromium.launch(args=args);ctx=await browser.new_context(viewport={'width':W,'height':H},device_scale_factor=1,is_mobile=True,has_touch=True,accept_downloads=True)
   await ctx.add_init_script("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{window.qaCopied=text;}}});")
   if mode=='fallback':await ctx.add_init_script("Object.defineProperty(navigator,'gpu',{value:undefined});")
