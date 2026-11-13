@@ -1,0 +1,24 @@
+name: Topology-aware mesh registry verification
+on:
+  push:
+    branches: [qa/mesh-registry-20261113]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python mesh-registry-qa/build.py
+      - run: |
+          python -m http.server 8765 >/tmp/watch-http.log 2>&1 &
+          WATCH_URL="$(cat mesh-registry-qa/url.txt)" python -u mesh-registry-qa/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mesh-registry-evidence
+          path: |
+            mesh-registry-output
+            mobile-output
