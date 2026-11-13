@@ -1,0 +1,21 @@
+name: Exact live watch triangle inventory
+on:
+  push:
+    branches: [qa/hardware-counts-20261113]
+permissions:
+  contents: read
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: |
+          python -m http.server 8878 >/tmp/hardware-counts-server.log 2>&1 &
+          python hardware-reuse-qa/counts.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: exact-live-triangle-inventory
+          path: hardware-reuse-qa/count-evidence
