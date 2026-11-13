@@ -1,0 +1,36 @@
+name: Guarded plates over current caseback sealed QA
+on:
+  push:
+    branches: [qa/plates-caseback-sealed-20261114]
+permissions:
+  contents: read
+jobs:
+  sealed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy playwright pillow && python -m playwright install --with-deps chromium
+      - run: |
+          python - <<'PY'
+          import base64,zipfile,io,pathlib
+          zipfile.ZipFile(io.BytesIO(base64.b64decode(pathlib.Path('mechanism-plates-qa/latest-caseback-integration/fixture.b64').read_text()))).extractall('.')
+          PY
+          export WATCH_BASE=preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6
+          python mechanism-plates-qa/latest-caseback-integration/bake.py
+          node mechanism-plates-qa/latest-caseback-integration/encode.mjs
+          python mechanism-plates-qa/latest-caseback-integration/build.py
+          python -m http.server 8873 >/tmp/plate-http.log 2>&1 &
+          python -u mechanism-plates-qa/latest-caseback-integration/qa.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: plates-caseback-sealed-evidence
+          path: |
+            mechanism-plates-qa/latest-caseback-integration/*report.json
+            mechanism-plates-qa/latest-caseback-integration/release-id.txt
+            mechanism-plates-qa/latest-caseback-integration/evidence-*
+            mechanism-plates-qa/latest-caseback-integration/release
