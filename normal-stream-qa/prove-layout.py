@@ -1,0 +1,4 @@
+import pathlib,hashlib,json,base64
+B=pathlib.Path('compact-explode-qa/recovery-ce5580ac/preview-b/releases/ce5580ac6f1299485a507149235bee5135360b538564d3d28921d72da84b415b/leather-assets/r14');low=(B/'normal-2048-existing-mips.ktx2').read_bytes();p0=(B/'outer-normal-4k.ktx2.part0').read_bytes();p1=(B/'outer-normal-4k.ktx2.part1').read_bytes();full=p0+p1;sha=lambda b:hashlib.sha256(b).hexdigest();assert low[560:]==full[584:4389496];assert full==full[:584]+low[560:]+p0[4389496:]+p1
+r=dict(lowBytes=len(low),lowSHA=sha(low),headerBytes=584,headerSHA=sha(full[:584]),headerBase64=base64.b64encode(full[:584]).decode(),tailStart=4389496,tailBytes=len(p0[4389496:]),tailSHA=sha(p0[4389496:]),part0SHA=sha(p0),part1Bytes=len(p1),part1SHA=sha(p1),fullBytes=len(full),fullSHA=sha(full),lowPayloadExactlyMatchesFull=True)
+pathlib.Path('normal-stream-qa/layout-proof.json').write_text(json.dumps(r,indent=2));print({k:v for k,v in r.items()if k!='headerBase64'})

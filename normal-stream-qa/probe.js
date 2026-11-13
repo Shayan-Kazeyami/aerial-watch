@@ -1,0 +1,6 @@
+// QA-only module instrumentation. No source asset or rendering-quality changes.
+window.normalQA={
+ snapshot(){return {state:progressiveNormalState,metrics:progressiveNormalMetrics,filtering:leatherDetails?.filtering,firstInteractiveMs:captureConfiguration().navigationTiming.firstInteractiveMs,startup:startupDiagnostics.snapshot(),crown:crownInteraction.snapshot(),hotspot:crownHotspot.snapshot(),failed,loading,quality,now:performance.now(),camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom},render:{...renderer.info.render},memory:{...renderer.info.memory}};},
+ async freeze(saved){resetMotion();stopTour();cameraTween=null;if(saved){camera.position.fromArray(saved.position);controls.target.fromArray(saved.target);camera.zoom=saved.zoom;camera.updateProjectionMatrix();controls.update();}dirty=true;const before=renderer.info.render.frame;await new Promise(resolve=>{function tick(){if(renderer.info.render.frame>before)resolve();else requestAnimationFrame(tick)}requestAnimationFrame(tick)});return this.snapshot();},
+ frames(n=4){return new Promise(resolve=>{const tick=()=>--n<=0?resolve(this.snapshot()):requestAnimationFrame(tick);requestAnimationFrame(tick)})}
+};
