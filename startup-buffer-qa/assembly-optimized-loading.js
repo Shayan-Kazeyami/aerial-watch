@@ -18,7 +18,10 @@ const createGzipDecompressor=()=>{
 export async function decompressGzipAsset(buffer,{signal,expectedBytes=GZIP_DECODED_BYTES,createDecompressor=createGzipDecompressor,onBuffering=()=>{}}={}) {
   signal?.throwIfAborted();
   if(!Number.isSafeInteger(expectedBytes)||expectedBytes<=0)throw new RangeError('Invalid audited decoded size.');
-  const stream=new Blob([buffer]).stream().pipeThrough(createDecompressor());
+  // Feed the owned input view directly; Blob construction snapshots another full
+  // compressed buffer before producing its stream. Callers retain input ownership.
+  const input=ArrayBuffer.isView(buffer)?new Uint8Array(buffer.buffer,buffer.byteOffset,buffer.byteLength):new Uint8Array(buffer);
+  const stream=new ReadableStream({start(controller){controller.enqueue(input);controller.close();}}).pipeThrough(createDecompressor());
   const reader=stream.getReader(),sink=createByteCollector(expectedBytes);let length=0,complete=false;
   const cancel=()=>{reader.cancel(signal?.reason).catch(()=>{});};
   signal?.addEventListener('abort',cancel,{once:true});
