@@ -40,14 +40,14 @@ async def checkpoint(page,out,label):
 async def wait_full(page,out):
  deadline=time.monotonic()+240
  while time.monotonic()<deadline:
-  state=await asyncio.wait_for(page.evaluate('normalQA.snapshot()'),15)
+  sample_started=time.monotonic();state=await asyncio.wait_for(page.evaluate('normalQA.snapshot()'),min(90,max(1,deadline-time.monotonic())));out.setdefault('upgradeSnapshotDurationsMs',[]).append((time.monotonic()-sample_started)*1000)
   out['lastUpgradeSnapshot']=state;out['lastUpgradeSnapshotAt']=time.time();flush()
   if state['state']=='full':return
   assert state['state']!='failed',state
   await asyncio.sleep(2)
  raise TimeoutError('Full adoption not reached within 240 seconds; see lastUpgradeSnapshot')
 async def case(browser,name,query,mobile,progressive,switch_only=False):
- context=await browser.new_context(viewport=({'width':320,'height':568}if switch_only else{'width':430,'height':932})if mobile else{'width':740,'height':480},device_scale_factor=1,is_mobile=mobile,has_touch=mobile,accept_downloads=True)
+ context=await browser.new_context(viewport=({'width':320,'height':568}if switch_only and not name.endswith('-large') else{'width':430,'height':932})if mobile else{'width':740,'height':480},device_scale_factor=1,is_mobile=mobile,has_touch=mobile,accept_downloads=True)
  page=await context.new_page();page.set_default_timeout(180000);await page.add_init_script(INIT)
  out={'name':name,'errors':[],'moduleHashes':[],'requests':[],'navigations':[],'downloads':[],'console':[],'requestFailures':[],'steps':[],'cleanupErrors':[]};R['cases'].append(out);gate=asyncio.Event()
  async def module(route):
@@ -122,7 +122,9 @@ async def case(browser,name,query,mobile,progressive,switch_only=False):
   except Exception as close_error:out['cleanupErrors'].append(repr(close_error))
   flush()
 async def main():
- cases=[('default-smooth','?qa=stage-default-smooth',True,True,False),
+ cases=[('quality-switch-large','?qa=stage-quality-switch-large',True,True,True),
+        ('explicit-zero-switch-large','?normalStream=0&qa=stage-direct-switch-large',True,False,True),
+        ('default-smooth','?qa=stage-default-smooth',True,True,False),
         ('explicit-zero-switch-small','?normalStream=0&qa=stage-direct-switch',True,False,True),
         ('quality-switch-small','?qa=stage-quality-switch',True,True,True),
         ('explicit-zero','?normalStream=0&qa=stage-full-first',True,False,False),
