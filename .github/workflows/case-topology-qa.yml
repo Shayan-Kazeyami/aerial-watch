@@ -10,6 +10,9 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - run: python -m pip install numpy scipy triangle trimesh rtree playwright pillow && python -m playwright install --with-deps chromium
       - run: |
           python case-topology-lane/prepare-ci.py
@@ -32,3 +35,4 @@ jobs:
             case-topology-lane/changes
             case-topology-lane/integrated-report.json
             case-topology-lane/integrated-proof.json
+
