@@ -1,0 +1,58 @@
+name: Isolated fixed mobile Reset paired and full lifecycle
+on:
+  push:
+    branches: [qa/mobile-reset-fit-fix-20261114]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [baseline-fixed-mobile, proposal-fixed-mobile, proposal-fixed-desktop]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: 64fff6296e7d23f00ef387fa222ef405da3c8fba
+          path: normal-fixture
+      - uses: actions/checkout@v4
+        with:
+          ref: e305819445671ba9bc24734a902646204a08801e
+          path: seconds-fixture
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy playwright pillow && python -m playwright install --with-deps chromium
+      - run: |
+          cd normal-fixture
+          tar -xzf hardware-current-fixture.tar.gz -C hardware-normal-qa
+          node hardware-normal-qa/ci-bake.mjs preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/rebuild/assembly.glb
+          node hardware-normal-qa/e79-rebase/ci-encode.mjs
+      - run: |
+          cd seconds-fixture
+          python qa-seconds-ring/pack.py preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/premium-face/face-svg04.glb
+          node qa-seconds-ring/encode.mjs
+      - run: |
+          WATCH_BASE=preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 NORMAL_INPUT=normal-fixture/hardware-normal-qa/e79-rebase RING_INPUT=seconds-fixture/qa-seconds-ring RUNTIME_INPUT=coordinated-release-proposal python coordinated-release-proposal/build.py
+          test "$(cat coordinated-release-proposal/release-id.txt)" = f0d3fb50ee863df4f83ee20045d6a7a0b35c0b47594884e76683a588642e0179
+          python -m http.server 8765 --directory coordinated-release-proposal/staging >/tmp/coordinated-proposal-server.log 2>&1 &
+          python -m http.server 8766 --directory . >/tmp/reset-baseline-server.log 2>&1 &
+          if [ "${{ matrix.suite }}" = baseline-fixed-mobile ]; then
+            QA_FIX=1 QA_RELEASE=e79 python -u reset-framing-diagnostic/check.py
+          elif [ "${{ matrix.suite }}" = proposal-fixed-mobile ]; then
+            QA_FIX=1 QA_DEVICE=mobile python -u mobile-lifecycle-f0d3/check.py
+          else
+            QA_FIX=1 QA_DEVICE=desktop python -u mobile-lifecycle-f0d3/check.py
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reset-fit-fix-${{ matrix.suite }}
+          path: |
+            mobile-lifecycle-f0d3/evidence-*
+            reset-framing-diagnostic/evidence-*
+            coordinated-release-proposal/build-report.json
+            coordinated-release-proposal/release-id.txt

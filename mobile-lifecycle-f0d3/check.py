@@ -10,6 +10,9 @@ async def run():
   b=await pw.chromium.launch(args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']);ctx=await b.new_context(viewport=({'width':430,'height':932}if MOBILE else {'width':1440,'height':900}),device_scale_factor=1,is_mobile=MOBILE,has_touch=MOBILE);await ctx.add_init_script(INIT);p=await ctx.new_page();p.set_default_timeout(120000)
   p.on('pageerror',lambda e:R['errors'].append(str(e)));p.on('request',lambda q:R['requests'].append({'url':q.url,'type':q.resource_type}));p.on('framenavigated',lambda f:R['navigation'].append(f.url))
   source=pathlib.Path('coordinated-release-proposal/staging/preview-b/releases',RID,'assembly-review.js').read_bytes();assert hashlib.sha256(source).hexdigest()=='91fcb25fbcc71e7e259dc603ba019d8c626e8506399dc14cf3c12075cc0fa4ee';R['baselineModuleSHA256']=hashlib.sha256(source).hexdigest()
+  if os.environ.get('QA_FIX')=='1':
+   import runpy
+   source=runpy.run_path('mobile-reset-fit-fix/patch.py')['patched'](source);R['isolatedFixedModuleSHA256']=hashlib.sha256(source).hexdigest()
   wrapped=source+b'\n'+pathlib.Path('mobile-lifecycle-f0d3/probe.js').read_bytes();R['expectedQAWrapperSHA256']=hashlib.sha256(wrapped).hexdigest()
   async def module(route):assert RID in route.request.url;await route.fulfill(status=200,content_type='text/javascript',body=wrapped)
   async def atelier(route):
