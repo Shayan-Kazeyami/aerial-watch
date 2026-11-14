@@ -1,0 +1,11 @@
+{
+  "build.py": "1dcac1d2f33c164f380e2dcff2c70f0a2b301b435e1b7324f2cdba8509dd25ae",
+  "check.mjs": "0e7f9e9b48fe0ae0d35f600dc3f0604040e63efcc1f43e25b4475469d113f96f",
+  "verify.py": "9c7e102269b4e0b80752f6de51f781b72ba1eca12d35a8010a27269e7cda167a",
+  "BASE_HANDLER.txt": "4477b23df2024ea838e9d70eac1cb9640c3e741cdf7c03677bf55294ec74abd8",
+  "CANDIDATE_HANDLER.txt": "b681b05b7915cca77ed825187d747f8740fefc48057eeced3caed6d9c47790f1",
+  "README.md": "c1bfa841bda707d6f2102375c8b883fb107b45fd8af745160b80b749cc277175",
+  "TESTS.log": "b978fcaf4304bd58cdb276cf5b853b21d7882dc216ca291e01a10f798763e0ce",
+  "build-report.json": "f9d5c68d4a72b0bd6112de32fa245a0baaa25de9b6077b11eadb818c00c62976",
+  "VERIFY.json": "a3ad57e54feeb5855d30355dcaeceab78db4f74b222d66217cc87b31a2c2af08"
+}

@@ -1,0 +1,11 @@
+{
+  "baseCommit": "1e1cd2a1478334a89207a19d19d932637584d97e",
+  "releaseId": "9865b37ea1813c85badb404935f7710c688f04beef36da55d7d517ceef96b353",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-review.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated canvas browser-shortcut guard; no browser/deployment approval"
+}

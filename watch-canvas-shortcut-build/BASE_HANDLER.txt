@@ -1,0 +1,9 @@
+renderer.domElement.addEventListener('keydown', event => {
+  if (loading || failed) return;
+  if (['+','=','-','_','Home'].includes(event.key)) {
+    event.preventDefault();
+    stopTour();
+    if (event.key === 'Home') view(interiorView?'interior':$('movement-only').checked?'showcase':'face');
+    else { camera.zoom = THREE.MathUtils.clamp(camera.zoom*(['+','='].includes(event.key) ? 1.15 : 1/1.15),controls.minZoom,controls.maxZoom); camera.updateProjectionMatrix(); dirty = true; }
+  }
+});

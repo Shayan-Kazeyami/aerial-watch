@@ -1,0 +1,3 @@
+PASS:33cases;15reproduced modified shortcut interceptions removed;unmodified/Shift behavior andloading/failure guards unchanged
+PASS both closures, exact three changes, references/crown fix preserved
+PASS integrated handler exact; all other current source bytes and UTF8 fixes preserved
