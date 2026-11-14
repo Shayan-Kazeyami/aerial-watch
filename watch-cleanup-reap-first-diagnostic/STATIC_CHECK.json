@@ -1,0 +1,9 @@
+{
+  "helper_exact_reviewed_copy": true,
+  "cleanup_calls": 1,
+  "fixed_finite_bounds": {
+    "grace": 0.5,
+    "post_grace": 1.0
+  },
+  "diagnostic_run": false
+}
