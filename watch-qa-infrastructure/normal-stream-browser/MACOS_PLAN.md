@@ -1,0 +1,7 @@
+# Separate macOS platform diagnostic — prepared, unexecuted
+
+Ubuntu run43632873729 failed before browser fixture because Chromium sandbox was unavailable; preserved unchanged. This is a different documented Playwright-supported macOS GitHub hosted platform, not a Linux sandbox-disable workaround. Existing driver and fixture source remain byte-identical, explicit chromium_sandbox=True and no fallback retained. No kernel/security/sysctl/AppArmor/privilege changes.
+
+Separate new QA branch, one bounded API fixture, contents:read, no deploy/main/frozen/preview mutation. macos-latest architecture/OS/browser actual version must be recorded from job metadata/result; platform and allocation/crypto internals differ, so no paired Linux timing or heap inference. Browser sandbox availability is unverified until launch; a failure remains a failure, no automatic retries. Same exact published e79 real assets/source and reviewed candidate, Range206/fallback200/output hash/shared backing and deterministic pending-reader cancel/release tests; no viewer decode/adoption/GPU/texture quality/heap approval. Same exclusive evidence folder, screenshot and normalclose bounds and owned server trap/reap retained.
+
+Official support basis: https://playwright.dev/python/docs/ci (Windows/macOS agents need no additional configuration beyond installing Playwright/browsers). This does not prove runner sandbox policy or product acceptance. Independent outgoing review and root authorization required before execution.
