@@ -1,0 +1,32 @@
+[
+  {
+    "id": 58,
+    "source": "Bascule de pignon coulant",
+    "old": "Pinion · OM10 #58",
+    "now": "Sliding-pinion yoke · OM10 #58"
+  },
+  {
+    "id": 74,
+    "source": "Vis de roue de couronne",
+    "old": "Gear wheel · OM10 #74",
+    "now": "Crown-wheel screw · OM10 #74"
+  },
+  {
+    "id": 84,
+    "source": "Ressort de barillet manuel",
+    "old": "Mainspring barrel · OM10 #84",
+    "now": "Mainspring · OM10 #84"
+  },
+  {
+    "id": 116,
+    "source": "Pont d'ancre brut",
+    "old": "Pallet fork component · OM10 #116",
+    "now": "Pallet bridge · OM10 #116"
+  },
+  {
+    "id": 141,
+    "source": "Pont de barillet brut",
+    "old": "Mainspring barrel · OM10 #141",
+    "now": "Barrel bridge · OM10 #141"
+  }
+]

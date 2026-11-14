@@ -1,0 +1,14 @@
+{
+  "baseRelease": "bd55a594260f4627127bcdb1975c2f9902eede87d0528669e02a111552ba939d",
+  "candidateRelease": "94ad3066d775ac9b39dd95a4c52a70388d86df29e327e556edfeee0328624817",
+  "both_closures": 298,
+  "changed_local_files": [
+    "assembly-component-labels.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "references_unchanged": true,
+  "crown_fix_preserved": true,
+  "browser_tested": false,
+  "deployment": false
+}

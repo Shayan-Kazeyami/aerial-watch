@@ -1,0 +1,11 @@
+{
+  "baseCommit": "efe03c1ec074bb0ab71a794af25e73f0074a2a9e",
+  "releaseId": "94ad3066d775ac9b39dd95a4c52a70388d86df29e327e556edfeee0328624817",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-component-labels.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated five Explorer label corrections; no browser/deployment approval"
+}

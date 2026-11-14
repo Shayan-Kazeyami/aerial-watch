@@ -1,0 +1,12 @@
+PASS:166 labels and searchable source IDs/descriptions;5 exact corrections;5 variants;6 negative contextual cases;22 exterior IDs
+✔ English balance searches find French movement descriptions (1.624757ms)
+✔ component names remain human-readable while source identities remain searchable (0.339501ms)
+✔ exterior parts have distinct everyday labels (0.199731ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.281591

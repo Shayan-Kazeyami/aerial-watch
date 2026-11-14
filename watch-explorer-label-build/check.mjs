@@ -1,0 +1,11 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+import * as a from './base.js';import * as b from './assembly-component-labels.js';
+const parts=JSON.parse(fs.readFileSync(new URL('./parts.json',import.meta.url))).parts;
+const expect=new Map([[58,'Sliding-pinion yoke'],[74,'Crown-wheel screw'],[84,'Mainspring'],[116,'Pallet bridge'],[141,'Barrel bridge']]);const changes=[];
+assert.equal(parts.length,166);assert.equal(new Set(parts.map(p=>p.id)).size,166);
+for(const p of parts){const d={...p,sourceIndex:p.id,partNumber:p.name},old=a.componentLabel(d,p.name),now=b.componentLabel(d,p.name);assert.equal(now,expect.has(p.id)?expect.get(p.id)+' · OM10 #'+p.id:old);if(now!==old)changes.push({id:p.id,source:p.description,old,now});const search=b.componentSearchText(d,p.name);assert.ok(search.includes(p.name.toLowerCase()));assert.ok(search.includes(b.normalizeComponentText(p.description)));assert.ok(now.endsWith('OM10 #'+p.id));}
+assert.equal(changes.length,5);
+for(const [description,label]of [["Pont d’ancre brut",'Pallet bridge'],['PONT DE BARILLET BRUT','Barrel bridge'],['Ressort de barillet manuel','Mainspring'],['Vis de roue de couronne','Crown-wheel screw'],['Bascule de pignon coulant','Sliding-pinion yoke']])assert.equal(b.componentLabel({sourceIndex:999,description}),label+' · OM10 #999');
+for(const description of ['Ressort de bascule de pignon coulant','Vis de pont de barillet','Bascule de pignon coulantXYZ','Pont de barilletXYZ','Roue couronne','Barillet'])assert.equal(a.componentLabel({sourceIndex:999,description}),b.componentLabel({sourceIndex:999,description}));
+for(const assemblyId of ['BEZEL','BUCKLE','BUCKLE-TANG','DIAL-CARRIER','SECONDS-STAFF','RETAINER','CROWN-TUBE','HOUR','MINUTE','SECONDS','CASE','CASEBACK','CROWN','DIAL','CHAPTER','FRONT-CRYSTAL','REAR-CRYSTAL','STRAP-UPPER','STRAP-LOWER','BACK-SCREW-1','SPRINGBAR-1','UNKNOWN'])assert.equal(a.componentLabel({assemblyId}),b.componentLabel({assemblyId}));
+fs.writeFileSync(new URL('./CHANGES.json',import.meta.url),JSON.stringify(changes,null,2));console.log('PASS:166 labels and searchable source IDs/descriptions;5 exact corrections;5 variants;6 negative contextual cases;22 exterior IDs');
