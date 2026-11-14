@@ -1,0 +1,12 @@
+// QA-only reversible geometry transaction. No own renderer, material or visibility overrides.
+export function prepareSubstitution(THREE,mesh,json){
+ const check=(x,m)=>{if(!x)throw Error(m)};check(mesh.name===json.name,'name mismatch');const source=mesh.geometry;check(source.index,'source must be indexed');const candidate=new THREE.BufferGeometry();
+ try{
+  for(const[key,a]of Object.entries(source.attributes)){const c=json.attributes[key];check(c&&c.itemSize===a.itemSize&&c.normalized===a.normalized,'attribute metadata');candidate.setAttribute(key,new THREE.BufferAttribute(new a.array.constructor(c.array),c.itemSize,c.normalized))}
+  check(Object.keys(json.attributes).length===Object.keys(source.attributes).length,'attribute set');check(Array.isArray(json.index)&&json.index.every(i=>Number.isSafeInteger(i)&&i>=0&&i<=65535&&Object.values(candidate.attributes).every(a=>i<a.count)),'raw candidate index range');candidate.setIndex(new THREE.BufferAttribute(new Uint16Array(json.index),1));candidate.groups=json.groups.map(x=>({...x}));candidate.drawRange={...source.drawRange};check(candidate.index.count===source.index.count,'triangle count');check(JSON.stringify(candidate.groups)===JSON.stringify(source.groups),'groups');
+  for(let k=0;k<source.index.count;k++)for(const[key,a]of Object.entries(source.attributes)){const c=candidate.attributes[key],i=source.index.array[k],j=candidate.index.array[k];check(j<c.count,'candidate index range');const x=new Uint8Array(a.array.buffer,a.array.byteOffset+i*a.itemSize*a.array.BYTES_PER_ELEMENT,a.itemSize*a.array.BYTES_PER_ELEMENT),y=new Uint8Array(c.array.buffer,c.array.byteOffset+j*c.itemSize*c.array.BYTES_PER_ELEMENT,c.itemSize*c.array.BYTES_PER_ELEMENT);check(x.length===y.length&&x.every((v,n)=>v===y[n]),'expanded bytes')}
+ }catch(e){candidate.dispose();throw e}
+ const identity={material:mesh.material,parent:mesh.parent,userData:mesh.userData};let disposed=false;const unchanged=()=>{check(mesh.material===identity.material&&mesh.parent===identity.parent&&mesh.userData===identity.userData,'object identity drift')};
+ return{source,candidate,activate(){check(!disposed,'disposed');unchanged();check(mesh.geometry===source,'unexpected geometry');mesh.geometry=candidate},restore(){unchanged();check(mesh.geometry===source||mesh.geometry===candidate,'foreign geometry');mesh.geometry=source},dispose(){this.restore();if(!disposed){candidate.dispose();disposed=true}}};
+}
+export function visibleAncestors(mesh){for(let x=mesh;x;x=x.parent)if(!x.visible)return false;return true}
