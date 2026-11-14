@@ -1,0 +1,9 @@
+test_both_fail_preserved (test_coordinator.Tests.test_both_fail_preserved) ... ok
+test_driver_failure_preserved_and_server_attempted (test_coordinator.Tests.test_driver_failure_preserved_and_server_attempted) ... ok
+test_exact_bounds_both (test_coordinator.Tests.test_exact_bounds_both) ... ok
+test_none_before_spawn (test_coordinator.Tests.test_none_before_spawn) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

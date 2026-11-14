@@ -1,0 +1,7 @@
+test_bad_digest (__main__.Tests.test_bad_digest) ... ok
+test_roundtrip_and_no_overwrite (__main__.Tests.test_roundtrip_and_no_overwrite) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.337s
+
+OK

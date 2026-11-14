@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "rid": "c9d2d1a59b4efacb6d4b44824baefd047dab96351b0086fa8bfe1032168c31bc",
+    "closureFiles": 298,
+    "overlay": {
+      "assembly-review.js": "d3ba6dabfdad93e27a4a6a462b2975aa9e7c97c7ef552e8ecfacb054d1b990f9"
+    },
+    "originalReview": "18acb2b6eea2a0a26b80dd173fc48a8bece76e6f2a66238ef84e3c57e0c79ae7"
+  },
+  "candidate": {
+    "rid": "bd55a594260f4627127bcdb1975c2f9902eede87d0528669e02a111552ba939d",
+    "closureFiles": 298,
+    "overlay": {
+      "assembly-review.js": "d3ba6dabfdad93e27a4a6a462b2975aa9e7c97c7ef552e8ecfacb054d1b990f9"
+    },
+    "originalReview": "18acb2b6eea2a0a26b80dd173fc48a8bece76e6f2a66238ef84e3c57e0c79ae7"
+  }
+}

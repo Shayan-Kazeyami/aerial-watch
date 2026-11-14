@@ -1,0 +1,1 @@
+V4 copies reviewed V3 CI with package path and dedicated branch substitutions only. Checked driver-exit/cleanup acceptance, fresh roots, 180s materialization and all bounds unchanged. No branch or run. Prior TESTS.log is historical; current validation is outgoing VALIDATION.json.
