@@ -1,0 +1,4 @@
+{
+  "old": "downloadBlob(new Blob([JSON.stringify(captureConfiguration(),null,2)],{type:'application/json'}),'aerial-view.json');",
+  "new": "downloadBlob(new Blob([JSON.stringify(captureConfiguration(),null,2)],{type:'application/json'}),'aerial-view.json');announce('View settings download requested. Check your browser downloads.');"
+}
