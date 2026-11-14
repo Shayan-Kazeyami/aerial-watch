@@ -1,0 +1,25 @@
+name: isolated main graphite chapter QA
+on:
+  push:
+    branches: [qa/main-graphite-chapter-20261114]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: node isolated-main-graphite-chapter-fresh/generate_ci.mjs
+      - run: python isolated-main-graphite-chapter-fresh/runtime_qa.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: main-graphite-chapter-runtime-evidence
+          path: |
+            isolated-main-graphite-chapter-fresh/runtime-evidence
+            isolated-main-graphite-chapter-fresh/source-authority.json
