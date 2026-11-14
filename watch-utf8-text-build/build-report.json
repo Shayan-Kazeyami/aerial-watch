@@ -1,0 +1,11 @@
+{
+  "baseCommit": "482ee78bf8ef29a29ac07f9605aaee8681dbf731",
+  "releaseId": "48438e79481a6258e2ae563e943d25a516c2e5a515f15a6335bdb08197ca752d",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-review.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated nineteen remaining UTF8 UI token repairs; no browser/deployment approval"
+}
