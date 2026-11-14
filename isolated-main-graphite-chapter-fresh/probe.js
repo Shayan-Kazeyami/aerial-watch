@@ -17,11 +17,11 @@ window.graphiteQa={
    const center=new THREE.Box3().setFromObject(this.mesh).getCenter(new THREE.Vector3());controls.target.copy(center);camera.position.copy(center).add(new THREE.Vector3(0,85,view==='exploded'?8:.001));camera.lookAt(center);
   }
   camera.updateProjectionMatrix();controls.update();scene.updateMatrixWorld(true);applyClockPose(clock.snapshot());renderer.info.reset();
-  for(let i=0;i<3;i++){mechanismBatch.build(source);try{mechanismBatch.beforeRender();composer.render()}finally{mechanismBatch.afterRender()}}
+  for(let i=0;i<3;i++){if(typeof mechanismBatch!=='undefined'&&mechanismBatch){mechanismBatch.build(source);try{mechanismBatch.beforeRender();composer.render()}finally{mechanismBatch.afterRender()}}else composer.render();}
   if(this.mesh.name!==this.sourceMeta.name||JSON.stringify(this.mesh.userData)!==this.sourceMeta.userData||this.mesh.parent!==this.sourceMeta.parent)throw Error('Target identity changed');
   if(this.other.some(([m,g])=>m.geometry!==g))throw Error('Other mesh geometry identity changed');
   const a=this.mesh.geometry.attributes;const bounds=new THREE.Box3().setFromObject(this.mesh);const pixelsPerMmMax=this.projectionBound();
-  return {state:{candidate,view,finish},authentic:this.status(),target:{name:this.mesh.name,userData:this.mesh.userData,world:this.mesh.matrixWorld.elements.slice(),materialName:this.mesh.material.name,position:a.position.count,normal:a.normal.count,uv:a.uv.count,bounds:[bounds.min.toArray(),bounds.max.toArray()]},camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},render:{...renderer.info.render},projectionDiagnostic:pixelsPerMmMax,png:renderer.domElement.toDataURL('image/png')};
+  return {state:{candidate,view,finish},rendererContext:{threeRevision:THREE.REVISION,backend:renderer.isWebGLRenderer?'WebGL':'other',drawingBuffer:[renderer.domElement.width,renderer.domElement.height],exposure:renderer.toneMappingExposure,hasMechanismBatch:typeof mechanismBatch!=='undefined'},authentic:this.status(),target:{name:this.mesh.name,userData:this.mesh.userData,world:this.mesh.matrixWorld.elements.slice(),materialName:this.mesh.material.name,position:a.position.count,normal:a.normal.count,uv:a.uv.count,bounds:[bounds.min.toArray(),bounds.max.toArray()]},camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},render:{...renderer.info.render},projectionDiagnostic:pixelsPerMmMax,png:renderer.domElement.toDataURL('image/png')};
  },
  projectionBound(){
   const size=new THREE.Vector2();renderer.getDrawingBufferSize(size);const matrix=this.mesh.matrixWorld;let maxScale=0;
