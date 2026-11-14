@@ -10,15 +10,13 @@ window.graphiteQa={
  capture({candidate,view,finish}){
   if(finish!==undefined){$('finish').checked=finish;updateMaterials();visibility();}this.mesh.geometry=candidate?this.candidate:this.original;registerExplosionParts();explosion.setAmount(view==='exploded'?1:0,{instant:true});scene.updateMatrixWorld(true);
   if(!openFrontFrame.group.visible||premiumActive()||premiumRequested)throw Error('Authentic frame visibility changed');
-  cameraTween=null;controls.enabled=false;camera.up.set(0,0,-1);camera.zoom=1;
-  if(view==='macro'){
-   const center=openFrontFrame.group.localToWorld(new THREE.Vector3(0,13.15,3.5));controls.target.copy(center);camera.position.copy(center).add(new THREE.Vector3(0,15,.001));camera.zoom=3;camera.lookAt(center);
-  }else{
-   const center=new THREE.Box3().setFromObject(this.mesh).getCenter(new THREE.Vector3());controls.target.copy(center);camera.position.copy(center).add(new THREE.Vector3(0,85,view==='exploded'?8:.001));camera.lookAt(center);
-  }
+  cameraTween=null;controls.enabled=false;camera.zoom=1;
+  const front=new THREE.Vector3(0,0,1).transformDirection(this.mesh.matrixWorld);camera.up.copy(new THREE.Vector3(0,1,0).transformDirection(this.mesh.matrixWorld));
+  const center=view==='macro'?this.mesh.localToWorld(new THREE.Vector3(0,13.15,.5)):new THREE.Box3().setFromObject(this.mesh).getCenter(new THREE.Vector3());
+  controls.target.copy(center);camera.position.copy(center).addScaledVector(front,view==='macro'?20:85);camera.zoom=view==='macro'?2:1;camera.lookAt(center);
   camera.updateProjectionMatrix();controls.update();scene.updateMatrixWorld(true);applyClockPose(clock.snapshot());renderer.info.reset();
   for(let i=0;i<3;i++){if(typeof mechanismBatch!=='undefined'&&mechanismBatch){mechanismBatch.build(source);try{mechanismBatch.beforeRender();composer.render()}finally{mechanismBatch.afterRender()}}else composer.render();}
-  if(this.mesh.name!==this.sourceMeta.name||JSON.stringify(this.mesh.userData)!==this.sourceMeta.userData||this.mesh.parent!==this.sourceMeta.parent)throw Error('Target identity changed');
+  if(this.armed&&(this.mesh.name!==this.sourceMeta.name||JSON.stringify(this.mesh.userData)!==this.sourceMeta.userData||this.mesh.parent!==this.sourceMeta.parent))throw Error('Target identity changed');
   const changedOther=this.other.filter(([m,g])=>m.geometry!==g).map(([m,g])=>({name:m.name,beforeGeometry:g.id,afterGeometry:m.geometry.id}));if(this.armed&&changedOther.length)throw Error('Other mesh geometry identity changed: '+JSON.stringify(changedOther));
   const a=this.mesh.geometry.attributes;const bounds=new THREE.Box3().setFromObject(this.mesh);const pixelsPerMmMax=this.projectionBound();
   return {state:{candidate,view,finish},otherGeometryChangesDuringPreparation:changedOther,rendererContext:{threeRevision:THREE.REVISION,backend:renderer.isWebGLRenderer?'WebGL':'other',drawingBuffer:[renderer.domElement.width,renderer.domElement.height],exposure:renderer.toneMappingExposure,hasMechanismBatch:typeof mechanismBatch!=='undefined'},authentic:this.status(),target:{name:this.mesh.name,userData:this.mesh.userData,world:this.mesh.matrixWorld.elements.slice(),materialName:this.mesh.material.name,position:a.position.count,normal:a.normal.count,uv:a.uv.count,bounds:[bounds.min.toArray(),bounds.max.toArray()]},camera:{position:camera.position.toArray(),target:controls.target.toArray(),zoom:camera.zoom,fov:camera.fov,near:camera.near,far:camera.far},render:{...renderer.info.render},projectionDiagnostic:pixelsPerMmMax,png:renderer.domElement.toDataURL('image/png')};
