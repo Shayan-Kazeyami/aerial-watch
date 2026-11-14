@@ -1,0 +1,60 @@
+name: Isolated 0116 screenshot path diagnostic
+on:
+  push:
+    branches: [qa/0116-capture-diagnostic-20261114]
+    paths: [watch-authorized-retry/isolated-diagnostic/**, .github/workflows/0116-capture-diagnostic.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        kind: [mobile, desktop]
+        mode: [behavior, repeated-capture, fresh-quality]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: 64fff6296e7d23f00ef387fa222ef405da3c8fba
+          path: normal-fixture
+      - uses: actions/checkout@v4
+        with:
+          ref: e305819445671ba9bc24734a902646204a08801e
+          path: seconds-fixture
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy playwright pillow && python -m playwright install --with-deps chromium
+      - run: |
+          cd normal-fixture
+          tar -xzf hardware-current-fixture.tar.gz -C hardware-normal-qa
+          node hardware-normal-qa/ci-bake.mjs preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/rebuild/assembly.glb
+          node hardware-normal-qa/e79-rebase/ci-encode.mjs
+      - run: |
+          cd seconds-fixture
+          python qa-seconds-ring/pack.py preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/premium-face/face-svg04.glb
+          node qa-seconds-ring/encode.mjs
+      - run: |
+          WATCH_BASE=preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 NORMAL_INPUT=normal-fixture/hardware-normal-qa/e79-rebase RING_INPUT=seconds-fixture/qa-seconds-ring RUNTIME_INPUT=coordinated-release-successor python coordinated-release-successor/build.py
+          test "$(cat coordinated-release-successor/release-id.txt)" = 011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192
+          python -m http.server 8765 --directory coordinated-release-successor/staging >/tmp/coordinated-proposal-server.log 2>&1 &
+          python watch-authorized-retry/isolated-diagnostic/build.py
+          python -m unittest discover -s watch-authorized-retry/isolated-diagnostic -p 'test_*.py' -v
+          (while true; do date -u +%FT%TZ; ps -C chrome -o pid,ppid,pcpu,rss,comm; grep -E 'MemAvailable|SwapFree' /proc/meminfo; sleep 5; done) >watch-authorized-retry/isolated-diagnostic/process-pressure.log 2>&1 &
+          DIAG_MODE=${{ matrix.mode }} DIAG_QUALITY=balanced QA_UI_KIND=${{ matrix.kind }} python -u watch-authorized-retry/isolated-diagnostic/ui-check-diagnostic.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: diagnostic-${{ matrix.kind }}-${{ matrix.mode }}
+          path: |
+            watch-authorized-retry/isolated-diagnostic/evidence-*
+            watch-authorized-retry/isolated-diagnostic/process-pressure.log
+            watch-authorized-retry/isolated-diagnostic/source-proof.json
+            coordinated-release-successor/build-report.json
+            coordinated-release-successor/changes/deployment-manifest.json
+            coordinated-release-successor/changes/release-receipt.json
+            coordinated-release-successor/release-id.txt
