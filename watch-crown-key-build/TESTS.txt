@@ -1,0 +1,1 @@
+PASS: left/right visible-control parity; up/down preserved; unavailable and irrelevant keys inert

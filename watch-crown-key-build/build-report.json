@@ -1,0 +1,11 @@
+{
+  "baseCommit": "c728d5bbfad8b35713ddfcbf4e660506099e601c",
+  "releaseId": "bd55a594260f4627127bcdb1975c2f9902eede87d0528669e02a111552ba939d",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-crown-hotspot.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated crown key direction candidate; no browser/deployment approval"
+}
