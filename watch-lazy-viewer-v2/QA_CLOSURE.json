@@ -1,0 +1,23 @@
+{
+  "originalClosure": 298,
+  "originalRID": "c9d2d1a59b4efacb6d4b44824baefd047dab96351b0086fa8bfe1032168c31bc",
+  "sourceUntouched": true,
+  "overlay": {
+    "baseline": {
+      "assembly-review.js": {
+        "sha256": "1f4df0505d3b12ec3aec7f0440aee09f8751971211e3b0445d1711c558589f06",
+        "sizeBytes": 136846
+      }
+    },
+    "candidate": {
+      "assembly-review.js": {
+        "sha256": "1f4df0505d3b12ec3aec7f0440aee09f8751971211e3b0445d1711c558589f06",
+        "sizeBytes": 136846
+      },
+      "assembly-lazy-detail.js": {
+        "sha256": "d9ec276c80cb9b3f259a033edb1c7c1224daef540c47aee7cae62f3a61c51f12",
+        "sizeBytes": 709
+      }
+    }
+  }
+}
