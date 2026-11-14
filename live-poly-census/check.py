@@ -24,10 +24,17 @@ async def main():
    R['samples']=[]
    for i in range(3):
     R['samples'].append(await f.evaluate(CENSUS));await page.wait_for_timeout(500)
-   await page.screenshot(path=str(O/'live-default.png'))
    R['runtimeSource']=await f.evaluate("async()=>{const u=new URL('./assembly-review.js?v=atelier-local-1',location.href);const r=await fetch(u);const b=await r.arrayBuffer();return {url:u.href,status:r.status,sha256:[...new Uint8Array(await crypto.subtle.digest('SHA-256',b))].map(x=>x.toString(16).padStart(2,'0')).join('')}}")
    R['viewport']={'width':1440,'height':1000,'deviceScaleFactor':1,'reducedMotion':'reduce'}
+   R['browserVersion']=browser.version
    R['complete']=True;assert not R['errors'],R['errors']
+   (O/'report.json').write_text(json.dumps(R,indent=2))
+   try:
+    import base64
+    cdp=await context.new_cdp_session(page)
+    shot=await asyncio.wait_for(cdp.send('Page.captureScreenshot',{'format':'png','fromSurface':True,'captureBeyondViewport':False}),60)
+    (O/'live-default.png').write_bytes(base64.b64decode(shot['data']));R['screenshotSaved']=True
+   except Exception as e:R['screenshotSaved']=False;R['screenshotFailure']=repr(e)
   except Exception as e:R['complete']=False;R['failure']=repr(e);R['traceback']=traceback.format_exc();raise
   finally:
    R['finishedUTC']=datetime.datetime.now(datetime.timezone.utc).isoformat();(O/'report.json').write_text(json.dumps(R,indent=2));print(json.dumps({k:v for k,v in R.items() if k not in ['requests','samples']},indent=2),flush=True);await browser.close()
