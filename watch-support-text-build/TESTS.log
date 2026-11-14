@@ -1,0 +1,3 @@
+PASS both closures, exact three changes, references/crown fix preserved
+PASS exact integrated support fallback token; saved-clock and all other latest bytes preserved
+PASS 8 actual detail-statement cases; fallback text repaired, attachment paths unchanged; textContent remains safe.

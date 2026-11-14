@@ -1,0 +1,11 @@
+{
+  "baseCommit": "fbf0ebe18ff22da4bd634e29c05676534e5d92fc",
+  "releaseId": "5af481a243687d5d809267eb8912a8cdbfd859f6b7daf2e00b60164da12406c2",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-review.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated one-token support fallback text fix; no browser/deployment approval"
+}

@@ -1,0 +1,1 @@
+Additive support fallback UTF-8 token build atop empty-search feature fbf0ebe18ff22da4bd634e29c05676534e5d92fc. Exact token only; no main/deploy/browser acceptance. Run build.py, verify.py and check.mjs from repository root after prior staging exists.
