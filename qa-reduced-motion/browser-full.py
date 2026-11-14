@@ -1,5 +1,5 @@
 """Isolated full e79 viewer; intercept only two guarded source modules, no deploy."""
-import asyncio,json,pathlib,hashlib,threading,http.server,functools
+import asyncio,json,pathlib,hashlib,threading,http.server,functools,base64
 from playwright.async_api import async_playwright
 P=pathlib.Path(__file__).parent;O=P/'ci-evidence';O.mkdir(exist_ok=True);RID='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6';B=pathlib.Path('preview-b/releases')/RID
 sha=lambda s:hashlib.sha256(s.encode()).hexdigest()
@@ -37,7 +37,11 @@ async def arm(browser,name,initial):
   # Baseline may settle before OS event on slow GPU; record without manufacturing a failure.
   await page.wait_for_function('!assemblyInspect().explosion.animating',timeout=30000)
   await page.locator('#atelier-reassemble').click();await page.wait_for_function('clickSamples.length===2');nextclick=await page.evaluate('clickSamples.at(-1)');assert nextclick['animating']==(name=='baseline'),nextclick
- result={'initial_preference':initial,'click_samples':await page.evaluate('clickSamples'),'media_samples':await page.evaluate('mediaSamples'),'executed_sha256':executed,'errors':errors,'final':await page.evaluate('assemblyInspect()')};assert not errors;assert executed==R['candidate' if name=='proposal' else 'source'];await page.screenshot(path=str(O/f'{name}-{initial}.png'));await ctx.close();return result
+ result={'initial_preference':initial,'click_samples':await page.evaluate('clickSamples'),'media_samples':await page.evaluate('mediaSamples'),'executed_sha256':executed,'errors':errors,'final':await page.evaluate('assemblyInspect()')};assert not errors;assert executed==R['candidate' if name=='proposal' else 'source'];(O/f'{name}-{initial}.json').write_text(json.dumps(result,indent=2));cdp=await ctx.new_cdp_session(page)
+ try:
+  shot=await asyncio.wait_for(cdp.send('Page.captureScreenshot',{'format':'png','fromSurface':True,'captureBeyondViewport':False}),90);(O/f'{name}-{initial}.png').write_bytes(base64.b64decode(shot['data']));result['screenshot']='PASS'
+ except Exception as error:result['screenshot']='UNAVAILABLE '+str(error)
+ await cdp.detach();await ctx.close();return result
 async def main():
  async with async_playwright() as p:
   b=await p.chromium.launch(args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']);R['browser']=b.version
