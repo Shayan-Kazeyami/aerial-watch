@@ -1,0 +1,112 @@
+name: Crown keyboard exact payload QA
+on:
+  push:
+    branches: [qa/crown-browser-v3-20261114]
+permissions:
+  contents: read
+jobs:
+  payload_build:
+    runs-on: ubuntu-latest
+    outputs:
+      archive_sha256: ${{ steps.pack.outputs.archive_sha256 }}
+      manifest_sha256: ${{ steps.pack.outputs.manifest_sha256 }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: 64fff6296e7d23f00ef387fa222ef405da3c8fba
+          path: normal-fixture
+      - uses: actions/checkout@v4
+        with:
+          ref: e305819445671ba9bc24734a902646204a08801e
+          path: seconds-fixture
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy
+      - run: |
+          cd normal-fixture
+          tar -xzf hardware-current-fixture.tar.gz -C hardware-normal-qa
+          node hardware-normal-qa/ci-bake.mjs preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/rebuild/assembly.glb
+          node hardware-normal-qa/e79-rebase/ci-encode.mjs
+      - run: |
+          cd seconds-fixture
+          python qa-seconds-ring/pack.py preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/premium-face/face-svg04.glb
+          node qa-seconds-ring/encode.mjs
+      - run: |
+          export WATCH_BASE=preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6
+          export NORMAL_INPUT=normal-fixture/hardware-normal-qa/e79-rebase
+          export RING_INPUT=seconds-fixture/qa-seconds-ring
+          export RUNTIME_INPUT=coordinated-release-successor
+          python watch-error-redaction-build/build.py
+          python watch-error-redaction-build/verify_closure.py
+          node --check watch-error-redaction-build/assembly-review-reset-candidate.js
+          node --test --test-reporter=tap watch-error-redaction-build/test.mjs watch-error-redaction-build/adversarial-regressions.test.mjs watch-error-redaction-build/existing-regressions.test.mjs > watch-error-redaction-build/security-tests.tap
+          cat watch-error-redaction-build/security-tests.tap
+          node watch-error-redaction-build/quality-status-test.mjs
+          node watch-error-redaction-build/runtime-check.mjs
+          python watch-normal-stream-build/build.py
+          python watch-normal-stream-build/verify.py
+          node --test --test-reporter=tap watch-normal-stream-build/test-staged.mjs > watch-normal-stream-build/tests.tap
+          cat watch-normal-stream-build/tests.tap
+      - run: python watch-crown-key-build/build.py
+      - name: Package exact verified build roots
+        id: pack
+        run: |
+          python watch-crown-v3-ci/payload.py pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: exact-linux-crown-payload
+          compression-level: 0
+          path: crown-payload/
+  viewer:
+    needs: payload_build
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [baseline, candidate]
+    runs-on: macos-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright && python -m playwright install chromium
+      - uses: actions/download-artifact@v4
+        with:
+          name: exact-linux-crown-payload
+          path: crown-payload/
+      - name: Verify upstream payload bytes
+        env:
+          EXPECTED_ARCHIVE_SHA256: ${{ needs.payload_build.outputs.archive_sha256 }}
+          EXPECTED_MANIFEST_SHA256: ${{ needs.payload_build.outputs.manifest_sha256 }}
+        run: python watch-crown-v3-ci/payload.py unpack
+      - name: Fresh bounded materialization
+        run: |
+          python - <<'PY'
+          import pathlib,json,hashlib,subprocess,sys
+          p=pathlib.Path('watch-crown-v3-ci')
+          for n,h in json.loads((p/'FREEZE.json').read_text()).items():
+            assert hashlib.sha256((p/n).read_bytes()).hexdigest()==h,n
+          q=pathlib.Path('watch-crown-browser-v3')
+          assert not (q/'prepared-baseline').exists() and not (q/'prepared-candidate').exists()
+          for pattern in ['RESULT-*.json','*-cleanup.json','*-driver-exit.json','*-ACCEPTANCE.json']:
+            assert not list(q.glob(pattern)),pattern
+          subprocess.run([sys.executable,str(q/'prepare.py'),'--materialize'],check=True,timeout=180)
+          PY
+      - name: One checked crown arm
+        run: python watch-crown-v3-ci/run_arm_checked.py ${{ matrix.arm }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crown-${{ matrix.arm }}-not-release
+          path: |
+            watch-crown-browser-v3/RESULT-*.json
+            watch-crown-browser-v3/*.png
+            watch-crown-browser-v3/QA_CLOSURE.json
+            watch-crown-browser-v3/*.log
+            watch-crown-browser-v3/*-cleanup.json
+            watch-crown-browser-v3/*-driver-exit.json
+            watch-crown-browser-v3/*-ACCEPTANCE.json

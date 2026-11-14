@@ -1,0 +1,12 @@
+{
+  "unchanged": [
+    "prepare.py",
+    "server.py",
+    "driver.py",
+    "QA_CLOSURE.json"
+  ],
+  "helper_sha256": "ac2fd3105a686b1485058a5d493d862106d811965cd95503ac5fe37cb72b3bf1",
+  "supervisor_delta": "import cleanup_both from coordinator only",
+  "tests": 4,
+  "run": false
+}

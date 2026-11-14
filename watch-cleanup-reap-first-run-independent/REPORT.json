@@ -1,0 +1,25 @@
+{
+  "verdict": "SCOPED_PASS_ONE_CLEANUP_ONLY_RUN",
+  "run": 43648081708,
+  "attempt": 1,
+  "commit": "36af201fcea19b1eb1ee05d619cb7bf5ac32f7e0",
+  "branch": "qa/cleanup-reap-first-20261114",
+  "remote_exact_10_path_hashes_verified": true,
+  "remote_compare_only_10_additions": true,
+  "remote_conclusion": "success",
+  "artifact_id": 14134817338,
+  "official_digest_matched_original_zip": "12cb3d3cc2da63ed07f0a744dcc43dd16018a0963e31bcc8bb97bb0cf92a012e",
+  "zip_only_result_and_extracted_bytes_exact": true,
+  "gate_replay": true,
+  "ordinary_elapsed_seconds": 0.15657245900001726,
+  "resistant_descendant_elapsed_seconds": 0.7818098749999933,
+  "cases": "Both initial groups present; no cleanup errors; leaders reaped; helper absence and independent after absence; final kill absent. Resistant-child handshake and SIGKILL confirmed.",
+  "platform": "macOS-26.7.2-arm64-arm-64bit",
+  "python": "3.12.10 (v3.12.10:0cc81280367, Apr  8 2025, 08:46:59) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "limits": [
+    "One disposable macOS runner observation, not universal cleanup safety or EPERM root-cause proof.",
+    "No browser/Playwright descendants or full viewer tested.",
+    "No retry/run or source mutation by reviewer.",
+    "Actual browser supervisor must integrate and freeze exact helper separately before browser execution."
+  ]
+}

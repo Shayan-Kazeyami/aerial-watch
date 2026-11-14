@@ -1,0 +1,9 @@
+# Exact crown V3 workflow proposal, not launched
+
+Linux builds original pinned normal baseline then exact crown candidate; custom payload transports normal+crown roots (303 files each;606 total) with upstream SHA256 manifest/archive outputs, existing path/size/symlink guards. No source tolerance relaxed. Two fresh macOS arms only, baseline/candidate, sandboxed Chromium,25minute job. Linux build bounded30minutes. Branch restricted qa/crown-browser-v3-20261114; intended one push only, no retry.
+
+Fresh-root/stale-result guards precede prepare.py --materialize with external180second timeout. Exact original298-file closures and telemetry hashes rechecked by unchanged prepare. Checked supervisor uses core V3 files unchanged except output receipts: stores driver process returncode, asserts0; both cleanup reports must independently say verified, reaped, group_absent and no errors. Only then checks functional RESULT and writes ACCEPTANCE. A RESULT.passed alone is explicitly insufficient; close failures/driver timeout cannot create acceptance. Driver1170s supervisor wait plus bounded two-group cleanup unchanged. The core run_arm.py remains untouched; separate checked supervisor is reviewed here.
+
+CI always uploads original result/screenshot/closure/logs, driver-exit, cleanup and acceptance receipts. Missing acceptance or missing/nonzero driver exit means HOLD even if functional assertions passed. Workflow job success plus exact head/artifact/source pins and manually inspected original screenshots required. No browser/native results exist yet; diagnostic cleanup success is not browser proof.
+
+Two synthetic payload tests verify606-file roundtrip, no-overwrite and corrupt-digest rejection. No materialization or browser run. Outgoing branch manifest/base and inherited workflow exclusions must be checked separately before approval; this package is a workflow/content proposal only.

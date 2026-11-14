@@ -1,0 +1,14 @@
+{
+  "branch": "feature/crown-key-parity-20261114",
+  "commit": "efe03c1ec074bb0ab71a794af25e73f0074a2a9e",
+  "parent": "c728d5bbfad8b35713ddfcbf4e660506099e601c",
+  "tree": "8e25034eaea9f05bc92a4f43dc7a36aeda19ceef",
+  "remote_ref_verified": true,
+  "compare_only_six_additions": true,
+  "unrelated_files_unchanged": true,
+  "main": "b84a51ec91b715aa70408e8bff6e988e29d93edb",
+  "local_build_closure_files": 298,
+  "local_tests_pass": true,
+  "browser_acceptance": false,
+  "deployed": false
+}
