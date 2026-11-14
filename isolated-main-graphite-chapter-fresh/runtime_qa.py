@@ -23,6 +23,11 @@ async def run():
       i1=Image.open(O/a['file']).convert('RGB');i2=Image.open(O/b['file']).convert('RGB');diff=ImageChops.difference(i1,i2);st=ImageStat.Stat(diff);a['candidate_pixel_comparison']={'mae_rgb':st.mean,'rms_rgb':st.rms,'bbox':diff.getbbox(),'warning':'Pixel difference diagnostic, not automatic visual acceptance.'};assert max(ImageStat.Stat(i1).stddev)>2,'blank frame'
     allresults[routekind]={'setup':setup,'cases':results,'pageerrors':errors,'route_asset_requests':[u for u in requests if u.endswith('.glb') or '.meshopt.' in u or u.endswith('.bin')],'cleanup':await page.evaluate('graphiteQa.finish()')};assert not errors,errors;await page.close()
    (O/'RESULTS.json').write_text(json.dumps({'pass':True,'scope':'Isolated authentic legacy/nonpremium route, runtime-generated target; raw/meshopt refer context asset routes, no packed q318 file exists. No public/defaultFPS claim.','routes':allresults},indent=2))
+  except Exception as e:
+   (O/'FAILURE.json').write_text(json.dumps({'error':repr(e),'partial_routes':allresults},indent=2))
+   try:await page.screenshot(path=str(O/'failure.png'))
+   except Exception:pass
+   raise
   finally:await browser.close()
 if __name__=='__main__':
  server=http.server.ThreadingHTTPServer(('127.0.0.1',8761),functools.partial(http.server.SimpleHTTPRequestHandler,directory='.'));threading.Thread(target=server.serve_forever,daemon=True).start()
