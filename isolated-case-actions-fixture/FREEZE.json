@@ -1,0 +1,22 @@
+{
+  "status": "EXIT_FAILCLOSED_CORRECTED_PENDING_REVIEW",
+  "files": {
+    "CPU_PREFLIGHT.json": "59a3b00dc6f37ae56e2129201c89646b4dd7e1fa587c9e3c03953ec32b19dfa9",
+    "EXIT_CORRECTION_TEST.json": "2cb4c98b94ff33359954b3e5a57800db31f3889dedafd7847bc15a2e7d1f561c",
+    "watchdog.py": "43cebbbdd920b75a0f6156379854f3f8e5a9b1b92b1bc1e79b28e5e937105848",
+    "PREPARATION.json": "c016464d95ea105b4ce05672ae6a5b27d163adc00319b34a89f93ee8accf5522",
+    "workflow.yml": "58a1465924ffbbb1dd0e3f4c5ab86107dda6689de82b85e7cadb4870595bc044",
+    "ACTION_SOURCE_EVIDENCE.json": "390d5289803d1485e2bf18a30ee6a521e418403a6fae839c099a65b49027a0a6",
+    "candidate-assembly-hybrid-case.js": "9fa88cfdef30a41b52f0f898ddbc3ce3eecbb0119c7c073d28e8a9ef659ec726",
+    "test_exit_contract.py": "f892ec8bdb40d655c4dc14cad654746270eeb0eb007aa3ff50592a8cfe59511b",
+    "browser_harness.py": "ceedcd37bff951d63d436580f8c7fa19df64fcf06772de521d3d01ea38b89851",
+    "verify.py": "ad9431e000f220135b2c1e86a2e301ebc4de4aab6ff1ed64b2d4f7c23df2b8a8",
+    "requirements.txt": "8fbb276a95debade15c5be60e4c05329200856deb993892ae4b95e3252b1dc2e",
+    "baseline-assembly-hybrid-case.js": "e1a1c2adfcc122c686a22b89db68f56ac02b96f6a6e00641d95d43c28c53dbf1",
+    "README.md": "2156cdc7b200dfa341b4d1c82e12771abfaef25edd5a72bb5f4326fe61e98432",
+    "CLOSURE_RESOLUTION.json": "3e246effd69e78942a04e934d08bc271e9eff6619f51d00eff16b7a49a2f4f01",
+    "server.py": "6ffba5afbdd959048d33220277827a8b79f604fd1c772ad91b7bd6c33c641a1e"
+  },
+  "workflow_runs": 0,
+  "uploads": 0
+}

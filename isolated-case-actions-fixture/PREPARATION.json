@@ -1,0 +1,13 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "source_release": "011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192",
+  "source_sha256": "e1a1c2adfcc122c686a22b89db68f56ac02b96f6a6e00641d95d43c28c53dbf1",
+  "patch_sha256": "1e95ea74b634639b886cb463a0e641012375c52099cf716f16dec6aaf316d37c",
+  "overrides": {
+    "baseline-assembly-hybrid-case.js": "e1a1c2adfcc122c686a22b89db68f56ac02b96f6a6e00641d95d43c28c53dbf1",
+    "candidate-assembly-hybrid-case.js": "9fa88cfdef30a41b52f0f898ddbc3ce3eecbb0119c7c073d28e8a9ef659ec726"
+  },
+  "browser_runs": 0,
+  "production_changes": false,
+  "server_started": false
+}

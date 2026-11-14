@@ -1,0 +1,1222 @@
+{
+  "status": "READ_ONLY_CLOSURE_INVENTORY",
+  "release": "011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192",
+  "sealed_manifest_sha256": "62d640d6eb4e18571aa715363c3ef4cff6274964215234f0b2a7d869d0200992",
+  "root_entry_pins_separate_from_release_manifest": {
+    "index.html": "98da344a29f73177d0da30423175c372427effd5e284e9024c495b56ec4b129a",
+    "watch-home-coordinated-successor.js": "4c841fb4acb2822493a2a3a0e5f75cd90ea4bb5c32bc4a580902745f429427ed",
+    "watch-home-loading-v4.css": "0db4e30c1e54f824152441bf5f566664df84ebf61d8996b8a78f9c4e271c5ee1"
+  },
+  "rows": [
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/ATTRIBUTION.md",
+      "expected_sha256": "221b74c381f9030ca0dcc73815cad7a7261a6f62eaa3c272fe5f10d42ec27e17"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-ao-shadow-reuse.js",
+      "expected_sha256": "a3d971b35a7a2ad71c3ad87f0731325d595d084cde14ccc1870e880043dee28b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-asset-routing.js",
+      "expected_sha256": "d506e86d541baaee7a13606ea202fbf9b1b7be0a9f0e8b77906945e744d547bf"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-atomic-normal-swap.js",
+      "expected_sha256": "76cd2c4197aa686eac37fd6724cd7bca1ea26dbbde288982ca6661128c6dc18f"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-backplate-finish.js",
+      "expected_sha256": "dc9cd2a4566b17bf920a65039c0ed76bffff43eccba7192c74c230a7618e652e"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-backplate.js",
+      "expected_sha256": "2d074b1e93189ccb54a2c5400f407c3ec29e949a714a0dab17f168c3789cf38a"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-byte-collector.js",
+      "expected_sha256": "8a12bc59dc66d34755e06157ce1f9685660fead14d892d901491a83b81c7e3d2"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-calendar-data.js",
+      "expected_sha256": "712bb6e31d46e42fe5d358f07e61134065b01339b969f119daac0bbf00c0a15d"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-calendar.js",
+      "expected_sha256": "1852cad11bd93380c16a031522a89780f8f742cefda1183ac82aa27b64fe5b45"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-cap-delta.js",
+      "expected_sha256": "65f2a6dcde41da1a3c21c6109f2d36a5d13b076455496c60c53354843dd5a26c"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-cap-refinement.js",
+      "expected_sha256": "e594336c5e370bcbf7bbb7f4da79efd0952e3b3152c7412c4e09685956592ac5"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-capture-detail-policy.js",
+      "expected_sha256": "6e603e1df0ddda2c6050b8d7268f9c1aee1395987e41f0fb6a2525c1c9f2d324"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-capture-provenance.js",
+      "expected_sha256": "8319fdc1ad86d5f416acd3e395340b6cd544777ef8a3e69c64c507e4d0c6cc7f"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-carrier-microfinish.js",
+      "expected_sha256": "f40afad5a3a0a9d435ad0822c2d1ca1079af9d668f75a52d46e659226bc2234a"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-combined-data.js",
+      "expected_sha256": "a5f2351ac06530cfe3953d5f53231e6fa06d0a786109f7faa34181282cc378cf"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-combined-delivery-data.js",
+      "expected_sha256": "a1776fd484fa465ee8db0ea160f13037eaf8ac8567fe38fbd52783210804e964"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-combined-loading.js",
+      "expected_sha256": "f208e5ea1ef43ab90fe079d88694952478d91bdcfc0a3edd089d62167ebfa7d7"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-combined-material-data.js",
+      "expected_sha256": "f6e34fcb1af5929dbc11da5046566e8ea7638b748ccb3b8d681b14e829b6aa5a"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-combined-material.js",
+      "expected_sha256": "135e700b4730639ecc5670b913bb835bf0af849db46165517f6aa433591699b3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-combined.js",
+      "expected_sha256": "27b1ced81e77de48261b01af289403b2157ca91e755e9702d31fb1026a597ca9"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-lug-data.js",
+      "expected_sha256": "741a877ddfce8427aee20add60f9100f0f33310234265ff3616619fb7305872d"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-case-lug-finish.js",
+      "expected_sha256": "0b2b107afd272344400a4fb94ccf4b71109b9c65be48b95596c9f5b9780739f1"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-caseback-finish.js",
+      "expected_sha256": "c31adc1ad1323f8dee5d0ca464b794619df8f1824f667b2dcd4a000ff51c29f8"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-chunked-texture.js",
+      "expected_sha256": "f98b553851063de9bff7305edb276da95a7f318b9bde761be3ec20ac0ac4dcd3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-clock.js",
+      "expected_sha256": "bd7de5fa62e5d1429ab2956e4caa095b7e6aeaf16c44e6808c4f8f1bc6859fb0"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-comparison-loading.js",
+      "expected_sha256": "8e1d587d4d3e44efe1db133db7d165305246f70cfd5e566144b30148f84cd171"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-component-labels.js",
+      "expected_sha256": "d8ab08f1ebe19f0336976669fb1b501676c0303e453a660ed25d028e0fe5cd4e"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-composition.js",
+      "expected_sha256": "7d84dd49632f98e82b87b0a451db22ea015c7a47cf2d58a95c31df129b2f7b89"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-contact-r09-data.js",
+      "expected_sha256": "9787373c4b15a29c29ae745d53150a0f0e59c79cfc7e5127c08827ce2f0b081b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-control-focus.js",
+      "expected_sha256": "455b33c30ff8ae652bdf5f7296f9be9cd9f46185eccae40aff39563141af7424"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-crown-cap-eligibility.js",
+      "expected_sha256": "a89a264fb57ad0d3a9e2839697e95606b80a2989506f8dacc57aae875943fe45"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-crown-finish.js",
+      "expected_sha256": "64f6b9eb5d13761f33cecad99744b6ed28ae2414eadb2e8d71f234041c57ef71"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-crown-hotspot.js",
+      "expected_sha256": "466237d3a426d186feb545e736c7d4c2ce7a6c1eb47ac2b137b1caa7d45841f3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-crown.js",
+      "expected_sha256": "515b4ff1c05729b52a0452d9a9a1212ef1cc9712c5a3eb3b7f40f00ceed70901"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-debug-benchmark.js",
+      "expected_sha256": "0066ca52f13392ab75f7032c12b3e1d9ffb6b0519f526bbc7bb01d2f6080241d"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-decode-full-ktx.js",
+      "expected_sha256": "fa3c82f6399abd07ab37bb4200f95410ea2017cc058fe9a668b3e8c347bd414b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-depth.js",
+      "expected_sha256": "8378fa6efa2a8a3281d12a9dcabdc97a2a91234185bc52ecf651481d82b503b7"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-design.js",
+      "expected_sha256": "32b157ec3a9718b48f07f6eb9a4cfc4e9be3883a89f8cf0c1c68b9ba2c3aaa97"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-dial.js",
+      "expected_sha256": "ab937535a37b229dfee6273e17560caf5b74c109527dcbd1e5a411e5930720d5"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-download.js",
+      "expected_sha256": "0949db5bfe23fdc0046dd42cec99428bb27032804d2a9112a078e1087bcfc374"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-escapement-data.js",
+      "expected_sha256": "031ce8a4f0b16a47b4ef49bb346ec3a8bd32095e78bbafce42392ab893c16960"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-escapement.js",
+      "expected_sha256": "1a14264d953673ca83bb5c3a0307a5a1a1bbf5bf928fba2370867ca1e6209946"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-explode.js",
+      "expected_sha256": "4feb893027cb9520e9c17ce47e5bdf70de9c8e0316ed92aca44e351203ed8f3a"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-fetch-progressive-normal.js",
+      "expected_sha256": "743d45d45cf82371364f842051ce6313fae41fb83b862897dc7f1fa24207cc40"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-form-details.js",
+      "expected_sha256": "06a203534ad7cd4ed7f00da2dbd4d8e552640c0e2726df488f14fb0cc75e65cb"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-fragment-validity.js",
+      "expected_sha256": "d0d8c962480c09a95ba0e2cf06f7c8fc0c68bdfa26ddb1797f38fd15f198fd9a"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-framing.js",
+      "expected_sha256": "d52fa25a427ab8b55b044ad6929871d9adec389e6317097cf1b2c3932d761af3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-front-architecture.js",
+      "expected_sha256": "fb0e99488e7bbdf62e4bb67965501148342cebbe66f1a74a67f00f055885db6b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-front-cap-normal.js",
+      "expected_sha256": "9e1e9ef3a9b96eaa3f2d3f263b4343604d4104b8e0bf58aa2514cf30b621f090"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-glass-ao.js",
+      "expected_sha256": "4cb0a8706f43935ea7e9af4d5a287ed44e4725710f709f793cd739323b10820d"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-gpu-pass-timing.js",
+      "expected_sha256": "a3f1afbce9111dfb9278be82caa895500d018b2a023ac991a2f4da5ec1bf9775"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-gpu-timing.js",
+      "expected_sha256": "43e11c450cf56d0eaa47c0c11a07982a32ee56af9f803f9306dbdfefd3cebc23"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-hand-clearance.js",
+      "expected_sha256": "9b5b7504904b54631783a2898217c0dca7a031bb7a569c3c36bfc4ed5752b427"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-hardware-canonical-data.js",
+      "expected_sha256": "b5a4467fe32bc3a00ab111ef40175bf5a2433b21ad33a53f4c93535daeece59b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-hybrid-case-data.js",
+      "expected_sha256": "3382aea8f6f0b20ccf72ecab5262c6463bb06998bd64f22a12ddf116f2bdc1e3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-hybrid-case.js",
+      "expected_sha256": "e1a1c2adfcc122c686a22b89db68f56ac02b96f6a6e00641d95d43c28c53dbf1"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-hybrid-delivery.js",
+      "expected_sha256": "9dd8ec111615b99a1e99822208f2aa093c38a2551c61d2cbde8f707f08e92100"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-image-export.js",
+      "expected_sha256": "6f4f26f31168e33373b20f76591d76e057dc4634553f20912dd3a91dc0ba19a8"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-inspection.js",
+      "expected_sha256": "2503a554da2caa8b6f042d31af034d1cc9a70601e034b6c3a5183e4ad35eaa59"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-ktx-leather-r14.js",
+      "expected_sha256": "ace6fffb2f2bdb93a47021adee581dce46d52df988ed225ae959a55d43fb0342"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-ktx-leather.js",
+      "expected_sha256": "9b3fac740f63abf0929c0f96a3c48352119bc400423c80f757420eb71a914263"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-layer-focus.js",
+      "expected_sha256": "fcec4a80a01e59a29a54853c6e6ed09806d43460ee312453d0a14cd8983a1612"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-lazy-detail.js",
+      "expected_sha256": "dcbc23cd712f21d6f1ca8c6dec5f0a43868ce141eaab71a6fa3d16486a1a3cd6"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-leather-authoring-identity.js",
+      "expected_sha256": "c6c8547f0a887236385add50b0764df379d7385efd1ac6f57a877719dc34e9d4"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-leather-compat.js",
+      "expected_sha256": "b3c181b44526c5e183f4a70f39646923badc73dbee87b5ddfae387f4fd0afba3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-leather-details.js",
+      "expected_sha256": "c8a7c7f7e5a102dd263cb85b9e753eb18cc932a01d2c2444a6d27080a17f7b59"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-leather-identity.js",
+      "expected_sha256": "767cde2ff509ad874e6c684dc74edf80b9c7e78990dc880a685abf82d6fcabb4"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-leather-microdetail.js",
+      "expected_sha256": "a5cc2d178cbc7a3e9cd6ac44444e7ed575c7421e93affcb186d63e0c2812272c"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-lifecycle.js",
+      "expected_sha256": "3bcd7f73c9b32f91d22e67a447c333f2ec90a272e9f2f38f26d1d5535c43dab0"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-lighting.js",
+      "expected_sha256": "4eb84849870b98aa3a26622c7e75bf162f61f16a9b35a42c979e65411723da72"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-lining-qa-selection.js",
+      "expected_sha256": "9bb531bed748fc46c67776000894c7d779f7a3583c5278a0f30f2b1a1e847e37"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-loading.js",
+      "expected_sha256": "5643997955fbe5367f7f54fef3fa7543a9c3b81d668663d6f8e9144b25e9d83a"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-lower-carrier-gold.js",
+      "expected_sha256": "bc4d8360500bbe1b80f7cd3bc336c25c9bcd954f3ed3003630edaaddea4ff7c4"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-marker-bevel-normals.js",
+      "expected_sha256": "21b95611b725620b1805103b76944a9fdaf54f89ab10d3d8804b7262b960b6cc"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-materials.js",
+      "expected_sha256": "e338b7b7772d17da4d0562bf7fc7bbd88d59baee1cf10e37aad1dfb70debc979"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-mechanism-batch.js",
+      "expected_sha256": "d4e96a759b8596661db1db700def0b33ba2680b01b48465cb778b3a388d7cf87"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-mesh-registry.js",
+      "expected_sha256": "20c5ed8a98a85a97599b1b723b55502b1069b121366a94327219c168094c2443"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-motion.js",
+      "expected_sha256": "a4c6f5e6f9ae96f226c73a90aaf3ce8d784947b72d5f73e5c56f40324f95adf9"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-native-ao.js",
+      "expected_sha256": "29e8b3e10a35238a148c1971bbcc06d4a7247528ad3cd441f0552078e495a517"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-node-carrier-microfinish.js",
+      "expected_sha256": "b158e7b80ce92a0881831fd4a7e552d50fe7d6d816dbfa6ef9d94c0f02ce8f66"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-node-finishes.js",
+      "expected_sha256": "c9a5aa223c604b486e7912a971a393b3a6b7c843042081591f068aea5c2769cd"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-node-leather-microdetail.js",
+      "expected_sha256": "0417c4596bbe49ac2f6f1f95fcea76a955f548dd7748101ed60fae606d873ae8"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-node-lug-finish.js",
+      "expected_sha256": "5d571ebc10183a5efcca06764151be0504c37053cec3fd565dd7ac6e771e352e"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-node-refraction.js",
+      "expected_sha256": "184d5c2d6ec73ee9c4c7cdbed826e6ba6bb0d9012f4c2ba84b7142a34f323089"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-offline-video.js",
+      "expected_sha256": "69f54704529e488ee9db298a1870c5b9eb747951a42e5d240ff5c3ef603734a5"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-open-front.js",
+      "expected_sha256": "4e44c427a788dfb52fcecd6d0154f3ad69497347ea8c046563d5f56436a693eb"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-optimized-loading.js",
+      "expected_sha256": "11cef9b57b453fbfb09df94f5f31883d40deceeeb5ad0bdae158aa9b048cd37a"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-overscan.js",
+      "expected_sha256": "47f70ac0ac4e965ff2c7e0bf7fc3c29627a49876cb126a00f3e430aa10b68fba"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-parametric-case-source.js",
+      "expected_sha256": "063e6cdc7eb3ad59d9f4144d5f37831c66b4995e8882a0fa5fa32c0028d1b0a8"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-performance.js",
+      "expected_sha256": "3558ccdf4105a5fdfd301e0ff117d611576ed2e17811ffb8de82eb26e9af8848"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-photo-leather.js",
+      "expected_sha256": "d8b698cea04d295c996f4fbc178de2670d2748a9c58ca9c99ae71739aa887a1b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-premium-face.js",
+      "expected_sha256": "42f926a5609fe4ed7ae5010471e8e46be703187133dddc2823d216a116439bd9"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-premium-tick-batch.js",
+      "expected_sha256": "d6cf1d9d6fb743504ef4cab78baf422463e766630a95c2f0303fbb6296f37baf"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-prepared-asset.js",
+      "expected_sha256": "ee279e8f34b5363a84f1ce1620f4308946bd513030c2db3449e5bfee8f6c0d49"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-presentation-gate.js",
+      "expected_sha256": "040007f76103e715a46e37e568f120f737b0657dc6aafc5c326a24b57e535487"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-progressive-normal.js",
+      "expected_sha256": "72fcf36738bbc515cbda2f8ea8b408be7fe231ea95b4ddeecf5995eeb9068c42"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-progressive-upgrade-controller.js",
+      "expected_sha256": "46e5dac151efc4135414b9c98abf44b4c562bfd64901c9c907538c042bd77067"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-projection-cache.js",
+      "expected_sha256": "3bc1a7400eaf3515f401fd77cf81613062601cde0890ca013bc79e6c240262a7"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-quality.css",
+      "expected_sha256": "cbc3f5a59a0bb46aa5c45fc2e907d58d3a5c54cb2925230380fa7fb1a788e602"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-receiver-plane-finish.js",
+      "expected_sha256": "69a7df1fa8d2f6ae214b3865bf66d9705a5472c9de52fc2be4c726385b9a831c"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-receiver-plane-shadow-tsl.js",
+      "expected_sha256": "7ba572e95c7f260340b2f6b77a4276d283060cf8e4a7f50c4360ef40d4a3088e"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-receiver-plane-shadow.js",
+      "expected_sha256": "3398dbf4a8e55c185c0f8fc072d0257042ae24343a42dda338781be5e2b72faa"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-recording.js",
+      "expected_sha256": "5f8fc345104e03e87e358bcec9f24d19d1ae0cf0c7769e5753bb96cfcb7d4b4f"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-refraction.js",
+      "expected_sha256": "2a2d0a471ac6c6df95abb668500bcdfb9a624a2889f13534b6ce4a04e2142c9e"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-render-pipeline.js",
+      "expected_sha256": "a04b786390e8d5de6e1144c10f824a0e31e1599116ea966842f60d60ee99ee7b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-renderer.js",
+      "expected_sha256": "6e51b9928e3cb0771b42915697faac84219d796934b372a7071fcf7007e96860"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-resolution.js",
+      "expected_sha256": "3ff3130b3664bc9319c0559d42ad1a77f5a33f1c494081536faf3a93fb029474"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-resource-accounting.js",
+      "expected_sha256": "c71c8b60c713933dcf43fd6db11acc80b241dc2ef06dedf5c051c46af085ce2e"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-review.css",
+      "expected_sha256": "6a999e85733c3b415ec5fd6505fd259c727c6f6eb0c1c046045bd8224a00bb45"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-review.html",
+      "expected_sha256": "97043339443b8defa34ceed03c0596c696a9829fd04c7bb8d2bb961af6b074fb"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-review.js",
+      "expected_sha256": "f890d65acb36f7bd3da53e3c5e5ed78b62a803bece14f196041696efec359a22"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-screen-visibility.js",
+      "expected_sha256": "83e09c2fb79d1831d63c8ce33cc33a7ddb52f8880bf1d2f6defc84b674e90985"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-seconds-details.js",
+      "expected_sha256": "3f4c703945fc78feadabf856b2e64128aca001887415bc2cf4afb7c01453ffb2"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-setting-carrier-r09-data.js",
+      "expected_sha256": "773fcb36b08d4c557f6fb4ed33749f3a04d736af8f19f360823bc7752dcd94a8"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-setting-engagement-data.js",
+      "expected_sha256": "3802ce73cd545e9a872847b3f2dedd14a334b484b36b7049e34bb2cd9f8261e2"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-setting-engagement.js",
+      "expected_sha256": "9bf3abb9c89b1f827f151f7916a8215738e115a56b3090933e440e567d4ae14d"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-setting.js",
+      "expected_sha256": "954a7622e2843a1122d66de999039de0c55eb3fe8ea3d1f5eb0c7b6768f93fdf"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-smaa-readiness.js",
+      "expected_sha256": "7c316a49fb2570156d687625b8050ca09a47a450c9b4041f52944a8e92474d42"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-spring-normals.js",
+      "expected_sha256": "41c5ac718caa50c43ced0af5578ef16f9db78a7997d19071843747fb5030816b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-startup-diagnostics.js",
+      "expected_sha256": "3a1aa322dc290cfee0649047520642acf7a0ad9c00fba9f5c5e01320389809db"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-state.js",
+      "expected_sha256": "de831ede1c4d40b727ef31b7611774d7c429014c839fb973b5c449959b6782f1"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-story.js",
+      "expected_sha256": "cc19deac072a538faeda16faab4748298232fcf7ceb8c7660bc848dc2a6e1be0"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-structural-support.js",
+      "expected_sha256": "cedaca1218b46768e0c1b97a6a66323b2d772ed01125b9c78994470da65c7b68"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-texture-upgrade.js",
+      "expected_sha256": "5ff8f724d6719a3f99e9af67bd7280022eedc7b7e045086611c91b91cab3fb87"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-video-dialog.js",
+      "expected_sha256": "ac5c997ddbb84e05e49cc15e104eefc25631c051d46b94af5c04068e2be2a437"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-video-export.js",
+      "expected_sha256": "c9dc5172e728a7db2be2c0f4a47f6a50a8af66a664aeb8f1701738ede11e23c1"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-video-frame.js",
+      "expected_sha256": "8f3ff2e3a78f3ac7baf30fed81a8f8b33a4794592069f22cc300864bc576fe58"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-webm-muxer.js",
+      "expected_sha256": "277c6cf4c2a9bffdfe3f83a7df554146161af3a79458d9162c5c88bd787bb58d"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-winding-calibration.js",
+      "expected_sha256": "f010afda424b7cbb58da7fa5c0a6e4a23dd5e15e99e4b1ff9969245f8331cc06"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-winding.js",
+      "expected_sha256": "6b98fac61688c7c4900b1e1ad80685c157fa286a0d86667a6ed832b5f9d43415"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-benchmark-run.js",
+      "expected_sha256": "4cb5434e69877cef67876614b5407c04f6be6d4ed128b709526e5799d58f0ba6"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-defaults.js",
+      "expected_sha256": "0c2d9eea25f1f5b3e316daa70321958006d9f2afa85c17189123fede7afdfc1c"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-error-details.js",
+      "expected_sha256": "d3625d722ca27ff54d5b5254f8671342764aa26b50ecb57d2592c17ab6a675a7"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-first-use.js",
+      "expected_sha256": "66d28f1eaf0306f1d01fc745a9985ea035db35bacc4b7a77a1d359e39e63782c"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-layout-study.css",
+      "expected_sha256": "60181885f05ec3265d6ba338741297898ee2a6c88d619377a6512949cc1be9bd"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-layout-study.html",
+      "expected_sha256": "1dbed757bc3d3243d4a52ac778793720ec23baba221a87bee7936a11c3c9cbf0"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-navigation.js",
+      "expected_sha256": "e474f4b534e5f64c2d8ab553f2ccbb5cad7e4885971a179c6b4b143403c24d75"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-preview.css",
+      "expected_sha256": "9be7d9787c8891a76761d08571b57674bcad72fa37e2db17c425a6ee13966ed2"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-preview.html",
+      "expected_sha256": "69f006d211fe635a18771aea192e23dab3296b4cdf4566cf621ccd27757d4a80"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-preview.js",
+      "expected_sha256": "9cfc625a30faa2d93cbddb12cf9507e66d50742cee41bdae151b078d00b223fc"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-renderer-tools.js",
+      "expected_sha256": "924f7fbbe30332cccfb6cc284be49e4180adccab6f62cddafcccf2cc39180a4c"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/avif-detect.js",
+      "expected_sha256": "5b08f5b8198c06a53cc70ee1372793419b247cb2d6a684834cfec17bf27474d8"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/hybrid-case-assets/hybrid-cap030-density-r01.meshopt.glb.gz",
+      "expected_sha256": "9b90e16e2af689c32861936a0ec2e95a773edc5b541c5527fcde3bb6285d4f68"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/hybrid-case-assets/hybrid-innerseat-density-r02.meshopt.glb.gz",
+      "expected_sha256": "6a4dd2a706ea8f0294bb9e9d3fe97d4a2bd50769d1bccb7154bc611c68947dab"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/hybrid-case-assets/hybrid-lug-density-r03.meshopt.glb.gz",
+      "expected_sha256": "dcd654024fc7482c303a2bf0dae1ebe8cdafb53583efdf18278fb72c72343446"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/hybrid-case-assets/hybrid-structured-flanks-r05-candidate.meshopt.glb.gz",
+      "expected_sha256": "cdd28825beeb1d9622a3613d4ad99054030852bd0ff21337582f04f432936ae9"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/index.html",
+      "expected_sha256": "fd9c81d7f59948451fe64f62b14170f8472678b09a20d72184f6262d214e8748"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/integrated-preview.html",
+      "expected_sha256": "8321f2ebcab6ccfe343ff23f7f7fe4c4b64199cb89653d073597a5fce73e3f93"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/lean-release-build.json",
+      "expected_sha256": "7937b27289eb5a33cc8de584186e44b828e8b58348c41609540e74fea8108ce7"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/color-avif-crf12.avif",
+      "expected_sha256": "ba638c19b57ce56ea465d186f60b24fb3b3ce21c2cfeb4a67a8c9b8ef461e26d"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/geometry.bin",
+      "expected_sha256": "f7e7a7638b7ac58a3d3f568cbbcc0baa989d840d9b989e10b0c72485298ed0d5"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/leather-qa-avif-gentle.gltf",
+      "expected_sha256": "fc9c673b9f31c9381b91932bb1a0b29d7011e00216ce16a44dee5456d88abba3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/leather.gltf",
+      "expected_sha256": "c233a708650f881fd1f3b5040c4e72d2359a6a4cabe0fadcc9ca90b5b5f08223"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/normal-2048-existing-mips.ktx2",
+      "expected_sha256": "5d8aa10702589424c1157d9a58a7f75aca265569d7c8fac09525a00af19455bc"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/normal-avif-crf6.avif",
+      "expected_sha256": "b7d92d289d6dacb6ad315afad3afad8ce2a9d67dd1aa60abed3fe1593a3a7156"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/original-0.png",
+      "expected_sha256": "60c33423b7fb9dc748e06ce022ff0b82b6f6b0f4b15aeb53d2bc05982158a3b2"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/original-3.jpg",
+      "expected_sha256": "05fbfb35f3a61a40b8abbdb8422e99e8f453d177b3439cd0b21078622c2da543"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/original-4.jpg",
+      "expected_sha256": "fe369bd4ea07f966305b79fd7b2a4f255ecf78466864eb44792a1ccbc50f3dc2"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/outer-color-2k.ktx2",
+      "expected_sha256": "4ebf01a5717e5656f92cae1e7b931971b1d15253e19c1f223475214997a71ecf"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/outer-normal-2k.manifest.json",
+      "expected_sha256": "6a7248b5f14b53943954172be46c0b1e279df6eada4895d5dd641f7b4c366aa8"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/outer-normal-4k.chunks.json",
+      "expected_sha256": "5719632d601fe61135fe6d3ca7df668bb089e940ad7816bb9d966864bf55a7c3"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/outer-normal-4k.ktx2.part0",
+      "expected_sha256": "32f662b3984b3efaf87889db2c8d0ba0779593de08390085d3d414ea0eea5a0b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/outer-normal-4k.ktx2.part1",
+      "expected_sha256": "e80c0155d8346517e1c6c0b46def43e06a97e21b1ed64f18d17b4fc64c816c49"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/outer-roughness-2k.ktx2",
+      "expected_sha256": "9261b65e6caefa5041c92223e78583e8f9fdf7eeb473efd13a4572711191f2a4"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/roughness-avif-crf12.avif",
+      "expected_sha256": "37d8153bb03c715298de58545c223315084bd0a6d553db112a5f2e829b11626f"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/thread-fiber-color.png",
+      "expected_sha256": "d3f867ec4538372b8ccc1b5af10210f51649b62fbe4ac8fdf6a981a45a558edc"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/leather-assets/r14/thread-fiber-normal.png",
+      "expected_sha256": "60d73df5bedce2ceab88a3c407172c8e9202bbd6824f475fc36446f63d65658f"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/lining-fallback.js",
+      "expected_sha256": "8a313f5da3aebf229a92ef3e9aaa4baa05f1db559dfd75012f867d7a6b176358"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/material-review-model.js",
+      "expected_sha256": "44f7d8a111dd797ef523350bc5752e7d7d8355f819ab7f7c13dd1f839d9b9f53"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/material-review.css",
+      "expected_sha256": "72c1073cc063255ef61c9bed06479caf11b4720d8f0cc3b70b28922daf1c66e4"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/material-review.html",
+      "expected_sha256": "8953609581faa471acd3ad4235a587fc1c346a62bb0126aa1f2c56c1b586ef9b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/material-review.js",
+      "expected_sha256": "0c36f091f9f84921f83b99a42cec6cb7c10bc2b11bd68734a3fdf23cd9de6c9b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/optimized-assets/premium-face__face-svg04.meshopt.glb",
+      "expected_sha256": "451bd45dcfa736316bf381320b9031c52cfbd4fc028712b86bf97c38919fe689"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/optimized-assets/rebuild__assembly.meshopt.glb.gz",
+      "expected_sha256": "22877fb671c582361f0613953d1ad065bbf3b2d9e6aa55595e2a6233797587b1"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/premium-face/face-svg04.glb",
+      "expected_sha256": "9766f3b04c56d698e52b999771ea494ac5ca49341da2ed8b22ec57fd6ac2a51c"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/quality-study/viewer-revision.js",
+      "expected_sha256": "a5fa9bb9cd61c9433a148da51995c3685c81b2fa39e29dcd401644e8ac3d6fb4"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/quality-study/viewer-revision.json",
+      "expected_sha256": "55bb803eb6cbdf996ffce6c0eeefe3609631d9950e6167c2e9342f76c29ad926"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/rebuild/assembly.glb",
+      "expected_sha256": "6ac638843c56eb4ae2f3d9ee1135facaac085ae70e2292f2b3d30f9673340039"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/release-redirect.js",
+      "expected_sha256": "b8535d138d38a6750e48cb0089382bb3652800a7908b33f3864c9d1f5657fbc2"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/shared-release-build.json",
+      "expected_sha256": "6c168ba213231b3218e2bf47499e6aa143b6deb9187ed23e7361114f94aae463"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/studio-console.css",
+      "expected_sha256": "f1e5dc0cec15e1d73eddb0defc4a7a3db827844ca9309dbcac151b56f82ea64b"
+    },
+    {
+      "url_path": "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/studio-console.js",
+      "expected_sha256": "a2fece20e5a2b34ff66955cde7bd2a6f92fea9925ef169009ed3fe16b9087011"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/aerial-assets/aerial-concept.png",
+      "expected_sha256": "9c822e4e66d662fbc45cf509fba2e207a8e1f6718674ecc6397fe039b5ee0561"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/assets/manual-a-parts.json",
+      "expected_sha256": "0b69ad7ad2d9a19760d75add06909ca221f36f7bdd0a0dbd457c1d38f4e26abf"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/case-assets/body-normal-g32.png",
+      "expected_sha256": "d2253fc092713bbf8f36d2af529c20bfc0951cd639ee09da0263edaefbdfb1cc"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/case-assets/case-combined-r5.meshopt.glb.gz",
+      "expected_sha256": "ef03d6bfaf3bd84e255cfa4ebef2eff38f828a92ae175a42cefd0c4f6b63473d"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/case-assets/planar-normal-g32.png",
+      "expected_sha256": "b920a869f29ff3b6601b0da59cecfd18d9889b25dd22d0a5a4a8e22c4a3b4a45"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/case-assets/planar-satin.png",
+      "expected_sha256": "fbede97f9daf6294430708de7a3ab1a907ce9f163ed2f6e347711467d6247e28"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/case-assets/revolved-satin.png",
+      "expected_sha256": "52b22fe07371b5681c6a2cb48855f1ddd5f0d5ce98640b71931876704ce547c7"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/docs/OM10_Release_notes.pdf",
+      "expected_sha256": "56f0ddc8e712d56dd1662c45de1f1123c9df3f216e6906c16d81cf000d82c57d"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/docs/OM10_Technical_Information_20210314.pdf",
+      "expected_sha256": "35feb63375bd066122e58428259f28c37306030e77db44e23b95c5fd00bc1246"
+    },
+    {
+      "url_path": "/preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/leather-compat-r12/geometry.bin",
+      "expected_sha256": "0a604095b96b3fc3b52db734d91861803391fa796e6039d13f25941d053e6040"
+    },
+    {
+      "url_path": "/preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/leather-compat-r12/leather.gltf",
+      "expected_sha256": "e058c0231c4837ace3c389ac7f06dcc86844d8f28f9402120440dfac715b9084"
+    },
+    {
+      "url_path": "/preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/leather-compat-r12/original-0.png",
+      "expected_sha256": "60c33423b7fb9dc748e06ce022ff0b82b6f6b0f4b15aeb53d2bc05982158a3b2"
+    },
+    {
+      "url_path": "/preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/leather-compat-r12/original-3.jpg",
+      "expected_sha256": "05fbfb35f3a61a40b8abbdb8422e99e8f453d177b3439cd0b21078622c2da543"
+    },
+    {
+      "url_path": "/preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/leather-compat-r12/original-4.jpg",
+      "expected_sha256": "fe369bd4ea07f966305b79fd7b2a4f255ecf78466864eb44792a1ccbc50f3dc2"
+    },
+    {
+      "url_path": "/preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/leather-compat-r12/outer-color-2k.png",
+      "expected_sha256": "402da467baa9000edb54f6e8d1f67933b54018f0d763db5c99310bbf0f0e9e3d"
+    },
+    {
+      "url_path": "/preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/leather-compat-r12/outer-roughness-2k.png",
+      "expected_sha256": "3364286c7869d202131dfd14a477017742d144c83e24b4ac7f36c0e03a058955"
+    },
+    {
+      "url_path": "/preview-b/releases/9c055e4777a79c7987dd6cd5ccabf9f189121fd6c64e2f54853aa694827add06/open-front-candidate/open-front-plates.glb",
+      "expected_sha256": "47d596c1a25453c37eeb84fb3ed1ee4c190ad0b3f40d067cea16e6d46cda490e"
+    },
+    {
+      "url_path": "/preview-b/releases/a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054/open-front/open-front-plates.glb",
+      "expected_sha256": "3e3bff2e0b56c4e67633f1ff64e49aa5375ae524ed04ec9e3fff2aaf468d9623"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/optimized-assets/README.md",
+      "expected_sha256": "728e4389037c7bbadb7229a2f9014f27278672e86a0c1f12511e69fcd8e62af2"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/optimized-assets/audit.json",
+      "expected_sha256": "58d1fbda95b1f21dc7f13e65dc4fdfa337432a391f7961b35624ae1c489bb490"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/optimized-assets/quality-study__leather-craft-r11.meshopt.glb",
+      "expected_sha256": "215ece1f0f56391a380eabcac9c3ba2fceaf16f934a1e820b8f106ce2b9a2180"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/premium-face/face-b-render.png",
+      "expected_sha256": "df7b41495313716cddf99a5031235536f890419e37b784c9dd48441164a7b20f"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/premium-face/face-b-render.webp",
+      "expected_sha256": "47e1c73c063a9fd9a3e7c9332aee683f249b160f2c19227dad145159f047e757"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/premium-face/face-b.glb",
+      "expected_sha256": "0b092d6c34ee99a2077a5529a0f79bb34f63ccf0ac6d084aefc646e49f5f2e6d"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/premium-face/face-svg-b.glb",
+      "expected_sha256": "abbc5f488332890d5f45da2e81ff2b986ddf23be2d119db527504dc2596bf667"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/01-front.png",
+      "expected_sha256": "8ce1af5478a492715b6dc7b5116a374aa51a5430432d84ca3aeb1286c37af77e"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/01-front.webp",
+      "expected_sha256": "1bfdb5cae5effc89eae4d43a742631c9074e443acd91bf8362c0480db2258a30"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/02-three-quarter.png",
+      "expected_sha256": "f8b914aafc6ce8a3ecb756a3ee6b52d0eaf4f93993bea6e9d518587e43b56916"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/02-three-quarter.webp",
+      "expected_sha256": "ece8c11f32185da5f776c1297bda34559e64e5e36f27c097a8cebe6efd8c5b94"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/03-interior.png",
+      "expected_sha256": "7820d298721832551b64f4cfcf740c9bc9b7e308927af409954437017fafae87"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/03-interior.webp",
+      "expected_sha256": "b932cf76b5831225716e6f5d3cb42950d4a0943c653b2174eeabd8567ec166b0"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/04-balance.png",
+      "expected_sha256": "eb0f16937ffa4200c5912a39759fea27b34aaf921ef2d2793011f9000644225d"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/04-balance.webp",
+      "expected_sha256": "25417b35ddb8c6f40ccd7b53584aac8d3d337112f9b3cea56b1ecdca40ace659"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/05-train.png",
+      "expected_sha256": "09d39ec75cdd72ba20e00bac3558a66731084fdcb453f2d33f073e05e639106d"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/05-train.webp",
+      "expected_sha256": "185575715dd3642e2cb2f746733d74f14ffa1d9bfd74d2e8696bb60a06dd2af0"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/06-leather.png",
+      "expected_sha256": "d99a7c5ba348eccce6ff59974e425065c04f6fd99cf5bba2e89874d1adab0fb5"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/06-leather.webp",
+      "expected_sha256": "104b0f5f7b16ad282de71351ff1bf3969f9e979d01785c5764fa1a696f6dbc55"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/face-svg03-rim-candidate.glb",
+      "expected_sha256": "12ebd6f6b764934be12bb598b56708f18c561dea3f434f69311a2feda5416cf9"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/form-legibility-r01.glb",
+      "expected_sha256": "151d5afec150fcf4ab996b521a8ff5eaa4a1e87e9c40cd827406476ac906fea8"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/front-architecture-r07.glb",
+      "expected_sha256": "2dae59d17213351fa310ede3b8713dae3d3134cca2657fc0d75996f555bacb2e"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-craft-r05.glb",
+      "expected_sha256": "e1f986df1f021edc73822b605e28586769a9e21edc66740fe15f6ec31784e5c3"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-craft-r09.glb",
+      "expected_sha256": "4729dd168c80be314c22deaad09f8447b4ed5388a9d43016a1a3688203e2271f"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-craft-r10.glb",
+      "expected_sha256": "ba6be0bffb7fc66dccbbc3adc26d3e5b076c67a8a23503d491d44c2bb7f7e566"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-craft-r11.glb",
+      "expected_sha256": "70c3283736160d2ac085fa79c1111f402d869bb84d410b8ac36f487c3acb8348"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/geometry.bin",
+      "expected_sha256": "0a604095b96b3fc3b52db734d91861803391fa796e6039d13f25941d053e6040"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/leather.gltf",
+      "expected_sha256": "4eaa141d1419adc0964b50f0eb442eb52fb2e16eddcac59514e07a3fe98f424a"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/original-0.png",
+      "expected_sha256": "60c33423b7fb9dc748e06ce022ff0b82b6f6b0f4b15aeb53d2bc05982158a3b2"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/original-1.jpg",
+      "expected_sha256": "f963519903cd96dceeaf02366ab93d09274319f79b51c669ffe881bf1dc81e24"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/original-2.jpg",
+      "expected_sha256": "b539095fff2cebfc57643edfcc98a8085b8c491733dd66bb0c891e9cafa1f922"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/original-3.jpg",
+      "expected_sha256": "05fbfb35f3a61a40b8abbdb8422e99e8f453d177b3439cd0b21078622c2da543"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/original-4.jpg",
+      "expected_sha256": "fe369bd4ea07f966305b79fd7b2a4f255ecf78466864eb44792a1ccbc50f3dc2"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/outer-color-2k.ktx2",
+      "expected_sha256": "b5de8731ee38853231c8e6cabcab756ee7315fc4a14663ac1daa79d657272748"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/outer-normal-4k.chunks.json",
+      "expected_sha256": "4208673ec075ee1dfe8f0f64e66aaa2086815157d2ebe282a7584b4ca0a985fb"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/outer-normal-4k.ktx2.part0",
+      "expected_sha256": "c0b3b48813713ab246c6bbbc5be65a69a8e0bdaf5f4fe5abb6e9b22223775223"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/outer-normal-4k.ktx2.part1",
+      "expected_sha256": "e84873e49464b2b7f9f4a0e4110b94a6a6c640ef7bfc2397744e8c4f4705fd27"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/leather-r12/outer-roughness-2k.ktx2",
+      "expected_sha256": "da9eace96c511ddbe92a426b77498a386d4261e2f998b1865dfefc3edec29ef3"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/native-front.png",
+      "expected_sha256": "636d2e2d91ff156b84e931b70741ff764f8bc372ecb1c056320b020a092ceecd"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/native-front.webp",
+      "expected_sha256": "e3c264840bba52e4fa23c80340c8cb0dfe0809139613b0cbe7c93f454fce770b"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/native-r03-svg04-finish3-front.png",
+      "expected_sha256": "85cfaa56f455d9f277c3fa35e200de1ac843a9fa880e4c7be9d3ea09cacb395e"
+    },
+    {
+      "url_path": "/preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/quality-study/open-front-plates.glb",
+      "expected_sha256": "844568617545e79b484169fff68b8ab70f7ad3cf4dc54d7e268a5c28961d01b9"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/rebuild/assembly-report.json",
+      "expected_sha256": "455d38379e2fa3bb0a7c0a34d73f80efc3d95136597b656e34780c5548c64e0a"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/GLTFExporter.js",
+      "expected_sha256": "569793baeba62baeb4ab0b3619b6b1495b45d4b2ba9690430497adb58307bdf2"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/THREE-LICENSE.txt",
+      "expected_sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/THREE-R187-PROVENANCE.json",
+      "expected_sha256": "6f613e737095b6b8a59618c2611da1de9f49a23bf350f8af662193e38b40d66d"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/THREE-TRANSMISSION-MSAA-PATCH.md",
+      "expected_sha256": "9042ec738c8aa5cadf097d909ed90ced858c54875081a6e155fb31af7d4b22a3"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/controls/OrbitControls.js",
+      "expected_sha256": "e7fca2fe9e7670a828af9b28084669a5909445b7f36f1f26cee9bf8f2961c32c"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/environments/RoomEnvironment.js",
+      "expected_sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-NOTICES.md",
+      "expected_sha256": "f94b2fec52b7fe4addf5377d958944c5034e4ecd5cccfb318236966f99b96e3f"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-licenses/BASIS-APACHE-2.0.txt",
+      "expected_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-licenses/BASIS-r180-README.md",
+      "expected_sha256": "930b11bbbb742b2525491b0964f0462d63d8b21383c0623ec4c98c43d53723c6"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-licenses/BASIS-r187-README.md",
+      "expected_sha256": "a578df416c1e0852e9c36a1cf91b4d28d91a251294f87ce610a3bc7ca4df15e0"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-licenses/BASIS-v1.50-THIRDPARTY-BSD.txt",
+      "expected_sha256": "849b4babf98a7400533c3e359ebd372b3d29b252eb2e466abfff80940b480188"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-licenses/KTX-PARSE-MIT.txt",
+      "expected_sha256": "79847431f9ecef9cf399085cb863452e71a6dab99738f4f0c1ea06c6484b5692"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-licenses/ZSTDDEC-MIT-ZSTD-BSD.txt",
+      "expected_sha256": "8d078b49fc02bd63c1beaf4ddc629a8b48e4ba6a435415408c8209e2a5c3aacf"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/ktx2-licenses/provenance.json",
+      "expected_sha256": "e37844701268964d0a095fbfe2eedefe668c8ceb68d2a2ffb7778b3e2e7f2a13"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/libs/basis/basis_transcoder.js",
+      "expected_sha256": "8478b5b6d6b74e7d3082b89f6417321d8d1dc0307f2b30d4484bb11b441696a1"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/libs/basis/basis_transcoder.wasm",
+      "expected_sha256": "6cf17dc889352c42e9acf8897107978d127005fe3386c36a0e3845e27967630a"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/libs/ktx-parse.module.js",
+      "expected_sha256": "f40c491f6c44dde511268121f778a0050e73b1a15fd844c1ae2c78c73213eafc"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/libs/zstddec.module.js",
+      "expected_sha256": "5cbf818e842628a4464e748594a6deae18ceddda3c2f541e7b3a0ff5fc7611e2"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/loaders/GLTFLoader.js",
+      "expected_sha256": "532ac726e120039acbcd6cf54328c57acbf7b438176afaa6951257126d11bff1"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/loaders/KTX2Loader.js",
+      "expected_sha256": "468143c5e5e6a3103eb262963c80a19c0e1a6490df4b6cdf383420b59c450942"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/math/ColorSpaces.js",
+      "expected_sha256": "cc35c01c793cd17ccded7bc8142abffd3ce0d60dd6de8d5d216983bd05aee262"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/math/SimplexNoise.js",
+      "expected_sha256": "4b1455617135e6b477de76244de07547d95570643379b72f4758e50161b06072"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/meshopt/LICENSE.md",
+      "expected_sha256": "e4a26033e3551fb2722888949fbb41e77aee628e8e8f04dcffeee301aa7e5634"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/meshopt/PROVENANCE.json",
+      "expected_sha256": "5a09f45fc0393971a2b9865e2e01a4693bb9ec96cb083f02d88251e7ebc1e050"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/meshopt/meshopt_decoder.mjs",
+      "expected_sha256": "97901fb3d2d296eeea2a57348a734ef0a17e35f2d4aea5a65223635d3f0e1709"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/meshopt/meshopt_encoder.js",
+      "expected_sha256": "e79ba4a73a758f315ab153dc50c389c7b0bea2b5c1fdcfcaa62ad6d0c27cb25c"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/EffectComposer.js",
+      "expected_sha256": "4e079a5886152d7e529a59aef644e968ab4d32c6a33ce016b36bf29b2eac26f7"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/GTAOPass.js",
+      "expected_sha256": "78f278563029f53a97c662bf9bcc5bf89b12b3e9ab2b80270dbb53c2d0a81162"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/MaskPass.js",
+      "expected_sha256": "7cd08eee9d5d6f5578beaddbdcbe9c384f6873810af27f22ab7db3ceeb127aa3"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/OutputPass.js",
+      "expected_sha256": "02e4a261af34de71338185e9e87f0cbe5cba9115608d984363e1269dec1d2272"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/Pass.js",
+      "expected_sha256": "444b409c235ead986893c472e720da1b779a56985c7d10b279c7944b52bd61c5"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/RenderPass.js",
+      "expected_sha256": "817f6c3cdcd0fd41515d112359ea0532568eefb5aabd3b33903957ebca1b8a6a"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/SMAAPass.js",
+      "expected_sha256": "1a96804b8cb33ba76a67f9a8e77f2d5e2bf47b1a5c9a8476901aa75e24acb85c"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/SSAOPass.js",
+      "expected_sha256": "2f9c02a53e09917d039c07c5bd7a110f1ce39bc5ab2affa316ea94f5198ec586"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/ShaderPass.js",
+      "expected_sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/postprocessing/UnrealBloomPass.js",
+      "expected_sha256": "ba8f2fcadfa6588384c9473498f974d81d120f02f0e63a0e59c265202a006b5a"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/shaders/CopyShader.js",
+      "expected_sha256": "a33057d5ac91c43304c186ac0e8816e62bb2ed471d3a00ff3018dfd5c0389718"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/shaders/GTAOShader.js",
+      "expected_sha256": "f7663d7726e884cee748d9b86ddc7416a99f81a181342cfbaa0845d993ea09cc"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/shaders/LuminosityHighPassShader.js",
+      "expected_sha256": "5044f780b6e6cf863947f64c36fe1587132f7fbe395ada863cd1e5f0388dcf1e"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/shaders/OutputShader.js",
+      "expected_sha256": "353479f77a8d7e2629d49ccac9fc2f5dbfdda5442e0adf867b00377a2fcb0cb2"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/shaders/PoissonDenoiseShader.js",
+      "expected_sha256": "b07ccfcdcd74f83cffd6d48834b18873545806421204a4d75143bd09756bc92d"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/shaders/SMAAShader.js",
+      "expected_sha256": "48ce320a6bf5c33806c4fa13ade7e3ab199f7856838d36b05ae82204db8a1c15"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/shaders/SSAOShader.js",
+      "expected_sha256": "034dad98927ed8f2677a19ce56d4da1212ce5070ed2666157106025dc260bb55"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/three.core.js",
+      "expected_sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/three.module.js",
+      "expected_sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/three.tsl.js",
+      "expected_sha256": "d8f3cdb8b85b799a5631bd9a8d77e185d88ce1eb1bb051f48b332728a5423e3f"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/three.webgpu.js",
+      "expected_sha256": "eafead3154ec06093f3108bddceab360f048a6fcebd7c085d5aae0ab5404bd25"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/tsl/display/BloomNode.js",
+      "expected_sha256": "e7a39bf41581b5ada6463dfd2e571c6fff27648e459cc0d7fd13d64bbcf0f6ea"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/tsl/display/GTAONode.js",
+      "expected_sha256": "ea946e1d8281ccf14cd19b3cd8b3e5ad387ff20320427e7153fdd884ce8da081"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/tsl/display/SMAANode.js",
+      "expected_sha256": "397ca1a38d5f31681c86705df052271eaff230b52848f768b6dd9ed482f4ae0a"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/tsl/display/SSAONode.js",
+      "expected_sha256": "fb4d8b406d4f22de5a5f1eab4f4f565a9bc8b26a49827d2e18aa5e61f25c9f59"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/tsl/display/depthAwareBlur.js",
+      "expected_sha256": "63adcf205b903ca202a0a2c3b0ed4d230ddac1e761b580e76e23ab3ed18cf80e"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/utils/BufferGeometryUtils.js",
+      "expected_sha256": "7bda2a8ba836b2bcf67cb938d4b9e1bb5d1b1bc616817103ed858c0b58296ce7"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/utils/SkeletonUtils.js",
+      "expected_sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "url_path": "/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/utils/WorkerPool.js",
+      "expected_sha256": "5ac7095fd566bc9ae48376055fd66edf27cb9ebbf9e1269dc206bfd4933ae9eb"
+    }
+  ],
+  "all_manifest_files_verified": true,
+  "actual_entry_chain": [
+    "/index.html",
+    "/watch-home-coordinated-successor.js",
+    "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-preview.html",
+    "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/atelier-preview.js",
+    "/preview-b/releases/011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192/assembly-review.js?v=atelier-local-1"
+  ],
+  "assembly_review_html_stub_not_used": true,
+  "browser_runs": 0,
+  "build_provenance_file_pins": {
+    "build.py": "aeb2f5efc94d67aff4937090a70b3b6e5fceeda55766bff32c4c07e9050a1fa4",
+    "build-report.json": "d7d8160e4d295056d93f4f63bc5d83ba3bc608b3304f5a797010637797447f7c",
+    "entry-baseline/index.html": "cf4dc1701c9064acab958fe690958a8c2a7b2f79dde1351ed77ccacd2525dc08",
+    "entry-baseline/watch-home-caseback-e79b2236.js": "5e5e0e2323541f519a09f8a4e6f9ee12ca93ae406c2aead0c66daeb6921ad38d",
+    "entry-baseline/watch-home-loading-v4.css": "0db4e30c1e54f824152441bf5f566664df84ebf61d8996b8a78f9c4e271c5ee1"
+  },
+  "verification_note": "Historical checked inventory; current bytes MUST be reverified by server inventory before run."
+}

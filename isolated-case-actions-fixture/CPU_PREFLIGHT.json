@@ -1,0 +1,7 @@
+{
+  "status": "PASS_READONLY_INVENTORY",
+  "entries": 302,
+  "override_and_watchdog_bytes_unchanged": true,
+  "browser_runs": 0,
+  "server_runs": 0
+}

@@ -1,0 +1,78 @@
+name: Isolated CASE snapshot bootstrap only
+on:
+  workflow_dispatch:
+    inputs:
+      reviewed_qa_sha:
+        description: Independently reviewed exact QA commit SHA (40 lowercase hex)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  bootstrap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Validate exact requested ref
+        env:
+          QA_SHA: ${{ inputs.reviewed_qa_sha }}
+        run: '[[ "$QA_SHA" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.reviewed_qa_sha }}
+          path: qa
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 48ca59ef81ee960ff78d598c3f512df96411848c
+          path: source
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 64fff6296e7d23f00ef387fa222ef405da3c8fba
+          path: normal-fixture
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e305819445671ba9bc24734a902646204a08801e
+          path: seconds-fixture
+          persist-credentials: false
+      - name: Record refs and provision disposable hosted dependencies
+        run: |
+          set -euo pipefail
+          test "$(git -C qa rev-parse HEAD)" = '${{ inputs.reviewed_qa_sha }}'
+          test "$(git -C source rev-parse HEAD)" = 48ca59ef81ee960ff78d598c3f512df96411848c
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r qa/isolated-case-actions-fixture/requirements.txt
+          .venv/bin/python -m playwright install --with-deps chromium
+          .venv/bin/python --version
+          node --version
+      - name: Reconstruct original source fixture without edits
+        run: |
+          set -euo pipefail
+          export PATH="$GITHUB_WORKSPACE/.venv/bin:$PATH"
+          (cd normal-fixture && tar -xzf hardware-current-fixture.tar.gz -C hardware-normal-qa && node hardware-normal-qa/ci-bake.mjs preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/rebuild/assembly.glb && node hardware-normal-qa/e79-rebase/ci-encode.mjs)
+          (cd seconds-fixture && python qa-seconds-ring/pack.py preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/premium-face/face-svg04.glb && node qa-seconds-ring/encode.mjs)
+          cd source
+          WATCH_BASE=preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 NORMAL_INPUT=../normal-fixture/hardware-normal-qa/e79-rebase RING_INPUT=../seconds-fixture/qa-seconds-ring RUNTIME_INPUT=coordinated-release-successor python coordinated-release-successor/build.py
+          test "$(cat coordinated-release-successor/release-id.txt)" = 011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192
+      - name: Exact preflight then single bounded sandbox-enabled experiment
+        env:
+          CASE_FIXTURE_STAGING: ${{ github.workspace }}/source/coordinated-release-successor/staging
+        run: |
+          set -euo pipefail
+          export PATH="$GITHUB_WORKSPACE/.venv/bin:$PATH"
+          python qa/isolated-case-actions-fixture/test_exit_contract.py
+          python qa/isolated-case-actions-fixture/verify.py
+          python qa/isolated-case-actions-fixture/watchdog.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: case-bootstrap-only-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            qa/isolated-case-actions-fixture/browser-results
+            qa/isolated-case-actions-fixture/watchdog-results
+            qa/isolated-case-actions-fixture/FREEZE.json
+            source/coordinated-release-successor/build-report.json

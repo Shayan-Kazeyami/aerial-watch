@@ -1,0 +1,9 @@
+{
+  "status": "PASS_CPU_STATIC_REGRESSION",
+  "test_groups": 2,
+  "policy_cases": 22,
+  "browser_runs": 0,
+  "server_runs": 0,
+  "process_launches": 0,
+  "scope": "Exact return expression and AST evidence-before-exit structure, not full runtime mock"
+}
