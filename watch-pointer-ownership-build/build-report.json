@@ -1,0 +1,11 @@
+{
+  "baseCommit": "30e01253f615a1ee87c266dccf4854ac00b7125e",
+  "releaseId": "c9468467517d37ca9f4fb34795443034169480d22d6e3a7924c9b03993fcb888",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-review.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated pointer ownership selection guard; no browser/deployment approval"
+}

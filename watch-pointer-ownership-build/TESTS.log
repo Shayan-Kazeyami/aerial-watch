@@ -1,0 +1,21 @@
+[
+  { name: 'single primary tap', actions: 1 },
+  { name: 'single drag', actions: 0 },
+  { name: 'mismatched release', actions: 0 },
+  { name: 'right button', actions: 0 },
+  { name: 'pinch release 2,1', actions: 1 },
+  { name: 'pinch release 1,2', actions: 1 },
+  { name: 'pointercancel invalidates and allows new tap', actions: 1 },
+  {
+    name: 'lostpointercapture invalidates and allows new tap',
+    actions: 1
+  },
+  { name: 'blur invalidates and allows new tap', actions: 1 },
+  {
+    name: 'visibilitychange invalidates and allows new tap',
+    actions: 1
+  }
+]
+PASS 9 additional extracted-event cases; baseline secondary/auxiliary clicks reproduced; primary and loading/failure preserved.
+PASS both closures, exact three changes, references/crown fix preserved
+PASS exact integrated pointer block; saved-clock and all other latest bytes preserved
