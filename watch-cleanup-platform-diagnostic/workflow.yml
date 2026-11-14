@@ -1,0 +1,29 @@
+name: Cleanup platform diagnostic only
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  cleanup:
+    runs-on: macos-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen diagnostic
+        run: |
+          python - <<'PY'
+          import pathlib,json,hashlib
+          p=pathlib.Path('watch-cleanup-platform-diagnostic')
+          for n,h in json.loads((p/'FREEZE.json').read_text()).items():
+            assert hashlib.sha256((p/n).read_bytes()).hexdigest()==h,n
+          PY
+      - name: Bounded cleanup diagnostic
+        run: python watch-cleanup-platform-diagnostic/diagnose.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cleanup-platform-diagnostic-not-viewer-approval
+          path: watch-cleanup-platform-diagnostic/RESULT.json
+          if-no-files-found: error

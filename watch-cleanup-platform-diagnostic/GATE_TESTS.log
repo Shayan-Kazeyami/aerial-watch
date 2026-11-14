@@ -1,0 +1,14 @@
+test_after_eperm (test_gate.GateTests.test_after_eperm) ... ok
+test_case_completeness (test_gate.GateTests.test_case_completeness) ... ok
+test_cleanup_error_even_with_success_label (test_gate.GateTests.test_cleanup_error_even_with_success_label) ... ok
+test_complete (test_gate.GateTests.test_complete) ... ok
+test_final_failures (test_gate.GateTests.test_final_failures) ... ok
+test_handshake_required (test_gate.GateTests.test_handshake_required) ... ok
+test_initial_absent_or_missing (test_gate.GateTests.test_initial_absent_or_missing) ... ok
+test_initial_eperm (test_gate.GateTests.test_initial_eperm) ... ok
+test_started (test_gate.GateTests.test_started) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.000s
+
+OK
