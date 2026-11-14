@@ -27,7 +27,7 @@ async def main():
      if chord=='Shift+Equal':assert event['key']=='+',event
      if chord=='Shift+Minus':assert event['key']=='_',event
      rr['cases'].append({'chord':chord,'before':before,'after':after,'event':event,'plainWatchZoomVerified':True})
-    await canvas.screenshot(path=str(O/(route+'-canvas-focused.png')))
+    await page.screenshot(path=str(O/(route+'-canvas-focused.png')))
     rr['delivery']=await page.evaluate('assemblyInspect().delivery||assemblyInspect().assets||null')
     assert any('/rebuild/assembly.glb' in u for u in requests) if route=='raw' else any('/optimized-assets/rebuild__assembly.meshopt.glb.gz' in u for u in requests)
     if route=='meshopt':assert not any('/rebuild/assembly.glb' in u for u in requests),'unexpected raw fallback'
