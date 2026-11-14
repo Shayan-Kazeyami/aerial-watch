@@ -1,0 +1,16 @@
+{
+  "baseRelease": "e157f07921363a07a67dffd367bbc5bec2392691313632a4169d951974abb5a2",
+  "candidateRelease": "bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0",
+  "both_closures": 298,
+  "changed_local_files": [
+    "atelier-preview.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "references_unchanged": true,
+  "crown_fix_preserved": true,
+  "explorer_labels_preserved": true,
+  "all_other_runtime_files_preserved": true,
+  "browser_tested": false,
+  "deployment": false
+}

@@ -1,0 +1,4 @@
+{
+  "old": "if(e.key==='Home'&&!",
+  "new": "if(e.key==='Home'&&!e.defaultPrevented&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!"
+}

@@ -1,0 +1,15 @@
+{
+  "REPORT.json": "e0376be487f9dc304784a4bbdbfd31da93eafab5e6bafe8266b7bce61233d36c",
+  "release-id.txt": "f99a568a94d257f8aec700b2cb94b7ac3c1e409b993655646c2e6805516ae0ba",
+  "BROWSER.log": "8c0989c2619fcdbe50fed1558b0fa3289bc36d12dbfb1fd7cf5c6fe72092e094",
+  "check.mjs": "fa35d48db1dda97f0394c19f78ed8f56b4ed791d48808736c39b9fcc288d7174",
+  "TESTS.json": "b39c64930c4d461199e0b10d9cb5280d7278ab6aa288a7c1f623b64c4dcae9ab",
+  "BROWSER_CLEANUP.json": "7b6564fe660c9b7b73301ea45ef32926c2c2ad3e63bd3fe6bf161dca0e604643",
+  "patch.json": "4a9e2ee999565e1011a17c2335dc9291532fe266f69b6a870b9dfc53b24e02b5",
+  "build.py": "ab085a299217dbd39618ee1f2f5c56b043cf3960aaa2e0ba0a143a59992a37dd",
+  "verify.py": "d7d9c58ea01a243ae5ef70da720be1975e06f820f7bcaa936219d6f30dbe14fd",
+  "VERIFY.json": "3e06bf765621b319a343e5fb98eaf7a40f61d3280f9f0a1735da1bc1e1242df7",
+  "browser_check.py": "d99aabe6e5d36442781b7164b3779031c5e832d75a179dd357dde217a6b2019f",
+  "build-report.json": "f910c1dbb81938d6e6beeaf1c4ef16b4a28b91372d6a697feba8e9e265e62609",
+  "candidate.js": "5699028e95b4a300ad149cae0473c28c40be62536460925e02e173a937dce820"
+}

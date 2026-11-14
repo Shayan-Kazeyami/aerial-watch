@@ -1,0 +1,9 @@
+{
+  "pid": 17,
+  "errors": [],
+  "signals": [],
+  "leader_reaped": true,
+  "group_absent": true,
+  "returncode": 1,
+  "status": "verified"
+}

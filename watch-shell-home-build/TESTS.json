@@ -1,0 +1,30 @@
+[
+  {
+    "cmd": [
+      "node",
+      "watch-shell-home-build/check.mjs"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 13 extracted actual shell+canvas listener modeled propagation cases; modified Home preserved, canvas Home once, other controls unchanged.\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "python",
+      "watch-shell-home-build/verify.py"
+    ],
+    "returncode": 0,
+    "stdout": "PASS both closures, exact three changes, references/crown fix preserved\nPASS exact integrated shell Home guard; saved-clock and all other latest bytes preserved\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "node",
+      "--check",
+      "watch-shell-home-build/candidate.js"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

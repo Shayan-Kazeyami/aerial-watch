@@ -1,0 +1,11 @@
+{
+  "baseRelease": "e157f07921363a07a67dffd367bbc5bec2392691313632a4169d951974abb5a2",
+  "releaseId": "bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0",
+  "closureFiles": 298,
+  "changedPaths": [
+    "atelier-preview.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated shell Home event ownership guard; no browser/deployment approval"
+}

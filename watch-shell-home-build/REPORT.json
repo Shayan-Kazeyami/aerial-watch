@@ -1,0 +1,35 @@
+{
+  "status": "ISOLATED_CANDIDATE_FROZEN_BROWSER_BUBBLING_BLOCKED",
+  "owner": "watch_2128_lazy",
+  "author": "miami_2114_plants",
+  "base_release": "e157f07921363a07a67dffd367bbc5bec2392691313632a4169d951974abb5a2",
+  "candidate_release": "bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0",
+  "exact_patch": "Adds defaultPrevented, ctrl/meta/alt guard to shell Home handler only; Shift behavior unchanged by design",
+  "source_sha256": "9cfc625a30faa2d93cbddb12cf9507e66d50742cee41bdae151b078d00b223fc",
+  "candidate_sha256": "5699028e95b4a300ad149cae0473c28c40be62536460925e02e173a937dce820",
+  "passed": [
+    "13 exact extracted listener modeled propagation cases",
+    "Both canonical 298-file closures verify; only atelier-preview.js and two viewer revisions change",
+    "All other bytes including latest import-readiness and saved-clock preserved",
+    "node syntax"
+  ],
+  "browser": {
+    "status": "NOT_EXECUTED_LAUNCH_BLOCKED",
+    "attempts": 1,
+    "error": "Chromium process_singleton socket() Operation not permitted before page creation",
+    "sandbox_enabled": true,
+    "owned_process_cleanup": {
+      "pid": 17,
+      "errors": [],
+      "signals": [],
+      "leader_reaped": true,
+      "group_absent": true,
+      "returncode": 1,
+      "status": "verified"
+    },
+    "limits": "Actual DOM bubbling unverified. Prepared browser fixture uses synthetic native KeyboardEvent dispatch, not full viewer/physical keyboard."
+  },
+  "production_changed": false,
+  "remote_uploaded": false,
+  "review_required": true
+}
