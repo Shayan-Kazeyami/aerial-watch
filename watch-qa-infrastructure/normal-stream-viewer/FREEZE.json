@@ -1,0 +1,14 @@
+{
+  "scope": "prepared-only/no browser",
+  "files": {
+    "PLAN.md": "8c22683446df10cb5adae8a3e0f9d98d5d0c4ea41ae0ac2d38ecd9f081aabf86",
+    "snapshot-hook.js": "ac3fe9090170225a0ea157b601001cf909b3b4f1711a9733f0e0c09dff49e003",
+    "prepare.py": "39f197a736450ccb285e20fea696c3e0c4e7a7d7d2c6f80796629a9e55a1c59a",
+    "server.py": "2072fecc82c8d721d42f5a80a9a0da1100cf0c4de2afd428ea28f791b410e74f",
+    "gates.py": "355d9bf1ba45649c9afe5ff77a26e4c73ed2e71a2ae8eaf31f7aa4ff6d9d871a",
+    "run.py": "4f25aab8372085e32d46c08d27aac1ec642b56e5c0bf0608d73b8501f13c934e",
+    "test_gates.py": "ea227e4d7a12c26bb7e85ea46056bec418b72a51ab2f5aaa233c505bd3922ee4",
+    "compare.py": "a4f79de52be03845a4993cbfdeec471cdc59d59989ab4a491a58581209b64914",
+    "workflow.yml": "26aeff22818cd7ddafbb88ef8da82356e2569ecadef705dd50b915309bb15491"
+  }
+}
