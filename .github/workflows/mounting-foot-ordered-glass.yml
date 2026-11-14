@@ -1,0 +1,38 @@
+name: Original beauty and ordered glass source evidence
+on:
+  push:
+    branches: [qa/mounting-foot-ordered-glass-20261114]
+    paths: [watch-qa-infrastructure/mounting-foot-viewer-validation/**, isolated-mounting-feet-exact-index/**, .github/workflows/mounting-foot-ordered-glass.yml]
+permissions:
+  contents: read
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - name: Prepare exact isolated copy
+        run: |
+          WATCH_BASE=preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 python watch-qa-infrastructure/mounting-foot-viewer-validation/prepare-ordered-viewer.py
+          python watch-qa-infrastructure/mounting-foot-viewer-validation/test_driver_contract.py
+          node watch-qa-infrastructure/mounting-foot-viewer-validation/test_ordered_prepared.mjs
+          node watch-qa-infrastructure/mounting-foot-viewer-validation/test_camera_restore_prepared.mjs
+          python watch-qa-infrastructure/mounting-foot-viewer-validation/test_keyboard_motion.py
+          python watch-qa-infrastructure/mounting-foot-viewer-validation/verify-ordered-closure.py
+          node --check watch-qa-infrastructure/mounting-foot-viewer-validation/qa-ordered-viewer/preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/assembly-review.js
+      - name: One bounded actual viewer attempt
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory watch-qa-infrastructure/mounting-foot-viewer-validation/qa-ordered-viewer >/tmp/foot-http.log 2>&1 &
+          python watch-qa-infrastructure/mounting-foot-viewer-validation/browser-driver-ordered.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mounting-foot-ordered-evidence-not-gate-pass
+          path: |
+            watch-qa-infrastructure/mounting-foot-viewer-validation/QA_ORDERED_COPY_REPORT.json
+            watch-qa-infrastructure/mounting-foot-viewer-validation/browser-evidence-ordered/
+            watch-qa-infrastructure/mounting-foot-viewer-validation/ORDERED_URL_CLOSURE.json

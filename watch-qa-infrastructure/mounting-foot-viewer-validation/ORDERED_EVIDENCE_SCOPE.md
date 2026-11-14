@@ -1,0 +1,11 @@
+# Source evidence collection, not gate revision
+
+Original finished legacybeauty only: preserve initialfinishtrue,glass/scene/material/lighting/quality unchanged; no diagnostic tag, candidate, visibilitytoggle, skippingglass or materialchanges. Nativekeyboard pause only. Exact originalsourcecamera/scene identities preserved; all priorfails unchanged.
+
+New orderedEvidence() is ADDITIONAL read-only method, originalstrict evidence() remainsbyte-identical to prior source-sidehook.81boundedROI rays preserveallvisible hitstacks sorted bydistance with128hitbudget, materialflags/maps/customshader metadata, targetintersectionindex and explicitmiss. No computed opticaltransmittance or prefixacceptanceclassification. Orderedraydata alone not visualproof. Captureoriginalbeauty twice with exactrepeatability,unalteredtargetROIcrops for manualidentification. No automaticbeautyvisibilityclaim. Actualstudiofinish is true,unlike priorclayfalse diagnostic; expectdifferent glassshader metadata and labelprecisely.
+
+After originals/ordereddata, execute ORIGINALstrict first-hit gate and record strictFirstHitPassed or expected'target occluded'failure explicitly. Only this known failure is collected as data, not suppressed as pass; othererrors remainfatal. `evidenceCollected` means diagnosticscomplete, NEVER optimizationacceptance. accepted=false and sourceAccessVerified=false unconditionally; originalstrict0/9historicalhold remains. No candidate or tag path. Sourcebeauty/camera/picking/ROI/normalclose checks retained.
+
+Legacy nonatelier lighting/finishmode only; no hardware/mobile/defaultatelier approval/nativecontactauthority. Even if data collection job succeeds, hold stays until manualidentification and independentlyreviewedacceptance criteria. OrderedCPU81raytest proves retention/targetordering andbudgetfailure only, not browseropticalproof. Package review before any single separatelyauthorized600sarm/20minjob, no auto-retry/deploy.
+
+Exact camera snapshot/restoration nowincludesnear/far/controls.minDistance andquaternion/projectionalongsideposition,target,up,zoom. Immediateexactreturnasserted;4preparedThree/native-depthCPUcasesalsoverify nextnative-depthrecompute yieldsoriginalpolicy. Actualbrowserrestore stillmustpass;do not claimCPUtestsasbrowserproof.
