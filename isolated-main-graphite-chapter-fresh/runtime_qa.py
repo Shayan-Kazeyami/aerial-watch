@@ -13,10 +13,11 @@ async def run():
      if 'createOpenFrontFrame' in text and 'syncFrontDetails' in text:text+='\n'+(D/'probe.js').read_text()
      await route.fulfill(response=response,body=text)
     await page.route('**/assembly-review.js*',inject)
-    await page.goto('http://127.0.0.1:8761/preview-b/assembly-review.html?quality=efficient&leather=craft14&assets='+routekind+'&finish=brushed&light=softbox',wait_until='domcontentloaded');await page.wait_for_function('window.graphiteQa?.status().ready');await page.wait_for_timeout(1200)
+    await page.goto('http://127.0.0.1:8761/preview-b/assembly-review.html?quality=efficient&leather=craft14&assets='+routekind+'&finish=brushed&light=softbox',wait_until='domcontentloaded');await page.wait_for_function('window.graphiteQa?.status().ready');await page.wait_for_load_state('networkidle');await page.evaluate('document.fonts.ready');await page.wait_for_timeout(1200)
     data={k:json.load(open(D/(k+'.json'))) for k in ['source','candidate']};setup=await page.evaluate('(d)=>graphiteQa.setup(d)',data);results=[]
     for finish in [True,False]:
      for view in ['assembled','macro','exploded']:
+      await page.evaluate('graphiteQa.disarm()');await page.evaluate('(c)=>graphiteQa.capture(c)',{'candidate':False,'view':view,'finish':finish});await page.wait_for_load_state('networkidle');await page.evaluate('graphiteQa.arm()')
       for enabled in [False,True,False]:
        r=await page.evaluate('(c)=>graphiteQa.capture(c)',{'candidate':enabled,'view':view,'finish':finish});png=base64.b64decode(r.pop('png').split(',')[1]);name=f'{routekind}-finish{int(finish)}-{view}-{len(results)}.png';(O/name).write_bytes(png);r['file']=name;r['png_sha256']=hashlib.sha256(png).hexdigest();results.append(r);print(routekind,finish,view,enabled,r['target']['position'],flush=True)
       a,b,c=results[-3:];assert a['camera']==b['camera']==c['camera'];assert a['target']['world']==b['target']['world']==c['target']['world'];assert a['png_sha256']==c['png_sha256'],'source A/B/A pixels changed';assert a['target']['position']==49152 and b['target']['position']==32736
