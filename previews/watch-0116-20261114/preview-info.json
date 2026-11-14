@@ -1,0 +1,7 @@
+{
+  "kind": "Experimental separate preview; existing default site unchanged",
+  "release": "011614d052b49dd32652ec25e31bd471addef053bfda24510d7741485fe37192",
+  "baseMain": "b84a51ec91b715aa70408e8bff6e988e29d93edb",
+  "frozenQACommit": "48ca59ef81ee960ff78d598c3f512df96411848c",
+  "limitations": "Primary five route gates passed; complementary UI/screenshot/cleanup timeouts remain unresolved. Not default release promotion or full visual acceptance."
+}
