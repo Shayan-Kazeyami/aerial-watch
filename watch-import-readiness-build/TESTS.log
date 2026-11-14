@@ -1,0 +1,3 @@
+PASS both closures, exact three changes, references/crown fix preserved
+PASS exact integrated import readiness guard; saved-clock and all other latest bytes preserved
+PASS nine actual async import-handler scenarios; late readiness blocked, prior guards/errors/disposal/video unchanged.

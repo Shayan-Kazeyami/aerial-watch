@@ -1,0 +1,1 @@
+Additive import readiness recheck build atop save-feedback2d985556edc6103807f38d9ed394a4a577d6c6a4. Exact post-await loading/failed guard only, after stale/disposed guard. No main/deploy/browser acceptance. Run build.py,verify.py,check.mjs from repository root with prior staging. Candidate must be independently reviewed before branch.

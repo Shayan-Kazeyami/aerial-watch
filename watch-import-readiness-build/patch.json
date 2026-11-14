@@ -1,0 +1,4 @@
+{
+  "old": "if(lifecycle.disposed||request!==configurationRequest)return;",
+  "new": "if(lifecycle.disposed||request!==configurationRequest)return;if(loading||failed)throw new Error('Wait for the watch to finish loading.');"
+}

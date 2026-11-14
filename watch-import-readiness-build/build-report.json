@@ -1,0 +1,11 @@
+{
+  "baseCommit": "2d985556edc6103807f38d9ed394a4a577d6c6a4",
+  "releaseId": "e157f07921363a07a67dffd367bbc5bec2392691313632a4169d951974abb5a2",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-review.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated one-token import readiness guard text fix; no browser/deployment approval"
+}
