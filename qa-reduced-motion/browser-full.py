@@ -35,8 +35,10 @@ async def arm(browser,name,initial):
   await page.emulate_media(reduced_motion='reduce');await page.wait_for_function('mediaSamples.length===1');end=await page.evaluate('mediaSamples.at(-1)')
   if name=='proposal':assert end['explosion']['amount']==1 and not end['explosion']['animating'],end
   # Baseline may settle before OS event on slow GPU; record without manufacturing a failure.
-  await page.wait_for_function('!assemblyInspect().explosion.animating',timeout=30000)
-  await page.locator('#atelier-reassemble').click();await page.wait_for_function('clickSamples.length===2');nextclick=await page.evaluate('clickSamples.at(-1)');assert nextclick['animating']==(name=='baseline'),nextclick
+  (O/f'{name}-{initial}-midphase.json').write_text(json.dumps({'media':end,'actual':await page.evaluate('assemblyInspect()')},indent=2))
+  if name=='proposal':await page.wait_for_function('!assemblyInspect().explosion.animating',timeout=30000)
+  await page.locator('#atelier-reassemble').click();await page.wait_for_function('clickSamples.length===2');nextclick=await page.evaluate('clickSamples.at(-1)');assert nextclick['target']==0,nextclick
+  if name=='proposal':assert nextclick['amount']==0 and not nextclick['animating'],nextclick
  result={'initial_preference':initial,'click_samples':await page.evaluate('clickSamples'),'media_samples':await page.evaluate('mediaSamples'),'executed_sha256':executed,'errors':errors,'final':await page.evaluate('assemblyInspect()')};assert not errors;assert executed==R['candidate' if name=='proposal' else 'source'];(O/f'{name}-{initial}.json').write_text(json.dumps(result,indent=2));cdp=await ctx.new_cdp_session(page)
  try:
   shot=await asyncio.wait_for(cdp.send('Page.captureScreenshot',{'format':'png','fromSurface':True,'captureBeyondViewport':False}),90);(O/f'{name}-{initial}.png').write_bytes(base64.b64decode(shot['data']));result['screenshot']='PASS'
