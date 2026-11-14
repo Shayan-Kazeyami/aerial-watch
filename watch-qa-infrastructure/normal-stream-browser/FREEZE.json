@@ -1,0 +1,19 @@
+{
+  "preparedOnly": true,
+  "files": {
+    "fixture.mjs": "dd5cafc2ca5effc21dee1c063421cc1ff206009f0d5e1c4c61b2eebc89544e38",
+    "prepare.py": "05685a34c2e72d5e503b97daeb0de494da7aed1526f190eef650edfa63d1f662",
+    "SERVER_SMOKE.json": "6c371fa3769d8c17a4325c3575a8dbf831a3f5cdfa697e68039b27a5891ed0b8",
+    "workflow.yml": "83922a915c332658d7a8c682aedd83cdc50eaa2d8ffa9bcb1ca2ed01328fb907",
+    "baseline.mjs": "743d45d45cf82371364f842051ce6313fae41fb83b862897dc7f1fa24207cc40",
+    "SOURCE_PINS.json": "40f9cc076ac3a3816064fc31e68099eb5d3e73fa718dcd2a334dba31ef651829",
+    "index.html": "2c98022969cdc2650903cb821b05c6de957f9c73352fbff1015c0f16180a675f",
+    "pending-stream.mjs": "ec6532bd9a79cdb3700cfb9c96c496227f3583ff1442c5eeee825296aaae3bde",
+    "assembly-progressive-normal.js": "72fcf36738bbc515cbda2f8ea8b408be7fe231ea95b4ddeecf5995eeb9068c42",
+    "run.py": "91b776a4d04e27fe8ad0041c562d42a130fa698ed33d41ace2a5ee25591cbb00",
+    "README.md": "1c9e8f3111c82022eb329beaa4de2a3de948ac1825f06bf1687050c0c2938662",
+    "test-pending.mjs": "6d44ac3a4317d54550b966937b619b254eefbac1f4c84b87c6da572c98fa790d",
+    "candidate.mjs": "89ff6e1bc368731c77499830cda4a4682e9798c234fcb47df0b96a3d579d62d2",
+    "server.py": "4b06e416bd6b5d913f5744b88ddfb89dc478ed087cf39d81ffb15f7d1d601a5c"
+  }
+}

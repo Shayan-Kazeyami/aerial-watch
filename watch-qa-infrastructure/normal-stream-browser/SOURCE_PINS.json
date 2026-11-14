@@ -1,0 +1,12 @@
+{
+  "manifestSHA256": "3324ba95a8c2c08125637a34e8bb757ab4bab77754cffe84221a07327a9d2fa2",
+  "inputs": {
+    "assembly-fetch-progressive-normal.js": "743d45d45cf82371364f842051ce6313fae41fb83b862897dc7f1fa24207cc40",
+    "assembly-progressive-normal.js": "72fcf36738bbc515cbda2f8ea8b408be7fe231ea95b4ddeecf5995eeb9068c42",
+    "leather-assets/r14/normal-2048-existing-mips.ktx2": "5d8aa10702589424c1157d9a58a7f75aca265569d7c8fac09525a00af19455bc",
+    "leather-assets/r14/outer-normal-4k.ktx2.part0": "32f662b3984b3efaf87889db2c8d0ba0779593de08390085d3d414ea0eea5a0b",
+    "leather-assets/r14/outer-normal-4k.ktx2.part1": "e80c0155d8346517e1c6c0b46def43e06a97e21b1ed64f18d17b4fc64c816c49"
+  },
+  "candidateSHA256": "89ff6e1bc368731c77499830cda4a4682e9798c234fcb47df0b96a3d579d62d2",
+  "sourceChanges": false
+}
