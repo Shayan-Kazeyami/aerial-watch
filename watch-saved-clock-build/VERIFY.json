@@ -1,0 +1,16 @@
+{
+  "baseRelease": "9865b37ea1813c85badb404935f7710c688f04beef36da55d7d517ceef96b353",
+  "candidateRelease": "e01677cd86bd5840e29c8ec4753aaa707eca40d83efd46528f1a56551e733934",
+  "both_closures": 298,
+  "changed_local_files": [
+    "assembly-story.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "references_unchanged": true,
+  "crown_fix_preserved": true,
+  "explorer_labels_preserved": true,
+  "all_other_runtime_files_preserved": true,
+  "browser_tested": false,
+  "deployment": false
+}

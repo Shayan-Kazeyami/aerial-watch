@@ -1,0 +1,11 @@
+{
+  "baseCommit": "f5e12dcbf5da36db4ad9cf063d95cdedda90dacd",
+  "releaseId": "e01677cd86bd5840e29c8ec4753aaa707eca40d83efd46528f1a56551e733934",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-story.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated saved-clock safe-cycle validation guard; no browser/deployment approval"
+}

@@ -1,0 +1,4 @@
+PASS 23 cases: invalid huge mechanism rejected upstream; valid/default/hands/speed behavior preserved; exact downstream sample guard agrees; restore validates before options mutation. Not integrated browser restore proof.
+PASS actual extracted restoreSavedView rejects three huge times before downstream scene/inspection calls; baseline reaches mutation sentinel. VM harness, not rendered-browser suite.
+PASS both closures, exact three changes, references/crown fix preserved
+PASS exact integrated story guard; latest assembly-review/framing/canvas/UTF8 bytes unchanged
