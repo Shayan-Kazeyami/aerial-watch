@@ -1,7 +1,7 @@
-name: Component search result semantics read-only QA
+name: Component search result semantics isolated fix QA
 on:
   push:
-    branches: [qa/component-search-semantics-20261114]
+    branches: [qa/component-search-status-fix-20261114]
     paths: [qa-component-search/**, .github/workflows/component-search-semantics.yml]
 permissions:
   contents: read
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: component-search-live-semantics-readonly
+          name: component-search-live-semantics-isolated-fix
           path: |
             qa-component-search/evidence
             qa-component-search/source-proof.json
