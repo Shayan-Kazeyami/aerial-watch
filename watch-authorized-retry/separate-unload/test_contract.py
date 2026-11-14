@@ -11,7 +11,9 @@ class Contract(unittest.TestCase):
   self.assertIn("not a.get('unloadFailure')",s);self.assertIn("not a['cleanupFailure']",s)
   self.assertIn('normal_unload_then_close(page,browser',s)
  def test_independent_runner_matrix_is_not_mobile_claim(self):
-  s=(ROOT/'workflow.yml').read_text();self.assertIn('release: [published-e79, frozen-0116]',s)
+  workflow=ROOT/'workflow.yml'
+  if not workflow.exists():workflow=ROOT.parents[1]/'.github/workflows/separate-unload.yml'
+  s=workflow.read_text();self.assertIn('release: [published-e79, frozen-0116]',s)
   self.assertNotIn('matrix.kind',s)
   self.assertIn("KIND='desktop'",(ROOT/'diagnostic.py').read_text())
 if __name__=='__main__':unittest.main()
