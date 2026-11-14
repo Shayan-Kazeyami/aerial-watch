@@ -48,7 +48,7 @@ async def main():
  async with async_playwright() as p:
   b=await p.chromium.launch(args=['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']);R['browser']=b.version
   try:
-   for name in ['baseline','proposal']:
+   for name in ['proposal','baseline']:
     R['arms'][name]=[]
     for pref in ['no-preference','reduce']:
      R['arms'][name].append(await arm(b,name,pref));(O/'REPORT.json').write_text(json.dumps(R,indent=2))
