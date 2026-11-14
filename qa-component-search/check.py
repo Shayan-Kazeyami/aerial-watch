@@ -15,14 +15,19 @@ async def main():
    cdp=await page.context.new_cdp_session(page);ax=await cdp.send('Accessibility.getFullAXTree');R['matchingAXNodes']=[n for n in ax['nodes'] if '0 of ' in n.get('name',{}).get('value','')]
    assert R['zeroMatches']['visible'];assert R['zeroMatches']['originalRole']=='status';assert not R['zeroMatches']['originalVisible'];assert R['zeroMatches']['originalInertAncestor']=='runtime-bridge'
    R['resultLiveSemanticsMissing']=not any(x['live'] in ['polite','assertive'] or x['role'] in ['status','alert'] for x in R['zeroMatches']['ancestors'])
-   assert R['resultLiveSemanticsMissing'],'Candidate issue not reproduced'
+   assert not R['resultLiveSemanticsMissing'];assert R['zeroMatches']['visibleRole']=='status'
+   assert R['zeroMatches']['visibleText']=='0 of 196 components — no matches; clear the search or change the group'
+   statuses=[n for n in ax['nodes'] if n.get('role',{}).get('value')=='status'];R['statusAXNodes']=statuses
+   assert any(any(p['name']=='live' and p.get('value',{}).get('value')=='polite' for p in n.get('properties',[])) for n in statuses)
    assert R['zeroMatches']['activeElement']=='atelier-search'
    await page.screenshot(path=str(O/'zero-matches-visible.png'))
    await page.locator('#atelier-search').fill('');await page.wait_for_function('!document.getElementById("atelier-count").textContent.startsWith("0 of ")')
-   R['restored']=await page.evaluate("({text:document.getElementById('atelier-count').textContent,activeElement:document.activeElement.id})");assert R['restored']['activeElement']=='atelier-search'
+   R['restored']=await page.evaluate("({text:document.getElementById('atelier-count').textContent,activeElement:document.activeElement.id})");assert R['restored']['activeElement']=='atelier-search';assert R['restored']['text']=='196 of 196 components'
+   await page.locator('#atelier-search').fill('zzzz-no-such-part-74219');await page.wait_for_function('document.getElementById("atelier-count").textContent.startsWith("0 of ")');assert await page.locator('#atelier-count').get_attribute('role')=='status'
+   await page.locator('#atelier-search').fill('');await page.wait_for_function('document.getElementById("atelier-count").textContent==="196 of 196 components"');R['repeatFlowPassed']=True
    await page.screenshot(path=str(O/'restored-results.png'));assert not R['errors'];R['complete']=True
   except Exception as e:R['failure']=repr(e);R['traceback']=traceback.format_exc();raise
   finally:
-   R['scope']='Production runtime unchanged. Actual DOM and Chromium AX semantics verified;not a screen-reader audio/announcement test andnofixapplied.'
+   R['scope']='Isolated generated candidate only. Actual DOM and Chromium AX semantics verified; not a screen-reader audio/announcement test. Canonical source unchanged.'
    (O/'report.json').write_text(json.dumps(R,indent=2));await b.close()
 asyncio.run(main())
