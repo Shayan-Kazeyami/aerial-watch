@@ -1,0 +1,12 @@
+from pathlib import Path
+import os,json,hashlib,shutil
+Q=Path(__file__).resolve().parent;arm=os.environ['QA_ARM'];assert arm in ['baseline','candidate'];roots={'baseline':Path('watch-error-redaction-build/staging'),'candidate':Path('watch-normal-stream-build/staging')};rids={'baseline':'3448182496cf6c2b906abe4b5a7128a9537ab745e8f992d4d55783fd389879e6','candidate':'c9d2d1a59b4efacb6d4b44824baefd047dab96351b0086fa8bfe1032168c31bc'};B=roots[arm];rid=rids[arm];S=B/'preview-b/releases'/rid;sha=lambda b:hashlib.sha256(b).hexdigest();m=json.loads((S/'deployment-manifest.json').read_text());assert sha(json.dumps({k:m[k] for k in ['schemaVersion','localFiles','references']},separators=(',',':')).encode())==rid
+for f in m['localFiles']+m['references']:
+ p=B/'preview-b/releases'/f.get('ownerReleaseId',rid)/f['path'];data=p.read_bytes();assert len(data)==f['sizeBytes'] and sha(data)==f['sha256']
+assert len(m['localFiles'])+len(m['references'])==298
+original=(S/'assembly-review.js').read_bytes();assert sha(original)=='18acb2b6eea2a0a26b80dd173fc48a8bece76e6f2a66238ef84e3c57e0c79ae7';assert sha((S/'atelier-error-details.js').read_bytes())=='e28bdd29a032d5dad5d2a501b08c02536a386b22abb04fc7bc2796b9a843de58'
+entryPins={'baseline': {'index.html': '78aed279f7e3f2a8274d540edf2d6a293bea04c137a0162d425f4cf6f3b79c47', 'watch-home-coordinated-successor.js': '7240a0d79626b0b0da367d22e1541b000e6dc36c9e6969570ba9d13db8921fd7', 'watch-home-loading-v4.css': '0db4e30c1e54f824152441bf5f566664df84ebf61d8996b8a78f9c4e271c5ee1'}, 'candidate': {'index.html': 'd537b50d8871dce657744bcc41bfbffd8405c0d404a1b32e00cd747baf8507b4', 'watch-home-coordinated-successor.js': '981165378d835b4b13fdf2217747fef9755f64203c49dc3a9c63fff2c790833d', 'watch-home-loading-v4.css': '0db4e30c1e54f824152441bf5f566664df84ebf61d8996b8a78f9c4e271c5ee1'}}
+for n,h in entryPins[arm].items():assert sha((B/n).read_bytes())==h
+# Clone exact build root once; do not rebase URL/HTML or overwrite prior copies.
+out=Q/('prepared-'+arm);assert not out.exists();shutil.copytree(B,out);target=out/'preview-b/releases'/rid/'assembly-review.js';hook=(Q/'snapshot-hook.js').read_bytes();target.write_bytes(original+b'\n'+hook)
+report={'arm':arm,'rid':rid,'sealedClosureVerified':298,'runtimePrefixExact':True,'readOnlyHookSHA256':sha(hook),'qaInstrumentedNotImmutableRelease':True,'bootstrapAndHTMLUnchanged':True,'sourceUntouched':sha((S/'assembly-review.js').read_bytes())==sha(original)};(Q/('PREPARED-'+arm+'.json')).write_text(json.dumps(report,indent=2));print(report)
