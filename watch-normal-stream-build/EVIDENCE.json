@@ -1,0 +1,16 @@
+{
+  "baseFeatureCommit": "c8f3bc16ba61569536b2226732b27a778e67f804",
+  "baseFeatureTree": "3364dc491d093b2b804fa62d93fba55f37bca921",
+  "baseRelease": "3448182496cf6c2b906abe4b5a7128a9537ab745e8f992d4d55783fd389879e6",
+  "candidateSHA256": "89ff6e1bc368731c77499830cda4a4682e9798c234fcb47df0b96a3d579d62d2",
+  "newRelease": "c9d2d1a59b4efacb6d4b44824baefd047dab96351b0086fa8bfe1032168c31bc",
+  "isolatedTests": 25,
+  "independentAdditionalAbortCases": 2,
+  "browserAPIRun": 43633442185,
+  "actualE79ViewerRun": 43635089796,
+  "actualE79LugsRun": 43635939700,
+  "browserEvidenceNotComposedRelease": true,
+  "tradeoff": "full16.56MB allocated beforefirstbodyhash vs4/8MBoriginal onearlyfailure",
+  "noHeapSpeedClaim": true,
+  "noDeployment": true
+}
