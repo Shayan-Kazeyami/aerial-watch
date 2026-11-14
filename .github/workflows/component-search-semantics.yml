@@ -1,0 +1,28 @@
+name: Component search result semantics read-only QA
+on:
+  push:
+    branches: [qa/component-search-semantics-20261114]
+    paths: [qa-component-search/**, .github/workflows/component-search-semantics.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python qa-component-search/prepare.py
+      - run: |
+          python -m http.server 8875 --bind 127.0.0.1 >/tmp/search-server.log 2>&1 &
+          python -u qa-component-search/check.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: component-search-live-semantics-readonly
+          path: |
+            qa-component-search/evidence
+            qa-component-search/source-proof.json
