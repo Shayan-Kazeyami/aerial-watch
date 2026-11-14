@@ -25,7 +25,7 @@ async def run():
     await f.evaluate('__touchAudit.actions=[];__touchAudit.events=[]');a=touch(1,x,y);bb=touch(2,x+50,y)
     await send('touchStart',[a])
     if multi:
-     await send('touchStart',[a,bb]);await send('touchMove',[touch(1,x-20,y),bb]);await send('touchEnd',[touch(1,x-20,y)])
+     await send('touchStart',[a,bb]);await send('touchMove',[touch(1,x-20,y),bb]);await send('touchEnd',[bb])
     await send('touchEnd',[]);R['cases'].append({'name':name,**await f.evaluate('({actions:__touchAudit.actions,events:__touchAudit.events})')})
    assert not R['errors'];assert any(e['type']=='pointerup' and not e['primary']for e in R['cases'][1]['events']);R['nativeDiagnosticExecuted']=True
   except Exception as e:R['failure']=repr(e);R['traceback']=traceback.format_exc();raise
