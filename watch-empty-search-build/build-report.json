@@ -1,0 +1,11 @@
+{
+  "baseCommit": "8a90bf513d9b3ad74ead99f91dd7320987c7b6d1",
+  "releaseId": "fa85a6e595b33a9bc9bfcf74d3fec624aa1ab29e4341496314de8aa981685edb",
+  "closureFiles": 298,
+  "changedPaths": [
+    "assembly-review.js",
+    "quality-study/viewer-revision.js",
+    "quality-study/viewer-revision.json"
+  ],
+  "scope": "isolated one-token empty search text fix; no browser/deployment approval"
+}

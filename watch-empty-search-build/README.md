@@ -1,0 +1,1 @@
+Additive build-only empty-search text correction atop pointer feature 8a90bf513d9b3ad74ead99f91dd7320987c7b6d1. Applies only one exact string replacement; all other current source bytes preserved. Run build.py from repository root with prior feature staging present, then verify.py and check.mjs. No deployment or browser acceptance.

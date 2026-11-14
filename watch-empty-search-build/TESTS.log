@@ -1,0 +1,3 @@
+PASS 12 exact renderer cases; zero-result message fixed, matched counts/buttons/scopes unchanged.
+PASS both closures, exact three changes, references/crown fix preserved
+PASS exact integrated empty-search token; saved-clock and all other latest bytes preserved
