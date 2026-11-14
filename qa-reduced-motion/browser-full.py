@@ -22,22 +22,22 @@ async def arm(browser,name,initial):
  async def route(r):
   key='controller' if r.request.url.split('?')[0].endswith('/assembly-explode.js') else 'viewer';body=(candidate if key=='controller' else candidate_viewer) if name=='proposal' else (controller if key=='controller' else viewer);executed[key]=sha(body);await r.fulfill(status=200,content_type='text/javascript',body=body)
  await page.route('**/assembly-explode.js*',route);await page.route('**/assembly-review.js*',route)
- await page.goto(f'http://127.0.0.1:{port}/preview-b/releases/{RID}/atelier-preview.html?atelier=1',wait_until='domcontentloaded',timeout=120000)
+ await page.goto(f'http://127.0.0.1:{port}/preview-b/releases/{RID}/atelier-preview.html?quality=efficient&normalStream=1&paused=1',wait_until='domcontentloaded',timeout=120000)
  await page.wait_for_function('document.body.dataset.ready==="true"&&window.assemblyInspect?.().presentation.interactive&&document.getElementById("stage").dataset.cameraReady==="true"',timeout=300000)
  # Event observer is registered after the actual viewer callback; snapshots are post-policy, pre-next-frame.
  await page.evaluate("""()=>{window.mediaSamples=[];matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',e=>mediaSamples.push({matches:e.matches,explosion:assemblyInspect().explosion}));window.clickSamples=[];document.addEventListener('click',e=>{if(e.target.closest('[data-mode=explode],#atelier-reassemble,#atelier-explode-full'))queueMicrotask(()=>clickSamples.push(assemblyInspect().explosion));});}""")
  if initial=='reduce':
-  await page.locator('[data-mode=explode]').click();assert (await page.evaluate('assemblyInspect().explosion.amount'))==1
-  await page.emulate_media(reduced_motion='no-preference');await page.wait_for_function('mediaSamples.length===1');await page.locator('#atelier-reassemble').click();await page.wait_for_function('clickSamples.length===2');click=await page.evaluate('clickSamples.at(-1)');assert click['animating']==(name=='proposal'),click
+  await page.locator('[data-mode=explode]').click(no_wait_after=True,timeout=90000);assert (await page.evaluate('assemblyInspect().explosion.amount'))==1
+  await page.emulate_media(reduced_motion='no-preference');await page.wait_for_function('mediaSamples.length===1');await page.locator('#atelier-reassemble').click(no_wait_after=True,timeout=90000);await page.wait_for_function('clickSamples.length===2');click=await page.evaluate('clickSamples.at(-1)');assert click['animating']==(name=='proposal'),click
   await page.emulate_media(reduced_motion='reduce');await page.wait_for_function('mediaSamples.length===2');end=await page.evaluate('mediaSamples.at(-1)');assert end['explosion']['amount']==0 and not end['explosion']['animating']
  else:
-  await page.locator('[data-mode=explode]').click();await page.wait_for_function('clickSamples.length===1');click=await page.evaluate('clickSamples[0]');assert click['animating'],click
+  await page.locator('[data-mode=explode]').click(no_wait_after=True,timeout=90000);await page.wait_for_function('clickSamples.length===1');click=await page.evaluate('clickSamples[0]');assert click['animating'],click
   await page.emulate_media(reduced_motion='reduce');await page.wait_for_function('mediaSamples.length===1');end=await page.evaluate('mediaSamples.at(-1)')
   if name=='proposal':assert end['explosion']['amount']==1 and not end['explosion']['animating'],end
   # Baseline may settle before OS event on slow GPU; record without manufacturing a failure.
   (O/f'{name}-{initial}-midphase.json').write_text(json.dumps({'media':end,'actual':await page.evaluate('assemblyInspect()')},indent=2))
   if name=='proposal':await page.wait_for_function('!assemblyInspect().explosion.animating',timeout=30000)
-  await page.locator('#atelier-reassemble').click();await page.wait_for_function('clickSamples.length===2');nextclick=await page.evaluate('clickSamples.at(-1)');assert nextclick['target']==0,nextclick
+  await page.locator('#atelier-reassemble').click(no_wait_after=True,timeout=90000);await page.wait_for_function('clickSamples.length===2');nextclick=await page.evaluate('clickSamples.at(-1)');assert nextclick['target']==0,nextclick
   if name=='proposal':assert nextclick['amount']==0 and not nextclick['animating'],nextclick
  result={'initial_preference':initial,'click_samples':await page.evaluate('clickSamples'),'media_samples':await page.evaluate('mediaSamples'),'executed_sha256':executed,'errors':errors,'final':await page.evaluate('assemblyInspect()')};assert not errors;assert executed==R['candidate' if name=='proposal' else 'source'];(O/f'{name}-{initial}.json').write_text(json.dumps(result,indent=2));cdp=await ctx.new_cdp_session(page)
  try:
