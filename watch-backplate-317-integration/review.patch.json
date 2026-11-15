@@ -1,0 +1,13 @@
+{
+  "source_sha256": "f02f88014eedd44769f5dce54c784b07d391aae6523da1d7bd2582cdfaa8f23f",
+  "replacements": [
+    [
+      "createBackplate({rearCrystal:rearWindow})",
+      "createBackplate({rearCrystal:rearWindow,borrowImmutableGeometry:true})"
+    ],
+    [
+      "'backplate private geometry and material'",
+      "'backplate borrowed geometry and private material'"
+    ]
+  ]
+}
