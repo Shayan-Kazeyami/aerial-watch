@@ -1,0 +1,6 @@
+{
+  "watch-backplate-317-build/build.py": "c13de55d79795f497f0e612ff15239d5906487be3c08d93b6008bc9cb6c14000",
+  "watch-backplate-317-integration/original.js": "2d074b1e93189ccb54a2c5400f407c3ec29e949a714a0dab17f168c3789cf38a",
+  "watch-backplate-317-integration/candidate.js": "d4d608edd43bda3499216267e9f07f644f9ad01d45df4167dba815d5739f9f10",
+  "watch-backplate-317-integration/review.patch.json": "9264cd753b50e3fc5b2d100779b3dad315a080eb6a3818cf1914a78330842139"
+}

@@ -1,0 +1,36 @@
+{
+  "baseline": {
+    "rid": "bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0",
+    "root": "watch-shell-home-build/staging",
+    "closureFiles": 298,
+    "expectedOriginalReviewSHA256": "f02f88014eedd44769f5dce54c784b07d391aae6523da1d7bd2582cdfaa8f23f",
+    "namedQAFiles": {
+      "g317-qa-review.js": "c7e0b1d62537f67606d4a4eaaee6c497d95f420c8ab1dc4b46d90f636805ee87",
+      "g317-qa-bootstrap.js": "35720c7f09f3e17cb2c19e2c10a9d8d394e03886342d8d31bdcb8a7a513deacb",
+      "g317-qa.html": "60a4b39593d860296366dfdc3c32462b6a61d6ad20e36893bba5f09f9bffa70b"
+    },
+    "canonicalFilesUnchanged": true,
+    "declaredQAInterventions": [
+      "observers and read-only resident identity inventory",
+      "camera-only transformed cover whole/grazing framing",
+      "named entry import redirects"
+    ]
+  },
+  "candidate": {
+    "rid": "ababdaee0577934bfcdb140d4c68087d804a39d55c4513e222bbf376d25da54d",
+    "root": "watch-backplate-317-build/staging",
+    "closureFiles": 298,
+    "expectedOriginalReviewSHA256": "6b1fc969fd8cba0cfa1480a828d2ccb1b45c477292c244b910b999abdf9bc93f",
+    "namedQAFiles": {
+      "g317-qa-review.js": "e2086ef64ebb831bdf09740989a83322da2694417d49a2f5bb305ad354194e90",
+      "g317-qa-bootstrap.js": "35720c7f09f3e17cb2c19e2c10a9d8d394e03886342d8d31bdcb8a7a513deacb",
+      "g317-qa.html": "60a4b39593d860296366dfdc3c32462b6a61d6ad20e36893bba5f09f9bffa70b"
+    },
+    "canonicalFilesUnchanged": true,
+    "declaredQAInterventions": [
+      "observers and read-only resident identity inventory",
+      "camera-only transformed cover whole/grazing framing",
+      "named entry import redirects"
+    ]
+  }
+}

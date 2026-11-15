@@ -1,0 +1,117 @@
+{
+  "source": {
+    "arrays": {
+      "POSITION": {
+        "sha256": "3f150eaf588df1fb9ff24630a0b895c0333d78c80d9b69ba65896a3dfcf7ad06",
+        "shape": [
+          3163,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "NORMAL": {
+        "sha256": "63edf152a9be8a5f516219aa3dbc31cf89704b2f928c14478476950b484f2042",
+        "shape": [
+          3163,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "TEXCOORD_0": {
+        "sha256": "4572b3a5b3297815e2c833a5bfe7c8b6967f43868d15d9be61066f90501d529e",
+        "shape": [
+          3163,
+          2
+        ],
+        "dtype": "float32"
+      },
+      "indices": {
+        "sha256": "eaa9ac6bdb72e905954452baf5d3f5766eaeeba3969f60686c281a316117ca61",
+        "shape": [
+          9252
+        ],
+        "dtype": "uint16"
+      }
+    }
+  },
+  "candidate": {
+    "arrays": {
+      "POSITION": {
+        "sha256": "2502c9e65b29d7bb30fd5c133bf3e6e411e3249411b9f134d810422bc19dff00",
+        "shape": [
+          3164,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "NORMAL": {
+        "sha256": "1f70e42a76c16cbb0d39df592304f8c8ff0b50928393de90b7465f02e4cb0442",
+        "shape": [
+          3164,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "TEXCOORD_0": {
+        "sha256": "9fe25e703fbe611edfe6fb118c3b8da8b62e194a500eb40351b863ae0391cb04",
+        "shape": [
+          3164,
+          2
+        ],
+        "dtype": "float32"
+      },
+      "indices": {
+        "sha256": "00366e005159ae797d37f2167de75af355b488f00de4a2a00f3b81ee8d12663e",
+        "shape": [
+          9252
+        ],
+        "dtype": "uint16"
+      }
+    }
+  },
+  "canonical": {
+    "path": "watch-shell-home-build/staging/preview-b/releases/bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0/premium-face/face-svg04.glb",
+    "sha256": "9766f3b04c56d698e52b999771ea494ac5ca49341da2ed8b22ec57fd6ac2a51c",
+    "node": {
+      "extras": {
+        "premiumFacePart": true,
+        "designRevision": "B-SVG-04"
+      },
+      "mesh": 70,
+      "name": "SVG studio-name",
+      "scale": [
+        1.5374650955200195,
+        1,
+        1.695311188697815
+      ],
+      "translation": [
+        7.001009941101074,
+        3.490000009536743,
+        1.5000001192092896
+      ]
+    },
+    "primitive": {
+      "attributes": {
+        "POSITION": 162,
+        "NORMAL": 163,
+        "TEXCOORD_0": 164
+      },
+      "indices": 165,
+      "material": 1
+    }
+  },
+  "material": {
+    "doubleSided": true,
+    "name": "Satin steel",
+    "pbrMetallicRoughness": {
+      "baseColorFactor": [
+        0.41999998688697815,
+        0.46000000834465027,
+        0.5,
+        1
+      ],
+      "metallicFactor": 0.9200000166893005,
+      "roughnessFactor": 0.25
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "assetRouteModuleSHA256": "11cef9b57b453fbfb09df94f5f31883d40deceeeb5ad0bdae158aa9b048cd37a",
+  "g317": {
+    "baseline": {
+      "rid": "bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0",
+      "root": "watch-shell-home-build/staging",
+      "closureFiles": 298,
+      "expectedOriginalReviewSHA256": "f02f88014eedd44769f5dce54c784b07d391aae6523da1d7bd2582cdfaa8f23f",
+      "namedQAFiles": {
+        "g317-qa-review.js": "c7e0b1d62537f67606d4a4eaaee6c497d95f420c8ab1dc4b46d90f636805ee87",
+        "g317-qa-bootstrap.js": "35720c7f09f3e17cb2c19e2c10a9d8d394e03886342d8d31bdcb8a7a513deacb",
+        "g317-qa.html": "60a4b39593d860296366dfdc3c32462b6a61d6ad20e36893bba5f09f9bffa70b"
+      },
+      "canonicalFilesUnchanged": true,
+      "declaredQAInterventions": [
+        "observers and read-only resident identity inventory",
+        "camera-only transformed cover whole/grazing framing",
+        "named entry import redirects"
+      ]
+    },
+    "candidate": {
+      "rid": "ababdaee0577934bfcdb140d4c68087d804a39d55c4513e222bbf376d25da54d",
+      "root": "watch-backplate-317-build/staging",
+      "closureFiles": 298,
+      "expectedOriginalReviewSHA256": "6b1fc969fd8cba0cfa1480a828d2ccb1b45c477292c244b910b999abdf9bc93f",
+      "namedQAFiles": {
+        "g317-qa-review.js": "e2086ef64ebb831bdf09740989a83322da2694417d49a2f5bb305ad354194e90",
+        "g317-qa-bootstrap.js": "35720c7f09f3e17cb2c19e2c10a9d8d394e03886342d8d31bdcb8a7a513deacb",
+        "g317-qa.html": "60a4b39593d860296366dfdc3c32462b6a61d6ad20e36893bba5f09f9bffa70b"
+      },
+      "canonicalFilesUnchanged": true,
+      "declaredQAInterventions": [
+        "observers and read-only resident identity inventory",
+        "camera-only transformed cover whole/grazing framing",
+        "named entry import redirects"
+      ]
+    }
+  },
+  "face": {
+    "rid": "bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0",
+    "namedQAFiles": {
+      "q401-adapter.mjs": "b1a3315614eb6e2a392596f8cacdfd5da93dcf80bb64b8d7c40b5dd33c9c815e",
+      "face-evidence-review.js": "f735b5ff59677a990821113fc79e29b57cbe8bb021c696971b54b21c34dc4b72",
+      "q401-INPUTS.json": "1cd2029b21b4ffdebd8b055b6d88a865cc6cb69ed1c25e4ffbd6571488161a4d",
+      "face-evidence.html": "86ae6cb2c054ea7619507f9d4d2d8fa60aab3ef6fabfdbdf27e53937851c854d",
+      "q333-candidate.json": "229dc04ed6900ce3261df7befef7047c04d98847378bc412c3d3d9e030742b30",
+      "q401-candidate.json": "cebce913e40fde5adfc2b2953fa958f57d350bd9d3c444719dcd90455721cd2a",
+      "q333-INPUTS.json": "c9ebed791d3a91399a8f10e629bf96a02ea7fef1802c676739a6e7e8187babd9",
+      "q402-candidate.json": "c7eab6fe739a98533d301c6b6e1359daa2cca67750c317c1812ecd9741169b4c",
+      "q333-adapter.mjs": "27b80142fd26c1c807ba23279cb9cab0430fe4db425acfb4bb63d34a093a8445",
+      "face-evidence-bootstrap.js": "ecb66544f9bc34dfcd2b78e30558a07a402356127d05b0cb6131694f15ea5e19",
+      "q402-adapter.mjs": "dcf9fef24e7eaa98f1fd99821311cecd33948a7d8434cf7e1579547c6f4a0a8b",
+      "q402-INPUTS.json": "bb5d61bbc2f78d8f3df91a599d5ee0944536655fc02522d870e3f993612227a7"
+    },
+    "expectedFrameKeysPerRoute": [
+      "q333-None-near-pbr-A",
+      "q333-None-near-pbr-B",
+      "q333-None-near-pbr-A2",
+      "q333-None-grazing-pbr-A",
+      "q333-None-grazing-pbr-B",
+      "q333-None-grazing-pbr-A2",
+      "q402-397-near-pbr-A",
+      "q402-397-near-pbr-B",
+      "q402-397-near-pbr-A2",
+      "q402-397-near-wire-A",
+      "q402-397-near-wire-B",
+      "q402-397-near-wire-A2",
+      "q402-397-grazing-pbr-A",
+      "q402-397-grazing-pbr-B",
+      "q402-397-grazing-pbr-A2",
+      "q402-397-grazing-wire-A",
+      "q402-397-grazing-wire-B",
+      "q402-397-grazing-wire-A2",
+      "q402-1158-near-pbr-A",
+      "q402-1158-near-pbr-B",
+      "q402-1158-near-pbr-A2",
+      "q402-1158-near-wire-A",
+      "q402-1158-near-wire-B",
+      "q402-1158-near-wire-A2",
+      "q402-1158-grazing-pbr-A",
+      "q402-1158-grazing-pbr-B",
+      "q402-1158-grazing-pbr-A2",
+      "q402-1158-grazing-wire-A",
+      "q402-1158-grazing-wire-B",
+      "q402-1158-grazing-wire-A2",
+      "q401-None-fit-front-pbr-A",
+      "q401-None-fit-front-pbr-A2",
+      "q401-None-fit-grazing-pbr-A",
+      "q401-None-fit-grazing-pbr-A2",
+      "q401-35-fit-front-pbr-A",
+      "q401-35-fit-front-pbr-A2",
+      "q401-35-fit-grazing-pbr-A",
+      "q401-35-fit-grazing-pbr-A2",
+      "q401-186-fit-front-pbr-A",
+      "q401-186-fit-front-pbr-A2",
+      "q401-186-fit-grazing-pbr-A",
+      "q401-186-fit-grazing-pbr-A2",
+      "q401-8-fit-front-pbr-A",
+      "q401-8-fit-front-pbr-A2",
+      "q401-8-fit-grazing-pbr-A",
+      "q401-8-fit-grazing-pbr-A2"
+    ],
+    "componentFreeze": "7089d5981b04691f165b5150e869cffd064cd167ef27fd3ed3b799340796f32a"
+  },
+  "assetRoutePaths": {
+    "raw": {
+      "assembly": "/rebuild/assembly.glb",
+      "face": "/premium-face/face-svg04.glb"
+    },
+    "meshopt": {
+      "assembly": "/optimized-assets/rebuild__assembly.meshopt.glb.gz",
+      "face": "/optimized-assets/premium-face__face-svg04.meshopt.glb"
+    }
+  },
+  "viewport": [
+    1280,
+    900
+  ],
+  "deviceScaleFactor": 1,
+  "routes": [
+    "raw",
+    "meshopt"
+  ],
+  "canonicalSources": {
+    "assembly": "6ac638843c56eb4ae2f3d9ee1135facaac085ae70e2292f2b3d30f9673340039",
+    "face": "9766f3b04c56d698e52b999771ea494ac5ca49341da2ed8b22ec57fd6ac2a51c"
+  },
+  "quality": "Human paired actual-render review required; q401 source gap0.019mm remains; no GPU/performance/adoption/finalization acceptance."
+}

@@ -1,0 +1,116 @@
+{
+  "source": {
+    "npz_sha256": "cfdc3a775db83825381fed0a0dba98926e8141cb07cbb7cf568b734117f109da",
+    "arrays": {
+      "POSITION": {
+        "sha256": "ca2ee0e534d6ccdfa57080ab5031ea9115c17077a1063be800b95e756d854690",
+        "shape": [
+          6144,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "NORMAL": {
+        "sha256": "8307744e8a532e0235d11f3ee9c3d70c8884e5d6fef4fd6f6afee0650238f650",
+        "shape": [
+          6144,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "TEXCOORD_0": {
+        "sha256": "8ad0c3c9712eca9e7ef1da05561f95017b9bd04b09b919a2c8032192b947c8c9",
+        "shape": [
+          6144,
+          2
+        ],
+        "dtype": "float32"
+      },
+      "indices": {
+        "sha256": "7026598cf357563c02f7d62377e10a35c900a32c01269b56793ee231214c66c0",
+        "shape": [
+          9216
+        ],
+        "dtype": "uint16"
+      }
+    }
+  },
+  "candidate": {
+    "npz_sha256": "415efd87cb919866f20943935ca1c8434879c69bb35e6066de8d6a93e93118d2",
+    "arrays": {
+      "POSITION": {
+        "sha256": "d80e022de3bc1f48e69cdd6584d99e56beb0f0c1c36c126e3262c801379f4267",
+        "shape": [
+          3088,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "NORMAL": {
+        "sha256": "95645641b1dcc2d2df11aaad65d83b44cd0a2e9557d8e26a3da896a969a45f9c",
+        "shape": [
+          3088,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "TEXCOORD_0": {
+        "sha256": "beda00163365960b374271ce66ae14c793b883560be7b12397233843e0305dd6",
+        "shape": [
+          3088,
+          2
+        ],
+        "dtype": "float32"
+      },
+      "indices": {
+        "sha256": "1ad3927a2720772d4904733d6ec3acfae31a3e673239b82400edc59888340e4d",
+        "shape": [
+          9216
+        ],
+        "dtype": "uint16"
+      }
+    }
+  },
+  "canonical": {
+    "path": "watch-shell-home-build/staging/preview-b/releases/bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0/premium-face/face-svg04.glb",
+    "sha256": "9766f3b04c56d698e52b999771ea494ac5ca49341da2ed8b22ec57fd6ac2a51c",
+    "node": {
+      "extras": {
+        "premiumFacePart": true,
+        "designRevision": "B-SVG-04"
+      },
+      "mesh": 1,
+      "name": "SVG seconds-edge-4.1",
+      "translation": [
+        -7.998827934265137,
+        3.559999942779541,
+        0.016291368752717972
+      ]
+    },
+    "primitive": {
+      "attributes": {
+        "POSITION": 4,
+        "NORMAL": 5,
+        "TEXCOORD_0": 6
+      },
+      "indices": 7,
+      "material": 0
+    }
+  },
+  "material": {
+    "doubleSided": true,
+    "name": "Muted champagne",
+    "pbrMetallicRoughness": {
+      "baseColorFactor": [
+        0.6800000071525574,
+        0.49000000953674316,
+        0.2800000011920929,
+        1
+      ],
+      "metallicFactor": 0.8500000238418579,
+      "roughnessFactor": 0.20000000298023224
+    }
+  },
+  "status": "LOCAL_DRAFT_NOT_AUTHORIZED_TO_RUN",
+  "source_candidate_bytes_delta": 97792
+}

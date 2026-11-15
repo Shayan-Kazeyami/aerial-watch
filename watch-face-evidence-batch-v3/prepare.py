@@ -1,0 +1,12 @@
+from pathlib import Path
+import hashlib,json,shutil
+D=Path(__file__).parent;R=Path('watch-shell-home-build/staging/preview-b/releases/bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0');S=D/'served';S.mkdir(exist_ok=True)
+pairs=[('q333',Path('watch-seconds-edge-41-pbr-adapter-v4')),('q402',Path('watch-svg-studio-name-402-pbr-adapter-v2')),('q401',Path('watch-svg-brand-401-pbr-adapter-v2'))];hooks=[]
+for name,src in pairs:
+ for a,b in [('adapter.mjs',name+'-adapter.mjs'),('candidate.json',name+'-candidate.json'),('INPUTS.json',name+'-INPUTS.json')]:shutil.copyfile(src/a,S/b)
+ hooks.append((src/'binding-recipe.js').read_text())
+hook='\n'.join(hooks)+'''\nwindow.__faceEvidenceReady=()=>!loading&&!failed&&!!model&&!!premiumFace&&!lifecycle.disposed;
+window.__faceEvidenceState=()=>({ao:ao.enabled,clock:clock.snapshot(),camera:camera.matrixWorld.toArray(),projection:camera.projectionMatrix.toArray(),target:controls.target.toArray(),zoom:camera.zoom,canvas:[renderer.domElement.width,renderer.domElement.height],tour:tourSequence.snapshot(),disposed:lifecycle.disposed});\nwindow.__faceCanvasPNG=()=>renderer.domElement.toDataURL('image/png');\n'''
+review=(R/'assembly-review.js').read_text();(S/'face-evidence-review.js').write_text(review+'\n'+hook+'\n'+'\nconst faceExpectedMaterials='+json.dumps({{'q333':'SVG_seconds-edge-41','q402':'SVG_studio-name','q401':'SVG_brand'}[name]:json.loads((src/'INPUTS.json').read_text())['material'] for name,src in pairs},separators=(',',':'))+';\nconst faceMaterialSignatures='+json.dumps(json.loads((D/'MATERIAL_SIGNATURES.json').read_text()),separators=(',',':'))+';\n'+(D/'face-observers.js').read_text())
+boot=(R/'atelier-preview.js').read_text();old="import('./assembly-review.js?v=atelier-local-1')";assert boot.count(old)==1;(S/'face-evidence-bootstrap.js').write_text(boot.replace(old,"import('./face-evidence-review.js?v=1')"));html=(R/'atelier-preview.html').read_text();assert html.count('src="atelier-preview.js"')==1;(S/'face-evidence.html').write_text(html.replace('src="atelier-preview.js"','src="face-evidence-bootstrap.js"'))
+(D/'SERVED_SHA256.json').write_text(json.dumps({p.name:hashlib.sha256(p.read_bytes()).hexdigest()for p in S.iterdir()},indent=2));(D/'CANONICAL_INPUTS.json').write_text(json.dumps({str(R/n):hashlib.sha256((R/n).read_bytes()).hexdigest()for n in ['assembly-review.js','atelier-preview.js','atelier-preview.html']},indent=2))

@@ -1,0 +1,139 @@
+name: Exact Watch mesh evidence V2, not release
+on:
+  push:
+    branches: [qa/watch-mesh-evidence-v2-20261115]
+permissions:
+  contents: read
+jobs:
+  payload_build:
+    runs-on: ubuntu-latest
+    outputs:
+      archive_sha256: ${{ steps.pack.outputs.archive_sha256 }}
+      manifest_sha256: ${{ steps.pack.outputs.manifest_sha256 }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact new source inputs before build
+        run: |
+          python - <<'PY2'
+          import pathlib,json,hashlib
+          q=pathlib.Path('watch-mesh-evidence-v2-draft')
+          for n,h in json.loads((q/'FREEZE.json').read_text()).items():
+            assert hashlib.sha256((q/n).read_bytes()).hexdigest()==h,n
+          for n,h in json.loads((q/'INPUTS.json').read_text()).items():
+            assert hashlib.sha256(pathlib.Path(n).read_bytes()).hexdigest()==h,n
+          assert pathlib.Path('.github/workflows/watch-mesh-evidence-v2.yml').read_bytes()==(q/'workflow.yml').read_bytes()
+          PY2
+      - uses: actions/checkout@v4
+        with:
+          ref: 64fff6296e7d23f00ef387fa222ef405da3c8fba
+          path: normal-fixture
+      - uses: actions/checkout@v4
+        with:
+          ref: e305819445671ba9bc24734a902646204a08801e
+          path: seconds-fixture
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy
+      - run: |
+          cd normal-fixture
+          tar -xzf hardware-current-fixture.tar.gz -C hardware-normal-qa
+          node hardware-normal-qa/ci-bake.mjs preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/rebuild/assembly.glb
+          node hardware-normal-qa/e79-rebase/ci-encode.mjs
+      - run: |
+          cd seconds-fixture
+          python qa-seconds-ring/pack.py preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6/premium-face/face-svg04.glb
+          node qa-seconds-ring/encode.mjs
+      - run: |
+          export WATCH_BASE=preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6
+          export NORMAL_INPUT=normal-fixture/hardware-normal-qa/e79-rebase
+          export RING_INPUT=seconds-fixture/qa-seconds-ring
+          export RUNTIME_INPUT=coordinated-release-successor
+          python watch-error-redaction-build/build.py
+          python watch-error-redaction-build/verify_closure.py
+          node --check watch-error-redaction-build/assembly-review-reset-candidate.js
+          node --test --test-reporter=tap watch-error-redaction-build/test.mjs watch-error-redaction-build/adversarial-regressions.test.mjs watch-error-redaction-build/existing-regressions.test.mjs > watch-error-redaction-build/security-tests.tap
+          cat watch-error-redaction-build/security-tests.tap
+          node watch-error-redaction-build/quality-status-test.mjs
+          node watch-error-redaction-build/runtime-check.mjs
+          python watch-normal-stream-build/build.py
+          python watch-normal-stream-build/verify.py
+          node --test --test-reporter=tap watch-normal-stream-build/test-staged.mjs > watch-normal-stream-build/tests.tap
+          cat watch-normal-stream-build/tests.tap
+      - run: |
+          python watch-crown-key-build/build.py
+          python watch-explorer-label-build/build.py
+          python watch-utf8-text-build/build.py
+          python watch-canvas-shortcut-build/build.py
+          python watch-saved-clock-build/build.py
+          python watch-pointer-ownership-build/build.py
+          python watch-empty-search-build/build.py
+          python watch-support-text-build/build.py
+          python watch-save-feedback-build/build.py
+          python watch-import-readiness-build/build.py
+          python watch-shell-home-build/build.py
+          python watch-backplate-317-build/build.py
+          python watch-mesh-evidence-v2-draft/prepare.py
+          python watch-mesh-evidence-v2-draft/prepare_combined.py --verify
+      - name: Package exact verified build roots
+        id: pack
+        run: |
+          python watch-mesh-evidence-v2-draft/payload.py pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: exact-linux-g317-payload
+          compression-level: 0
+          path: g317-payload/
+  viewer:
+    needs: payload_build
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright pillow && python -m playwright install chromium
+      - uses: actions/download-artifact@v4
+        with:
+          name: exact-linux-g317-payload
+          path: g317-payload/
+      - name: Verify upstream payload bytes
+        env:
+          EXPECTED_ARCHIVE_SHA256: ${{ needs.payload_build.outputs.archive_sha256 }}
+          EXPECTED_MANIFEST_SHA256: ${{ needs.payload_build.outputs.manifest_sha256 }}
+        run: python watch-mesh-evidence-v2-draft/payload.py unpack
+      - name: Fresh bounded materialization
+        run: |
+          python - <<'PY'
+          import pathlib,json,hashlib,subprocess,sys
+          p=pathlib.Path('watch-mesh-evidence-v2-draft')
+          for n,h in json.loads((p/'FREEZE.json').read_text()).items():
+            assert hashlib.sha256((p/n).read_bytes()).hexdigest()==h,n
+          q=pathlib.Path('watch-mesh-evidence-v2-draft')
+          assert not (q/'prepared-baseline').exists() and not (q/'prepared-candidate').exists()
+          for pattern in ['RESULT.json','cleanup.json','driver-exit.json','ACCEPTANCE.json']:
+            assert not list(q.glob(pattern)),pattern
+          subprocess.run([sys.executable,str(q/'prepare.py'),'--materialize'],check=True,timeout=180)
+          subprocess.run([sys.executable,str(q/'prepare_combined.py'),'--materialize'],check=True,timeout=180)
+          PY
+      - name: One bounded exact mesh evidence run
+        run: python watch-mesh-evidence-v2-draft/run_checked.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-mesh-evidence-v2-not-release
+          path: |
+            watch-mesh-evidence-v2-draft/RESULT.json
+            watch-mesh-evidence-v2-draft/face-raw/
+            watch-mesh-evidence-v2-draft/face-meshopt/
+            watch-mesh-evidence-v2-draft/EXPECTED_EXECUTION.json
+            watch-mesh-evidence-v2-draft/inventory-*.json
+            watch-mesh-evidence-v2-draft/*.png
+            watch-mesh-evidence-v2-draft/*.roi.json
+            watch-mesh-evidence-v2-draft/QA_CLOSURE.json
+            watch-mesh-evidence-v2-draft/*.log
+            watch-mesh-evidence-v2-draft/cleanup.json
+            watch-mesh-evidence-v2-draft/driver-exit.json
+            watch-mesh-evidence-v2-draft/ACCEPTANCE.json
