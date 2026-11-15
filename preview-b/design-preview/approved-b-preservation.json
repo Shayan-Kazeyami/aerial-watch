@@ -1,6 +1,0 @@
-{
-  "checked_source_and_hand_meshes": 169,
-  "changed": [],
-  "pass": true,
-  "checks": "Exact local vertex SHA256 and world transform equality; no claim of full assembly interference clearance."
-}

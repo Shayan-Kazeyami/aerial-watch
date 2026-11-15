@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "kind": "source-only-candidate-backup-not-deployment",
+  "repository": "Shayan-Kazeyami/aerial-watch",
+  "candidateReleaseId": "f22b8870c9f64c522918f0c4e372fcbd9617accfc33b4fb420a56291dcc8ab10",
+  "baseReleaseId": "bfbaaf3576738da1930718602031607bbc6d5b57a1a504fd5c231be3ccc160c0",
+  "sourceFilesOnly": true,
+  "assetBinariesIncluded": false,
+  "workflowFilesIncluded": false,
+  "privateNotesOrCredentialsIncluded": false,
+  "releaseReceiptSupplied": false,
+  "files": [
+    {
+      "path": "ATTRIBUTION.md",
+      "bytes": 8450,
+      "sha256": "221b74c381f9030ca0dcc73815cad7a7261a6f62eaa3c272fe5f10d42ec27e17",
+      "gitBlobSHA1": "73e29967447ed9a1014b9a12b3f6d591add95e4d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1819,
+      "sha256": "0f20c983f0e60418dec19eba1102b6b1807df3527e861e6fb227e6c07dd83eca",
+      "gitBlobSHA1": "79ab4e7715f74bcdf4ec73f43fad08cb60c36b93"
+    },
+    {
+      "path": "VERIFY_SOURCE.py",
+      "bytes": 671,
+      "sha256": "d99b2212f6e8bd5838a0177f87419090d4d8c5f4b638875d69fd7e6c9ddd9f1b",
+      "gitBlobSHA1": "643676f99c3bb9e6448976dc5726637344174d29"
+    },
+    {
+      "path": "baseline/deployment-manifest.json",
+      "bytes": 62000,
+      "sha256": "23ba2419c882be1e9cb5d4ec3fbd3855f290662f88f93ab0b78812eb1d4932f4",
+      "gitBlobSHA1": "ec4963c16455c3e0acb67db7bcfeb1ec3ff17fcf"
+    },
+    {
+      "path": "bootstrap/index.html",
+      "bytes": 1164,
+      "sha256": "b1542c37c452519acc97f1a60f24198ec7fede3f69f6298e24ea43d72a495296",
+      "gitBlobSHA1": "20ec59c7064357fad35488d2e18ef7f9986eba84"
+    },
+    {
+      "path": "bootstrap/watch-home-coordinated-successor.js",
+      "bytes": 4086,
+      "sha256": "2729fe202093e01c1dbada86136356226a2997bb99463050e9b89839f0d383f6",
+      "gitBlobSHA1": "fd24ff1b0ee065f0f8651dffad79556b101069d0"
+    },
+    {
+      "path": "bootstrap/watch-home-loading-v4.css",
+      "bytes": 2043,
+      "sha256": "0db4e30c1e54f824152441bf5f566664df84ebf61d8996b8a78f9c4e271c5ee1",
+      "gitBlobSHA1": "6685c3e39642f20be9d857ee7aea7dc6a0068b80"
+    },
+    {
+      "path": "runtime/assembly-fresh-byte-hash.js",
+      "bytes": 1915,
+      "sha256": "fb37b7b9a9aba512ec621afaf59e68d638d5c29a0771d93fdde272290df34a7d",
+      "gitBlobSHA1": "6459c2a0d8b2ed0c70897e04bfc08d51dc89779a"
+    },
+    {
+      "path": "runtime/assembly-fresh-exact-index.js",
+      "bytes": 1155,
+      "sha256": "740018d289d908647656f9d958a7a42416f25dfda247713dbd5a5207c17e428d",
+      "gitBlobSHA1": "a1ea0821984143c69133cc14252cd2c3214dc0aa"
+    },
+    {
+      "path": "runtime/assembly-fresh-frame-fingerprints.js",
+      "bytes": 1920,
+      "sha256": "1dee9915c906ea8c96a2287da443079e05a2fa2e3467fed2e6ee9409530bb2b9",
+      "gitBlobSHA1": "08750f7df5187a59f714427cf1aac24d906ed6a8"
+    },
+    {
+      "path": "runtime/assembly-fresh-frame-index.js",
+      "bytes": 684,
+      "sha256": "b654ac0d20ee85ac870c1d7e115448ea7265d65ddbed4dc36c667c2c265e9046",
+      "gitBlobSHA1": "c90e9328102596672cd0613e0a211c0dbafe99bc"
+    },
+    {
+      "path": "runtime/assembly-fresh-gold-index.js",
+      "bytes": 1014,
+      "sha256": "5137258d7b57521dac8d38eaa94679586b240a32785067839dd48322cc55db7b",
+      "gitBlobSHA1": "c8245b8462a02f7e89e342883dbdc2276a315db4"
+    },
+    {
+      "path": "runtime/assembly-fresh-quality-fingerprints.js",
+      "bytes": 3881,
+      "sha256": "85ad7e87734055a7c9393cefd57f38de1515e829e071625bb814c073b94fc249",
+      "gitBlobSHA1": "77153e51fe83b27ef57d6362e8afc5fbbc0650e7"
+    },
+    {
+      "path": "runtime/assembly-fresh-quality-index.js",
+      "bytes": 3320,
+      "sha256": "4557ecf3a7ea40f7d26ab74ff247ba542b420f3fd95dee7ebb70a0228297da54",
+      "gitBlobSHA1": "a3bc50c364ff6a16199a5edb614a0e997345ef9b"
+    },
+    {
+      "path": "runtime/assembly-review.js",
+      "bytes": 136654,
+      "sha256": "08ca602e0de41543f4125d632cf6fbeb263b5066bc4ec9c4b9d5ed53b0a5b267",
+      "gitBlobSHA1": "930628b89fed425d8317b0a76f03162009b51bc4"
+    },
+    {
+      "path": "runtime/deployment-manifest.json",
+      "bytes": 63190,
+      "sha256": "f381f375fef384c5e5d27c81a459d7489fd55903e7e32185a4e84949928a50ac",
+      "gitBlobSHA1": "d2500f08e57a01bef54ec71264802891d941c829"
+    },
+    {
+      "path": "runtime/quality-study/viewer-revision.js",
+      "bytes": 20383,
+      "sha256": "d2bdbc6ee84c24c3af4b32b190adb31afe18651e5229168d78df0582f5a812d0",
+      "gitBlobSHA1": "2b6b1ff36de6974e8eef7add4a1bbbedf9fd1fda"
+    },
+    {
+      "path": "runtime/quality-study/viewer-revision.json",
+      "bytes": 25767,
+      "sha256": "58b64387d816d8eec3fe9459782eb123d16bca30d3e464a538b55484425c3226",
+      "gitBlobSHA1": "d0b90ffedbaa62418bc111afeef51c6da256e3ba"
+    }
+  ]
+}
