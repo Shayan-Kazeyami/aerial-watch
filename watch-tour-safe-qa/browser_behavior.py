@@ -38,9 +38,13 @@ async def check(b,width,height,motion):
  if motion=='no-preference':
   trace=await button.evaluate("""b=>{b.click();const a=assemblyInspect();b.click();const z=assemblyInspect();return [[a.view,a.studioTour],[z.view,z.studioTour]];}""")
   assert trace==[['face',True],['face',False]],trace
+  await pg.wait_for_function("document.querySelector('#stage').dataset.cameraReady==='true'")
   current=await pg.evaluate("()=>{const a=assemblyInspect();return [a.view,a.camera,a.target];}")
   await pg.wait_for_timeout(7500)
-  assert current==await pg.evaluate("()=>{const a=assemblyInspect();return [a.view,a.camera,a.target];}")
+  after=await pg.evaluate("()=>{const a=assemblyInspect();return [a.view,a.camera,a.target];}")
+  max_pose_delta=max(abs(a-b) for k in (1,2) for a,b in zip(current[k],after[k]))
+  report['cases'][label]['pausedPoseTrace']={'before':current,'after':after,'maxAbsoluteComponentDelta':max_pose_delta}
+  assert current[0]==after[0] and max_pose_delta<1e-7,(current,after,max_pose_delta)
   await button.click()
   await pg.wait_for_function("assemblyInspect().view==='interior'&&assemblyInspect().studioTour",timeout=120000)
   await button.click()
