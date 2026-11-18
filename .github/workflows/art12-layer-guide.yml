@@ -14,13 +14,20 @@ jobs:
           sparse-checkout: |
             layer-focus-qa
             preview-b/candidates/art12-layer-guide
+            preview-b/releases/145aba103999de275e202eb0529fc66850c0e64a068f81ef876e5cfc495c70d4
           sparse-checkout-cone-mode: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m pip install playwright
       - run: python -m playwright install --with-deps chromium
-      - name: Overlay candidate copy on exact public release and verify all six layers
+      - name: Serve exact sealed release checkout
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 >/tmp/art12-http.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/preview-b/releases/145aba103999de275e202eb0529fc66850c0e64a068f81ef876e5cfc495c70d4/atelier-preview.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/art12-http.log
+          exit 1
+      - name: Test exact sealed runtime and all six layers
         run: python -u layer-focus-qa/art12_candidate.py
       - uses: actions/upload-artifact@v4
         if: always()
