@@ -1,0 +1,11 @@
+# Release-bound runtime census, not finalization
+
+Diagnostic CI only, against live immutable seal9de584f. Production source is not edited. The viewer response's original SHA is checked before appending a hash-bound observer; instrumentation is disclosed. All297 release bindings are independently rechecked before launch.
+
+Three actual states (assembled, exploded and balance layer) enumerate scene meshes, full geometry/index buffer hashes, transform/material identities, authoritative collections and scene-graph visibility. This is not occlusion/pixel visibility or approval. Historical sourceIndex + authoritative collection joins and unique collection/name joins are conservative semantic observations; all421 original statuses/adopted=false remain unchanged. Ambiguous names are unresolved. Historical optimization rows419–421 and duplicated tick rows407/408 are intentionally unresolved, not assigned by ordinal.
+
+Actual calendar148/159: record early bounded beforeRender observations, then pause clocks/crown, set exact clock0 and apply calendar-only0→peak→0. This is not synchronized whole-mechanism/physical simulation. Full POSITION hashes must deform and recover; each state has matched on/off/on render controls with stable camera/clock/buffers. Early16 hook calls may not be the initial build; report observed suppression only. Geometry revisions can make the actual springs ineligible before the explicit override. If so, don't claim those captures test batch invalidation; isolated prior WebGL tests retain that role.
+
+No source geometry changes, public deployment, device-performance or all421 completion claims. Full buffer fingerprints are executed output identities, not inferred authoring equivalence. Report any incomplete state/failed assertion as failed, not a completed census.
+
+Independent review additions: checkbox animation flags and spring world matrices are explicitly checked across toggle captures. Generated strap, proposal plate and premium-face candidates require their exact expected collection; no unrestricted generated-name matching.
