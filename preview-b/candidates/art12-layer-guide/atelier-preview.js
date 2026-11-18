@@ -57,7 +57,8 @@ body.atelier-live .context-card[data-tool=explode] #atelier-explosion-note[data-
  margin:0!important;padding:0!important;border:0!important;
 }
 @media(max-width:680px),(min-width:568px) and (max-width:1050px) and (max-height:600px) and (orientation:landscape){
- body.atelier-live #context[data-tool=explode] #atelier-tools{gap:4px}
+ body.atelier-live #context[data-tool=explode] #atelier-tools{column-gap:4px;row-gap:3px}
+ body.atelier-live #context[data-tool=explode] .layer-focus-row{margin:0!important}
  body.atelier-live #context[data-tool=explode] #atelier-explosion-note[data-layer-active=true]{
   grid-column:1/-1;grid-row:3;font:10px/1.2 Arial,sans-serif!important;color:#d2c3a6!important;
  }
