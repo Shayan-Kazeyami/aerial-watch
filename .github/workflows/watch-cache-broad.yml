@@ -1,0 +1,24 @@
+name: Watch canonical asset candidate broad smoke
+on:
+  push:
+    branches: [codex/watch-cache-broad]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '24'}
+      - run: python watch-cache-pin-qa/verify_seal.py
+      - run: node watch-cache-pin-qa/verify.mjs efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -m http.server 8765 --bind 127.0.0.1 >/tmp/cache-broad-http.log 2>&1 &
+      - run: EXPECTED_RELEASE=efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3 python -u watch-cache-pin-qa/broad.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: canonical-cache-broad
+          path: caseback-integrated-live
