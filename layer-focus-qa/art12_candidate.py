@@ -69,6 +69,10 @@ async def run():
      assert nb['y']>=pb['y']-.5 and nb['y']+nb['height']<=pb['y']+pb['height']+.5
      assert pb['y']+pb['height']<=dock['y']+.5,{'panel':pb,'dock':dock}
      report['layers'][layer_id]={'copy':copy,'runtime_selected':snap['layerFocus']['selected'],'member_count':len(snap['layerFocus']['members']),'copy_box':nb,'panel_box':pb,'copy_style':style}
+     # Preserve the keyboard-selection assertion but dismiss Chromium's native select popup before visual evidence.
+     await layer.evaluate('(e)=>e.blur()')
+     await f.locator('#atelier-explosion-note').click(force=True)
+     await page.wait_for_timeout(150)
      await page.screenshot(path=str(OUT/f'{w}-{layer_id}.png'))
     await overview.click();await f.wait_for_function("!assemblyInspect().layerFocus.selected&&assemblyInspect().explosion.amount===1")
     assert await layer.input_value()=='' and await overview.is_disabled() and (await note.inner_text()).strip()==baseline
