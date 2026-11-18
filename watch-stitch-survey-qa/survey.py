@@ -1,4 +1,4 @@
-import asyncio,json,pathlib,hashlib
+import asyncio,json,pathlib,hashlib,base64
 from playwright.async_api import async_playwright
 P=pathlib.Path(__file__).parent;O=P/'output';O.mkdir(exist_ok=True);RID='efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3';ROOT='https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/'+RID+'/'
 R={'release':RID,'scope':'Unmodified current public release Studio closeup survey, cloud Chromium software WebGL. No proposed change or defect claim yet.','errors':[],'poses':[],'servedModules':{}}
@@ -13,11 +13,11 @@ async def main():
    for response in responses:
     name=response.url.split('?')[0].split('/')[-1];digest=hashlib.sha256(await response.body()).hexdigest();assert digest==local[name]['sha256'],name;R['servedModules'][name]={'url':response.url,'sha256':digest}
    assert len(R['servedModules'])>=3
-   config=json.loads((P/'config.json').read_text());poses=[('upper-front',[0,42,55],[0,42,0]),('upper-oblique',[24,37,42],[7,37,0]),('crown-close',[43,-12,22],[22,0,3])]
+   config=json.loads((P/'config.json').read_text());poses=[('upper-front',[0,22,42],[0,22,0]),('upper-oblique',[22,24,40],[4,22,0]),('crown-close',[43,-12,22],[22,0,3])]
    for name,pos,target in poses:
     config['camera']['position']=pos;config['camera']['target']=target
     await page.locator('#import-config').set_input_files({'name':name+'.json','mimeType':'application/json','buffer':json.dumps(config).encode()});await page.wait_for_function("assemblyInspect().mechanismElapsed===0&&!assemblyInspect().animation&&!assemblyInspect().interiorAnimation");await page.wait_for_function("document.querySelector('#stage').dataset.cameraReady==='true'");await page.locator('.atelier-first-use').wait_for(state='hidden',timeout=15000);await page.wait_for_timeout(1500)
-    state=await page.evaluate('assemblyInspect()');assert state['renderQuality']=='studio';await page.locator('#assembly-canvas').screenshot(path=str(O/(name+'-A1.png')));await page.wait_for_timeout(800);await page.locator('#assembly-canvas').screenshot(path=str(O/(name+'-A2.png')))
+    state=await page.evaluate('assemblyInspect()');assert state['renderQuality']=='studio';(O/(name+'-A1.png')).write_bytes(base64.b64decode((await page.locator('#assembly-canvas').evaluate("c=>c.toDataURL('image/png')")).split(',')[1]));await page.wait_for_timeout(800);(O/(name+'-A2.png')).write_bytes(base64.b64decode((await page.locator('#assembly-canvas').evaluate("c=>c.toDataURL('image/png')")).split(',')[1]))
     diag=await page.evaluate("()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent)}")
     row={'name':name,'config':json.loads(json.dumps(config)),'state':state,'resourceTotals':await page.evaluate('assemblyResourceInspect().totals'),'canvas':await page.locator('#assembly-canvas').evaluate('(c)=>({css:[c.clientWidth,c.clientHeight],buffer:[c.width,c.height],dpr:devicePixelRatio})')};R['poses'].append(row);(O/(name+'-diagnostics.json')).write_text(json.dumps(diag,indent=2));print(name,'captured',flush=True)
    assert not R['errors'];R['passed']=True
