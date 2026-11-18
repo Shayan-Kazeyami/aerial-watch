@@ -1,0 +1,18 @@
+/* Portrait phones: one real header row, not a second toolbar over the watch.
+   Keep quality and Studio tools labelled; backend details remain in Quality.
+   This is a CSS-only trial. No geometry, materials or runtime state change. */
+@media(max-width:680px) and (orientation:portrait){
+ body.atelier-live .masthead{margin:0 8px;pointer-events:none}
+ body.atelier-live .masthead>a,body.atelier-live .masthead>button{pointer-events:auto}
+ body.atelier-live .wordmark{font-size:10px;letter-spacing:1.5px;min-height:44px}
+ body.atelier-live .wordmark span{display:none}
+ body.atelier-live .masthead .quality{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:136px;width:110px;min-width:110px;height:44px;padding:0 4px;gap:4px;justify-content:center;white-space:nowrap}
+ body.atelier-live .masthead .quality-value{margin-left:0}
+ body.atelier-live .masthead .backend-indicator,body.atelier-live .masthead .quality-dot{display:none}
+ body.atelier-live .home{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:92px;width:44px;height:44px;min-height:44px;padding:0;justify-content:center}
+ body.atelier-live .home span,body.atelier-live .home kbd{display:none}
+ body.atelier-live .atelier-more{position:fixed;z-index:10;top:env(safe-area-inset-top,0px);right:8px;width:84px;height:44px;min-height:44px;padding:0 4px;border:0;font-size:11px}
+ body.atelier-live .title-block{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;padding:0;margin:0}
+ body.atelier-live .object-stage #stage,
+ body.atelier-live:has(#context:not([hidden])) .object-stage #stage{inset:0 0 var(--atelier-stage-bottom)}
+}
