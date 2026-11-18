@@ -42,36 +42,57 @@ async def main():
       await page.locator('body[data-ready=true]').wait_for(timeout=300000)
       await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"')
       await page.evaluate("""()=>{for(const id of ['animate','animate-movement']){const e=document.getElementById(id);if(e?.checked){e.checked=false;e.dispatchEvent(new Event('change',{bubbles:true}));}}}""")
-      await page.locator('.task-dock [data-mode=capture]').click(force=True)
-      button=page.locator('#context [data-proxy=record-scene]');await page.wait_for_function('!document.querySelector("#context [data-proxy=record-scene]").disabled')
+      dock=page.locator('.task-dock [data-mode=capture]')
+      button=page.locator('#context [data-proxy=record-scene]')
       dialog=page.get_by_role('dialog')
-      box=await page.locator('#assembly-canvas').bounding_box()
-      dims=await page.locator('#assembly-canvas').evaluate('(c)=>[c.width,c.height]')
+      canvas=page.locator('#assembly-canvas')
+      async def begin_video():
+        # Existing full-stage capture handoff intentionally closes the capture panel.
+        await dock.click(force=True)
+        await button.wait_for(state='visible')
+        await page.wait_for_function('!document.querySelector("#context [data-proxy=record-scene]").disabled')
+        await button.click()
+        await dialog.get_by_role('group',name='Video resolution').wait_for()
+        assert await page.locator('#context').evaluate('(e)=>e.hidden')
+        assert not await page.evaluate('assemblyInspect().videoExport.active')
+        assert await dialog.locator('[value=view]').is_checked()
+      async def closed_cleanly():
+        await dialog.wait_for(state='hidden')
+        await page.wait_for_function('!assemblyInspect().videoExport.active')
+        assert await dock.evaluate('(e)=>document.activeElement===e')
+        assert await canvas.bounding_box()==box
+        assert await canvas.evaluate('(c)=>[c.width,c.height]')==dims
+        after=await page.evaluate('assemblyInspect()')
+        assert after['camera']==baseline['camera'] and after['target']==baseline['target']
+        assert not after['animation'] and not after['interiorAnimation']
+      await begin_video()
+      box=await canvas.bounding_box()
+      dims=await canvas.evaluate('(c)=>[c.width,c.height]')
+      baseline=await page.evaluate('assemblyInspect()')
       report['source_dims']=dims
       assert set(report['overlay'])==set(NAMES)
-      await button.click();await dialog.get_by_role('group',name='Video resolution').wait_for()
-      assert await dialog.locator('[value=view]').is_checked()
       await page.screenshot(path=str(OUT/'resolution-choices.png'))
-      await page.keyboard.press('Escape');await dialog.wait_for(state='hidden')
-      await page.wait_for_function('!assemblyInspect().videoExport.active')
-      assert len(count)==0 and await button.is_enabled()
+      await page.keyboard.press('Escape');await closed_cleanly()
+      assert len(count)==0
       report['cancel_before_render']=True
-      await button.click();await dialog.locator('[value=compact]').check()
+      await begin_video();await dialog.locator('[value=compact]').check()
       await dialog.get_by_role('button',name='Render 8s video').click()
+      await page.wait_for_function('assemblyInspect().videoExport.progress?.completed>=1')
+      cancelled_at=(await page.evaluate('assemblyInspect().videoExport.progress')).get('completed')
+      assert cancelled_at>=1
       await dialog.get_by_role('button',name='Cancel render').click()
-      await dialog.wait_for(state='hidden');await page.wait_for_function('!assemblyInspect().videoExport.active')
-      assert len(count)==0 and await button.is_enabled()
+      await closed_cleanly()
+      assert len(count)==0
       report['cancel_active_render']=True
+      report['cancelled_at_frame']=cancelled_at
+      report['cancel_restored_focus_camera_and_canvas']=True
       for size in ['view','compact']:
-        await button.click();await dialog.locator(f'[value={size}]').check()
+        await begin_video();await dialog.locator(f'[value={size}]').check()
         desc=await dialog.locator(f'[data-video-size={size}]').inner_text()
         encoded=list(map(int,desc.split('·')[-1].strip().split(' × ')))
         async with page.expect_download(timeout=420000) as evt:await dialog.get_by_role('button',name='Render 8s video').click()
         download=await evt.value;target=OUT/f'{size}.webm';await download.save_as(target)
-        await dialog.wait_for(state='hidden');await page.wait_for_function('!assemblyInspect().videoExport.active')
-        assert await button.is_enabled()
-        assert await page.locator('#assembly-canvas').bounding_box()==box
-        assert await page.locator('#assembly-canvas').evaluate('(c)=>[c.width,c.height]')==dims
+        await closed_cleanly()
         r=await asyncio.to_thread(inspect,target)
         assert [r['width'],r['height']]==encoded,(r,encoded)
         if size=='view':assert encoded==dims

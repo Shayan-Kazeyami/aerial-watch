@@ -16,7 +16,7 @@ export function createOfflineVideoExport({canvas,gl,begin,renderFrame,end,onProg
  win.addEventListener('pagehide',cancel);win.addEventListener('resize',cancel);doc.addEventListener('visibilitychange',hidden);
  return {
   get supported(){return typeof globalThis.VideoEncoder==='function'&&typeof globalThis.VideoFrame==='function';},
-  get active(){return choosing||exporter.active;},
+  get active(){return exporter.active;},
   get progress(){return progress;},
   async start(options){
    if(disposed)throw new Error('The video exporter has closed.');

@@ -24,7 +24,7 @@ export function createVideoExportDialog({onCancel=()=>{},doc=globalThis.document
    form.hidden=false;status.hidden=true;button.disabled=false;button.textContent='Cancel';
    form.querySelector('[value=view]').checked=true;
    form.querySelector('[data-video-size=view]').textContent=`Current view · ${dimensions(view)}`;
-   form.querySelector('[data-video-size=compact]').textContent=`Smaller file · ${dimensions(compact)}`;
+   form.querySelector('[data-video-size=compact]').textContent=`Compact · ${dimensions(compact)}`;
    return new Promise(resolve=>{chooseResolve=resolve;show();form.querySelector('[value=view]').focus();});
   },
   cancelChoice(){return settleChoice(null);},
