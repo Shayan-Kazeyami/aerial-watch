@@ -15,6 +15,11 @@ jobs:
             layer-focus-qa
             preview-b/candidates/art12-layer-guide
             preview-b/releases/145aba103999de275e202eb0529fc66850c0e64a068f81ef876e5cfc495c70d4
+            preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1
+            preview-b/releases/9c055e4777a79c7987dd6cd5ccabf9f189121fd6c64e2f54853aa694827add06
+            preview-b/releases/a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054
+            preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44
+            preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72
           sparse-checkout-cone-mode: true
       - uses: actions/setup-python@v5
         with:
