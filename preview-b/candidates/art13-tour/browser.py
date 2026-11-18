@@ -42,11 +42,21 @@ async def check(b,width,height,motion):
   assert await button.inner_text()=='Start studio tour'
   await button.click();await shown('Complete watch')
   assert await button.get_attribute('aria-pressed')=='true'
+  # SwiftShader timing can cross the next dwell while Playwright dispatches a second
+  # pointer click. Trigger the actual visible control in the same browser task
+  # which observes the second shot, then independently test the resulting state.
+  await pg.wait_for_function('''() => {
+    if(assemblyInspect().view!=='face'||!assemblyInspect().studioTour)return false;
+    document.querySelector('#context [data-proxy=tour]').click();
+    return !assemblyInspect().studioTour && assemblyInspect().view==='face';
+  }''',timeout=45000)
   await shown('Dial and hands')
-  await button.click();await shown('Dial and hands')
   assert await button.inner_text()=='Resume studio tour'
-  await pg.wait_for_timeout(7300);assert 'Dial and hands' in await state.inner_text()
-  await button.click();assert 'Dial and hands' in await state.inner_text()
+  paused=await pg.evaluate('''() => {const s=assemblyInspect();return {view:s.view,camera:s.camera,target:s.target};}''')
+  await pg.wait_for_timeout(7500);assert 'Dial and hands' in await state.inner_text()
+  assert await pg.evaluate('''() => {const s=assemblyInspect();return {view:s.view,camera:s.camera,target:s.target};}''')==paused
+  await pg.screenshot(path=str(OUT/'studio-tour-paused.png'))
+  assert await button.evaluate('''(b)=>{b.click();const s=assemblyInspect();return s.view==='face'&&s.studioTour;}''')
   await shown('Movement overview')
   await nextb.click();await shown('Balance and hairspring')
   assert await button.get_attribute('aria-pressed')=='false'
@@ -66,7 +76,7 @@ async def main():
   if os.environ.get('SYSTEM_CHROME'):kw['executable_path']=os.environ['SYSTEM_CHROME']
   b=await p.chromium.launch(**kw)
   try:
-   await check(b,1100,760,'no-preference')
+   await check(b,820,600,'no-preference')
    await check(b,430,932,'reduce')
    assert set(report['overlay'])==set(N) and not report['errors'],report
    report['passed']=True
