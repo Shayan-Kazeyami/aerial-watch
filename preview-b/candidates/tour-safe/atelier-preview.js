@@ -67,10 +67,10 @@ document.head.append(layerExplanationStyle);
 // over the object while the user reads its current shot.
 const tourStageStyle=document.createElement('style');
 tourStageStyle.textContent=`
-body.atelier-live:has(#context[data-tool=tour]:not([hidden])) .title-block{visibility:hidden}
+body.atelier-live:has(#context[data-tool=tour]:not([hidden])) :is(.title-block,.atelier-status){width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media(min-width:681px),(min-width:568px) and (orientation:landscape){
  body.atelier-live:has(#context[data-tool=tour]:not([hidden])) #atelier-stage-host #stage{
-  right:var(--tour-stage-end,334px);transition:none
+  right:var(--tour-stage-end,334px);bottom:var(--tour-dock-end,242px);transition:none
  }
 }
 @media(max-width:680px) and (orientation:portrait),(max-width:567px){
@@ -148,12 +148,16 @@ function measurePanelLayout(){
   const panel=context.getBoundingClientRect(),host=$('atelier-stage-host').getBoundingClientRect();
   const end=Math.ceil((tourSideLayout.matches?host.right-panel.left:host.bottom-panel.top)+12);
   document.body.style.setProperty('--tour-stage-end',`${end}px`);
- }else document.body.style.removeProperty('--tour-stage-end');
+  const dock=$('context').parentElement.querySelector('.bottom-zone').getBoundingClientRect();
+  document.body.style.setProperty('--tour-dock-end',`${Math.ceil(host.bottom-dock.top+12)}px`);
+ }else{
+  document.body.style.removeProperty('--tour-stage-end');document.body.style.removeProperty('--tour-dock-end');
+ }
 
 }
 function schedulePanelLayout(){if(panelLayoutActive&&!panelLayoutFrame)panelLayoutFrame=requestAnimationFrame(measurePanelLayout);}
 const panelLayoutObserver=new ResizeObserver(schedulePanelLayout);
-function startPanelLayout(){if(panelLayoutActive)return;panelLayoutActive=true;panelLayoutObserver.observe($('context'));panelMedia.addEventListener('change',schedulePanelLayout);tourSideLayout.addEventListener('change',schedulePanelLayout);window.addEventListener('resize',schedulePanelLayout);schedulePanelLayout();}
+function startPanelLayout(){if(panelLayoutActive)return;panelLayoutActive=true;panelLayoutObserver.observe($('context'));panelLayoutObserver.observe(document.querySelector('.bottom-zone'));panelMedia.addEventListener('change',schedulePanelLayout);tourSideLayout.addEventListener('change',schedulePanelLayout);window.addEventListener('resize',schedulePanelLayout);schedulePanelLayout();}
 function stopPanelLayout(){panelLayoutActive=false;panelLayoutObserver.disconnect();panelMedia.removeEventListener('change',schedulePanelLayout);tourSideLayout.removeEventListener('change',schedulePanelLayout);window.removeEventListener('resize',schedulePanelLayout);if(panelLayoutFrame)cancelAnimationFrame(panelLayoutFrame);panelLayoutFrame=0;}
 window.addEventListener('pagehide',stopPanelLayout);
 window.addEventListener('pageshow',event=>{if(event.persisted)startPanelLayout();});

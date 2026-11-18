@@ -24,7 +24,7 @@ async def check(b,width,height,motion):
  await pg.locator('body[data-ready=true]').wait_for(timeout=300000)
  await pg.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"',timeout=80000)
 
- rects="""() => {const rect=(s)=>{const r=document.querySelector(s).getBoundingClientRect();return {l:r.left,t:r.top,r:r.right,b:r.bottom,w:r.width,h:r.height};};return {stage:rect('#assembly-canvas'),panel:rect('#context'),dock:rect('.task-dock'),host:rect('#atelier-stage-host')};}"""
+ rects="""() => {const rect=(s)=>{const r=document.querySelector(s).getBoundingClientRect();return {l:r.left,t:r.top,r:r.right,b:r.bottom,w:r.width,h:r.height};};return {stage:rect('#assembly-canvas'),panel:rect('#context'),dock:rect('.task-dock'),controls:rect('.bottom-zone'),host:rect('#atelier-stage-host')};}"""
  original=(await pg.evaluate(rects))['stage']
  await pg.locator('button.atelier-more').click()
  await pg.locator('#context [data-mode=tour]').click()
@@ -41,10 +41,11 @@ async def check(b,width,height,motion):
   st,pa=rs['stage'],rs['panel']
   side=width>=681 or width>=568 and width>height
   gap=pa['l']-st['r'] if side else pa['t']-st['b']
-  assert gap>=11 and st['w']>=190 and st['h']>=155,(label,shot,rs)
+  dockgap=rs['controls']['t']-st['b']
+  assert gap>=11 and dockgap>=11 and st['w']>=190 and st['h']>=155,(label,shot,rs)
   actual=await pg.evaluate("()=>{const s=assemblyInspect();return {camera:s.camera,target:s.target};}")
   assert all(isinstance(v,(int,float)) for k in ('camera','target') for v in actual[k])
-  evidence.append({'shot':shot,'title':title,'geometry':rs,'gap':gap,**actual})
+  evidence.append({'shot':shot,'title':title,'geometry':rs,'gap':gap,'dockgap':dockgap,**actual})
   await pg.screenshot(path=str(OUT/(label+'-'+shot+'.png')))
  await pg.locator('#close').click()
  await pg.wait_for_function("document.body.style.getPropertyValue('--tour-stage-end')===''")
