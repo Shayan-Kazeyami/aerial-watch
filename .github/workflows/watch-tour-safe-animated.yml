@@ -1,0 +1,44 @@
+name: Guided tour safe framing exact animated screenshots
+on:
+  push:
+    branches: [codex/watch-tour-safe-animated]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    strategy:
+      fail-fast: false
+      matrix:
+        view: [820x600]
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            watch-tour-safe-qa
+            preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1
+            preview-b/releases/9c055e4777a79c7987dd6cd5ccabf9f189121fd6c64e2f54853aa694827add06
+            preview-b/releases/a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054
+            preview-b/releases/a9b5db9042cf25036cd74c1471cbb87c48b966b8c68cbf2992d134b45b9f9ac7
+            preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44
+            preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - name: Serve exact checkout
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 >/tmp/watch-http.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/preview-b/releases/a9b5db9042cf25036cd74c1471cbb87c48b966b8c68cbf2992d134b45b9f9ac7/atelier-preview.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/watch-http.log
+          exit 1
+      - run: python -u watch-tour-safe-qa/browser_animated_exact.py
+        env:
+          VIEW: ${{ matrix.view }}
+          MOTION: ${{ matrix.view == '820x600' && 'no-preference' || 'reduce' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tour-safe-animated-${{ matrix.view }}
+          path: watch-tour-safe-qa/output/
