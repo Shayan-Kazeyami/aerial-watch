@@ -45,13 +45,23 @@ async def check(b,width,height,motion):
   max_pose_delta=max(abs(a-b) for k in (1,2) for a,b in zip(current[k],after[k]))
   report['cases'][label]['pausedPoseTrace']={'before':current,'after':after,'maxAbsoluteComponentDelta':max_pose_delta}
   assert current[0]==after[0] and max_pose_delta<1e-7,(current,after,max_pose_delta)
+  report['cases'][label].update({'sameShotResume':trace,'pausedPoseStable':True})
   await button.click()
-  await pg.wait_for_function("assemblyInspect().view==='interior'&&assemblyInspect().studioTour",timeout=120000)
-  await button.click()
-  assert await button.get_attribute('aria-pressed')=='false'
-  await previous.click()
+  # Observe and pause the same in-browser frame. In SwiftShader, wall-time
+  # between two Playwright actions can exceed another full view's dwell.
+  auto=await pg.wait_for_function("""()=>{const a=assemblyInspect();
+    if(a.view!=='interior'||!a.studioTour)return false;
+    document.querySelector('#context [data-proxy=tour]').click();
+    const z=assemblyInspect();return [[a.view,a.studioTour],[z.view,z.studioTour]];
+  }""",timeout=120000)
+  paused=await auto.json_value();report['cases'][label]['autoPauseSameFrame']=paused
+  assert paused==[['interior',True],['interior',False]],paused
+  stepped=await previous.evaluate("p=>{const a=assemblyInspect();p.click();const z=assemblyInspect();return [[a.view,a.studioTour],[z.view,z.studioTour]];}")
+  report['cases'][label]['previousTrace']=stepped
+  assert stepped==[['interior',False],['face',False]],stepped
+  await pg.wait_for_timeout(1100)
   await pg.wait_for_function("assemblyInspect().view==='face'&&document.querySelector('#stage').dataset.cameraReady==='true'")
-  report['cases'][label].update({'sameShotResume':trace,'pausedPoseStable':True,'elapsedDwellContinues':True,'previousGoesBack':True})
+  report['cases'][label].update({'autoAdvancedToAdjacentShot':True,'previousGoesBack':True})
  else:
   assert await button.get_attribute('aria-pressed')=='false'
   await pg.wait_for_timeout(7500)
