@@ -1,0 +1,14 @@
+// Generated immutable directory ownership; never reads URL parameters.
+const routes=Object.freeze({"aerial-assets":"../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/","assets":"../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/","case-assets":"../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/","docs":"../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/","leather-compat-r12":"../87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1/","open-front-candidate":"../9c055e4777a79c7987dd6cd5ccabf9f189121fd6c64e2f54853aa694827add06/","open-front":"../a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054/","optimized-assets":"../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/","premium-face":"../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/","quality-study":"../fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72/","rebuild":"../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/","vendor":"../f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/"});
+
+// Exact unchanged content owners. Release gate MUST reject intended-local/owner mismatch.
+export const CANONICAL_ASSET_OWNERS=Object.freeze({"premium-face/face-svg04.glb":"87a8607a738ba192c68f266db3f241e148f48f34216e7976c73cc062adb1f3e2","optimized-assets/premium-face__face-svg04.meshopt.glb":"87a8607a738ba192c68f266db3f241e148f48f34216e7976c73cc062adb1f3e2","rebuild/assembly.glb":"87a8607a738ba192c68f266db3f241e148f48f34216e7976c73cc062adb1f3e2","optimized-assets/rebuild__assembly.meshopt.glb.gz":"87a8607a738ba192c68f266db3f241e148f48f34216e7976c73cc062adb1f3e2"});
+export function assertCanonicalAssetOwners(manifest){
+ for(const [path,ownerReleaseId] of Object.entries(CANONICAL_ASSET_OWNERS)){
+  const local=manifest.localFiles?.filter(x=>x.path===path)||[], refs=manifest.references?.filter(x=>x.path===path&&x.ownerReleaseId===ownerReleaseId)||[];
+  if(local.length!==1||refs.length!==1||local[0].sizeBytes!==refs[0].sizeBytes||local[0].sha256!==refs[0].sha256)throw new Error(`Canonical asset differs from intended current bytes: ${path}`);
+ }
+ return Object.keys(CANONICAL_ASSET_OWNERS).length;
+}
+export function assetBase(directory,fallback=import.meta.url){return Object.hasOwn(routes,directory)?new URL(routes[directory],import.meta.url).href:fallback;}
+export function assetURL(value){if(typeof value!=='string')return value;const logical=value.replace(/^\.\//,'');const path=logical.split(/[?#]/)[0];if(Object.hasOwn(CANONICAL_ASSET_OWNERS,path))return new URL(logical,new URL('../'+CANONICAL_ASSET_OWNERS[path]+'/',import.meta.url)).href;const directory=logical.split('/')[0];if(!Object.hasOwn(routes,directory))return value;if(logical.split(/[?#]/)[0].split('/').some(p=>p==='..'||p==='.')||/[\\%:]/.test(logical))throw new Error('Unsafe logical asset URL');return new URL(logical,assetBase(directory)).href;}
