@@ -59,7 +59,6 @@ async def check(b,width,height,motion):
   await pg.wait_for_timeout(7500);assert 'Dial and hands' in await state.inner_text()
   same=await pg.evaluate('''() => {const s=assemblyInspect();return {view:s.view,camera:s.camera,target:s.target};}''')
   assert same['view']==paused['view'] and all(abs(x-y)<1e-7 for k in ('camera','target') for x,y in zip(same[k],paused[k]))
-  await top.screenshot(path=str(OUT/'studio-tour-paused.png'))
   await nextb.click();await shown('Movement overview')
   await nextb.click();await shown('Balance and hairspring')
   assert await button.get_attribute('aria-pressed')=='false'
@@ -89,7 +88,6 @@ async def check(b,width,height,motion):
  await pg.locator('#context [data-mode=tour]').click()
  assert await stage.evaluate('(c)=>[c.width,c.height]')==dims
  assert await state.get_attribute('role')=='status'
- await top.screenshot(path=str(OUT/(label+'.png')))
  report['cases'][label]={'passed':True,'canvas':dims,'state':await state.inner_text()}
  await top.close()
 async def main():
