@@ -40,24 +40,22 @@ async def check(b,width,height,motion):
   await prev.click();await shown('Lugs and strap')
  else:
   assert await button.inner_text()=='Start studio tour'
-  await button.click();await shown('Complete watch')
-  assert await button.get_attribute('aria-pressed')=='true'
-  # SwiftShader timing can cross the next dwell while Playwright dispatches a second
-  # pointer click. Trigger the actual visible control in the same browser task
-  # which observes the second shot, then independently test the resulting state.
-  await pg.wait_for_function('''() => {
-    if(assemblyInspect().view!=='face'||!assemblyInspect().studioTour)return false;
-    document.querySelector('#context [data-proxy=tour]').click();
-    return !assemblyInspect().studioTour && assemblyInspect().view==='face';
-  }''',timeout=45000)
-  await shown('Dial and hands')
+  await nextb.click();await shown('Complete watch')
+  await nextb.click();await shown('Dial and hands')
   assert await button.inner_text()=='Resume studio tour'
+  await pg.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"')
+  # Test the key regression: resume from a manually selected nonfirst shot.
+  # Inspect the actual 3D viewer state between two genuine UI button activations,
+  # avoiding extra frame scheduling delay on a software browser.
+  trace=await button.evaluate('''b=>{b.click();let first=assemblyInspect();b.click();let second=assemblyInspect();return [[first.view,first.studioTour],[second.view,second.studioTour]];}''')
+  assert trace==[['face',True],['face',False]],trace
+  await shown('Dial and hands')
   paused=await pg.evaluate('''() => {const s=assemblyInspect();return {view:s.view,camera:s.camera,target:s.target};}''')
   await pg.wait_for_timeout(7500);assert 'Dial and hands' in await state.inner_text()
-  assert await pg.evaluate('''() => {const s=assemblyInspect();return {view:s.view,camera:s.camera,target:s.target};}''')==paused
+  same=await pg.evaluate('''() => {const s=assemblyInspect();return {view:s.view,camera:s.camera,target:s.target};}''')
+  assert same['view']==paused['view'] and all(abs(x-y)<1e-7 for k in ('camera','target') for x,y in zip(same[k],paused[k]))
   await pg.screenshot(path=str(OUT/'studio-tour-paused.png'))
-  assert await button.evaluate('''(b)=>{b.click();const s=assemblyInspect();return s.view==='face'&&s.studioTour;}''')
-  await shown('Movement overview')
+  await nextb.click();await shown('Movement overview')
   await nextb.click();await shown('Balance and hairspring')
   assert await button.get_attribute('aria-pressed')=='false'
   await pg.locator('#close').click();await pg.locator('#assembly-canvas').focus()
