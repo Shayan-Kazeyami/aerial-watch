@@ -7,6 +7,17 @@ ROOT=pathlib.Path(__file__).resolve().parent.parent
 OUT=ROOT/'watch-batch-browser-evidence';OUT.mkdir(exist_ok=True)
 RID='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6'
 PROBE=(ROOT/'next-bottleneck-qa/probe.js').read_text()+'''\nwindow.batchReviewFixedPose=()=>{settingSeconds=0;applyClockPose(clock.seek(0));dirty=true;};window.batchReviewContext=()=>{const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return {webgl2:gl instanceof WebGL2RenderingContext,renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),vendor:ext?gl.getParameter(ext.UNMASKED_VENDOR_WEBGL):gl.getParameter(gl.VENDOR),batch:mechanismBatch?.snapshot(),backend:GPU?'webgpu':'webgl',normalState:progressiveNormalState,clock:clock.snapshot(),camera:camera.matrixWorld.elements.slice(),projection:camera.projectionMatrix.elements.slice(),readyForReview:!cameraTween&&!['waiting-for-first-frame','upgrading'].includes(progressiveNormalState)};};'''
+PROBE+="""
+window.batchReviewFocusRing=()=>{
+ const matches=[];scene.updateMatrixWorld(true);
+ scene.traverse(o=>{if(!o.isMesh||!/seconds[-_ ]edge[-_ ]3[._]?1/i.test(o.name))return;let a=o;while(a&&a!==scene){if(!a.visible)return;a=a.parent;}if(a===scene)matches.push(o);});
+ if(matches.length!==1)throw new Error('Expected one visible authored seconds ring; found '+matches.map(o=>o.name).join(','));
+ const o=matches[0],box=new THREE.Box3().setFromObject(o),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());
+ const direction=camera.position.clone().sub(controls.target).normalize(),distance=size.length()/2/Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)/Math.min(camera.aspect,1)*1.25;
+ stopTour();cameraTween=null;controls.minDistance=.01;controls.maxDistance=10000;controls.target.copy(center);camera.position.copy(center).addScaledVector(direction,distance);camera.lookAt(center);camera.near=Math.min(camera.near,distance/100);camera.updateProjectionMatrix();controls.update();dirty=true;
+ return {name:o.name,vertices:o.geometry.attributes.position.count,indices:o.geometry.index?.count??0,worldMatrix:o.matrixWorld.elements.slice(),worldBounds:[box.min.toArray(),box.max.toArray()],cameraDistance:distance};
+};
+"""
 class Handler(http.server.SimpleHTTPRequestHandler):
  def __init__(self,*a,**kw):super().__init__(*a,directory=str(ROOT),**kw)
  def log_message(self,*a):pass
@@ -28,23 +39,30 @@ async def main():
     result['context']=await page.evaluate('batchReviewContext()')
     assert result['context']['backend']=='webgl' and result['context']['webgl2'],result
     assert result['context']['batch']['batches']>0,'No batches exercised, cannot accept GPU gate'
-    samples=[]
-    for enabled in [True,False]:
-     sample=await page.evaluate('(batch)=>bottleneckQA.sample({batch,profile:"efficient",explode:0,finish:true})',enabled);samples.append(sample)
-     await page.locator('#assembly-canvas').screenshot(path=str(OUT/f'{rid}-{enabled}.png'),style='.crown-hotspot,.crown-halo,.atelier-first-use{visibility:hidden!important}')
-    result['samples']=samples
-    a=np.asarray(Image.open(OUT/f'{rid}-True.png')).astype(float);c=np.asarray(Image.open(OUT/f'{rid}-False.png')).astype(float);d=np.abs(a-c)
-    result['pixel_diff']={'mean':float(d.mean()),'fraction_over_8':float((d.max(axis=2)>8).mean()),'image_std':float(a.std())}
-    assert a.std()>2,'Blank render'
-    assert samples[0]['render']['triangles']==samples[1]['render']['triangles'],'Geometry count changed'
-    result['batch_original_pixel_gate_pass']=bool(d.mean()<.1 and (d.max(axis=2)>8).mean()<.001)
-    if rid=='watch-batch-review-local':assert result['batch_original_pixel_gate_pass'],'Candidate batch/original visual mismatch'
+    result['views']=[]
+    for view in ['whole','seconds-macro']:
+     v={'view':view};result['views'].append(v)
+     if view=='seconds-macro':v['target']=await page.evaluate('batchReviewFocusRing()')
+     samples=[]
+     for index,enabled in enumerate([True,False,True]):
+      sample=await page.evaluate('(batch)=>bottleneckQA.sample({batch,profile:"efficient",explode:0,finish:true})',enabled);samples.append(sample)
+      v.setdefault('contexts',[]).append(await page.evaluate('batchReviewContext()'))
+      await page.locator('#assembly-canvas').screenshot(path=str(OUT/f'{rid}-{view}-{index}.png'),style='.crown-hotspot,.crown-halo,.atelier-first-use{visibility:hidden!important}')
+     v['samples']=samples;v['comparisons']=[]
+     a=np.asarray(Image.open(OUT/f'{rid}-{view}-0.png')).astype(float)
+     assert a.std()>2,'Blank render'
+     for index in [1,2]:
+      c=np.asarray(Image.open(OUT/f'{rid}-{view}-{index}.png')).astype(float);d=np.abs(a-c)
+      v['comparisons'].append({'against':index,'mean':float(d.mean()),'fraction_over_8':float((d.max(axis=2)>8).mean())})
+      assert samples[0]['render']['triangles']==samples[index]['render']['triangles'],'Geometry count changed'
+      assert d.mean()<.1 and (d.max(axis=2)>8).mean()<.001,'Render mode or repeated snapshot mismatch'
     assert not errors,errors
     await page.close()
    cross=[]
-   for mode in [True,False]:
-    a=np.asarray(Image.open(OUT/f'{RID}-{mode}.png')).astype(float);c=np.asarray(Image.open(OUT/f'watch-batch-review-local-{mode}.png')).astype(float);d=np.abs(a-c)
-    item={'mode':mode,'mean':float(d.mean()),'fraction_over_8':float((d.max(axis=2)>8).mean())};cross.append(item)
+   for view in ['whole','seconds-macro']:
+    for index in range(3):
+     a=np.asarray(Image.open(OUT/f'{RID}-{view}-{index}.png')).astype(float);c=np.asarray(Image.open(OUT/f'watch-batch-review-local-{view}-{index}.png')).astype(float);d=np.abs(a-c)
+     cross.append({'view':view,'index':index,'mean':float(d.mean()),'fraction_over_8':float((d.max(axis=2)>8).mean())})
    report['fixed_pose_baseline_candidate']=cross
    assert all(x['mean']<.1 and x['fraction_over_8']<.001 for x in cross),'Fixed-pose baseline/candidate mismatch'
    report['passed']=True
