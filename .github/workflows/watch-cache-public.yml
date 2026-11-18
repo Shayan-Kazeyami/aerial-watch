@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: watch-cache-public-qa
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
       - run: python -u watch-cache-public-qa/public-cache.py
       - uses: actions/upload-artifact@v4

@@ -8,7 +8,7 @@ async def main():
   b=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   try:
    for phases in [[('baseline-cold',OLD),('baseline-warm',OLD),('candidate-transition',NEW)],[('candidate-cold',NEW),('candidate-warm',NEW)]]:
-    ctx=await b.new_context(viewport={'width':430,'height':932});page=await ctx.new_page();page.on('pageerror',lambda e:R['errors'].append(str(e)));cdp=await ctx.new_cdp_session(page);await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{'cacheDisabled':False});req={}
+    ctx=await b.new_context(viewport={'width':430,'height':932});page=await ctx.new_page();page.set_default_timeout(180000);page.set_default_navigation_timeout(180000);page.on('pageerror',lambda e:R['errors'].append(str(e)));cdp=await ctx.new_cdp_session(page);await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{'cacheDisabled':False});req={}
     cdp.on('Network.requestWillBeSent',lambda e:req.update({e['requestId']:{'url':e['request']['url']}}))
     def response(e):
      r=e['response'];req.setdefault(e['requestId'],{}).update(status=r['status'],diskCache=r.get('fromDiskCache',False),headers={k:v for k,v in r.get('headers',{}).items()if k.lower()in ['content-length','content-encoding','cache-control','etag']})
