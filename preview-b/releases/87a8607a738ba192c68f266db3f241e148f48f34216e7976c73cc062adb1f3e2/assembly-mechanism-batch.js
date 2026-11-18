@@ -1,0 +1,77 @@
+// Render-only batching: source meshes remain authoritative for interaction and animation.
+export function createMechanismBatch({THREE,scene,renderer,maxBytes=32*1024*1024}){
+ let built=false,disposed=false,enabled=true;const batches=[],hidden=[];
+ const audit={supported:!!renderer.extensions?.has('WEBGL_multi_draw'),meshes:0,batches:0,bufferBytes:0,reason:null};
+ // BatchedMesh copies buffers. Cache the exact source revision and fall back to
+ // the original mesh when the source changes in place; never render stale copies.
+ function attributeState(a){return a&&{attribute:a,array:a.array,version:a.version,count:a.count,itemSize:a.itemSize,normalized:a.normalized};}
+ function unchangedAttribute(a,state){return !state?!a:!!a&&a===state.attribute&&a.array===state.array&&a.version===state.version&&a.count===state.count&&a.itemSize===state.itemSize&&a.normalized===state.normalized;}
+ function geometryState(g){return {attributes:Object.entries(g.attributes).map(([name,a])=>[name,attributeState(a)]),index:attributeState(g.index)};}
+ function unchangedGeometry(g,state){
+  if(g.groups.length||g.drawRange.start!==0||Number.isFinite(g.drawRange.count)||Object.values(g.morphAttributes).some(a=>a.length))return false;
+  if(Object.keys(g.attributes).length!==state.attributes.length||!unchangedAttribute(g.index,state.index))return false;
+  return state.attributes.every(([name,a])=>unchangedAttribute(g.attributes[name],a));
+ }
+ function build(source){
+  if(built||disposed||!source.length)return;built=true;
+  if(!audit.supported){audit.reason='WEBGL_multi_draw unavailable';return;}
+  const groups=new Map();
+  for(const mesh of source){const g=mesh.geometry,m=mesh.material;
+   if(!g?.attributes.position||Array.isArray(m)||m.transparent||m.transmission>0||mesh.isSkinnedMesh||mesh.isInstancedMesh||Object.values(g.morphAttributes).some(a=>a.length)||g.groups.length||g.drawRange.start!==0||Number.isFinite(g.drawRange.count))continue;
+   if(Object.values(g.attributes).some(a=>a.isInterleavedBufferAttribute))continue;
+   const signature=JSON.stringify([m.uuid,!!g.index,mesh.castShadow,mesh.receiveShadow,mesh.renderOrder,mesh.layers.mask,Object.entries(g.attributes).map(([n,a])=>[n,a.itemSize,a.normalized,a.array.constructor.name])]);
+   if(!groups.has(signature))groups.set(signature,[]);groups.get(signature).push(mesh);
+  }
+  for(const list of groups.values()){
+   if(list.length<8)continue;
+   const bytes=list.reduce((n,m)=>n+Object.values(m.geometry.attributes).reduce((s,a)=>s+a.array.byteLength,0)+(m.geometry.index?.array.byteLength||0),0);
+   if(audit.bufferBytes+bytes>maxBytes)continue;
+   const first=list[0],vertices=list.reduce((n,m)=>n+m.geometry.attributes.position.count,0),indices=list.reduce((n,m)=>n+(m.geometry.index?.count||0),0);
+   const batch=new THREE.BatchedMesh(list.length,vertices,indices,first.material);
+   batch.name='Mechanism render batch';batch.castShadow=first.castShadow;batch.receiveShadow=first.receiveShadow;batch.renderOrder=first.renderOrder;batch.layers.mask=first.layers.mask;batch.frustumCulled=false;batch.visible=false;
+   const entries=list.map(mesh=>({mesh,geometry:mesh.geometry,state:geometryState(mesh.geometry),id:batch.addInstance(batch.addGeometry(mesh.geometry))}));
+   scene.add(batch);batches.push({batch,entries});audit.meshes+=list.length;audit.bufferBytes+=bytes;
+  }
+  audit.batches=batches.length;
+ }
+ // Cached source ownership may change after asynchronous replacement or disposal.
+ // A detached source is not rendered by Three's scene traversal and must not
+ // survive through this render-only proxy. Different render state stays on the
+ // authoritative mesh rather than inheriting the batch's captured state.
+ function eligible(mesh,geometry,batch,state){
+  if(!unchangedGeometry(geometry,state))return false;
+  const material=mesh.material;
+  if(!mesh.visible||mesh.geometry!==geometry||Array.isArray(material)||!material||material.transparent||material.transmission>0||mesh.matrixWorld.determinant()<=0)return false;
+  if(mesh.layers.mask!==batch.layers.mask||mesh.renderOrder!==batch.renderOrder||mesh.castShadow!==batch.castShadow||mesh.receiveShadow!==batch.receiveShadow)return false;
+  let parent=mesh.parent;
+  while(parent){if(!parent.visible)return false;if(parent===scene)return true;parent=parent.parent;}
+  return false;
+ }
+ function restore(){for(const mesh of hidden)mesh.visible=true;hidden.length=0;for(const {batch} of batches)batch.visible=false;}
+ return {
+  build,setEnabled(value){enabled=!!value;},
+  beforeRender(){
+   if(disposed||!enabled||!batches.length)return;
+   scene.updateMatrixWorld(true);
+   for(const {batch,entries} of batches){let any=false;
+    // Finish/inspection modes may replace materials without changing geometry.
+    // Reuse the existing buffers for the largest compatible material cohort;
+    // exceptions stay on their original meshes and retain their exact material.
+    const cohorts=new Map();
+    for(const {mesh,geometry,state} of entries){const m=mesh.material;
+     if(!eligible(mesh,geometry,batch,state))continue;
+     cohorts.set(m,(cohorts.get(m)||0)+1);
+    }
+    let count=0;for(const [material,n] of cohorts)if(n>count){batch.material=material;count=n;}
+
+    for(const {mesh,geometry,state,id} of entries){let visible=count>0&&mesh.material===batch.material&&eligible(mesh,geometry,batch,state);
+     batch.setVisibleAt(id,visible);
+     if(visible){batch.setMatrixAt(id,mesh.matrixWorld);hidden.push(mesh);mesh.visible=false;any=true;}
+    }
+    batch.visible=any;
+   }
+  },afterRender:restore,
+  snapshot(){return {...audit,enabled};},
+  dispose(){if(disposed)return;restore();disposed=true;for(const {batch} of batches){batch.removeFromParent();batch.dispose();}batches.length=0;}
+ };
+}
