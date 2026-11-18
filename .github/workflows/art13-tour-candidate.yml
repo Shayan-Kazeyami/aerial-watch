@@ -1,0 +1,25 @@
+name: ART-13 resumable studio tour candidate
+on:
+  push:
+    branches: [codex/watch-art13-resumable-tour]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  software-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: preview-b/candidates/art13-tour
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node --test preview-b/candidates/art13-tour/tour.test.mjs
+      - run: pip install playwright==1.57.0 && playwright install --with-deps chromium
+      - run: python preview-b/candidates/art13-tour/browser.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: art13-tour-controls
+          path: preview-b/candidates/art13-tour/output/
