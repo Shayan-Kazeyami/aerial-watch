@@ -21,8 +21,13 @@ jobs:
       - run: python -m pip install playwright pillow numpy && python -m playwright install --with-deps chromium
       - run: python watch-batch-integration-review-v1/build_stage.py
       - run: python watch-batch-integration-review-v1/browser_review.py
+      - name: Isolated lifecycle and buffer-mutation WebGL diagnostic
+        if: always()
+        run: python watch-batch-integration-review-v1/live-webgl-diagnostic/run.py . watch-batch-live-evidence
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: watch-batch-review-software-webgl
-          path: watch-batch-browser-evidence
+          path: |
+            watch-batch-browser-evidence
+            watch-batch-live-evidence

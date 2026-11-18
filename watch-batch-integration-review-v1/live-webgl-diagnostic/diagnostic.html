@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style><script type="module">
+import * as THREE from '/preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44/vendor/three.module.js';
+const BASE='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6';
+const renderer=new THREE.WebGLRenderer({antialias:false,preserveDrawingBuffer:true});renderer.setSize(512,384);renderer.setPixelRatio(1);renderer.setClearColor(0x101820);document.body.append(renderer.domElement);
+const camera=new THREE.OrthographicCamera(-4,4,3,-3,.1,100);camera.position.set(0,0,10);camera.lookAt(0,0,0);let current;
+function dispose(){if(!current)return;current.api.dispose();for(const o of current.meshes)o.geometry.dispose();current.material.dispose();current=null}
+window.setupDiagnostic=async(release,state)=>{
+ dispose();const{createMechanismBatch}=await import('/preview-b/releases/'+(release==='baseline'?BASE:'watch-batch-review-local')+'/assembly-mechanism-batch.js');
+ const scene=new THREE.Scene(),material=new THREE.MeshBasicMaterial({color:0xf0c040}),group=new THREE.Group();scene.add(group);
+ const meshes=Array.from({length:8},(_,i)=>{const g=new THREE.BoxGeometry(.8,.8,.8);g.clearGroups();const m=new THREE.Mesh(g,material);m.position.set((i%4-1.5)*1.7,i<4?1:-1,0);group.add(m);return m});
+ const api=createMechanismBatch({THREE,scene,renderer});api.build(meshes);scene.updateMatrixWorld(true);
+ if(state==='detached')meshes[0].removeFromParent();
+ else if(state==='other_scene')new THREE.Scene().add(meshes[0]);
+ else if(state==='reparent_transformed'){const p=new THREE.Group();p.position.y=.65;scene.add(p);p.add(meshes[0]);}
+ else if(state==='position_revision'){const a=meshes[0].geometry.attributes.position;for(let i=0;i<a.count;i++)a.setY(i,a.getY(i)+.65);a.needsUpdate=true;meshes[0].geometry.computeBoundingSphere();}
+ else if(state!=='unchanged')throw Error('Unexpected state');
+ current={scene,material,meshes,api,state,release};const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return{revision:THREE.REVISION,batch:api.snapshot(),renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),webgl2:gl instanceof WebGL2RenderingContext};
+};
+window.renderDiagnostic=(enabled)=>{const{scene,api,meshes}=current;api.setEnabled(enabled);renderer.info.reset();try{api.beforeRender();renderer.render(scene,camera)}finally{api.afterRender()}const gl=renderer.getContext();gl.finish();return{state:current.state,enabled,render:{...renderer.info.render},restoredVisibility:meshes.map(o=>o.visible),webglError:gl.getError()}};
+window.diagnosticReady=true;
+</script>
