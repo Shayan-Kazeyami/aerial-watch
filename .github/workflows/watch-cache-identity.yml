@@ -1,0 +1,24 @@
+name: Watch canonical identity derivation guard
+on:
+  push:
+    branches: [codex/watch-cache-identity]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            watch-cache-pin-qa
+            preview-b/releases
+      - uses: actions/setup-node@v4
+        with: {node-version: '24'}
+      - run: python watch-cache-pin-qa/verify_seal.py
+      - run: node watch-cache-pin-qa/verify.mjs efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3
+      - run: node watch-cache-pin-qa/identity-negative.mjs preview-b/releases/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3/assembly-asset-routing.js
+      - run: python watch-cache-pin-qa/derive.py preview-b/releases/87a8607a738ba192c68f266db3f241e148f48f34216e7976c73cc062adb1f3e2 preview-b/releases/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3 /tmp/pin-derived preview-b/releases
+      - run: cmp /tmp/pin-derived/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3/deployment-manifest.json preview-b/releases/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3/deployment-manifest.json && cmp /tmp/pin-derived/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3/release-receipt.json preview-b/releases/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3/release-receipt.json
+      - run: python watch-cache-pin-qa/closure.py
