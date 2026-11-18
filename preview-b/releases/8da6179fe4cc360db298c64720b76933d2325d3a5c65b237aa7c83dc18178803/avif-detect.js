@@ -1,9 +1,0 @@
-// A tiny same-format decode probe. A successful probe does not replace checking actual textures.
-const SAMPLE='AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAAD5bWV0YQAAAAAAAAAvaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAFBpY3R1cmVIYW5kbGVyAAAAAA5waXRtAAAAAAABAAAAHmlsb2MAAAAARAAAAQABAAAAAQAAASEAAAAVAAAAKGlpbmYAAAAAAAEAAAAaaW5mZQIAAAAAAQAAYXYwMUNvbG9yAAAAAGppcHJwAAAAS2lwY28AAAAUaXNwZQAAAAAAAAACAAAAAgAAABBwaXhpAAAAAAMICAgAAAAMYXYxQ4EgAAAAAAATY29scm5jbHgAAgACAACAAAAAF2lwbWEAAAAAAAAAAQABBAECgwQAAAAdbWRhdAoHOAA20BDQAjIKEAAASAqM01K21g==';
-export function supportsAvif({decode=typeof globalThis.createImageBitmap==='function'?globalThis.createImageBitmap.bind(globalThis):undefined,signal,timeoutMs=1500,schedule=setTimeout,cancel=clearTimeout}={}){
- if(signal?.aborted)return Promise.reject(signal.reason||new DOMException('Aborted','AbortError'));
- if(typeof decode!=='function')return Promise.resolve(false);
- if(!Number.isFinite(timeoutMs)||timeoutMs<=0)throw new RangeError('Positive AVIF probe timeout required');
- const bytes=Uint8Array.from(atob(SAMPLE),c=>c.charCodeAt(0));
- return new Promise((resolve,reject)=>{let ended=false,timer;const cleanup=()=>{if(timer!==undefined)cancel(timer);signal?.removeEventListener('abort',abort)};const finish=(fn,value)=>{if(ended)return;ended=true;cleanup();fn(value)};const abort=()=>finish(reject,signal.reason||new DOMException('Aborted','AbortError'));signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted){abort();return;}timer=schedule(()=>finish(resolve,false),timeoutMs);Promise.resolve().then(()=>ended?null:decode(new Blob([bytes],{type:'image/avif'}),{colorSpaceConversion:'none',premultiplyAlpha:'none'})).then(bitmap=>{if(ended){bitmap?.close?.();return;}const valid=bitmap?.width===2&&bitmap?.height===2;bitmap?.close?.();finish(resolve,!!valid)},()=>finish(resolve,false));});
-}
