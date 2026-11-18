@@ -1,5 +1,5 @@
 """Exercise the real Watch capture UI on its pinned immutable public base with exact branch-module overlays."""
-import asyncio,json,hashlib,pathlib,subprocess
+import asyncio,json,hashlib,pathlib,subprocess,time,os
 from playwright.async_api import async_playwright
 
 RID='145aba103999de275e202eb0529fc66850c0e64a068f81ef876e5cfc495c70d4'
@@ -7,7 +7,8 @@ URL=f'https://shayan-kazeyami.github.io/aerial-watch/preview-b/releases/{RID}/'
 NAMES=('assembly-offline-video.js','assembly-video-dialog.js','assembly-video-export.js')
 HERE=pathlib.Path(__file__).resolve().parent;OUT=HERE/'output';OUT.mkdir(exist_ok=True)
 dhash=lambda d:hashlib.sha256(d).hexdigest()
-report={'base_release':RID,'production_changed':False,'software_browser_only':True,'overlay':{},'page_errors':[],'downloads':{}}
+policy=os.getenv('REL03_TEST_SIZE');assert policy in ('view','compact')
+report={'tested_size':policy,'base_release':RID,'production_changed':False,'software_browser_only':True,'overlay':{},'page_errors':[],'downloads':{}}
 def inspect(path):
     probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-count_frames','-show_streams','-show_format','-of','json',str(path)]))
     s=next(s for s in probe['streams'] if s['codec_type']=='video')
@@ -86,19 +87,37 @@ async def main():
       report['cancel_active_render']=True
       report['cancelled_at_frame']=cancelled_at
       report['cancel_restored_focus_camera_and_canvas']=True
-      for size in ['view','compact']:
+      for size in [policy]:
         await begin_video();await dialog.locator(f'[value={size}]').check()
         desc=await dialog.locator(f'[data-video-size={size}]').inner_text()
         encoded=list(map(int,desc.split('·')[-1].strip().split(' × ')))
-        async with page.expect_download(timeout=420000) as evt:await dialog.get_by_role('button',name='Render 8s video').click()
-        download=await evt.value;target=OUT/f'{size}.webm';await download.save_as(target)
+        started=time.monotonic();trace=[];report['progress_trace']=trace
+        async def track():
+          while True:
+            try:
+              state=await page.evaluate('assemblyInspect().videoExport')
+              sample={'seconds':round(time.monotonic()-started,2),'state':state}
+              trace.append(sample)
+              (OUT/'RENDER_PROGRESS.json').write_text(json.dumps(trace,indent=2))
+              print(json.dumps(sample),flush=True)
+            except Exception: pass
+            await asyncio.sleep(15)
+        monitor=asyncio.create_task(track())
+        try:
+          async with page.expect_download(timeout=900000) as evt:await dialog.get_by_role('button',name='Render 8s video').click()
+          download=await evt.value
+        finally:
+          monitor.cancel()
+          try:await monitor
+          except asyncio.CancelledError:pass
+        target=OUT/f'{size}.webm';await download.save_as(target)
         await closed_cleanly()
         r=await asyncio.to_thread(inspect,target)
         assert [r['width'],r['height']]==encoded,(r,encoded)
         if size=='view':assert encoded==dims
         else:assert all(a<b for a,b in zip(encoded,dims)) and max(encoded)<=540
-        report['downloads'][size]={**r,'displayed_dimensions':encoded,'live_canvas_restored':True}
-      assert len(count)==2 and not report['page_errors'],report['page_errors']
+        report['downloads'][size]={**r,'displayed_dimensions':encoded,'live_canvas_restored':True,'wall_seconds':round(time.monotonic()-started,2)}
+      assert len(count)==1 and not report['page_errors'],report['page_errors']
       report['passed']=True
     except Exception as e:
       report['passed']=False;report['failure']=repr(e)

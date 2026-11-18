@@ -6,6 +6,10 @@ permissions:
   contents: read
 jobs:
   browser:
+    strategy:
+      fail-fast: false
+      matrix:
+        size: [view, compact]
     runs-on: ubuntu-latest
     timeout-minutes: 27
     steps:
@@ -24,8 +28,10 @@ jobs:
       - run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - name: Capture, decode and seek exact exported frame counts and dimensions
         run: python -u rel03-qa/browser.py
+        env:
+          REL03_TEST_SIZE: ${{ matrix.size }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: watch-rel03-video-qa
+          name: watch-rel03-video-qa-${{ matrix.size }}
           path: rel03-qa/output
