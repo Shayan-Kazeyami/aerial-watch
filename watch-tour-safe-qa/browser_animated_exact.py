@@ -35,8 +35,12 @@ async def check(b,width,height,motion):
  for shot,title in shots:
   await nextb.click()
   await pg.wait_for_function("(t)=>document.querySelector('#atelier-tour-state').textContent.includes(t)",arg=title)
-  await pg.wait_for_timeout(1100) # clear the previous frame's cameraReady marker
-  await pg.wait_for_function("(s)=>assemblyInspect().view===s&&document.querySelector('#stage').dataset.cameraReady==='true'",arg=shot,timeout=120000)
+  # A time-based delay cannot distinguish an old completed frame on a slow software renderer.
+  await pg.wait_for_function("""([id,prior])=>{
+    const a=assemblyInspect(),pose=[...a.camera,...a.target];
+    return a.view===id&&document.querySelector('#stage').dataset.cameraReady==='true'
+      &&pose.some((value,i)=>Math.abs(value-prior[i])>.25);
+  }""",arg=[shot,last_pose],timeout=100000)
   before=await pg.evaluate("()=>{const a=assemblyInspect();return [...a.camera,...a.target];}")
   await pg.wait_for_timeout(500)
   settled=await pg.evaluate("()=>{const a=assemblyInspect();return [...a.camera,...a.target];}")
