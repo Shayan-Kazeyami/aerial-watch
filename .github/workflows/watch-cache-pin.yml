@@ -20,7 +20,7 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
       - run: python watch-cache-pin-qa/verify_seal.py
-      - run: node --experimental-default-type=module watch-cache-pin-qa/verify.mjs efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3
+      - run: node watch-cache-pin-qa/verify.mjs efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3
       - run: python watch-cache-pin-qa/closure.py
       - run: python watch-cache-pin-qa/server.py >/tmp/cache-http.log 2>&1 &
       - run: python -u watch-cache-pin-qa/test.py
