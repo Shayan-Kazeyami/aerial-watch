@@ -8,3 +8,9 @@ for f in m['references']:
  b=(r.parent/f['ownerReleaseId']/f['path']).read_bytes();assert len(b)==f['sizeBytes']and sha(b)==f['sha256'],f['path']
 rev=json.loads((r/'quality-study/viewer-revision.json').read_text());assert sha(json.dumps(rev['files'],separators=(',',':')).encode())==rev['digest']
 print('Verified exact seal +301 runtime bindings +viewer revision digest')
+
+receipt=json.loads((r/'release-receipt.json').read_text())
+assert receipt['releaseId']==m['releaseId']
+for key,items in [('fileCount','localFiles'),('referenceCount','references')]: assert receipt[key]==len(m[items]),key
+for key,items in [('totalBytes','localFiles'),('referencedBytes','references')]: assert receipt[key]==sum(x['sizeBytes'] for x in m[items]),key
+print('Receipt counts and bytes verified')
