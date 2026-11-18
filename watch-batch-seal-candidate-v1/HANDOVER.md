@@ -1,0 +1,7 @@
+# Immutable candidate, not public promotion
+
+Based on sealed e79b, same original assets/116 shared-owner references. Only application change is tested assembly-mechanism-batch.js; required viewer-revision JSON/JS, deployment manifest and receipt are regenerated. build.py reproduces the identical ID without overwriting an existing different seal. verify.py recomputes content ID, viewer digest, all297 local/reference bytes,20 glTF +6 compressed GLB closures,33 physical URI occurrences and2 virtual split-texture identities.
+
+No public index, public loader or root deployment manifest changed. Exact sealed URL is only served inside CI; no independent device-preview host exists. CI replaces only the candidate-path string in the previously reviewed whole/macro/repeat and isolated live-WebGL harness, never source watch geometry.
+
+Before future promotion: independently review seal and actual-path CI; retain base e79b and all owner releases; use a newly named loader rather than edit the old immutable-named loader; atomically bind proposed index and root deployment metadata to the new seal. Preserve old index/loader/root metadata bytes and their hashes as rollback. Verify assets, source ownership and expected release identity after any authorized loader update. Physical GPU/mobile performance, all studio/rear/crown/calendar/explode/lifecycle interaction states and WebGPU remain outside this bounded software-WebGL acceptance. No421-object completion claim.

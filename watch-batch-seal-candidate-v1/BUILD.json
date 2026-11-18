@@ -1,0 +1,8 @@
+{
+  "base": "e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6",
+  "releaseId": "9de584f677b276f7cc3621b904c36d0762a4e8202da81578341150828e6c3576",
+  "viewerDigest": "cf03e7a42205986f5b5f4edb41bbd1a47ba4417111391776031c99715ab6eed2",
+  "candidate_module_sha256": "02868f9ab9556b10e3bd4f55b0adcd5f48cbe3c1d7328e58f2446cc1833efab1",
+  "public_loader_changed": false,
+  "physical_gpu_verified": false
+}
