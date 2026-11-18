@@ -2,9 +2,9 @@
 import asyncio, json, os, pathlib, urllib.request, urllib.parse, re
 from playwright.async_api import async_playwright
 
-RID='9de584f677b276f7cc3621b904c36d0762a4e8202da81578341150828e6c3576'
-BASE='https://shayan-kazeyami.github.io/aerial-watch/'
-CANDIDATE=pathlib.Path('preview-b/candidates/art12-layer-guide/atelier-preview.js').read_text()
+RID='145aba103999de275e202eb0529fc66850c0e64a068f81ef876e5cfc495c70d4'
+BASE='http://127.0.0.1:8765/'
+
 OUT=pathlib.Path('art12-layer-guide-output'); OUT.mkdir(exist_ok=True)
 EXPECTED={
  'plate':'Structural base that locates the movement.',
@@ -13,7 +13,7 @@ EXPECTED={
  'bridges':'Holds gear pivots and barrels in alignment.',
  'balance':'Oscillates with its hairspring to pace time.',
  'calendar':'Transfers rotation to the hands and calendar.'}
-R={'base_release':RID,'candidate_only_overlay':True,'production_changed':False,
+R={'base_release':RID,'candidate_only_overlay':False,'production_changed':False,
    'scope':'Public immutable release with branch-local UI module overlay; Chromium software rendering, not device/GPU performance.',
    'candidate_overlay_hits':0,'viewports':{},'errors':[]}
 
@@ -22,20 +22,16 @@ async def run():
   browser=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   page=await browser.new_page(viewport={'width':430,'height':932},device_scale_factor=1,is_mobile=True,has_touch=True,reduced_motion='reduce')
   page.set_default_timeout(180000);page.on('pageerror',lambda e:R['errors'].append(str(e)))
-  async def overlay(route):
-   R['candidate_overlay_hits']+=1
-   await route.fulfill(status=200,content_type='application/javascript',body=CANDIDATE)
-  await page.route(f'**/preview-b/releases/{RID}/atelier-preview.js*',overlay)
   try:
-   await page.goto(BASE+'?mesh='+RID[:12],wait_until='domcontentloaded')
+   await page.goto(BASE+f'preview-b/releases/{RID}/atelier-preview.html?mesh={RID[:12]}',wait_until='domcontentloaded')
    await page.wait_for_timeout(15000)
    frames=[f for f in page.frames if RID in f.url]
    assert frames,'Expected immutable release iframe did not load'
    f=frames[0]
    await f.locator('body[data-ready=true]').wait_for(timeout=240000)
    await f.wait_for_function("document.querySelector('#stage').dataset.cameraReady==='true'")
-   assert R['candidate_overlay_hits']==1,R['candidate_overlay_hits']
-   assert await f.evaluate('window.__ART12_LAYER_GUIDANCE__')=='art12-preview-candidate'
+   assert R['candidate_overlay_hits']==0,R['candidate_overlay_hits']
+   assert not await f.evaluate('window.__ART12_LAYER_GUIDANCE__')
    for w,h in [(430,932),(932,430)]:
     await page.set_viewport_size({'width':w,'height':h});await page.wait_for_timeout(1200)
     canvas=f.locator('#assembly-canvas');before=await canvas.bounding_box()
@@ -107,7 +103,7 @@ async def run():
     assert await canvas.bounding_box()==before
     report.update(overview_restored=True,close_reopen_copy_matches_state=True,zero_scrub_clears=True,reassemble_clears=True,mode_exit_clears=True,canvas_stable=True)
    assert not R['errors'],R['errors']
-   R.update(passed=True,final_note='Exploded-layer explanations; not production deployment or device performance.')
+   R.update(passed=True,final_note='Exact sealed ART-12 runtime; no route overlay or device performance claim.')
   except Exception as e:
    R.update(passed=False,failure=repr(e));raise
   finally:
