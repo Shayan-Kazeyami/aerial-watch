@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=a09e63edcfc275e017ff9655270f0c1c733a95d075f55c0306e84ba70d1a07a8 python case-topology-lane/caseback-integration/public-live.py
+      - run: EXPECTED_RELEASE=bf858771be73667b8a9ca3a459090e671786783fbfb5faf471522c580b8f0710 python case-topology-lane/caseback-integration/public-live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
