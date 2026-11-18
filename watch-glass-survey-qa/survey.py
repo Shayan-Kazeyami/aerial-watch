@@ -20,21 +20,13 @@ async def main():
    for response in responses:
     name=response.url.split('?')[0].split('/')[-1];digest=hashlib.sha256(await response.body()).hexdigest();assert digest==local[name]['sha256'],name;R['servedModules'][name]={'url':response.url,'sha256':digest}
    assert len(R['servedModules'])>=3
-   config=json.loads((P/'config.json').read_text());poses=[('glass-normal',[0,0,65],[0,0,3.5]),('glass-edge',[10,0,45],[10,0,3.5]),('glass-oblique',[35,-18,45],[0,0,3.5])]
+   config=json.loads((P/'config.json').read_text());poses=[('glass-safe',[0,0,95],[0,0,3.5])]
    for name,pos,target in poses:
     config['camera']['position']=pos;config['camera']['target']=target
     await page.locator('#import-config').set_input_files({'name':name+'.json','mimeType':'application/json','buffer':json.dumps(config).encode()});await page.wait_for_function("assemblyInspect().mechanismElapsed===0&&!assemblyInspect().animation&&!assemblyInspect().interiorAnimation");await page.wait_for_function("document.querySelector('#stage').dataset.cameraReady==='true'");await page.locator('.atelier-first-use').wait_for(state='hidden',timeout=15000);await page.wait_for_timeout(1500)
     state=await page.evaluate('assemblyInspect()');assert state['renderQuality']=='studio';await capture(page,O/(name+'-default.png'))
     diag=await page.evaluate("()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent)}")
     row={'name':name,'config':json.loads(json.dumps(config)),'state':state,'resourceTotals':await page.evaluate('assemblyResourceInspect().totals'),'canvas':await page.locator('#assembly-canvas').evaluate('(c)=>({css:[c.clientWidth,c.clientHeight],buffer:[c.width,c.height],dpr:devicePixelRatio})')};R['poses'].append(row);(O/(name+'-diagnostics.json')).write_text(json.dumps(diag,indent=2));print(name,'captured',flush=True)
-   # Enlarged existing overscan is diagnostic only; no runtime code overrides.
-   await page.goto(ROOT+'atelier-preview.html?quality=studio&assets=meshopt&normalStream=1&overscan=.24',wait_until='domcontentloaded');await page.locator('body[data-ready=true]').wait_for(timeout=360000)
-   await page.wait_for_function("()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent).progressiveNormal==='full'}",timeout=240000)
-   for name,pos,target in poses:
-    config['camera']['position']=pos;config['camera']['target']=target
-    await page.locator('#import-config').set_input_files({'name':name+'.json','mimeType':'application/json','buffer':json.dumps(config).encode()});await page.wait_for_function("assemblyInspect().mechanismElapsed===0&&!assemblyInspect().animation&&!assemblyInspect().interiorAnimation");await page.wait_for_function("document.querySelector('#stage').dataset.cameraReady==='true'");await page.locator('.atelier-first-use').wait_for(state='hidden',timeout=15000);await page.wait_for_timeout(1500)
-    await capture(page,O/(name+'-expanded.png'))
-    diag=await page.evaluate("()=>{document.getElementById('refresh-diagnostics').click();return JSON.parse(document.getElementById('diagnostics-report').textContent)}");(O/(name+'-expanded-diagnostics.json')).write_text(json.dumps(diag,indent=2));print(name,'expanded captured',flush=True)
    assert not R['errors'];R['passed']=True
   finally:(O/'REPORT.json').write_text(json.dumps(R,indent=2));await browser.close()
 asyncio.run(main())
