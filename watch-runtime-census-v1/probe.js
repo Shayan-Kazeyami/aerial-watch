@@ -32,6 +32,24 @@ window.runtime421Snapshot=async label=>{
  return {label,url:location.href,clock:clock.snapshot(),crown:crownInteraction.snapshot(),camera:camera.matrixWorld.elements.slice(),projection:camera.projectionMatrix.elements.slice(),threeRevision:THREE.REVISION,webgl2:gl instanceof WebGL2RenderingContext,renderer:e?gl.getParameter(e.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),batch:mechanismBatch.snapshot(),activeProxyIds:activeProxies,rows,geometries:[...geometryMap.values()],captureSource:captureConfiguration().sourceAtCapture,inspection:assemblyInspect(),scope:'Executed semantic census only; visibility is scene-graph visibility, not occlusion; no object finalization or physical GPU claim'};
 };
 window.runtime421Freeze=()=>{cancelCrownGesture();bottleneckQA.freeze();settingSeconds=0;applyClockPose(clock.seek(0));crownVisual?.finish();dirty=true;};
+// Toggle-only batch control for calendar calibration. Unlike bottleneckQA.sample,
+// this deliberately does not call visibility(), updateMaterials(), or applyClockPose().
+window.runtime421ToggleBatch=async enabled=>{
+ if(typeof enabled!=='boolean')throw Error('Boolean batch state required');
+ const before=renderer.info.render.frame;mechanismBatch.setEnabled(enabled);dirty=true;
+ await new Promise(resolve=>{const wait=()=>renderer.info.render.frame>before?resolve():requestAnimationFrame(wait);requestAnimationFrame(wait)});
+ return mechanismBatch.snapshot();
+};
+// Layer overview can start a camera tween. Wait for a stable rendered camera pose
+// rather than taking the next frame as the overview baseline.
+window.runtime421WaitStableCamera=async()=>{
+ let previous=null,stable=0;const deadline=performance.now()+10000;
+ while(performance.now()<deadline){await new Promise(requestAnimationFrame);const now=[...camera.matrixWorld.elements,...camera.projectionMatrix.elements];
+  if(previous&&now.every((v,i)=>Math.abs(v-previous[i])<1e-9))stable++;else stable=0;
+  if(stable>=4)return {stableFrames:stable+1,camera:now};previous=now;
+ }
+ throw Error('Camera did not settle within 10 seconds');
+};
 window.runtime421Calendar=async seconds=>{
  if(!Number.isFinite(seconds))throw Error('Finite calendar time required');
  if(clock.snapshot().running.hands||clock.snapshot().running.mechanism)throw Error('Pause both clocks');

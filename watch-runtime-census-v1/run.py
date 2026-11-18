@@ -2,6 +2,7 @@ import asyncio,json,pathlib,hashlib,threading,http.server,socketserver,subproces
 from playwright.async_api import async_playwright
 from PIL import Image
 import numpy as np
+import shutil
 HERE=pathlib.Path(__file__).resolve().parent;ROOT=HERE.parent;OUT=HERE/'output';OUT.mkdir(exist_ok=True)
 RID='9de584f677b276f7cc3621b904c36d0762a4e8202da81578341150828e6c3576';REL=ROOT/'preview-b/releases'/RID
 PROBE=(ROOT/'next-bottleneck-qa/probe.js').read_text()+'\n'+(HERE/'probe.js').read_text()
@@ -18,7 +19,7 @@ def pixels(a,b):
  x=np.asarray(Image.open(a)).astype(float);y=np.asarray(Image.open(b)).astype(float);d=np.abs(x-y);return {'mean':float(d.mean()),'max':float(d.max()),'fraction_over_8':float((d.max(axis=2)>8).mean())}
 async def main():
  async with async_playwright()as p:
-  browser=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
+  browser=await p.chromium.launch(executable_path=shutil.which('chromium') or shutil.which('chromium-browser') or None,args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   page=await browser.new_page(viewport={'width':430,'height':932},device_scale_factor=1,is_mobile=True,has_touch=True);page.set_default_timeout(240000)
   page.on('pageerror',lambda e:report['errors'].append(str(e)));requests=[];page.on('request',lambda r:requests.append(r.url))
   async def intercept(route):
@@ -36,12 +37,12 @@ async def main():
      await page.locator('#atelier-layer-focus').select_option('balance');await page.wait_for_function('assemblyInspect().layerFocus.selected==="balance"');await page.wait_for_timeout(1000)
     s=await page.evaluate('label=>runtime421Snapshot(label)',label);assert RID in s['url'] and s['threeRevision']=='187' and s['webgl2'];assert not s['clock']['running']['hands']and not s['clock']['running']['mechanism'];assert not s['inspection']['animation'] and not s['inspection']['interiorAnimation'];census.append(s)
     await page.locator('#assembly-canvas').screenshot(path=str(OUT/(label+'.png')),style='.crown-hotspot,.crown-halo,.atelier-first-use{visibility:hidden!important}')
-   await page.locator('#atelier-layer-overview').click(force=True);await page.wait_for_function('!assemblyInspect().layerFocus.selected');await page.evaluate('runtime421Freeze()');await page.evaluate('bottleneckQA.sample({batch:true,profile:"efficient",explode:1})')
+   await page.locator('#atelier-layer-overview').click(force=True);await page.wait_for_function('!assemblyInspect().layerFocus.selected');await page.evaluate('runtime421Freeze()');await page.evaluate('bottleneckQA.sample({batch:true,profile:"efficient",explode:1})');await page.evaluate('runtime421WaitStableCamera()')
    assert census[0]['batch']['batches']>0,'No actual batching built'
    for idx,seconds in enumerate([0,33659.351376120474,0]):
     initial=await page.evaluate('s=>runtime421Calendar(s)',seconds);samples=[]
     for toggle,on in enumerate([True,False,True]):
-     await page.evaluate('on=>bottleneckQA.sample({batch:on,profile:"efficient",explode:1})',on)
+     await page.evaluate('on=>runtime421ToggleBatch(on)',on)
      s=await page.evaluate('label=>runtime421Snapshot(label)',f'calendar-{idx}-{toggle}');samples.append(s)
      await page.locator('#assembly-canvas').screenshot(path=str(OUT/f'calendar-{idx}-{toggle}.png'),style='.crown-hotspot,.crown-halo,.atelier-first-use{visibility:hidden!important}')
     first=spring(samples[0]);assert set(first)=={148,159}
