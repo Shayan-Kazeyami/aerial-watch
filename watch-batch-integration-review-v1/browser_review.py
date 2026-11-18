@@ -31,7 +31,7 @@ async def main():
     samples=[]
     for enabled in [True,False]:
      sample=await page.evaluate('(batch)=>bottleneckQA.sample({batch,profile:"efficient",explode:0,finish:true})',enabled);samples.append(sample)
-     await page.locator('#assembly-canvas').screenshot(path=str(OUT/f'{rid}-{enabled}.png'),style='.crown-hotspot,.crown-halo{visibility:hidden!important}')
+     await page.locator('#assembly-canvas').screenshot(path=str(OUT/f'{rid}-{enabled}.png'),style='.crown-hotspot,.crown-halo,.atelier-first-use{visibility:hidden!important}')
     result['samples']=samples
     a=np.asarray(Image.open(OUT/f'{rid}-True.png')).astype(float);c=np.asarray(Image.open(OUT/f'{rid}-False.png')).astype(float);d=np.abs(a-c)
     result['pixel_diff']={'mean':float(d.mean()),'fraction_over_8':float((d.max(axis=2)>8).mean()),'image_std':float(a.std())}
