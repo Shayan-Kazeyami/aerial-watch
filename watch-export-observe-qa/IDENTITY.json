@@ -1,0 +1,9 @@
+{
+  "release": "af604e9469ba87b091ebeed8c74865c6aa7afa3acd052e23538f427f19ffa81c",
+  "source": {
+    "path": "assembly-video-export.js",
+    "sizeBytes": 8257,
+    "sha256": "6c8944968effb8637f9db11b6a645de0a688bafae75924892a854b57866441ff"
+  },
+  "purpose": "test-only observability, never release artifact"
+}

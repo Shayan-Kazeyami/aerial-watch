@@ -1,0 +1,25 @@
+name: Watch one bounded export observation
+on:
+  push:
+    branches: [codex/watch-export-observe-once]
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            watch-export-observe-qa
+            preview-b/releases
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: timeout 540s python -u watch-export-observe-qa/run-bounded.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-bounded-export-observation
+          path: watch-export-observe-qa/output
