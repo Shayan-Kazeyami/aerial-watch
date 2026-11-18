@@ -14,14 +14,15 @@ EXPECTED={
  'balance':'Oscillates with its hairspring to pace time.',
  'calendar':'Transfers rotation to the hands and calendar.'}
 R={'base_release':RID,'candidate_only_overlay':False,'production_changed':False,
-   'scope':'Public immutable release with branch-local UI module overlay; Chromium software rendering, not device/GPU performance.',
-   'candidate_overlay_hits':0,'viewports':{},'errors':[]}
+   'scope':'Exact locally served sealed release with no UI overlay; Chromium software rendering, not device/GPU performance.',
+   'candidate_overlay_hits':0,'viewports':{},'errors':[],'release_http_errors':[]}
 
 async def run():
  async with async_playwright() as p:
   browser=await p.chromium.launch(args=['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader'])
   page=await browser.new_page(viewport={'width':430,'height':932},device_scale_factor=1,is_mobile=True,has_touch=True,reduced_motion='reduce')
   page.set_default_timeout(180000);page.on('pageerror',lambda e:R['errors'].append(str(e)))
+  page.on('response',lambda response:R['release_http_errors'].append({'status':response.status,'url':response.url}) if '/preview-b/releases/' in response.url and response.status>=400 else None)
   try:
    await page.goto(BASE+f'preview-b/releases/{RID}/atelier-preview.html?mesh={RID[:12]}',wait_until='domcontentloaded')
    await page.wait_for_timeout(15000)
@@ -30,6 +31,8 @@ async def run():
    f=frames[0]
    await f.locator('body[data-ready=true]').wait_for(timeout=240000)
    await f.wait_for_function("document.querySelector('#stage').dataset.cameraReady==='true'")
+   await page.wait_for_timeout(2500)
+   assert not R['release_http_errors'],R['release_http_errors']
    assert R['candidate_overlay_hits']==0,R['candidate_overlay_hits']
    assert not await f.evaluate('window.__ART12_LAYER_GUIDANCE__')
    for w,h in [(430,932),(932,430)]:
@@ -103,6 +106,7 @@ async def run():
     assert await canvas.bounding_box()==before
     report.update(overview_restored=True,close_reopen_copy_matches_state=True,zero_scrub_clears=True,reassemble_clears=True,mode_exit_clears=True,canvas_stable=True)
    assert not R['errors'],R['errors']
+   assert not R['release_http_errors'],R['release_http_errors']
    R.update(passed=True,final_note='Exact sealed ART-12 runtime; no route overlay or device performance claim.')
   except Exception as e:
    R.update(passed=False,failure=repr(e));raise
