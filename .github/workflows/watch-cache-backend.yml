@@ -1,0 +1,23 @@
+name: Diagnose public large asset HTTP cache backend
+on:
+  push:
+    branches: [codex/watch-cache-backend]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: watch-cache-backend-qa
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -u watch-cache-backend-qa/probe.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: canonical-cache-backend
+          path: watch-cache-backend-qa/output
