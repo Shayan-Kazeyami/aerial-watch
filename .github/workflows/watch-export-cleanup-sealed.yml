@@ -1,0 +1,32 @@
+name: Watch sealed CPU export cleanup gate
+on:
+  push:
+    branches: [codex/watch-export-cleanup-sealed]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            watch-export-cleanup-qa
+            preview-b/releases
+      - uses: actions/setup-node@v4
+        with: {node-version: '24'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python watch-export-cleanup-qa/derive.py preview-b/releases/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3 preview-b/releases/af604e9469ba87b091ebeed8c74865c6aa7afa3acd052e23538f427f19ffa81c /tmp/export-seal preview-b/releases
+      - run: cmp /tmp/export-seal/af604e9469ba87b091ebeed8c74865c6aa7afa3acd052e23538f427f19ffa81c/deployment-manifest.json preview-b/releases/af604e9469ba87b091ebeed8c74865c6aa7afa3acd052e23538f427f19ffa81c/deployment-manifest.json
+      - run: python -m pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python -u watch-export-cleanup-qa/browser-test.py
+      - run: python -u watch-export-cleanup-qa/watch-test.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-sealed-export-cleanup-proof
+          path: |
+            watch-export-cleanup-qa/output
+            watch-export-cleanup-qa/watch-output

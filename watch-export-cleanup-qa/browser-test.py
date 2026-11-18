@@ -18,7 +18,7 @@ async def main():
     for scenario in ['success','success','abort','reject','success','dispose']:
      r=await page.evaluate('''async scenarioName=>{scenario=scenarioName;refs=[];let result,error=null;try{result=await exporter.start({durationMs:200,frameRate:30,size:'compact'});}catch(e){error={name:e.name,message:e.message};}window.lastBlob=result?.blob;return {scenario,error,active:exporter.active,progress:exporter.progress,ended,renders,counts:{...frameCounts},video:result?{width:result.width,height:result.height,frameCount:result.frameCount,durationMs:result.durationMs,codec:result.codec}:null};}''',scenario)
      await page.evaluate('()=>gc()');await page.wait_for_timeout(50)
-     r['retainedScratchBytes']=await page.evaluate('()=>refs.reduce((n,r)=>n+(r.deref()?.byteLength||0),0)');r['variant']=variant
+     r['retainedScratchBytes']=await page.evaluate('()=>[...new Set(refs.map(r=>r.deref()).filter(Boolean))].reduce((n,b)=>n+b.byteLength,0)');r['variant']=variant
      assert not r['active'] and r['progress'] is None
      assert r['counts']['opened']==r['counts']['closed']
      if scenario=='success':
