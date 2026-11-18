@@ -370,8 +370,8 @@
     },
     {
       "path": "index.html",
-      "sizeBytes": 1161,
-      "sha256": "e2b4ae9e65655f84807c60a1c885f1d40933fec4073f80d12ab4b2c647a93bb4"
+      "sizeBytes": 1164,
+      "sha256": "c64dfe4fadc6a1881e2eb62e82848e396964838363d7710bc9a27a9c0b5c9740"
     },
     {
       "path": "material-review-model.js",
@@ -822,6 +822,11 @@
       "path": "watch-home-batch-9de584f6.js",
       "sizeBytes": 4086,
       "sha256": "58e67898f0024317612ddaf4f27d04e8723cf7a4ed51d26c86ff3a0b9f817089"
+    },
+    {
+      "path": "watch-home-camera-reset-a09e63ed.js",
+      "sizeBytes": 4086,
+      "sha256": "a06f998387d358e976b198166ad457212e61e40feb693d6012510d690baecd14"
     },
     {
       "path": "watch-home-caseback-e79b2236.js",
