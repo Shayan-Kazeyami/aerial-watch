@@ -44,6 +44,7 @@ async def main():
     for toggle,on in enumerate([True,False,True]):
      await page.evaluate('on=>runtime421ToggleBatch(on)',on)
      s=await page.evaluate('label=>runtime421Snapshot(label)',f'calendar-{idx}-{toggle}');samples.append(s)
+     assert s['batch']['enabled'] is on,{'requested_enabled':on,'observed_batch':s['batch']}
      await page.locator('#assembly-canvas').screenshot(path=str(OUT/f'calendar-{idx}-{toggle}.png'),style='.crown-hotspot,.crown-halo,.atelier-first-use{visibility:hidden!important}')
     first=spring(samples[0]);assert set(first)=={148,159}
     for state in samples:
