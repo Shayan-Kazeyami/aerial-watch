@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {createCrownHotspot} from './assembly-crown-hotspot.js';
+import {createCrownHotspot} from '../preview-b/releases/63600a544b71214dcbfceee96a3eac0dbfa48bca7d42d59425acd43bae131bfd/assembly-crown-hotspot.js';
 class Element extends EventTarget{
  constructor(){super();this.attrs=new Map();this.style={setProperty(){}};this.captured=new Set();this.hidden=false;}
  setAttribute(k,v){this.attrs.set(k,String(v))}removeAttribute(k){this.attrs.delete(k)}append(){}remove(){}querySelectorAll(){return []}
@@ -22,7 +22,7 @@ test('readiness rejects entry and cancelled pointer never toggles',()=>{const f=
 test('captured direct mesh hold survives unavailable dot anchor but not unavailable scene',()=>{const f=setup();f.h.beginPointer(f.event(),f.canvas);f.h.movePointer(f.event(78));f.hideAnchor();f.h.update();f.tick(100);assert.equal(f.turns.at(-1),12);assert.equal(f.stats().ends,0);f.disable();f.h.update();assert.equal(f.stats().ends,1);});
 test('dot hold cancels when its anchor disappears',()=>{const f=setup();f.h.beginPointer(f.event());f.hideAnchor();f.h.update();assert.equal(f.stats().ends,1);});
 test('actual integration callbacks restore previously enabled and disabled orbit state exactly',async()=>{
- const {readFile}=await import('node:fs/promises'),source=await readFile(new URL('./assembly-review.js',import.meta.url),'utf8');
+ const {readFile}=await import('node:fs/promises'),source=await readFile(new URL('../preview-b/releases/63600a544b71214dcbfceee96a3eac0dbfa48bca7d42d59425acd43bae131bfd/assembly-review.js',import.meta.url),'utf8');
  const start=source.match(/onGestureStart\(\)\{([^}]+)\}/)[1],end=source.match(/onGestureEnd\(\)\{([^}]+)\}/)[1];
  for(const enabled of [true,false]){
   const state=new Function('initial',`let controls={enabled:initial},crownControlsEnabled=null,down=[1,2],dirty=false;return {start(){${start}},end(){${end}},snapshot(){return {enabled:controls.enabled,saved:crownControlsEnabled,down,dirty}}}`)(enabled);

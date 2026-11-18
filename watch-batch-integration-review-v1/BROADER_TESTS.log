@@ -1,0 +1,77 @@
+node:internal/modules/esm/resolve:272
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/scratch/3fafd2dd84e3/watch-current/crown-unified-qa/assembly-crown-hotspot.js' imported from /workspace/scratch/3fafd2dd84e3/watch-current/crown-unified-qa/gesture.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:272:11)
+    at moduleResolve (node:internal/modules/esm/resolve:879:10)
+    at defaultResolve (node:internal/modules/esm/resolve:1006:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:705:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:725:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:763:56)
+    at #resolve (node:internal/modules/esm/loader:687:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:607:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:276:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:381:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///workspace/scratch/3fafd2dd84e3/watch-current/crown-unified-qa/assembly-crown-hotspot.js'
+}
+
+Node.js v24.22.3
+✖ crown-unified-qa/gesture.test.mjs (281.348738ms)
+✔ unknown work is indeterminate, never timer progress (1.697719ms)
+✔ all unfinished phases stay continuous without invented percentages (0.501816ms)
+✔ only actual readiness hides loading (0.409246ms)
+✔ error leaves recovery UI exposed (0.533792ms)
+✖ preserves route query/hash and catches late cached readiness (2.240948ms)
+✔ progress events, failure, retry, reload, teardown (1.383111ms)
+✔ actual milestone completion moves forward, never backwards on retry (3.629813ms)
+✔ only actual selected readiness can reach full (0.222129ms)
+✔ elapsed time alone cannot inflate progress (0.741432ms)
+✔ errors never report completion (1.777039ms)
+✔ complete fill appears only at readiness, hides once, no endless timer reset (2.114178ms)
+✔ failure cancels completion, retry resets and pagehide cleans up (1.717321ms)
+✔ reduced motion preserves readiness without long animation (0.501833ms)
+✔ entry retains query/hash and accessible nonnumeric description (0.786144ms)
+✔ unknown work is indeterminate, never timer progress (2.9161ms)
+✔ five asset milestones plus actual frame (0.527127ms)
+✔ rendering does not claim finished (0.273453ms)
+✔ non SMAA uses four assets plus frame (0.258708ms)
+✔ error leaves recovery UI exposed (0.296251ms)
+✔ preserves route query/hash and catches late cached readiness (1.651137ms)
+✔ progress events, failure, retry, reload, teardown (0.961815ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 20
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 468.130623
+
+✖ failing tests:
+
+test at crown-unified-qa/gesture.test.mjs:1:1
+✖ crown-unified-qa/gesture.test.mjs (281.348738ms)
+  'test failed'
+
+test at loading-v2.test.mjs:10:1
+✖ preserves route query/hash and catches late cached readiness (2.240948ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /dca5c072.*quality=studio#x$/. Input:
+  
+  'https://example.test/aerial-watch/preview-b/releases/e1d2072ce848df1e154b9d2db9de5b1612fb081df3330cb82e3fc6dc428a7640/atelier-preview.html?quality=studio#x'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/watch-current/loading-v2.test.mjs:10:99)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'https://example.test/aerial-watch/preview-b/releases/e1d2072ce848df1e154b9d2db9de5b1612fb081df3330cb82e3fc6dc428a7640/atelier-preview.html?quality=studio#x',
+    expected: /dca5c072.*quality=studio#x$/,
+    operator: 'match',
+    diff: 'simple'
+  }

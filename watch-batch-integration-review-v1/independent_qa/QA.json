@@ -1,0 +1,15 @@
+{
+  "git_head": "b84a51ec91b715aa70408e8bff6e988e29d93edb",
+  "unchanged_tracked_files": true,
+  "sealed_original_manifest_files_verified": 297,
+  "stage_file_count": 183,
+  "stage_changed_files": [
+    "assembly-mechanism-batch.js"
+  ],
+  "candidate_sha256": "02868f9ab9556b10e3bd4f55b0adcd5f48cbe3c1d7328e58f2446cc1833efab1",
+  "staged_js_syntax_passed": 138,
+  "actual_stage_module_tests_passed": 32,
+  "staged_deployment_manifest_still_parent_not_valid_new_release": true,
+  "publishable": false,
+  "gpu_browser_verified": false
+}

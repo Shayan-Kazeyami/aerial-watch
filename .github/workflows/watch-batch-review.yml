@@ -1,0 +1,28 @@
+name: Non-deployed watch batch review
+on:
+  push:
+    branches: [codex/watch-batch-lifecycle-review]
+    paths: [watch-batch-integration-review-v1/**, crown-unified-qa/gesture.test.mjs, loading-v2.test.mjs, .github/workflows/watch-batch-review.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  software-webgl-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test watch-batch-integration-review-v1/tests/*.mjs loading.test.mjs loading-v2.test.mjs loading-v3.test.mjs crown-unified-qa/gesture.test.mjs
+      - run: python -m pip install playwright pillow numpy && python -m playwright install --with-deps chromium
+      - run: python watch-batch-integration-review-v1/build_stage.py
+      - run: python watch-batch-integration-review-v1/browser_review.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-batch-review-software-webgl
+          path: watch-batch-browser-evidence

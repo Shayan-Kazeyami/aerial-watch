@@ -1,0 +1,14 @@
+{
+  "HANDOVER.md": "1b164b75928a8ee2b4182dae17aabff2e5d26af4802896e494abb05833c9f13f",
+  "BASELINE_TESTS.log": "2298cee2b274f917f81f369e5838f0e3c0b6a342bc37d1df54ab224e3ece308e",
+  "ALL_TESTS.log": "b817c910ee5d5f1c57de21ffad61abde16d72f445ccf10e6a23ad4f71053b6b8",
+  "test.mjs": "33029a669e9c056ebb8f26ee3800f975571adfa8cecaf247d388455ab926ad30",
+  "BASELINE.js": "4afc7d793e91ba9b852b93468a06c79c0408c6fd29f016604d177292abb09598",
+  "lifecycle-regression.mjs": "7ea0522b06c1851bd9c41e965ff5594d210473c689fa18a0521f500a598bf105",
+  "independent-lifecycle-regression.mjs": "dd2f74016dd5949ca5e5fb6c5b2a0a12962185b82a5e1f64ed05fd6155f6b4db",
+  "CANDIDATE_TESTS.log": "43ca3886260fa303f1d68d41c5bc9faafc797d5648db77bc1b210f61c725e3c5",
+  "assembly-mechanism-batch.js": "02868f9ab9556b10e3bd4f55b0adcd5f48cbe3c1d7328e58f2446cc1833efab1",
+  "vendor/three.core.js": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578",
+  "vendor/THREE-LICENSE.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+  "vendor/three.module.js": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
+}

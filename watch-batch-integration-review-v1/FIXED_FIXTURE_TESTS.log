@@ -1,0 +1,40 @@
+✔ direct and dot share stationary displaced rate, reverse and dead zone (3.019004ms)
+✔ tap toggles once, duplicate release and unrelated pointer are ignored (0.458221ms)
+✔ cancel clears RAF, timer, pointer capture and ownership, without toggling (1.034654ms)
+✔ blur stops held gesture (0.255943ms)
+✔ hidden stops held gesture (0.345698ms)
+✔ unavailable stops held gesture (0.44671ms)
+✔ dispose stops held gesture (0.325806ms)
+✔ readiness rejects entry and cancelled pointer never toggles (0.555455ms)
+✔ captured direct mesh hold survives unavailable dot anchor but not unavailable scene (0.731403ms)
+✔ dot hold cancels when its anchor disappears (0.793744ms)
+✔ actual integration callbacks restore previously enabled and disabled orbit state exactly (16.100497ms)
+✔ unknown work is indeterminate, never timer progress (0.849094ms)
+✔ all unfinished phases stay continuous without invented percentages (0.177047ms)
+✔ only actual readiness hides loading (0.157889ms)
+✔ error leaves recovery UI exposed (0.164669ms)
+✔ preserves route query/hash and catches late cached readiness (1.004516ms)
+✔ progress events, failure, retry, reload, teardown (0.897733ms)
+✔ actual milestone completion moves forward, never backwards on retry (2.213824ms)
+✔ only actual selected readiness can reach full (0.282404ms)
+✔ elapsed time alone cannot inflate progress (0.716515ms)
+✔ errors never report completion (1.39878ms)
+✔ complete fill appears only at readiness, hides once, no endless timer reset (1.710242ms)
+✔ failure cancels completion, retry resets and pagehide cleans up (0.849852ms)
+✔ reduced motion preserves readiness without long animation (0.39728ms)
+✔ entry retains query/hash and accessible nonnumeric description (0.975474ms)
+✔ unknown work is indeterminate, never timer progress (2.076646ms)
+✔ five asset milestones plus actual frame (0.503323ms)
+✔ rendering does not claim finished (0.305815ms)
+✔ non SMAA uses four assets plus frame (0.285899ms)
+✔ error leaves recovery UI exposed (0.411927ms)
+✔ preserves route query/hash and catches late cached readiness (1.5289ms)
+✔ progress events, failure, retry, reload, teardown (1.242361ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 223.083822

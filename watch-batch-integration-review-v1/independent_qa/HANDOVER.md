@@ -1,0 +1,4 @@
+# Integrated local candidate independent gate
+Imported the actual staged module, not a copied candidate, into32 tests: all pass. Verified all297 original sealed-manifest local/referenced file identities,183 staged-file comparison with exactly one changed module,138 staged JavaScript syntax checks and empty tracked/index git diff at b84a51ec. Candidate hash matches independently reviewed geometry/lifecycle v2.
+
+This is a local review stage, NOT publishable: copied deployment manifest retains original parent identity and must be regenerated/sealed by the supported release workflow before any publication. Public loader and immutable original release unchanged. Browser/GPU/device rendering, actual affected421 runtime cohorts and performance remain unverified. Broader producer historical suites have known unrelated missing-module/stale-release expectations, not counted as complete project test pass here.

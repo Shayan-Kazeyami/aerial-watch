@@ -1,0 +1,40 @@
+✔ hidden majority cannot suppress smaller live material cohort (8.354167ms)
+✔ detached majority cannot suppress smaller attached material cohort (2.050683ms)
+✔ render state reversal restores batching on next frame (3.075692ms)
+✔ negative scale remains original and invisible scene never batches (2.232468ms)
+✔ disabled clean frame leaves all sources untouched (2.053176ms)
+✔ baseline eligible meshes batch and restore exact source visibility (14.627972ms)
+✔ detached cached source is not a ghost instance (1.931687ms)
+✔ source moved into another scene remains outside active batch (1.631006ms)
+✔ reattachment to active scene restores eligibility (1.886471ms)
+✔ changed renderOrder stays on original mesh (1.230029ms)
+✔ changed castShadow stays on original mesh (1.463994ms)
+✔ changed receiveShadow stays on original mesh (1.113846ms)
+✔ changed layers stay on original mesh (1.566824ms)
+✔ hidden ancestor stays hidden; disposing twice restores source and removes batch (2.051891ms)
+✔ in-scene reparenting uses exact updated matrix (3.75963ms)
+✔ transparent/material/geometry exceptions remain authoritative (3.512084ms)
+✔ restoring changed render state re-enables batching (2.565323ms)
+✔ negative determinant stays source-rendered (1.578491ms)
+✔ extension-unavailable fallback makes no render proxy (0.893505ms)
+✔ unchanged geometry remains eligible (15.992625ms)
+✔ in-place position version update stays authoritative (23.793065ms)
+✔ in-place normal update stays authoritative (4.049926ms)
+✔ same geometry replacement attribute stays authoritative (2.687344ms)
+✔ same geometry index revision stays authoritative (2.636354ms)
+✔ replacement index stays authoritative (2.273965ms)
+✔ drawRange no longer full stays authoritative (2.64486ms)
+✔ material groups added stays authoritative (2.5982ms)
+✔ attribute addition stays authoritative (4.885067ms)
+✔ morph position added stays authoritative (1.615913ms)
+✔ non-position normal morph added stays authoritative (1.048761ms)
+✔ non-position color morph added stays authoritative (0.993768ms)
+✔ initial non-position morph geometry never enters batch (0.886722ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 455.5747

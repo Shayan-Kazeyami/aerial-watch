@@ -1,0 +1,9 @@
+{
+  "HANDOVER.md": "c9b96ba98a9d981da012a3cb4c066edf58a89b71fe100342751454d56d5a0bc2",
+  "verify.py": "3276908951f535363340ecd487fa0d1b124fe399819f728c1242c2a8cf0aeb85",
+  "QA.json": "d23cccc85032731d2ed72a59d95c7d2ca0a2151e08b9613a622a53c5f2e3ebe7",
+  "test.mjs": "1eb1b4a1c211cbe77965a4de34f2b52564ef2800a183767558290c523d55bbff",
+  "lifecycle-regression.mjs": "b38fbb74e581b4a4b1a52754cf528cc5aaaa67fca4833dc383393b3c7140b57a",
+  "independent-lifecycle-regression.mjs": "6c8f859187d02540f027235d119a12359fec4e54853a62b362bef526fba426d9",
+  "TESTS.log": "93ccecc4659bc68d8e9cf40a568dee1d7e8edbd2ef3a38d6ab4449124c8db1c5"
+}

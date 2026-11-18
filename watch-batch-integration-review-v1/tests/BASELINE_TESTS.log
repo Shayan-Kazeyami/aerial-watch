@@ -1,0 +1,286 @@
+✔ unchanged geometry remains eligible (16.069909ms)
+✖ in-place position version update stays authoritative (5.219453ms)
+✖ in-place normal update stays authoritative (3.40402ms)
+✖ same geometry replacement attribute stays authoritative (1.814082ms)
+✖ same geometry index revision stays authoritative (1.566222ms)
+✖ replacement index stays authoritative (1.373039ms)
+✖ drawRange no longer full stays authoritative (1.551405ms)
+✖ material groups added stays authoritative (3.873469ms)
+✖ attribute addition stays authoritative (4.54449ms)
+✖ morph position added stays authoritative (4.663072ms)
+✖ non-position normal morph added stays authoritative (1.416505ms)
+✖ non-position color morph added stays authoritative (0.783294ms)
+✖ initial non-position morph geometry never enters batch (1.247276ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 1
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 523.627144
+
+✖ failing tests:
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:6:1
+✖ in-place position version update stays authoritative (5.219453ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:6:152)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:7:1
+✖ in-place normal update stays authoritative (3.40402ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:7:122)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:8:1
+✖ same geometry replacement attribute stays authoritative (1.814082ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:8:159)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:9:1
+✖ same geometry index revision stays authoritative (1.566222ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:9:116)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:10:1
+✖ replacement index stays authoritative (1.373039ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:10:112)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:11:1
+✖ drawRange no longer full stays authoritative (1.551405ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:11:107)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:12:1
+✖ material groups added stays authoritative (3.873469ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:12:102)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:13:1
+✖ attribute addition stays authoritative (4.54449ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:13:188)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:14:1
+✖ morph position added stays authoritative (4.663072ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:14:146)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:16:38
+✖ non-position normal morph added stays authoritative (1.416505ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:16:192)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:16:38
+✖ non-position color morph added stays authoritative (0.783294ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at original (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:4:50)
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:16:192)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at aerial-watch-geometry-revision-candidate-v2/test.mjs:17:1
+✖ initial non-position morph geometry never enters batch (1.247276ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/3fafd2dd84e3/aerial-watch-geometry-revision-candidate-v2/test.mjs:17:390)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

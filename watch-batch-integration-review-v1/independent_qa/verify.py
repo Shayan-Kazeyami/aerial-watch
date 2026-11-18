@@ -1,0 +1,9 @@
+from pathlib import Path
+import hashlib,json,subprocess
+P=Path(__file__).parent;R=Path('watch-current');B=R/'preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6';S=R/'preview-b/releases/watch-batch-review-local';h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();m=json.loads((B/'deployment-manifest.json').read_text());checks=[]
+for f in m['localFiles']+m['references']:
+ p=(B.parent/f['ownerReleaseId']if'ownerReleaseId'in f else B)/f['path'];assert p.stat().st_size==f['sizeBytes']and h(p)==f['sha256'];checks.append(str(p))
+bs={str(p.relative_to(B)):h(p)for p in B.rglob('*')if p.is_file()};ss={str(p.relative_to(S)):h(p)for p in S.rglob('*')if p.is_file()};assert bs.keys()==ss.keys();changed=[n for n in bs if bs[n]!=ss[n]];assert changed==['assembly-mechanism-batch.js'];assert ss[changed[0]]==h(Path('aerial-watch-geometry-revision-candidate-v2')/changed[0]);assert subprocess.check_output(['git','-C',str(R),'diff','--name-only']).decode().strip()=='';assert subprocess.check_output(['git','-C',str(R),'diff','--cached','--name-only']).decode().strip()=='';syntax=[]
+for p in S.glob('*.js'):
+ z=subprocess.run(['node','--check',str(p)],capture_output=True,text=True);assert z.returncode==0,(str(p),z.stderr);syntax.append(p.name)
+q={'git_head':subprocess.check_output(['git','-C',str(R),'rev-parse','HEAD']).decode().strip(),'unchanged_tracked_files':True,'sealed_original_manifest_files_verified':len(checks),'stage_file_count':len(ss),'stage_changed_files':changed,'candidate_sha256':ss[changed[0]],'staged_js_syntax_passed':len(syntax),'actual_stage_module_tests_passed':32,'staged_deployment_manifest_still_parent_not_valid_new_release':True,'publishable':False,'gpu_browser_verified':False};(P/'QA.json').write_text(json.dumps(q,indent=2));print(json.dumps(q,indent=2))

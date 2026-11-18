@@ -1,0 +1,25 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as THREE from './vendor/three.module.js';
+const {createMechanismBatch}=await import(process.env.BASELINE==='1'?'./BASELINE.js':'./assembly-mechanism-batch.js');
+function setup(){
+ const scene=new THREE.Scene(), group=new THREE.Group();scene.add(group);
+ const material=new THREE.MeshStandardMaterial();
+ const geometry=new THREE.BoxGeometry();geometry.clearGroups();
+ const meshes=Array.from({length:8},(_,i)=>{const m=new THREE.Mesh(geometry,material);m.position.x=i;group.add(m);return m;});
+ const api=createMechanismBatch({THREE,scene,renderer:{extensions:{has:()=>true}}});api.build(meshes);
+ const batch=scene.children.find(o=>o.isBatchedMesh);assert.ok(batch);return{scene,group,meshes,batch,api};
+}
+function visibleCount(batch){return Array.from({length:8},(_,i)=>batch.getVisibleAt(i)).filter(Boolean).length;}
+test('baseline eligible meshes batch and restore exact source visibility',()=>{const x=setup();x.api.beforeRender();assert.equal(visibleCount(x.batch),8);assert.ok(x.meshes.every(m=>!m.visible));x.api.afterRender();assert.ok(x.meshes.every(m=>m.visible));assert.equal(x.batch.visible,false);x.api.dispose();});
+test('detached cached source is not a ghost instance',()=>{const x=setup();x.meshes[0].removeFromParent();x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),false);assert.equal(visibleCount(x.batch),7);assert.equal(x.meshes[0].visible,true);x.api.afterRender();x.api.dispose();});
+test('source moved into another scene remains outside active batch',()=>{const x=setup();new THREE.Scene().add(x.group);x.api.beforeRender();assert.equal(visibleCount(x.batch),0);assert.equal(x.batch.visible,false);assert.ok(x.meshes.every(m=>m.visible));x.api.afterRender();x.api.dispose();});
+test('reattachment to active scene restores eligibility',()=>{const x=setup();x.group.removeFromParent();x.api.beforeRender();assert.equal(visibleCount(x.batch),0);x.api.afterRender();x.scene.add(x.group);x.api.beforeRender();assert.equal(visibleCount(x.batch),8);x.api.afterRender();x.api.dispose();});
+for(const [property,value] of [['renderOrder',7],['castShadow',true],['receiveShadow',true]])test(`changed ${property} stays on original mesh`,()=>{const x=setup();x.meshes[0][property]=value;x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),false);assert.equal(x.meshes[0].visible,true);x.api.afterRender();x.api.dispose();});
+test('changed layers stay on original mesh',()=>{const x=setup();x.meshes[0].layers.set(2);x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),false);assert.equal(x.meshes[0].visible,true);x.api.afterRender();x.api.dispose();});
+test('hidden ancestor stays hidden; disposing twice restores source and removes batch',()=>{const x=setup();x.group.visible=false;x.api.beforeRender();assert.equal(visibleCount(x.batch),0);x.api.afterRender();assert.equal(x.group.visible,false);x.group.visible=true;x.api.beforeRender();x.api.dispose();x.api.dispose();assert.ok(x.meshes.every(m=>m.visible));assert.equal(x.batch.parent,null);});
+test('in-scene reparenting uses exact updated matrix',()=>{const x=setup();const g=new THREE.Group();g.position.set(10,20,30);x.scene.add(g);g.add(x.meshes[0]);x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),true);const matrix=new THREE.Matrix4();x.batch.getMatrixAt(0,matrix);assert.deepEqual(matrix.elements,x.meshes[0].matrixWorld.elements);x.api.afterRender();x.api.dispose();});
+test('transparent/material/geometry exceptions remain authoritative',()=>{const x=setup();x.meshes[0].material=new THREE.MeshStandardMaterial({transparent:true});x.meshes[1].geometry=x.meshes[1].geometry.clone();x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),false);assert.equal(x.batch.getVisibleAt(1),false);assert.equal(x.meshes[0].visible,true);assert.equal(x.meshes[1].visible,true);x.api.afterRender();x.api.dispose();});
+test('restoring changed render state re-enables batching',()=>{const x=setup();x.meshes[0].renderOrder=9;x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),false);x.api.afterRender();x.meshes[0].renderOrder=0;x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),true);x.api.afterRender();x.api.dispose();});
+test('negative determinant stays source-rendered',()=>{const x=setup();x.meshes[0].scale.x=-1;x.api.beforeRender();assert.equal(x.batch.getVisibleAt(0),false);assert.equal(x.meshes[0].visible,true);x.api.afterRender();x.api.dispose();});
+test('extension-unavailable fallback makes no render proxy',()=>{const scene=new THREE.Scene(),g=new THREE.BoxGeometry(),m=new THREE.MeshStandardMaterial();g.clearGroups();const meshes=Array.from({length:8},()=>{const o=new THREE.Mesh(g,m);scene.add(o);return o;});const api=createMechanismBatch({THREE,scene,renderer:{extensions:{has:()=>false}}});api.build(meshes);api.beforeRender();assert.equal(api.snapshot().batches,0);assert.ok(meshes.every(o=>o.visible));api.afterRender();api.dispose();});

@@ -1,0 +1,11 @@
+{
+  "base": "preview-b/releases/e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6",
+  "stage": "preview-b/releases/watch-batch-review-local",
+  "changed_files": [
+    "assembly-mechanism-batch.js"
+  ],
+  "candidate_sha256": "02868f9ab9556b10e3bd4f55b0adcd5f48cbe3c1d7328e58f2446cc1833efab1",
+  "public_loader_changed": false,
+  "sealed_release_changed": false,
+  "browser_gpu_verified": false
+}

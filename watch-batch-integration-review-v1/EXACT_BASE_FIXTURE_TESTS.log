@@ -1,0 +1,77 @@
+node:internal/modules/esm/resolve:272
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/tmp/watch-exact-base-tests/crown-unified-qa/assembly-crown-hotspot.js' imported from /tmp/watch-exact-base-tests/crown-unified-qa/gesture.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:272:11)
+    at moduleResolve (node:internal/modules/esm/resolve:879:10)
+    at defaultResolve (node:internal/modules/esm/resolve:1006:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:705:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:725:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:763:56)
+    at #resolve (node:internal/modules/esm/loader:687:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:607:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:276:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:381:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///tmp/watch-exact-base-tests/crown-unified-qa/assembly-crown-hotspot.js'
+}
+
+Node.js v24.22.3
+✖ crown-unified-qa/gesture.test.mjs (246.922435ms)
+✔ unknown work is indeterminate, never timer progress (1.737879ms)
+✔ all unfinished phases stay continuous without invented percentages (0.26407ms)
+✔ only actual readiness hides loading (0.459276ms)
+✔ error leaves recovery UI exposed (0.229131ms)
+✖ preserves route query/hash and catches late cached readiness (1.782815ms)
+✔ progress events, failure, retry, reload, teardown (1.050237ms)
+✔ actual milestone completion moves forward, never backwards on retry (1.579483ms)
+✔ only actual selected readiness can reach full (0.241898ms)
+✔ elapsed time alone cannot inflate progress (2.541345ms)
+✔ errors never report completion (1.222435ms)
+✔ complete fill appears only at readiness, hides once, no endless timer reset (1.58523ms)
+✔ failure cancels completion, retry resets and pagehide cleans up (0.760018ms)
+✔ reduced motion preserves readiness without long animation (0.648635ms)
+✔ entry retains query/hash and accessible nonnumeric description (0.913186ms)
+✔ unknown work is indeterminate, never timer progress (2.648139ms)
+✔ five asset milestones plus actual frame (0.493456ms)
+✔ rendering does not claim finished (0.503621ms)
+✔ non SMAA uses four assets plus frame (0.351152ms)
+✔ error leaves recovery UI exposed (0.344654ms)
+✔ preserves route query/hash and catches late cached readiness (1.689624ms)
+✔ progress events, failure, retry, reload, teardown (1.703518ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 20
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 425.5408
+
+✖ failing tests:
+
+test at crown-unified-qa/gesture.test.mjs:1:1
+✖ crown-unified-qa/gesture.test.mjs (246.922435ms)
+  'test failed'
+
+test at loading-v2.test.mjs:10:1
+✖ preserves route query/hash and catches late cached readiness (1.782815ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /dca5c072.*quality=studio#x$/. Input:
+  
+  'https://example.test/aerial-watch/preview-b/releases/e1d2072ce848df1e154b9d2db9de5b1612fb081df3330cb82e3fc6dc428a7640/atelier-preview.html?quality=studio#x'
+  
+      at TestContext.<anonymous> (file:///tmp/watch-exact-base-tests/loading-v2.test.mjs:10:99)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'https://example.test/aerial-watch/preview-b/releases/e1d2072ce848df1e154b9d2db9de5b1612fb081df3330cb82e3fc6dc428a7640/atelier-preview.html?quality=studio#x',
+    expected: /dca5c072.*quality=studio#x$/,
+    operator: 'match',
+    diff: 'simple'
+  }

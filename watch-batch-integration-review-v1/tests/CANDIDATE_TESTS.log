@@ -1,0 +1,21 @@
+✔ unchanged geometry remains eligible (6.113852ms)
+✔ in-place position version update stays authoritative (1.458267ms)
+✔ in-place normal update stays authoritative (1.047622ms)
+✔ same geometry replacement attribute stays authoritative (1.354628ms)
+✔ same geometry index revision stays authoritative (1.081671ms)
+✔ replacement index stays authoritative (0.891045ms)
+✔ drawRange no longer full stays authoritative (2.460292ms)
+✔ material groups added stays authoritative (3.689217ms)
+✔ attribute addition stays authoritative (5.431766ms)
+✔ morph position added stays authoritative (1.092311ms)
+✔ non-position normal morph added stays authoritative (1.100782ms)
+✔ non-position color morph added stays authoritative (0.594665ms)
+✔ initial non-position morph geometry never enters batch (0.634217ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 217.576855
