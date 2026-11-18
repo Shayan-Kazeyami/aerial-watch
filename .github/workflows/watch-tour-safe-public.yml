@@ -1,0 +1,31 @@
+name: Guided tour safe framing public smoke
+on:
+  push:
+    branches: [codex/watch-tour-safe-public]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    strategy:
+      fail-fast: false
+      matrix:
+        view: [820x600, 430x932]
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: watch-tour-safe-qa
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python watch-tour-safe-qa/browser_public.py
+        env:
+          VIEW: ${{ matrix.view }}
+          MOTION: ${{ matrix.view == '820x600' && 'no-preference' || 'reduce' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tour-safe-${{ matrix.view }}
+          path: watch-tour-safe-qa/output/
