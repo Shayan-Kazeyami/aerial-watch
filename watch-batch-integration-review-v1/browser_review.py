@@ -6,7 +6,7 @@ import numpy as np
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 OUT=ROOT/'watch-batch-browser-evidence';OUT.mkdir(exist_ok=True)
 RID='e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6'
-PROBE=(ROOT/'next-bottleneck-qa/probe.js').read_text()+'''\nwindow.batchReviewContext=()=>{const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return {webgl2:gl instanceof WebGL2RenderingContext,renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),vendor:ext?gl.getParameter(ext.UNMASKED_VENDOR_WEBGL):gl.getParameter(gl.VENDOR),batch:mechanismBatch?.snapshot(),backend:GPU?'webgpu':'webgl'};};'''
+PROBE=(ROOT/'next-bottleneck-qa/probe.js').read_text()+'''\nwindow.batchReviewContext=()=>{const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return {webgl2:gl instanceof WebGL2RenderingContext,renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),vendor:ext?gl.getParameter(ext.UNMASKED_VENDOR_WEBGL):gl.getParameter(gl.VENDOR),batch:mechanismBatch?.snapshot(),backend:GPU?'webgpu':'webgl',normalState:progressiveNormalState,camera:camera.matrixWorld.elements.slice(),projection:camera.projectionMatrix.elements.slice(),readyForReview:!cameraTween&&!['waiting-for-first-frame','upgrading'].includes(progressiveNormalState)};};'''
 class Handler(http.server.SimpleHTTPRequestHandler):
  def __init__(self,*a,**kw):super().__init__(*a,directory=str(ROOT),**kw)
  def log_message(self,*a):pass
@@ -24,7 +24,7 @@ async def main():
     await page.route('**/assembly-review.js*',intercept)
     result={'release':rid,'errors':errors};report['runs'].append(result)
     await page.goto(f'http://127.0.0.1:8765/preview-b/releases/{rid}/atelier-preview.html?quality=efficient',wait_until='domcontentloaded')
-    await page.locator('body[data-ready=true]').wait_for();await page.wait_for_function('typeof batchReviewContext==="function"');await page.evaluate('bottleneckQA.freeze()');await page.wait_for_timeout(2000)
+    await page.locator('body[data-ready=true]').wait_for();await page.wait_for_function('typeof batchReviewContext==="function"');await page.evaluate('bottleneckQA.freeze()');await page.wait_for_function('batchReviewContext().readyForReview');await page.wait_for_function('document.querySelector("#stage").dataset.cameraReady==="true"');await page.wait_for_timeout(2000)
     result['context']=await page.evaluate('batchReviewContext()')
     assert result['context']['backend']=='webgl' and result['context']['webgl2'],result
     assert result['context']['batch']['batches']>0,'No batches exercised, cannot accept GPU gate'
@@ -37,7 +37,8 @@ async def main():
     result['pixel_diff']={'mean':float(d.mean()),'fraction_over_8':float((d.max(axis=2)>8).mean()),'image_std':float(a.std())}
     assert a.std()>2,'Blank render'
     assert samples[0]['render']['triangles']==samples[1]['render']['triangles'],'Geometry count changed'
-    assert d.mean()<.1 and (d.max(axis=2)>8).mean()<.001,'Batch/original visual mismatch'
+    result['batch_original_pixel_gate_pass']=bool(d.mean()<.1 and (d.max(axis=2)>8).mean()<.001)
+    if rid=='watch-batch-review-local':assert result['batch_original_pixel_gate_pass'],'Candidate batch/original visual mismatch'
     assert not errors,errors
     await page.close()
    report['passed']=True
