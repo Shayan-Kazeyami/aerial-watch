@@ -1,0 +1,23 @@
+name: Watch current Studio strap and crown closeups
+on:
+  push:
+    branches: [codex/watch-stitch-survey]
+permissions:
+  contents: read
+jobs:
+  survey:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: watch-stitch-survey-qa
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -u watch-stitch-survey-qa/survey.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: current-studio-closeups
+          path: watch-stitch-survey-qa/output
