@@ -2,7 +2,7 @@ name: Watch caseback live release check
 on:
   push:
     branches: [main]
-    paths: [index.html, watch-home-caseback-e79b2236.js, case-topology-lane/caseback-integration/public-live.py, .github/workflows/material-state-live.yml]
+    paths: [index.html, watch-home-batch-9de584f6.js, watch-home-caseback-e79b2236.js, case-topology-lane/caseback-integration/public-live.py, .github/workflows/material-state-live.yml]
 permissions:
   contents: read
 jobs:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install playwright && python -m playwright install --with-deps chromium
-      - run: EXPECTED_RELEASE=e79b22365b4874327d308eca789326fbea0da8d717ffca20da80b611e36b39c6 python case-topology-lane/caseback-integration/public-live.py
+      - run: EXPECTED_RELEASE=9de584f677b276f7cc3621b904c36d0762a4e8202da81578341150828e6c3576 python case-topology-lane/caseback-integration/public-live.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
