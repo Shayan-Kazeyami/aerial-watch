@@ -1,0 +1,46 @@
+name: REL-03 exact sealed video export
+on:
+  push:
+    branches: [codex/watch-rel03-seal-stage]
+permissions:
+  contents: read
+jobs:
+  exact-browser:
+    strategy:
+      fail-fast: false
+      matrix:
+        size: [view, compact]
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            rel03-qa
+            preview-b/releases/e1d6f75a57a44d0ceba1ff3be1d92e7205fdc0e95b256a576a305bea27ad4f9b
+            preview-b/releases/87a759964175034b479a36bd84035d0265cad0b6742306e1f7499ce4dca325e1
+            preview-b/releases/9c055e4777a79c7987dd6cd5ccabf9f189121fd6c64e2f54853aa694827add06
+            preview-b/releases/a2ee1cff3c620530dfd63add3ab7111ba493bfff9173d7de00802e9a97f75054
+            preview-b/releases/f3ab38493b7bc5c4af84728add913e54938d0db276143a7b765a7803f361bb44
+            preview-b/releases/fcaad311973aff1e27395d6f87ce363210b2d9a4d28b545e8c569f22831a5a72
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Serve exact checkout
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 >/tmp/rel03-http.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/preview-b/releases/e1d6f75a57a44d0ceba1ff3be1d92e7205fdc0e95b256a576a305bea27ad4f9b/atelier-preview.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/rel03-http.log
+          exit 1
+      - name: Render and decode exact sealed checkout, no overlays
+        run: python -u rel03-qa/browser_exact.py
+        env:
+          REL03_TEST_SIZE: ${{ matrix.size }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-rel03-exact-${{ matrix.size }}
+          path: rel03-qa/output
