@@ -1,0 +1,35 @@
+name: Watch Studio rear separation isolated candidate
+on:
+  push:
+    branches: [codex/watch-studio-rear-separation]
+permissions:
+  contents: read
+jobs:
+  capture:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {view: 1440x900, light: rear-study, quality: studio}
+          - {view: 430x932, light: rear-study, quality: studio}
+          - {view: 430x932, light: softbox, quality: efficient}
+          - {view: 430x932, light: rear-study, quality: efficient}
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: watch-studio-qa
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -u watch-studio-qa/browser.py
+        env:
+          VIEW: ${{ matrix.view }}
+          LIGHT: ${{ matrix.light }}
+          QUALITY: ${{ matrix.quality }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rear-${{ matrix.view }}-${{ matrix.quality }}-${{ matrix.light }}
+          path: watch-studio-qa/output/
