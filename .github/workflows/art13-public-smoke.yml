@@ -1,0 +1,23 @@
+name: ART-13 read-only public studio tour smoke
+on:
+  push:
+    branches: [codex/watch-art13-public-smoke]
+permissions:
+  contents: read
+jobs:
+  public:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: art13-qa
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -u art13-qa/browser_public.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-art13-public
+          path: art13-qa/output
