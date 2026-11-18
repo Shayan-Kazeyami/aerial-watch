@@ -1,0 +1,25 @@
+name: Read-only public ART-12 watch check
+on:
+  push:
+    branches: [codex/watch-art12-public-smoke]
+permissions:
+  contents: read
+jobs:
+  public-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: layer-focus-qa
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -u layer-focus-qa/art12_public_smoke.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-art12-unmodified-public-viewer
+          path: art12-public-output
