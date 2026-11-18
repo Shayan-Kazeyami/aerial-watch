@@ -370,8 +370,8 @@
     },
     {
       "path": "index.html",
-      "sizeBytes": 20478,
-      "sha256": "69353b26460eb00d5151e32ef2dae2a154825128e73a204212a4c49fdc86a2df"
+      "sizeBytes": 1157,
+      "sha256": "64bed7c0c1dab2c271e690645fdea22ef9ebb6e65de803585f0ade139b1184d8"
     },
     {
       "path": "material-review-model.js",
@@ -807,6 +807,16 @@
       "path": "vendor/utils/BufferGeometryUtils.js",
       "sizeBytes": 35539,
       "sha256": "fda7e946b8e0b5ab39b779206589e7a1079a22eb24efb89d7223e03fdfb1f751"
+    },
+    {
+      "path": "watch-home-batch-9de584f6.js",
+      "sizeBytes": 4086,
+      "sha256": "58e67898f0024317612ddaf4f27d04e8723cf7a4ed51d26c86ff3a0b9f817089"
+    },
+    {
+      "path": "watch-home-caseback-e79b2236.js",
+      "sizeBytes": 4086,
+      "sha256": "5e5e0e2323541f519a09f8a4e6f9ee12ca93ae406c2aead0c66daeb6921ad38d"
     }
   ]
 }
