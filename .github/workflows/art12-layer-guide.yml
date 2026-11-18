@@ -1,0 +1,29 @@
+name: ART-12 layer guidance candidate
+on:
+  push:
+    branches: [codex/watch-art12-layer-guide-v1]
+permissions:
+  contents: read
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            layer-focus-qa
+            preview-b/candidates/art12-layer-guide
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Overlay candidate copy on exact public release and verify all six layers
+        run: python -u layer-focus-qa/art12_candidate.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watch-art12-layer-guidance
+          path: art12-layer-guide-output
