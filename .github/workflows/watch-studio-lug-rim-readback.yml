@@ -1,0 +1,32 @@
+name: Watch Studio lug rim synchronous canvas readback
+on:
+  push:
+    branches: [codex/watch-studio-lug-rim-readback]
+permissions:
+  contents: read
+jobs:
+  isolate:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {view: 960x650, quality: studio}
+          - {view: 430x932, quality: studio}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: watch-studio-lug-rim-readback-qa
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python -u watch-studio-lug-rim-readback-qa/browser.py
+        env:
+          VIEW: ${{ matrix.view }}
+          QUALITY: ${{ matrix.quality }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lug-rim-readback-${{ matrix.view }}-${{ matrix.quality }}
+          path: watch-studio-lug-rim-readback-qa/output/
