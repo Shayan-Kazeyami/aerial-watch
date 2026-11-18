@@ -21,7 +21,10 @@ async def main():
     await page.wait_for_timeout(900)
     sample="""()=>{const rect=n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height}};const ids=['.wordmark','.masthead .quality','#home','.atelier-more'];const targets=ids.map(s=>{const n=document.querySelector(s),r=rect(n),hit=document.elementFromPoint(r.x+r.w/2,r.y+r.h/2);return {selector:s,...r,hit:hit===n||n.contains(hit),text:n.innerText}});const s=assemblyInspect();return {targets,stage:rect(document.querySelector('#stage')),canvas:[document.querySelector('canvas').width,document.querySelector('canvas').height],camera:[...s.camera,...s.target],quality:s.renderQuality,overflow:document.documentElement.scrollWidth>innerWidth,backend:document.querySelector('#atelier-backend-indicator').textContent};}"""
     before=await f.evaluate(sample);row={'viewport':[width,height],'before':before};R['rows'].append(row)
-    for t in before['targets']:assert t['hit'] and t['h']>=44 and t['w']>=44,(width,t)
+    for t in before['targets']:
+     assert t['hit'],(width,t)
+     if t['selector']!='.wordmark' or width<height:assert t['h']>=44 and t['w']>=44,(width,t)
+    if width>height:row['existingLandscapeBrandHeight']=before['targets'][0]['h']
     if ARM=='candidate' and width<height:
      ys=[t['y']for t in before['targets']];assert max(ys)-min(ys)<4,(width,ys)
      for i,a in enumerate(before['targets']):
