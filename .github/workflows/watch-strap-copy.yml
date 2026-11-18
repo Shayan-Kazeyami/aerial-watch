@@ -1,0 +1,33 @@
+name: Watch strap restore copy exact behavior
+on:
+  push:
+    branches: [codex/watch-strap-copy-seal]
+permissions:
+  contents: read
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [candidate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            watch-strap-copy-qa
+            preview-b/releases
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install playwright && python -m playwright install --with-deps chromium
+      - run: python watch-strap-copy-qa/verify_seal.py
+      - run: python -m http.server 8765 --bind 127.0.0.1 >/tmp/header-http.log 2>&1 &
+      - run: python -u watch-strap-copy-qa/test.py
+        env:
+          ARM: ${{ matrix.arm }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compact-header-${{ matrix.arm }}
+          path: watch-strap-copy-qa/output/
