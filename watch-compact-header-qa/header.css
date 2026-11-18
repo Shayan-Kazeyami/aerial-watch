@@ -16,3 +16,7 @@
  body.atelier-live .object-stage #stage,
  body.atelier-live:has(#context:not([hidden])) .object-stage #stage{inset:0 0 var(--atelier-stage-bottom)}
 }
+@media(max-width:680px) and (orientation:portrait){
+ body.atelier-live .wordmark{flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;line-height:12px}
+ body.atelier-live .wordmark::after{content:'Aerial · Left Crescent';font:8px/10px Arial,sans-serif;letter-spacing:.25px;color:#c5c6bd;white-space:nowrap}
+}

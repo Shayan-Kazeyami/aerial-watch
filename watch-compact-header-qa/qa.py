@@ -30,7 +30,13 @@ async def main():
      for i,a in enumerate(before['targets']):
       for c in before['targets'][i+1:]:assert a['x']+a['w']<=c['x']+.2 or c['x']+c['w']<=a['x']+.2,(width,a,c)
     assert not before['overflow']
+    dock=await f.locator('.task-dock').evaluate('''n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,display:getComputedStyle(n).display,opacity:getComputedStyle(n).opacity,buttons:[...n.querySelectorAll('button')].map(b=>{const r=b.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {label:b.innerText,w:r.width,h:r.height,hit:b===hit||b.contains(hit)}})}}''')
+    row['dock']=dock;assert dock['display']!='none' and float(dock['opacity'])>0 and dock['y']+dock['h']<=height+.5
+    assert len(dock['buttons'])==5 and all(t['hit'] and t['w']>=44 and t['h']>=44 for t in dock['buttons']),dock
+    await f.locator('.task-dock').screenshot(path=str(O/f'{width}-dock.png'))
     await page.screenshot(path=str(O/f'{width}-home.png'))
+    await page.wait_for_timeout(350)
+    await page.screenshot(path=str(O/f'{width}-home-repeat.png'))
     for selector in ['.masthead .quality','.atelier-more','.task-dock [data-mode=capture]']:
      await f.locator(selector).click();await f.locator('#context').wait_for(state='visible');await page.wait_for_timeout(200)
      opened=await f.evaluate(sample);assert opened['stage']==before['stage'],(width,selector,'stage');assert opened['camera']==before['camera'],(width,selector,'camera')
